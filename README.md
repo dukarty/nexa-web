@@ -1,5 +1,7 @@
 # NEXA — web pública
 
+En producción: https://nexa-web-one.vercel.app
+
 Estática. HTML + CSS + JS. Cero dependencias, cero build, cero cookies.
 
 ```
