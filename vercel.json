@@ -12,7 +12,14 @@
       ]
     },
     {
-      "source": "/(.*).(css|js|svg|jpg|webp|avif|woff2)",
+      "comment": "CSS y JS NO se cachean de forma inmutable: no llevan hash en el nombre, y si no, al editarlos el navegador sigue sirviendo la versión vieja.",
+      "source": "/(.*).(css|js)",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=0, must-revalidate" }
+      ]
+    },
+    {
+      "source": "/(.*).(jpg|png|webp|avif|svg|woff2)",
       "headers": [
         { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
       ]
