@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>NEXA — La red social de la vida real</title>
+<meta name="description" content="NEXA es la app donde dices qué quieres vivir este año y encuentras a quien quiere vivir lo mismo. Lista de espera de Valencia.">
+<meta name="theme-color" content="#0A0C11">
+
+<!-- OG: la imagen DEBE ser una URL absoluta. Cambia el dominio aquí el día que compres el tuyo. -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://nexa-web-one.vercel.app/">
+<meta property="og:title" content="NEXA — Que no se te escape la vida">
+<meta property="og:description" content="Dices qué quieres vivir. Encuentras con quién. Lo vivís. Lista de espera de Valencia.">
+<meta property="og:image" content="https://nexa-web-one.vercel.app/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="NEXA — Que no se te escape la vida">
+<meta property="og:locale" content="es_ES">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://nexa-web-one.vercel.app/og.jpg">
+
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://images.pexels.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+<link rel="preload" as="image" fetchpriority="high"
+      href="https://images.pexels.com/photos/17014071/pexels-photo-17014071.jpeg?auto=compress&cs=tinysrgb&w=1800">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<a class="skip" href="#lista">Ir a la lista de espera</a>
+<div class="progress" id="progress" aria-hidden="true"></div>
+<div class="grain" aria-hidden="true"></div>
+
+<!-- ══════════════ NAV ══════════════ -->
+<header class="nav" id="nav">
+  <div class="nav__in">
+    <a class="logo" href="#top" aria-label="NEXA, inicio">
+      <span class="logo__word">NE<span class="logo__x" aria-hidden="true">
+        <svg viewBox="0 0 20 20" focusable="false"><line class="x1" x1="2" y1="18" x2="18" y2="2"/><line class="x2" x1="18" y1="18" x2="2" y2="2"/></svg>
+      </span>A</span>
+    </a>
+    <nav class="nav__links" aria-label="Secciones">
+      <a href="#que">Qué es</a>
+      <a href="#como">Cómo funciona</a>
+      <a href="#nueve">Tus 9</a>
+      <a href="#faq">Preguntas</a>
+    </nav>
+    <a class="btn btn--sm" href="#lista">Entrar en la lista</a>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- ══════════════ 1. HERO ══════════════ -->
+<section class="hero">
+  <div class="hero__media">
+    <img class="hero__img"
+         src="https://images.pexels.com/photos/17014071/pexels-photo-17014071.jpeg?auto=compress&cs=tinysrgb&w=1800"
+         alt="Un grupo de amigos en la playa al atardecer, en silueta contra el mar"
+         width="1800" height="1200" fetchpriority="high" decoding="async">
+    <div class="hero__veil" aria-hidden="true"></div>
+  </div>
+
+  <div class="hero__copy wrap">
+    <p class="tagline rise" style="--i:0">La red social de la vida real</p>
+    <h1 class="display" data-split>Que no se te escape la vida.</h1>
+    <p class="lead lead--hero rise" style="--i:7">Dices qué quieres vivir este año.<br>Encuentras con quién. Lo vivís.</p>
+    <div class="rise" style="--i:8">
+      <a class="btn btn--lg btn--mag" href="#lista">Entrar en la lista de Valencia</a>
+      <p class="micro micro--hero">Gratis · Solo Valencia, de momento</p>
+    </div>
+  </div>
+
+  <div class="hero__scroll" aria-hidden="true"><span></span></div>
+</section>
+
+<!-- ══════════════ 2. QUÉ ES NEXA (la definición) ══════════════ -->
+<section class="que" id="que">
+  <div class="wrap tc">
+    <p class="kicker rise">Qué es NEXA</p>
+    <p class="define rise" style="--i:1">
+      Una app donde eliges <strong>lo que quieres vivir</strong> este año — y te cruza con la gente que quiere vivir <strong>lo mismo que tú</strong>.
+    </p>
+    <p class="define__s rise" style="--i:2">
+      Instagram te deja enseñar quién quieres parecer.<br>
+      NEXA te deja demostrar cómo vives de verdad.
+    </p>
+
+    <ul class="facts">
+      <li class="fact rise" style="--i:0"><span class="fact__k">Gratis</span><span class="fact__v">Sin planes de pago. Sin trucos.</span></li>
+      <li class="fact rise" style="--i:1"><span class="fact__k">Valencia</span><span class="fact__v">Una ciudad cada vez. La primera, la nuestra.</span></li>
+      <li class="fact rise" style="--i:2"><span class="fact__k">Cero likes</span><span class="fact__v">Nada de seguidores, puntos ni rachas.</span></li>
+    </ul>
+  </div>
+</section>
+
+<!-- ══════════════ 3. EL PROBLEMA ══════════════ -->
+<section class="problema">
+  <div class="wrap tc">
+    <p class="mega rise" style="--i:0">No es que no tengas tiempo.</p>
+    <p class="mega rise" style="--i:1">Es que no sabes con quién.</p>
+    <p class="mega mega--blue rise" style="--i:2">Y da vergüenza escribir primero.</p>
+    <p class="body rise" style="--i:3">El enemigo no es la rutina: es la inercia. NEXA es la excusa que la rompe.</p>
+  </div>
+</section>
+
+<!-- ══════════════ TIRA DE VIDA ══════════════ -->
+<section class="tira" aria-label="Experiencias">
+  <div class="tira__row" data-dir="1">
+    <div class="tira__track">
+      <figure class="strip"><img src="https://images.pexels.com/photos/17444987/pexels-photo-17444987.jpeg?auto=compress&cs=tinysrgb&w=700" alt="Furgoneta camper con vistas al mar y a la montaña" loading="lazy" width="700" height="525"></figure>
+      <figure class="strip"><img src="https://images.pexels.com/photos/1105666/pexels-photo-1105666.jpeg?auto=compress&cs=tinysrgb&w=700" alt="Público con las manos en alto en un concierto" loading="lazy" width="700" height="525"></figure>
+      <figure class="strip"><img src="https://images.pexels.com/photos/7148674/pexels-photo-7148674.jpeg?auto=compress&cs=tinysrgb&w=700" alt="Grupo de amigos alrededor de una hoguera" loading="lazy" width="700" height="525"></figure>
+      <figure class="strip"><img src="https://images.pexels.com/photos/8482195/pexels-photo-8482195.jpeg?auto=compress&cs=tinysrgb&w=700" alt="Siluetas de un grupo en la cima de una montaña" loading="lazy" width="700" height="525"></figure>
+      <figure class="strip"><img src="https://images.pexels.com/photos/8050356/pexels-photo-8050356.jpeg?auto=compress&cs=tinysrgb&w=700" alt="Silueta de una persona surfeando una ola al amanecer" loading="lazy" width="700" height="525"></figure>
+      <figure class="strip"><img src="https://images.pexels.com/photos/5738245/pexels-photo-5738245.jpeg?auto=compress&cs=tinysrgb&w=700" alt="Grupo de amigos riéndose alrededor de una mesa" loading="lazy" width="700" height="525"></figure>
+    </div>
+  </div>
+  <div class="tira__row" data-dir="-1">
+    <div class="tira__track">
+      <figure class="strip"><img src="https://images.pexels.com/photos/6760878/pexels-photo-6760878.jpeg?auto=compress&cs=tinysrgb&w=700" alt="Amigos en una terraza al atardecer" loading="lazy" width="700" height="525"></figure>
+      <figure class="strip"><img src="https://images.pexels.com/photos/32876381/pexels-photo-32876381.jpeg?auto=compress&cs=tinysrgb&w=700" alt="Una persona caminando por la playa al amanecer" loading="lazy" width="700" height="525"></figure>
+      <figure class="strip"><img src="https://images.pexels.com/photos/1323550/pexels-photo-1323550.jpeg?auto=compress&cs=tinysrgb&w=700" alt="Montañas en silueta durante el amanecer" loading="lazy" width="700" height="525"></figure>
+      <figure class="strip"><img src="https://images.pexels.com/photos/10867128/pexels-photo-10867128.jpeg?auto=compress&cs=tinysrgb&w=700" alt="Un grupo de amigos en la playa" loading="lazy" width="700" height="525"></figure>
+      <figure class="strip"><img src="https://images.pexels.com/photos/2990835/pexels-photo-2990835.jpeg?auto=compress&cs=tinysrgb&w=700" alt="Concierto nocturno con el público iluminado" loading="lazy" width="700" height="525"></figure>
+      <figure class="strip"><img src="https://images.pexels.com/photos/100077/pexels-photo-100077.jpeg?auto=compress&cs=tinysrgb&w=700" alt="Una persona de pie en un acantilado a la hora dorada" loading="lazy" width="700" height="525"></figure>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ 4. QUÉ ES UN NEXA ══════════════ -->
+<section class="nexa" id="nexa">
+  <div class="wrap tc">
+    <p class="kicker rise">La unidad</p>
+    <h2 class="h2 rise" style="--i:1">Un NEXA no es un like.<br>Es una pregunta.</h2>
+    <blockquote class="quote rise" style="--i:2">
+      «Creo que esta experiencia encaja contigo y conmigo. <em>¿La vivimos?</em>»
+    </blockquote>
+    <p class="body rise" style="--i:3">La app te da tres propuestas. Cada una lleva escrito su porqué. Tú solo eliges.</p>
+
+    <div class="nexa__viz" data-parallax="-0.04">
+      <svg class="cross" viewBox="0 0 300 300" aria-hidden="true" focusable="false">
+        <path class="cross__a" d="M10 290 C 90 220, 210 80, 290 10"/>
+        <path class="cross__b" d="M290 290 C 210 220, 90 80, 10 10"/>
+        <circle class="cross__dot" cx="150" cy="150" r="6"/>
+      </svg>
+
+      <div class="phone reveal">
+        <div class="phone__frame">
+          <div class="phone__island" aria-hidden="true"></div>
+          <div class="screen">
+            <div class="screen__top">
+              <span class="screen__title">Enviar un NEXA</span>
+              <span class="screen__to">a Marta</span>
+            </div>
+            <div class="prop prop--sel">
+              <div class="prop__hd"><span class="prop__name">Amanecer en la Albufera</span><span class="prop__chk" aria-hidden="true"></span></div>
+              <p class="prop__why">Está en el «quiero vivir» de los dos</p>
+            </div>
+            <div class="prop">
+              <div class="prop__hd"><span class="prop__name">Escalar en Montanejos</span><span class="prop__chk" aria-hidden="true"></span></div>
+              <p class="prop__why">Los dos vivís a 15 minutos</p>
+            </div>
+            <div class="prop">
+              <div class="prop__hd"><span class="prop__name">Concierto en el Loco</span><span class="prop__chk" aria-hidden="true"></span></div>
+              <p class="prop__why">Nuria, que sale en sus 9, ya va</p>
+            </div>
+            <div class="screen__cta">Enviar NEXA</div>
+            <p class="screen__foot">Si acepta, se abre el chat.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <ul class="ticks">
+      <li class="tick rise" style="--i:0"><span class="tick__x" aria-hidden="true"></span>Dos toques y está enviado</li>
+      <li class="tick rise" style="--i:1"><span class="tick__x" aria-hidden="true"></span>Nunca empiezas de cero</li>
+      <li class="tick rise" style="--i:2"><span class="tick__x" aria-hidden="true"></span>Si no acepta, nadie se entera</li>
+    </ul>
+  </div>
+</section>
+
+<!-- ══════════════ 5. CÓMO FUNCIONA ══════════════ -->
+<section class="como" id="como">
+  <div class="wrap">
+    <header class="sec-hd tc">
+      <p class="kicker rise">Cómo funciona</p>
+      <h2 class="h2 rise" style="--i:1">Cuatro pasos.<br>Ninguno es escribir «hola».</h2>
+    </header>
+
+    <ol class="pasos">
+      <!-- 01 -->
+      <li class="paso">
+        <div class="paso__txt tc">
+          <span class="chip rise">Paso 01</span>
+          <h3 class="h3 rise" style="--i:1">Elige tus 9</h3>
+          <p class="body rise" style="--i:2">Nueve categorías que te representan. Una foto en cada una. Tu perfil no es una bio: es una vida.</p>
+        </div>
+        <div class="paso__viz" data-parallax="-0.05">
+          <div class="phone phone--sm reveal">
+            <div class="phone__frame"><div class="phone__island" aria-hidden="true"></div>
+              <div class="screen screen--grid">
+                <div class="screen__top"><span class="screen__title">Tus 9</span><span class="screen__to">8 / 9</span></div>
+                <div class="g9">
+                  <div class="g9__c"><img src="https://images.pexels.com/photos/17444987/pexels-photo-17444987.jpeg?auto=compress&cs=tinysrgb&w=220" alt="Furgoneta camper con vistas" loading="lazy" width="220" height="220"><span class="g9__l">Furgo</span></div>
+                  <div class="g9__c"><img src="https://images.pexels.com/photos/7148674/pexels-photo-7148674.jpeg?auto=compress&cs=tinysrgb&w=220" alt="Hoguera con amigos" loading="lazy" width="220" height="220"><span class="g9__l">Fuego</span></div>
+                  <div class="g9__c"><img src="https://images.pexels.com/photos/1105666/pexels-photo-1105666.jpeg?auto=compress&cs=tinysrgb&w=220" alt="Concierto" loading="lazy" width="220" height="220"><span class="g9__l">Directos</span></div>
+                  <div class="g9__c"><img src="https://images.pexels.com/photos/8050356/pexels-photo-8050356.jpeg?auto=compress&cs=tinysrgb&w=220" alt="Surf al amanecer" loading="lazy" width="220" height="220"><span class="g9__l">Mar</span></div>
+                  <div class="g9__c"><img src="https://images.pexels.com/photos/8482195/pexels-photo-8482195.jpeg?auto=compress&cs=tinysrgb&w=220" alt="Cima de montaña" loading="lazy" width="220" height="220"><span class="g9__l">Montaña</span></div>
+                  <div class="g9__c"><img src="https://images.pexels.com/photos/5738245/pexels-photo-5738245.jpeg?auto=compress&cs=tinysrgb&w=220" alt="Cena con amigos" loading="lazy" width="220" height="220"><span class="g9__l">Mesa</span></div>
+                  <div class="g9__c"><img src="https://images.pexels.com/photos/6760878/pexels-photo-6760878.jpeg?auto=compress&cs=tinysrgb&w=220" alt="Terraza al atardecer" loading="lazy" width="220" height="220"><span class="g9__l">Terrazas</span></div>
+                  <div class="g9__c"><img src="https://images.pexels.com/photos/10867128/pexels-photo-10867128.jpeg?auto=compress&cs=tinysrgb&w=220" alt="Amigos en la playa" loading="lazy" width="220" height="220"><span class="g9__l">Playa</span></div>
+                  <div class="g9__c g9__c--add"><span class="empty" aria-hidden="true">+</span><span class="g9__l">La 9ª</span></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </li>
+
+      <!-- 02 -->
+      <li class="paso paso--rev">
+        <div class="paso__txt tc">
+          <span class="chip rise">Paso 02</span>
+          <h3 class="h3 rise" style="--i:1">Di qué quieres vivir</h3>
+          <p class="body rise" style="--i:2">Hasta diez cosas, este año. No es una lista privada: es una invitación abierta.</p>
+        </div>
+        <div class="paso__viz" data-parallax="-0.05">
+          <div class="phone phone--sm reveal">
+            <div class="phone__frame"><div class="phone__island" aria-hidden="true"></div>
+              <div class="screen">
+                <div class="screen__top"><span class="screen__title">Este año quiero vivir</span><span class="screen__to">7 / 10</span></div>
+                <ul class="wish">
+                  <li>Dormir en la furgo en Cabo de Gata</li>
+                  <li>Subir el Penyagolosa antes de junio</li>
+                  <li>Aprender a surfear de una vez</li>
+                  <li>Un concierto en primera fila</li>
+                  <li class="wish--done"><s>Bañarme en el mar en enero</s><span class="tag">Vivido</span></li>
+                  <li>Cenar en un sitio al que nunca iría solo</li>
+                  <li>Ver amanecer sin haber dormido</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+      </li>
+
+      <!-- 03 -->
+      <li class="paso">
+        <div class="paso__txt tc">
+          <span class="chip rise">Paso 03</span>
+          <h3 class="h3 rise" style="--i:1">Envía un NEXA</h3>
+          <p class="body rise" style="--i:2">Aquí no se escribe a desconocidos. Propones vivir algo. Si acepta, se abre el chat y tenéis 24 h para poner fecha.</p>
+        </div>
+        <div class="paso__viz" data-parallax="-0.05">
+          <div class="phone phone--sm reveal">
+            <div class="phone__frame"><div class="phone__island" aria-hidden="true"></div>
+              <div class="screen screen--dark">
+                <div class="screen__top"><span class="screen__title screen__title--w">Marta ha aceptado</span></div>
+                <div class="accept">
+                  <div class="accept__ring" aria-hidden="true">
+                    <svg viewBox="0 0 60 60"><line x1="10" y1="50" x2="50" y2="10"/><line x1="50" y1="50" x2="10" y2="10"/></svg>
+                  </div>
+                  <p class="accept__t">Amanecer en la Albufera</p>
+                  <p class="accept__s">Tenéis 24 h para poner fecha.</p>
+                  <div class="clock"><span class="clock__bar"></span></div>
+                  <div class="screen__cta screen__cta--w">Proponer fecha</div>
+                  <p class="screen__foot screen__foot--w">Sin fecha, un plan es un plan muerto.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </li>
+
+      <!-- 04 -->
+      <li class="paso paso--rev">
+        <div class="paso__txt tc">
+          <span class="chip rise">Paso 04</span>
+          <h3 class="h3 rise" style="--i:1">Vividlo</h3>
+          <p class="body rise" style="--i:2">Lo confirmáis los dos y entra en el perfil de ambos. El deseo se tacha: de «quiero vivir» a <strong>vivido</strong>.</p>
+        </div>
+        <div class="paso__viz" data-parallax="-0.05">
+          <div class="phone phone--sm reveal">
+            <div class="phone__frame"><div class="phone__island" aria-hidden="true"></div>
+              <div class="screen">
+                <div class="screen__top"><span class="screen__title">Historial de Vida</span></div>
+                <div class="hist">
+                  <img src="https://images.pexels.com/photos/32876381/pexels-photo-32876381.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Amanecer en la playa" loading="lazy" width="400" height="250">
+                  <p class="hist__t">Amanecer en la Albufera</p>
+                  <p class="hist__s">12 de abril · con Marta</p>
+                  <p class="hist__x"><s>Quiero vivir</s> <span class="hist__done">Vivido</span></p>
+                </div>
+                <div class="hist hist--past">
+                  <img src="https://images.pexels.com/photos/2990835/pexels-photo-2990835.jpeg?auto=compress&cs=tinysrgb&w=400" alt="Concierto de noche" loading="lazy" width="400" height="250">
+                  <p class="hist__t">El concierto del que saliste sin voz</p>
+                  <p class="hist__s">2 de marzo · con Iván y Nuria</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </li>
+    </ol>
+  </div>
+</section>
+
+<!-- ══════════════ 6. TUS 9 ══════════════ -->
+<section class="nueve" id="nueve">
+  <div class="wrap">
+    <header class="sec-hd tc">
+      <p class="kicker rise">Tus 9</p>
+      <h2 class="h2 rise" style="--i:1">Nueve fotos. Ninguna bio.</h2>
+      <p class="body rise" style="--i:2">Cada categoría te hace su propia pregunta. No subes una foto bonita: subes la prueba.</p>
+    </header>
+
+    <div class="cards">
+      <article class="card reveal" style="--i:0">
+        <figure class="card__f">
+          <img src="https://images.pexels.com/photos/17444987/pexels-photo-17444987.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Furgoneta camper con la puerta abierta frente al mar y la montaña" loading="lazy" width="800" height="1000">
+        </figure>
+        <div class="card__b">
+          <h3 class="card__t">Furgo</h3>
+          <p class="card__q">Dónde amaneciste. Esa foto nada más abrir la puerta.</p>
+        </div>
+      </article>
+
+      <article class="card reveal" style="--i:1">
+        <figure class="card__f">
+          <img src="https://images.pexels.com/photos/7148674/pexels-photo-7148674.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Grupo de amigos alrededor de una hoguera de noche" loading="lazy" width="800" height="1000">
+        </figure>
+        <div class="card__b">
+          <h3 class="card__t">Fallas</h3>
+          <p class="card__q">La foto que demuestra que sobreviviste a Fallas.</p>
+        </div>
+      </article>
+
+      <article class="card reveal" style="--i:2">
+        <figure class="card__f">
+          <img src="https://images.pexels.com/photos/1105666/pexels-photo-1105666.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Público con las manos en alto bajo los focos de un concierto" loading="lazy" width="800" height="1000">
+        </figure>
+        <div class="card__b">
+          <h3 class="card__t">Directos</h3>
+          <p class="card__q">El concierto del que saliste sin voz.</p>
+        </div>
+      </article>
+
+      <article class="card reveal" style="--i:3">
+        <figure class="card__f">
+          <img src="https://images.pexels.com/photos/8482195/pexels-photo-8482195.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Siluetas de un grupo de personas en la cima de una montaña" loading="lazy" width="800" height="1000">
+        </figure>
+        <div class="card__b">
+          <h3 class="card__t">Montaña</h3>
+          <p class="card__q">La cima donde juraste que nunca más. Y volviste.</p>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ 7. EL BUCLE ══════════════ -->
+<section class="bucle">
+  <div class="wrap">
+    <header class="sec-hd tc">
+      <p class="kicker rise">El bucle</p>
+      <h2 class="h2 rise" style="--i:1">Y entonces quieres repetir.</h2>
+    </header>
+    <ol class="loop">
+      <li class="loop__i rise" style="--i:0"><span class="loop__n">1</span><span>Ves una experiencia</span></li>
+      <li class="loop__i rise" style="--i:1"><span class="loop__n">2</span><span>Descubres a la persona</span></li>
+      <li class="loop__i rise" style="--i:2"><span class="loop__n">3</span><span>Le envías un NEXA</span></li>
+      <li class="loop__i rise" style="--i:3"><span class="loop__n">4</span><span>Quedáis</span></li>
+      <li class="loop__i rise" style="--i:4"><span class="loop__n">5</span><span>Lo vivís</span></li>
+      <li class="loop__i rise" style="--i:5"><span class="loop__n">6</span><span>Es vuestra historia</span></li>
+    </ol>
+  </div>
+</section>
+
+<!-- ══════════════ 8. LO QUE NO ES ══════════════ -->
+<section class="noes">
+  <div class="wrap tc">
+    <h2 class="h2 h2--w rise">Lo que no vas a encontrar aquí.</h2>
+    <ul class="noes__l">
+      <li class="rise" style="--i:0"><s>Likes</s></li>
+      <li class="rise" style="--i:1"><s>Comentarios</s></li>
+      <li class="rise" style="--i:2"><s>Seguidores</s></li>
+      <li class="rise" style="--i:3"><s>Puntos</s></li>
+      <li class="rise" style="--i:4"><s>Rachas</s></li>
+      <li class="rise" style="--i:5"><s>Retos</s></li>
+      <li class="rise" style="--i:6"><s>Un catálogo de planes</s></li>
+      <li class="rise" style="--i:7"><s>Tinder para amigos</s></li>
+    </ul>
+    <p class="mega mega--w rise">No recompensamos el consumo.<br>Recompensamos vivir.</p>
+  </div>
+</section>
+
+<!-- ══════════════ 9. SEGURIDAD ══════════════ -->
+<section class="seg" id="seguridad">
+  <div class="wrap">
+    <header class="sec-hd tc">
+      <p class="kicker rise">Seguridad</p>
+      <h2 class="h2 rise" style="--i:1">Sin rodeos.</h2>
+    </header>
+    <div class="seg__g">
+      <article class="seg__c tc rise" style="--i:0">
+        <span class="seg__i" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M4 6h16v10H9l-5 4z"/></svg>
+        </span>
+        <h3 class="h4">El chat se gana</h3>
+        <p class="body body--sm">Nadie puede escribirte porque sí. La conversación se abre solo si tú aceptas.</p>
+      </article>
+      <article class="seg__c tc rise" style="--i:1">
+        <span class="seg__i" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><line x1="6" y1="18" x2="18" y2="6"/></svg>
+        </span>
+        <h3 class="h4">Bloquear y reportar</h3>
+        <p class="body body--sm">En dos toques, desde cualquier pantalla. Sin que la otra persona lo sepa.</p>
+      </article>
+      <article class="seg__c tc rise" style="--i:2">
+        <span class="seg__i" aria-hidden="true">
+          <svg viewBox="0 0 24 24"><path d="M12 21s-7-4.7-7-10a7 7 0 1 1 14 0c0 5.3-7 10-7 10z"/><circle cx="12" cy="11" r="2.5"/></svg>
+        </span>
+        <h3 class="h4">Comparte tu plan</h3>
+        <p class="body body--sm">Antes de salir, mándaselo a quien tú quieras: verá dónde estás y con quién.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ 10. FAQ ══════════════ -->
+<section class="faq" id="faq">
+  <div class="wrap wrap--narrow">
+    <h2 class="h2 tc rise">Preguntas frecuentes</h2>
+    <div class="faq__l">
+      <details class="q rise">
+        <summary><span>¿Es una app de citas?</span><span class="q__i" aria-hidden="true"></span></summary>
+        <div class="q__a"><p>No. Es una app para vivir experiencias con gente que quiere vivir lo mismo que tú. Que de ahí salga una amistad, un grupo o algo más no es cosa nuestra.</p></div>
+      </details>
+      <details class="q rise">
+        <summary><span>¿Cuánto cuesta?</span><span class="q__i" aria-hidden="true"></span></summary>
+        <div class="q__a"><p>Gratis.</p></div>
+      </details>
+      <details class="q rise">
+        <summary><span>¿Por qué solo Valencia?</span><span class="q__i" aria-hidden="true"></span></summary>
+        <div class="q__a"><p>Porque una app social vacía no sirve para nada. Abrimos ciudad cuando hay gente dentro, no antes.</p></div>
+      </details>
+      <details class="q rise">
+        <summary><span>¿Y si no conozco a nadie?</span><span class="q__i" aria-hidden="true"></span></summary>
+        <div class="q__a"><p>De eso va.</p></div>
+      </details>
+      <details class="q rise">
+        <summary><span>¿Qué pasa si no ponemos fecha en 24 horas?</span><span class="q__i" aria-hidden="true"></span></summary>
+        <div class="q__a"><p>Nada. El plan caduca y sigues con tu vida. No hay castigo, ni rachas, ni puntos que perder.</p></div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ 11. QUÉ TIENES QUE HACER ══════════════ -->
+<section class="cierre" id="lista">
+  <div class="cierre__media" aria-hidden="true">
+    <img src="https://images.pexels.com/photos/10867128/pexels-photo-10867128.jpeg?auto=compress&cs=tinysrgb&w=1600" alt="" loading="lazy" width="1600" height="1000">
+    <div class="cierre__veil"></div>
+  </div>
+
+  <div class="wrap tc cierre__in">
+    <p class="kicker kicker--w rise">Qué tienes que hacer</p>
+    <h2 class="display display--sm" data-split>Que no se te escape la vida.</h2>
+
+    <ol class="pasos3">
+      <li class="rise" style="--i:0"><span class="pasos3__n">1</span>Dejas tu email aquí abajo.</li>
+      <li class="rise" style="--i:1"><span class="pasos3__n">2</span>Te avisamos el día que abrimos Valencia.</li>
+      <li class="rise" style="--i:2"><span class="pasos3__n">3</span>Sales de casa.</li>
+    </ol>
+
+    <form class="form rise" id="waitlist" novalidate>
+      <div class="form__row">
+        <label class="sr" for="email">Email</label>
+        <input id="email" name="email" type="email" inputmode="email" autocomplete="email" required placeholder="tu@email.com">
+        <button class="btn btn--lg btn--mag" type="submit" id="submit">Entrar en la lista</button>
+      </div>
+      <div class="form__row form__row--opt">
+        <label class="sr" for="uni">Universidad o facultad (opcional)</label>
+        <input id="uni" name="uni" type="text" autocomplete="organization" placeholder="Universidad o facultad (opcional)">
+      </div>
+      <p class="form__err" id="err" role="alert" hidden></p>
+      <p class="micro micro--c micro--w">Solo el email. Nada de spam. Al apuntarte aceptas la <a class="lnk" href="privacidad.html">política de privacidad</a>.</p>
+    </form>
+
+    <div class="ok" id="ok" hidden>
+      <svg class="ok__x" viewBox="0 0 60 60" aria-hidden="true"><line x1="10" y1="50" x2="50" y2="10"/><line x1="50" y1="50" x2="10" y2="10"/></svg>
+      <p class="ok__t">Estás dentro.</p>
+      <p class="ok__s">Abrimos Valencia cuando seamos suficientes para que valga la pena.</p>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="ft">
+  <div class="wrap ft__in">
+    <span class="logo logo--ft"><span class="logo__word">NE<span class="logo__x logo__x--st" aria-hidden="true"><svg viewBox="0 0 20 20" focusable="false"><line x1="2" y1="18" x2="18" y2="2"/><line x1="18" y1="18" x2="2" y2="2"/></svg></span>A</span></span>
+    <p class="ft__c">Valencia · © <span id="y">2026</span> NEXA</p>
+    <nav class="ft__n" aria-label="Legal">
+      <a href="privacidad.html">Privacidad</a>
+      <a href="mailto:hola@nexa.app">hola@nexa.app</a>
+    </nav>
+  </div>
+</footer>
+
+<script src="config.js"></script>
+<script src="script.js" defer></script>
+</body>
+</html>
