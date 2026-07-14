@@ -130,7 +130,8 @@ body.oscuro .prog{background:var(--az)}
   font-size:clamp(.82rem,1.35vw,1.15rem);font-weight:700;letter-spacing:-.02em;
   color:var(--gris-2);white-space:nowrap;transition:opacity .45s ease,color .45s ease,transform .45s var(--e);
 }
-.nombres span.vivo{color:var(--tinta);font-weight:900}
+/* Los seis no se distinguen hasta que se apagan los demás. */
+.nombres span.destaca{color:var(--tinta);font-weight:900}
 
 /* ═══ ÍNDICE + TÍTULOS ═══ */
 .ind{

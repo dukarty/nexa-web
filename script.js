@@ -68,7 +68,7 @@ function domingo(p) {
 /* ═════════════════════════════════════════════
    01 · LOS 847
    ═════════════════════════════════════════════ */
-const NOMBRES = ("Marta Iván Nuria Dani Clara Hugo Lucía Pablo Alba Sergio Carla Jorge Paula Álvaro Andrea Marc "
+const NOMBRES = ("Lucía Pablo Alba Sergio Carla Jorge Paula Álvaro Andrea Marc "
   + "Elena Rubén Sara Adrián Laura Víctor Irene Diego Cristina Javier Nerea Raúl Ana Guillermo Julia Óscar "
   + "Rocío Manuel Silvia Aitor Patricia Fernando Miriam Gonzalo Eva Ignacio Noelia Alejandro Marina Rodrigo "
   + "Lidia Samuel Beatriz Emilio Celia Tomás Ainhoa Bruno Alicia Martín Vega Nacho Berta Íker Olivia Gabriel "
@@ -79,6 +79,10 @@ const NOMBRES = ("Marta Iván Nuria Dani Clara Hugo Lucía Pablo Alba Sergio Car
   + "Ariel Elsa Omar Abril Salva Nayara Roger Aitana Cesc Alana Iago Ona Bosco Jana Enrique").split(" ");
 
 const SEIS = ["Marta", "Iván", "Nuria", "Dani", "Clara", "Hugo"];
+
+// Los seis van sueltos por el medio. Si estuvieran juntos al principio,
+// se vería venir el golpe.
+[14, 37, 58, 79, 101, 124].forEach((i, k) => NOMBRES.splice(i, 0, SEIS[k]));
 
 const secAg = $("#agenda");
 const cajaN = $("#nombres");
@@ -109,7 +113,7 @@ function agenda(p) {
   spans.forEach((s) => {
     if (s.classList.contains("vivo")) {
       s.style.opacity = 1;
-      s.style.transform = q > 0.75 ? "scale(1.06)" : "none";
+      s.classList.toggle("destaca", q > 0.5);
       return;
     }
     s.style.opacity = +s.dataset.o < q ? 0 : 1;
