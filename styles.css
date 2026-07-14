@@ -86,7 +86,9 @@ body.oscuro .marca{background:transparent;border-color:rgba(255,255,255,.32);col
 /* ═══════════════════════════════════════════════
    01 · EL BUCLE
    ═══════════════════════════════════════════════ */
-.bucle{height:340vh;background:var(--tinta);color:#fff}
+/* La semana entera cabe en dos pantallas de scroll. Si le doy más,
+   deja de escaparse y empieza a arrastrarse. */
+.bucle{height:210vh;background:var(--tinta);color:#fff}
 .dia{font-size:.72rem;font-weight:800;letter-spacing:.36em;text-transform:uppercase;
      color:rgba(255,255,255,.42);margin-bottom:clamp(10px,1.6vw,20px)}
 .hora{
@@ -109,7 +111,7 @@ body.oscuro .marca{background:transparent;border-color:rgba(255,255,255,.32);col
 /* ═══════════════════════════════════════════════
    02 · LOS SEIS
    ═══════════════════════════════════════════════ */
-.seis{height:330vh;background:#fff}
+.seis{height:190vh;background:#fff}
 .seis .fijo{justify-content:center;padding-top:calc(var(--pad) + 56px)}
 .seis__t{
   position:relative;z-index:2;
@@ -263,7 +265,7 @@ body.bloq .nav,body.bloq .prog{opacity:0;pointer-events:none}
    Cerrada. En negro. Hasta que mandas un NEXA.
    ═══════════════════════════════════════════════ */
 .vuelta{height:100svh;background:var(--tinta);color:#fff;transition:height .1s}
-.vuelta.abierta{height:400vh}
+.vuelta.abierta{height:280vh}
 .vuelta .fijo{padding:0}
 
 .tira{position:absolute;inset:0;opacity:0;transition:opacity 1.4s var(--e);pointer-events:none}
