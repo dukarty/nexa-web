@@ -224,9 +224,9 @@ a{color:inherit;text-decoration:none}
 }
 .sab__edad input:focus{outline:none;border-color:var(--az);background:rgba(10,92,255,.14)}
 .sab__edad input::-webkit-outer-spin-button,.sab__edad input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
-/* 52 columnas × 90 filas: si el grid es demasiado ancho, se vuelve
-   una pared de 2.000px de alto. Se limita para que quepa en una mirada. */
-.sab__grid{width:100%;max-width:780px}
+/* 90 columnas (años) × 52 filas (semanas): formato apaisado.
+   Una vida entera tiene que caber en una sola mirada. */
+.sab__grid{width:100%;max-width:1000px}
 #lienzo{width:100%;height:auto;display:block}
 .sab__pie{display:flex;flex-wrap:wrap;gap:28px;align-items:flex-end;justify-content:space-between;margin-top:44px}
 .sab__n{display:flex;flex-direction:column;gap:2px}

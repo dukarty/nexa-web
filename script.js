@@ -139,22 +139,27 @@ chatForm?.addEventListener("submit", (e) => {
    3. LOS SÁBADOS
    90 años × 52 sábados. Los gastados se apagan.
    ───────────────────────────────────────────── */
-const VIDA = 90, COLS = 52;
+/* Cada COLUMNA es un año de vida (90). Cada FILA, una semana (52).
+   Puesta así, una vida entera cabe en una sola mirada — que es
+   justo lo que tiene que pasar aquí. */
+const ANIOS = 90, SEMANAS = 52;
 const lienzo = $("#lienzo");
 const edadIn = $("#edad");
 const quedanEl = $("#quedan");
 
 if (lienzo && edadIn) {
   const ctx = lienzo.getContext("2d");
-  const TOTAL = VIDA * COLS;
+  const TOTAL = ANIOS * SEMANAS;
   let progreso = 0, objetivo = 0, raf = null, arrancado = false, m;
   const fmt = (n) => n.toLocaleString("es-ES");
+
+  const pos = (i) => ({ col: Math.floor(i / SEMANAS), fila: i % SEMANAS });
 
   function medir() {
     const w = lienzo.parentElement.clientWidth;
     const dpr = Math.min(devicePixelRatio || 1, 2);
-    const paso = w / COLS;
-    const h = paso * VIDA;
+    const paso = w / ANIOS;
+    const h = paso * SEMANAS;
     lienzo.width = Math.round(w * dpr);
     lienzo.height = Math.round(h * dpr);
     lienzo.style.height = h + "px";
@@ -165,21 +170,20 @@ if (lienzo && edadIn) {
 
   function pintar() {
     ctx.clearRect(0, 0, m.w, m.h);
-    const r = Math.max(1, m.paso * 0.19);
+    const r = Math.max(1, m.paso * 0.2);
     for (let i = 0; i < TOTAL; i++) {
-      const x = (i % COLS) * m.paso + m.paso / 2;
-      const y = Math.floor(i / COLS) * m.paso + m.paso / 2;
+      const { col, fila } = pos(i);
       const gastado = i < progreso;
       ctx.beginPath();
-      ctx.arc(x, y, gastado ? r * 0.75 : r, 0, 6.2832);
-      ctx.fillStyle = gastado ? "rgba(255,255,255,.09)" : "rgba(255,255,255,.6)";
+      ctx.arc(col * m.paso + m.paso / 2, fila * m.paso + m.paso / 2, gastado ? r * 0.7 : r, 0, 6.2832);
+      ctx.fillStyle = gastado ? "rgba(255,255,255,.08)" : "rgba(255,255,255,.62)";
       ctx.fill();
     }
     // Hoy. El único punto azul de toda la cuadrícula.
     if (progreso > 0 && progreso < TOTAL) {
-      const i = Math.round(progreso) - 1;
+      const { col, fila } = pos(Math.round(progreso) - 1);
       ctx.beginPath();
-      ctx.arc((i % COLS) * m.paso + m.paso / 2, Math.floor(i / COLS) * m.paso + m.paso / 2, r * 1.6, 0, 6.2832);
+      ctx.arc(col * m.paso + m.paso / 2, fila * m.paso + m.paso / 2, r * 1.7, 0, 6.2832);
       ctx.fillStyle = "#0A5CFF";
       ctx.fill();
     }
@@ -202,7 +206,7 @@ if (lienzo && edadIn) {
 
   function actualizar(animado) {
     const edad = Math.min(89, Math.max(14, parseInt(edadIn.value, 10) || 20));
-    objetivo = edad * COLS;
+    objetivo = edad * SEMANAS;
     if (!animado || reduce) {
       progreso = objetivo;
       pintar();
