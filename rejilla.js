@@ -213,7 +213,9 @@ function arrancar() {
     { p: 0.20, pos: [-10, 5, 68], mira: [-7, 3, 0], fov: 36 },  // 2 · nos acercamos
     { p: 0.36, pos: [-17, 8, 20], mira: [-16, 7, 0], fov: 44 }, // 2b · dentro: son todas iguales
     { p: 0.56, pos: [12, -7, 30], mira: [10, -6, 0], fov: 40 }, // 3 · el NEXA
-    { p: 0.78, pos: [5, 2, 72], mira: [2, 1, 0], fov: 38 },     // 4 · retrocedemos: tu rejilla
+    // 4 · retrocedemos y la cámara encara la zona encendida:
+    //     el usuario tiene que VER sus semanas ardiendo.
+    { p: 0.78, pos: [16, 0, 60], mira: [14, 0, 0], fov: 40 },
     { p: 1.00, pos: [0, 0, 132], mira: [0, 0, 0], fov: 34 },    // 5 · la vida entera, otra vez
   ];
 
@@ -281,12 +283,16 @@ function arrancar() {
     at.needsUpdate = true;
   }
 
+  /* Encender una semana.
+     Las nuevas salen SIEMPRE junto al presente: es lo que tienes
+     delante, y es donde la cámara está mirando. Una semana que se
+     enciende y no la ves, no sirve de nada. */
   function encender(n = 1) {
-    // Encendemos semanas futuras al azar, cerca del presente.
     const libres = [];
     for (let i = 0; i < TOTAL; i++) if (at.array[i] === 1) libres.push(i);
+    libres.sort((a, b) => a - b);
     for (let k = 0; k < n && libres.length; k++) {
-      const j = Math.floor(Math.random() * Math.min(libres.length, 260));
+      const j = Math.floor(Math.random() * Math.min(libres.length, 160));
       at.array[libres[j]] = 2;
       libres.splice(j, 1);
     }

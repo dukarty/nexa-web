@@ -297,12 +297,13 @@ if (esc4) {
   new IntersectionObserver((es, obs) => {
     es.forEach((e) => {
       if (!e.isIntersecting) return;
+      // Se encienden una a una, no de golpe. Que se vea cómo se llena.
       if (window.REJILLA) {
         let n = 0;
         const t = setInterval(() => {
-          window.REJILLA.encender(1);
-          if (++n >= 30) clearInterval(t);
-        }, 70);
+          window.REJILLA.encender(2);
+          if (++n >= 45) clearInterval(t);
+        }, 55);
       }
       obs.disconnect();
     });
