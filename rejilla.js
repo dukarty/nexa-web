@@ -71,7 +71,7 @@ function arrancar() {
   const estados = new Float32Array(TOTAL);
   const semillas = new Float32Array(TOTAL);
 
-  const PASO = 1.35;
+  const PASO = 1.15;
   const ANCHO = (COLS - 1) * PASO;
   const ALTO = (FILAS - 1) * PASO;
 
@@ -97,8 +97,8 @@ function arrancar() {
     uCursor: { value: new THREE.Vector3(9999, 9999, 0) },
     uRadio: { value: 9.0 },
     uAz: { value: new THREE.Color("#0A5CFF") },
-    uGris: { value: new THREE.Color("#C6CBD6") },
-    uApagado: { value: new THREE.Color("#EDEFF3") },
+    uGris: { value: new THREE.Color("#8C95A6") },     // te queda
+    uApagado: { value: new THREE.Color("#DFE3E9") },  // ya no vuelve
     uOpacidad: { value: 1 },
   };
 
@@ -174,11 +174,11 @@ function arrancar() {
         if (a < 0.01) discard;
 
         vec3 col = uGris;
-        float op = 0.55;
+        float op = 0.62;
 
-        if (vEstado < 0.5) {            // gastada
+        if (vEstado < 0.5) {            // gastada: ya no vuelve
           col = uApagado;
-          op = 0.5;
+          op = 0.42;
         } else if (vEstado > 2.5) {     // ahora
           col = uAz;
           op = 0.9 + sin(uTiempo * 3.0) * 0.1;
@@ -205,13 +205,16 @@ function arrancar() {
   /* ─── La cámara: una sola toma, de principio a fin ───
      Cada escena es un punto de la trayectoria. El scroll es el
      tiempo de la película. No hay cortes: hay un travelling. */
+  /* La escena 1 tiene que enseñarte la vida ENTERA de un vistazo.
+     Con paso 1.15 la rejilla mide 91 × 59 unidades: la cámara se va
+     a 125 para que quepa con aire alrededor del titular. */
   const TOMAS = [
-    { p: 0.00, pos: [0, 0, 74], mira: [0, 0, 0], fov: 38 },   // 1 · la vida entera
-    { p: 0.18, pos: [-8, 4, 40], mira: [-6, 2, 0], fov: 36 }, // 2 · nos acercamos
-    { p: 0.34, pos: [-14, 6, 15], mira: [-13, 5, 0], fov: 42 },// 2b · dentro. Semanas idénticas.
-    { p: 0.55, pos: [10, -6, 22], mira: [8, -5, 0], fov: 40 },// 3 · el NEXA
-    { p: 0.76, pos: [4, 2, 46], mira: [2, 1, 0], fov: 38 },   // 4 · retrocedemos: tu rejilla
-    { p: 1.00, pos: [0, 0, 88], mira: [0, 0, 0], fov: 34 },   // 5 · la vida entera, otra vez
+    { p: 0.00, pos: [0, 0, 125], mira: [0, 0, 0], fov: 38 },    // 1 · tu vida entera
+    { p: 0.20, pos: [-10, 5, 68], mira: [-7, 3, 0], fov: 36 },  // 2 · nos acercamos
+    { p: 0.36, pos: [-17, 8, 20], mira: [-16, 7, 0], fov: 44 }, // 2b · dentro: son todas iguales
+    { p: 0.56, pos: [12, -7, 30], mira: [10, -6, 0], fov: 40 }, // 3 · el NEXA
+    { p: 0.78, pos: [5, 2, 72], mira: [2, 1, 0], fov: 38 },     // 4 · retrocedemos: tu rejilla
+    { p: 1.00, pos: [0, 0, 132], mira: [0, 0, 0], fov: 34 },    // 5 · la vida entera, otra vez
   ];
 
   const lerp = (a, b, t) => a + (b - a) * t;
