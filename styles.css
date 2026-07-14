@@ -18,6 +18,7 @@
   --gris:#5C5C5C;
   --gris-2:#9A9A9A;
   --linea:#E6E6E6;
+  --papel:#F5F5F5;
 
   --f:"Archivo","Helvetica Neue",Helvetica,Arial,sans-serif;
   --pad:clamp(20px,4vw,48px);
@@ -184,60 +185,122 @@ body.oscuro .marca{background:transparent;border-color:rgba(255,255,255,.32);col
 .tuyo__p b{color:var(--az);font-weight:800}
 
 /* ═══════════════════════════════════════════════
-   04 · EL GESTO — se elige con palabras, no con fotos
+   04 · EL GESTO
+   El producto dentro de la historia: un teléfono con la
+   interfaz real de NEXA, y los 3 pasos encendiéndose al lado.
    ═══════════════════════════════════════════════ */
 .gesto{padding:var(--sec) var(--pad);max-width:1300px;margin:0 auto}
-.gesto .tit{margin-bottom:clamp(30px,4vw,48px)}
+.gesto .tit{margin-bottom:clamp(44px,6vw,72px)}
+.demo{display:grid;gap:clamp(40px,6vw,80px);align-items:center}
+@media (min-width:900px){.demo{grid-template-columns:auto 1fr}}
 
-/* El mecanismo, con todas las letras. Tres pasos numerados. */
-.como{border-top:1.5px solid var(--tinta);margin-bottom:14px}
+/* ── El teléfono ── */
+.fono{justify-self:center;width:min(340px,82vw)}
+.fono__cuerpo{
+  position:relative;border-radius:44px;background:var(--tinta);padding:12px;
+  box-shadow:0 40px 90px -40px rgba(10,10,10,.55),0 0 0 1.5px rgba(10,10,10,.9);
+}
+.fono__notch{position:absolute;top:12px;left:50%;transform:translateX(-50%);
+  width:38%;height:22px;background:var(--tinta);border-radius:0 0 16px 16px;z-index:3}
+.fono__scr{
+  position:relative;border-radius:33px;background:#fff;overflow:hidden;
+  height:min(620px,74vh);min-height:500px;
+  display:flex;flex-direction:column;
+}
+.app__bar{
+  display:flex;align-items:center;justify-content:space-between;
+  padding:26px 20px 14px;border-bottom:1px solid var(--linea);flex:none;
+}
+.app__logo{font-weight:900;font-size:1.05rem;letter-spacing:-.05em}
+.app__logo i{color:var(--az);font-style:normal;margin:0 .02em}
+.app__paso{font-size:.66rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--gris-2)}
+
+/* Cada pantalla de la app. Solo una visible. */
+.scr{display:none;flex-direction:column;gap:11px;padding:20px;overflow:auto;flex:1;animation:scrIn .5s var(--e)}
+.scr.is-on{display:flex}
+@keyframes scrIn{from{opacity:0;transform:translateX(14px)}to{opacity:1;transform:none}}
+.scr__h{font-size:1.35rem;font-weight:900;letter-spacing:-.04em;margin-bottom:4px}
+.volver{align-self:flex-start;background:none;border:0;color:var(--gris-2);cursor:pointer;
+  font-size:.68rem;font-weight:800;text-transform:uppercase;letter-spacing:.1em;padding:0;margin-bottom:2px;transition:color .2s}
+.volver:hover{color:var(--tinta)}
+
+/* Tarjetas de experiencia (sin foto: la foto es el premio del final) */
+.tile{
+  display:flex;flex-direction:column;gap:3px;text-align:left;cursor:pointer;
+  background:var(--papel,#F5F5F5);border:1.5px solid transparent;border-radius:16px;padding:15px 16px;
+  transition:border-color .2s,transform .2s var(--e),background .2s;
+}
+.tile:hover{transform:translateY(-2px)}
+.tile:active,.tile.sel{border-color:var(--az);background:#fff}
+.tile__t{font-size:1.02rem;font-weight:800;letter-spacing:-.02em;line-height:1.15}
+.tile__m{font-size:.78rem;font-weight:600;color:var(--gris-2)}
+
+/* Filas de persona */
+.fila-p{
+  display:flex;align-items:center;gap:12px;text-align:left;cursor:pointer;
+  background:var(--papel,#F5F5F5);border:1.5px solid transparent;border-radius:16px;padding:12px 14px;
+  transition:border-color .2s,transform .2s var(--e),background .2s;
+}
+.fila-p:hover{transform:translateX(3px)}
+.fila-p:active,.fila-p.sel{border-color:var(--az);background:#fff}
+.fila-p__a{width:40px;height:40px;flex:none;border-radius:50%;display:grid;place-items:center;
+  background:var(--tinta);color:#fff;font-weight:900}
+.fila-p.sel .fila-p__a{background:var(--az)}
+.fila-p__i{display:flex;flex-direction:column;gap:1px;min-width:0}
+.fila-p__i b{font-size:1rem;font-weight:800;letter-spacing:-.02em}
+.fila-p__i i{font-size:.78rem;font-style:normal;font-weight:600;color:var(--az)}
+
+/* Pantalla de envío */
+.scr--env{justify-content:center;text-align:center;gap:6px}
+.scr__k{font-size:.86rem;font-weight:600;color:var(--gris)}
+.scr__k b{color:var(--tinta);font-weight:800}
+.scr__big{margin:6px auto 2px;max-width:12ch;font-size:1.9rem;font-weight:900;line-height:1;
+  letter-spacing:-.045em;text-transform:uppercase;font-variation-settings:"wdth" 86}
+.scr__por{font-size:.82rem;font-weight:700;color:var(--az);margin-bottom:22px}
+.fenv{width:100%;background:var(--az);color:#fff;border:0;border-radius:14px;cursor:pointer;
+  padding:16px;font-size:.92rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;transition:background .2s}
+.fenv:hover{background:var(--az-h)}
+.fenv[disabled]{opacity:.6;pointer-events:none}
+.scr__f{margin-top:14px;font-size:.76rem;color:var(--gris-2)}
+
+/* Pantalla de aceptado, dentro del móvil */
+.scr--ok{justify-content:center;text-align:center;gap:8px;background:var(--tinta);color:#fff}
+.okp__badge{align-self:center;background:rgba(10,92,255,.16);color:#7FA8FF;
+  font-size:.68rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;padding:8px 14px;border-radius:999px}
+.okp__t{margin-top:14px;font-size:1.9rem;font-weight:900;line-height:1;letter-spacing:-.05em;
+  text-transform:uppercase;font-variation-settings:"wdth" 84}
+.okp__s{font-size:.92rem;font-weight:600;color:rgba(255,255,255,.7)}
+.okp__chat{margin-top:22px;font-size:.82rem;font-weight:700;color:var(--az)}
+
+/* ── Los tres pasos, guía lateral que se enciende ── */
+.como{border-top:1.5px solid var(--tinta)}
 .como li{
   display:flex;align-items:baseline;gap:clamp(14px,2.4vw,30px);
-  padding:clamp(12px,1.7vw,20px) 0;border-bottom:1.5px solid var(--linea);
+  padding:clamp(16px,2.2vw,26px) 0;border-bottom:1.5px solid var(--linea);
+  opacity:.4;transition:opacity .4s var(--e),padding-left .4s var(--e);
 }
+.como li.on{opacity:1;padding-left:10px}
 .como__n{font-size:.72rem;font-weight:800;letter-spacing:.12em;color:var(--az);flex:none;font-variant-numeric:tabular-nums}
-.como__t{font-size:clamp(1.2rem,3vw,2.2rem);font-weight:900;letter-spacing:-.04em;line-height:1.05;text-transform:uppercase;font-variation-settings:"wdth" 86}
+.como__t{font-size:clamp(1.3rem,3.2vw,2.3rem);font-weight:900;letter-spacing:-.04em;line-height:1.05;text-transform:uppercase;font-variation-settings:"wdth" 86}
 .como__t b{color:var(--az)}
-.como__pie{margin-bottom:clamp(34px,4.5vw,56px);font-size:clamp(.95rem,1.5vw,1.15rem);font-weight:600;color:var(--gris);max-width:44ch}
+.como__pie{margin-top:clamp(22px,3vw,34px);font-size:clamp(.95rem,1.5vw,1.15rem);font-weight:600;color:var(--gris);max-width:40ch;line-height:1.5}
 .como__pie b{color:var(--tinta);font-weight:800}
-.caja{min-height:400px}
-.paso{display:none}
-.paso.is-on{display:block}
-.paso__k{font-size:.72rem;font-weight:800;letter-spacing:.2em;text-transform:uppercase;color:var(--gris-2);margin-bottom:22px}
-.atras{background:none;border:0;color:var(--gris-2);font-size:.72rem;font-weight:800;cursor:pointer;
-       margin-bottom:16px;text-transform:uppercase;letter-spacing:.12em;transition:color .2s}
-.atras:hover{color:var(--tinta)}
 
-.ops{border-top:1.5px solid var(--tinta)}
-.op{
-  display:flex;align-items:baseline;gap:clamp(14px,2.4vw,34px);width:100%;
-  padding:clamp(18px,2.4vw,30px) 0;border:0;border-bottom:1.5px solid var(--linea);
-  background:none;cursor:pointer;text-align:left;
-  transition:padding-left .45s var(--e),border-color .3s;
+/* ═══ CTA ═══ */
+.cta{
+  display:inline-flex;align-items:center;gap:11px;
+  background:var(--az);color:#fff;border:0;border-radius:999px;cursor:pointer;
+  padding:16px 26px;font-size:.84rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;
+  white-space:nowrap;transition:background .2s;
 }
-.op:hover{padding-left:16px}
-.op[aria-checked="true"]{border-color:var(--az)}
-.op__n{font-size:.68rem;font-weight:800;letter-spacing:.14em;color:var(--gris-2);flex:none;
-       font-variant-numeric:tabular-nums;transition:color .3s}
-.op[aria-checked="true"] .op__n{color:var(--az)}
-.op__t{
-  font-size:clamp(1.35rem,3.6vw,2.9rem);font-weight:900;line-height:1.02;letter-spacing:-.045em;
-  text-transform:uppercase;font-variation-settings:"wdth" 86;transition:color .3s;
-}
-.op[aria-checked="true"] .op__t{color:var(--az)}
-.op--per{flex-wrap:wrap}
-.op__p{font-size:.9rem;font-weight:600;color:var(--az);letter-spacing:-.01em;flex:1 0 100%;margin-top:4px}
-
-.paso--fin{padding-top:8px}
-.env__t{font-size:.95rem;color:var(--gris);font-weight:600}
-.env__t strong{color:var(--tinta);font-weight:800}
-.env__e{
-  margin:14px 0 8px;max-width:15ch;
-  font-size:clamp(2rem,5.4vw,4rem);font-weight:900;letter-spacing:-.05em;line-height:1;
-  text-transform:uppercase;font-variation-settings:"wdth" 85;
-}
-.env__w{font-size:.92rem;color:var(--az);font-weight:700;margin-bottom:32px}
-.env__f{margin-top:18px;font-size:.82rem;color:var(--gris-2)}
+.cta:hover{background:var(--az-h)}
+.cta--big{padding:19px 34px;font-size:.92rem}
+.cta--w{background:#fff;color:var(--tinta)}
+.cta[disabled]{opacity:.5;pointer-events:none}
+.cta__x{width:13px;height:13px;flex:none}
+.cta__x svg{width:100%;height:100%;overflow:visible}
+.cta__x line{stroke:currentColor;stroke-width:3;stroke-linecap:round}
+.cta--w .cta__x line{stroke:var(--az)}
 
 /* ═══ CTA ═══ */
 .cta{
@@ -400,5 +463,6 @@ body.bloq .nav,body.bloq .prog{opacity:0;pointer-events:none}
   .vuelta.abierta{height:100svh}
   .vuelta.abierta .fot:first-child{opacity:1!important}
   .momento img,.momento__k,.momento__t,.momento__s,.momento__e,.momento .cta{animation:none;opacity:1;transform:none}
-  .op:hover{padding-left:0}
+  .scr{animation:none}
+  .como li{opacity:1}
 }

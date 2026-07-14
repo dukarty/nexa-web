@@ -313,43 +313,62 @@ if (lienzo && edadIn) {
 /* ═════════════════════════════════════════════
    04 · EL GESTO  ·  EL MOMENTO
    ═════════════════════════════════════════════ */
-const caja = $("#caja");
+const fono = $("#fono");
 const momento = $("#momento");
 
-if (caja) {
-  const pasos = $$(".paso", caja);
+if (fono) {
+  const scrs = $$(".scr", fono);
+  const pasosGuia = $$("#como li");
+  const appPaso = $("#appPaso");
   const est = {};
-  const ir = (n) => pasos.forEach((p) => p.classList.toggle("is-on", +p.dataset.paso === n));
-  const marcar = (grupo, b) => {
-    $$(".op", grupo).forEach((o) => o.setAttribute("aria-checked", "false"));
-    b.setAttribute("aria-checked", "true");
-  };
 
-  $$('.paso[data-paso="1"] .op', caja).forEach((b) => b.addEventListener("click", () => {
-    marcar(b.parentElement, b);
+  // Cambiar de pantalla dentro del móvil, y encender el paso de la guía.
+  const ir = (n) => {
+    scrs.forEach((s) => s.classList.toggle("is-on", +s.dataset.fp === n));
+    pasosGuia.forEach((li) => li.classList.toggle("on", +li.dataset.paso <= Math.min(n, 3)));
+    if (n <= 3) appPaso.textContent = `Paso ${n} de 3`;
+    if (n === 4) appPaso.textContent = "Aceptado";
+  };
+  ir(1);
+
+  // P1 · experiencia
+  $$('.scr[data-fp="1"] .tile', fono).forEach((b) => b.addEventListener("click", () => {
+    $$(".tile", fono).forEach((o) => o.classList.remove("sel"));
+    b.classList.add("sel");
     est.exp = b.dataset.exp;
     est.img = b.dataset.img;
-    new Image().src = est.img;                 // la foto se precarga, pero no se enseña
-    setTimeout(() => ir(2), reduce ? 0 : 200);
+    new Image().src = est.img;                 // se precarga; la foto grande es el premio final
+    setTimeout(() => ir(2), reduce ? 0 : 260);
   }));
 
-  $$('.paso[data-paso="2"] .op', caja).forEach((b) => b.addEventListener("click", () => {
-    marcar(b.parentElement, b);
+  // P2 · persona
+  $$('.scr[data-fp="2"] .fila-p', fono).forEach((b) => b.addEventListener("click", () => {
+    $$(".fila-p", fono).forEach((o) => o.classList.remove("sel"));
+    b.classList.add("sel");
     est.per = b.dataset.per;
     est.por = b.dataset.por;
-    $("#rPer").textContent = est.per;
-    $("#rExp").textContent = est.exp;
-    $("#rPor").textContent = est.por;
-    setTimeout(() => ir(3), reduce ? 0 : 200);
+    $("#fPer").textContent = est.per;
+    $("#fExp").textContent = est.exp;
+    $("#fPor").textContent = est.por;
+    setTimeout(() => ir(3), reduce ? 0 : 260);
   }));
 
-  $$("[data-volver]", caja).forEach((b) =>
-    b.addEventListener("click", () => ir(+b.dataset.volver)));
+  $$("[data-fvolver]", fono).forEach((b) =>
+    b.addEventListener("click", () => ir(+b.dataset.fvolver)));
 
+  // P3 · enviar → el móvil muestra "aceptado", y luego llega el momento a pantalla completa
   $("#enviar")?.addEventListener("click", (e) => {
     const b = e.currentTarget;
     b.disabled = true;
-    $("#btnT").textContent = "Enviado";
+    $("#btnT").textContent = "Enviando…";
+    setTimeout(() => {
+      $("#fOkT").textContent = est.exp;
+      ir(4);                                   // aceptado, dentro del teléfono
+      b.disabled = false;
+      $("#btnT").textContent = "Enviar NEXA";
+    }, reduce ? 60 : 700);
+
+    // El clímax cinematográfico, a pantalla completa.
     setTimeout(() => {
       $("#momImg").src = est.img;
       $("#momImg").alt = est.exp;
@@ -358,21 +377,22 @@ if (caja) {
       momento.hidden = false;
       document.body.classList.add("bloq");
       $("#cerrarMom").focus();
-
       encender(1);      // una semana tuya deja de estar apagada
       abrirVuelta();    // y la vuelta a casa se enciende
-
-      b.disabled = false;
-      $("#btnT").textContent = "Enviar NEXA";
-      ir(1);
-      $$(".op", caja).forEach((o) => o.setAttribute("aria-checked", "false"));
-    }, reduce ? 80 : 620);
+    }, reduce ? 120 : 1600);
   });
+
+  // Al cerrar el momento, el teléfono vuelve a empezar: la demo se puede repetir.
+  fono._reset = () => {
+    ir(1);
+    $$(".tile,.fila-p", fono).forEach((o) => o.classList.remove("sel"));
+  };
 }
 
 function cerrarMomento() {
   momento.hidden = true;
   document.body.classList.remove("bloq");
+  fono?._reset?.();
   secVuelta.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
 }
 $("#cerrarMom")?.addEventListener("click", cerrarMomento);

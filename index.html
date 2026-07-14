@@ -53,7 +53,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://images.pexels.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..100,400;75..100,500;75..100,600;75..100,700;75..100,800;75..100,900&display=swap">
-<link rel="stylesheet" href="styles.css?v=64">
+<link rel="stylesheet" href="styles.css?v=65">
 </head>
 <body class="oscuro">
 
@@ -127,66 +127,88 @@
   <p class="ind">04 · Esto es la app</p>
   <h2 class="tit" id="h2-ges">Aquí no se escribe<br>a nadie. <span class="az">Se propone.</span></h2>
 
-  <!-- El mecanismo, dicho con todas las letras. Y justo debajo, lo haces. -->
-  <ol class="como">
-    <li><span class="como__n">01</span><span class="como__t">Eliges un plan.</span></li>
-    <li><span class="como__n">02</span><span class="como__t">Eliges a alguien concreto.</span></li>
-    <li><span class="como__n">03</span><span class="como__t">Le llega la propuesta <b>ya hecha</b>.</span></li>
-  </ol>
-  <p class="como__pie">Sin grupos. Sin «¿alguien se apunta?». Y solo si acepta, habláis. <b>Pruébalo aquí abajo:</b></p>
+  <!-- El producto, dentro de la historia: un teléfono con la interfaz real,
+       y tú avanzas por el flujo tocando la propia pantalla. -->
+  <div class="demo">
+    <div class="fono" id="fono">
+      <div class="fono__cuerpo">
+        <span class="fono__notch" aria-hidden="true"></span>
+        <div class="fono__scr" id="fscr">
+          <div class="app__bar">
+            <span class="app__logo">NE<i aria-hidden="true">✕</i>A</span>
+            <span class="app__paso" id="appPaso">Paso 1 de 3</span>
+          </div>
 
-  <div class="caja" id="caja">
-    <div class="paso is-on" data-paso="1">
-      <p class="paso__k">Elige qué quieres vivir</p>
-      <div class="ops" role="radiogroup" aria-label="Elige una experiencia">
-        <button class="op" type="button" role="radio" aria-checked="false"
-                data-exp="Amanecer en la Albufera"
-                data-img="https://images.pexels.com/photos/32876381/pexels-photo-32876381.jpeg?auto=compress&cs=tinysrgb&w=1800">
-          <span class="op__n">01</span><span class="op__t">Amanecer en la Albufera</span>
-        </button>
-        <button class="op" type="button" role="radio" aria-checked="false"
-                data-exp="Hoguera en el Saler"
-                data-img="https://images.pexels.com/photos/7148674/pexels-photo-7148674.jpeg?auto=compress&cs=tinysrgb&w=1800">
-          <span class="op__n">02</span><span class="op__t">Hoguera en el Saler</span>
-        </button>
-        <button class="op" type="button" role="radio" aria-checked="false"
-                data-exp="El concierto del jueves"
-                data-img="https://images.pexels.com/photos/1105666/pexels-photo-1105666.jpeg?auto=compress&cs=tinysrgb&w=1800">
-          <span class="op__n">03</span><span class="op__t">El concierto del jueves</span>
-        </button>
+          <!-- P1 · elegir experiencia -->
+          <div class="scr is-on" data-fp="1">
+            <p class="scr__h">¿Qué quieres vivir?</p>
+            <button class="tile" type="button"
+                    data-exp="Amanecer en la Albufera"
+                    data-img="https://images.pexels.com/photos/32876381/pexels-photo-32876381.jpeg?auto=compress&cs=tinysrgb&w=1800">
+              <span class="tile__t">Amanecer en la Albufera</span>
+              <span class="tile__m">La Albufera · madrugada</span>
+            </button>
+            <button class="tile" type="button"
+                    data-exp="Hoguera en el Saler"
+                    data-img="https://images.pexels.com/photos/7148674/pexels-photo-7148674.jpeg?auto=compress&cs=tinysrgb&w=1800">
+              <span class="tile__t">Hoguera en el Saler</span>
+              <span class="tile__m">El Saler · noche</span>
+            </button>
+            <button class="tile" type="button"
+                    data-exp="El concierto del jueves"
+                    data-img="https://images.pexels.com/photos/1105666/pexels-photo-1105666.jpeg?auto=compress&cs=tinysrgb&w=1800">
+              <span class="tile__t">El concierto del jueves</span>
+              <span class="tile__m">Sala · 22:00</span>
+            </button>
+          </div>
+
+          <!-- P2 · elegir persona -->
+          <div class="scr" data-fp="2">
+            <button class="volver" type="button" data-fvolver="1">← Cambiar</button>
+            <p class="scr__h">¿Con quién?</p>
+            <button class="fila-p" type="button" data-per="Marta" data-por="Está en tu «quiero vivir» y en el suyo">
+              <span class="fila-p__a">M</span>
+              <span class="fila-p__i"><b>Marta</b><i>Está en tu «quiero vivir» y en el suyo</i></span>
+            </button>
+            <button class="fila-p" type="button" data-per="Iván" data-por="A 15 min y nunca habéis coincidido">
+              <span class="fila-p__a">I</span>
+              <span class="fila-p__i"><b>Iván</b><i>A 15 min y nunca habéis coincidido</i></span>
+            </button>
+            <button class="fila-p" type="button" data-per="Nuria" data-por="Sale en las 9 de dos amigos tuyos">
+              <span class="fila-p__a">N</span>
+              <span class="fila-p__i"><b>Nuria</b><i>Sale en las 9 de dos amigos tuyos</i></span>
+            </button>
+          </div>
+
+          <!-- P3 · enviar (la propuesta ya está hecha) -->
+          <div class="scr scr--env" data-fp="3">
+            <button class="volver" type="button" data-fvolver="2">← Cambiar</button>
+            <p class="scr__k">Le propones a <b id="fPer">Marta</b></p>
+            <p class="scr__big" id="fExp">Amanecer en la Albufera</p>
+            <p class="scr__por" id="fPor">Está en tu «quiero vivir» y en el suyo</p>
+            <button class="fenv" type="button" id="enviar"><span id="btnT">Enviar NEXA</span></button>
+            <p class="scr__f">No escribes ni una palabra. Ya está redactado.</p>
+          </div>
+
+          <!-- P4 · aceptado, dentro del propio móvil -->
+          <div class="scr scr--ok" data-fp="4">
+            <span class="okp__badge">Marta ha aceptado</span>
+            <p class="okp__t" id="fOkT">Amanecer en la Albufera</p>
+            <p class="okp__s">Sábado · 07:00 · La Albufera</p>
+            <span class="okp__chat">Ahora sí: se abre el chat.</span>
+          </div>
+        </div>
       </div>
     </div>
 
-    <div class="paso" data-paso="2">
-      <button class="atras" type="button" data-volver="1">← Cambiar</button>
-      <p class="paso__k">Elige a quién</p>
-      <div class="ops" role="radiogroup" aria-label="Elige a una persona">
-        <button class="op op--per" type="button" role="radio" aria-checked="false"
-                data-per="Marta" data-por="Está en el «quiero vivir» de los dos">
-          <span class="op__t">Marta</span><span class="op__p">Está en el «quiero vivir» de los dos</span>
-        </button>
-        <button class="op op--per" type="button" role="radio" aria-checked="false"
-                data-per="Iván" data-por="Vivís a 15 minutos y nunca habéis coincidido">
-          <span class="op__t">Iván</span><span class="op__p">Vivís a 15 minutos y nunca habéis coincidido</span>
-        </button>
-        <button class="op op--per" type="button" role="radio" aria-checked="false"
-                data-per="Nuria" data-por="Sale en las 9 de dos personas que conoces">
-          <span class="op__t">Nuria</span><span class="op__p">Sale en las 9 de dos personas que conoces</span>
-        </button>
-      </div>
-    </div>
-
-    <div class="paso paso--fin" data-paso="3">
-      <button class="atras" type="button" data-volver="2">← Cambiar</button>
-      <p class="paso__k">Ya está</p>
-      <p class="env__t">Le vas a proponer a <strong id="rPer">Marta</strong></p>
-      <p class="env__e" id="rExp">Amanecer en la Albufera</p>
-      <p class="env__w" id="rPor">Está en el «quiero vivir» de los dos</p>
-      <button class="cta cta--big" type="button" id="enviar">
-        <span id="btnT">Enviar NEXA</span>
-        <span class="cta__x" aria-hidden="true"><svg viewBox="0 0 20 20"><line x1="2" y1="18" x2="18" y2="2"/><line x1="18" y1="18" x2="2" y2="2"/></svg></span>
-      </button>
-      <p class="env__f">No has escrito ni una palabra. No hace falta.</p>
+    <!-- Los tres pasos, encendiéndose a la vez que el teléfono avanza. -->
+    <div class="demo__guia">
+      <ol class="como" id="como">
+        <li data-paso="1"><span class="como__n">01</span><span class="como__t">Eliges un plan.</span></li>
+        <li data-paso="2"><span class="como__n">02</span><span class="como__t">Eliges a alguien concreto.</span></li>
+        <li data-paso="3"><span class="como__n">03</span><span class="como__t">Le llega la propuesta <b>ya hecha</b>.</span></li>
+      </ol>
+      <p class="como__pie">Sin grupos. Sin «¿alguien se apunta?».<br>Y el chat <b>se gana</b>: solo se abre si acepta.</p>
     </div>
   </div>
 </section>
@@ -304,7 +326,7 @@
   </nav>
 </footer>
 
-<script src="config.js?v=64"></script>
-<script src="script.js?v=64" defer></script>
+<script src="config.js?v=65"></script>
+<script src="script.js?v=65" defer></script>
 </body>
 </html>
