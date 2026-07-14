@@ -9,10 +9,16 @@
    Y ninguna imagen aparece antes de que actúes.
    ═══════════════════════════════════════════════════════════════ */
 
-// Al entrar, siempre arriba del todo. Ni el navegador ni un ancla nos bajan.
+// Al entrar o recargar, SIEMPRE arriba del todo. Aunque quede un #lista
+// en la URL de una visita anterior: lo borramos para que no nos baje.
 if ("scrollRestoration" in history) history.scrollRestoration = "manual";
-if (!location.hash) { try { scrollTo(0, 0); } catch (e) {} }
-addEventListener("load", () => { if (!location.hash) scrollTo(0, 0); });
+(function arriba() {
+  if (location.hash) {
+    try { history.replaceState(null, "", location.pathname + location.search); } catch (e) {}
+  }
+  try { scrollTo(0, 0); } catch (e) {}
+})();
+addEventListener("load", () => { try { scrollTo(0, 0); } catch (e) {} });
 
 const CFG = window.NEXA || {};
 const SUPABASE_URL = CFG.SUPABASE_URL || "";
