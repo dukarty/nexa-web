@@ -87,6 +87,34 @@ body.oscuro .marca{background:transparent;border-color:rgba(255,255,255,.32);col
 }
 
 /* ═══════════════════════════════════════════════
+   00 · LA APERTURA — la primera frase, la firma
+   ═══════════════════════════════════════════════ */
+.apertura{
+  height:100svh;background:var(--tinta);color:#fff;position:relative;
+  display:flex;align-items:center;justify-content:center;padding:var(--pad);text-align:center;
+}
+.ap__in{max-width:1100px}
+.ap__t{
+  font-size:clamp(2.9rem,11.5vw,10.5rem);font-weight:900;line-height:.9;letter-spacing:-.055em;
+  text-transform:uppercase;font-variation-settings:"wdth" 84;
+  opacity:0;transform:translateY(22px);animation:apSube 1.1s var(--e) .15s forwards;
+}
+@keyframes apSube{to{opacity:1;transform:none}}
+.xword{display:inline-flex;align-items:center;white-space:nowrap}
+.xword__x{display:inline-flex;width:.62em;height:.62em;margin:0 .01em;position:relative;top:.02em}
+.xword__x svg{width:100%;height:100%;overflow:visible}
+.xword__x line{stroke:var(--az);stroke-width:2.4;stroke-linecap:round;
+  stroke-dasharray:26;stroke-dashoffset:26;animation:apX 1s var(--e) .7s forwards}
+.xword__x line:last-child{animation-delay:.86s}
+@keyframes apX{to{stroke-dashoffset:0}}
+.ap__s{
+  margin:clamp(24px,3vw,40px) auto 0;max-width:34ch;
+  font-size:clamp(1rem,1.7vw,1.35rem);font-weight:600;line-height:1.4;color:rgba(255,255,255,.6);
+  text-wrap:balance;opacity:0;animation:apSube 1s var(--e) .55s forwards;
+}
+.baja--ap{opacity:0;animation:apSube 1s var(--e) 1s forwards}
+
+/* ═══════════════════════════════════════════════
    01 · EL BUCLE
    ═══════════════════════════════════════════════ */
 /* La semana entera cabe en dos pantallas de scroll. Si le doy más,
@@ -467,4 +495,6 @@ body.bloq .nav,body.bloq .prog{opacity:0;pointer-events:none}
   .momento img,.momento__k,.momento__t,.momento__s,.momento__e,.momento .cta{animation:none;opacity:1;transform:none}
   .scr{animation:none}
   .como li{opacity:1}
+  .ap__t,.ap__s,.baja--ap{animation:none;opacity:1;transform:none}
+  .xword__x line{animation:none;stroke-dashoffset:0}
 }
