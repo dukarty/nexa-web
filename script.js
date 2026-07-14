@@ -1,15 +1,12 @@
 /* ═══════════════════════════════════════════════════════════════
    NEXA
 
-   Cero librerías. Todo movimiento va atado al scroll o a un clic:
-   nada se mueve porque sí.
+   Cero librerías.
 
-     00  El reloj da la vuelta entera y te deja donde estabas.
-     01  847 nombres. Se apagan. Quedan seis.
-     02  Escribes lo que quieres vivir. Tus palabras se hacen enormes.
-     03  Dos toques y ya está propuesto.
-     04  Las 4.160 semanas de una vida.
-     05  No dejas un email. Dejas un deseo.
+   Regla única: nada se mueve solo. Solo el tiempo.
+   Todo lo demás se mueve porque tú scrolleas o porque tú tocas.
+
+   Y ninguna imagen aparece antes de que actúes.
    ═══════════════════════════════════════════════════════════════ */
 
 const CFG = window.NEXA || {};
@@ -23,7 +20,7 @@ const $$ = (s, c = document) => [...c.querySelectorAll(s)];
 const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
 const fmt = (n) => n.toLocaleString("es-ES");
 
-/* Progreso de scroll dentro de una sección alta con contenido pegado. */
+/* Cuánto has recorrido de una escena alta con el contenido pegado. */
 function prog(sec) {
   const r = sec.getBoundingClientRect();
   const rec = r.height - innerHeight;
@@ -31,63 +28,53 @@ function prog(sec) {
 }
 
 /* ═════════════════════════════════════════════
-   00 · EL DOMINGO
-   Domingo 23:47. Scrolleas: la semana entera se va.
+   01 · EL BUCLE
+   Domingo 23:47. Bajas: la semana entera se va.
    Y al final del scroll son las 23:47 de otro domingo.
-   Eso es la inercia. No hace falta explicarla.
    ═════════════════════════════════════════════ */
-const secDom = $("#domingo");
-const elDia = $("#dia");
-const elHora = $("#hora");
-const frA = $("#frA");
-const frB = $("#frB");
-const baja = $("#baja");
+const secBucle = $("#bucle");
+const elDia = $("#dia"), elHora = $("#hora");
+const frA = $("#frA"), frB = $("#frB"), baja = $("#baja");
 
 const DIAS = ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"];
-const T0 = 23 * 60 + 47;          // 23:47
-const SEMANA = 7 * 1440;          // una semana, en minutos
+const T0 = 23 * 60 + 47;
+const SEMANA = 7 * 1440;
 
-function domingo(p) {
+function bucle(p) {
   const t = T0 + p * SEMANA;
-  const dia = DIAS[Math.floor(t / 1440) % 7];
   const min = Math.floor(t) % 1440;
-  const hh = String(Math.floor(min / 60)).padStart(2, "0");
-  const mm = String(min % 60).padStart(2, "0");
+  elDia.textContent = DIAS[Math.floor(t / 1440) % 7];
+  elHora.textContent =
+    String(Math.floor(min / 60)).padStart(2, "0") + ":" + String(min % 60).padStart(2, "0");
 
-  elDia.textContent = dia;
-  elHora.textContent = `${hh}:${mm}`;
-
-  // La frase al principio. Silencio en medio. Y la misma frase al final.
-  const a = p < 0.16 ? 1 - p / 0.16 * 0.85 : p > 0.8 ? (p - 0.8) / 0.14 : 0;
-  const b = p > 0.9 ? (p - 0.9) / 0.08 : 0;
-  frA.style.opacity = clamp(p < 0.16 ? 1 : a);
-  frB.style.opacity = clamp(b);
-  baja.style.opacity = clamp(1 - p * 6);
+  // Frase al principio. Silencio en medio. La misma frase al final.
+  frA.style.opacity = clamp(p < 0.14 ? 1 : p > 0.78 ? (p - 0.78) / 0.12 : 0);
+  frB.style.opacity = clamp(p > 0.9 ? (p - 0.9) / 0.07 : 0);
+  baja.style.opacity = clamp(1 - p * 7);
 }
 
 /* ═════════════════════════════════════════════
-   01 · LOS 847
+   02 · LOS SEIS
    ═════════════════════════════════════════════ */
-const NOMBRES = ("Lucía Pablo Alba Sergio Carla Jorge Paula Álvaro Andrea Marc "
-  + "Elena Rubén Sara Adrián Laura Víctor Irene Diego Cristina Javier Nerea Raúl Ana Guillermo Julia Óscar "
-  + "Rocío Manuel Silvia Aitor Patricia Fernando Miriam Gonzalo Eva Ignacio Noelia Alejandro Marina Rodrigo "
-  + "Lidia Samuel Beatriz Emilio Celia Tomás Ainhoa Bruno Alicia Martín Vega Nacho Berta Íker Olivia Gabriel "
-  + "Ángela Mario Teresa Enzo Amaia Luis Inés Aarón Daniela Héctor Naia Borja Rebeca Unai Sofía Cristian "
-  + "Blanca Joel Valeria Xavi Lorena Arnau Claudia Iker Aurora Pau Vera Kevin Jimena Roberto Ariadna Sandra "
-  + "Emma Álex Nadia Simón Leire Gerard Nora Ismael Candela Rafa Lola Erik Miguel Alma Fran Greta Toni Chloe "
-  + "Bea Aleix Zoe Nil Ruth Álex Yaiza Denis Carmen Pol Ada Israel Mireia Saúl Lara Cayetana Nico Ainara "
-  + "Ariel Elsa Omar Abril Salva Nayara Roger Aitana Cesc Alana Iago Ona Bosco Jana Enrique").split(" ");
-
 const SEIS = ["Marta", "Iván", "Nuria", "Dani", "Clara", "Hugo"];
 
-// Los seis van sueltos por el medio. Si estuvieran juntos al principio,
-// se vería venir el golpe.
-[14, 37, 58, 79, 101, 124].forEach((i, k) => NOMBRES.splice(i, 0, SEIS[k]));
+const NOMBRES = ("Lucía Pablo Alba Sergio Carla Jorge Paula Álvaro Andrea Marc "
+  + "Elena Rubén Sara Adrián Laura Víctor Irene Diego Cristina Javier Nerea Raúl Ana Guillermo "
+  + "Julia Óscar Rocío Manuel Silvia Aitor Patricia Fernando Miriam Gonzalo Eva Ignacio Noelia "
+  + "Alejandro Marina Rodrigo Lidia Samuel Beatriz Emilio Celia Tomás Ainhoa Bruno Alicia Martín "
+  + "Vega Nacho Berta Íker Olivia Gabriel Ángela Mario Teresa Enzo Amaia Luis Inés Aarón Daniela "
+  + "Héctor Naia Borja Rebeca Unai Sofía Cristian Blanca Joel Valeria Xavi Lorena Arnau Claudia "
+  + "Aurora Pau Vera Kevin Jimena Roberto Ariadna Sandra Emma Álex Nadia Simón Leire Gerard Nora "
+  + "Ismael Candela Rafa Lola Erik Miguel Alma Fran Greta Toni Chloe Bea Aleix Zoe Nil Ruth Yaiza "
+  + "Denis Carmen Pol Ada Israel Mireia Saúl Lara Cayetana Nico Ainara Ariel Elsa Omar Abril Salva "
+  + "Nayara Roger Aitana Cesc Alana Iago Ona Bosco Jana Enrique").split(" ");
 
-const secAg = $("#agenda");
+// Los seis van sueltos por el medio. Juntos al principio se vería venir el golpe.
+[13, 36, 57, 78, 100, 123].forEach((i, k) => NOMBRES.splice(i, 0, SEIS[k]));
+
+const secSeis = $("#seis");
 const cajaN = $("#nombres");
-const agT1 = $("#agT1");
-const agT2 = $("#agT2");
+const agT1 = $("#agT1"), agT2 = $("#agT2"), agP = $("#agP");
 let spans = [];
 
 if (cajaN) {
@@ -96,35 +83,64 @@ if (cajaN) {
   NOMBRES.forEach((n) => {
     const s = document.createElement("span");
     s.textContent = n;
-    // Los seis se quedan. Solo la primera vez que aparece cada uno.
     if (SEIS.includes(n) && !usados.has(n)) { s.classList.add("vivo"); usados.add(n); }
     frag.appendChild(s);
   });
   cajaN.appendChild(frag);
   spans = $$("span", cajaN);
-
-  // Un orden de apagado aleatorio, pero fijo: si no, parpadea al scrollear.
-  spans.forEach((s) => s.dataset.o = Math.random().toFixed(4));
+  // Orden de apagado aleatorio pero fijo: si cambiara, parpadearía al scrollear.
+  spans.forEach((s) => (s.dataset.o = Math.random().toFixed(4)));
 }
 
-function agenda(p) {
-  // Entre 0.15 y 0.8 se van apagando. Los seis se quedan.
-  const q = clamp((p - 0.15) / 0.65);
+function seis(p) {
+  const q = clamp((p - 0.14) / 0.62);
   spans.forEach((s) => {
     if (s.classList.contains("vivo")) {
-      s.style.opacity = 1;
       s.classList.toggle("destaca", q > 0.5);
       return;
     }
     s.style.opacity = +s.dataset.o < q ? 0 : 1;
   });
-  const t2 = clamp((p - 0.72) / 0.16);
-  agT1.style.opacity = 1 - t2;
-  agT2.style.opacity = t2;
+  const t = clamp((p - 0.7) / 0.14);
+  agT1.style.opacity = 1 - t;
+  agT2.style.opacity = t;
+  agP.style.opacity = clamp((p - 0.86) / 0.1);
 }
 
 /* ═════════════════════════════════════════════
-   Bucle de scroll
+   05 · LA VUELTA A CASA
+   Cerrada hasta que mandas un NEXA. Entonces se abre,
+   y las fotos van pasando con el scroll: tú eres el que rebobina.
+   ═════════════════════════════════════════════ */
+const secVuelta = $("#vuelta");
+const fotos = $$(".fot");
+const vueltaPie = $("#vueltaPie");
+let abierta = false;
+
+function abrirVuelta() {
+  if (abierta) return;
+  abierta = true;
+  secVuelta.classList.add("abierta");
+  vueltaPie.hidden = false;
+  if (fotos[0]) fotos[0].style.opacity = 1;
+}
+
+function vuelta(p) {
+  if (!abierta || !fotos.length) return;
+  // Fundido cruzado atado al scroll. Nada avanza por su cuenta.
+  const n = fotos.length;
+  const x = clamp(p) * (n - 1);
+  fotos.forEach((f, i) => {
+    f.style.opacity = clamp(1 - Math.abs(x - i));
+  });
+}
+
+$("#irGesto")?.addEventListener("click", () => {
+  $("#gesto").scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
+});
+
+/* ═════════════════════════════════════════════
+   Bucle de scroll — el único motor de la página
    ═════════════════════════════════════════════ */
 const nav = $("#nav");
 const barra = $("#prog");
@@ -137,15 +153,20 @@ function marco() {
   nav.classList.toggle("oculto", y > ultimo && y > 700);
   ultimo = y;
 
-  if (secDom) domingo(prog(secDom));
-  if (secAg && spans.length) agenda(prog(secAg));
+  if (secBucle) bucle(prog(secBucle));
+  if (secSeis && spans.length) seis(prog(secSeis));
+  if (secVuelta) vuelta(prog(secVuelta));
 
-  // El negro solo dura lo que dura el domingo.
-  const r = secDom.getBoundingClientRect();
-  document.body.classList.toggle("oscuro", r.bottom > innerHeight * 0.5);
+  // El negro dura lo que dura el domingo. Y vuelve en la vuelta a casa.
+  const b = secBucle.getBoundingClientRect();
+  const v = secVuelta.getBoundingClientRect();
+  const enNegro = b.bottom > innerHeight * 0.5 ||
+                  (v.top < innerHeight * 0.5 && v.bottom > innerHeight * 0.5);
+  document.body.classList.toggle("oscuro", enNegro);
 
   pendiente = false;
 }
+
 if (!reduce) {
   addEventListener("scroll", () => { if (!pendiente) { requestAnimationFrame(marco); pendiente = true; } }, { passive: true });
   addEventListener("resize", marco, { passive: true });
@@ -155,46 +176,29 @@ if (!reduce) {
 }
 
 /* ═════════════════════════════════════════════
-   02 · EL DESEO
+   03 · LO QUE NO HAS PEDIDO
    Lo que escribes aquí te acompaña hasta el final.
    ═════════════════════════════════════════════ */
 const dForm = $("#deseoForm");
 const dIn = $("#deseoIn");
-const dSalida = $("#dSalida");
-const dBig = $("#dBig");
-const dPista = $("#dPista");
-const formK = $("#formK");
-const formDeseo = $("#formDeseo");
+const tuyo = $("#tuyo"), tuyoT = $("#tuyoT"), pista = $("#pista");
+const formK = $("#formK"), formDeseo = $("#formDeseo");
 let DESEO = "";
 
 dForm?.addEventListener("submit", (e) => {
   e.preventDefault();
   DESEO = (dIn.value.trim() || dIn.placeholder).slice(0, 52);
-  dBig.textContent = DESEO;
-  dSalida.hidden = false;
-  dPista.style.opacity = "0";
+  tuyoT.textContent = DESEO;
+  tuyo.hidden = false;
+  pista.style.opacity = "0";
   formDeseo.textContent = DESEO;
   formK.hidden = false;
   dIn.blur();
-  if (!reduce) dSalida.scrollIntoView({ behavior: "smooth", block: "center" });
+  if (!reduce) tuyo.scrollIntoView({ behavior: "smooth", block: "center" });
 });
 
-/* El río de deseos. */
-const rio = $("#rio");
-if (rio && !reduce) {
-  rio.innerHTML += rio.innerHTML;
-  let x = 0;
-  (function rueda() {
-    const mitad = rio.scrollWidth / 2;
-    x -= 0.5;
-    if (x <= -mitad) x += mitad;
-    rio.style.transform = `translate3d(${x.toFixed(2)}px,0,0)`;
-    requestAnimationFrame(rueda);
-  })();
-}
-
 /* ═════════════════════════════════════════════
-   04 · LAS SEMANAS
+   06 · LAS SEMANAS
    80 años × 52 semanas = 4.160 puntos.
    ═════════════════════════════════════════════ */
 const COLS = 80, FILAS = 52, TOTAL = COLS * FILAS;
@@ -250,10 +254,7 @@ function pintar() {
 }
 
 const edad = () => Math.min(89, Math.max(14, parseInt(edadIn.value, 10) || 20));
-
-function cuenta() {
-  quedanEl.textContent = fmt(Math.max(0, TOTAL - Math.round(edad() * FILAS)));
-}
+const cuenta = () => (quedanEl.textContent = fmt(Math.max(0, TOTAL - Math.round(edad() * FILAS))));
 
 const aplicar = (g) => {
   for (let i = 0; i < TOTAL; i++) {
@@ -310,34 +311,40 @@ if (lienzo && edadIn) {
 }
 
 /* ═════════════════════════════════════════════
-   03 · UN NEXA  ·  EL MOMENTO
+   04 · EL GESTO  ·  EL MOMENTO
    ═════════════════════════════════════════════ */
 const caja = $("#caja");
 const momento = $("#momento");
 
 if (caja) {
   const pasos = $$(".paso", caja);
-  const est = { exp: null, img: null, per: null, por: null };
+  const est = {};
   const ir = (n) => pasos.forEach((p) => p.classList.toggle("is-on", +p.dataset.paso === n));
-
-  $$(".exp", caja).forEach((b) => b.addEventListener("click", () => {
-    $$(".exp", caja).forEach((o) => o.setAttribute("aria-checked", "false"));
+  const marcar = (grupo, b) => {
+    $$(".op", grupo).forEach((o) => o.setAttribute("aria-checked", "false"));
     b.setAttribute("aria-checked", "true");
+  };
+
+  $$('.paso[data-paso="1"] .op', caja).forEach((b) => b.addEventListener("click", () => {
+    marcar(b.parentElement, b);
     est.exp = b.dataset.exp;
     est.img = b.dataset.img;
-    setTimeout(() => ir(2), reduce ? 0 : 220);
+    new Image().src = est.img;                 // la foto se precarga, pero no se enseña
+    setTimeout(() => ir(2), reduce ? 0 : 200);
   }));
 
-  $$(".per", caja).forEach((b) => b.addEventListener("click", () => {
-    $$(".per", caja).forEach((o) => o.setAttribute("aria-checked", "false"));
-    b.setAttribute("aria-checked", "true");
+  $$('.paso[data-paso="2"] .op', caja).forEach((b) => b.addEventListener("click", () => {
+    marcar(b.parentElement, b);
     est.per = b.dataset.per;
     est.por = b.dataset.por;
     $("#rPer").textContent = est.per;
     $("#rExp").textContent = est.exp;
     $("#rPor").textContent = est.por;
-    setTimeout(() => ir(3), reduce ? 0 : 220);
+    setTimeout(() => ir(3), reduce ? 0 : 200);
   }));
+
+  $$("[data-volver]", caja).forEach((b) =>
+    b.addEventListener("click", () => ir(+b.dataset.volver)));
 
   $("#enviar")?.addEventListener("click", (e) => {
     const b = e.currentTarget;
@@ -351,34 +358,31 @@ if (caja) {
       momento.hidden = false;
       document.body.classList.add("bloq");
       $("#cerrarMom").focus();
-      encender(1);
+
+      encender(1);      // una semana tuya deja de estar apagada
+      abrirVuelta();    // y la vuelta a casa se enciende
+
       b.disabled = false;
       $("#btnT").textContent = "Enviar NEXA";
       ir(1);
-      $$(".exp, .per", caja).forEach((o) => o.setAttribute("aria-checked", "false"));
-    }, reduce ? 80 : 650);
+      $$(".op", caja).forEach((o) => o.setAttribute("aria-checked", "false"));
+    }, reduce ? 80 : 620);
   });
-
-  $$("[data-volver]", caja).forEach((b) => b.addEventListener("click", () => ir(+b.dataset.volver)));
 }
 
 function cerrarMomento() {
   momento.hidden = true;
   document.body.classList.remove("bloq");
-  $("#semanas")?.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
+  secVuelta.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
 }
 $("#cerrarMom")?.addEventListener("click", cerrarMomento);
 addEventListener("keydown", (e) => { if (e.key === "Escape" && momento && !momento.hidden) cerrarMomento(); });
 
-/* Una foto rota nunca se ve. */
-$$("img").forEach((img) => img.addEventListener("error", () => {
-  img.style.visibility = "hidden";
-  const c = img.closest(".exp");
-  if (c) c.style.background = "#DEDEDE";
-}));
+/* Una foto rota no se ve nunca. */
+$$("img").forEach((img) => img.addEventListener("error", () => (img.style.visibility = "hidden")));
 
 /* ═════════════════════════════════════════════
-   05 · ENTRAR
+   07 · ENTRAR
    ═════════════════════════════════════════════ */
 const form = $("#waitlist");
 const email = $("#email");
@@ -394,30 +398,27 @@ function fallar(msg) {
   email.focus();
 }
 
-async function post(datos) {
-  const res = await fetch(`${SUPABASE_URL}/rest/v1/${TABLA}`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-      apikey: SUPABASE_ANON_KEY,
-      Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
-      Prefer: "return=minimal",
-    },
-    body: JSON.stringify(datos),
-  });
-  return res;
-}
+const post = (datos) => fetch(`${SUPABASE_URL}/rest/v1/${TABLA}`, {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json",
+    apikey: SUPABASE_ANON_KEY,
+    Authorization: `Bearer ${SUPABASE_ANON_KEY}`,
+    Prefer: "return=minimal",
+  },
+  body: JSON.stringify(datos),
+});
 
 async function enviarLista(base) {
   if (!SUPABASE_URL || !SUPABASE_ANON_KEY) {
     console.warn("[NEXA] Supabase sin configurar:", base);
     return true;
   }
-  // Intentamos guardar también el deseo. Si la columna todavía no existe
-  // en la tabla, no perdemos el email por eso: reintentamos sin ella.
+  // Guardamos también el deseo. Si la columna todavía no existe en la tabla,
+  // no perdemos el email por eso: reintentamos sin ella.
   let res = await post(DESEO ? { ...base, deseo: DESEO } : base);
   if (res.status === 400 && DESEO) res = await post(base);
-  if (res.status === 409) return true;                 // ya estaba dentro
+  if (res.status === 409) return true;             // ya estaba dentro
   if (!res.ok) throw new Error(await res.text());
   return true;
 }

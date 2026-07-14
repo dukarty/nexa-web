@@ -4,7 +4,6 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 
-<!-- ── SEO ─────────────────────────────────────────────────── -->
 <title>NEXA — Que no se te escape la vida | Experiencias reales en Valencia</title>
 <meta name="description" content="Tienes 800 contactos y hablas con seis. NEXA es la app para vivir experiencias reales con gente que quiere vivir lo mismo que tú. Dices qué quieres vivir, NEXA te dice con quién. Valencia, 2026.">
 <link rel="canonical" href="https://nexavalencia.vercel.app/">
@@ -29,40 +28,22 @@
 {
   "@context":"https://schema.org",
   "@graph":[
-    {
-      "@type":"Organization",
-      "@id":"https://nexavalencia.vercel.app/#org",
-      "name":"NEXA",
-      "url":"https://nexavalencia.vercel.app/",
-      "logo":"https://nexavalencia.vercel.app/favicon.svg",
-      "slogan":"Que no se te escape la vida",
-      "areaServed":{"@type":"City","name":"Valencia","address":{"@type":"PostalAddress","addressCountry":"ES"}}
-    },
-    {
-      "@type":"WebSite",
-      "@id":"https://nexavalencia.vercel.app/#web",
-      "url":"https://nexavalencia.vercel.app/",
-      "name":"NEXA",
-      "inLanguage":"es-ES",
-      "publisher":{"@id":"https://nexavalencia.vercel.app/#org"}
-    },
-    {
-      "@type":"SoftwareApplication",
-      "name":"NEXA",
-      "applicationCategory":"SocialNetworkingApplication",
-      "operatingSystem":"iOS, Android",
-      "description":"App para vivir experiencias reales con gente que quiere vivir lo mismo que tú. Dices qué quieres vivir este año y NEXA te dice con quién. Primera ciudad: Valencia.",
-      "offers":{"@type":"Offer","price":"0","priceCurrency":"EUR"}
-    },
-    {
-      "@type":"FAQPage",
-      "mainEntity":[
-        {"@type":"Question","name":"¿Qué es NEXA?","acceptedAnswer":{"@type":"Answer","text":"Una app para vivir experiencias reales con gente que quiere vivir lo mismo que tú. Dices qué quieres vivir este año y NEXA te dice con quién."}},
-        {"@type":"Question","name":"¿NEXA es una app de citas?","acceptedAnswer":{"@type":"Answer","text":"No. Aquí no se escribe a desconocidos: propones vivir algo concreto y solo si aceptan se abre la conversación."}},
-        {"@type":"Question","name":"¿Cuánto cuesta NEXA?","acceptedAnswer":{"@type":"Answer","text":"Es gratis."}},
-        {"@type":"Question","name":"¿Por qué NEXA solo está en Valencia?","acceptedAnswer":{"@type":"Answer","text":"Porque una app social vacía no le sirve a nadie. Abrimos otra ciudad cuando en Valencia haya vida."}}
-      ]
-    }
+    {"@type":"Organization","@id":"https://nexavalencia.vercel.app/#org","name":"NEXA",
+     "url":"https://nexavalencia.vercel.app/","logo":"https://nexavalencia.vercel.app/favicon.svg",
+     "slogan":"Que no se te escape la vida",
+     "areaServed":{"@type":"City","name":"Valencia","address":{"@type":"PostalAddress","addressCountry":"ES"}}},
+    {"@type":"WebSite","@id":"https://nexavalencia.vercel.app/#web","url":"https://nexavalencia.vercel.app/",
+     "name":"NEXA","inLanguage":"es-ES","publisher":{"@id":"https://nexavalencia.vercel.app/#org"}},
+    {"@type":"SoftwareApplication","name":"NEXA","applicationCategory":"SocialNetworkingApplication",
+     "operatingSystem":"iOS, Android",
+     "description":"App para vivir experiencias reales con gente que quiere vivir lo mismo que tú. Dices qué quieres vivir este año y NEXA te dice con quién. Primera ciudad: Valencia.",
+     "offers":{"@type":"Offer","price":"0","priceCurrency":"EUR"}},
+    {"@type":"FAQPage","mainEntity":[
+      {"@type":"Question","name":"¿Qué es NEXA?","acceptedAnswer":{"@type":"Answer","text":"Una app para vivir experiencias reales con gente que quiere vivir lo mismo que tú. Dices qué quieres vivir este año y NEXA te dice con quién."}},
+      {"@type":"Question","name":"¿NEXA es una app de citas?","acceptedAnswer":{"@type":"Answer","text":"No. Aquí no se escribe a desconocidos: propones vivir algo concreto y solo si aceptan se abre la conversación."}},
+      {"@type":"Question","name":"¿Cuánto cuesta NEXA?","acceptedAnswer":{"@type":"Answer","text":"Es gratis."}},
+      {"@type":"Question","name":"¿Por qué NEXA solo está en Valencia?","acceptedAnswer":{"@type":"Answer","text":"Porque una app social vacía no le sirve a nadie. Abrimos otra ciudad cuando en Valencia haya vida."}}
+    ]}
   ]
 }
 </script>
@@ -72,7 +53,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://images.pexels.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..100,400;75..100,500;75..100,600;75..100,700;75..100,800;75..100,900&display=swap">
-<link rel="stylesheet" href="styles.css?v=52">
+<link rel="stylesheet" href="styles.css?v=60">
 </head>
 <body class="oscuro">
 
@@ -84,115 +65,85 @@
     <a class="marca" href="#top" aria-label="NEXA, inicio">
       NE<span class="marca__x" aria-hidden="true"><svg viewBox="0 0 20 20"><line x1="2" y1="18" x2="18" y2="2"/><line x1="18" y1="18" x2="2" y2="2"/></svg></span>A
     </a>
-    <a class="pill pill--on" href="#lista">Entrar</a>
+    <a class="pill" href="#lista">Entrar</a>
   </nav>
 </header>
 
 <main id="top">
 
-<!-- ══════════════════════════════════════════════════════════
-     00 · EL DOMINGO
-     El reloj da la vuelta entera y te deja en el mismo sitio.
-     Toda la tesis de NEXA, sin una palabra de marketing.
-     ══════════════════════════════════════════════════════════ -->
-<section class="domingo" id="domingo" aria-labelledby="h1">
-  <div class="domingo__fijo">
+<!-- ═══════════════ 01 · EL BUCLE ═══════════════
+     Negro. El reloj da la vuelta entera y te deja donde estabas. -->
+<section class="bucle" id="bucle" aria-labelledby="h1">
+  <div class="fijo">
     <p class="dia" id="dia">Domingo</p>
     <p class="hora" id="hora">23:47</p>
-
     <h1 class="frase" id="h1">
-      <span class="frase__a" id="frA">No ha pasado nada esta semana.</span>
-      <span class="frase__b" id="frB">Otra vez.</span>
+      <span id="frA">No ha pasado nada esta semana.</span>
+      <span class="az" id="frB">Otra vez.</span>
     </h1>
-
     <p class="sr">NEXA es una app para vivir experiencias reales con gente que quiere vivir lo mismo que tú. Primera ciudad: Valencia.</p>
     <span class="baja" id="baja" aria-hidden="true">Baja</span>
   </div>
 </section>
 
-<!-- ══════════════════════════════════════════════════════════
-     01 · LOS 847
-     La luz. Y los nombres apagándose hasta que quedan seis.
-     ══════════════════════════════════════════════════════════ -->
-<section class="agenda" id="agenda" aria-labelledby="h2-ag">
-  <div class="agenda__fijo">
-    <h2 class="ag__t" id="h2-ag">
-      <span class="ag__t1" id="agT1">Tienes <b>847</b> contactos.</span>
-      <span class="ag__t2" id="agT2">Hablas con seis.</span>
+<!-- ═══════════════ 02 · LOS SEIS ═══════════════
+     Corte a blanco. Los nombres se apagan hasta que quedan seis. -->
+<section class="seis" id="seis" aria-labelledby="h2-seis">
+  <div class="fijo">
+    <h2 class="seis__t" id="h2-seis">
+      <span id="agT1">Tienes <b>847</b> contactos.</span>
+      <span class="az" id="agT2">Hablas con seis.</span>
     </h2>
     <div class="nombres" id="nombres" aria-hidden="true"></div>
+    <p class="seis__p" id="agP">No es que no tengas a nadie. Es que nadie empieza.</p>
   </div>
 </section>
 
-<!-- ══════════════════════════════════════════════════════════
-     02 · EL DESEO
-     Escribe lo que quieres vivir. Y tus palabras se hacen enormes.
-     Esto no explica NEXA: esto ES la primera pantalla de NEXA.
-     ══════════════════════════════════════════════════════════ -->
-<section class="deseo" id="deseo" aria-labelledby="h2-de">
-  <p class="ind">01</p>
-  <h2 class="h2" id="h2-de">¿Qué quieres vivir<br>este año?</h2>
+<!-- ═══════════════ 03 · LO QUE NO HAS PEDIDO ═══════════════ -->
+<section class="pedir" id="pedir" aria-labelledby="h2-ped">
+  <p class="ind">03</p>
+  <h2 class="tit" id="h2-ped">¿Qué quieres vivir<br>este año?</h2>
 
-  <form class="dform" id="deseoForm" autocomplete="off">
+  <form class="linea" id="deseoForm" autocomplete="off">
     <label class="sr" for="deseoIn">Escribe algo que quieras vivir este año</label>
     <input id="deseoIn" type="text" maxlength="52" placeholder="Ver amanecer sin haber dormido">
-    <button class="dform__b" type="submit" aria-label="Confirmar deseo">
+    <button class="linea__b" type="submit" aria-label="Confirmar">
       <svg viewBox="0 0 20 20" aria-hidden="true"><line x1="2" y1="18" x2="18" y2="2"/><line x1="18" y1="18" x2="2" y2="2"/></svg>
     </button>
   </form>
-  <p class="dform__p" id="dPista">Lo que sea. Nadie lo va a juzgar.</p>
+  <p class="pista" id="pista">Lo que sea. Nadie lo va a juzgar.</p>
 
-  <div class="salida" id="dSalida" hidden>
-    <p class="salida__k">Este año quiero</p>
-    <p class="salida__big" id="dBig"></p>
-    <p class="salida__pie">
-      No eres el único que lo quiere.<br>
-      <b>Eres el único que no lo ha pedido.</b>
-    </p>
+  <div class="tuyo" id="tuyo" hidden>
+    <p class="tuyo__k">Este año quiero</p>
+    <p class="tuyo__t" id="tuyoT"></p>
+    <p class="tuyo__p">No eres el único que lo quiere.<br><b>Eres el único que no lo ha pedido.</b></p>
   </div>
-
-  <div class="rio" aria-hidden="true"><div class="rio__t" id="rio">
-    <span>Ver amanecer sin haber dormido</span><i>✕</i>
-    <span>Aprender a surfear de una vez</span><i>✕</i>
-    <span>Un concierto en primera fila</span><i>✕</i>
-    <span>Dormir en la furgo</span><i>✕</i>
-    <span>Bañarme en el mar en enero</span><i>✕</i>
-    <span>Subir el Penyagolosa</span><i>✕</i>
-    <span>Cenar donde nunca iría solo</span><i>✕</i>
-    <span>Un viaje sin plan</span><i>✕</i>
-    <span>Ver las Perseidas fuera de la ciudad</span><i>✕</i>
-  </div></div>
 </section>
 
-<!-- ══════════════════════════════════════════════════════════
-     03 · UN NEXA
-     Dos toques. Ni una palabra escrita.
-     ══════════════════════════════════════════════════════════ -->
-<section class="nexa" id="nexa" aria-labelledby="h2-nx">
-  <p class="ind">02</p>
-  <h2 class="h2" id="h2-nx">Aquí no se escribe<br>a nadie. <span class="az">Se propone.</span></h2>
+<!-- ═══════════════ 04 · EL GESTO ═══════════════
+     Eliges con palabras. La foto no existe todavía. -->
+<section class="gesto" id="gesto" aria-labelledby="h2-ges">
+  <p class="ind">04</p>
+  <h2 class="tit" id="h2-ges">Aquí no se escribe<br>a nadie. <span class="az">Se propone.</span></h2>
 
   <div class="caja" id="caja">
     <div class="paso is-on" data-paso="1">
       <p class="paso__k">Elige qué quieres vivir</p>
-      <div class="exps" role="radiogroup" aria-label="Elige una experiencia">
-        <button class="exp" type="button" role="radio" aria-checked="false"
+      <div class="ops" role="radiogroup" aria-label="Elige una experiencia">
+        <button class="op" type="button" role="radio" aria-checked="false"
                 data-exp="Amanecer en la Albufera"
-                data-img="https://images.pexels.com/photos/32876381/pexels-photo-32876381.jpeg?auto=compress&cs=tinysrgb&w=1600">
-          <img src="https://images.pexels.com/photos/32876381/pexels-photo-32876381.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Amanecer sobre el agua" loading="lazy" width="600" height="750">
-          <span class="exp__n">Amanecer en la Albufera</span>
+                data-img="https://images.pexels.com/photos/32876381/pexels-photo-32876381.jpeg?auto=compress&cs=tinysrgb&w=1800">
+          <span class="op__n">01</span><span class="op__t">Amanecer en la Albufera</span>
         </button>
-        <button class="exp" type="button" role="radio" aria-checked="false"
-                data-exp="El concierto del Loco"
-                data-img="https://images.pexels.com/photos/1105666/pexels-photo-1105666.jpeg?auto=compress&cs=tinysrgb&w=1600">
-          <img src="https://images.pexels.com/photos/1105666/pexels-photo-1105666.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Público en un concierto" loading="lazy" width="600" height="750">
-          <span class="exp__n">El concierto del Loco</span>
-        </button>
-        <button class="exp" type="button" role="radio" aria-checked="false"
+        <button class="op" type="button" role="radio" aria-checked="false"
                 data-exp="Hoguera en el Saler"
-                data-img="https://images.pexels.com/photos/7148674/pexels-photo-7148674.jpeg?auto=compress&cs=tinysrgb&w=1600">
-          <img src="https://images.pexels.com/photos/7148674/pexels-photo-7148674.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Hoguera en la playa con gente alrededor" loading="lazy" width="600" height="750">
-          <span class="exp__n">Hoguera en el Saler</span>
+                data-img="https://images.pexels.com/photos/7148674/pexels-photo-7148674.jpeg?auto=compress&cs=tinysrgb&w=1800">
+          <span class="op__n">02</span><span class="op__t">Hoguera en el Saler</span>
+        </button>
+        <button class="op" type="button" role="radio" aria-checked="false"
+                data-exp="El concierto del jueves"
+                data-img="https://images.pexels.com/photos/1105666/pexels-photo-1105666.jpeg?auto=compress&cs=tinysrgb&w=1800">
+          <span class="op__n">03</span><span class="op__t">El concierto del jueves</span>
         </button>
       </div>
     </div>
@@ -200,20 +151,24 @@
     <div class="paso" data-paso="2">
       <button class="atras" type="button" data-volver="1">← Cambiar</button>
       <p class="paso__k">Elige a quién</p>
-      <div class="gente" role="radiogroup" aria-label="Elige a una persona">
-        <button class="per" type="button" role="radio" aria-checked="false" data-per="Marta" data-por="Está en el «quiero vivir» de los dos">
-          <span class="per__a">M</span><span class="per__i"><span class="per__n">Marta</span><span class="per__p">Está en el «quiero vivir» de los dos</span></span>
+      <div class="ops" role="radiogroup" aria-label="Elige a una persona">
+        <button class="op op--per" type="button" role="radio" aria-checked="false"
+                data-per="Marta" data-por="Está en el «quiero vivir» de los dos">
+          <span class="op__t">Marta</span><span class="op__p">Está en el «quiero vivir» de los dos</span>
         </button>
-        <button class="per" type="button" role="radio" aria-checked="false" data-per="Iván" data-por="Vivís a 15 minutos y nunca habéis coincidido">
-          <span class="per__a">I</span><span class="per__i"><span class="per__n">Iván</span><span class="per__p">Vivís a 15 minutos y nunca habéis coincidido</span></span>
+        <button class="op op--per" type="button" role="radio" aria-checked="false"
+                data-per="Iván" data-por="Vivís a 15 minutos y nunca habéis coincidido">
+          <span class="op__t">Iván</span><span class="op__p">Vivís a 15 minutos y nunca habéis coincidido</span>
         </button>
-        <button class="per" type="button" role="radio" aria-checked="false" data-per="Nuria" data-por="Sale en las 9 de dos personas que conoces">
-          <span class="per__a">N</span><span class="per__i"><span class="per__n">Nuria</span><span class="per__p">Sale en las 9 de dos personas que conoces</span></span>
+        <button class="op op--per" type="button" role="radio" aria-checked="false"
+                data-per="Nuria" data-por="Sale en las 9 de dos personas que conoces">
+          <span class="op__t">Nuria</span><span class="op__p">Sale en las 9 de dos personas que conoces</span>
         </button>
       </div>
     </div>
 
     <div class="paso paso--fin" data-paso="3">
+      <button class="atras" type="button" data-volver="2">← Cambiar</button>
       <p class="paso__k">Ya está</p>
       <p class="env__t">Le vas a proponer a <strong id="rPer">Marta</strong></p>
       <p class="env__e" id="rExp">Amanecer en la Albufera</p>
@@ -227,7 +182,7 @@
   </div>
 </section>
 
-<!-- ══════ EL MOMENTO ══════ -->
+<!-- ══════ EL MOMENTO — la primera imagen de toda la web ══════ -->
 <div class="momento" id="momento" role="dialog" aria-modal="true" aria-labelledby="momT" hidden>
   <img id="momImg" src="" alt="">
   <div class="momento__velo" aria-hidden="true"></div>
@@ -240,14 +195,35 @@
   </div>
 </div>
 
-<!-- ══════════════════════════════════════════════════════════
-     04 · LAS SEMANAS
-     ══════════════════════════════════════════════════════════ -->
-<section class="semanas" id="semanas" aria-labelledby="h2-sm">
+<!-- ═══════════════ 05 · LA VUELTA A CASA ═══════════════
+     Cerrada hasta que mandas un NEXA. La web no se enciende
+     hasta que tú dejas de ser pasivo. -->
+<section class="vuelta" id="vuelta" aria-labelledby="h2-vue">
+  <div class="fijo">
+    <div class="tira" id="tira" aria-hidden="true">
+      <figure class="fot"><img src="https://images.pexels.com/photos/17444987/pexels-photo-17444987.jpeg?auto=compress&cs=tinysrgb&w=1800" alt="" loading="lazy"></figure>
+      <figure class="fot"><img src="https://images.pexels.com/photos/7148674/pexels-photo-7148674.jpeg?auto=compress&cs=tinysrgb&w=1800" alt="" loading="lazy"></figure>
+      <figure class="fot"><img src="https://images.pexels.com/photos/5738245/pexels-photo-5738245.jpeg?auto=compress&cs=tinysrgb&w=1800" alt="" loading="lazy"></figure>
+      <figure class="fot"><img src="https://images.pexels.com/photos/32876381/pexels-photo-32876381.jpeg?auto=compress&cs=tinysrgb&w=1800" alt="" loading="lazy"></figure>
+      <div class="grano" aria-hidden="true"></div>
+    </div>
+
+    <div class="cerrado" id="cerrado">
+      <h2 class="cerrado__t" id="h2-vue">Aquí es donde<br>vuelves a casa.</h2>
+      <p class="cerrado__s">Pero todavía no has propuesto nada.</p>
+      <button class="enlace" type="button" id="irGesto">Manda un NEXA <span aria-hidden="true">→</span></button>
+    </div>
+
+    <p class="vuelta__pie" id="vueltaPie" hidden>Esto es lo que NEXA quiere que te pase un martes.</p>
+  </div>
+</section>
+
+<!-- ═══════════════ 06 · LAS SEMANAS ═══════════════ -->
+<section class="semanas" id="semanas" aria-labelledby="h2-sem">
   <div class="sem__hd">
     <div>
-      <p class="ind">03</p>
-      <h2 class="h2" id="h2-sm">Un punto.<br>Una semana.</h2>
+      <p class="ind">06</p>
+      <h2 class="tit" id="h2-sem">Un punto.<br>Una semana.</h2>
     </div>
     <div class="edad">
       <label for="edad">Tengo</label>
@@ -257,7 +233,7 @@
   </div>
 
   <div class="sem__lienzo">
-    <canvas id="rejilla" role="img" aria-label="Cuadrícula con las 4.160 semanas de una vida. Las ya vividas aparecen apagadas."></canvas>
+    <canvas id="rejilla" role="img" aria-label="Las 4.160 semanas de una vida. Las ya vividas aparecen apagadas."></canvas>
   </div>
 
   <div class="sem__pie">
@@ -266,13 +242,10 @@
   </div>
 </section>
 
-<!-- ══════════════════════════════════════════════════════════
-     05 · ENTRAR
-     No dejas un email. Dejas un deseo.
-     ══════════════════════════════════════════════════════════ -->
-<section class="lista" id="lista" aria-labelledby="h2-ls">
-  <p class="ind">04</p>
-  <h2 class="h2 h2--fin" id="h2-ls">Valencia.<br>2026.<br><span class="az">Sé de los primeros.</span></h2>
+<!-- ═══════════════ 07 · ENTRAR ═══════════════ -->
+<section class="lista" id="lista" aria-labelledby="h2-lis">
+  <p class="ind">07</p>
+  <h2 class="tit tit--fin" id="h2-lis">Valencia.<br>2026.<br><span class="az">Sé de los primeros.</span></h2>
 
   <form class="form" id="waitlist" novalidate>
     <p class="form__k" id="formK" hidden>Te guardamos esto: <b id="formDeseo"></b></p>
@@ -321,7 +294,7 @@
   </nav>
 </footer>
 
-<script src="config.js?v=52"></script>
-<script src="script.js?v=52" defer></script>
+<script src="config.js?v=60"></script>
+<script src="script.js?v=60" defer></script>
 </body>
 </html>
