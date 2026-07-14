@@ -101,11 +101,19 @@ body.oscuro .marca{background:transparent;border-color:rgba(255,255,255,.32);col
   max-width:16ch;text-wrap:balance;min-height:2.5em;
 }
 .frase span{display:block;opacity:0;transition:opacity .5s ease}
+/* El ancla: quien mira 5 segundos ya sabe qué es NEXA. Siempre visible. */
+.claim{
+  position:absolute;left:50%;bottom:64px;transform:translateX(-50%);
+  max-width:32ch;text-align:center;
+  font-size:clamp(.82rem,1.5vw,1rem);font-weight:700;letter-spacing:-.01em;
+  color:rgba(255,255,255,.62);
+}
 .baja{
   position:absolute;left:50%;bottom:24px;transform:translateX(-50%);
   font-size:.64rem;font-weight:800;letter-spacing:.24em;text-transform:uppercase;
   color:rgba(255,255,255,.32);transition:opacity .4s;
 }
+@media (max-width:640px){.claim{bottom:52px}}
 .baja::after{content:"";display:block;width:1px;height:24px;margin:8px auto 0;background:rgba(255,255,255,.32)}
 
 /* ═══════════════════════════════════════════════
@@ -179,7 +187,19 @@ body.oscuro .marca{background:transparent;border-color:rgba(255,255,255,.32);col
    04 · EL GESTO — se elige con palabras, no con fotos
    ═══════════════════════════════════════════════ */
 .gesto{padding:var(--sec) var(--pad);max-width:1300px;margin:0 auto}
-.gesto .tit{margin-bottom:clamp(40px,5vw,64px)}
+.gesto .tit{margin-bottom:clamp(30px,4vw,48px)}
+
+/* El mecanismo, con todas las letras. Tres pasos numerados. */
+.como{border-top:1.5px solid var(--tinta);margin-bottom:14px}
+.como li{
+  display:flex;align-items:baseline;gap:clamp(14px,2.4vw,30px);
+  padding:clamp(12px,1.7vw,20px) 0;border-bottom:1.5px solid var(--linea);
+}
+.como__n{font-size:.72rem;font-weight:800;letter-spacing:.12em;color:var(--az);flex:none;font-variant-numeric:tabular-nums}
+.como__t{font-size:clamp(1.2rem,3vw,2.2rem);font-weight:900;letter-spacing:-.04em;line-height:1.05;text-transform:uppercase;font-variation-settings:"wdth" 86}
+.como__t b{color:var(--az)}
+.como__pie{margin-bottom:clamp(34px,4.5vw,56px);font-size:clamp(.95rem,1.5vw,1.15rem);font-weight:600;color:var(--gris);max-width:44ch}
+.como__pie b{color:var(--tinta);font-weight:800}
 .caja{min-height:400px}
 .paso{display:none}
 .paso.is-on{display:block}
@@ -325,6 +345,9 @@ body.bloq .nav,body.bloq .prog{opacity:0;pointer-events:none}
    07 · ENTRAR
    ═══════════════════════════════════════════════ */
 .lista{padding:var(--sec) var(--pad);max-width:1300px;margin:0 auto;border-top:1.5px solid var(--tinta)}
+/* La frase que se le repite a un amigo. */
+.resumen{margin-bottom:22px;font-size:clamp(1.15rem,2.4vw,1.9rem);font-weight:700;line-height:1.2;letter-spacing:-.03em;color:var(--gris);max-width:24ch}
+.resumen b{color:var(--tinta);font-weight:900}
 .form{margin-top:clamp(40px,5vw,64px);max-width:640px}
 .form__k{margin-bottom:18px;font-size:.9rem;color:var(--gris);font-weight:600}
 .form__k b{color:var(--tinta);font-weight:800}
