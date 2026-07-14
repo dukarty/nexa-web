@@ -1,14 +1,15 @@
 /* ═══════════════════════════════════════════════════════════════
    NEXA
 
-   Sin librerías. 60 fps. Progressive enhancement:
-   si esto no se ejecuta, el contenido sigue ahí y se lee entero.
+   Cero librerías. Todo movimiento va atado al scroll o a un clic:
+   nada se mueve porque sí.
 
-     1. LA VIDA DENTRO DEL TITULAR — las fotos incrustadas rotan solas.
-     2. La cinta de deseos, rodando sin parar.
-     3. Las 4.160 semanas que se apagan con tu edad.
-     4. El mensaje que no envías: se deshace en el aire.
-     5. Mandas un NEXA → la foto se abre a pantalla completa.
+     00  El reloj da la vuelta entera y te deja donde estabas.
+     01  847 nombres. Se apagan. Quedan seis.
+     02  Escribes lo que quieres vivir. Tus palabras se hacen enormes.
+     03  Dos toques y ya está propuesto.
+     04  Las 4.160 semanas de una vida.
+     05  No dejas un email. Dejas un deseo.
    ═══════════════════════════════════════════════════════════════ */
 
 const CFG = window.NEXA || {};
@@ -19,110 +20,183 @@ const TABLA = CFG.TABLA || "waitlist";
 const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
 const $ = (s, c = document) => c.querySelector(s);
 const $$ = (s, c = document) => [...c.querySelectorAll(s)];
-
-const COLS = 80, FILAS = 52, TOTAL = COLS * FILAS;   // 4.160
+const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
 const fmt = (n) => n.toLocaleString("es-ES");
 
-/* ═════════════════════════════════════════════
-   1 · LA VIDA DENTRO DEL TITULAR
-   Dos huecos en la frase. Dentro, la vida, rotando.
-   No es un adorno: es literalmente de lo que va NEXA.
-   ═════════════════════════════════════════════ */
-const VIDA = [
-  ["https://images.pexels.com/photos/7148674/pexels-photo-7148674.jpeg?auto=compress&cs=tinysrgb&w=400", "Hoguera en la playa"],
-  ["https://images.pexels.com/photos/1105666/pexels-photo-1105666.jpeg?auto=compress&cs=tinysrgb&w=400", "Concierto"],
-  ["https://images.pexels.com/photos/32876381/pexels-photo-32876381.jpeg?auto=compress&cs=tinysrgb&w=400", "Amanecer en la playa"],
-  ["https://images.pexels.com/photos/8482195/pexels-photo-8482195.jpeg?auto=compress&cs=tinysrgb&w=400", "Cima de una montaña"],
-  ["https://images.pexels.com/photos/17444987/pexels-photo-17444987.jpeg?auto=compress&cs=tinysrgb&w=400", "Furgoneta frente al mar"],
-  ["https://images.pexels.com/photos/5738245/pexels-photo-5738245.jpeg?auto=compress&cs=tinysrgb&w=400", "Cena con amigos"],
-  ["https://images.pexels.com/photos/8050356/pexels-photo-8050356.jpeg?auto=compress&cs=tinysrgb&w=400", "Surf al amanecer"],
-];
-
-function hueco(el, arranque) {
-  // Dos capas: una entra mientras la otra sale. Nunca hay hueco vacío.
-  const a = document.createElement("img");
-  const b = document.createElement("img");
-  a.loading = "eager"; b.loading = "eager";
-  a.decoding = "async"; b.decoding = "async";
-  el.append(a, b);
-
-  let i = arranque, frente = a, fondo = b;
-  const poner = (img, n) => { img.src = VIDA[n][0]; img.alt = VIDA[n][1]; };
-
-  poner(frente, i);
-  frente.classList.add("on");
-
-  if (reduce) return;
-
-  setInterval(() => {
-    i = (i + 2) % VIDA.length;
-    poner(fondo, i);
-    fondo.onload = () => {
-      fondo.classList.add("on");
-      frente.classList.remove("on");
-      [frente, fondo] = [fondo, frente];
-    };
-  }, 2600);
+/* Progreso de scroll dentro de una sección alta con contenido pegado. */
+function prog(sec) {
+  const r = sec.getBoundingClientRect();
+  const rec = r.height - innerHeight;
+  return rec <= 0 ? 0 : clamp(-r.top / rec);
 }
 
-const fA = $(".foto--a");
-const fB = $(".foto--b");
-if (fA) hueco(fA, 0);
-if (fB) hueco(fB, 1);
+/* ═════════════════════════════════════════════
+   00 · EL DOMINGO
+   Domingo 23:47. Scrolleas: la semana entera se va.
+   Y al final del scroll son las 23:47 de otro domingo.
+   Eso es la inercia. No hace falta explicarla.
+   ═════════════════════════════════════════════ */
+const secDom = $("#domingo");
+const elDia = $("#dia");
+const elHora = $("#hora");
+const frA = $("#frA");
+const frB = $("#frB");
+const baja = $("#baja");
 
-// Cada palabra del titular sale con su propio retardo. Una detrás de otra.
-$$(".h1").forEach((h) => $$(".w", h).forEach((w, i) => w.style.setProperty("--d", i)));
+const DIAS = ["Domingo", "Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"];
+const T0 = 23 * 60 + 47;          // 23:47
+const SEMANA = 7 * 1440;          // una semana, en minutos
+
+function domingo(p) {
+  const t = T0 + p * SEMANA;
+  const dia = DIAS[Math.floor(t / 1440) % 7];
+  const min = Math.floor(t) % 1440;
+  const hh = String(Math.floor(min / 60)).padStart(2, "0");
+  const mm = String(min % 60).padStart(2, "0");
+
+  elDia.textContent = dia;
+  elHora.textContent = `${hh}:${mm}`;
+
+  // La frase al principio. Silencio en medio. Y la misma frase al final.
+  const a = p < 0.16 ? 1 - p / 0.16 * 0.85 : p > 0.8 ? (p - 0.8) / 0.14 : 0;
+  const b = p > 0.9 ? (p - 0.9) / 0.08 : 0;
+  frA.style.opacity = clamp(p < 0.16 ? 1 : a);
+  frB.style.opacity = clamp(b);
+  baja.style.opacity = clamp(1 - p * 6);
+}
 
 /* ═════════════════════════════════════════════
-   2 · LA CINTA
+   01 · LOS 847
    ═════════════════════════════════════════════ */
-const cinta = $("#cinta1");
-if (cinta && !reduce) {
-  cinta.innerHTML += cinta.innerHTML;   // sin costura
+const NOMBRES = ("Marta Iván Nuria Dani Clara Hugo Lucía Pablo Alba Sergio Carla Jorge Paula Álvaro Andrea Marc "
+  + "Elena Rubén Sara Adrián Laura Víctor Irene Diego Cristina Javier Nerea Raúl Ana Guillermo Julia Óscar "
+  + "Rocío Manuel Silvia Aitor Patricia Fernando Miriam Gonzalo Eva Ignacio Noelia Alejandro Marina Rodrigo "
+  + "Lidia Samuel Beatriz Emilio Celia Tomás Ainhoa Bruno Alicia Martín Vega Nacho Berta Íker Olivia Gabriel "
+  + "Ángela Mario Teresa Enzo Amaia Luis Inés Aarón Daniela Héctor Naia Borja Rebeca Unai Sofía Cristian "
+  + "Blanca Joel Valeria Xavi Lorena Arnau Claudia Iker Aurora Pau Vera Kevin Jimena Roberto Ariadna Sandra "
+  + "Emma Álex Nadia Simón Leire Gerard Nora Ismael Candela Rafa Lola Erik Miguel Alma Fran Greta Toni Chloe "
+  + "Bea Aleix Zoe Nil Ruth Álex Yaiza Denis Carmen Pol Ada Israel Mireia Saúl Lara Cayetana Nico Ainara "
+  + "Ariel Elsa Omar Abril Salva Nayara Roger Aitana Cesc Alana Iago Ona Bosco Jana Enrique").split(" ");
+
+const SEIS = ["Marta", "Iván", "Nuria", "Dani", "Clara", "Hugo"];
+
+const secAg = $("#agenda");
+const cajaN = $("#nombres");
+const agT1 = $("#agT1");
+const agT2 = $("#agT2");
+let spans = [];
+
+if (cajaN) {
+  const frag = document.createDocumentFragment();
+  const usados = new Set();
+  NOMBRES.forEach((n) => {
+    const s = document.createElement("span");
+    s.textContent = n;
+    // Los seis se quedan. Solo la primera vez que aparece cada uno.
+    if (SEIS.includes(n) && !usados.has(n)) { s.classList.add("vivo"); usados.add(n); }
+    frag.appendChild(s);
+  });
+  cajaN.appendChild(frag);
+  spans = $$("span", cajaN);
+
+  // Un orden de apagado aleatorio, pero fijo: si no, parpadea al scrollear.
+  spans.forEach((s) => s.dataset.o = Math.random().toFixed(4));
+}
+
+function agenda(p) {
+  // Entre 0.15 y 0.8 se van apagando. Los seis se quedan.
+  const q = clamp((p - 0.15) / 0.65);
+  spans.forEach((s) => {
+    if (s.classList.contains("vivo")) {
+      s.style.opacity = 1;
+      s.style.transform = q > 0.75 ? "scale(1.06)" : "none";
+      return;
+    }
+    s.style.opacity = +s.dataset.o < q ? 0 : 1;
+  });
+  const t2 = clamp((p - 0.72) / 0.16);
+  agT1.style.opacity = 1 - t2;
+  agT2.style.opacity = t2;
+}
+
+/* ═════════════════════════════════════════════
+   Bucle de scroll
+   ═════════════════════════════════════════════ */
+const nav = $("#nav");
+const barra = $("#prog");
+let ultimo = 0, pendiente = false;
+
+function marco() {
+  const y = scrollY;
+  const max = document.documentElement.scrollHeight - innerHeight;
+  barra.style.transform = `scaleX(${max > 0 ? y / max : 0})`;
+  nav.classList.toggle("oculto", y > ultimo && y > 700);
+  ultimo = y;
+
+  if (secDom) domingo(prog(secDom));
+  if (secAg && spans.length) agenda(prog(secAg));
+
+  // El negro solo dura lo que dura el domingo.
+  const r = secDom.getBoundingClientRect();
+  document.body.classList.toggle("oscuro", r.bottom > innerHeight * 0.5);
+
+  pendiente = false;
+}
+if (!reduce) {
+  addEventListener("scroll", () => { if (!pendiente) { requestAnimationFrame(marco); pendiente = true; } }, { passive: true });
+  addEventListener("resize", marco, { passive: true });
+  marco();
+} else {
+  document.body.classList.remove("oscuro");
+}
+
+/* ═════════════════════════════════════════════
+   02 · EL DESEO
+   Lo que escribes aquí te acompaña hasta el final.
+   ═════════════════════════════════════════════ */
+const dForm = $("#deseoForm");
+const dIn = $("#deseoIn");
+const dSalida = $("#dSalida");
+const dBig = $("#dBig");
+const dPista = $("#dPista");
+const formK = $("#formK");
+const formDeseo = $("#formDeseo");
+let DESEO = "";
+
+dForm?.addEventListener("submit", (e) => {
+  e.preventDefault();
+  DESEO = (dIn.value.trim() || dIn.placeholder).slice(0, 52);
+  dBig.textContent = DESEO;
+  dSalida.hidden = false;
+  dPista.style.opacity = "0";
+  formDeseo.textContent = DESEO;
+  formK.hidden = false;
+  dIn.blur();
+  if (!reduce) dSalida.scrollIntoView({ behavior: "smooth", block: "center" });
+});
+
+/* El río de deseos. */
+const rio = $("#rio");
+if (rio && !reduce) {
+  rio.innerHTML += rio.innerHTML;
   let x = 0;
   (function rueda() {
-    const mitad = cinta.scrollWidth / 2;
-    x -= 0.55;
+    const mitad = rio.scrollWidth / 2;
+    x -= 0.5;
     if (x <= -mitad) x += mitad;
-    cinta.style.transform = `translate3d(${x.toFixed(2)}px,0,0)`;
+    rio.style.transform = `translate3d(${x.toFixed(2)}px,0,0)`;
     requestAnimationFrame(rueda);
   })();
 }
 
 /* ═════════════════════════════════════════════
-   Entradas + nav + barra de progreso
+   04 · LAS SEMANAS
+   80 años × 52 semanas = 4.160 puntos.
    ═════════════════════════════════════════════ */
-const io = new IntersectionObserver(
-  (es) => es.forEach((e) => {
-    if (!e.isIntersecting) return;
-    e.target.classList.add("on");
-    io.unobserve(e.target);
-  }),
-  { rootMargin: "0px 0px -12% 0px", threshold: 0.2 }
-);
-$$(".fila, .reveal, .h2").forEach((el) => io.observe(el));
-
-const nav = $("#nav");
-const prog = $("#prog");
-let last = 0, tick = false;
-function frame() {
-  const y = scrollY;
-  const max = document.documentElement.scrollHeight - innerHeight;
-  prog.style.transform = `scaleX(${max > 0 ? y / max : 0})`;
-  nav.classList.toggle("oculto", y > last && y > 600);
-  last = y;
-  tick = false;
-}
-addEventListener("scroll", () => { if (!tick) { requestAnimationFrame(frame); tick = true; } }, { passive: true });
-frame();
-
-/* ═════════════════════════════════════════════
-   3 · LAS SEMANAS
-   ═════════════════════════════════════════════ */
+const COLS = 80, FILAS = 52, TOTAL = COLS * FILAS;
 const lienzo = $("#rejilla");
 const edadIn = $("#edad");
 const quedanEl = $("#quedan");
-const finN = $("#finN");
 
 const estados = new Uint8Array(TOTAL);   // 0 apagada · 1 te queda · 2 encendida · 3 ahora
 let gastadas = 0, objetivo = 0, m = null, raf = null;
@@ -159,10 +233,10 @@ function pintar() {
       r += Math.max(0, 1 - d / (m.paso * 7)) * base * 1.1;
     }
 
-    let color = "#0A0A0A";                      // te queda
-    if (e === 0) { color = "#DEDEDE"; r *= 0.72; }  // ya no vuelve
-    if (e === 2) { color = "#0A5CFF"; r *= 1.45; }  // encendida
-    if (e === 3) { color = "#0A5CFF"; r *= 1.6; }   // esta semana
+    let color = "#0A0A0A";
+    if (e === 0) { color = "#DEDEDE"; r *= 0.72; }
+    if (e === 2) { color = "#0A5CFF"; r *= 1.45; }
+    if (e === 3) { color = "#0A5CFF"; r *= 1.6; }
 
     ctx.beginPath();
     ctx.arc(x, y, r, 0, 6.2832);
@@ -174,9 +248,7 @@ function pintar() {
 const edad = () => Math.min(89, Math.max(14, parseInt(edadIn.value, 10) || 20));
 
 function cuenta() {
-  const q = Math.max(0, TOTAL - Math.round(edad() * FILAS));
-  quedanEl.textContent = fmt(q);
-  if (finN) finN.textContent = fmt(q);
+  quedanEl.textContent = fmt(Math.max(0, TOTAL - Math.round(edad() * FILAS)));
 }
 
 const aplicar = (g) => {
@@ -230,45 +302,11 @@ if (lienzo && edadIn) {
 
   new IntersectionObserver((es, obs) => {
     es.forEach((e) => { if (e.isIntersecting) { apagar(true); obs.disconnect(); } });
-  }, { threshold: 0.2 }).observe($("#semanas"));
+  }, { threshold: 0.15 }).observe($("#semanas"));
 }
 
 /* ═════════════════════════════════════════════
-   4 · EL MENSAJE QUE NO ENVÍAS
-   ═════════════════════════════════════════════ */
-const chatForm = $("#chatForm");
-const chatIn = $("#chatIn");
-const chatBody = $("#chatBody");
-const salida = $("#salida");
-
-const RESPUESTAS = [
-  "Se ha ido. Como se van casi todos.",
-  "Otra vez. Y no ha pasado nada: simplemente, no lo has mandado.",
-  "Tres. <strong>No eres tú.</strong> Es que proponer expone, y todo el mundo prefiere que empiece otro.",
-];
-let intentos = 0;
-
-chatForm?.addEventListener("submit", (e) => {
-  e.preventDefault();
-  const txt = chatIn.value.trim() || chatIn.placeholder;
-  const b = document.createElement("div");
-  b.className = "burb burb--mio";
-  b.textContent = txt;
-  chatBody.appendChild(b);
-  chatIn.value = "";
-  chatIn.blur();
-
-  setTimeout(() => {
-    b.classList.add("burb--fuga");
-    setTimeout(() => b.remove(), reduce ? 0 : 1400);
-  }, reduce ? 150 : 600);
-
-  intentos = Math.min(intentos + 1, RESPUESTAS.length);
-  setTimeout(() => (salida.innerHTML = RESPUESTAS[intentos - 1]), reduce ? 250 : 1100);
-});
-
-/* ═════════════════════════════════════════════
-   5 · UN NEXA  ·  EL MOMENTO
+   03 · UN NEXA  ·  EL MOMENTO
    ═════════════════════════════════════════════ */
 const caja = $("#caja");
 const momento = $("#momento");
@@ -278,28 +316,24 @@ if (caja) {
   const est = { exp: null, img: null, per: null, por: null };
   const ir = (n) => pasos.forEach((p) => p.classList.toggle("is-on", +p.dataset.paso === n));
 
-  $$(".exp", caja).forEach((b) => {
-    b.addEventListener("click", () => {
-      $$(".exp", caja).forEach((o) => o.setAttribute("aria-checked", "false"));
-      b.setAttribute("aria-checked", "true");
-      est.exp = b.dataset.exp;
-      est.img = b.dataset.img;
-      setTimeout(() => ir(2), reduce ? 0 : 220);
-    });
-  });
+  $$(".exp", caja).forEach((b) => b.addEventListener("click", () => {
+    $$(".exp", caja).forEach((o) => o.setAttribute("aria-checked", "false"));
+    b.setAttribute("aria-checked", "true");
+    est.exp = b.dataset.exp;
+    est.img = b.dataset.img;
+    setTimeout(() => ir(2), reduce ? 0 : 220);
+  }));
 
-  $$(".per", caja).forEach((b) => {
-    b.addEventListener("click", () => {
-      $$(".per", caja).forEach((o) => o.setAttribute("aria-checked", "false"));
-      b.setAttribute("aria-checked", "true");
-      est.per = b.dataset.per;
-      est.por = b.dataset.por;
-      $("#rPer").textContent = est.per;
-      $("#rExp").textContent = est.exp;
-      $("#rPor").textContent = est.por;
-      setTimeout(() => ir(3), reduce ? 0 : 220);
-    });
-  });
+  $$(".per", caja).forEach((b) => b.addEventListener("click", () => {
+    $$(".per", caja).forEach((o) => o.setAttribute("aria-checked", "false"));
+    b.setAttribute("aria-checked", "true");
+    est.per = b.dataset.per;
+    est.por = b.dataset.por;
+    $("#rPer").textContent = est.per;
+    $("#rExp").textContent = est.exp;
+    $("#rPor").textContent = est.por;
+    setTimeout(() => ir(3), reduce ? 0 : 220);
+  }));
 
   $("#enviar")?.addEventListener("click", (e) => {
     const b = e.currentTarget;
@@ -327,26 +361,23 @@ if (caja) {
 function cerrarMomento() {
   momento.hidden = true;
   document.body.classList.remove("bloq");
-  $("#nexa")?.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "center" });
+  $("#semanas")?.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
 }
 $("#cerrarMom")?.addEventListener("click", cerrarMomento);
 addEventListener("keydown", (e) => { if (e.key === "Escape" && momento && !momento.hidden) cerrarMomento(); });
 
-/* Las fotos nunca se ven rotas. */
-$$("img").forEach((img) =>
-  img.addEventListener("error", () => {
-    img.style.visibility = "hidden";
-    const c = img.closest(".exp, .mz, .foto");
-    if (c) c.style.background = "#DEDEDE";
-  })
-);
+/* Una foto rota nunca se ve. */
+$$("img").forEach((img) => img.addEventListener("error", () => {
+  img.style.visibility = "hidden";
+  const c = img.closest(".exp");
+  if (c) c.style.background = "#DEDEDE";
+}));
 
 /* ═════════════════════════════════════════════
-   Lista de espera
+   05 · ENTRAR
    ═════════════════════════════════════════════ */
 const form = $("#waitlist");
 const email = $("#email");
-const uni = $("#uni");
 const btn = $("#submit");
 const err = $("#err");
 const ok = $("#ok");
@@ -359,11 +390,7 @@ function fallar(msg) {
   email.focus();
 }
 
-async function enviarLista(datos) {
-  if (!SUPABASE_URL || !SUPABASE_ANON_KEY) {
-    console.warn("[NEXA] Supabase sin configurar:", datos);
-    return true;
-  }
+async function post(datos) {
   const res = await fetch(`${SUPABASE_URL}/rest/v1/${TABLA}`, {
     method: "POST",
     headers: {
@@ -374,7 +401,19 @@ async function enviarLista(datos) {
     },
     body: JSON.stringify(datos),
   });
-  if (res.status === 409) return true;
+  return res;
+}
+
+async function enviarLista(base) {
+  if (!SUPABASE_URL || !SUPABASE_ANON_KEY) {
+    console.warn("[NEXA] Supabase sin configurar:", base);
+    return true;
+  }
+  // Intentamos guardar también el deseo. Si la columna todavía no existe
+  // en la tabla, no perdemos el email por eso: reintentamos sin ella.
+  let res = await post(DESEO ? { ...base, deseo: DESEO } : base);
+  if (res.status === 400 && DESEO) res = await post(base);
+  if (res.status === 409) return true;                 // ya estaba dentro
   if (!res.ok) throw new Error(await res.text());
   return true;
 }
@@ -388,11 +427,7 @@ form?.addEventListener("submit", async (e) => {
   btn.disabled = true;
   btn.querySelector("span").textContent = "Un segundo…";
   try {
-    await enviarLista({
-      email: email.value.trim().toLowerCase(),
-      universidad: uni.value.trim() || null,
-      ciudad: "valencia",
-    });
+    await enviarLista({ email: email.value.trim().toLowerCase(), ciudad: "valencia" });
     form.hidden = true;
     ok.hidden = false;
     ok.setAttribute("tabindex", "-1");
@@ -400,7 +435,7 @@ form?.addEventListener("submit", async (e) => {
   } catch (e) {
     console.error(e);
     btn.disabled = false;
-    btn.querySelector("span").textContent = "Enciende la primera";
+    btn.querySelector("span").textContent = "Entrar";
     fallar("No ha entrado. Prueba otra vez en un momento.");
   }
 });

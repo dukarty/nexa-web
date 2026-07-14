@@ -6,9 +6,9 @@
 
 <!-- ── SEO ─────────────────────────────────────────────────── -->
 <title>NEXA — Que no se te escape la vida | Experiencias reales en Valencia</title>
-<meta name="description" content="NEXA es la app para conocer gente en Valencia viviendo experiencias reales. Dices qué quieres vivir, te decimos con quién. Lista de espera abierta.">
+<meta name="description" content="Tienes 800 contactos y hablas con seis. NEXA es la app para vivir experiencias reales con gente que quiere vivir lo mismo que tú. Dices qué quieres vivir, NEXA te dice con quién. Valencia, 2026.">
 <link rel="canonical" href="https://nexavalencia.vercel.app/">
-<meta name="theme-color" content="#FFFFFF">
+<meta name="theme-color" content="#0A0A0A">
 <meta name="robots" content="index,follow,max-image-preview:large">
 
 <meta property="og:type" content="website">
@@ -51,7 +51,7 @@
       "name":"NEXA",
       "applicationCategory":"SocialNetworkingApplication",
       "operatingSystem":"iOS, Android",
-      "description":"App para vivir experiencias reales con gente que quiere vivir lo mismo que tú. Primera ciudad: Valencia.",
+      "description":"App para vivir experiencias reales con gente que quiere vivir lo mismo que tú. Dices qué quieres vivir este año y NEXA te dice con quién. Primera ciudad: Valencia.",
       "offers":{"@type":"Offer","price":"0","priceCurrency":"EUR"}
     },
     {
@@ -72,72 +72,86 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://images.pexels.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..100,400;75..100,500;75..100,600;75..100,700;75..100,800;75..100,900&display=swap">
-<link rel="stylesheet" href="styles.css?v=42">
+<link rel="stylesheet" href="styles.css?v=50">
 </head>
-<body>
+<body class="oscuro">
 
 <a class="skip" href="#lista">Ir a la lista de espera</a>
 <div class="prog" id="prog" aria-hidden="true"></div>
 
-<!-- ══════ NAV — pills, como una etiqueta cosida ══════ -->
 <header class="nav" id="nav">
   <nav class="nav__in" aria-label="Principal">
     <a class="marca" href="#top" aria-label="NEXA, inicio">
       NE<span class="marca__x" aria-hidden="true"><svg viewBox="0 0 20 20"><line x1="2" y1="18" x2="18" y2="2"/><line x1="18" y1="18" x2="2" y2="2"/></svg></span>A
     </a>
-    <ul class="pills">
-      <li><a class="pill" href="#semanas">Semanas</a></li>
-      <li><a class="pill" href="#nexa">Un NEXA</a></li>
-      <li><a class="pill pill--on" href="#lista">Entrar</a></li>
-    </ul>
+    <a class="pill pill--on" href="#lista">Entrar</a>
   </nav>
 </header>
 
 <main id="top">
 
 <!-- ══════════════════════════════════════════════════════════
-     01 · LA PORTADA
-     Tipografía masiva. Y la vida metida DENTRO de la frase:
-     las fotos van incrustadas entre las palabras, y cambian solas.
+     00 · EL DOMINGO
+     El reloj da la vuelta entera y te deja en el mismo sitio.
+     Toda la tesis de NEXA, sin una palabra de marketing.
      ══════════════════════════════════════════════════════════ -->
-<section class="portada" aria-labelledby="h1">
-  <div class="lienzo">
-    <div class="etiquetas">
-      <p class="etiqueta">Valencia · 2026</p>
-      <p class="etiqueta et--2">Lista de espera abierta</p>
-    </div>
+<section class="domingo" id="domingo" aria-labelledby="h1">
+  <div class="domingo__fijo">
+    <p class="dia" id="dia">Domingo</p>
+    <p class="hora" id="hora">23:47</p>
 
-    <h1 class="h1" id="h1">
-      <span class="l l1">
-        <em class="w">Que</em>
-        <em class="w">no</em>
-        <span class="foto foto--a" aria-hidden="true"></span>
-        <em class="w">se</em>
-        <em class="w">te</em>
-      </span>
-      <span class="l l2">
-        <em class="w">escape</em>
-        <span class="foto foto--b" aria-hidden="true"></span>
-        <em class="w">la</em>
-        <em class="w">vida</em><em class="w pt">.</em>
-      </span>
+    <h1 class="frase" id="h1">
+      <span class="frase__a" id="frA">No ha pasado nada esta semana.</span>
+      <span class="frase__b" id="frB">Otra vez.</span>
     </h1>
 
-    <div class="portada__pie">
-      <p class="entradilla">Dices qué quieres vivir.<br>NEXA te dice con quién.</p>
-      <a class="cta" href="#lista">
-        <span>Entrar en la lista</span>
-        <span class="cta__x" aria-hidden="true"><svg viewBox="0 0 20 20"><line x1="2" y1="18" x2="18" y2="2"/><line x1="18" y1="18" x2="2" y2="2"/></svg></span>
-      </a>
-    </div>
+    <p class="sr">NEXA es una app para vivir experiencias reales con gente que quiere vivir lo mismo que tú. Primera ciudad: Valencia.</p>
+    <span class="baja" id="baja" aria-hidden="true">Baja</span>
   </div>
-
-  <span class="scrollhint" aria-hidden="true">Baja</span>
 </section>
 
-<!-- ══════ LA CINTA — lo que la gente quiere vivir, rodando sin parar ══════ -->
-<div class="cinta" aria-hidden="true">
-  <div class="cinta__t" id="cinta1">
+<!-- ══════════════════════════════════════════════════════════
+     01 · LOS 847
+     La luz. Y los nombres apagándose hasta que quedan seis.
+     ══════════════════════════════════════════════════════════ -->
+<section class="agenda" id="agenda" aria-labelledby="h2-ag">
+  <div class="agenda__fijo">
+    <h2 class="ag__t" id="h2-ag">
+      <span class="ag__t1" id="agT1">Tienes <b>847</b> contactos.</span>
+      <span class="ag__t2" id="agT2">Hablas con seis.</span>
+    </h2>
+    <div class="nombres" id="nombres" aria-hidden="true"></div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════
+     02 · EL DESEO
+     Escribe lo que quieres vivir. Y tus palabras se hacen enormes.
+     Esto no explica NEXA: esto ES la primera pantalla de NEXA.
+     ══════════════════════════════════════════════════════════ -->
+<section class="deseo" id="deseo" aria-labelledby="h2-de">
+  <p class="ind">01</p>
+  <h2 class="h2" id="h2-de">¿Qué quieres vivir<br>este año?</h2>
+
+  <form class="dform" id="deseoForm" autocomplete="off">
+    <label class="sr" for="deseoIn">Escribe algo que quieras vivir este año</label>
+    <input id="deseoIn" type="text" maxlength="52" placeholder="Ver amanecer sin haber dormido">
+    <button class="dform__b" type="submit" aria-label="Confirmar deseo">
+      <svg viewBox="0 0 20 20" aria-hidden="true"><line x1="2" y1="18" x2="18" y2="2"/><line x1="18" y1="18" x2="2" y2="2"/></svg>
+    </button>
+  </form>
+  <p class="dform__p" id="dPista">Lo que sea. Nadie lo va a juzgar.</p>
+
+  <div class="salida" id="dSalida" hidden>
+    <p class="salida__k">Este año quiero</p>
+    <p class="salida__big" id="dBig"></p>
+    <p class="salida__pie">
+      No eres el único que lo quiere.<br>
+      <b>Eres el único que no lo ha pedido.</b>
+    </p>
+  </div>
+
+  <div class="rio" aria-hidden="true"><div class="rio__t" id="rio">
     <span>Ver amanecer sin haber dormido</span><i>✕</i>
     <span>Aprender a surfear de una vez</span><i>✕</i>
     <span>Un concierto en primera fila</span><i>✕</i>
@@ -145,102 +159,22 @@
     <span>Bañarme en el mar en enero</span><i>✕</i>
     <span>Subir el Penyagolosa</span><i>✕</i>
     <span>Cenar donde nunca iría solo</span><i>✕</i>
-  </div>
-</div>
-
-<!-- ══════════════════════════════════════════════════════════
-     02 · EL ESPEJO
-     Cuatro frases. Si eres tú, lo sabes en tres segundos.
-     ══════════════════════════════════════════════════════════ -->
-<section class="espejo" aria-labelledby="h2-espejo">
-  <h2 class="sr" id="h2-espejo">Esto te está pasando</h2>
-  <ol class="lista">
-    <li class="fila">
-      <span class="num">01</span>
-      <p class="frase">Tienes 800 contactos y hablas con seis.</p>
-    </li>
-    <li class="fila">
-      <span class="num">02</span>
-      <p class="frase">Siempre quedas con los mismos, siempre en el mismo sitio.</p>
-    </li>
-    <li class="fila">
-      <span class="num">03</span>
-      <p class="frase">Ves cómo otros viven cosas mientras tú repites la semana.</p>
-    </li>
-    <li class="fila">
-      <span class="num">04</span>
-      <p class="frase frase--az">Y no es por falta de ganas.</p>
-    </li>
-  </ol>
+    <span>Un viaje sin plan</span><i>✕</i>
+    <span>Ver las Perseidas fuera de la ciudad</span><i>✕</i>
+  </div></div>
 </section>
 
 <!-- ══════════════════════════════════════════════════════════
-     03 · LA PRUEBA
+     03 · UN NEXA
+     Dos toques. Ni una palabra escrita.
      ══════════════════════════════════════════════════════════ -->
-<section class="prueba" aria-labelledby="h2-prueba">
-  <div class="prueba__g">
-    <div class="prueba__t">
-      <p class="etiqueta">Pruébalo</p>
-      <h2 class="h2" id="h2-prueba">Escribe lo que llevas todo el día pensando.</h2>
-      <p class="salida" id="salida" role="status" aria-live="polite">Y dale a enviar. En serio.</p>
-    </div>
-
-    <div class="chat">
-      <div class="chat__hd"><span class="chat__av" aria-hidden="true"></span><span class="chat__n">Grupo · 6 personas</span></div>
-      <div class="chat__body" id="chatBody">
-        <div class="burb">Yo hoy me quedo, que estoy reventado</div>
-        <div class="burb">Mañana sí eh</div>
-      </div>
-      <form class="chat__bar" id="chatForm" autocomplete="off">
-        <label class="sr" for="chatIn">Tu mensaje</label>
-        <input id="chatIn" type="text" placeholder="¿Hacemos algo?" maxlength="70">
-        <button class="chat__send" type="submit" aria-label="Enviar mensaje">
-          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 20l18-8L3 4v6l11 2-11 2z"/></svg>
-        </button>
-      </form>
-    </div>
-  </div>
-</section>
-
-<!-- ══════════════════════════════════════════════════════════
-     04 · LAS SEMANAS
-     ══════════════════════════════════════════════════════════ -->
-<section class="semanas" id="semanas" aria-labelledby="h2-sem">
-  <header class="sem__hd">
-    <div>
-      <p class="etiqueta">La cuenta</p>
-      <h2 class="h2" id="h2-sem">Un punto.<br>Una semana.</h2>
-    </div>
-    <div class="edad">
-      <label for="edad">Tengo</label>
-      <input id="edad" type="number" min="14" max="89" value="20" inputmode="numeric" aria-label="Tu edad en años">
-      <span>años</span>
-    </div>
-  </header>
-
-  <div class="sem__lienzo">
-    <canvas id="rejilla" role="img" aria-label="Cuadrícula con las 4.160 semanas de una vida. Las ya vividas aparecen apagadas."></canvas>
-  </div>
-
-  <footer class="sem__pie">
-    <p class="cifra"><strong id="quedan">3120</strong></p>
-    <p class="cifra__l">Semanas que te quedan.<br><span>Las apagadas ya no vuelven.</span></p>
-  </footer>
-</section>
-
-<!-- ══════════════════════════════════════════════════════════
-     05 · UN NEXA
-     ══════════════════════════════════════════════════════════ -->
-<section class="nexa" id="nexa" aria-labelledby="h2-nexa">
-  <p class="etiqueta">La unidad</p>
-  <h2 class="h2 h2--big" id="h2-nexa">
-    Un NEXA no es un mensaje.<br>
-    <span class="az">Es una propuesta ya hecha.</span>
-  </h2>
+<section class="nexa" id="nexa" aria-labelledby="h2-nx">
+  <p class="ind">02</p>
+  <h2 class="h2" id="h2-nx">Aquí no se escribe<br>a nadie. <span class="az">Se propone.</span></h2>
 
   <div class="caja" id="caja">
     <div class="paso is-on" data-paso="1">
-      <p class="paso__k"><span class="num">01</span> Elige qué quieres vivir</p>
+      <p class="paso__k">Elige qué quieres vivir</p>
       <div class="exps" role="radiogroup" aria-label="Elige una experiencia">
         <button class="exp" type="button" role="radio" aria-checked="false"
                 data-exp="Amanecer en la Albufera"
@@ -265,7 +199,7 @@
 
     <div class="paso" data-paso="2">
       <button class="atras" type="button" data-volver="1">← Cambiar</button>
-      <p class="paso__k"><span class="num">02</span> Elige a quién</p>
+      <p class="paso__k">Elige a quién</p>
       <div class="gente" role="radiogroup" aria-label="Elige a una persona">
         <button class="per" type="button" role="radio" aria-checked="false" data-per="Marta" data-por="Está en el «quiero vivir» de los dos">
           <span class="per__a">M</span><span class="per__i"><span class="per__n">Marta</span><span class="per__p">Está en el «quiero vivir» de los dos</span></span>
@@ -280,7 +214,7 @@
     </div>
 
     <div class="paso paso--fin" data-paso="3">
-      <p class="paso__k"><span class="num">03</span> Ya está</p>
+      <p class="paso__k">Ya está</p>
       <p class="env__t">Le vas a proponer a <strong id="rPer">Marta</strong></p>
       <p class="env__e" id="rExp">Amanecer en la Albufera</p>
       <p class="env__w" id="rPor">Está en el «quiero vivir» de los dos</p>
@@ -298,7 +232,7 @@
   <img id="momImg" src="" alt="">
   <div class="momento__velo" aria-hidden="true"></div>
   <div class="momento__c">
-    <p class="etiqueta etiqueta--w">Aceptado</p>
+    <p class="momento__k">Aceptado</p>
     <p class="momento__t" id="momT">Amanecer en la Albufera</p>
     <p class="momento__s" id="momS">con Marta · el sábado que viene</p>
     <p class="momento__e">Y una semana de tu vida deja de estar apagada.</p>
@@ -307,56 +241,45 @@
 </div>
 
 <!-- ══════════════════════════════════════════════════════════
-     06 · TU VIDA DENTRO DE UN AÑO
+     04 · LAS SEMANAS
      ══════════════════════════════════════════════════════════ -->
-<section class="vida" aria-labelledby="h2-vida">
-  <h2 class="h2 h2--big" id="h2-vida">
-    Tu perfil no son<br><span class="tach">selfies</span>. Son <span class="az">semanas</span>.
-  </h2>
-
-  <div class="mosaico">
-    <figure class="mz reveal" style="--i:0">
-      <img src="https://images.pexels.com/photos/7148674/pexels-photo-7148674.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Hoguera con amigos en la playa" loading="lazy" width="800" height="600">
-      <figcaption><b>Hoguera en el Saler</b><span>con Iván y Nuria · sem. 14</span></figcaption>
-    </figure>
-    <figure class="mz mz--alto reveal" style="--i:1">
-      <img src="https://images.pexels.com/photos/1105666/pexels-photo-1105666.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Concierto con el público en alto" loading="lazy" width="800" height="1100">
-      <figcaption><b>El concierto del Loco</b><span>con Marta · sem. 09</span></figcaption>
-    </figure>
-    <figure class="mz reveal" style="--i:2">
-      <img src="https://images.pexels.com/photos/32876381/pexels-photo-32876381.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Amanecer en la playa" loading="lazy" width="800" height="600">
-      <figcaption><b>Amanecer en la Albufera</b><span>con Dani · sem. 22</span></figcaption>
-    </figure>
-    <figure class="mz mz--alto reveal" style="--i:3">
-      <img src="https://images.pexels.com/photos/8482195/pexels-photo-8482195.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Grupo en la cima de una montaña" loading="lazy" width="800" height="1100">
-      <figcaption><b>El Penyagolosa</b><span>con Nuria · sem. 31</span></figcaption>
-    </figure>
+<section class="semanas" id="semanas" aria-labelledby="h2-sm">
+  <div class="sem__hd">
+    <div>
+      <p class="ind">03</p>
+      <h2 class="h2" id="h2-sm">Un punto.<br>Una semana.</h2>
+    </div>
+    <div class="edad">
+      <label for="edad">Tengo</label>
+      <input id="edad" type="number" min="14" max="89" value="20" inputmode="numeric" aria-label="Tu edad en años">
+      <span>años</span>
+    </div>
   </div>
 
-  <ul class="noes">
-    <li><s>Likes</s></li><li><s>Seguidores</s></li><li><s>Comentarios</s></li><li><s>Rachas</s></li><li><s>Un feed que te retenga</s></li>
-  </ul>
+  <div class="sem__lienzo">
+    <canvas id="rejilla" role="img" aria-label="Cuadrícula con las 4.160 semanas de una vida. Las ya vividas aparecen apagadas."></canvas>
+  </div>
+
+  <div class="sem__pie">
+    <p class="cifra"><strong id="quedan">3120</strong></p>
+    <p class="cifra__l">Semanas que te quedan.<br><span>Las apagadas no vuelven.</span></p>
+  </div>
 </section>
 
 <!-- ══════════════════════════════════════════════════════════
-     07 · ENTRAR
+     05 · ENTRAR
+     No dejas un email. Dejas un deseo.
      ══════════════════════════════════════════════════════════ -->
-<section class="lista" id="lista" aria-labelledby="h2-lista">
-  <p class="etiqueta">Valencia · Gratis</p>
-  <h2 class="h1 h1--fin" id="h2-lista">
-    <span class="l"><em class="w">Te</em> <em class="w">quedan</em> <em class="w az" id="finN">3120</em><em class="w pt">.</em></span>
-    <span class="l"><em class="w">Esta</em> <em class="w">es</em> <em class="w">una</em><em class="w pt">.</em></span>
-  </h2>
+<section class="lista" id="lista" aria-labelledby="h2-ls">
+  <p class="ind">04</p>
+  <h2 class="h2 h2--fin" id="h2-ls">Valencia.<br>2026.<br><span class="az">Sé de los primeros.</span></h2>
 
   <form class="form" id="waitlist" novalidate>
+    <p class="form__k" id="formK" hidden>Te guardamos esto: <b id="formDeseo"></b></p>
     <div class="form__r">
       <label class="sr" for="email">Email</label>
       <input id="email" name="email" type="email" inputmode="email" autocomplete="email" required placeholder="tu@email.com">
-      <button class="cta" type="submit" id="submit"><span>Enciende la primera</span><span class="cta__x" aria-hidden="true"><svg viewBox="0 0 20 20"><line x1="2" y1="18" x2="18" y2="2"/><line x1="18" y1="18" x2="2" y2="2"/></svg></span></button>
-    </div>
-    <div class="form__r form__r--o">
-      <label class="sr" for="uni">Universidad o facultad (opcional)</label>
-      <input id="uni" name="uni" type="text" autocomplete="organization" placeholder="Universidad o facultad (opcional)">
+      <button class="cta" type="submit" id="submit"><span>Entrar</span><span class="cta__x" aria-hidden="true"><svg viewBox="0 0 20 20"><line x1="2" y1="18" x2="18" y2="2"/><line x1="18" y1="18" x2="2" y2="2"/></svg></span></button>
     </div>
     <p class="form__e" id="err" role="alert" hidden></p>
     <p class="form__m">Te escribimos una vez: el día que abrimos. <a href="privacidad.html">Privacidad</a>.</p>
@@ -364,17 +287,24 @@
 
   <div class="ok" id="ok" hidden>
     <p class="ok__t">Estás dentro.</p>
-    <p class="ok__s">Abrimos Valencia cuando seamos suficientes para que valga la pena.</p>
+    <p class="ok__s">Abrimos Valencia cuando seamos suficientes para que valga la pena. Te avisamos.</p>
   </div>
 
   <details class="faq">
     <summary>Preguntas <i aria-hidden="true"></i></summary>
     <div class="faq__b">
-      <h3 class="faq__h">¿Y si no conozco a nadie?</h3><p>De eso va.</p>
-      <h3 class="faq__h">¿Es Tinder?</h3><p>No. Aquí no se escribe a desconocidos: propones vivir algo, y solo si aceptan hay conversación.</p>
-      <h3 class="faq__h">¿Es una app de planes?</h3><p>No hay catálogo, ni eventos, ni entradas. El plan es la excusa; la compañía es el producto.</p>
-      <h3 class="faq__h">¿Cuánto cuesta?</h3><p>Gratis.</p>
-      <h3 class="faq__h">¿Por qué solo Valencia?</h3><p>Porque una app social vacía no le sirve a nadie. Preferimos ser imprescindibles para mil personas antes que irrelevantes para un millón.</p>
+      <h3 class="faq__h">¿Qué es NEXA, exactamente?</h3>
+      <p>Una app para vivir experiencias reales con gente que quiere vivir lo mismo que tú. Dices qué quieres vivir este año y NEXA te dice con quién.</p>
+      <h3 class="faq__h">¿Es Tinder?</h3>
+      <p>No. Aquí no se escribe a desconocidos: propones vivir algo concreto, y solo si aceptan hay conversación.</p>
+      <h3 class="faq__h">¿Es una app de planes?</h3>
+      <p>No hay catálogo, ni eventos, ni entradas. El plan es la excusa; la compañía es el producto.</p>
+      <h3 class="faq__h">¿Y si no conozco a nadie?</h3>
+      <p>De eso va.</p>
+      <h3 class="faq__h">¿Cuánto cuesta?</h3>
+      <p>Gratis.</p>
+      <h3 class="faq__h">¿Por qué solo Valencia?</h3>
+      <p>Porque una app social vacía no le sirve a nadie. Preferimos ser imprescindibles para mil personas antes que irrelevantes para un millón.</p>
     </div>
   </details>
 </section>
@@ -391,7 +321,7 @@
   </nav>
 </footer>
 
-<script src="config.js?v=42"></script>
-<script src="script.js?v=42" defer></script>
+<script src="config.js?v=50"></script>
+<script src="script.js?v=50" defer></script>
 </body>
 </html>
