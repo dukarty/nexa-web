@@ -13,15 +13,16 @@
   --az:#0A5CFF;
   --az-h:#0040CC;
   --tinta:#0B0D12;
-  --gris:#5A6377;      /* legible: 6:1 sobre blanco */
-  --gris-2:#9AA1AF;    /* solo decorativo */
+  --gris:#5A6377;      /* texto secundario — 6.0:1 sobre blanco (AA) */
+  --gris-2:#818A99;    /* SOLO texto grande (>24px bold) — 3.5:1 (AA large) */
+  --gris-3:#6F7788;    /* texto pequeño apagado — 4.5:1 (AA) */
   --linea:#E7E9EE;
   --papel:#F5F6F8;
 
   --f:"Bricolage Grotesque","Inter",-apple-system,BlinkMacSystemFont,system-ui,sans-serif;
 
   /* Escala fluida. Cinco tamaños, no más. */
-  --t-xl:clamp(2.6rem,7.6vw,6.2rem);
+  --t-xl:clamp(2.3rem,5.4vw,4.7rem);
   --t-l:clamp(1.9rem,4.4vw,3.5rem);
   --t-m:clamp(1.35rem,2.6vw,2rem);
   --t-b:clamp(1.05rem,1.35vw,1.2rem);
@@ -86,7 +87,7 @@ a{color:inherit;text-decoration:none}
 .p--w strong{color:#fff}
 .sub{font-size:var(--t-b);color:var(--gris);margin-top:14px;max-width:40ch}
 .sub--w{color:rgba(255,255,255,.55)}
-.k{font-size:.72rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--gris-2);margin-bottom:18px}
+.k{font-size:.72rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--gris-3);margin-bottom:18px}
 
 /* ── Botón: lo único azul ── */
 .btn{
@@ -114,7 +115,7 @@ a{color:inherit;text-decoration:none}
   transition:background .5s,border-color .5s,color .5s;
   pointer-events:none;
 }
-.reloj__d{font-size:.62rem;font-weight:700;letter-spacing:.16em;color:var(--gris-2)}
+.reloj__d{font-size:.62rem;font-weight:700;letter-spacing:.16em;color:var(--gris-3)}
 .reloj__h{font-size:.95rem;font-weight:700;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
 .reloj.is-dark{background:rgba(20,23,30,.6);border-color:rgba(255,255,255,.14);color:#fff}
 .reloj.is-dark .reloj__d{color:rgba(255,255,255,.45)}
@@ -141,8 +142,8 @@ a{color:inherit;text-decoration:none}
   color:var(--az);margin-bottom:26px;font-variant-numeric:tabular-nums;
 }
 .hero__h{
-  font-size:var(--t-xl);font-weight:800;line-height:.98;letter-spacing:-.05em;
-  font-variation-settings:"opsz" 96;max-width:15ch;
+  font-size:var(--t-xl);font-weight:800;line-height:1.02;letter-spacing:-.045em;
+  font-variation-settings:"opsz" 96;max-width:22ch;
 }
 .hero__h .dim{color:var(--gris-2)}
 .ln{display:block;overflow:hidden;padding-bottom:.05em}
@@ -153,7 +154,7 @@ a{color:inherit;text-decoration:none}
 .is-in .ln > span,.hero.on .ln > span{transform:none}
 .hero__p{margin-top:34px;max-width:44ch;font-size:var(--t-b);color:var(--gris);line-height:1.6}
 .hero__cta{margin-top:44px;display:flex;align-items:center;gap:18px;flex-wrap:wrap}
-.hero__free{font-size:var(--t-s);color:var(--gris-2)}
+.hero__free{font-size:var(--t-s);color:var(--gris-3)}
 .hero__scroll{position:absolute;left:50%;bottom:26px;width:1px;height:44px;background:var(--linea);overflow:hidden}
 .hero__scroll span{position:absolute;inset:0;background:var(--tinta);animation:sc 2.4s var(--e) infinite}
 @keyframes sc{0%{transform:translateY(-100%)}60%,100%{transform:translateY(100%)}}
@@ -223,7 +224,9 @@ a{color:inherit;text-decoration:none}
 }
 .sab__edad input:focus{outline:none;border-color:var(--az);background:rgba(10,92,255,.14)}
 .sab__edad input::-webkit-outer-spin-button,.sab__edad input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
-.sab__grid{width:100%}
+/* 52 columnas × 90 filas: si el grid es demasiado ancho, se vuelve
+   una pared de 2.000px de alto. Se limita para que quepa en una mirada. */
+.sab__grid{width:100%;max-width:780px}
 #lienzo{width:100%;height:auto;display:block}
 .sab__pie{display:flex;flex-wrap:wrap;gap:28px;align-items:flex-end;justify-content:space-between;margin-top:44px}
 .sab__n{display:flex;flex-direction:column;gap:2px}
@@ -429,8 +432,8 @@ a{color:inherit;text-decoration:none}
 }
 .fin__t strong{color:var(--az)}
 .fin__h{
-  font-size:clamp(2.3rem,6.4vw,5rem);font-weight:800;line-height:1;letter-spacing:-.05em;
-  font-variation-settings:"opsz" 96;max-width:13ch;margin:0 auto;
+  font-size:clamp(2.1rem,5vw,4.2rem);font-weight:800;line-height:1.04;letter-spacing:-.045em;
+  font-variation-settings:"opsz" 96;max-width:15ch;margin:0 auto;
 }
 .fin__h em{font-style:normal;color:var(--az);font-variant-numeric:tabular-nums}
 .fin__p{margin:32px auto 0;max-width:40ch;font-size:var(--t-b);color:rgba(255,255,255,.55);line-height:1.6}

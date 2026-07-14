@@ -78,7 +78,8 @@ function pielReloj() {
 let last = 0, tick = false;
 function frame() {
   const y = scrollY;
-  const max = document.body.scrollHeight - innerHeight;
+  // documentElement, no body: body puede no medir la página entera.
+  const max = document.documentElement.scrollHeight - innerHeight;
   const p = max > 0 ? Math.min(1, Math.max(0, y / max)) : 0;
 
   pintarReloj(p);
@@ -214,6 +215,8 @@ if (lienzo && edadIn) {
   edadIn.addEventListener("input", () => arrancado && actualizar(true));
   addEventListener("resize", () => { m = medir(); pintar(); }, { passive: true });
 
+  // Umbral bajo a propósito: la sección es más alta que la pantalla,
+  // así que su ratio visible nunca puede llegar a 0.3.
   new IntersectionObserver((es, obs) => {
     es.forEach((e) => {
       if (!e.isIntersecting || arrancado) return;
@@ -221,7 +224,7 @@ if (lienzo && edadIn) {
       actualizar(true);
       obs.disconnect();
     });
-  }, { threshold: 0.3 }).observe($("#sabados"));
+  }, { threshold: 0.05 }).observe($("#sabados"));
 
   pintar();
   quedanEl.textContent = fmt(TOTAL);
