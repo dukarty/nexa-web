@@ -1,14 +1,14 @@
 /* ═══════════════════════════════════════════════════════════════
    NEXA
 
-   Sin librerías. 60 fps.
+   Sin librerías. 60 fps. Progressive enhancement:
+   si esto no se ejecuta, el contenido sigue ahí y se lee entero.
 
-   Cuatro cosas hacen algo aquí:
-     1. La Rejilla — 4.160 semanas que se apagan con tu edad.
-     2. El mensaje que no envías — se deshace en el aire.
-     3. La demo — mandas un NEXA.
-     4. EL MOMENTO — la foto se abre a pantalla completa.
-        Eso es lo que compras. Todo lo demás lleva hasta ahí.
+     1. LA VIDA DENTRO DEL TITULAR — las fotos incrustadas rotan solas.
+     2. La cinta de deseos, rodando sin parar.
+     3. Las 4.160 semanas que se apagan con tu edad.
+     4. El mensaje que no envías: se deshace en el aire.
+     5. Mandas un NEXA → la foto se abre a pantalla completa.
    ═══════════════════════════════════════════════════════════════ */
 
 const CFG = window.NEXA || {};
@@ -23,54 +23,101 @@ const $$ = (s, c = document) => [...c.querySelectorAll(s)];
 const COLS = 80, FILAS = 52, TOTAL = COLS * FILAS;   // 4.160
 const fmt = (n) => n.toLocaleString("es-ES");
 
-/* ── Entradas ── */
+/* ═════════════════════════════════════════════
+   1 · LA VIDA DENTRO DEL TITULAR
+   Dos huecos en la frase. Dentro, la vida, rotando.
+   No es un adorno: es literalmente de lo que va NEXA.
+   ═════════════════════════════════════════════ */
+const VIDA = [
+  ["https://images.pexels.com/photos/7148674/pexels-photo-7148674.jpeg?auto=compress&cs=tinysrgb&w=400", "Hoguera en la playa"],
+  ["https://images.pexels.com/photos/1105666/pexels-photo-1105666.jpeg?auto=compress&cs=tinysrgb&w=400", "Concierto"],
+  ["https://images.pexels.com/photos/32876381/pexels-photo-32876381.jpeg?auto=compress&cs=tinysrgb&w=400", "Amanecer en la playa"],
+  ["https://images.pexels.com/photos/8482195/pexels-photo-8482195.jpeg?auto=compress&cs=tinysrgb&w=400", "Cima de una montaña"],
+  ["https://images.pexels.com/photos/17444987/pexels-photo-17444987.jpeg?auto=compress&cs=tinysrgb&w=400", "Furgoneta frente al mar"],
+  ["https://images.pexels.com/photos/5738245/pexels-photo-5738245.jpeg?auto=compress&cs=tinysrgb&w=400", "Cena con amigos"],
+  ["https://images.pexels.com/photos/8050356/pexels-photo-8050356.jpeg?auto=compress&cs=tinysrgb&w=400", "Surf al amanecer"],
+];
+
+function hueco(el, arranque) {
+  // Dos capas: una entra mientras la otra sale. Nunca hay hueco vacío.
+  const a = document.createElement("img");
+  const b = document.createElement("img");
+  a.loading = "eager"; b.loading = "eager";
+  a.decoding = "async"; b.decoding = "async";
+  el.append(a, b);
+
+  let i = arranque, frente = a, fondo = b;
+  const poner = (img, n) => { img.src = VIDA[n][0]; img.alt = VIDA[n][1]; };
+
+  poner(frente, i);
+  frente.classList.add("on");
+
+  if (reduce) return;
+
+  setInterval(() => {
+    i = (i + 2) % VIDA.length;
+    poner(fondo, i);
+    fondo.onload = () => {
+      fondo.classList.add("on");
+      frente.classList.remove("on");
+      [frente, fondo] = [fondo, frente];
+    };
+  }, 2600);
+}
+
+const fA = $(".foto--a");
+const fB = $(".foto--b");
+if (fA) hueco(fA, 0);
+if (fB) hueco(fB, 1);
+
+// Cada palabra del titular sale con su propio retardo. Una detrás de otra.
+$$(".h1").forEach((h) => $$(".w", h).forEach((w, i) => w.style.setProperty("--d", i)));
+
+/* ═════════════════════════════════════════════
+   2 · LA CINTA
+   ═════════════════════════════════════════════ */
+const cinta = $("#cinta1");
+if (cinta && !reduce) {
+  cinta.innerHTML += cinta.innerHTML;   // sin costura
+  let x = 0;
+  (function rueda() {
+    const mitad = cinta.scrollWidth / 2;
+    x -= 0.55;
+    if (x <= -mitad) x += mitad;
+    cinta.style.transform = `translate3d(${x.toFixed(2)}px,0,0)`;
+    requestAnimationFrame(rueda);
+  })();
+}
+
+/* ═════════════════════════════════════════════
+   Entradas + nav + barra de progreso
+   ═════════════════════════════════════════════ */
 const io = new IntersectionObserver(
   (es) => es.forEach((e) => {
     if (!e.isIntersecting) return;
     e.target.classList.add("on");
     io.unobserve(e.target);
   }),
-  { rootMargin: "0px 0px -10% 0px", threshold: 0.12 }
+  { rootMargin: "0px 0px -12% 0px", threshold: 0.2 }
 );
-$$(".sube, .reveal, .titan, .frase").forEach((el) => io.observe(el));
-$$(".ln").forEach((ln, i) => ln.style.setProperty("--l", i % 3));
+$$(".fila, .reveal, .h2").forEach((el) => io.observe(el));
 
-requestAnimationFrame(() => {
-  $(".hero .titan")?.classList.add("on");
-  $$(".hero .sube").forEach((el) => el.classList.add("on"));
-});
-
-/* ── Nav + barra de progreso + parallax del corte ── */
 const nav = $("#nav");
 const prog = $("#prog");
-const corteImg = $(".corte img");
 let last = 0, tick = false;
-
 function frame() {
   const y = scrollY;
   const max = document.documentElement.scrollHeight - innerHeight;
   prog.style.transform = `scaleX(${max > 0 ? y / max : 0})`;
-
-  nav.classList.toggle("solido", y > innerHeight * 0.85);
-  nav.classList.toggle("oculto", y > last && y > 700);
+  nav.classList.toggle("oculto", y > last && y > 600);
   last = y;
-
-  // El corte se mueve más despacio que el scroll: profundidad.
-  if (corteImg && !reduce) {
-    const r = corteImg.parentElement.getBoundingClientRect();
-    if (r.bottom > 0 && r.top < innerHeight) {
-      const p = (r.top + r.height / 2 - innerHeight / 2) / innerHeight;
-      corteImg.style.transform = `translate3d(0, ${(-p * 9).toFixed(2)}%, 0)`;
-    }
-  }
   tick = false;
 }
 addEventListener("scroll", () => { if (!tick) { requestAnimationFrame(frame); tick = true; } }, { passive: true });
-addEventListener("resize", frame, { passive: true });
 frame();
 
 /* ═════════════════════════════════════════════
-   1 · LA REJILLA
+   3 · LAS SEMANAS
    ═════════════════════════════════════════════ */
 const lienzo = $("#rejilla");
 const edadIn = $("#edad");
@@ -80,7 +127,6 @@ const finN = $("#finN");
 const estados = new Uint8Array(TOTAL);   // 0 apagada · 1 te queda · 2 encendida · 3 ahora
 let gastadas = 0, objetivo = 0, m = null, raf = null;
 let raton = { x: -999, y: -999 };
-
 const pos = (i) => ({ col: Math.floor(i / FILAS), fila: i % FILAS });
 
 function medir() {
@@ -99,7 +145,7 @@ function pintar() {
   if (!m) return;
   const ctx = lienzo.getContext("2d");
   ctx.clearRect(0, 0, m.w, m.h);
-  const base = Math.max(1, m.paso * 0.2);
+  const base = Math.max(1, m.paso * 0.21);
 
   for (let i = 0; i < TOTAL; i++) {
     const { col, fila } = pos(i);
@@ -110,14 +156,13 @@ function pintar() {
     let r = base;
     if (raton.x > -900) {
       const d = Math.hypot(x - raton.x, y - raton.y);
-      const f = Math.max(0, 1 - d / (m.paso * 7));
-      r += f * base * 1.1;
+      r += Math.max(0, 1 - d / (m.paso * 7)) * base * 1.1;
     }
 
-    let color = "#8E96A5";                              // te queda
-    if (e === 0) { color = "rgba(255,255,255,.09)"; r *= 0.7; }   // ya no vuelve
-    if (e === 2) { color = "#0A5CFF"; r *= 1.45; }      // encendida
-    if (e === 3) { color = "#0A5CFF"; r *= 1.6; }       // esta semana
+    let color = "#0A0A0A";                      // te queda
+    if (e === 0) { color = "#DEDEDE"; r *= 0.72; }  // ya no vuelve
+    if (e === 2) { color = "#0A5CFF"; r *= 1.45; }  // encendida
+    if (e === 3) { color = "#0A5CFF"; r *= 1.6; }   // esta semana
 
     ctx.beginPath();
     ctx.arc(x, y, r, 0, 6.2832);
@@ -132,27 +177,14 @@ function cuenta() {
   const q = Math.max(0, TOTAL - Math.round(edad() * FILAS));
   quedanEl.textContent = fmt(q);
   if (finN) finN.textContent = fmt(q);
-  return q;
 }
 
-function apagar(animado = true) {
-  objetivo = Math.round(edad() * FILAS);
-  cuenta();
-  if (!animado || reduce) {
-    gastadas = objetivo;
-    aplicar(Math.round(gastadas));
-    pintar();
-    return;
-  }
-  if (!raf) raf = requestAnimationFrame(animar);
-}
-
-function aplicar(g) {
+const aplicar = (g) => {
   for (let i = 0; i < TOTAL; i++) {
     if (estados[i] === 2) continue;
     estados[i] = i < g - 1 ? 0 : i === g - 1 ? 3 : 1;
   }
-}
+};
 
 function animar() {
   const d = objetivo - gastadas;
@@ -160,6 +192,13 @@ function animar() {
   else { gastadas += d * 0.08 + Math.sign(d) * 0.5; raf = requestAnimationFrame(animar); }
   aplicar(Math.round(gastadas));
   pintar();
+}
+
+function apagar(animado = true) {
+  objetivo = Math.round(edad() * FILAS);
+  cuenta();
+  if (!animado || reduce) { gastadas = objetivo; aplicar(Math.round(gastadas)); pintar(); return; }
+  if (!raf) raf = requestAnimationFrame(animar);
 }
 
 function encender(n = 1) {
@@ -187,20 +226,15 @@ if (lienzo && edadIn) {
     }, { passive: true });
     lienzo.addEventListener("pointerleave", () => { raton = { x: -999, y: -999 }; pintar(); });
   }
-
   addEventListener("resize", () => { m = medir(); pintar(); }, { passive: true });
 
   new IntersectionObserver((es, obs) => {
-    es.forEach((e) => {
-      if (!e.isIntersecting) return;
-      apagar(true);
-      obs.disconnect();
-    });
+    es.forEach((e) => { if (e.isIntersecting) { apagar(true); obs.disconnect(); } });
   }, { threshold: 0.2 }).observe($("#semanas"));
 }
 
 /* ═════════════════════════════════════════════
-   2 · EL MENSAJE QUE NO ENVÍAS
+   4 · EL MENSAJE QUE NO ENVÍAS
    ═════════════════════════════════════════════ */
 const chatForm = $("#chatForm");
 const chatIn = $("#chatIn");
@@ -217,7 +251,6 @@ let intentos = 0;
 chatForm?.addEventListener("submit", (e) => {
   e.preventDefault();
   const txt = chatIn.value.trim() || chatIn.placeholder;
-
   const b = document.createElement("div");
   b.className = "burb burb--mio";
   b.textContent = txt;
@@ -227,24 +260,21 @@ chatForm?.addEventListener("submit", (e) => {
 
   setTimeout(() => {
     b.classList.add("burb--fuga");
-    setTimeout(() => b.remove(), reduce ? 0 : 1500);
+    setTimeout(() => b.remove(), reduce ? 0 : 1400);
   }, reduce ? 150 : 600);
 
   intentos = Math.min(intentos + 1, RESPUESTAS.length);
-  setTimeout(() => {
-    salida.innerHTML = RESPUESTAS[intentos - 1];
-    salida.classList.add("on");
-  }, reduce ? 250 : 1150);
+  setTimeout(() => (salida.innerHTML = RESPUESTAS[intentos - 1]), reduce ? 250 : 1100);
 });
 
 /* ═════════════════════════════════════════════
-   3 · LA DEMO  ·  4 · EL MOMENTO
+   5 · UN NEXA  ·  EL MOMENTO
    ═════════════════════════════════════════════ */
 const caja = $("#caja");
 const momento = $("#momento");
 
 if (caja) {
-  const pasos = $$(".paso1", caja);
+  const pasos = $$(".paso", caja);
   const est = { exp: null, img: null, per: null, por: null };
   const ir = (n) => pasos.forEach((p) => p.classList.toggle("is-on", +p.dataset.paso === n));
 
@@ -254,7 +284,7 @@ if (caja) {
       b.setAttribute("aria-checked", "true");
       est.exp = b.dataset.exp;
       est.img = b.dataset.img;
-      setTimeout(() => ir(2), reduce ? 0 : 240);
+      setTimeout(() => ir(2), reduce ? 0 : 220);
     });
   });
 
@@ -267,58 +297,47 @@ if (caja) {
       $("#rPer").textContent = est.per;
       $("#rExp").textContent = est.exp;
       $("#rPor").textContent = est.por;
-      setTimeout(() => ir(3), reduce ? 0 : 240);
+      setTimeout(() => ir(3), reduce ? 0 : 220);
     });
   });
 
-  /* ── EL MOMENTO ──
-     La foto se abre a pantalla completa. Silencio. Y una frase.
-     Si esto no te da un vuelco, no hay web que lo arregle. */
   $("#enviar")?.addEventListener("click", (e) => {
     const b = e.currentTarget;
     b.disabled = true;
     $("#btnT").textContent = "Enviado";
-
     setTimeout(() => {
       $("#momImg").src = est.img;
       $("#momImg").alt = est.exp;
       $("#momT").textContent = est.exp;
       $("#momS").textContent = `con ${est.per} · el sábado que viene`;
-
       momento.hidden = false;
       document.body.classList.add("bloq");
       $("#cerrarMom").focus();
-
-      encender(1);   // y una semana deja de estar apagada
-
+      encender(1);
       b.disabled = false;
       $("#btnT").textContent = "Enviar NEXA";
       ir(1);
       $$(".exp, .per", caja).forEach((o) => o.setAttribute("aria-checked", "false"));
-    }, reduce ? 80 : 700);
+    }, reduce ? 80 : 650);
   });
 
-  $$("[data-volver]", caja).forEach((b) =>
-    b.addEventListener("click", () => ir(+b.dataset.volver))
-  );
+  $$("[data-volver]", caja).forEach((b) => b.addEventListener("click", () => ir(+b.dataset.volver)));
 }
 
 function cerrarMomento() {
   momento.hidden = true;
   document.body.classList.remove("bloq");
-  $("#demo")?.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "center" });
+  $("#nexa")?.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "center" });
 }
 $("#cerrarMom")?.addEventListener("click", cerrarMomento);
-addEventListener("keydown", (e) => {
-  if (e.key === "Escape" && momento && !momento.hidden) cerrarMomento();
-});
+addEventListener("keydown", (e) => { if (e.key === "Escape" && momento && !momento.hidden) cerrarMomento(); });
 
 /* Las fotos nunca se ven rotas. */
 $$("img").forEach((img) =>
   img.addEventListener("error", () => {
     img.style.visibility = "hidden";
-    const c = img.closest(".exp__f, .mz, .paso__f, .hero__foto, .cierre__foto");
-    if (c) c.style.background = "linear-gradient(200deg,#2A2F3A,#14171E)";
+    const c = img.closest(".exp, .mz, .foto");
+    if (c) c.style.background = "#DEDEDE";
   })
 );
 
@@ -367,7 +386,7 @@ form?.addEventListener("submit", async (e) => {
   if (!valido(email.value)) return fallar("Ese email no parece un email.");
 
   btn.disabled = true;
-  btn.textContent = "Un segundo…";
+  btn.querySelector("span").textContent = "Un segundo…";
   try {
     await enviarLista({
       email: email.value.trim().toLowerCase(),
@@ -381,7 +400,7 @@ form?.addEventListener("submit", async (e) => {
   } catch (e) {
     console.error(e);
     btn.disabled = false;
-    btn.textContent = "Enciende la primera";
+    btn.querySelector("span").textContent = "Enciende la primera";
     fallar("No ha entrado. Prueba otra vez en un momento.");
   }
 });
