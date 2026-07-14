@@ -4,13 +4,13 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>NEXA — Que no se te escape la vida</title>
-<meta name="description" content="Esta app solo funciona cuando la cierras. Dices qué quieres vivir este año, encuentras con quién, y lo vivís. Lista de espera de Valencia.">
-<meta name="theme-color" content="#0A0C11">
+<meta name="description" content="Sábado, 18:37. No tienes nada que hacer, y no es por falta de ganas. NEXA convierte el «algún día» en un día. Lista de espera de Valencia.">
+<meta name="theme-color" content="#FFFFFF">
 
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://nexavalencia.vercel.app/">
 <meta property="og:title" content="NEXA — Que no se te escape la vida">
-<meta property="og:description" content="Esta app solo funciona cuando la cierras.">
+<meta property="og:description" content="Sábado, 18:37. No tienes nada que hacer, y no es por falta de ganas.">
 <meta property="og:image" content="https://nexavalencia.vercel.app/og.jpg">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
@@ -22,380 +22,338 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://images.pexels.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
-<link rel="stylesheet" href="styles.css?v=3">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&display=swap">
+<link rel="stylesheet" href="styles.css?v=5">
 </head>
 <body>
 
 <a class="skip" href="#lista">Ir a la lista de espera</a>
-<div class="progress" id="progress" aria-hidden="true"></div>
 <div class="grain" aria-hidden="true"></div>
 
-<!-- ══════════════ NAV ══════════════ -->
+<!-- ═══ EL RELOJ ═══
+     No es un adorno. Es el hilo. Toda la web es un sábado:
+     empieza a las 18:37 y acaba al amanecer del domingo. -->
+<div class="reloj" id="reloj" aria-hidden="true">
+  <span class="reloj__d" id="relojDia">SÁB</span>
+  <span class="reloj__h" id="relojHora">18:37</span>
+</div>
+
 <header class="nav" id="nav">
   <div class="nav__in">
     <a class="logo" href="#top" aria-label="NEXA, inicio">
-      <span class="logo__word">NE<span class="logo__x" aria-hidden="true">
-        <svg viewBox="0 0 20 20" focusable="false"><line class="x1" x1="2" y1="18" x2="18" y2="2"/><line class="x2" x1="18" y1="18" x2="2" y2="2"/></svg>
-      </span>A</span>
+      <span class="logo__w">NE<span class="logo__x" aria-hidden="true"><svg viewBox="0 0 20 20"><line class="x1" x1="2" y1="18" x2="18" y2="2"/><line class="x2" x1="18" y1="18" x2="2" y2="2"/></svg></span>A</span>
     </a>
-    <nav class="nav__links" aria-label="Secciones">
-      <a href="#sabados">Tus sábados</a>
-      <a href="#nexa">Qué es un NEXA</a>
-      <a href="#nueve">Tus 9</a>
-      <a href="manifiesto.html">Manifiesto</a>
-    </nav>
     <a class="btn btn--sm" href="#lista">Entrar en la lista</a>
   </div>
 </header>
 
 <main id="top">
 
-<!-- ══════════════ 1. HERO ══════════════
-     Sin foto. La foto es la prueba, no el decorado.
-     Aquí solo hay una frase y dos vidas que se cruzan. -->
-<section class="hero">
-  <svg class="hero__x" viewBox="0 0 1000 600" aria-hidden="true" preserveAspectRatio="xMidYMid slice">
-    <line class="hx hx--a" x1="-100" y1="700" x2="1100" y2="-100"/>
-    <line class="hx hx--b" x1="1100" y1="700" x2="-100" y2="-100"/>
-    <circle class="hx__dot" cx="500" cy="300" r="4"/>
-  </svg>
-
-  <div class="hero__copy wrap">
-    <h1 class="display" data-split>Que no se te escape la vida.</h1>
-    <p class="lead lead--hero rise" style="--i:7">Esta app solo funciona cuando la cierras.</p>
-    <div class="rise" style="--i:8">
-      <a class="btn btn--lg btn--mag" href="#lista">Entrar en la lista de Valencia</a>
-      <p class="micro micro--hero">Gratis · Solo Valencia, de momento</p>
+<!-- ══════════ 1. SÁBADO, 18:37 ══════════ -->
+<section class="hero" id="hero">
+  <div class="wrap">
+    <p class="hero__k rise">Sábado · 18:37</p>
+    <h1 class="hero__h">
+      <span class="ln"><span>No tienes nada que hacer.</span></span>
+      <span class="ln"><span class="dim">Y no es por falta de ganas.</span></span>
+    </h1>
+    <p class="hero__p rise" style="--i:4">Tienes el móvil en la mano desde hace veinte minutos. Has abierto tres apps. Has visto lo que están haciendo otros. No has escrito a nadie.</p>
+    <div class="hero__cta rise" style="--i:5">
+      <a class="btn btn--lg" href="#lista">Entrar en la lista de Valencia</a>
+      <span class="hero__free">Gratis · Solo Valencia, de momento</span>
     </div>
   </div>
-
   <div class="hero__scroll" aria-hidden="true"><span></span></div>
 </section>
 
-<!-- ══════════════ 2. EL PROBLEMA ══════════════ -->
-<section class="problema">
-  <div class="wrap tc">
-    <p class="mega rise" style="--i:0">No es que no tengas tiempo.</p>
-    <p class="mega rise" style="--i:1">Es que no sabes con quién.</p>
-    <p class="mega mega--blue rise" style="--i:2">Y dentro de diez años eso seguirá siendo verdad.</p>
-    <p class="body rise" style="--i:3">Nadie decide dejar de vivir cosas. Simplemente, un día no las hace. Y luego otro. El enemigo no es la rutina: es la inercia.</p>
+<!-- ══════════ 2. EL MENSAJE QUE NO ENVÍAS ══════════ -->
+<section class="msg" id="msg">
+  <div class="wrap wrap--n">
+    <h2 class="h2 rise">Escribe lo que llevas todo el día pensando.</h2>
+    <p class="sub rise" style="--i:1">Va en serio. Escríbelo y dale a enviar.</p>
+
+    <div class="chat rise" style="--i:2">
+      <div class="chat__hd">
+        <span class="chat__av" aria-hidden="true"></span>
+        <span class="chat__n">Grupo · 6 personas</span>
+        <span class="chat__on">en línea</span>
+      </div>
+      <div class="chat__body" id="chatBody">
+        <div class="burb burb--otro">Yo hoy me quedo, que estoy reventado</div>
+        <div class="burb burb--otro">Mañana sí eh</div>
+      </div>
+      <form class="chat__bar" id="chatForm" autocomplete="off">
+        <label class="sr" for="chatIn">Tu mensaje</label>
+        <input id="chatIn" type="text" placeholder="¿Hacemos algo?" maxlength="70">
+        <button class="chat__send" type="submit" aria-label="Enviar mensaje">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 20l18-8L3 4v6l11 2-11 2z"/></svg>
+        </button>
+      </form>
+    </div>
+
+    <p class="msg__out" id="msgOut" role="status" aria-live="polite"></p>
   </div>
 </section>
 
-<!-- ══════════════ 3. LOS SÁBADOS ══════════════ -->
+<!-- ══════════ 3. EL PROBLEMA ══════════ -->
+<section class="prob">
+  <div class="wrap wrap--n">
+    <p class="big rise" style="--i:0">No es que no tengas tiempo.</p>
+    <p class="big rise" style="--i:1">Es que escribir primero te expone.</p>
+    <p class="big big--az rise" style="--i:2">Y así se va un sábado. Y luego otro.</p>
+    <p class="p rise" style="--i:3">Nadie decide dejar de vivir cosas. Simplemente, un día no las hace. El enemigo no es el sofá: un sofá elegido está bien. El enemigo es que los días pasen <strong>por defecto</strong>.</p>
+  </div>
+</section>
+
+<!-- ══════════ 4. LOS SÁBADOS ══════════ -->
 <section class="sab" id="sabados">
-  <div class="wrap tc">
-    <p class="kicker kicker--w rise">La cuenta</p>
-    <h2 class="h2 h2--w rise" style="--i:1">Esto es tu vida en sábados.</h2>
-
-    <div class="sab__edad rise" style="--i:2">
-      <label for="edad">Tengo</label>
-      <input id="edad" type="number" min="14" max="89" value="20" inputmode="numeric" aria-label="Tu edad">
-      <span>años</span>
-    </div>
-
-    <div class="sab__grid rise" style="--i:3">
-      <canvas id="lienzo" role="img" aria-label="Cuadrícula de los sábados de una vida: los ya vividos aparecen apagados"></canvas>
-    </div>
-
-    <p class="sab__n rise" style="--i:4"><strong id="quedan">3.640</strong> sábados por delante.</p>
-    <p class="sab__s rise" style="--i:5">Los apagados ya no vuelven. Esta app va sobre los que quedan.</p>
-  </div>
-</section>
-
-<!-- ══════════════ 4. QUÉ ES NEXA ══════════════ -->
-<section class="que" id="que">
-  <div class="wrap tc">
-    <p class="kicker rise">Qué es NEXA</p>
-    <p class="define rise" style="--i:1">
-      Sabes exactamente lo que te gustaría hacer.<br>
-      Y sabes exactamente <strong>por qué no lo has hecho</strong>.
-    </p>
-    <p class="define__s rise" style="--i:2">
-      No es el tiempo. No es el dinero. Es que hay que escribir primero, hay que organizar, hay que ser el pesado del grupo.
-      NEXA hace esas tres cosas por ti. Lo único que queda es salir.
-    </p>
-
-    <ul class="facts">
-      <li class="fact rise" style="--i:0"><span class="fact__k">Gratis</span><span class="fact__v">Sin planes de pago. Sin trucos.</span></li>
-      <li class="fact rise" style="--i:1"><span class="fact__k">Valencia</span><span class="fact__v">Una ciudad cada vez. La primera, la nuestra.</span></li>
-      <li class="fact rise" style="--i:2"><span class="fact__k">Cero likes</span><span class="fact__v">Ni seguidores, ni puntos, ni rachas.</span></li>
-    </ul>
-  </div>
-</section>
-
-<!-- ══════════════ 5. TUS 9 ══════════════
-     La unidad no es una foto: es pregunta + prueba. -->
-<section class="nueve" id="nueve">
   <div class="wrap">
-    <header class="sec-hd tc">
-      <p class="kicker rise">Tus 9</p>
-      <h2 class="h2 rise" style="--i:1">Tu perfil no es una bio.<br>Son nueve pruebas.</h2>
-      <p class="body rise" style="--i:2">Eliges nueve categorías. Cada una te hace su pregunta. Tú no subes una foto bonita: subes la respuesta.</p>
+    <div class="sab__hd">
+      <h2 class="h2 rise">Y sábados, quedan estos.</h2>
+      <div class="sab__edad rise" style="--i:1">
+        <label for="edad">Tengo</label>
+        <input id="edad" type="number" min="14" max="89" value="20" inputmode="numeric" aria-label="Tu edad en años">
+        <span>años</span>
+      </div>
+    </div>
+
+    <div class="sab__grid">
+      <canvas id="lienzo" role="img" aria-label="Cuadrícula con todos los sábados de una vida. Los ya vividos aparecen apagados."></canvas>
+    </div>
+
+    <div class="sab__pie">
+      <p class="sab__n"><strong id="quedan">3.640</strong><span>sábados por delante</span></p>
+      <p class="sab__s">Los apagados ya no vuelven. De los que quedan, la mitad los vas a pasar durmiendo, trabajando o esperando a que alguien proponga algo.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ 5. QUÉ ES UN NEXA ══════════ -->
+<section class="def">
+  <div class="wrap wrap--n">
+    <p class="k rise">La diferencia</p>
+    <p class="def__t rise" style="--i:1">
+      «¿Hacemos algo?» es una pregunta abierta.<br>
+      Alguien tiene que llenarla, y por eso no la manda nadie.
+    </p>
+    <p class="def__t def__t--az rise" style="--i:2">
+      Un NEXA ya viene lleno.
+    </p>
+    <p class="p rise" style="--i:3">No propones «quedar». Propones <strong>una cosa concreta</strong>, en un sitio concreto, a una persona concreta. Y la app te dice por qué se lo propones a ella. Tú solo eliges.</p>
+  </div>
+</section>
+
+<!-- ══════════ 6. LA DEMO: MANDA UN NEXA ══════════ -->
+<section class="demo" id="demo">
+  <div class="wrap">
+    <header class="demo__hd">
+      <h2 class="h2 h2--w rise">Manda uno. Aquí mismo.</h2>
+      <p class="sub sub--w rise" style="--i:1">Son dos toques. Los mismos dos toques que en la app.</p>
     </header>
 
-    <div class="pruebas">
-      <article class="prueba reveal" style="--i:0">
-        <p class="prueba__q">«Dónde amaneciste. Esa foto nada más abrir la puerta.»</p>
-        <figure class="prueba__f">
-          <img src="https://images.pexels.com/photos/17444987/pexels-photo-17444987.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Furgoneta camper con la puerta abierta frente al mar y la montaña" loading="lazy" width="800" height="600">
-          <figcaption>Furgo</figcaption>
-        </figure>
-      </article>
+    <div class="demo__box" id="demoBox">
 
-      <article class="prueba reveal" style="--i:1">
-        <p class="prueba__q">«La foto que demuestra que sobreviviste a Fallas.»</p>
-        <figure class="prueba__f">
-          <img src="https://images.pexels.com/photos/7148674/pexels-photo-7148674.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Grupo de amigos alrededor de una hoguera de noche" loading="lazy" width="800" height="600">
-          <figcaption>Fallas</figcaption>
-        </figure>
-      </article>
-
-      <article class="prueba reveal" style="--i:2">
-        <p class="prueba__q">«El concierto del que saliste sin voz.»</p>
-        <figure class="prueba__f">
-          <img src="https://images.pexels.com/photos/1105666/pexels-photo-1105666.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Público con las manos en alto bajo los focos de un concierto" loading="lazy" width="800" height="600">
-          <figcaption>Directos</figcaption>
-        </figure>
-      </article>
-
-      <article class="prueba reveal" style="--i:3">
-        <p class="prueba__q">«La cima donde juraste que nunca más. Y volviste.»</p>
-        <figure class="prueba__f">
-          <img src="https://images.pexels.com/photos/8482195/pexels-photo-8482195.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Siluetas de un grupo de personas en la cima de una montaña" loading="lazy" width="800" height="600">
-          <figcaption>Montaña</figcaption>
-        </figure>
-      </article>
-    </div>
-
-    <p class="micro micro--c rise">Y otras tantas. Solo caben nueve. Se te quedan cortas.</p>
-  </div>
-</section>
-
-<!-- ══════════════ 6. EL NEXA ══════════════ -->
-<section class="nexa" id="nexa">
-  <div class="wrap tc">
-    <p class="kicker rise">El gesto</p>
-    <h2 class="h2 rise" style="--i:1">Aquí nadie escribe «hola».</h2>
-    <blockquote class="quote rise" style="--i:2">
-      Un NEXA es una sola pregunta:<br>
-      <em>«¿Vivimos esto, tú y yo?»</em>
-    </blockquote>
-
-    <p class="body rise" style="--i:3">La app te da tres propuestas. Y cada una lleva escrito <strong>por qué</strong> te la propone. No tienes que pensar qué decir. Solo elegir cuál.</p>
-
-    <ul class="porques">
-      <li class="porque rise" style="--i:0">«Está en el <em>quiero vivir</em> de los dos»</li>
-      <li class="porque rise" style="--i:1">«Los dos vivís a 15 minutos»</li>
-      <li class="porque rise" style="--i:2">«Nuria, que sale en sus 9, ya va»</li>
-    </ul>
-
-    <div class="nexa__viz" data-parallax="-0.04">
-      <div class="phone reveal">
-        <div class="phone__frame">
-          <div class="phone__island" aria-hidden="true"></div>
-          <div class="screen">
-            <div class="screen__top">
-              <span class="screen__title">Enviar un NEXA</span>
-              <span class="screen__to">a Marta</span>
-            </div>
-            <div class="prop prop--sel">
-              <div class="prop__hd"><span class="prop__name">Amanecer en la Albufera</span><span class="prop__chk" aria-hidden="true"></span></div>
-              <p class="prop__why">Está en el «quiero vivir» de los dos</p>
-            </div>
-            <div class="prop">
-              <div class="prop__hd"><span class="prop__name">Escalar en Montanejos</span><span class="prop__chk" aria-hidden="true"></span></div>
-              <p class="prop__why">Los dos vivís a 15 minutos</p>
-            </div>
-            <div class="prop">
-              <div class="prop__hd"><span class="prop__name">Concierto en el Loco</span><span class="prop__chk" aria-hidden="true"></span></div>
-              <p class="prop__why">Nuria, que sale en sus 9, ya va</p>
-            </div>
-            <div class="screen__cta">Enviar NEXA</div>
-            <p class="screen__foot">Si acepta, se abre el chat. Antes no.</p>
-          </div>
+      <!-- PASO 1 -->
+      <div class="paso is-on" data-paso="1">
+        <p class="paso__k">Paso 1 · Elige qué quieres vivir</p>
+        <div class="exps" role="radiogroup" aria-label="Elige una experiencia">
+          <button class="exp" type="button" role="radio" aria-checked="false" data-exp="Amanecer en la Albufera" data-hora="06:40" data-img="https://images.pexels.com/photos/32876381/pexels-photo-32876381.jpeg?auto=compress&cs=tinysrgb&w=600">
+            <img src="https://images.pexels.com/photos/32876381/pexels-photo-32876381.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Amanecer sobre el agua" loading="lazy" width="600" height="400">
+            <span class="exp__n">Amanecer en la Albufera</span>
+            <span class="exp__d">Salir de noche y llegar con el sol</span>
+          </button>
+          <button class="exp" type="button" role="radio" aria-checked="false" data-exp="El concierto del Loco" data-hora="23:15" data-img="https://images.pexels.com/photos/1105666/pexels-photo-1105666.jpeg?auto=compress&cs=tinysrgb&w=600">
+            <img src="https://images.pexels.com/photos/1105666/pexels-photo-1105666.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Público en un concierto" loading="lazy" width="600" height="400">
+            <span class="exp__n">El concierto del Loco</span>
+            <span class="exp__d">Salir sin voz, volver andando</span>
+          </button>
+          <button class="exp" type="button" role="radio" aria-checked="false" data-exp="Hoguera en el Saler" data-hora="21:00" data-img="https://images.pexels.com/photos/7148674/pexels-photo-7148674.jpeg?auto=compress&cs=tinysrgb&w=600">
+            <img src="https://images.pexels.com/photos/7148674/pexels-photo-7148674.jpeg?auto=compress&cs=tinysrgb&w=600" alt="Hoguera en la playa con gente alrededor" loading="lazy" width="600" height="400">
+            <span class="exp__n">Hoguera en el Saler</span>
+            <span class="exp__d">Llevar leña y no mirar la hora</span>
+          </button>
         </div>
       </div>
+
+      <!-- PASO 2 -->
+      <div class="paso" data-paso="2">
+        <button class="volver" type="button" data-volver="1">← Cambiar experiencia</button>
+        <p class="paso__k">Paso 2 · Elige a quién</p>
+        <div class="gente" role="radiogroup" aria-label="Elige a una persona">
+          <button class="per" type="button" role="radio" aria-checked="false" data-per="Marta" data-por="Está en el «quiero vivir» de los dos">
+            <span class="per__av" style="--h:212">M</span>
+            <span class="per__i"><span class="per__n">Marta</span><span class="per__p">Está en el «quiero vivir» de los dos</span></span>
+          </button>
+          <button class="per" type="button" role="radio" aria-checked="false" data-per="Iván" data-por="Vivís a 15 minutos, y nunca habéis coincidido">
+            <span class="per__av" style="--h:262">I</span>
+            <span class="per__i"><span class="per__n">Iván</span><span class="per__p">Vivís a 15 minutos, y nunca habéis coincidido</span></span>
+          </button>
+          <button class="per" type="button" role="radio" aria-checked="false" data-per="Nuria" data-por="Sale en las 9 de dos personas que conoces">
+            <span class="per__av" style="--h:190">N</span>
+            <span class="per__i"><span class="per__n">Nuria</span><span class="per__p">Sale en las 9 de dos personas que conoces</span></span>
+          </button>
+        </div>
+      </div>
+
+      <!-- PASO 3 -->
+      <div class="paso" data-paso="3">
+        <p class="paso__k">Paso 3 · Ya está</p>
+        <div class="envio">
+          <p class="envio__t">Vas a mandarle a <strong id="rPer">Marta</strong>:</p>
+          <p class="envio__e" id="rExp">Amanecer en la Albufera</p>
+          <p class="envio__w" id="rPor">Está en el «quiero vivir» de los dos</p>
+          <button class="btn btn--lg btn--send" type="button" id="enviar">
+            <span class="btn__t">Enviar NEXA</span>
+            <span class="btn__x" aria-hidden="true"><svg viewBox="0 0 20 20"><line x1="2" y1="18" x2="18" y2="2"/><line x1="18" y1="18" x2="2" y2="2"/></svg></span>
+          </button>
+          <p class="envio__f">No has escrito ni una palabra. No hace falta.</p>
+        </div>
+      </div>
+
+      <!-- PASO 4 — LA RESPUESTA -->
+      <div class="paso paso--fin" data-paso="4">
+        <div class="acepta">
+          <div class="acepta__x" aria-hidden="true">
+            <svg viewBox="0 0 60 60"><line class="ax1" x1="8" y1="52" x2="52" y2="8"/><line class="ax2" x1="52" y1="52" x2="8" y2="8"/></svg>
+          </div>
+          <p class="acepta__t"><strong id="rPer2">Marta</strong> lo ha aceptado.</p>
+          <p class="acepta__s">Ahora tenéis 24 horas para poner fecha. Si no la ponéis, el plan caduca y no pasa nada.</p>
+        </div>
+
+        <!-- El sábado, antes y después -->
+        <div class="antes">
+          <div class="antes__c">
+            <p class="antes__k">Tu sábado hace un minuto</p>
+            <div class="ficha ficha--vacia">
+              <span class="ficha__h">18:37</span>
+              <span class="ficha__t">—</span>
+              <span class="ficha__s">Nada</span>
+            </div>
+          </div>
+          <div class="antes__f" aria-hidden="true">→</div>
+          <div class="antes__c">
+            <p class="antes__k">Tu sábado ahora</p>
+            <div class="ficha ficha--llena">
+              <span class="ficha__h" id="fHora">06:40</span>
+              <span class="ficha__t" id="fExp">Amanecer en la Albufera</span>
+              <span class="ficha__s">con <span id="fPer">Marta</span></span>
+            </div>
+          </div>
+        </div>
+
+        <button class="otra" type="button" id="otra">Probar otra vez</button>
+      </div>
+
     </div>
-
-    <p class="body body--dim rise">Si no acepta, no pasa nada. Nadie se entera.</p>
   </div>
 </section>
 
-<!-- ══════════════ 7. LAS 24 HORAS ══════════════ -->
-<section class="horas">
-  <div class="wrap tc">
-    <p class="kicker kicker--w rise">Al aceptar</p>
-    <h2 class="h2 h2--w rise" style="--i:1">Tenéis 24 horas para poner fecha.</h2>
-    <div class="reloj rise" style="--i:2" aria-hidden="true"><span class="reloj__bar"></span></div>
-    <p class="body body--w rise" style="--i:3">Sin fecha, un plan es una conversación. Y las conversaciones se mueren solas.</p>
-    <p class="body body--w body--dim rise" style="--i:4">Si caduca, no pasa nada. Aquí no hay rachas que perder ni puntos que te castiguen. Solo un plan menos.</p>
-  </div>
-</section>
-
-<!-- ══════════════ 8. EL TACHADO ══════════════
-     El momento. El producto entero. -->
-<section class="tachado" id="tachado">
-  <div class="wrap tc">
-    <p class="kicker rise">El momento</p>
-    <p class="cruz" id="cruz">
-      <span class="cruz__l">Este año quiero vivir</span>
-      <span class="cruz__t" data-tachar>Ver amanecer en la Albufera</span>
-      <span class="cruz__d">Vivido · 12 de abril · con Marta</span>
-    </p>
-    <p class="body body--c rise">Lo vivís. Lo confirmáis los dos. Y el deseo se tacha.</p>
-    <p class="mega rise">De <span class="q">quiero vivir</span> a <strong>vivido</strong>.<br>Eso es todo lo que hace NEXA.</p>
-  </div>
-</section>
-
-<!-- ══════════════ 9. HISTORIAL DE VIDA ══════════════ -->
-<section class="hist2">
+<!-- ══════════ 7. LA FOTO QUE CAMBIA ══════════ -->
+<section class="foto" id="foto">
   <div class="wrap">
-    <header class="sec-hd tc">
-      <p class="kicker rise">El Historial de Vida</p>
-      <h2 class="h2 rise" style="--i:1">Dentro de un año, esto será tuyo.</h2>
-      <p class="body rise" style="--i:2">No un perfil. No un feed. Una lista de cosas que pasaron de verdad, con la gente con la que pasaron.</p>
-    </header>
+    <div class="foto__g">
+      <div class="foto__txt">
+        <p class="k rise">Tu perfil</p>
+        <h2 class="h2 rise" style="--i:1">Instagram guarda fotos.<br>NEXA guarda sábados.</h2>
+        <p class="p rise" style="--i:2">Una foto sola no es nada. Es una foto. Pero una foto <em>con</em> quién estabas, <em>qué</em> te preguntó la app y <em>qué</em> deseo tachaste ese día deja de ser una foto: es una prueba de que lo viviste.</p>
+        <p class="p p--dim rise" style="--i:3">Por eso tu perfil no tiene bio. Tiene nueve pruebas.</p>
+      </div>
 
-    <div class="hist2__g">
-      <figure class="hito reveal" style="--i:0">
-        <img src="https://images.pexels.com/photos/32876381/pexels-photo-32876381.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Amanecer en la playa" loading="lazy" width="800" height="600">
-        <figcaption>
-          <span class="hito__t">Amanecer en la Albufera</span>
-          <span class="hito__s">12 de abril · con Marta</span>
-        </figcaption>
-      </figure>
-      <figure class="hito reveal" style="--i:1">
-        <img src="https://images.pexels.com/photos/2990835/pexels-photo-2990835.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Concierto de noche" loading="lazy" width="800" height="600">
-        <figcaption>
-          <span class="hito__t">El concierto del que saliste sin voz</span>
-          <span class="hito__s">2 de marzo · con Iván y Nuria</span>
-        </figcaption>
-      </figure>
-      <figure class="hito reveal" style="--i:2">
-        <img src="https://images.pexels.com/photos/8050356/pexels-photo-8050356.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Persona surfeando al amanecer" loading="lazy" width="800" height="600">
-        <figcaption>
-          <span class="hito__t">La primera vez que te pusiste de pie</span>
-          <span class="hito__s">28 de enero · con Dani</span>
+      <figure class="marco" id="marco">
+        <img src="https://images.pexels.com/photos/8482195/pexels-photo-8482195.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Siluetas de un grupo de personas en la cima de una montaña al amanecer" loading="lazy" width="900" height="1125">
+        <figcaption class="marco__c">
+          <span class="capa capa--1"><span class="capa__k">La pregunta</span>«La cima donde juraste que nunca más. Y volviste.»</span>
+          <span class="capa capa--2"><span class="capa__k">Con quién</span>Con Iván y Nuria · 14 de marzo</span>
+          <span class="capa capa--3"><span class="capa__k">El deseo</span><s>Subir el Penyagolosa antes de junio</s> <b>Vivido</b></span>
         </figcaption>
       </figure>
     </div>
-
-    <p class="cierre-frase rise">En diciembre no te vas a acordar de ninguna de las noches que te quedaste en casa.<br><strong>Te vas a acordar de estas.</strong></p>
   </div>
 </section>
 
-<!-- ══════════════ 10. EL DICCIONARIO ══════════════ -->
-<section class="dicc">
-  <div class="wrap wrap--narrow">
-    <p class="kicker rise">La palabra</p>
-    <dl class="dicc__l">
-      <div class="dicc__e rise" style="--i:0">
-        <dt>NEXA <span class="dicc__g">sustantivo</span></dt>
-        <dd>Propuesta de vivir algo con alguien.<br>
-          <em>«Te he mandado un NEXA.»</em><br>
-          <em>«Lo conocí por NEXA.»</em><br>
-          <em>«Este finde tengo un NEXA.»</em>
-        </dd>
-      </div>
-      <div class="dicc__e rise" style="--i:1">
-        <dt>nexar <span class="dicc__g">verbo</span></dt>
-        <dd>Proponerle a alguien vivir algo,<br>en lugar de escribirle «hola».</dd>
-      </div>
-    </dl>
-  </div>
-</section>
-
-<!-- ══════════════ 11. LO QUE NO ES ══════════════ -->
+<!-- ══════════ 8. LO QUE NO VAS A ENCONTRAR ══════════ -->
 <section class="noes">
-  <div class="wrap tc">
+  <div class="wrap wrap--n">
     <h2 class="h2 h2--w rise">Lo que no vas a encontrar aquí.</h2>
     <ul class="noes__l">
       <li class="rise" style="--i:0"><s>Likes</s></li>
       <li class="rise" style="--i:1"><s>Comentarios</s></li>
       <li class="rise" style="--i:2"><s>Seguidores</s></li>
-      <li class="rise" style="--i:3"><s>Puntos</s></li>
-      <li class="rise" style="--i:4"><s>Rachas</s></li>
+      <li class="rise" style="--i:3"><s>Rachas</s></li>
+      <li class="rise" style="--i:4"><s>Puntos</s></li>
       <li class="rise" style="--i:5"><s>Retos</s></li>
-      <li class="rise" style="--i:6"><s>Un catálogo de planes</s></li>
-      <li class="rise" style="--i:7"><s>Un feed que te retenga</s></li>
+      <li class="rise" style="--i:6"><s>Un feed que te retenga</s></li>
+      <li class="rise" style="--i:7"><s>Notificaciones para que vuelvas</s></li>
     </ul>
-    <p class="mega mega--w rise">No recompensamos el consumo.<br>Recompensamos vivir.</p>
+    <p class="big big--w rise">Sabemos cómo se hace una app que te enganche.<br>No la vamos a hacer.</p>
+    <p class="p p--w rise">Esta app está diseñada para que la cierres, salgas de casa, y tardes tres días en volver a abrirla. Con una foto.</p>
   </div>
 </section>
 
-<!-- ══════════════ 12. SEGURIDAD ══════════════ -->
+<!-- ══════════ 9. LA FRONTERA ══════════ -->
+<section class="front">
+  <div class="wrap wrap--n">
+    <p class="k rise">Hacia dónde va</p>
+    <h2 class="h2 rise" style="--i:1">Un centímetro, no un salto.</h2>
+    <p class="p rise" style="--i:2">NEXA no te va a proponer irte a Nepal. Te va a proponer la cosa que <strong>esta semana</strong> agradecerías haber hecho, y que está justo un centímetro fuera de lo que ya haces.</p>
+    <p class="p rise" style="--i:3">Sin insistir. Sin convertir tu vida en una lista de tareas. Sin premios por cumplir. Si esta semana no te apetece, no pasa nada: la app se calla.</p>
+  </div>
+</section>
+
+<!-- ══════════ 10. SEGURIDAD ══════════ -->
 <section class="seg" id="seguridad">
-  <div class="wrap wrap--narrow tc">
-    <p class="kicker rise">Seguridad</p>
-    <h2 class="h2 rise" style="--i:1">Sin rodeos.</h2>
-    <p class="seg__p rise" style="--i:2"><strong>Nadie puede escribirte porque sí.</strong> El chat se gana: se abre solo si tú aceptas vivir algo con esa persona.</p>
-    <p class="seg__p rise" style="--i:3"><strong>Bloquear y reportar</strong> está a dos toques desde cualquier pantalla, sin explicaciones y sin que la otra persona lo sepa.</p>
-    <p class="seg__p rise" style="--i:4"><strong>Antes de salir, comparte tu plan</strong> con quien tú quieras: verá dónde estás, con quién y a qué hora vuelves.</p>
-  </div>
-</section>
-
-<!-- ══════════════ 13. FAQ ══════════════ -->
-<section class="faq" id="faq">
-  <div class="wrap wrap--narrow">
-    <h2 class="h2 tc rise">Preguntas</h2>
-    <div class="faq__l">
-      <details class="q rise">
-        <summary><span>¿Y si no conozco a nadie?</span><span class="q__i" aria-hidden="true"></span></summary>
-        <div class="q__a"><p>De eso va.</p></div>
-      </details>
-      <details class="q rise">
-        <summary><span>¿Cuánto cuesta?</span><span class="q__i" aria-hidden="true"></span></summary>
-        <div class="q__a"><p>Gratis.</p></div>
-      </details>
-      <details class="q rise">
-        <summary><span>¿Por qué solo Valencia?</span><span class="q__i" aria-hidden="true"></span></summary>
-        <div class="q__a"><p>Porque una app social vacía no sirve para nada. Abrimos ciudad cuando hay gente dentro, no antes. Y no vamos a inflar la cifra para que parezca que la hay.</p></div>
-      </details>
-      <details class="q rise">
-        <summary><span>¿Qué pasa si no ponemos fecha en 24 horas?</span><span class="q__i" aria-hidden="true"></span></summary>
-        <div class="q__a"><p>El plan caduca y sigues con tu vida. No hay castigo, ni rachas, ni puntos que perder.</p></div>
-      </details>
-      <details class="q rise">
-        <summary><span>¿Es una app de citas?</span><span class="q__i" aria-hidden="true"></span></summary>
-        <div class="q__a"><p>No. Es una app para vivir experiencias con gente que quiere vivir lo mismo que tú. Que de ahí salga una amistad, un grupo o algo más no es cosa nuestra.</p></div>
-      </details>
+  <div class="wrap wrap--n">
+    <p class="k rise">Antes de que preguntes</p>
+    <div class="seg__l">
+      <p class="seg__i rise" style="--i:0"><strong>Nadie puede escribirte porque sí.</strong> El chat se abre solo si aceptas vivir algo con esa persona. Cero «hola guapa».</p>
+      <p class="seg__i rise" style="--i:1"><strong>Bloquear y reportar, a dos toques</strong>, desde cualquier pantalla, sin dar explicaciones y sin que la otra persona se entere.</p>
+      <p class="seg__i rise" style="--i:2"><strong>Comparte tu plan antes de salir</strong> con quien tú quieras: verá dónde estás, con quién y a qué hora vuelves.</p>
     </div>
   </div>
 </section>
 
-<!-- ══════════════ 14. CIERRE ══════════════ -->
-<section class="cierre" id="lista">
-  <div class="wrap wrap--narrow tc cierre__in">
-    <p class="tiempo rise" id="tiempo">Llevas <strong>0 s</strong> leyendo sobre vivir.</p>
+<!-- ══════════ 11. PREGUNTAS ══════════ -->
+<section class="faq" id="faq">
+  <div class="wrap wrap--n">
+    <h2 class="h2 rise">Preguntas</h2>
+    <div class="faq__l">
+      <details class="q rise"><summary><span>¿Y si no conozco a nadie?</span><i aria-hidden="true"></i></summary><div class="q__a"><p>De eso va.</p></div></details>
+      <details class="q rise"><summary><span>¿Cuánto cuesta?</span><i aria-hidden="true"></i></summary><div class="q__a"><p>Gratis.</p></div></details>
+      <details class="q rise"><summary><span>¿Por qué solo Valencia?</span><i aria-hidden="true"></i></summary><div class="q__a"><p>Porque una app social vacía no le sirve a nadie. Preferimos ser imprescindibles para mil personas antes que irrelevantes para un millón. Abrimos otra ciudad cuando aquí haya vida, y no vamos a inflar la cifra para fingir que la hay.</p></div></details>
+      <details class="q rise"><summary><span>¿Qué pasa si no ponemos fecha en 24 horas?</span><i aria-hidden="true"></i></summary><div class="q__a"><p>El plan caduca y sigues con tu vida. No hay castigo, ni rachas, ni puntos que perder. Aquí no se penaliza no tener ganas.</p></div></details>
+      <details class="q rise"><summary><span>¿Es una app de citas?</span><i aria-hidden="true"></i></summary><div class="q__a"><p>No. Es una app para vivir experiencias con gente que quiere vivir lo mismo que tú. Lo que salga de ahí —una amistad, un grupo, o algo más— no es cosa nuestra.</p></div></details>
+    </div>
+  </div>
+</section>
 
-    <h2 class="display display--sm" data-split>Que no se te escape la vida.</h2>
+<!-- ══════════ 12. EL CIERRE ══════════ -->
+<section class="fin" id="lista">
+  <div class="wrap wrap--n">
+    <p class="fin__t" id="tiempo">Llevas <strong>0 s</strong> en esta pantalla.</p>
+    <h2 class="fin__h">
+      <span class="ln"><span>Son las <em id="finHora">06:40</em>.</span></span>
+      <span class="ln"><span>Ese sábado ya pasó.</span></span>
+    </h2>
+    <p class="fin__p rise" style="--i:3">El siguiente es dentro de siete días. Y va a pasar exactamente igual, salvo que alguien proponga algo.</p>
 
-    <ol class="pasos3">
-      <li class="rise" style="--i:0"><span class="pasos3__n">1</span>Dejas tu email aquí abajo.</li>
-      <li class="rise" style="--i:1"><span class="pasos3__n">2</span>Te avisamos el día que abrimos Valencia.</li>
-      <li class="rise" style="--i:2"><span class="pasos3__n">3</span>Sales de casa.</li>
-    </ol>
-
-    <form class="form rise" id="waitlist" novalidate>
-      <div class="form__row">
+    <form class="form rise" id="waitlist" novalidate style="--i:4">
+      <div class="form__r">
         <label class="sr" for="email">Email</label>
         <input id="email" name="email" type="email" inputmode="email" autocomplete="email" required placeholder="tu@email.com">
-        <button class="btn btn--lg btn--mag" type="submit" id="submit">Entrar en la lista</button>
+        <button class="btn btn--lg" type="submit" id="submit">Que el próximo sea distinto</button>
       </div>
-      <div class="form__row form__row--opt">
+      <div class="form__r form__r--o">
         <label class="sr" for="uni">Universidad o facultad (opcional)</label>
         <input id="uni" name="uni" type="text" autocomplete="organization" placeholder="Universidad o facultad (opcional)">
       </div>
-      <p class="form__err" id="err" role="alert" hidden></p>
-      <p class="micro micro--c micro--w">Solo el email. Nada de spam. Al apuntarte aceptas la <a class="lnk" href="privacidad.html">política de privacidad</a>.</p>
+      <p class="form__e" id="err" role="alert" hidden></p>
+      <p class="form__m">Solo el email. Te escribimos una vez: el día que abrimos Valencia. <a href="privacidad.html">Privacidad</a>.</p>
     </form>
 
     <div class="ok" id="ok" hidden>
       <svg class="ok__x" viewBox="0 0 60 60" aria-hidden="true"><line x1="10" y1="50" x2="50" y2="10"/><line x1="50" y1="50" x2="10" y2="10"/></svg>
       <p class="ok__t">Estás dentro.</p>
-      <p class="ok__s">Abrimos Valencia cuando seamos suficientes para que valga la pena.</p>
+      <p class="ok__s">Abrimos Valencia cuando seamos suficientes para que valga la pena. Y ese día, el sábado lo eliges tú.</p>
     </div>
   </div>
 </section>
@@ -404,9 +362,9 @@
 
 <footer class="ft">
   <div class="wrap ft__in">
-    <span class="logo logo--ft"><span class="logo__word">NE<span class="logo__x logo__x--st" aria-hidden="true"><svg viewBox="0 0 20 20" focusable="false"><line x1="2" y1="18" x2="18" y2="2"/><line x1="18" y1="18" x2="2" y2="2"/></svg></span>A</span></span>
-    <p class="ft__c">Valencia · © <span id="y">2026</span> NEXA</p>
-    <nav class="ft__n" aria-label="Legal">
+    <span class="logo logo--ft"><span class="logo__w">NE<span class="logo__x logo__x--st" aria-hidden="true"><svg viewBox="0 0 20 20"><line x1="2" y1="18" x2="18" y2="2"/><line x1="18" y1="18" x2="2" y2="2"/></svg></span>A</span></span>
+    <p class="ft__c">Valencia · © <span id="y">2026</span></p>
+    <nav class="ft__n" aria-label="Enlaces">
       <a href="manifiesto.html">Manifiesto</a>
       <a href="privacidad.html">Privacidad</a>
       <a href="mailto:hola@nexa.app">hola@nexa.app</a>
@@ -414,7 +372,7 @@
   </div>
 </footer>
 
-<script src="config.js?v=3"></script>
-<script src="script.js?v=3" defer></script>
+<script src="config.js?v=5"></script>
+<script src="script.js?v=5" defer></script>
 </body>
 </html>
