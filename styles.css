@@ -49,6 +49,8 @@ a{color:inherit;text-decoration:none}
 .az{color:var(--az)}
 .ind{font-size:.68rem;font-weight:800;letter-spacing:.26em;color:var(--az);
      font-variant-numeric:tabular-nums;margin-bottom:18px}
+/* Que ningún titular deje una palabra suelta abajo: reparte las líneas. */
+.tit,.frase,.cerrado__t,.tuyo__t,.okp__t,.scr__big,.scr__h,.seis__t,.momento__t{text-wrap:balance}
 
 /* La única tipografía. El tamaño hace la jerarquía. */
 .tit{
