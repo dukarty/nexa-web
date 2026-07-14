@@ -1,12 +1,15 @@
 /* ═══════════════════════════════════════════════════════════════
-   NEXA — la capa que toca el usuario
+   NEXA
 
-   La Rejilla (rejilla.js) es el objeto. Esto es todo lo demás:
-   el cursor, las entradas, el chat, la demo del NEXA, el
-   formulario — y el fallback 2D para cuando no hay WebGL.
+   Sin librerías. Sin WebGL. Sin trucos.
+   La sofisticación está en el timing, no en la GPU.
 
-   Progressive enhancement de verdad: si nada de esto se ejecuta,
-   el contenido sigue ahí y se lee.
+   Tres cosas hacen algo aquí:
+     1. La Rejilla — 4.160 semanas. Se apagan con tu edad.
+     2. El mensaje que no envías — se deshace en el aire.
+     3. La demo — mandas un NEXA y una semana se enciende.
+
+   Si el JS no se ejecuta, el contenido sigue ahí y se lee entero.
    ═══════════════════════════════════════════════════════════════ */
 
 const CFG = window.NEXA || {};
@@ -15,16 +18,16 @@ const SUPABASE_ANON_KEY = CFG.SUPABASE_ANON_KEY || "";
 const TABLA = CFG.TABLA || "waitlist";
 
 const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
-const fino = matchMedia("(hover: hover) and (pointer: fine)").matches;
 const $ = (s, c = document) => c.querySelector(s);
 const $$ = (s, c = document) => [...c.querySelectorAll(s)];
 
-const SEMANAS = 52;
-const VIDA = 80 * SEMANAS;               // 4.160
+const COLS = 80;                  // años
+const FILAS = 52;                 // semanas
+const TOTAL = COLS * FILAS;       // 4.160
 const fmt = (n) => n.toLocaleString("es-ES");
 
 /* ─────────────────────────────────────────────
-   1. Entradas
+   Entradas. Suben un poco y aparecen. Nada más.
    ───────────────────────────────────────────── */
 const io = new IntersectionObserver(
   (es) => es.forEach((e) => {
@@ -32,156 +35,220 @@ const io = new IntersectionObserver(
     e.target.classList.add("on");
     io.unobserve(e.target);
   }),
-  { rootMargin: "0px 0px -12% 0px", threshold: 0.12 }
+  { rootMargin: "0px 0px -10% 0px", threshold: 0.15 }
 );
-$$(".rise, .titan").forEach((el) => io.observe(el));
-$$(".ln").forEach((ln, i) => ln.style.setProperty("--l", i % 5));
+$$(".sube, .display").forEach((el) => io.observe(el));
+$$(".ln").forEach((ln, i) => ln.style.setProperty("--l", i));
 
 requestAnimationFrame(() => {
-  $(".esc--1 .titan")?.classList.add("on");
-  $$(".esc--1 .rise").forEach((el) => el.classList.add("on"));
-  $("#hud")?.classList.add("on");
+  $(".hero .display")?.classList.add("on");
+  $$(".hero .sube").forEach((el) => el.classList.add("on"));
 });
 
-/* ─────────────────────────────────────────────
-   2. Cursor
-   El puntero deja de ser del sistema y pasa a ser tuyo.
-   ───────────────────────────────────────────── */
-const cur = $("#cursor");
-if (fino && !reduce && cur) {
-  let x = innerWidth / 2, y = innerHeight / 2, cx = x, cy = y;
-
-  addEventListener("pointermove", (e) => {
-    x = e.clientX; y = e.clientY;
-    cur.classList.add("on");
-  }, { passive: true });
-
-  (function seguir() {
-    cx += (x - cx) * 0.18;
-    cy += (y - cy) * 0.18;
-    cur.style.transform = `translate(${cx}px, ${cy}px) translate(-50%,-50%)`;
-    requestAnimationFrame(seguir);
-  })();
-
-  // Magnetismo: los elementos tocables tiran del cursor.
-  $$(".mag, a, button, input, summary").forEach((el) => {
-    el.addEventListener("pointerenter", () => cur.classList.add("tocable"));
-    el.addEventListener("pointerleave", () => cur.classList.remove("tocable"));
-  });
-
-  $$(".mag").forEach((b) => {
-    b.addEventListener("pointermove", (e) => {
-      const r = b.getBoundingClientRect();
-      const dx = (e.clientX - (r.left + r.width / 2)) * 0.16;
-      const dy = (e.clientY - (r.top + r.height / 2)) * 0.28;
-      b.style.transform = `translate(${dx}px, ${dy}px)`;
-    });
-    b.addEventListener("pointerleave", () => (b.style.transform = ""));
-  });
-}
-
-/* ─────────────────────────────────────────────
-   3. Nav + HUD de semanas
-   ───────────────────────────────────────────── */
 const nav = $("#nav");
-const hudN = $("#hudN");
-let last = 0, tick = false;
+addEventListener("scroll", () => nav.classList.toggle("solido", scrollY > 24), { passive: true });
 
-function frame() {
-  const y = scrollY;
-  nav.classList.toggle("solido", y > 30);
-  nav.classList.toggle("arriba", y > last && y > 700);
-  last = y;
-  tick = false;
-}
-addEventListener("scroll", () => { if (!tick) { requestAnimationFrame(frame); tick = true; } }, { passive: true });
-frame();
-
-/* ─────────────────────────────────────────────
-   4. LA EDAD → apagar semanas
-   Es la primera interacción de la web, y ocurre
-   en los primeros tres segundos. Es el gancho.
-   ───────────────────────────────────────────── */
+/* ═════════════════════════════════════════════
+   1 · LA REJILLA
+   4.160 puntos. Los que ya has vivido se apagan.
+   Y reacciona a tu cursor: está viva, pero no grita.
+   ═════════════════════════════════════════════ */
+const lienzo = $("#rejilla");
 const edadIn = $("#edad");
+const quedanEl = $("#quedan");
 const finN = $("#finN");
-let encendidasDemo = 0;
 
-function pintarCuenta() {
-  const edad = Math.min(89, Math.max(14, parseInt(edadIn.value, 10) || 20));
-  const quedan = Math.max(0, VIDA - Math.round(edad * SEMANAS));
-  if (hudN) hudN.textContent = fmt(quedan);
-  if (finN) finN.textContent = fmt(quedan);
-  return edad;
-}
+let estados = new Uint8Array(TOTAL);   // 0 apagada · 1 te queda · 2 encendida · 3 ahora
+let gastadas = 0, objetivo = 0;
+let raton = { x: -999, y: -999 };
+let m = null, raf = null;
 
-function aplicarEdad() {
-  const edad = pintarCuenta();
-  if (window.REJILLA) window.REJILLA.apagarPasadas(edad);
-  if (plano2d) pintar2D(edad);
-}
+const pos = (i) => ({ col: Math.floor(i / FILAS), fila: i % FILAS });
 
-edadIn?.addEventListener("input", aplicarEdad);
-document.addEventListener("rejilla:lista", aplicarEdad);
-
-/* ─────────────────────────────────────────────
-   5. FALLBACK 2D
-   Sin WebGL (o con «reducir movimiento»), la Rejilla
-   se dibuja plana. Mismo mensaje, cero coste.
-   ───────────────────────────────────────────── */
-let plano2d = null;
-if (document.body.classList.contains("sin-3d") || !document.getElementById("rejilla")) {
-  crear2D();
-}
-// rejilla.js decide en cuanto carga; puede llegar después.
-setTimeout(() => {
-  if (document.body.classList.contains("sin-3d") && !plano2d) crear2D();
-}, 300);
-
-function crear2D() {
-  if (plano2d) return;
-  const c = document.createElement("canvas");
-  c.id = "plano2d";
-  c.setAttribute("role", "img");
-  c.setAttribute("aria-label", "Cuadrícula con las 4.160 semanas de una vida. Las ya vividas aparecen apagadas.");
-  $(".esc--1 .wrap")?.appendChild(c);
-  plano2d = c;
-  addEventListener("resize", () => pintar2D(parseInt(edadIn.value, 10) || 20), { passive: true });
-  pintar2D(parseInt(edadIn.value, 10) || 20);
-}
-
-function pintar2D(edad) {
-  if (!plano2d) return;
-  const ctx = plano2d.getContext("2d");
-  const w = plano2d.parentElement.clientWidth;
-  const cols = 80, filas = 52;
+function medir() {
+  const w = lienzo.parentElement.clientWidth;
   const dpr = Math.min(devicePixelRatio || 1, 2);
-  const paso = w / cols;
-  const h = paso * filas;
+  const paso = w / COLS;
+  const h = paso * FILAS;
+  lienzo.width = Math.round(w * dpr);
+  lienzo.height = Math.round(h * dpr);
+  lienzo.style.height = h + "px";
+  lienzo.getContext("2d").setTransform(dpr, 0, 0, dpr, 0, 0);
+  return { paso, w, h };
+}
 
-  plano2d.width = w * dpr;
-  plano2d.height = h * dpr;
-  plano2d.style.height = h + "px";
-  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-  ctx.clearRect(0, 0, w, h);
+function pintar() {
+  if (!m) return;
+  const ctx = lienzo.getContext("2d");
+  ctx.clearRect(0, 0, m.w, m.h);
+  const base = Math.max(1, m.paso * 0.2);
 
-  const gastadas = Math.round(edad * filas);
-  const r = Math.max(1, paso * 0.2);
+  for (let i = 0; i < TOTAL; i++) {
+    const { col, fila } = pos(i);
+    const x = col * m.paso + m.paso / 2;
+    const y = fila * m.paso + m.paso / 2;
+    const e = estados[i];
 
-  for (let i = 0; i < cols * filas; i++) {
-    const col = Math.floor(i / filas);
-    const fila = i % filas;
+    // Cerca del cursor, el punto crece un poco. Sutil. Solo eso.
+    let r = base;
+    if (raton.x > -900) {
+      const d = Math.hypot(x - raton.x, y - raton.y);
+      const f = Math.max(0, 1 - d / (m.paso * 7));
+      r += f * base * 0.9;
+    }
+
+    let color = "#C2C8D2";           // te queda
+    if (e === 0) { color = "#E4E7EC"; r *= 0.78; }   // ya no vuelve
+    if (e === 2) { color = "#0A5CFF"; r *= 1.35; }   // encendida
+    if (e === 3) { color = "#0A5CFF"; r *= 1.5; }    // esta semana
+
     ctx.beginPath();
-    ctx.arc(col * paso + paso / 2, fila * paso + paso / 2, i < gastadas ? r * 0.7 : r, 0, 6.2832);
-    ctx.fillStyle = i < gastadas ? "#E9EBEF" : "#C6CBD6";
-    if (i === gastadas - 1) ctx.fillStyle = "#0A5CFF";
+    ctx.arc(x, y, r, 0, 6.2832);
+    ctx.fillStyle = color;
     ctx.fill();
   }
 }
 
-/* ─────────────────────────────────────────────
-   6. EL MENSAJE QUE NO ENVÍAS
-   Escribes. Le das a enviar. Y se deshace.
-   ───────────────────────────────────────────── */
+function edad() {
+  return Math.min(89, Math.max(14, parseInt(edadIn.value, 10) || 20));
+}
+
+function cuenta() {
+  const q = Math.max(0, TOTAL - Math.round(edad() * FILAS));
+  quedanEl.textContent = fmt(q);
+  if (finN) finN.textContent = fmt(q) + " semanas";
+  return q;
+}
+
+/* Las semanas no se apagan de golpe: se apagan una a una.
+   Ese medio segundo es todo el argumento de la web. */
+function apagar(animado = true) {
+  objetivo = Math.round(edad() * FILAS);
+  cuenta();
+
+  if (!animado || reduce) {
+    gastadas = objetivo;
+    for (let i = 0; i < TOTAL; i++) {
+      if (estados[i] === 2) continue;
+      estados[i] = i < gastadas - 1 ? 0 : i === gastadas - 1 ? 3 : 1;
+    }
+    pintar();
+    return;
+  }
+  if (!raf) raf = requestAnimationFrame(animar);
+}
+
+function animar() {
+  const d = objetivo - gastadas;
+  if (Math.abs(d) < 1) {
+    gastadas = objetivo;
+    raf = null;
+  } else {
+    gastadas += d * 0.08 + Math.sign(d) * 0.5;
+    raf = requestAnimationFrame(animar);
+  }
+  const g = Math.round(gastadas);
+  for (let i = 0; i < TOTAL; i++) {
+    if (estados[i] === 2) continue;
+    estados[i] = i < g - 1 ? 0 : i === g - 1 ? 3 : 1;
+  }
+  pintar();
+}
+
+function encender(n = 1) {
+  const libres = [];
+  for (let i = 0; i < TOTAL; i++) if (estados[i] === 1) libres.push(i);
+  for (let k = 0; k < n && libres.length; k++) {
+    const j = Math.floor(Math.random() * Math.min(libres.length, 120));
+    estados[libres[j]] = 2;
+    libres.splice(j, 1);
+  }
+  pintar();
+}
+
+if (lienzo && edadIn) {
+  m = medir();
+  estados.fill(1);
+  apagar(false);
+
+  edadIn.addEventListener("input", () => apagar(true));
+
+  if (!reduce) {
+    lienzo.addEventListener("pointermove", (e) => {
+      const r = lienzo.getBoundingClientRect();
+      raton = { x: e.clientX - r.left, y: e.clientY - r.top };
+      pintar();
+    }, { passive: true });
+    lienzo.addEventListener("pointerleave", () => {
+      raton = { x: -999, y: -999 };
+      pintar();
+    });
+  }
+
+  addEventListener("resize", () => { m = medir(); pintar(); }, { passive: true });
+
+  // No se apagan hasta que la sección está delante de tus ojos.
+  new IntersectionObserver((es, obs) => {
+    es.forEach((e) => {
+      if (!e.isIntersecting) return;
+      apagar(true);
+      obs.disconnect();
+    });
+  }, { threshold: 0.25 }).observe($("#semanas"));
+}
+
+/* ═════════════════════════════════════════════
+   La rejilla pequeña del perfil: un año.
+   52 semanas, con las encendidas en azul.
+   ═════════════════════════════════════════════ */
+const mini = $("#mini");
+if (mini) {
+  const M_COLS = 13, M_FILAS = 4;            // 52 semanas
+  const vividas = [2, 5, 6, 11, 14, 19, 23, 24, 30, 33, 38, 41, 45, 50];
+
+  function pintarMini(hasta = 99) {
+    const w = mini.parentElement.clientWidth;
+    const dpr = Math.min(devicePixelRatio || 1, 2);
+    const paso = w / M_COLS;
+    const h = paso * M_FILAS;
+    mini.width = w * dpr;
+    mini.height = h * dpr;
+    mini.style.height = h + "px";
+    const ctx = mini.getContext("2d");
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    ctx.clearRect(0, 0, w, h);
+
+    for (let i = 0; i < 52; i++) {
+      const col = i % M_COLS;
+      const fila = Math.floor(i / M_COLS);
+      const on = vividas.includes(i) && vividas.indexOf(i) < hasta;
+      ctx.beginPath();
+      ctx.arc(col * paso + paso / 2, fila * paso + paso / 2, paso * (on ? 0.26 : 0.18), 0, 6.2832);
+      ctx.fillStyle = on ? "#0A5CFF" : "#C7CCD6";
+      ctx.fill();
+    }
+  }
+  pintarMini(0);
+  addEventListener("resize", () => pintarMini(99), { passive: true });
+
+  // Se encienden una a una cuando llegas. Es la promesa del producto.
+  new IntersectionObserver((es, obs) => {
+    es.forEach((e) => {
+      if (!e.isIntersecting) return;
+      if (reduce) { pintarMini(99); obs.disconnect(); return; }
+      let n = 0;
+      const t = setInterval(() => {
+        pintarMini(++n);
+        if (n >= vividas.length) clearInterval(t);
+      }, 130);
+      obs.disconnect();
+    });
+  }, { threshold: 0.4 }).observe($(".perfil"));
+}
+
+/* ═════════════════════════════════════════════
+   2 · EL MENSAJE QUE NO ENVÍAS
+   ═════════════════════════════════════════════ */
 const chatForm = $("#chatForm");
 const chatIn = $("#chatIn");
 const chatBody = $("#chatBody");
@@ -189,8 +256,8 @@ const salida = $("#salida");
 
 const RESPUESTAS = [
   "Se ha ido. Como se van casi todos.",
-  "Otra vez. Y no ha pasado nada malo: simplemente, no lo has mandado.",
-  "Tres. <strong>No eres tú.</strong> Es que proponer expone, y todo el mundo prefiere que empiece otro. Esa semana se quedará apagada.",
+  "Otra vez. Y no ha pasado nada: simplemente, no lo has mandado.",
+  "Tres. <strong>No eres tú.</strong> Es que proponer expone, y todo el mundo prefiere que empiece otro.",
 ];
 let intentos = 0;
 
@@ -207,27 +274,26 @@ chatForm?.addEventListener("submit", (e) => {
 
   setTimeout(() => {
     b.classList.add("burb--fuga");
-    setTimeout(() => b.remove(), reduce ? 0 : 1500);
-  }, reduce ? 150 : 650);
+    setTimeout(() => b.remove(), reduce ? 0 : 1400);
+  }, reduce ? 150 : 600);
 
   intentos = Math.min(intentos + 1, RESPUESTAS.length);
   setTimeout(() => {
     salida.innerHTML = RESPUESTAS[intentos - 1];
     salida.classList.add("on");
-  }, reduce ? 250 : 1150);
+  }, reduce ? 250 : 1100);
 });
 
-/* ─────────────────────────────────────────────
-   7. LA DEMO — y aquí se enciende una semana de verdad
-   ───────────────────────────────────────────── */
+/* ═════════════════════════════════════════════
+   3 · LA DEMO
+   ═════════════════════════════════════════════ */
 const caja = $("#caja");
 if (caja) {
-  const pasos = $$(".paso", caja);
+  const pasos = $$(".paso1", caja);
   const est = { exp: null, img: null, per: null, por: null };
 
   const ir = (n) => {
     pasos.forEach((p) => p.classList.toggle("is-on", +p.dataset.paso === n));
-    if (n > 1 && !reduce) caja.scrollIntoView({ behavior: "smooth", block: "center" });
   };
 
   $$(".exp", caja).forEach((b) => {
@@ -236,7 +302,7 @@ if (caja) {
       b.setAttribute("aria-checked", "true");
       est.exp = b.dataset.exp;
       est.img = b.dataset.img;
-      setTimeout(() => ir(2), reduce ? 0 : 240);
+      setTimeout(() => ir(2), reduce ? 0 : 220);
     });
   });
 
@@ -249,7 +315,7 @@ if (caja) {
       $("#rPer").textContent = est.per;
       $("#rExp").textContent = est.exp;
       $("#rPor").textContent = est.por;
-      setTimeout(() => ir(3), reduce ? 0 : 240);
+      setTimeout(() => ir(3), reduce ? 0 : 220);
     });
   });
 
@@ -257,7 +323,6 @@ if (caja) {
     const b = e.currentTarget;
     b.disabled = true;
     $("#btnT").textContent = "Enviado";
-
     setTimeout(() => {
       $("#rPer2").textContent = est.per;
       $("#rPer3").textContent = est.per;
@@ -265,16 +330,11 @@ if (caja) {
       const img = $("#rImg");
       img.src = est.img;
       img.alt = est.exp;
-
-      // ── El momento ──
-      // Una celda de la Rejilla se enciende. De verdad, en el 3D.
-      if (window.REJILLA) window.REJILLA.encender(1);
-      encendidasDemo++;
-
+      encender(1);                 // y una semana deja de estar apagada
       ir(4);
       b.disabled = false;
       $("#btnT").textContent = "Enviar NEXA";
-    }, reduce ? 80 : 850);
+    }, reduce ? 80 : 750);
   });
 
   $$("[data-volver]", caja).forEach((b) =>
@@ -287,59 +347,18 @@ if (caja) {
   });
 }
 
-/* ─────────────────────────────────────────────
-   8. ESCENA 4: tu rejilla se llena
-   Al llegar aquí, encendemos 30 semanas: es la vida
-   que tendrías dentro de un año usando NEXA.
-   ───────────────────────────────────────────── */
-const esc4 = $(".esc--4");
-if (esc4) {
-  new IntersectionObserver((es, obs) => {
-    es.forEach((e) => {
-      if (!e.isIntersecting) return;
-      // Se encienden una a una, no de golpe. Que se vea cómo se llena.
-      if (window.REJILLA) {
-        let n = 0;
-        const t = setInterval(() => {
-          window.REJILLA.encender(2);
-          if (++n >= 45) clearInterval(t);
-        }, 55);
-      }
-      obs.disconnect();
-    });
-  }, { threshold: 0.25 }).observe(esc4);
-}
-
-/* ─────────────────────────────────────────────
-   9. El tiempo que llevas mirando una pantalla
-   ───────────────────────────────────────────── */
-const tiempoEl = $("#tiempo");
-if (tiempoEl) {
-  const t0 = Date.now();
-  const pinta = () => {
-    const s = Math.floor((Date.now() - t0) / 1000);
-    const txt = s < 60 ? `${s} s` : `${Math.floor(s / 60)} min ${s % 60} s`;
-    let cola = "";
-    if (s > 150) cola = " Es lo que tardas en mandar un NEXA.";
-    if (s > 400) cola = " Y esta semana sigue apagada.";
-    tiempoEl.innerHTML = `Llevas <strong>${txt}</strong> mirando esta pantalla.${cola}`;
-  };
-  pinta();
-  setInterval(pinta, 1000);
-}
-
-/* Fotos rotas: nunca se ven rotas. */
+/* Las fotos nunca se ven rotas. */
 $$("img").forEach((img) =>
   img.addEventListener("error", () => {
     img.style.visibility = "hidden";
     const c = img.closest(".exp__f, .recuerdo");
-    if (c) c.style.background = "linear-gradient(200deg,#D9DDE4,#8E97A6)";
+    if (c) c.style.background = "#E4E7EC";
   })
 );
 
-/* ─────────────────────────────────────────────
-   10. Lista de espera
-   ───────────────────────────────────────────── */
+/* ═════════════════════════════════════════════
+   Lista de espera
+   ═════════════════════════════════════════════ */
 const form = $("#waitlist");
 const email = $("#email");
 const uni = $("#uni");
@@ -355,7 +374,7 @@ function fallar(msg) {
   email.focus();
 }
 
-async function enviar(datos) {
+async function enviarLista(datos) {
   if (!SUPABASE_URL || !SUPABASE_ANON_KEY) {
     console.warn("[NEXA] Supabase sin configurar:", datos);
     return true;
@@ -384,7 +403,7 @@ form?.addEventListener("submit", async (e) => {
   btn.disabled = true;
   btn.textContent = "Un segundo…";
   try {
-    await enviar({
+    await enviarLista({
       email: email.value.trim().toLowerCase(),
       universidad: uni.value.trim() || null,
       ciudad: "valencia",
@@ -393,7 +412,6 @@ form?.addEventListener("submit", async (e) => {
     ok.hidden = false;
     ok.setAttribute("tabindex", "-1");
     ok.focus();
-    if (window.REJILLA) window.REJILLA.encender(12);
   } catch (e) {
     console.error(e);
     btn.disabled = false;
@@ -403,4 +421,3 @@ form?.addEventListener("submit", async (e) => {
 });
 
 $("#y").textContent = new Date().getFullYear();
-pintarCuenta();
