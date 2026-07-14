@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>NEXA — Que no se te escape la vida</title>
 <meta name="description" content="Dices qué quieres vivir. NEXA te dice con quién. Y esa semana deja de ser una semana más. Lista de espera de Valencia.">
-<meta name="theme-color" content="#FFFFFF">
+<meta name="theme-color" content="#0B0D12">
 
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://nexavalencia.vercel.app/">
@@ -23,11 +23,16 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://images.pexels.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,500;12..96,600;12..96,700;12..96,800&display=swap">
-<link rel="stylesheet" href="styles.css?v=21">
+<link rel="preload" as="image" fetchpriority="high"
+      href="https://images.pexels.com/photos/17014071/pexels-photo-17014071.jpeg?auto=compress&cs=tinysrgb&w=1900">
+<link rel="stylesheet" href="styles.css?v=30">
 </head>
 <body>
 
 <a class="skip" href="#lista">Ir a la lista de espera</a>
+
+<!-- La barra de progreso: cuánta película llevas -->
+<div class="prog" id="prog" aria-hidden="true"></div>
 
 <header class="nav" id="nav">
   <div class="wrap nav__in">
@@ -40,14 +45,21 @@
 
 <main id="top">
 
-<!-- ════════════════════════════════════════════════════
-     1 · CURIOSIDAD
-     Blanco. Una frase. Nada más. Si algo compite con
-     esta frase, sobra.
-     ════════════════════════════════════════════════════ -->
+<!-- ══════════════════════════════════════════════════════════
+     1 · EL GOLPE
+     Foto a pantalla completa. Gente viva. Y una frase.
+     Tres segundos para que quieras estar ahí.
+     ══════════════════════════════════════════════════════════ -->
 <section class="hero">
-  <div class="wrap tc">
-    <h1 class="display">
+  <div class="hero__foto">
+    <img src="https://images.pexels.com/photos/17014071/pexels-photo-17014071.jpeg?auto=compress&cs=tinysrgb&w=1900"
+         alt="Un grupo de amigos en la playa al atardecer, en silueta contra el mar"
+         width="1900" height="1270" fetchpriority="high" decoding="async">
+    <div class="hero__velo" aria-hidden="true"></div>
+  </div>
+
+  <div class="hero__txt wrap">
+    <h1 class="titan">
       <span class="ln"><span>Que no se te</span></span>
       <span class="ln"><span>escape la vida.</span></span>
     </h1>
@@ -60,45 +72,31 @@
       <p class="pie">Gratis · Solo Valencia, de momento</p>
     </div>
   </div>
-  <span class="baja" aria-hidden="true"></span>
+
+  <span class="baja" aria-hidden="true"><span></span></span>
 </section>
 
-<!-- ════════════════════════════════════════════════════
-     2 · INTRIGA
-     La Rejilla. Aquí ella es el argumento, así que aquí
-     — y solo aquí — ocupa la pantalla.
-     ════════════════════════════════════════════════════ -->
-<section class="semanas" id="semanas">
-  <div class="wrap">
-    <header class="sem__hd">
-      <h2 class="h2 sube">Cada punto es una semana de tu vida.</h2>
-      <div class="edad sube" style="--i:1">
-        <label for="edad">Tengo</label>
-        <input id="edad" type="number" min="14" max="89" value="20" inputmode="numeric" aria-label="Tu edad en años">
-        <span>años</span>
-      </div>
-    </header>
-
-    <div class="sem__lienzo">
-      <canvas id="rejilla" role="img"
-        aria-label="Cuadrícula con las 4.160 semanas de una vida. Las ya vividas aparecen apagadas."></canvas>
-    </div>
-
-    <footer class="sem__pie">
-      <p class="cifra"><strong id="quedan">3.120</strong><span>semanas por delante</span></p>
-      <p class="cuerpo">Las apagadas ya no vuelven. Y de las que quedan, casi ninguna la vas a recordar: van a pasar todas iguales, una detrás de otra.</p>
-    </footer>
+<!-- ══════════════════════════════════════════════════════════
+     2 · EL SILENCIO
+     Negro. Tres frases. El golpe emocional.
+     ══════════════════════════════════════════════════════════ -->
+<section class="negro golpe">
+  <div class="wrap wrap--n">
+    <p class="mega sube">Ayer querías hacer algo.</p>
+    <p class="mega sube" style="--i:1">Y al final no hiciste nada.</p>
+    <p class="mega mega--az sube" style="--i:2">Otra vez.</p>
+    <p class="cuerpo cuerpo--w sube" style="--i:3">No fue por falta de tiempo. Ni de dinero. Ni de ganas. Fue porque nadie propuso nada — y proponer, tú lo sabes, expone.</p>
   </div>
 </section>
 
-<!-- ════════════════════════════════════════════════════
-     3 · IDENTIFICACIÓN
-     El mensaje que no envías. Aquí se ve el enemigo.
-     ════════════════════════════════════════════════════ -->
-<section class="mensaje">
+<!-- ══════════════════════════════════════════════════════════
+     3 · LA PRUEBA
+     Que lo sienta con los dedos: escribe y mira cómo se deshace.
+     ══════════════════════════════════════════════════════════ -->
+<section class="negro chatSec">
   <div class="wrap wrap--n">
-    <h2 class="h2 sube">Y no es por falta de ganas.</h2>
-    <p class="cuerpo sube" style="--i:1">Escribe lo que llevas todo el día pensando. Va en serio: escríbelo y dale a enviar.</p>
+    <h2 class="h2 h2--w sube">Escríbelo tú. Ahora.</h2>
+    <p class="cuerpo cuerpo--w sube" style="--i:1">Lo que llevas todo el día pensando. Escríbelo y dale a enviar.</p>
 
     <div class="chat sube" style="--i:2">
       <div class="chat__hd">
@@ -119,31 +117,78 @@
     </div>
 
     <p class="salida" id="salida" role="status" aria-live="polite"></p>
-
-    <p class="remate sube">No es que no tengas tiempo.<br><em>Es que proponer expone.</em></p>
   </div>
 </section>
 
-<!-- ════════════════════════════════════════════════════
-     4 · CLARIDAD
-     Qué es NEXA. Tres frases. Cero adornos.
-     ════════════════════════════════════════════════════ -->
+<!-- ══════════════════════════════════════════════════════════
+     4 · LA CUENTA
+     Las semanas. Sobre negro se ve lo que se apaga.
+     ══════════════════════════════════════════════════════════ -->
+<section class="negro semanas" id="semanas">
+  <div class="wrap">
+    <header class="sem__hd">
+      <h2 class="h2 h2--w sube">Cada punto es una semana de tu vida.</h2>
+      <div class="edad sube" style="--i:1">
+        <label for="edad">Tengo</label>
+        <input id="edad" type="number" min="14" max="89" value="20" inputmode="numeric" aria-label="Tu edad en años">
+        <span>años</span>
+      </div>
+    </header>
+
+    <div class="sem__lienzo">
+      <canvas id="rejilla" role="img"
+        aria-label="Cuadrícula con las 4.160 semanas de una vida. Las ya vividas aparecen apagadas."></canvas>
+    </div>
+
+    <footer class="sem__pie">
+      <p class="cifra"><strong id="quedan">3120</strong><span>semanas por delante</span></p>
+      <p class="cuerpo cuerpo--w">Las apagadas ya no vuelven. Y de las que quedan, casi ninguna la vas a recordar. Van a pasar todas iguales.</p>
+    </footer>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════
+     5 · EL CORTE
+     Una foto a pantalla completa. Aire. Deseo.
+     ══════════════════════════════════════════════════════════ -->
+<section class="corte" data-par>
+  <img src="https://images.pexels.com/photos/8050356/pexels-photo-8050356.jpeg?auto=compress&cs=tinysrgb&w=1900"
+       alt="Silueta de una persona surfeando una ola al amanecer" loading="lazy" width="1900" height="1070">
+  <div class="corte__t">
+    <p class="frase"><span class="ln"><span>Salvo las que enciendas.</span></span></p>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════════════
+     6 · QUÉ ES NEXA
+     Claridad total. Con imagen, no con vacío.
+     ══════════════════════════════════════════════════════════ -->
 <section class="claro">
   <div class="wrap">
     <h2 class="h2 h2--c sube">Un NEXA no es un mensaje.<br>Es una propuesta ya hecha.</h2>
+    <p class="cuerpo cuerpo--c sube" style="--i:1">Nadie escribe «¿hacemos algo?» porque es una pregunta vacía que alguien tiene que llenar. Un NEXA ya viene lleno: una cosa concreta, un sitio concreto, una persona concreta.</p>
 
     <ol class="pasos">
-      <li class="paso sube" style="--i:0">
+      <li class="paso reveal" style="--i:0">
+        <figure class="paso__f">
+          <img src="https://images.pexels.com/photos/17444987/pexels-photo-17444987.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Furgoneta camper frente al mar" loading="lazy" width="800" height="1000">
+        </figure>
         <span class="paso__n">01</span>
         <h3 class="h3">Dices qué quieres vivir</h3>
         <p class="cuerpo">Hasta diez cosas este año. No es una lista privada: es lo que permite que alguien te proponga algo.</p>
       </li>
-      <li class="paso sube" style="--i:1">
+      <li class="paso reveal" style="--i:1">
+        <figure class="paso__f">
+          <img src="https://images.pexels.com/photos/5738245/pexels-photo-5738245.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Grupo de amigos riéndose alrededor de una mesa" loading="lazy" width="800" height="1000">
+        </figure>
         <span class="paso__n">02</span>
         <h3 class="h3">La app te dice con quién</h3>
         <p class="cuerpo">Tres propuestas, cada una con su porqué escrito: <em>«está en el quiero vivir de los dos»</em>. Tú solo eliges.</p>
       </li>
-      <li class="paso sube" style="--i:2">
+      <li class="paso reveal" style="--i:2">
+        <figure class="paso__f">
+          <img src="https://images.pexels.com/photos/8482195/pexels-photo-8482195.jpeg?auto=compress&cs=tinysrgb&w=800" alt="Siluetas de un grupo en la cima de una montaña" loading="lazy" width="800" height="1000">
+        </figure>
         <span class="paso__n">03</span>
         <h3 class="h3">Y esa semana se enciende</h3>
         <p class="cuerpo">Si acepta, se abre el chat y tenéis 24 h para poner fecha. Aquí no se escribe a desconocidos: el chat se gana.</p>
@@ -152,34 +197,34 @@
   </div>
 </section>
 
-<!-- ════════════════════════════════════════════════════
-     5 · DESEO
-     Que lo haga con las manos.
-     ════════════════════════════════════════════════════ -->
-<section class="demo" id="demo">
+<!-- ══════════════════════════════════════════════════════════
+     7 · HAZLO TÚ
+     ══════════════════════════════════════════════════════════ -->
+<section class="negro demo" id="demo">
   <div class="wrap">
-    <h2 class="h2 h2--c sube">Manda uno. Aquí mismo.</h2>
+    <h2 class="h2 h2--w h2--c sube">Manda uno. Aquí mismo.</h2>
+    <p class="cuerpo cuerpo--w cuerpo--c sube" style="--i:1">Dos toques. Los mismos dos toques que en la app.</p>
 
     <div class="caja" id="caja">
       <div class="paso1 is-on" data-paso="1">
         <p class="mini">01 · Elige qué quieres vivir</p>
         <div class="exps" role="radiogroup" aria-label="Elige una experiencia">
           <button class="exp" type="button" role="radio" aria-checked="false"
-                  data-exp="Amanecer en la Albufera"
-                  data-img="https://images.pexels.com/photos/32876381/pexels-photo-32876381.jpeg?auto=compress&cs=tinysrgb&w=700">
-            <span class="exp__f"><img src="https://images.pexels.com/photos/32876381/pexels-photo-32876381.jpeg?auto=compress&cs=tinysrgb&w=700" alt="Amanecer sobre el agua" loading="lazy" width="700" height="470"></span>
+                  data-exp="Amanecer en la Albufera" data-sub="Salir de noche y llegar con el sol"
+                  data-img="https://images.pexels.com/photos/32876381/pexels-photo-32876381.jpeg?auto=compress&cs=tinysrgb&w=1600">
+            <span class="exp__f"><img src="https://images.pexels.com/photos/32876381/pexels-photo-32876381.jpeg?auto=compress&cs=tinysrgb&w=700" alt="Amanecer sobre el agua" loading="lazy" width="700" height="900"></span>
             <span class="exp__n">Amanecer en la Albufera</span>
           </button>
           <button class="exp" type="button" role="radio" aria-checked="false"
-                  data-exp="El concierto del Loco"
-                  data-img="https://images.pexels.com/photos/1105666/pexels-photo-1105666.jpeg?auto=compress&cs=tinysrgb&w=700">
-            <span class="exp__f"><img src="https://images.pexels.com/photos/1105666/pexels-photo-1105666.jpeg?auto=compress&cs=tinysrgb&w=700" alt="Público en un concierto" loading="lazy" width="700" height="470"></span>
+                  data-exp="El concierto del Loco" data-sub="Salir sin voz, volver andando"
+                  data-img="https://images.pexels.com/photos/1105666/pexels-photo-1105666.jpeg?auto=compress&cs=tinysrgb&w=1600">
+            <span class="exp__f"><img src="https://images.pexels.com/photos/1105666/pexels-photo-1105666.jpeg?auto=compress&cs=tinysrgb&w=700" alt="Público en un concierto" loading="lazy" width="700" height="900"></span>
             <span class="exp__n">El concierto del Loco</span>
           </button>
           <button class="exp" type="button" role="radio" aria-checked="false"
-                  data-exp="Hoguera en el Saler"
-                  data-img="https://images.pexels.com/photos/7148674/pexels-photo-7148674.jpeg?auto=compress&cs=tinysrgb&w=700">
-            <span class="exp__f"><img src="https://images.pexels.com/photos/7148674/pexels-photo-7148674.jpeg?auto=compress&cs=tinysrgb&w=700" alt="Hoguera en la playa con gente alrededor" loading="lazy" width="700" height="470"></span>
+                  data-exp="Hoguera en el Saler" data-sub="Llevar leña y no mirar la hora"
+                  data-img="https://images.pexels.com/photos/7148674/pexels-photo-7148674.jpeg?auto=compress&cs=tinysrgb&w=1600">
+            <span class="exp__f"><img src="https://images.pexels.com/photos/7148674/pexels-photo-7148674.jpeg?auto=compress&cs=tinysrgb&w=700" alt="Hoguera en la playa con gente alrededor" loading="lazy" width="700" height="900"></span>
             <span class="exp__n">Hoguera en el Saler</span>
           </button>
         </div>
@@ -209,60 +254,89 @@
         <p class="env__t">Le vas a proponer a <strong id="rPer">Marta</strong></p>
         <p class="env__e" id="rExp">Amanecer en la Albufera</p>
         <p class="env__w" id="rPor">Está en el «quiero vivir» de los dos</p>
-        <button class="btn btn--lg" type="button" id="enviar"><span id="btnT">Enviar NEXA</span></button>
+        <button class="btn btn--lg btn--x" type="button" id="enviar">
+          <span id="btnT">Enviar NEXA</span>
+          <span class="bx" aria-hidden="true"><svg viewBox="0 0 20 20"><line x1="2" y1="18" x2="18" y2="2"/><line x1="18" y1="18" x2="2" y2="2"/></svg></span>
+        </button>
         <p class="env__f">No has escrito ni una palabra. No hace falta.</p>
       </div>
-
-      <div class="paso1 tc" data-paso="4">
-        <div class="equis" aria-hidden="true">
-          <svg viewBox="0 0 60 60"><line class="ax1" x1="10" y1="50" x2="50" y2="10"/><line class="ax2" x1="50" y1="50" x2="10" y2="10"/></svg>
-        </div>
-        <p class="acep"><strong id="rPer2">Marta</strong> lo ha aceptado.</p>
-        <p class="cuerpo cuerpo--c">Tenéis 24 horas para poner fecha. Si no la ponéis, caduca y no pasa nada: aquí no hay rachas ni castigos.</p>
-
-        <figure class="recuerdo">
-          <img id="rImg" src="" alt="" width="700" height="470">
-          <figcaption>
-            <span class="recuerdo__t" id="rExp2">Amanecer en la Albufera</span>
-            <span class="recuerdo__p">con <span id="rPer3">Marta</span></span>
-          </figcaption>
-        </figure>
-
-        <p class="encendida">Y una semana de tu vida deja de estar apagada.</p>
-        <button class="atras atras--c" type="button" id="otra">Probar otra vez</button>
-      </div>
     </div>
   </div>
 </section>
 
-<!-- ════════════════════════════════════════════════════
-     6 · AMBICIÓN
-     Tu perfil no son selfies.
-     ════════════════════════════════════════════════════ -->
-<section class="perfil">
+<!-- ══════════════════════════════════════════════════════════
+     EL MOMENTO
+     Al enviar, la experiencia se abre a pantalla completa.
+     Esto es lo que compras.
+     ══════════════════════════════════════════════════════════ -->
+<div class="momento" id="momento" role="dialog" aria-modal="true" aria-labelledby="momT" hidden>
+  <img id="momImg" src="" alt="">
+  <div class="momento__velo" aria-hidden="true"></div>
+  <div class="momento__c">
+    <p class="momento__k">Aceptado</p>
+    <p class="momento__t" id="momT">Amanecer en la Albufera</p>
+    <p class="momento__s" id="momS">con Marta · sábado que viene</p>
+    <p class="momento__d">Tenéis 24 horas para poner fecha. Si no la ponéis, caduca y no pasa nada.</p>
+    <p class="momento__e">Y una semana de tu vida deja de estar apagada.</p>
+    <button class="btn btn--lg" type="button" id="cerrarMom">Seguir</button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════
+     8 · TU VIDA, DENTRO DE UN AÑO
+     ══════════════════════════════════════════════════════════ -->
+<section class="vida">
   <div class="wrap">
-    <div class="perfil__g">
-      <div class="perfil__t">
-        <h2 class="h2 sube">Instagram guarda lo que enseñaste.<br><em>NEXA guarda lo que viviste.</em></h2>
-        <p class="cuerpo sube" style="--i:1">Tu perfil no son nueve selfies. Son las semanas que encendiste, con quién las encendiste y qué deseo tachaste ese día.</p>
-        <p class="cuerpo sube" style="--i:2">Aquí no hay likes, ni seguidores, ni rachas, ni puntos. Sabemos perfectamente cómo se hace una app que te enganche. <strong>No la vamos a hacer.</strong> Esta se diseñó para que la cierres, salgas de casa y tardes tres días en volver a abrirla. Con una foto.</p>
-      </div>
+    <h2 class="h2 h2--c sube">Instagram guarda lo que enseñaste.<br><em>NEXA guarda lo que viviste.</em></h2>
+    <p class="cuerpo cuerpo--c sube" style="--i:1">Tu perfil no son nueve selfies. Son las semanas que encendiste, con quién las encendiste y qué deseo tachaste ese día.</p>
 
-      <div class="perfil__r">
-        <canvas id="mini" role="img" aria-label="Un año de semanas: las encendidas aparecen en azul"></canvas>
-        <p class="perfil__l"><span class="pt pt--on" aria-hidden="true"></span> Semana encendida &nbsp;·&nbsp; <span class="pt" aria-hidden="true"></span> Semana que se te fue</p>
-      </div>
+    <div class="mosaico">
+      <figure class="mz mz--1 reveal" style="--i:0">
+        <img src="https://images.pexels.com/photos/7148674/pexels-photo-7148674.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Hoguera con amigos" loading="lazy" width="900" height="600">
+        <figcaption><b>Hoguera en el Saler</b><span>con Iván y Nuria</span></figcaption>
+      </figure>
+      <figure class="mz mz--2 reveal" style="--i:1">
+        <img src="https://images.pexels.com/photos/1105666/pexels-photo-1105666.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Concierto" loading="lazy" width="900" height="1200">
+        <figcaption><b>El concierto del Loco</b><span>con Marta</span></figcaption>
+      </figure>
+      <figure class="mz mz--3 reveal" style="--i:2">
+        <img src="https://images.pexels.com/photos/32876381/pexels-photo-32876381.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Amanecer en la playa" loading="lazy" width="900" height="600">
+        <figcaption><b>Amanecer en la Albufera</b><span>con Dani</span></figcaption>
+      </figure>
+      <figure class="mz mz--4 reveal" style="--i:3">
+        <img src="https://images.pexels.com/photos/8482195/pexels-photo-8482195.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Cima de montaña" loading="lazy" width="900" height="1200">
+        <figcaption><b>El Penyagolosa</b><span>con Nuria</span></figcaption>
+      </figure>
+      <figure class="mz mz--5 reveal" style="--i:4">
+        <img src="https://images.pexels.com/photos/10867128/pexels-photo-10867128.jpeg?auto=compress&cs=tinysrgb&w=900" alt="Amigos en la playa" loading="lazy" width="900" height="600">
+        <figcaption><b>Baño en enero</b><span>con medio grupo</span></figcaption>
+      </figure>
     </div>
+
+    <ul class="noes">
+      <li class="sube" style="--i:0"><s>Likes</s></li>
+      <li class="sube" style="--i:1"><s>Seguidores</s></li>
+      <li class="sube" style="--i:2"><s>Comentarios</s></li>
+      <li class="sube" style="--i:3"><s>Rachas</s></li>
+      <li class="sube" style="--i:4"><s>Un feed que te retenga</s></li>
+    </ul>
+    <p class="cuerpo cuerpo--c sube">Sabemos perfectamente cómo se hace una app que te enganche. <strong>No la vamos a hacer.</strong> Esta se diseñó para que la cierres, salgas de casa y tardes tres días en volver a abrirla. Con una foto.</p>
   </div>
 </section>
 
-<!-- ════════════════════════════════════════════════════
-     7 · NECESIDAD
-     ════════════════════════════════════════════════════ -->
+<!-- ══════════════════════════════════════════════════════════
+     9 · EL CIERRE
+     ══════════════════════════════════════════════════════════ -->
 <section class="cierre" id="lista">
-  <div class="wrap wrap--n tc">
-    <h2 class="display display--sm">
-      <span class="ln"><span>Te quedan <em id="finN">3.120</em>.</span></span>
+  <div class="cierre__foto">
+    <img src="https://images.pexels.com/photos/2990835/pexels-photo-2990835.jpeg?auto=compress&cs=tinysrgb&w=1900"
+         alt="" loading="lazy" width="1900" height="1270" aria-hidden="true">
+    <div class="cierre__velo" aria-hidden="true"></div>
+  </div>
+
+  <div class="wrap wrap--n tc cierre__c">
+    <h2 class="titan titan--sm">
+      <span class="ln"><span>Te quedan <em id="finN">3120</em>.</span></span>
       <span class="ln"><span>Esta es una.</span></span>
     </h2>
 
@@ -314,7 +388,7 @@
   </div>
 </footer>
 
-<script src="config.js?v=21"></script>
-<script src="script.js?v=21" defer></script>
+<script src="config.js?v=30"></script>
+<script src="script.js?v=30" defer></script>
 </body>
 </html>
