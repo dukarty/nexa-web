@@ -97,10 +97,12 @@ function pintar() {
       r += f * base * 0.9;
     }
 
-    let color = "#C2C8D2";           // te queda
-    if (e === 0) { color = "#E4E7EC"; r *= 0.78; }   // ya no vuelve
-    if (e === 2) { color = "#0A5CFF"; r *= 1.35; }   // encendida
-    if (e === 3) { color = "#0A5CFF"; r *= 1.5; }    // esta semana
+    // La diferencia entre "te queda" y "ya no vuelve" tiene que
+    // verse de un vistazo, o la sección no dice nada.
+    let color = "#A4ABB8";                            // te queda
+    if (e === 0) { color = "#E6E9ED"; r *= 0.72; }    // ya no vuelve
+    if (e === 2) { color = "#0A5CFF"; r *= 1.4; }     // encendida
+    if (e === 3) { color = "#0A5CFF"; r *= 1.55; }    // esta semana
 
     ctx.beginPath();
     ctx.arc(x, y, r, 0, 6.2832);
