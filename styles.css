@@ -103,8 +103,8 @@ body.oscuro .marca{background:transparent;border-color:rgba(255,255,255,.32);col
 .frase span{display:block;opacity:0;transition:opacity .5s ease}
 /* El ancla: quien mira 5 segundos ya sabe qué es NEXA. Siempre visible. */
 .claim{
-  position:absolute;left:50%;bottom:64px;transform:translateX(-50%);
-  max-width:32ch;text-align:center;
+  position:absolute;left:50%;bottom:92px;transform:translateX(-50%);
+  max-width:34ch;text-align:center;
   font-size:clamp(.82rem,1.5vw,1rem);font-weight:700;letter-spacing:-.01em;
   color:rgba(255,255,255,.62);
 }
@@ -113,7 +113,7 @@ body.oscuro .marca{background:transparent;border-color:rgba(255,255,255,.32);col
   font-size:.64rem;font-weight:800;letter-spacing:.24em;text-transform:uppercase;
   color:rgba(255,255,255,.32);transition:opacity .4s;
 }
-@media (max-width:640px){.claim{bottom:52px}}
+@media (max-width:640px){.claim{bottom:76px;font-size:.8rem}}
 .baja::after{content:"";display:block;width:1px;height:24px;margin:8px auto 0;background:rgba(255,255,255,.32)}
 
 /* ═══════════════════════════════════════════════
