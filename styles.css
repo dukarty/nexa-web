@@ -128,8 +128,18 @@ body.oscuro .marca{background:transparent;border-color:rgba(255,255,255,.32);col
 .cta--hero{background:var(--az);color:#fff;padding:18px 32px;font-size:.95rem}
 .cta--hero:hover{background:var(--az-h)}
 .ap__meta{margin-top:14px;font-size:.76rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.4)}
-.baja--ap{position:absolute;left:50%;bottom:24px;transform:translateX(-50%);opacity:0;animation:apSube 1s var(--e) 1.1s forwards}
-@media (max-height:720px){.baja--ap{display:none}}
+/* Indicador de scroll: línea centrada + punto azul que cae en bucle. */
+.scrollcue{
+  position:absolute;left:50%;bottom:26px;transform:translateX(-50%);
+  width:1px;height:48px;background:rgba(255,255,255,.2);overflow:hidden;
+  opacity:0;animation:apSube 1s var(--e) 1.1s forwards;
+}
+.scrollcue__dot{
+  position:absolute;left:50%;top:0;width:3px;height:9px;border-radius:2px;background:var(--az);
+  transform:translateX(-50%);animation:cae 1.7s var(--e) infinite;
+}
+@keyframes cae{0%{top:-9px;opacity:0}18%{opacity:1}82%{opacity:1}100%{top:48px;opacity:0}}
+@media (max-height:640px){.scrollcue{display:none}}
 
 /* ═══════════════════════════════════════════════
    01 · EL BUCLE
@@ -526,6 +536,7 @@ body.bloq .nav,body.bloq .prog{opacity:0;pointer-events:none}
   .momento img,.momento__k,.momento__t,.momento__s,.momento__e,.momento .cta{animation:none;opacity:1;transform:none}
   .scr{animation:none}
   .como li{opacity:1}
-  .ap__t,.ap__s,.ap__act,.baja--ap{animation:none;opacity:1;transform:none}
+  .ap__t,.ap__s,.ap__act,.scrollcue{animation:none;opacity:1;transform:none}
+  .scrollcue__dot{animation:none;top:6px}
   .xword__x line{animation:none;stroke-dashoffset:0}
 }
