@@ -128,6 +128,7 @@ a{color:inherit;text-decoration:none}
 .hero__foto{position:absolute;inset:0;z-index:0}
 .hero__foto img{
   width:100%;height:100%;object-fit:cover;
+  object-position:center 68%;   /* la gente, no el cielo */
   transform:scale(1.14);opacity:0;
   animation:entraFoto 2.2s var(--e) .1s forwards, ken 30s ease-in-out 2.2s infinite alternate;
   will-change:transform,opacity;
@@ -292,7 +293,9 @@ a{color:inherit;text-decoration:none}
 .env__f{margin-top:20px;font-size:.85rem;color:rgba(255,255,255,.4)}
 
 /* ═══════ EL MOMENTO ═══════
-   La foto se abre a pantalla completa. Es lo que compras. */
+   La foto se abre a pantalla completa. Es lo que compras.
+   Y mientras dura, no hay web: solo eso. */
+body.bloq .nav,body.bloq .prog{opacity:0;pointer-events:none;transition:opacity .3s}
 .momento{position:fixed;inset:0;z-index:150;display:grid;place-items:center;overflow:hidden;background:var(--tinta)}
 .momento[hidden]{display:none}
 .momento img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transform:scale(1.25);opacity:0;animation:momFoto 1.4s var(--e) forwards}
