@@ -59,156 +59,25 @@ function bucle(p) {
 }
 
 /* ═════════════════════════════════════════════
-   02 · LA RED — constelación viva de personas
-   Cientos de puntos que flotan y se rozan. Con el scroll casi
-   todos se apagan; seis se encienden en azul y se enlazan.
+   02 · EL NÚMERO
+   Una cifra que baja de 800 a 6 con el scroll. Sin tocar nada.
    ═════════════════════════════════════════════ */
-const secRed = $("#red");
-const lienzoRed = $("#constelacion");
-const redA = $("#redA"), redB = $("#redB"), redP = $("#redP");
-let R = null;
+const secNum = $("#numero");
+const numBig = $("#numBig"), numA = $("#numA"), numB = $("#numB"), numP = $("#numP");
+const N0 = 800, N1 = 6;
 
-function initRed() {
-  const ctx = lienzoRed.getContext("2d");
-  const dpr = Math.min(devicePixelRatio || 1, 2);
-  let W = 0, H = 0, N = 0, pts = [], seis = [];
-  const raton = { x: -1e4, y: -1e4 };
-
-  function medir() {
-    W = lienzoRed.clientWidth; H = lienzoRed.clientHeight;
-    lienzoRed.width = W * dpr; lienzoRed.height = H * dpr;
-    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-    N = W < 680 ? 80 : 150;
-    if (pts.length !== N) sembrar();
-  }
-  function sembrar() {
-    pts = Array.from({ length: N }, () => ({
-      x: Math.random() * W, y: Math.random() * H,
-      vx: (Math.random() - .5) * .22, vy: (Math.random() - .5) * .22,
-      r: 1.4 + Math.random() * 1.6,
-    }));
-    // Seis elegidos, repartidos, que serán los que se encienden.
-    seis = [];
-    const paso = Math.floor(N / 6);
-    for (let k = 0; k < 6; k++) seis.push(3 + k * paso);
-  }
-
-  lienzoRed.addEventListener("pointermove", (e) => {
-    const b = lienzoRed.getBoundingClientRect();
-    raton.x = e.clientX - b.left; raton.y = e.clientY - b.top;
-  }, { passive: true });
-  lienzoRed.addEventListener("pointerleave", () => { raton.x = raton.y = -1e4; });
-
-  let p = 0;                       // progreso de scroll (0..1), lo fija marco()
-  medir();
-  addEventListener("resize", medir, { passive: true });
-
-  function frame() {
-    ctx.clearRect(0, 0, W, H);
-    const vivo = clamp((p - 0.35) / 0.4);        // cuánto han "muerto" los normales
-    const enc = clamp((p - 0.5) / 0.35);         // cuánto se encienden los seis
-
-    // Deriva (la red está viva). Con reduced-motion se queda quieta.
-    if (!reduce) for (const a of pts) {
-      a.x += a.vx; a.y += a.vy;
-      if (a.x < 0 || a.x > W) a.vx *= -1;
-      if (a.y < 0 || a.y > H) a.vy *= -1;
-      const dx = a.x - raton.x, dy = a.y - raton.y, d2 = dx * dx + dy * dy;
-      if (d2 < 14000) { a.x += dx / 220; a.y += dy / 220; }   // el ratón los aparta
-    }
-
-    // Líneas entre puntos cercanos.
-    const LIM = W < 680 ? 96 : 120;
-    for (let i = 0; i < N; i++) {
-      for (let j = i + 1; j < N; j++) {
-        const a = pts[i], b = pts[j];
-        const dx = a.x - b.x, dy = a.y - b.y, d = Math.hypot(dx, dy);
-        if (d > LIM) continue;
-        const cerca = 1 - d / LIM;
-        const azul = seis.includes(i) && seis.includes(j);
-        if (azul) {
-          ctx.strokeStyle = `rgba(10,92,255,${(.25 + cerca * .6) * enc})`;
-          ctx.lineWidth = 1.4;
-        } else {
-          const base = 0.16 * cerca * (1 - vivo * 0.9);
-          ctx.strokeStyle = `rgba(10,10,10,${base})`;
-          ctx.lineWidth = 1;
-        }
-        ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke();
-      }
-    }
-
-    // Enlace fijo entre los seis, aunque estén lejos: la red que sí importa.
-    ctx.lineWidth = 1.6;
-    for (let i = 0; i < seis.length; i++) {
-      const a = pts[seis[i]], b = pts[seis[(i + 1) % seis.length]];
-      ctx.strokeStyle = `rgba(10,92,255,${0.5 * enc})`;
-      ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke();
-    }
-
-    // Puntos.
-    for (let i = 0; i < N; i++) {
-      const a = pts[i], es = seis.includes(i);
-      let r = a.r, col;
-      if (es) { r = a.r + enc * 2.6; col = `rgba(10,92,255,${.5 + .5 * enc})`; }
-      else    { const g = Math.round(10 + vivo * 200); col = `rgba(${g},${g},${g},${1 - vivo * .55})`; }
-      ctx.beginPath(); ctx.arc(a.x, a.y, r, 0, 6.2832); ctx.fillStyle = col; ctx.fill();
-    }
-
-    R.raf = requestAnimationFrame(frame);
-  }
-
-  R = { set: (v) => (p = v), raf: 0 };
-  R.raf = requestAnimationFrame(frame);
+function numero(p) {
+  // Entre 0.1 y 0.72 baja de 800 a 6, con caída suave (ease-out).
+  const q = clamp((p - 0.1) / 0.62);
+  const e = 1 - Math.pow(1 - q, 2.2);
+  const v = Math.round(N0 - (N0 - N1) * e);
+  numBig.textContent = v;
+  numBig.classList.toggle("az", v <= N1 + 2);
+  const t = clamp((p - 0.6) / 0.14);
+  numA.style.opacity = 1 - t;
+  numB.style.opacity = t;
+  numP.style.opacity = clamp((p - 0.78) / 0.12);
 }
-
-function red(pr) {
-  if (!R) return;
-  R.set(pr);
-  const t = clamp((pr - 0.5) / 0.16);
-  redA.style.opacity = 1 - t;
-  redB.style.opacity = t;
-  redP.style.opacity = clamp((pr - 0.74) / 0.12);
-}
-
-if (lienzoRed) {
-  // Solo se enciende (y solo consume rAF) cuando la sección está cerca.
-  new IntersectionObserver((es) => es.forEach((e) => {
-    if (e.isIntersecting && !R) initRed();
-  }), { rootMargin: "200px" }).observe(secRed);
-}
-
-/* ═════════════════════════════════════════════
-   05 · LA VUELTA A CASA
-   Cerrada hasta que mandas un NEXA. Entonces se abre,
-   y las fotos van pasando con el scroll: tú eres el que rebobina.
-   ═════════════════════════════════════════════ */
-const secVuelta = $("#vuelta");
-const fotos = $$(".fot");
-const vueltaPie = $("#vueltaPie");
-let abierta = false;
-
-function abrirVuelta() {
-  if (abierta) return;
-  abierta = true;
-  secVuelta.classList.add("abierta");
-  vueltaPie.hidden = false;
-  if (fotos[0]) fotos[0].style.opacity = 1;
-}
-
-function vuelta(p) {
-  if (!abierta || !fotos.length) return;
-  // Fundido cruzado atado al scroll. Nada avanza por su cuenta.
-  const n = fotos.length;
-  const x = clamp(p) * (n - 1);
-  fotos.forEach((f, i) => {
-    f.style.opacity = clamp(1 - Math.abs(x - i));
-  });
-}
-
-$("#irGesto")?.addEventListener("click", () => {
-  $("#gesto").scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
-});
 
 /* ═════════════════════════════════════════════
    Bucle de scroll — el único motor de la página
@@ -225,15 +94,11 @@ function marco() {
   ultimo = y;
 
   if (secBucle) bucle(prog(secBucle));
-  if (secRed) red(prog(secRed));
-  if (secVuelta) vuelta(prog(secVuelta));
+  if (secNum) numero(prog(secNum));
 
-  // El negro dura lo que dura el domingo. Y vuelve en la vuelta a casa.
+  // El negro solo dura lo que dura el domingo.
   const b = secBucle.getBoundingClientRect();
-  const v = secVuelta.getBoundingClientRect();
-  const enNegro = b.bottom > innerHeight * 0.5 ||
-                  (v.top < innerHeight * 0.5 && v.bottom > innerHeight * 0.5);
-  document.body.classList.toggle("oscuro", enNegro);
+  document.body.classList.toggle("oscuro", b.bottom > innerHeight * 0.5);
 
   pendiente = false;
 }
@@ -245,28 +110,6 @@ if (!reduce) {
 } else {
   document.body.classList.remove("oscuro");
 }
-
-/* ═════════════════════════════════════════════
-   03 · LO QUE NO HAS PEDIDO
-   Lo que escribes aquí te acompaña hasta el final.
-   ═════════════════════════════════════════════ */
-const dForm = $("#deseoForm");
-const dIn = $("#deseoIn");
-const tuyo = $("#tuyo"), tuyoT = $("#tuyoT"), pista = $("#pista");
-const formK = $("#formK"), formDeseo = $("#formDeseo");
-let DESEO = "";
-
-dForm?.addEventListener("submit", (e) => {
-  e.preventDefault();
-  DESEO = (dIn.value.trim() || dIn.placeholder).slice(0, 52);
-  tuyoT.textContent = DESEO;
-  tuyo.hidden = false;
-  pista.style.opacity = "0";
-  formDeseo.textContent = DESEO;
-  formK.hidden = false;
-  dIn.blur();
-  if (!reduce) tuyo.scrollIntoView({ behavior: "smooth", block: "center" });
-});
 
 /* ═════════════════════════════════════════════
    06 · LAS SEMANAS
@@ -449,7 +292,6 @@ if (fono) {
       document.body.classList.add("bloq");
       $("#cerrarMom").focus();
       encender(1);      // una semana tuya deja de estar apagada
-      abrirVuelta();    // y la vuelta a casa se enciende
     }, reduce ? 120 : 1600);
   });
 
@@ -464,7 +306,7 @@ function cerrarMomento() {
   momento.hidden = true;
   document.body.classList.remove("bloq");
   fono?._reset?.();
-  secVuelta.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
+  $("#semanas")?.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
 }
 $("#cerrarMom")?.addEventListener("click", cerrarMomento);
 addEventListener("keydown", (e) => { if (e.key === "Escape" && momento && !momento.hidden) cerrarMomento(); });
@@ -505,10 +347,7 @@ async function enviarLista(base) {
     console.warn("[NEXA] Supabase sin configurar:", base);
     return true;
   }
-  // Guardamos también el deseo. Si la columna todavía no existe en la tabla,
-  // no perdemos el email por eso: reintentamos sin ella.
-  let res = await post(DESEO ? { ...base, deseo: DESEO } : base);
-  if (res.status === 400 && DESEO) res = await post(base);
+  const res = await post(base);
   if (res.status === 409) return true;             // ya estaba dentro
   if (!res.ok) throw new Error(await res.text());
   return true;

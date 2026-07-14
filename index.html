@@ -53,7 +53,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://images.pexels.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..100,400;75..100,500;75..100,600;75..100,700;75..100,800;75..100,900&display=swap">
-<link rel="stylesheet" href="styles.css?v=69">
+<link rel="stylesheet" href="styles.css?v=70">
 </head>
 <body class="oscuro">
 
@@ -76,15 +76,15 @@
 <section class="apertura" id="apertura" aria-labelledby="ap">
   <div class="ap__in">
     <h1 class="ap__t" id="ap">
-      Todo empieza<br>con un <span class="xword">NE<span class="xword__x" aria-hidden="true"><svg viewBox="0 0 20 20"><line x1="2" y1="18" x2="18" y2="2"/><line x1="18" y1="18" x2="2" y2="2"/></svg></span>A</span><span class="az">.</span>
+      <span class="ap__l"><em>Todo</em> <em>empieza</em></span>
+      <span class="ap__l"><em>con</em> <em>un</em> <em class="xword">NE<span class="xword__x" aria-hidden="true"><svg viewBox="0 0 20 20"><line x1="2" y1="18" x2="18" y2="2"/><line x1="18" y1="18" x2="2" y2="2"/></svg></span>A</em><em class="az">.</em></span>
     </h1>
-    <p class="ap__s">Dices qué quieres vivir. NEXA te dice con quién.</p>
+    <p class="ap__s">Elige el plan y con quién, NEXA te ayuda.</p>
     <div class="ap__act">
       <a class="cta cta--hero" href="#lista">
         <span>Entrar en la lista</span>
         <span class="cta__x" aria-hidden="true"><svg viewBox="0 0 20 20"><line x1="2" y1="18" x2="18" y2="2"/><line x1="18" y1="18" x2="2" y2="2"/></svg></span>
       </a>
-      <p class="ap__meta">Gratis · Valencia · 2026</p>
     </div>
     <span class="baja baja--ap" aria-hidden="true">O baja y lo entiendes</span>
   </div>
@@ -105,42 +105,27 @@
   </div>
 </section>
 
-<!-- ═══════════════ 02 · LA RED ═══════════════
-     Constelación viva de personas. Cientos de puntos que flotan y se
-     rozan; con el scroll, casi todos se apagan y unos pocos se
-     encienden en azul. Rodeado de gente, conectas con seis. -->
-<section class="red" id="red" aria-labelledby="h2-red">
+<!-- ═══════════════ 02 · EL NÚMERO ═══════════════
+     Una cifra gigante que baja de 800 a 6 con el scroll. Rodeado de
+     gente, con seis vives algo de verdad. Se entiende sin tocar nada. -->
+<section class="numero" id="numero" aria-labelledby="h2-num">
   <div class="fijo">
-    <canvas id="constelacion" aria-hidden="true"></canvas>
-    <div class="red__txt">
-      <h2 class="red__t" id="h2-red">
-        <span id="redA">Cientos de personas<br>a tu alrededor.</span>
-        <span class="az" id="redB">Con seis pasa algo.</span>
-      </h2>
-      <p class="red__p" id="redP">No es que no tengas a nadie. Es que nadie da el primer paso.</p>
-    </div>
+    <p class="num__k">En tu móvil</p>
+    <p class="num__big" id="numBig">800</p>
+    <h2 class="num__t" id="h2-num">
+      <span id="numA">personas guardadas.</span>
+      <span class="az" id="numB">Con seis vives algo.</span>
+    </h2>
+    <p class="num__p" id="numP">No es que no tengas a nadie. Es que nadie da el primer paso.</p>
   </div>
 </section>
 
-<!-- ═══════════════ 03 · LO QUE NO HAS PEDIDO ═══════════════ -->
-<section class="pedir" id="pedir" aria-labelledby="h2-ped">
+<!-- ═══════════════ 03 · LA IDEA ═══════════════
+     Explica qué es NEXA. Sin escribir nada: solo se lee bajando. -->
+<section class="idea" id="idea" aria-labelledby="h2-idea">
   <p class="ind">03</p>
-  <h2 class="tit" id="h2-ped">¿Qué quieres<br>vivir este año?</h2>
-
-  <form class="linea" id="deseoForm" autocomplete="off">
-    <label class="sr" for="deseoIn">Escribe algo que quieras vivir este año</label>
-    <input id="deseoIn" type="text" maxlength="52" placeholder="Ver amanecer sin haber dormido">
-    <button class="linea__b" type="submit" aria-label="Confirmar">
-      <svg viewBox="0 0 20 20" aria-hidden="true"><line x1="2" y1="18" x2="18" y2="2"/><line x1="18" y1="18" x2="2" y2="2"/></svg>
-    </button>
-  </form>
-  <p class="pista" id="pista">Lo que sea. Nadie lo va a juzgar.</p>
-
-  <div class="tuyo" id="tuyo" hidden>
-    <p class="tuyo__k">Este año quiero</p>
-    <p class="tuyo__t" id="tuyoT"></p>
-    <p class="tuyo__p">No eres el único que lo quiere.<br><b>Eres el único que no lo ha pedido.</b></p>
-  </div>
+  <h2 class="tit" id="h2-idea">NEXA no es un feed.<br>Es <span class="az">una propuesta</span>.</h2>
+  <p class="idea__p">Aquí nadie presume de su vida. Eliges un plan, eliges a una persona, y la app <b>da el primer paso por ti</b>: le llega una propuesta ya hecha, con día y con motivo. Sin grupos, sin «¿alguien se apunta?», sin quedarte con las ganas.</p>
 </section>
 
 <!-- ═══════════════ 04 · EL GESTO ═══════════════
@@ -248,26 +233,16 @@
   </div>
 </div>
 
-<!-- ═══════════════ 05 · LA VUELTA A CASA ═══════════════
-     Cerrada hasta que mandas un NEXA. La web no se enciende
-     hasta que tú dejas de ser pasivo. -->
-<section class="vuelta" id="vuelta" aria-labelledby="h2-vue">
-  <div class="fijo">
-    <div class="tira" id="tira" aria-hidden="true">
-      <figure class="fot"><img src="https://images.pexels.com/photos/1105666/pexels-photo-1105666.jpeg?auto=compress&cs=tinysrgb&w=1800" alt="" loading="lazy"></figure>
-      <figure class="fot"><img src="https://images.pexels.com/photos/7148674/pexels-photo-7148674.jpeg?auto=compress&cs=tinysrgb&w=1800" alt="" loading="lazy"></figure>
-      <figure class="fot"><img src="https://images.pexels.com/photos/17444987/pexels-photo-17444987.jpeg?auto=compress&cs=tinysrgb&w=1800" alt="" loading="lazy"></figure>
-      <figure class="fot"><img src="https://images.pexels.com/photos/32876381/pexels-photo-32876381.jpeg?auto=compress&cs=tinysrgb&w=1800" alt="" loading="lazy"></figure>
-      <div class="grano" aria-hidden="true"></div>
-    </div>
-
-    <div class="cerrado" id="cerrado">
-      <h2 class="cerrado__t" id="h2-vue">Aquí es donde<br>vuelves a casa.</h2>
-      <p class="cerrado__s">Pero todavía no has propuesto nada.</p>
-      <button class="enlace" type="button" id="irGesto">Manda un NEXA <span aria-hidden="true">→</span></button>
-    </div>
-
-    <p class="vuelta__pie" id="vueltaPie" hidden>Esto es lo que NEXA quiere que te pase un martes.</p>
+<!-- ═══════════════ 05 · EL RESULTADO ═══════════════
+     Continuación: qué pasa cuando aceptan. Foto real a pantalla
+     completa que aparece al bajar, sin tocar nada. -->
+<section class="result" id="result" aria-labelledby="h2-res">
+  <img class="result__bg" src="https://images.pexels.com/photos/32876381/pexels-photo-32876381.jpeg?auto=compress&cs=tinysrgb&w=1800" alt="Amanecer en la Albufera con amigos" loading="lazy">
+  <div class="result__velo" aria-hidden="true"></div>
+  <div class="result__c">
+    <p class="ind ind--w">05</p>
+    <h2 class="tit result__t" id="h2-res">Y si dice que sí,<br><span class="az">lo vivís</span>.</h2>
+    <p class="result__p">Un plan real, un día, y alguien esperándote. Eso que llevabas meses queriendo hacer deja de ser una idea suelta y se convierte en un sábado con nombre. Y una semana de tu vida deja de estar vacía.</p>
   </div>
 </section>
 
@@ -298,10 +273,9 @@
 <!-- ═══════════════ 07 · ENTRAR ═══════════════ -->
 <section class="lista" id="lista" aria-labelledby="h2-lis">
   <p class="ind">07</p>
-  <h2 class="tit tit--fin" id="h2-lis">Valencia.<br>2026.<br><span class="az">Sé de los primeros.</span></h2>
+  <h2 class="tit tit--fin" id="h2-lis">Que no se te<br>escape la vida.<br><span class="az">Sé de los primeros.</span></h2>
 
   <form class="form" id="waitlist" novalidate>
-    <p class="form__k" id="formK" hidden>Te guardamos esto: <b id="formDeseo"></b></p>
     <div class="form__r">
       <label class="sr" for="email">Email</label>
       <input id="email" name="email" type="email" inputmode="email" autocomplete="email" required placeholder="tu@email.com">
@@ -347,7 +321,7 @@
   </nav>
 </footer>
 
-<script src="config.js?v=69"></script>
-<script src="script.js?v=69" defer></script>
+<script src="config.js?v=70"></script>
+<script src="script.js?v=70" defer></script>
 </body>
 </html>
