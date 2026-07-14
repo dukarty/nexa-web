@@ -145,10 +145,12 @@ body.oscuro .marca{background:transparent;border-color:rgba(255,255,255,.32);col
 }
 .frase{
   margin-top:clamp(26px,4vw,54px);
-  font-size:clamp(1.35rem,3.6vw,3rem);font-weight:800;line-height:1.12;letter-spacing:-.04em;
-  max-width:16ch;text-wrap:balance;min-height:2.5em;
+  font-size:clamp(1.3rem,3.2vw,2.7rem);font-weight:800;line-height:1.15;letter-spacing:-.04em;
+  max-width:none;min-height:2.5em;
 }
-.frase span{display:block;opacity:0;transition:opacity .5s ease}
+/* Cada frase en su propia línea: 2 líneas, nunca 3. En móvil estrecho sí puede partir. */
+.frase span{display:block;white-space:nowrap;opacity:0;transition:opacity .5s ease}
+@media (max-width:560px){.frase span{white-space:normal}}
 /* El ancla: quien mira 5 segundos ya sabe qué es NEXA. Siempre visible. */
 .claim{
   position:absolute;left:50%;bottom:92px;transform:translateX(-50%);
