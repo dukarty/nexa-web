@@ -53,7 +53,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="preconnect" href="https://images.pexels.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..100,400;75..100,500;75..100,600;75..100,700;75..100,800;75..100,900&display=swap">
-<link rel="stylesheet" href="styles.css?v=68">
+<link rel="stylesheet" href="styles.css?v=69">
 </head>
 <body class="oscuro">
 
@@ -78,7 +78,7 @@
     <h1 class="ap__t" id="ap">
       Todo empieza<br>con un <span class="xword">NE<span class="xword__x" aria-hidden="true"><svg viewBox="0 0 20 20"><line x1="2" y1="18" x2="18" y2="2"/><line x1="18" y1="18" x2="2" y2="2"/></svg></span>A</span><span class="az">.</span>
     </h1>
-    <p class="ap__s">La app para vivir experiencias reales con gente que quiere vivir lo mismo que tú. Eliges un plan, eliges a alguien, y la propuesta va hecha.</p>
+    <p class="ap__s">Dices qué quieres vivir. NEXA te dice con quién.</p>
     <div class="ap__act">
       <a class="cta cta--hero" href="#lista">
         <span>Entrar en la lista</span>
@@ -105,16 +105,20 @@
   </div>
 </section>
 
-<!-- ═══════════════ 02 · LOS SEIS ═══════════════
-     Corte a blanco. Los nombres se apagan hasta que quedan seis. -->
-<section class="seis" id="seis" aria-labelledby="h2-seis">
+<!-- ═══════════════ 02 · LA RED ═══════════════
+     Constelación viva de personas. Cientos de puntos que flotan y se
+     rozan; con el scroll, casi todos se apagan y unos pocos se
+     encienden en azul. Rodeado de gente, conectas con seis. -->
+<section class="red" id="red" aria-labelledby="h2-red">
   <div class="fijo">
-    <h2 class="seis__t" id="h2-seis">
-      <span id="agT1">Tienes <b>847</b> contactos.</span>
-      <span class="az" id="agT2">Hablas con seis.</span>
-    </h2>
-    <div class="nombres" id="nombres" aria-hidden="true"></div>
-    <p class="seis__p" id="agP">No es que no tengas a nadie. Es que nadie empieza.</p>
+    <canvas id="constelacion" aria-hidden="true"></canvas>
+    <div class="red__txt">
+      <h2 class="red__t" id="h2-red">
+        <span id="redA">Cientos de personas<br>a tu alrededor.</span>
+        <span class="az" id="redB">Con seis pasa algo.</span>
+      </h2>
+      <p class="red__p" id="redP">No es que no tengas a nadie. Es que nadie da el primer paso.</p>
+    </div>
   </div>
 </section>
 
@@ -343,7 +347,7 @@
   </nav>
 </footer>
 
-<script src="config.js?v=68"></script>
-<script src="script.js?v=68" defer></script>
+<script src="config.js?v=69"></script>
+<script src="script.js?v=69" defer></script>
 </body>
 </html>

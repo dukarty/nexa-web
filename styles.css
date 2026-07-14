@@ -154,33 +154,23 @@ body.oscuro .marca{background:transparent;border-color:rgba(255,255,255,.32);col
 .baja::after{content:"";display:block;width:1px;height:24px;margin:8px auto 0;background:rgba(255,255,255,.32)}
 
 /* ═══════════════════════════════════════════════
-   02 · LOS SEIS
+   02 · LA RED — constelación viva de personas
    ═══════════════════════════════════════════════ */
-.seis{height:190vh;background:#fff}
-.seis .fijo{justify-content:center;padding-top:calc(var(--pad) + 56px)}
-.seis__t{
-  position:relative;z-index:2;
-  font-size:clamp(1.7rem,5vw,4.4rem);font-weight:900;line-height:1;letter-spacing:-.05em;
-  text-transform:uppercase;font-variation-settings:"wdth" 85;min-height:1.1em;width:100%;
+.red{height:280vh;background:#fff}
+.red .fijo{padding:0}
+#constelacion{position:absolute;inset:0;width:100%;height:100%;display:block}
+.red__txt{position:relative;z-index:2;text-align:center;padding:var(--pad);pointer-events:none}
+.red__t{
+  font-size:clamp(1.9rem,5.4vw,4.8rem);font-weight:900;line-height:1;letter-spacing:-.05em;
+  text-transform:uppercase;font-variation-settings:"wdth" 85;position:relative;
+  text-shadow:0 2px 30px rgba(255,255,255,.9),0 0 12px rgba(255,255,255,.9);
 }
-.seis__t b{color:var(--az);font-weight:900}
-.seis__t span{display:block;transition:opacity .45s ease}
-.seis__t #agT2{position:absolute;left:0;right:0;top:0;opacity:0}
-.nombres{
-  margin-top:clamp(24px,3.4vw,44px);
-  display:flex;flex-wrap:wrap;justify-content:center;align-content:center;
-  gap:6px 11px;max-height:54svh;overflow:hidden;
-  -webkit-mask-image:linear-gradient(to bottom,transparent,#000 12%,#000 88%,transparent);
-          mask-image:linear-gradient(to bottom,transparent,#000 12%,#000 88%,transparent);
-}
-.nombres span{
-  font-size:clamp(.82rem,1.35vw,1.15rem);font-weight:700;letter-spacing:-.02em;
-  color:var(--gris-2);white-space:nowrap;transition:opacity .4s ease,color .4s ease;
-}
-.nombres span.destaca{color:var(--tinta);font-weight:900}
-.seis__p{
-  margin-top:clamp(22px,3vw,40px);font-size:clamp(1rem,1.7vw,1.35rem);font-weight:700;
-  letter-spacing:-.025em;color:var(--gris);max-width:30ch;opacity:0;transition:opacity .6s ease;
+.red__t span{display:block;transition:opacity .5s ease}
+.red__t #redB{position:absolute;left:0;right:0;top:0;opacity:0}
+.red__p{
+  margin-top:clamp(20px,2.8vw,36px);font-size:clamp(1rem,1.6vw,1.3rem);font-weight:700;
+  letter-spacing:-.025em;color:var(--gris);max-width:32ch;margin-inline:auto;
+  opacity:0;transition:opacity .6s ease;text-shadow:0 2px 24px rgba(255,255,255,.95);
 }
 
 /* ═══════════════════════════════════════════════
@@ -490,11 +480,12 @@ body.bloq .nav,body.bloq .prog{opacity:0;pointer-events:none}
 
 /* ═══ SIN MOVIMIENTO, SIGUE FUNCIONANDO ═══ */
 @media (prefers-reduced-motion:reduce){
-  .bucle,.seis{height:auto}
-  .bucle .fijo,.seis .fijo{position:static;height:auto;padding-block:var(--sec)}
-  .frase span,.seis__p{opacity:1!important}
-  .seis__t #agT2{position:static;opacity:1!important;margin-top:10px}
-  .nombres{max-height:none}
+  .bucle,.red{height:auto}
+  .bucle .fijo,.red .fijo{position:static;height:auto;padding-block:var(--sec)}
+  .frase span,.red__p{opacity:1!important}
+  .red__t #redB{position:static;opacity:1!important;margin-top:10px}
+  .red{min-height:60vh}
+  #constelacion{opacity:.5}
   .baja{display:none}
   .vuelta.abierta{height:100svh}
   .vuelta.abierta .fot:first-child{opacity:1!important}

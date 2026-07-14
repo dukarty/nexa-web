@@ -9,6 +9,11 @@
    Y ninguna imagen aparece antes de que actúes.
    ═══════════════════════════════════════════════════════════════ */
 
+// Al entrar, siempre arriba del todo. Ni el navegador ni un ancla nos bajan.
+if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+if (!location.hash) { try { scrollTo(0, 0); } catch (e) {} }
+addEventListener("load", () => { if (!location.hash) scrollTo(0, 0); });
+
 const CFG = window.NEXA || {};
 const SUPABASE_URL = CFG.SUPABASE_URL || "";
 const SUPABASE_ANON_KEY = CFG.SUPABASE_ANON_KEY || "";
@@ -54,57 +59,123 @@ function bucle(p) {
 }
 
 /* ═════════════════════════════════════════════
-   02 · LOS SEIS
+   02 · LA RED — constelación viva de personas
+   Cientos de puntos que flotan y se rozan. Con el scroll casi
+   todos se apagan; seis se encienden en azul y se enlazan.
    ═════════════════════════════════════════════ */
-const SEIS = ["Marta", "Iván", "Nuria", "Dani", "Clara", "Hugo"];
+const secRed = $("#red");
+const lienzoRed = $("#constelacion");
+const redA = $("#redA"), redB = $("#redB"), redP = $("#redP");
+let R = null;
 
-const NOMBRES = ("Lucía Pablo Alba Sergio Carla Jorge Paula Álvaro Andrea Marc "
-  + "Elena Rubén Sara Adrián Laura Víctor Irene Diego Cristina Javier Nerea Raúl Ana Guillermo "
-  + "Julia Óscar Rocío Manuel Silvia Aitor Patricia Fernando Miriam Gonzalo Eva Ignacio Noelia "
-  + "Alejandro Marina Rodrigo Lidia Samuel Beatriz Emilio Celia Tomás Ainhoa Bruno Alicia Martín "
-  + "Vega Nacho Berta Íker Olivia Gabriel Ángela Mario Teresa Enzo Amaia Luis Inés Aarón Daniela "
-  + "Héctor Naia Borja Rebeca Unai Sofía Cristian Blanca Joel Valeria Xavi Lorena Arnau Claudia "
-  + "Aurora Pau Vera Kevin Jimena Roberto Ariadna Sandra Emma Álex Nadia Simón Leire Gerard Nora "
-  + "Ismael Candela Rafa Lola Erik Miguel Alma Fran Greta Toni Chloe Bea Aleix Zoe Nil Ruth Yaiza "
-  + "Denis Carmen Pol Ada Israel Mireia Saúl Lara Cayetana Nico Ainara Ariel Elsa Omar Abril Salva "
-  + "Nayara Roger Aitana Cesc Alana Iago Ona Bosco Jana Enrique").split(" ");
+function initRed() {
+  const ctx = lienzoRed.getContext("2d");
+  const dpr = Math.min(devicePixelRatio || 1, 2);
+  let W = 0, H = 0, N = 0, pts = [], seis = [];
+  const raton = { x: -1e4, y: -1e4 };
 
-// Los seis van sueltos por el medio. Juntos al principio se vería venir el golpe.
-[13, 36, 57, 78, 100, 123].forEach((i, k) => NOMBRES.splice(i, 0, SEIS[k]));
+  function medir() {
+    W = lienzoRed.clientWidth; H = lienzoRed.clientHeight;
+    lienzoRed.width = W * dpr; lienzoRed.height = H * dpr;
+    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    N = W < 680 ? 80 : 150;
+    if (pts.length !== N) sembrar();
+  }
+  function sembrar() {
+    pts = Array.from({ length: N }, () => ({
+      x: Math.random() * W, y: Math.random() * H,
+      vx: (Math.random() - .5) * .22, vy: (Math.random() - .5) * .22,
+      r: 1.4 + Math.random() * 1.6,
+    }));
+    // Seis elegidos, repartidos, que serán los que se encienden.
+    seis = [];
+    const paso = Math.floor(N / 6);
+    for (let k = 0; k < 6; k++) seis.push(3 + k * paso);
+  }
 
-const secSeis = $("#seis");
-const cajaN = $("#nombres");
-const agT1 = $("#agT1"), agT2 = $("#agT2"), agP = $("#agP");
-let spans = [];
+  lienzoRed.addEventListener("pointermove", (e) => {
+    const b = lienzoRed.getBoundingClientRect();
+    raton.x = e.clientX - b.left; raton.y = e.clientY - b.top;
+  }, { passive: true });
+  lienzoRed.addEventListener("pointerleave", () => { raton.x = raton.y = -1e4; });
 
-if (cajaN) {
-  const frag = document.createDocumentFragment();
-  const usados = new Set();
-  NOMBRES.forEach((n) => {
-    const s = document.createElement("span");
-    s.textContent = n;
-    if (SEIS.includes(n) && !usados.has(n)) { s.classList.add("vivo"); usados.add(n); }
-    frag.appendChild(s);
-  });
-  cajaN.appendChild(frag);
-  spans = $$("span", cajaN);
-  // Orden de apagado aleatorio pero fijo: si cambiara, parpadearía al scrollear.
-  spans.forEach((s) => (s.dataset.o = Math.random().toFixed(4)));
+  let p = 0;                       // progreso de scroll (0..1), lo fija marco()
+  medir();
+  addEventListener("resize", medir, { passive: true });
+
+  function frame() {
+    ctx.clearRect(0, 0, W, H);
+    const vivo = clamp((p - 0.35) / 0.4);        // cuánto han "muerto" los normales
+    const enc = clamp((p - 0.5) / 0.35);         // cuánto se encienden los seis
+
+    // Deriva (la red está viva). Con reduced-motion se queda quieta.
+    if (!reduce) for (const a of pts) {
+      a.x += a.vx; a.y += a.vy;
+      if (a.x < 0 || a.x > W) a.vx *= -1;
+      if (a.y < 0 || a.y > H) a.vy *= -1;
+      const dx = a.x - raton.x, dy = a.y - raton.y, d2 = dx * dx + dy * dy;
+      if (d2 < 14000) { a.x += dx / 220; a.y += dy / 220; }   // el ratón los aparta
+    }
+
+    // Líneas entre puntos cercanos.
+    const LIM = W < 680 ? 96 : 120;
+    for (let i = 0; i < N; i++) {
+      for (let j = i + 1; j < N; j++) {
+        const a = pts[i], b = pts[j];
+        const dx = a.x - b.x, dy = a.y - b.y, d = Math.hypot(dx, dy);
+        if (d > LIM) continue;
+        const cerca = 1 - d / LIM;
+        const azul = seis.includes(i) && seis.includes(j);
+        if (azul) {
+          ctx.strokeStyle = `rgba(10,92,255,${(.25 + cerca * .6) * enc})`;
+          ctx.lineWidth = 1.4;
+        } else {
+          const base = 0.16 * cerca * (1 - vivo * 0.9);
+          ctx.strokeStyle = `rgba(10,10,10,${base})`;
+          ctx.lineWidth = 1;
+        }
+        ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke();
+      }
+    }
+
+    // Enlace fijo entre los seis, aunque estén lejos: la red que sí importa.
+    ctx.lineWidth = 1.6;
+    for (let i = 0; i < seis.length; i++) {
+      const a = pts[seis[i]], b = pts[seis[(i + 1) % seis.length]];
+      ctx.strokeStyle = `rgba(10,92,255,${0.5 * enc})`;
+      ctx.beginPath(); ctx.moveTo(a.x, a.y); ctx.lineTo(b.x, b.y); ctx.stroke();
+    }
+
+    // Puntos.
+    for (let i = 0; i < N; i++) {
+      const a = pts[i], es = seis.includes(i);
+      let r = a.r, col;
+      if (es) { r = a.r + enc * 2.6; col = `rgba(10,92,255,${.5 + .5 * enc})`; }
+      else    { const g = Math.round(10 + vivo * 200); col = `rgba(${g},${g},${g},${1 - vivo * .55})`; }
+      ctx.beginPath(); ctx.arc(a.x, a.y, r, 0, 6.2832); ctx.fillStyle = col; ctx.fill();
+    }
+
+    R.raf = requestAnimationFrame(frame);
+  }
+
+  R = { set: (v) => (p = v), raf: 0 };
+  R.raf = requestAnimationFrame(frame);
 }
 
-function seis(p) {
-  const q = clamp((p - 0.14) / 0.62);
-  spans.forEach((s) => {
-    if (s.classList.contains("vivo")) {
-      s.classList.toggle("destaca", q > 0.5);
-      return;
-    }
-    s.style.opacity = +s.dataset.o < q ? 0 : 1;
-  });
-  const t = clamp((p - 0.7) / 0.14);
-  agT1.style.opacity = 1 - t;
-  agT2.style.opacity = t;
-  agP.style.opacity = clamp((p - 0.86) / 0.1);
+function red(pr) {
+  if (!R) return;
+  R.set(pr);
+  const t = clamp((pr - 0.5) / 0.16);
+  redA.style.opacity = 1 - t;
+  redB.style.opacity = t;
+  redP.style.opacity = clamp((pr - 0.74) / 0.12);
+}
+
+if (lienzoRed) {
+  // Solo se enciende (y solo consume rAF) cuando la sección está cerca.
+  new IntersectionObserver((es) => es.forEach((e) => {
+    if (e.isIntersecting && !R) initRed();
+  }), { rootMargin: "200px" }).observe(secRed);
 }
 
 /* ═════════════════════════════════════════════
@@ -154,7 +225,7 @@ function marco() {
   ultimo = y;
 
   if (secBucle) bucle(prog(secBucle));
-  if (secSeis && spans.length) seis(prog(secSeis));
+  if (secRed) red(prog(secRed));
   if (secVuelta) vuelta(prog(secVuelta));
 
   // El negro dura lo que dura el domingo. Y vuelve en la vuelta a casa.
