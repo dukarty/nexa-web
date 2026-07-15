@@ -46,6 +46,18 @@ a{color:inherit;text-decoration:none}
 .skip:focus{top:0}
 .prog{position:fixed;top:0;left:0;height:3px;width:100%;z-index:90;background:var(--az);transform:scaleX(0);transform-origin:0 50%;transition:transform .1s linear}
 
+/* Capa experiencial: un anillo azul que sigue al cursor y crece sobre
+   lo que se puede tocar. Solo con ratón, y solo si quieres movimiento. */
+.spark{
+  position:fixed;top:0;left:0;width:26px;height:26px;border-radius:50%;
+  border:1.5px solid var(--az);background:transparent;pointer-events:none;z-index:300;
+  opacity:0;transition:width .25s var(--e),height .25s var(--e),background .25s,opacity .3s;
+  will-change:transform;
+}
+.spark.big{width:58px;height:58px;background:rgba(10,92,255,.12)}
+@media (hover:none),(pointer:coarse){.spark{display:none}}
+@media (prefers-reduced-motion:reduce){.spark{display:none}}
+
 .az{color:var(--az)}
 .ind{font-size:.68rem;font-weight:800;letter-spacing:.26em;color:var(--az);
      font-variant-numeric:tabular-nums;margin-bottom:18px}

@@ -108,6 +108,14 @@ body:not(.oscuro) .marca{border-color:var(--tinta);color:var(--tinta);background
 .rev{opacity:0;transform:translateY(24px);transition:opacity .8s var(--e),transform .8s var(--e)}
 .rev.on{opacity:1;transform:none}
 
+/* Capa experiencial: anillo azul que sigue al cursor */
+.spark{position:fixed;top:0;left:0;width:26px;height:26px;border-radius:50%;border:1.5px solid var(--az);
+  background:transparent;pointer-events:none;z-index:300;opacity:0;
+  transition:width .25s var(--e),height .25s var(--e),background .25s,opacity .3s;will-change:transform}
+.spark.big{width:58px;height:58px;background:rgba(10,92,255,.12)}
+@media (hover:none),(pointer:coarse){.spark{display:none}}
+@media (prefers-reduced-motion:reduce){.spark{display:none}}
+
 @media (prefers-reduced-motion:reduce){
   .hero__t .w,.hero__s,.cue{animation:none;opacity:1;transform:none}
   .cue span{animation:none;top:6px}
@@ -216,6 +224,28 @@ body:not(.oscuro) .marca{border-color:var(--tinta);color:var(--tinta);background
   addEventListener("scroll", marcar, { passive: true });
   addEventListener("resize", marcar, { passive: true });
   marcar();
+
+  // Capa experiencial: el anillo azul que te sigue.
+  if (matchMedia("(hover:hover) and (pointer:fine)").matches && !reduce) {
+    const s = document.createElement("div");
+    s.className = "spark";
+    document.body.appendChild(s);
+    let x = innerWidth / 2, y = innerHeight / 2, tx = x, ty = y, vivo = false;
+    const inter = "a,button,summary,.volver,.cta";
+    addEventListener("pointermove", (e) => {
+      tx = e.clientX; ty = e.clientY;
+      if (!vivo) { vivo = true; s.style.opacity = "1"; }
+      s.classList.toggle("big", !!e.target.closest(inter));
+    }, { passive: true });
+    addEventListener("pointerdown", () => s.classList.add("big"));
+    addEventListener("pointerup", () => s.classList.remove("big"));
+    document.addEventListener("mouseleave", () => (s.style.opacity = "0"));
+    (function sigue() {
+      x += (tx - x) * 0.18; y += (ty - y) * 0.18;
+      s.style.transform = `translate(${x}px,${y}px) translate(-50%,-50%)`;
+      requestAnimationFrame(sigue);
+    })();
+  }
 </script>
 </body>
 </html>
