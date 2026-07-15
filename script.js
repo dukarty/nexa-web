@@ -321,6 +321,19 @@ addEventListener("keydown", (e) => { if (e.key === "Escape" && momento && !momen
 $$("img").forEach((img) => img.addEventListener("error", () => (img.style.visibility = "hidden")));
 
 /* ═════════════════════════════════════════════
+   Reveal al scrollear (secciones nuevas)
+   ═════════════════════════════════════════════ */
+const reveals = $$(".reveal");
+if (reveals.length && !reduce) {
+  const ioRev = new IntersectionObserver((es) => es.forEach((e) => {
+    if (e.isIntersecting) { e.target.classList.add("on"); ioRev.unobserve(e.target); }
+  }), { rootMargin: "0px 0px -12% 0px", threshold: 0.2 });
+  reveals.forEach((el) => ioRev.observe(el));
+} else {
+  reveals.forEach((el) => el.classList.add("on"));
+}
+
+/* ═════════════════════════════════════════════
    07 · ENTRAR
    ═════════════════════════════════════════════ */
 const form = $("#waitlist");
