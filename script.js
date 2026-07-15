@@ -11,14 +11,32 @@
 
 // Al entrar o recargar, SIEMPRE arriba del todo. Aunque quede un #lista
 // en la URL de una visita anterior: lo borramos para que no nos baje.
+// EXCEPCIÓN: si vienes de un clic del menú de otra página (index.html#lista,
+// index.html#gesto…), eso es intencionado: te llevamos a esa sección y luego
+// limpiamos la URL, para que al recargar vuelva a empezar arriba.
 if ("scrollRestoration" in history) history.scrollRestoration = "manual";
 (function arriba() {
-  if (location.hash) {
+  const hash = location.hash;
+  const nt = (performance.getEntriesByType && performance.getEntriesByType("navigation")[0]) || {};
+  const destino = hash.length > 1 ? document.getElementById(decodeURIComponent(hash.slice(1))) : null;
+  const intencionado = destino && nt.type === "navigate";
+
+  if (intencionado) {
+    // El DOM ya está parseado (script defer), así que saltamos ya. Repetimos
+    // tras el primer pintado y al cargar del todo, porque las fuentes al
+    // llegar cambian las alturas y moverían el destino.
+    const ir = () => destino.scrollIntoView({ behavior: "auto", block: "start" });
+    ir();
+    requestAnimationFrame(ir);
+    addEventListener("load", ir);
+    // Limpiamos la URL: al recargar, la web vuelve a empezar arriba.
     try { history.replaceState(null, "", location.pathname + location.search); } catch (e) {}
+    return;
   }
+  if (hash) { try { history.replaceState(null, "", location.pathname + location.search); } catch (e) {} }
   try { scrollTo(0, 0); } catch (e) {}
+  addEventListener("load", () => { try { scrollTo(0, 0); } catch (e) {} });
 })();
-addEventListener("load", () => { try { scrollTo(0, 0); } catch (e) {} });
 
 const CFG = window.NEXA || {};
 const SUPABASE_URL = CFG.SUPABASE_URL || "";
@@ -97,6 +115,7 @@ function marco() {
   const max = document.documentElement.scrollHeight - innerHeight;
   barra.style.transform = `scaleX(${max > 0 ? y / max : 0})`;
   nav.classList.toggle("oculto", y > ultimo && y > 700);
+  nav.classList.toggle("flota", y > 40);
   ultimo = y;
 
   if (secBucle) bucle(prog(secBucle));
