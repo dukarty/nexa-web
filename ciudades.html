@@ -164,16 +164,16 @@ body:not(.oscuro) .nav__links a{color:var(--tinta)}
   <div>
     <p class="hero__k">NEXA · Ciudades</p>
     <h1 class="hero__t" id="h1"><span class="w">Valencia</span> <span class="w">primero<span class="pt">.</span></span></h1>
-    <p class="hero__s">Después, la tuya. Pero solo cuando aquí haya vida. No antes.</p>
+    <p class="hero__s">Después, la tuya. Cuando haya con quién.</p>
   </div>
   <span class="cue" aria-hidden="true"><span></span></span>
 </section>
 
 <!-- 01 · UNA CIUDAD CADA VEZ -->
 <section class="sec" aria-labelledby="c1">
-  <p class="ind rev">01 · Por qué una sola</p>
-  <h2 class="tit rev" id="c1">Una ciudad.<br><span class="az">Cada vez.</span></h2>
-  <p class="p rev">Una app social vacía no le sirve a nadie. Preferimos ser <b>imprescindibles para mil personas</b> antes que irrelevantes para un millón. Por eso no abrimos diez ciudades a medias: abrimos una, y la llenamos de vida.</p>
+  <p class="ind rev">01 · Una a una</p>
+  <h2 class="tit rev" id="c1">Una ciudad.<br>Y a <span class="az">tope</span>.</h2>
+  <p class="p rev">Abrimos donde ya hay gente con quien salir. <b>Una a tope</b> antes que diez a medias.</p>
 </section>
 
 <!-- 02 · ESTADO -->
@@ -193,7 +193,7 @@ body:not(.oscuro) .nav__links a{color:var(--tinta)}
 <section class="sec" aria-labelledby="c3">
   <p class="ind rev">03 · No eres de Valencia</p>
   <h2 class="tit rev" id="c3">Dinos<br><span class="az">dónde estás.</span></h2>
-  <p class="p rev">Cuando NEXA llegue a tu ciudad, eres de los primeros en saberlo. Y cuanta más gente pida la misma, antes va.</p>
+  <p class="p rev">Cuando NEXA llegue ahí, te avisamos. Cuanta más gente lo pida, antes.</p>
 
   <form class="form rev" id="cform" novalidate>
     <div class="campo">
@@ -211,7 +211,7 @@ body:not(.oscuro) .nav__links a{color:var(--tinta)}
 
   <div class="ok" id="cok">
     <p class="ok__t">Anotado.</p>
-    <p class="ok__s" id="cokS">Cuando NEXA llegue, eres de los primeros en saberlo.</p>
+    <p class="ok__s" id="cokS">Cuando NEXA llegue, te avisamos el primero.</p>
   </div>
 </section>
 
@@ -280,7 +280,7 @@ body:not(.oscuro) .nav__links a{color:var(--tinta)}
     try {
       await guardar({ email: iEmail.value.trim().toLowerCase(), ciudad: ciudad.toLowerCase() });
       const disp = ciudad.charAt(0).toUpperCase() + ciudad.slice(1);
-      okS.textContent = `Cuando NEXA llegue a ${disp}, eres de los primeros en saberlo.`;
+      okS.textContent = `Cuando NEXA llegue a ${disp}, te avisamos el primero.`;
       form.style.display = "none";
       okBox.classList.add("on");
       okBox.setAttribute("tabindex", "-1");
