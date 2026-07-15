@@ -221,6 +221,23 @@ body.oscuro .marca{background:transparent;border-color:rgba(255,255,255,.32);col
 }
 .idea__p b{color:var(--tinta);font-weight:800}
 
+/* ═══ EL FILTRO — posicionamiento por contraste ═══ */
+.noes{padding:var(--sec) var(--pad);max-width:1300px;margin:0 auto}
+.noes .tit{margin-bottom:clamp(30px,4vw,52px)}
+.nolist{border-top:1.5px solid var(--tinta)}
+.nolist li{padding:clamp(20px,2.8vw,36px) 0;border-bottom:1.5px solid var(--linea);
+  display:flex;flex-wrap:wrap;align-items:baseline;gap:4px clamp(16px,3vw,40px)}
+.nolist .no{font-size:clamp(1.6rem,4.8vw,3.4rem);font-weight:900;letter-spacing:-.045em;
+  text-transform:uppercase;font-variation-settings:"wdth" 86;line-height:1;flex:none}
+.nolist .no s{position:relative;text-decoration:none}
+.nolist .no s::after{content:"";position:absolute;left:-.02em;right:-.02em;top:54%;height:.07em;
+  background:var(--az);transform:scaleX(0);transform-origin:left;transition:transform .8s var(--e) .15s}
+.nolist li.on .no s::after{transform:scaleX(1)}
+.nolist .por{font-size:clamp(.95rem,1.5vw,1.2rem);font-weight:600;color:var(--gris);align-self:center}
+.noes__cierre{margin-top:clamp(34px,4vw,52px);max-width:34ch;font-size:clamp(1.3rem,2.8vw,2.1rem);
+  font-weight:800;letter-spacing:-.03em;line-height:1.2}
+.noes__cierre b{color:var(--az)}
+
 /* ═══ 06 · ASÍ SE USA — ruta de 4 pasos ═══ */
 .pasos{padding:var(--sec) var(--pad);max-width:1300px;margin:0 auto}
 .pasos .tit{margin-bottom:clamp(30px,4vw,52px)}
@@ -581,5 +598,6 @@ body.bloq .nav,body.bloq .prog{opacity:0;pointer-events:none}
   .ap__t,.ap__s,.ap__act,.scrollcue{animation:none;opacity:1;transform:none}
   .scrollcue__dot{animation:none;top:6px}
   .reveal{opacity:1;transform:none;transition:none}
+  .nolist .no s::after{transform:scaleX(1);transition:none}
   .xword__x line{animation:none;stroke-dashoffset:0}
 }
