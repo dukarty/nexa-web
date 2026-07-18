@@ -27,7 +27,9 @@
 }
 
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+/* «clip» y no «hidden»: hidden rompería el position:sticky de las escenas.
+   Va en html y en body para que nada pueda desplazarse de lado en móvil. */
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;overflow-x:clip;max-width:100%}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 body{
   font-family:var(--f);background:#fff;color:var(--tinta);
@@ -90,36 +92,6 @@ a{color:inherit;text-decoration:none}
 }
 .pill:hover{background:var(--az-h);border-color:var(--az-h)}
 body.oscuro .marca{background:transparent;border-color:rgba(255,255,255,.32);color:#fff}
-
-/* Los enlaces del centro: que se vea que hay más sin gritar. */
-.nav__links{display:flex;align-items:center;gap:clamp(14px,2vw,32px)}
-.nav__links a{
-  position:relative;font-size:.75rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;
-  color:var(--tinta);white-space:nowrap;opacity:.82;transition:opacity .3s,color .6s;
-}
-.nav__links a::after{content:"";position:absolute;left:0;right:100%;bottom:-6px;height:2px;
-  background:var(--az);transition:right .32s var(--e)}
-.nav__links a:hover{opacity:1}
-.nav__links a:hover::after,.nav__links a[aria-current="page"]::after{right:0}
-.nav__links a[aria-current="page"]{color:var(--az);opacity:1}
-body.oscuro .nav__links a{color:#fff}
-
-/* Estado flotante: un fondo tenue cuando ya no estás arriba del todo,
-   para que los enlaces se lean sobre cualquier sección. */
-.nav::before{content:"";position:absolute;inset:0;z-index:-1;pointer-events:none;opacity:0;
-  background:rgba(255,255,255,.72);backdrop-filter:blur(14px) saturate(1.3);
-  -webkit-backdrop-filter:blur(14px) saturate(1.3);transition:opacity .45s var(--e)}
-.nav.flota::before{opacity:1}
-body.oscuro .nav.flota::before{background:rgba(10,10,10,.5)}
-
-/* Móvil: marca + Entrar arriba, y los enlaces en una fila propia debajo. */
-@media (max-width:820px){
-  .nav__in{flex-wrap:wrap;row-gap:11px}
-  .nav__links{order:3;flex-basis:100%;flex-wrap:wrap;justify-content:center;gap:6px 18px;
-    padding-top:11px;border-top:1px solid rgba(10,10,10,.1)}
-  body.oscuro .nav__links{border-top-color:rgba(255,255,255,.16)}
-  .nav__links a{font-size:.68rem;letter-spacing:.05em;opacity:1}
-}
 
 /* ═══ Escenas fijas ═══ */
 .fijo{
@@ -200,9 +172,10 @@ body.oscuro .nav.flota::before{background:rgba(10,10,10,.5)}
   font-size:clamp(1.3rem,3.2vw,2.7rem);font-weight:800;line-height:1.15;letter-spacing:-.04em;
   max-width:none;min-height:2.5em;
 }
-/* Cada frase en su propia línea: 2 líneas, nunca 3. En móvil estrecho sí puede partir. */
-.frase span{display:block;white-space:nowrap;opacity:0;transition:opacity .5s ease}
-@media (max-width:560px){.frase span{white-space:normal}}
+/* Cada frase en su propia línea. El nowrap SOLO en pantallas anchas:
+   en móvil desbordaba y dejaba un hueco blanco a la derecha. */
+.frase span{display:block;opacity:0;transition:opacity .5s ease}
+@media (min-width:900px){.frase span{white-space:nowrap}}
 /* El ancla: quien mira 5 segundos ya sabe qué es NEXA. Siempre visible. */
 .claim{
   position:absolute;left:50%;bottom:92px;transform:translateX(-50%);
