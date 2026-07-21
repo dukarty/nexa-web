@@ -439,7 +439,10 @@ body.nav-azul .marca__x line{stroke:#fff}
         <button class="opt sel" data-tipo="local"><b>Un local</b><small>Bar, café, sala, gimnasio…</small></button>
         <button class="opt" data-tipo="marca"><b>Una marca</b><small>Producto, evento, club…</small></button>
       </div>
-      <div class="campo"><label>Categoría</label><select id="regCat"><option>Hostelería</option><option>Ocio y cultura</option><option>Deporte y outdoor</option><option>Música y noche</option><option>Bienestar</option><option>Otro</option></select></div>
+      <div class="campo"><label>Categoría</label><select id="regCat">
+        <option>Restaurante</option><option>Bar / Cervecería</option><option>Cafetería / Brunch</option><option>Discoteca / Ocio nocturno</option><option>Música / Sala de conciertos</option><option>Cultura / Arte</option><option>Cine / Teatro</option><option>Gimnasio / Fitness</option><option>Deporte / Club</option><option>Outdoor / Aventura</option><option>Bienestar / Spa / Yoga</option><option>Librería</option><option>Coworking / Espacio</option><option>Tienda / Retail</option><option>Moda</option><option>Belleza / Peluquería</option><option>Formación / Talleres</option><option>Turismo / Guías</option><option>Escape room / Ocio</option><option>Eventos / Productora</option><option>Food truck / Gastroneta</option><option>Comunidad / Club social</option><option>Otro</option>
+      </select></div>
+      <div class="campo" id="regCatOtroWrap" hidden><label>¿Qué tipo de negocio? Especifícalo</label><input type="text" id="regCatOtro" placeholder="Escríbelo aquí"></div>
       <div class="campo"><label>Ciudad</label><select id="regCiudad"><option>Valencia</option><option disabled>Más ciudades, pronto</option></select></div>
       <div class="reg__acc"><button class="reg__back" data-back>← Atrás</button><button class="cta" data-next><span>Continuar</span></button></div>
     </div>
@@ -549,6 +552,9 @@ body.nav-azul .marca__x line{stroke:#fff}
   $$("[data-back]",reg).forEach(b=>b.addEventListener("click",()=>{showMsg("");ir(paso-1);}));
   $$(".opt",reg).forEach(b=>b.addEventListener("click",()=>{$$(".opt",reg).forEach(o=>o.classList.remove("sel"));b.classList.add("sel");tipoSel=b.dataset.tipo;}));
   $$(".meta",reg).forEach(b=>b.addEventListener("click",()=>{$$(".meta",reg).forEach(o=>o.classList.remove("sel"));b.classList.add("sel");metaSel=b.dataset.meta;}));
+  // Categoría "Otro" abre campo libre
+  const regCatEl=$("#regCat");
+  if(regCatEl)regCatEl.addEventListener("change",()=>{const otro=regCatEl.value==="Otro";$("#regCatOtroWrap").hidden=!otro;if(otro)$("#regCatOtro").focus();});
 
   $("[data-fin]",reg).addEventListener("click",()=>{
     // Seguridad: los datos clave deben estar rellenos
@@ -559,7 +565,7 @@ body.nav-azul .marca__x line{stroke:#fff}
     const nombre=val("regNombre")||"Tu empresa";
     const cuenta={
       nombre, plan:"verificada", persona:val("regPersona")||"Tú", email:val("regEmail"),
-      tipo:tipoSel, categoria:val("regCat"), ciudad:val("regCiudad")||"Valencia",
+      tipo:tipoSel, categoria:(val("regCat")==="Otro"?(val("regCatOtro")||"Otro"):val("regCat")), ciudad:val("regCiudad")||"Valencia",
       frase:val("regFrase"), aforo:val("regAforo"), sedes:val("regSedes"),
       meta:metaSel, web:val("regWeb"), ig:val("regIg"), creada:Date.now()
     };

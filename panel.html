@@ -184,7 +184,23 @@ button{font:inherit;color:inherit;cursor:pointer;background:none;border:0}
 .modelo__g b{display:block;margin:6px 0 4px;font-size:1rem;font-weight:800}
 .modelo__g p{color:var(--tx-2);font-size:.86rem}
 
+/* Utilidades */
+[hidden]{display:none!important}
+.ic svg,.lock svg{width:100%;height:100%;display:block}
+.navi .ic{width:17px;height:17px}
+.lock{margin-left:auto;width:13px;height:13px;opacity:.5;flex:none}
+.icbtn svg{width:18px;height:18px}
+.lad__i svg{width:18px;height:18px}
+.expc__i svg,.acc__i svg{width:18px;height:18px}
+.hamb svg{width:20px;height:20px}
+.vacio .em{opacity:1}
+.vacio .em svg{width:36px;height:36px;opacity:.5;stroke-width:1.5;margin:0 auto;color:var(--az)}
+.co__safe svg{width:13px;height:13px;vertical-align:-2px;margin-right:5px;display:inline-block}
+.biz,.side__user{cursor:pointer;transition:background .15s;width:100%}
+.biz:hover,.side__user:hover{background:var(--panel)}
+
 /* Checkout */
+.mod__c.co{max-width:720px;padding:0;text-align:left;overflow:hidden}
 .co{max-width:720px;padding:0;text-align:left;overflow:hidden}
 .co__x{position:absolute;top:14px;right:14px;width:32px;height:32px;border-radius:50%;border:1px solid rgba(255,255,255,.35);color:#fff;display:grid;place-items:center;z-index:3}
 .co__body{display:grid;grid-template-columns:1fr 1fr}
@@ -277,47 +293,47 @@ body.claro .co__apple{background:#000;color:#fff}
 @media(max-width:520px){.kpis{grid-template-columns:1fr}.top__r{width:100%}}
 </style>
 </head>
-<body>
+<body class="claro">
 <div class="app">
   <aside class="side" id="side">
     <div class="side__logo">NE<span class="x" aria-hidden="true"><svg viewBox="0 0 20 20"><line x1="2" y1="18" x2="18" y2="2"/><line x1="18" y1="18" x2="2" y2="2"/></svg></span>A&nbsp;Empresas</div>
-    <div class="biz">
+    <button class="biz" id="bizBtn" title="Ver perfil de empresa">
       <div class="biz__a" id="bizAv">N</div>
-      <div class="biz__i"><b id="bizN">Tu empresa</b><small id="bizCiudad">Valencia</small></div>
-    </div>
+      <div class="biz__i" style="text-align:left"><b id="bizN">Tu empresa</b><small id="bizCiudad">Valencia</small></div>
+    </button>
     <span class="planbadge" id="planBadge">Plan · Verificada</span>
 
     <p class="grp">Analítica</p>
-    <button class="navi on" data-v="resumen" data-min="0"><span class="ic">▣</span> Resumen</button>
-    <button class="navi" data-v="encuentros" data-min="1"><span class="ic">◆</span> Encuentros</button>
-    <button class="navi" data-v="comunidad" data-min="1"><span class="ic">◉</span> Comunidad</button>
-    <button class="navi" data-v="resenas" data-min="1"><span class="ic">★</span> Reseñas</button>
+    <button class="navi on" data-v="resumen" data-min="0"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg></span> Resumen</button>
+    <button class="navi" data-v="encuentros" data-min="1"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="9" cy="12" r="6"/><circle cx="15" cy="12" r="6"/></svg></span> Encuentros</button>
+    <button class="navi" data-v="comunidad" data-min="1"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="9" cy="8" r="3.2"/><path d="M3.5 20c0-3.3 2.7-5 5.5-5s5.5 1.7 5.5 5"/><path d="M16 5.4a3.2 3.2 0 0 1 0 6.3M18.5 20c0-2.5-1-4.2-2.6-5"/></svg></span> Comunidad</button>
+    <button class="navi" data-v="resenas" data-min="1"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M12 3.5l2.6 5.3 5.9.8-4.3 4.1 1 5.8L12 16.9 6.8 19.6l1-5.8-4.3-4.1 5.9-.8z"/></svg></span> Reseñas</button>
     <p class="grp">Crecer</p>
-    <button class="navi" data-v="experiencias" data-min="0"><span class="ic">✦</span> Experiencias</button>
-    <button class="navi" data-v="objetivos" data-min="1"><span class="ic">◎</span> Objetivos</button>
-    <button class="navi" data-v="sedes" data-min="2"><span class="ic">⬚</span> Sedes</button>
+    <button class="navi" data-v="experiencias" data-min="0"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M12 3v3.5M12 17.5V21M3 12h3.5M17.5 12H21M6.2 6.2l2.4 2.4M15.4 15.4l2.4 2.4M17.8 6.2l-2.4 2.4M8.6 15.4l-2.4 2.4"/></svg></span> Experiencias</button>
+    <button class="navi" data-v="objetivos" data-min="1"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3.4"/></svg></span> Objetivos</button>
+    <button class="navi" data-v="sedes" data-min="2"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="8" width="7" height="12" rx="1"/><rect x="13" y="4" width="7" height="16" rx="1"/></svg></span> Sedes</button>
     <p class="grp">Tu marca</p>
-    <button class="navi" data-v="perfil" data-min="0"><span class="ic">◐</span> Perfil</button>
-    <button class="navi" data-v="verificacion" data-min="0"><span class="ic">✓</span> Verificación</button>
+    <button class="navi" data-v="perfil" data-min="0"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="8" r="4"/><path d="M4.5 20.5c0-4 3.5-6 7.5-6s7.5 2 7.5 6"/></svg></span> Perfil</button>
+    <button class="navi" data-v="verificacion" data-min="0"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M8.5 12l2.4 2.4 4.6-4.8"/></svg></span> Verificación</button>
     <p class="grp">Cuenta</p>
-    <button class="navi" data-v="facturacion" data-min="0"><span class="ic">≡</span> Facturación</button>
-    <button class="navi" data-v="equipo" data-min="0"><span class="ic">⚇</span> Equipo</button>
-    <button class="navi" data-v="ajustes" data-min="0"><span class="ic">⚙</span> Ajustes</button>
+    <button class="navi" data-v="facturacion" data-min="0"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 10h18"/></svg></span> Facturación</button>
+    <button class="navi" data-v="equipo" data-min="0"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="8" cy="9" r="3"/><circle cx="16" cy="9" r="3"/><path d="M2.5 19c0-2.8 2.5-4.3 5.5-4.3M21.5 19c0-2.8-2.5-4.3-5.5-4.3"/></svg></span> Equipo</button>
+    <button class="navi" data-v="ajustes" data-min="0"><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="3"/><path d="M12 2.5v3M12 18.5v3M2.5 12h3M18.5 12h3M5.2 5.2l2 2M16.8 16.8l2 2M18.8 5.2l-2 2M7.2 16.8l-2 2"/></svg></span> Ajustes</button>
 
-    <div class="side__user"><span class="av" id="userAv">T</span><div><b id="userN">Tú</b><small>Administrador</small></div></div>
+    <button class="side__user" id="userBtn" title="Tu cuenta"><span class="av" id="userAv">T</span><div style="text-align:left"><b id="userN">Tú</b><small>Administrador</small></div></button>
   </aside>
   <div class="velo" id="velo"></div>
 
   <main class="main">
     <div class="top">
-      <button class="hamb" id="hamb" aria-label="Menú">☰</button>
+      <button class="hamb" id="hamb" aria-label="Menú"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
       <div><h1 id="tTit">Resumen</h1><p id="tSub">Cómo va tu comunidad en NEXA</p></div>
       <div class="top__r">
         <div class="seg"><button>7 d</button><button class="on">30 d</button><button>90 d</button></div>
         <span class="chip chip--amb" id="verChip" title="Estado de verificación">En revisión</span>
-        <button class="icbtn" id="campana" title="Notificaciones">🔔<span class="dot" id="campanaDot"></span></button>
-        <button class="icbtn" id="ayudaBtn" title="Ayuda">?</button>
-        <button class="icbtn" id="tema" title="Modo claro/oscuro">◐</button>
+        <button class="icbtn" id="campana" title="Notificaciones" aria-label="Notificaciones"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 9a6 6 0 0 1 12 0c0 5 2 6 2 6H4s2-1 2-6z"/><path d="M10 20a2 2 0 0 0 4 0"/></svg><span class="dot" id="campanaDot"></span></button>
+        <button class="icbtn" id="ayudaBtn" title="Ayuda" aria-label="Ayuda"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M9.2 9.2a2.8 2.8 0 0 1 5.4 1c0 1.9-2.6 2.2-2.6 3.8"/><circle cx="12" cy="17.4" r=".6" fill="currentColor" stroke="none"/></svg></button>
+        <button class="icbtn" id="tema" title="Modo claro/oscuro" aria-label="Cambiar tema"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="8"/><path d="M12 4a8 8 0 0 0 0 16z" fill="currentColor" stroke="none"/></svg></button>
       </div>
     </div>
 
@@ -355,7 +371,7 @@ body.claro .co__apple{background:#000;color:#fff}
       <div class="row">
         <div class="box">
           <div class="box__h"><b>Encuentros y θ</b><small>evolución</small></div>
-          <div class="vacio"><div class="em">📈</div><b>Aún no hay evolución que mostrar</b><p>En cuanto tengas tus primeros encuentros, aquí verás cómo crecen semana a semana.</p></div>
+          <div class="vacio"><div class="em"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M3 3v18h18"/><path d="M7 15l4-5 3 3 5-7"/></svg></div><b>Aún no hay evolución que mostrar</b><p>En cuanto tengas tus primeros encuentros, aquí verás cómo crecen semana a semana.</p></div>
         </div>
         <div class="box">
           <div class="box__h"><b>Tu comunidad</b></div>
@@ -376,7 +392,7 @@ body.claro .co__apple{background:#000;color:#fff}
         <button class="kpi" data-exp="showup"><p class="kpi__k">Show-up <span class="info">i</span></p><p class="kpi__v">—</p><p class="kpi__d dim">Aún sin datos</p></button>
       </div>
       <div class="box"><div class="box__h"><b>Tus encuentros</b><small>por experiencia</small></div>
-        <div class="vacio"><div class="em">◆</div><b>Aún no has generado encuentros</b><p>Cuando lances una experiencia y dos personas queden contigo, aparecerán aquí con su θ, repetición y +1.</p><button class="cta" data-go="experiencias">Crear una experiencia</button></div>
+        <div class="vacio"><div class="em"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="9" cy="12" r="6"/><circle cx="15" cy="12" r="6"/></svg></div><b>Aún no has generado encuentros</b><p>Cuando lances una experiencia y dos personas queden contigo, aparecerán aquí con su θ, repetición y +1.</p><button class="cta" data-go="experiencias">Crear una experiencia</button></div>
       </div>
     </section>
 
@@ -388,14 +404,14 @@ body.claro .co__apple{background:#000;color:#fff}
         <button class="kpi" data-exp="dormidos"><p class="kpi__k">Dormidos <span class="info">i</span></p><p class="kpi__v">0</p><p class="kpi__d dim">Aún sin datos</p></button>
       </div>
       <div class="box"><div class="box__h"><b>Segmentos</b><small>solo agregados · nunca datos privados</small></div>
-        <div class="vacio"><div class="em">◉</div><b>Tu comunidad aún está por construirse</b><p>Cuando la gente te siga y quede contigo, verás segmentos (recurrentes, nuevos, dormidos) para actuar sobre ellos — siempre en agregado.</p><button class="cta" data-go="perfil">Comparte tu perfil</button></div>
+        <div class="vacio"><div class="em"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="9" cy="8" r="3.2"/><path d="M3.5 20c0-3.3 2.7-5 5.5-5s5.5 1.7 5.5 5"/><path d="M16 5.4a3.2 3.2 0 0 1 0 6.3M18.5 20c0-2.5-1-4.2-2.6-5"/></svg></div><b>Tu comunidad aún está por construirse</b><p>Cuando la gente te siga y quede contigo, verás segmentos (recurrentes, nuevos, dormidos) para actuar sobre ellos — siempre en agregado.</p><button class="cta" data-go="perfil">Comparte tu perfil</button></div>
       </div>
     </section>
 
     <!-- RESEÑAS -->
     <section class="vista" data-vista="resenas">
       <div class="box"><div class="box__h"><b>Lo que dice tu comunidad</b><small>tras cada encuentro</small></div>
-        <div class="vacio"><div class="em">★</div><b>Aún sin reseñas</b><p>Después de cada encuentro, la gente puede valorar su experiencia contigo. Verás la nota media y los comentarios en agregado, para saber qué mejorar.</p></div>
+        <div class="vacio"><div class="em"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linejoin="round"><path d="M12 3.5l2.6 5.3 5.9.8-4.3 4.1 1 5.8L12 16.9 6.8 19.6l1-5.8-4.3-4.1 5.9-.8z"/></svg></div><b>Aún sin reseñas</b><p>Después de cada encuentro, la gente puede valorar su experiencia contigo. Verás la nota media y los comentarios en agregado, para saber qué mejorar.</p></div>
       </div>
     </section>
 
@@ -449,7 +465,7 @@ body.claro .co__apple{background:#000;color:#fff}
     <!-- SEDES -->
     <section class="vista" data-vista="sedes">
       <div class="box"><div class="box__h"><b>Comparativa entre sedes</b><small>plan Ciudad</small></div>
-        <div class="vacio"><div class="em">⬚</div><b>Añade tus sedes</b><p>Con el plan Ciudad, compara todos tus locales en un panel: encuentros, θ, repetición y R por sede, con objetivos para cada uno.</p></div>
+        <div class="vacio"><div class="em"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><rect x="4" y="8" width="7" height="12" rx="1"/><rect x="13" y="4" width="7" height="16" rx="1"/></svg></div><b>Añade tus sedes</b><p>Con el plan Ciudad, compara todos tus locales en un panel: encuentros, θ, repetición y R por sede, con objetivos para cada uno.</p></div>
       </div>
     </section>
 
@@ -461,9 +477,10 @@ body.claro .co__apple{background:#000;color:#fff}
           <div class="form">
             <div class="field"><label>Nombre</label><input id="pfNombre" placeholder="Bar La Brújula"></div>
             <div class="f2">
-              <div class="field"><label>Categoría</label><select id="pfCat"><option>Hostelería</option><option>Ocio y cultura</option><option>Deporte y outdoor</option><option>Música y noche</option><option>Bienestar</option><option>Otro</option></select></div>
+              <div class="field"><label>Categoría</label><select id="pfCat"></select></div>
               <div class="field"><label>Ciudad</label><input id="pfCiudad" value="Valencia"></div>
             </div>
+            <div class="field" id="pfCatOtroWrap" hidden><label>¿Qué tipo de negocio? (especifica)</label><input id="pfCatOtro" placeholder="Escríbelo aquí"></div>
             <div class="field"><label>Descripción</label><textarea id="pfDesc" placeholder="Qué vive la gente contigo"></textarea></div>
             <div class="f2">
               <div class="field"><label>Web</label><input id="pfWeb" placeholder="labrujula.com"></div>
@@ -554,6 +571,7 @@ body.claro .co__apple{background:#000;color:#fff}
           <div class="comm__r"><span>Categoría</span><b id="ajCat">—</b></div>
           <div class="comm__r"><span>Email</span><b id="ajEmail">—</b></div>
           <button class="comm__btn" data-go="perfil" style="margin-top:14px">Editar en Perfil</button>
+          <button class="comm__btn" id="logoutBtn" style="margin-top:10px">Cerrar sesión</button>
         </div>
         <div class="box"><div class="box__h"><b>Privacidad y datos (RGPD)</b></div>
           <p style="color:var(--tx-2);font-size:.9rem">Tus datos son tuyos. Puedes descargarlos o borrar tu cuenta cuando quieras.</p>
@@ -569,7 +587,7 @@ body.claro .co__apple{background:#000;color:#fff}
 <!-- Notificaciones -->
 <div class="drop" id="drop">
   <b>Notificaciones</b>
-  <div class="vacio" style="padding:20px 6px"><div class="em">🔔</div><b>Sin novedades</b><p>Te avisaremos cuando pase algo con tu comunidad: nuevos seguidores, encuentros o reseñas.</p></div>
+  <div class="vacio" style="padding:20px 6px"><div class="em"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><path d="M6 9a6 6 0 0 1 12 0c0 5 2 6 2 6H4s2-1 2-6z"/><path d="M10 20a2 2 0 0 0 4 0"/></svg></div><b>Sin novedades</b><p>Te avisaremos cuando pase algo con tu comunidad: nuevos seguidores, encuentros o reseñas.</p></div>
 </div>
 
 <!-- EXPLICA -->
@@ -630,7 +648,7 @@ body.claro .co__apple{background:#000;color:#fff}
         <div class="field"><label>Nombre en la tarjeta</label><input id="ccName" autocomplete="off" placeholder="David C."></div>
       </div>
       <button class="co__btn" id="ccPay">Pagar <span id="ccPayAmt">299 €</span></button>
-      <p class="co__safe" id="ccSafe">🔒 Pago seguro · demo: no se realiza ningún cargo real</p>
+      <p class="co__safe" id="ccSafe">Pago seguro · demo: no se realiza ningún cargo real</p>
       <button class="sec" data-cerrar-pago style="width:100%;color:var(--tx-2);font-weight:700">Cancelar</button>
     </div>
     <div class="co__done" id="pagoDone" hidden>
@@ -663,6 +681,9 @@ body.claro .co__apple{background:#000;color:#fff}
   const RANGO={verificada:0,activacion:1,ciudad:2,red:3};
   const NOMBREPLAN={verificada:"Verificada",activacion:"Activación",ciudad:"Ciudad",red:"Red"};
   const PRECIOPLAN={verificada:"Gratis",activacion:"299 €/año",ciudad:"990 €/año",red:"A medida"};
+  const SVG_LOCK='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>';
+  const SVG_SPARK='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M12 3v3.5M12 17.5V21M3 12h3.5M17.5 12H21M6.2 6.2l2.4 2.4M15.4 15.4l2.4 2.4M17.8 6.2l-2.4 2.4M8.6 15.4l-2.4 2.4"/></svg>';
+  const CATEGORIAS=["Restaurante","Bar / Cervecería","Cafetería / Brunch","Discoteca / Ocio nocturno","Música / Sala de conciertos","Cultura / Arte","Cine / Teatro","Gimnasio / Fitness","Deporte / Club","Outdoor / Aventura","Bienestar / Spa / Yoga","Librería","Coworking / Espacio","Tienda / Retail","Moda","Belleza / Peluquería","Formación / Talleres","Turismo / Guías","Escape room / Ocio","Eventos / Productora","Food truck / Gastroneta","Comunidad / Club social","Otro"];
 
   /* ── SESIÓN ── */
   function leerCuenta(){try{return JSON.parse(localStorage.getItem("nexa_empresa")||"null");}catch(e){return null;}}
@@ -673,6 +694,7 @@ body.claro .co__apple{background:#000;color:#fff}
     try{localStorage.setItem("nexa_empresa",JSON.stringify(cuenta));}catch(e){}
   }
   if(!cuenta){ $("#gate").classList.add("on"); document.body.style.overflow="hidden"; }
+  else if(sessionStorage.getItem("nexa_out")){ $("#gate").classList.add("on"); document.body.style.overflow="hidden"; }
 
   let plan="verificada",nombre="Tu empresa",rango=0;
 
@@ -716,7 +738,7 @@ body.claro .co__apple{background:#000;color:#fff}
       {need:2,plan:"Ciudad",t:"Benchmarks de tu sector",d:"Compárate con negocios como el tuyo en Valencia. Dónde ganas y dónde no."}
     ];
     $("#ladder").innerHTML=defs.map(x=>{const lock=rango<x.need;
-      return '<button class="lad" data-need="'+x.need+'" data-t="'+x.t+'"><div class="lad__i">'+(lock?"🔒":"✦")+'</div><div><b>'+x.t+'</b><p>'+x.d+'</p></div><span class="lad__tag'+(lock?'':' lad__tag--ok')+'">'+(lock?x.plan:"Activo")+'</span></button>';}).join("");
+      return '<button class="lad" data-need="'+x.need+'" data-t="'+x.t+'"><div class="lad__i">'+(lock?SVG_LOCK:SVG_SPARK)+'</div><div><b>'+x.t+'</b><p>'+x.d+'</p></div><span class="lad__tag'+(lock?'':' lad__tag--ok')+'">'+(lock?x.plan:"Activo")+'</span></button>';}).join("");
     $$("#ladder .lad").forEach(b=>b.addEventListener("click",()=>{const need=+b.dataset.need;if(rango<need)abrirUpsell(b.dataset.t,need>=2?"Ciudad":"Activación");else toast("Se llenará con tu actividad real.");}));
   }
 
@@ -726,22 +748,28 @@ body.claro .co__apple{background:#000;color:#fff}
     const val=(id,v)=>{const el=$(id);if(el)el.value=v||"";};
     val("#pfNombre",c.nombre);val("#pfCiudad",c.ciudad||"Valencia");val("#pfDesc",c.descripcion||c.frase);
     val("#pfWeb",c.web);val("#pfIg",c.ig);val("#pfHorario",c.horario);
-    if(c.categoria){const s=$("#pfCat");[...s.options].forEach(o=>{if(o.value===c.categoria)s.value=c.categoria;});}
+    const sel=$("#pfCat");
+    if(!sel.options.length)sel.innerHTML=CATEGORIAS.map(x=>'<option>'+x+'</option>').join("");
+    const cat=c.categoria||"";
+    if(cat&&CATEGORIAS.includes(cat)){sel.value=cat;$("#pfCatOtroWrap").hidden=true;$("#pfCatOtro").value="";}
+    else if(cat){sel.value="Otro";$("#pfCatOtroWrap").hidden=false;$("#pfCatOtro").value=cat;}
+    else{sel.value=CATEGORIAS[0];$("#pfCatOtroWrap").hidden=true;}
     // preview
     $("#pvNombre").firstChild.textContent=(c.nombre||"Tu empresa")+" ";
     $("#pvAv").textContent=((c.nombre||"N").trim()[0]||"N").toUpperCase();
     $("#pvCat").textContent=((c.categoria||"Categoría")+" · "+(c.ciudad||"Valencia"));
     $("#pvDesc").textContent=(c.descripcion||c.frase)||"Añade una descripción para que la gente sepa qué vive contigo.";
-    $("#pvWeb").textContent=c.web?("🔗 "+c.web):"";
-    $("#pvIg").textContent=c.ig?("◎ "+c.ig):"";
-    $("#pvHorario").textContent=c.horario?("🕑 "+c.horario):"";
+    $("#pvWeb").textContent=c.web||"";
+    $("#pvIg").textContent=c.ig||"";
+    $("#pvHorario").textContent=c.horario||"";
     $("#pvVer").style.display=c.verified?"inline":"none";
   }
+  $("#pfCat").addEventListener("change",()=>{$("#pfCatOtroWrap").hidden=$("#pfCat").value!=="Otro";if($("#pfCat").value==="Otro")$("#pfCatOtro").focus();});
   $("#pfGuardar").addEventListener("click",()=>{
     cuenta=cuenta||{};
     cuenta.nombre=$("#pfNombre").value.trim()||cuenta.nombre;
     cuenta.ciudad=$("#pfCiudad").value.trim()||"Valencia";
-    cuenta.categoria=$("#pfCat").value;
+    cuenta.categoria=$("#pfCat").value==="Otro"?($("#pfCatOtro").value.trim()||"Otro"):$("#pfCat").value;
     cuenta.descripcion=$("#pfDesc").value.trim();
     cuenta.web=$("#pfWeb").value.trim();cuenta.ig=$("#pfIg").value.trim();cuenta.horario=$("#pfHorario").value.trim();
     guardar();pintarCuenta();pintarPerfil();pintarCheck();toast("Perfil guardado.");
@@ -759,8 +787,8 @@ body.claro .co__apple{background:#000;color:#fff}
     const list=(cuenta&&cuenta.experiencias)||[];
     $("#expCount").textContent=list.length;
     $("#expLista").innerHTML=list.length?('<div class="explist">'+list.map(e=>
-      '<div class="expc"><div class="expc__i">✦</div><div><b>'+esc(e.titulo)+'</b><small>'+esc(e.cat)+'</small></div><span class="expc__tag'+(e.franja==="valle"?' expc__tag--val':'')+'">'+(e.franja==="valle"?"Franja valle":"Publicada")+'</span></div>'
-    ).join("")+'</div>'):'<div class="vacio"><div class="em">✦</div><b>Aún no has creado ninguna</b><p>Crea tu primera experiencia arriba. Es lo que enciende el motor: gente que queda, que repite y que trae a otros.</p></div>';
+      '<div class="expc"><div class="expc__i">'+SVG_SPARK+'</div><div><b>'+esc(e.titulo)+'</b><small>'+esc(e.cat)+'</small></div><span class="expc__tag'+(e.franja==="valle"?' expc__tag--val':'')+'">'+(e.franja==="valle"?"Franja valle":"Publicada")+'</span></div>'
+    ).join("")+'</div>'):'<div class="vacio"><div class="em"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"><path d="M12 3v3.5M12 17.5V21M3 12h3.5M17.5 12H21M6.2 6.2l2.4 2.4M15.4 15.4l2.4 2.4M17.8 6.2l-2.4 2.4M8.6 15.4l-2.4 2.4"/></svg></div><b>Aún no has creado ninguna</b><p>Crea tu primera experiencia arriba. Es lo que enciende el motor: gente que queda, que repite y que trae a otros.</p></div>';
   }
   function esc(s){return String(s||"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));}
   $("#expCrear").addEventListener("click",()=>{
@@ -863,7 +891,7 @@ body.claro .co__apple{background:#000;color:#fff}
       ?'<tr><td colspan="4" style="padding:12px;color:var(--tx-2)">Sin facturas · estás en el plan gratis.</td></tr>'
       :'<tr><td style="padding:12px">Hoy</td><td style="padding:12px">'+NOMBREPLAN[plan]+' · anual</td><td style="padding:12px;text-align:right">'+PRECIOPLAN[plan]+'</td><td style="padding:12px;text-align:right"><button class="mini">PDF</button></td></tr>';
     $$(".navi .lock").forEach(l=>l.remove());
-    $$(".navi").forEach(n=>{const min=+n.dataset.min;if(min>rango)n.insertAdjacentHTML("beforeend",'<span class="lock">🔒</span>');});
+    $$(".navi").forEach(n=>{const min=+n.dataset.min;if(min>rango)n.insertAdjacentHTML("beforeend",'<span class="lock">'+SVG_LOCK+'</span>');});
     pintarMejoras();pintarLadder();pintarPerfil();pintarExp();pintarGoal();pintarEquipo();pintarCheck();
   }
   function bloqueoNombre(min){return min>=2?"Ciudad":"Activación";}
@@ -925,7 +953,7 @@ body.claro .co__apple{background:#000;color:#fff}
     $("#ccFields").style.display=real?"none":"block";
     $("#payOr").style.display=real?"none":"block";
     $("#payApple").style.display=real?"none":"block";
-    $("#ccSafe").textContent=real?"🔒 Pago seguro con Stripe":"🔒 Pago seguro · demo: no se realiza ningún cargo real";
+    $("#ccSafe").textContent=real?"Pago seguro con Stripe":"Pago seguro · demo: no se realiza ningún cargo real";
     if(real)btn.textContent="Ir a pago seguro";
     $("#pago").classList.add("on");
   }
@@ -986,7 +1014,7 @@ body.claro .co__apple{background:#000;color:#fff}
       if(r&&r.ok==="magic_link"){$("#gateMsg").textContent="Te hemos enviado un enlace de acceso a "+email+".";$("#gateMsg").style.color="var(--verde)";$("#gateMsg").style.display="block";return;}
     }
     const c=leerCuenta();
-    if(c){cuenta=c;$("#gate").classList.remove("on");document.body.style.overflow="";pintarCuenta();aplicarDatos((c&&c.datos)||null);toast("Bienvenido de vuelta, "+((c.nombre)||"empresa")+".");}
+    if(c){cuenta=c;sessionStorage.removeItem("nexa_out");$("#gate").classList.remove("on");document.body.style.overflow="";pintarCuenta();aplicarDatos((c&&c.datos)||null);toast("Bienvenido de vuelta, "+((c.nombre)||"empresa")+".");}
     else{$("#gateMsg").textContent="No encontramos ninguna cuenta en este dispositivo. Crea una gratis — se tarda un minuto.";$("#gateMsg").style.display="block";}
   });
 
@@ -1005,7 +1033,18 @@ body.claro .co__apple{background:#000;color:#fff}
   $("#ayuda").addEventListener("click",e=>{if(e.target.id==="ayuda")$("#ayuda").classList.remove("on");});
   document.addEventListener("click",e=>{if(!e.target.closest("#drop")&&!e.target.closest("#campana"))$("#drop").classList.remove("on");});
   $$(".seg button").forEach(b=>b.addEventListener("click",()=>{$$(".seg button").forEach(x=>x.classList.remove("on"));b.classList.add("on");}));
-  $("#tema").addEventListener("click",()=>document.body.classList.toggle("claro"));
+
+  /* Tema — por defecto BLANCO, con memoria */
+  function aplicarTema(t){document.body.classList.toggle("claro",t!=="oscuro");}
+  aplicarTema(localStorage.getItem("nexa_tema")||"claro");
+  $("#tema").addEventListener("click",()=>{const t=document.body.classList.contains("claro")?"oscuro":"claro";localStorage.setItem("nexa_tema",t);aplicarTema(t);});
+
+  /* Bloques clicables: empresa → Perfil, usuario → Ajustes */
+  $("#bizBtn").addEventListener("click",()=>ver("perfil"));
+  $("#userBtn").addEventListener("click",()=>ver("ajustes"));
+  function logout(){sessionStorage.setItem("nexa_out","1");$("#gate").classList.add("on");document.body.style.overflow="hidden";}
+  $("#logoutBtn").addEventListener("click",logout);
+
   const side=$("#side"),velo=$("#velo");
   $("#hamb").addEventListener("click",()=>{side.classList.add("abierta");velo.classList.add("on");});
   velo.addEventListener("click",()=>{side.classList.remove("abierta");velo.classList.remove("on");});
