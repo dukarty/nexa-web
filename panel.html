@@ -751,9 +751,10 @@ body.claro .co__apple{background:#000;color:#fff}
     const sel=$("#pfCat");
     if(!sel.options.length)sel.innerHTML=CATEGORIAS.map(x=>'<option>'+x+'</option>').join("");
     const cat=c.categoria||"";
-    if(cat&&CATEGORIAS.includes(cat)){sel.value=cat;$("#pfCatOtroWrap").hidden=true;$("#pfCatOtro").value="";}
-    else if(cat){sel.value="Otro";$("#pfCatOtroWrap").hidden=false;$("#pfCatOtro").value=cat;}
-    else{sel.value=CATEGORIAS[0];$("#pfCatOtroWrap").hidden=true;}
+    if(cat&&CATEGORIAS.includes(cat)){sel.value=cat;$("#pfCatOtro").value="";}
+    else if(cat){sel.value="Otro";$("#pfCatOtro").value=cat;}
+    else{sel.value=CATEGORIAS[0];$("#pfCatOtro").value="";}
+    $("#pfCatOtroWrap").hidden=sel.value!=="Otro";
     // preview
     $("#pvNombre").firstChild.textContent=(c.nombre||"Tu empresa")+" ";
     $("#pvAv").textContent=((c.nombre||"N").trim()[0]||"N").toUpperCase();
