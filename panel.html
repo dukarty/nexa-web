@@ -173,6 +173,44 @@ button{font:inherit;color:inherit;cursor:pointer;background:none;border:0}
 
 .mini{padding:8px 14px;border-radius:8px;background:var(--az);color:#fff;font-weight:700;font-size:.8rem;align-self:flex-start}
 
+/* Desplegables custom (encajan con la estética) */
+.field select{appearance:none;-webkit-appearance:none;-moz-appearance:none;background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="8" viewBox="0 0 12 8"><path d="M1 1l5 5 5-5" fill="none" stroke="%239A9AAC" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>');background-repeat:no-repeat;background-position:right 14px center;padding-right:40px;cursor:pointer}
+.field select option{background:var(--bg-2);color:var(--tx)}
+
+/* Modelo de negocio (claridad nivel inversor) */
+.modelo__g{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+@media(max-width:760px){.modelo__g{grid-template-columns:1fr}}
+.modelo__g .mn{font-size:.7rem;font-weight:800;letter-spacing:.12em;color:var(--az)}
+.modelo__g b{display:block;margin:6px 0 4px;font-size:1rem;font-weight:800}
+.modelo__g p{color:var(--tx-2);font-size:.86rem}
+
+/* Checkout */
+.co{max-width:720px;padding:0;text-align:left;overflow:hidden}
+.co__x{position:absolute;top:14px;right:14px;width:32px;height:32px;border-radius:50%;border:1px solid rgba(255,255,255,.35);color:#fff;display:grid;place-items:center;z-index:3}
+.co__body{display:grid;grid-template-columns:1fr 1fr}
+@media(max-width:640px){.co__body{grid-template-columns:1fr}}
+.co__sum{background:linear-gradient(160deg,#0A5CFF,#0A2E8A);color:#fff;padding:30px}
+.co__sum .mod__k{color:rgba(255,255,255,.75)}
+.co__plan{font-size:1.7rem;font-weight:900;letter-spacing:-.03em;margin-top:6px}
+.co__price{font-size:2.2rem;font-weight:900;margin:14px 0}
+.co__price small{font-size:.4em;font-weight:700;opacity:.82}
+.co__ul{list-style:none;display:grid;gap:8px;margin:8px 0 16px}
+.co__ul li{font-size:.9rem;display:flex;gap:8px;color:rgba(255,255,255,.94)}
+.co__ul li::before{content:"✓";font-weight:900}
+.co__roi{font-size:.85rem;font-weight:700;background:rgba(255,255,255,.14);border-radius:12px;padding:12px 14px;line-height:1.4}
+.co__pay{padding:26px}
+.co__apple{width:100%;background:#000;color:#fff;border-radius:12px;padding:13px;font-weight:800;font-size:1rem;margin-bottom:12px}
+body.claro .co__apple{background:#000;color:#fff}
+.co__or{text-align:center;color:var(--tx-3);font-size:.8rem;margin:4px 0 14px}
+.co__btn{width:100%;background:var(--az);color:#fff;border-radius:12px;padding:14px;font-weight:800;margin-top:6px}
+.co__btn:hover{background:var(--az-h)}
+.co__btn:disabled{opacity:.7;cursor:default}
+.co__safe{font-size:.78rem;color:var(--tx-3);text-align:center;margin:10px 0 12px}
+.co__done{grid-column:1/-1;padding:48px 30px;text-align:center;display:grid;place-items:center;gap:4px}
+.co__check{width:66px;height:66px;border-radius:50%;background:var(--verde);color:#04231a;display:grid;place-items:center;font-size:1.9rem;font-weight:900;margin-bottom:10px;animation:pop .4s var(--e)}
+.spin{display:inline-block;width:14px;height:14px;border:2px solid rgba(255,255,255,.4);border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite;vertical-align:-2px;margin-right:7px}
+@keyframes spin{to{transform:rotate(360deg)}}
+
 /* Modales */
 .mod{position:fixed;inset:0;z-index:70;background:rgba(0,0,0,.6);display:none;place-items:center;padding:20px}
 .mod.on{display:grid}
@@ -298,10 +336,18 @@ button{font:inherit;color:inherit;cursor:pointer;background:none;border:0}
           <div><div class="valor__n tab" id="vRepiten">—</div><div class="valor__l">vuelven, sin pagar por que lo hagan</div></div>
           <div><div class="valor__n tab" id="vMas">—</div><div class="valor__l">llegaron como el +1 de otro</div></div>
         </div>
-        <p class="valor__p" id="vFrase">Aún sin datos. Cuando tu comunidad empiece a quedar contigo, aquí verás lo que te trae.</p>
+        <p class="valor__p" id="vFrase">Aún sin datos — pero el modelo es simple: clientes que vuelven sin pagar publicidad. Eso es margen que se queda.</p>
       </button>
 
       <div class="kpis" id="kpis"></div>
+
+      <div class="box" style="margin-bottom:20px"><div class="box__h"><b>Cómo NEXA te hace ganar dinero</b><small>el modelo, en 3 frases</small></div>
+        <div class="modelo__g">
+          <div><span class="mn">01 · Captar</span><b>Gente nueva sin anuncios</b><p>Llegan porque alguien las trae a vivir algo contigo, no porque pagues por que te vean. Coste de captación: cero.</p></div>
+          <div><span class="mn">02 · Retener</span><b>Vuelven = margen puro</b><p>Un cliente que repite no te cuesta volver a captarlo. Cada vuelta es beneficio directo, no gasto.</p></div>
+          <div><span class="mn">03 · Multiplicar</span><b>Cada uno trae a otro</b><p>Con R&gt;1 tu comunidad crece sola: uno trae a otro, ese a otro. Es crecimiento compuesto, no un anuncio que se apaga.</p></div>
+        </div>
+      </div>
 
       <p class="grp" style="padding-top:2px">Desbloquea más valor</p>
       <div class="ladder" id="ladder"></div>
@@ -561,14 +607,38 @@ button{font:inherit;color:inherit;cursor:pointer;background:none;border:0}
   <div class="mod__acc"><button class="pri" id="onbNext">Siguiente</button><button class="sec" id="onbSkip">Saltar</button></div>
 </div></div>
 
-<!-- PAGO -->
-<div class="mod" id="pago"><div class="mod__c">
-  <p class="mod__k">Mejora en un toque</p>
-  <p class="mod__t" id="pagoT">Mejorar de plan</p>
-  <p class="mod__p" id="pagoP"></p>
-  <div class="pagos"><button class="apple" data-pagar>&#63743;&nbsp; Pay</button><button data-pagar>G&nbsp;Pay</button><button data-pagar>Tarjeta</button></div>
-  <p class="pago__nota">Renovación anual. Cancela cuando quieras. El dinero nunca compra alcance: solo desbloquea herramientas.</p>
-  <div class="mod__acc"><button class="sec" data-cerrar-pago>Ahora no</button></div>
+<!-- CHECKOUT -->
+<div class="mod" id="pago"><div class="mod__c co">
+  <button class="co__x" data-cerrar-pago aria-label="Cerrar">✕</button>
+  <div class="co__body">
+    <div class="co__sum">
+      <p class="mod__k">Mejorar a</p>
+      <p class="co__plan" id="pagoT">Activación</p>
+      <p class="co__price"><span id="pagoPrice">299 €</span><small>/año · IVA incl.</small></p>
+      <ul class="co__ul" id="pagoUl"></ul>
+      <p class="co__roi" id="pagoRoi"></p>
+    </div>
+    <div class="co__pay" id="pagoPay">
+      <button class="co__apple" id="payApple">&#63743;&nbsp; Pay</button>
+      <div class="co__or" id="payOr">o paga con tarjeta</div>
+      <div id="ccFields">
+        <div class="field"><label>Número de tarjeta</label><input id="ccNum" inputmode="numeric" autocomplete="off" placeholder="4242 4242 4242 4242"></div>
+        <div class="f2">
+          <div class="field"><label>Caducidad</label><input id="ccExp" inputmode="numeric" autocomplete="off" placeholder="MM/AA"></div>
+          <div class="field"><label>CVC</label><input id="ccCvc" inputmode="numeric" autocomplete="off" placeholder="123"></div>
+        </div>
+        <div class="field"><label>Nombre en la tarjeta</label><input id="ccName" autocomplete="off" placeholder="David C."></div>
+      </div>
+      <button class="co__btn" id="ccPay">Pagar <span id="ccPayAmt">299 €</span></button>
+      <p class="co__safe" id="ccSafe">🔒 Pago seguro · demo: no se realiza ningún cargo real</p>
+      <button class="sec" data-cerrar-pago style="width:100%;color:var(--tx-2);font-weight:700">Cancelar</button>
+    </div>
+    <div class="co__done" id="pagoDone" hidden>
+      <div class="co__check">✓</div>
+      <p class="co__plan" style="color:var(--tx)">¡Listo!</p>
+      <p class="mod__p" id="pagoDoneTxt" style="margin:0"></p>
+    </div>
+  </div>
 </div></div>
 
 <div class="toast" id="toast"></div>
@@ -831,20 +901,73 @@ button{font:inherit;color:inherit;cursor:pointer;background:none;border:0}
   $("#upBtn").addEventListener("click",()=>{$("#upsell").classList.remove("on");abrirPago(upsellKey);});
   $("#upsell").addEventListener("click",e=>{if(e.target.id==="upsell")$("#upsell").classList.remove("on");});
 
-  /* Pago */
+  /* Checkout — nada se desbloquea sin pasar por el pago */
+  const PRECIO_A={activacion:"299 €",ciudad:"990 €",red:"A medida"};
+  const ROI={
+    activacion:"Un cliente que vuelve no te cuesta publicidad. Con solo ~2 al mes, Activación ya se paga sola — el resto es margen.",
+    ciudad:"Compara tus locales y replica lo que funciona en cada uno. Pensado para marcas que ya llenan y quieren escalar."
+  };
   let pagoKey="activacion";
-  function abrirPago(k){pagoKey=k;$("#pagoT").textContent="Mejorar a "+NOMBREPLAN[k];$("#pagoP").textContent=PRECIOPLAN[k]+" · sin permanencia, cancela cuando quieras.";$("#pago").classList.add("on");}
-  $$("[data-cerrar-pago]").forEach(b=>b.addEventListener("click",()=>$("#pago").classList.remove("on")));
-  $("#pago").addEventListener("click",e=>{if(e.target.id==="pago")$("#pago").classList.remove("on");});
-  $$("[data-pagar]").forEach(b=>b.addEventListener("click",()=>hacerUpgrade(pagoKey)));
-  async function hacerUpgrade(k){
-    // Modo real: pasa por Stripe/Edge Function; modo mock: aplica local.
-    if(window.NEXAEmpresas&&window.NEXAEmpresas.real&&window.NEXAEmpresas.upgrade){
-      const r=await window.NEXAEmpresas.upgrade(k); if(r&&r.redirect)return;
-    }
-    cuenta=cuenta||{};cuenta.plan=k;guardar();pintarCuenta();
-    $("#pago").classList.remove("on");ver("resumen");toast("Ya eres "+NOMBREPLAN[k]+". Desbloqueado.");
+  function cerrarPago(){$("#pago").classList.remove("on");}
+  function abrirPago(k){
+    pagoKey=k;
+    const real=!!(window.NEXAEmpresas&&window.NEXAEmpresas.real);
+    $("#pagoT").textContent=NOMBREPLAN[k];
+    $("#pagoPrice").textContent=PRECIO_A[k]||PRECIOPLAN[k];
+    $("#pagoUl").innerHTML=(BENEF[NOMBREPLAN[k]]||[]).map(b=>"<li>"+b+"</li>").join("");
+    $("#pagoRoi").textContent=ROI[k]||"";
+    $("#ccPayAmt").textContent=PRECIO_A[k]||"";
+    // reset estados
+    $("#pagoPay").hidden=false;$("#pagoDone").hidden=true;
+    const btn=$("#ccPay");btn.disabled=false;btn.innerHTML='Pagar <span id="ccPayAmt">'+(PRECIO_A[k]||"")+'</span>';
+    ["#ccNum","#ccExp","#ccCvc","#ccName"].forEach(s=>{const el=$(s);if(el)el.value="";});
+    // Modo real: sin formulario de tarjeta, va a Stripe
+    $("#ccFields").style.display=real?"none":"block";
+    $("#payOr").style.display=real?"none":"block";
+    $("#payApple").style.display=real?"none":"block";
+    $("#ccSafe").textContent=real?"🔒 Pago seguro con Stripe":"🔒 Pago seguro · demo: no se realiza ningún cargo real";
+    if(real)btn.textContent="Ir a pago seguro";
+    $("#pago").classList.add("on");
   }
+  $$("[data-cerrar-pago]").forEach(b=>b.addEventListener("click",cerrarPago));
+  $("#pago").addEventListener("click",e=>{if(e.target.id==="pago")cerrarPago();});
+
+  // Máscaras
+  const num=$("#ccNum"),exp=$("#ccExp"),cvc=$("#ccCvc");
+  if(num)num.addEventListener("input",()=>{let v=num.value.replace(/\D/g,"").slice(0,16);num.value=v.replace(/(.{4})(?=.)/g,"$1 ");});
+  if(exp)exp.addEventListener("input",()=>{let v=exp.value.replace(/\D/g,"").slice(0,4);exp.value=v.length>2?v.slice(0,2)+"/"+v.slice(2):v;});
+  if(cvc)cvc.addEventListener("input",()=>{cvc.value=cvc.value.replace(/\D/g,"").slice(0,4);});
+  function validaTarjeta(){
+    const n=$("#ccNum").value.replace(/\s/g,"");
+    if(n.length<15)return "Revisa el número de tarjeta";
+    const e=$("#ccExp").value;if(!/^\d{2}\/\d{2}$/.test(e))return "Caducidad en formato MM/AA";
+    const mm=+e.slice(0,2);if(mm<1||mm>12)return "El mes de caducidad no es válido";
+    if($("#ccCvc").value.length<3)return "El CVC tiene 3 dígitos";
+    if(!$("#ccName").value.trim())return "Pon el nombre de la tarjeta";
+    return null;
+  }
+  function procesar(btn,label){
+    const orig=btn.innerHTML;btn.disabled=true;btn.innerHTML='<span class="spin"></span>Procesando pago…';
+    setTimeout(()=>{
+      cuenta=cuenta||{};cuenta.plan=pagoKey;guardar();
+      $("#pagoPay").hidden=true;$("#pagoDone").hidden=false;
+      $("#pagoDoneTxt").textContent="Pago confirmado. Ya eres "+NOMBREPLAN[pagoKey]+" — todo desbloqueado.";
+      setTimeout(()=>{cerrarPago();btn.disabled=false;btn.innerHTML=orig;pintarCuenta();ver("resumen");toast("Ya eres "+NOMBREPLAN[pagoKey]+".");},1600);
+    },1700);
+  }
+  async function viaStripe(){
+    if(window.NEXAEmpresas&&window.NEXAEmpresas.upgrade){const r=await window.NEXAEmpresas.upgrade(pagoKey);if(r&&r.redirect)return true;}
+    return false;
+  }
+  $("#ccPay").addEventListener("click",async ()=>{
+    if(window.NEXAEmpresas&&window.NEXAEmpresas.real){if(await viaStripe())return;}
+    const err=validaTarjeta();if(err)return toast(err);
+    procesar($("#ccPay"));
+  });
+  $("#payApple").addEventListener("click",async ()=>{
+    if(window.NEXAEmpresas&&window.NEXAEmpresas.real){if(await viaStripe())return;}
+    procesar($("#payApple"));
+  });
   function pintarMejoras(){
     const cont=$("#facMejoras");if(!cont)return;
     const sup=["activacion","ciudad","red"].filter(k=>(RANGO[k]??9)>rango);
