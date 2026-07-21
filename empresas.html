@@ -229,6 +229,9 @@ body.nav-azul .marca__x line{stroke:#fff}
 .meta b{display:block;font-size:1.05rem;font-weight:900;letter-spacing:-.02em}
 .meta small{color:var(--gris-2);font-size:.86rem}
 .meta.sel{border-color:var(--az);box-shadow:0 0 0 3px rgba(10,92,255,.14)}
+.campo input.mal,.campo select.mal{border-color:#E5484D!important;box-shadow:0 0 0 4px rgba(229,72,77,.14)}
+.regmsg{display:none;position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:#E5484D;color:#fff;font-weight:800;font-size:.9rem;padding:12px 20px;border-radius:999px;z-index:210;box-shadow:0 12px 30px rgba(0,0,0,.22);max-width:90vw;text-align:center}
+.regmsg.on{display:block;animation:sube .3s var(--e)}
 
 @media (prefers-reduced-motion:reduce){.rev{opacity:1;transform:none;transition:none}.paso.on{animation:none}}
 </style>
@@ -412,6 +415,7 @@ body.nav-azul .marca__x line{stroke:#fff}
     <button class="reg__x" data-cerrar aria-label="Cerrar">✕</button>
   </div>
   <div class="reg__prog"><i id="regProg"></i></div>
+  <div id="regMsg" class="regmsg"></div>
   <div class="reg__wrap">
 
     <div class="paso on" data-p="1">
@@ -520,12 +524,35 @@ body.nav-azul .marca__x line{stroke:#fff}
   $("[data-cerrar]").addEventListener("click",cerrar);
   addEventListener("keydown",e=>{if(e.key==="Escape"&&reg.classList.contains("abierto"))cerrar();});
 
-  $$("[data-next]",reg).forEach(b=>b.addEventListener("click",()=>ir(paso+1)));
-  $$("[data-back]",reg).forEach(b=>b.addEventListener("click",()=>ir(paso-1)));
+  /* Validación: no avanzas sin rellenar lo obligatorio */
+  function showMsg(m){const el=$("#regMsg");el.textContent=m||"";el.classList.toggle("on",!!m);clearTimeout(el._t);if(m)el._t=setTimeout(()=>el.classList.remove("on"),3200);}
+  function malo(sel,msg){const i=$(sel);if(i){i.classList.add("mal");i.focus();}showMsg(msg);return false;}
+  function valida(n){
+    showMsg("");
+    if(n===1){
+      ["#regNombre","#regEmail","#regPersona"].forEach(s=>$(s).classList.remove("mal"));
+      if(!$("#regNombre").value.trim())return malo("#regNombre","Pon el nombre de tu empresa para seguir");
+      if(!/^\S+@\S+\.\S+$/.test($("#regEmail").value.trim()))return malo("#regEmail","Necesitamos un email de trabajo válido");
+      if(!$("#regPersona").value.trim())return malo("#regPersona","¿Con quién hablamos? Pon tu nombre");
+    }
+    if(n===3){
+      $("#regFrase").classList.remove("mal");
+      if(!$("#regFrase").value.trim())return malo("#regFrase","Cuéntanos en una frase qué ofreces");
+    }
+    return true;
+  }
+  // quitar el rojo al escribir
+  ["#regNombre","#regEmail","#regPersona","#regFrase"].forEach(s=>{const el=$(s);if(el)el.addEventListener("input",()=>{el.classList.remove("mal");showMsg("");});});
+
+  $$("[data-next]",reg).forEach(b=>b.addEventListener("click",()=>{if(valida(paso))ir(paso+1);}));
+  $$("[data-back]",reg).forEach(b=>b.addEventListener("click",()=>{showMsg("");ir(paso-1);}));
   $$(".opt",reg).forEach(b=>b.addEventListener("click",()=>{$$(".opt",reg).forEach(o=>o.classList.remove("sel"));b.classList.add("sel");tipoSel=b.dataset.tipo;}));
   $$(".meta",reg).forEach(b=>b.addEventListener("click",()=>{$$(".meta",reg).forEach(o=>o.classList.remove("sel"));b.classList.add("sel");metaSel=b.dataset.meta;}));
 
   $("[data-fin]",reg).addEventListener("click",()=>{
+    // Seguridad: los datos clave deben estar rellenos
+    if(!valida(1)){ir(1);return;}
+    if(!valida(3)){ir(3);return;}
     // Se crea la cuenta GRATIS (plan verificada). El pago se hace luego, dentro del panel.
     const val=id=>($("#"+id)?.value||"").trim();
     const nombre=val("regNombre")||"Tu empresa";
