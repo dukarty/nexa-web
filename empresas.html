@@ -223,6 +223,12 @@ body.nav-azul .marca__x line{stroke:#fff}
 .hecho{text-align:center;padding:20px 0}
 .hecho__ico{width:64px;height:64px;border-radius:50%;background:var(--az);display:grid;place-items:center;margin:0 auto 22px}
 .hecho__ico svg{width:26px;height:26px}.hecho__ico line{stroke:#fff;stroke-width:3;stroke-linecap:round}
+.regmini{font-size:.85rem;color:var(--gris-2);margin:-6px 0 4px}
+.metas{display:grid;gap:10px;margin-bottom:8px}
+.meta{border:1.5px solid var(--linea);border-radius:14px;padding:16px 18px;text-align:left;background:#fff;transition:border-color .2s}
+.meta b{display:block;font-size:1.05rem;font-weight:900;letter-spacing:-.02em}
+.meta small{color:var(--gris-2);font-size:.86rem}
+.meta.sel{border-color:var(--az);box-shadow:0 0 0 3px rgba(10,92,255,.14)}
 
 @media (prefers-reduced-motion:reduce){.rev{opacity:1;transform:none;transition:none}.paso.on{animation:none}}
 </style>
@@ -243,8 +249,8 @@ body.nav-azul .marca__x line{stroke:#fff}
   <h1 class="tit tit--xl">Más clientes.<br>Los que <span class="az">vuelven</span>.</h1>
   <p class="hero__s lead">Activa tu comunidad y mídelo. <span class="b">Sin anuncios.</span></p>
   <div class="hero__acc">
-    <button class="cta" data-abrir><span>Empieza gratis</span><span class="cta__x" aria-hidden="true"><svg viewBox="0 0 20 20"><line x1="2" y1="18" x2="18" y2="2"/><line x1="18" y1="18" x2="2" y2="2"/></svg></span></button>
-    <a class="cta cta--gh" href="panel.html"><span>Ver el panel</span></a>
+    <button class="cta" data-abrir><span>Crear cuenta gratis</span><span class="cta__x" aria-hidden="true"><svg viewBox="0 0 20 20"><line x1="2" y1="18" x2="18" y2="2"/><line x1="18" y1="18" x2="2" y2="2"/></svg></span></button>
+    <a class="cta cta--gh" href="panel.html"><span>Ya soy empresa</span></a>
   </div>
   <p class="hero__meta">Gratis para empezar · Sin permanencia · Verificación en 1 día</p>
 </section>
@@ -302,7 +308,7 @@ body.nav-azul .marca__x line{stroke:#fff}
       </div>
     </div>
     <p class="lead rev" style="margin-top:26px">Encuentros generados, θ (cuántos son entre desconocidos), repetición y el coeficiente R. Con objetivo, tendencia y qué hacer con cada dato.</p>
-    <div style="margin-top:28px" class="rev"><a class="cta cta--gh" href="panel.html" style="color:#fff;border-color:#fff"><span>Ver el panel completo</span></a></div>
+    <div style="margin-top:28px" class="rev"><button class="cta cta--gh" data-abrir style="color:#fff;border-color:#fff"><span>Crear cuenta y verlo</span></button></div>
   </div>
 </section>
 
@@ -342,24 +348,25 @@ body.nav-azul .marca__x line{stroke:#fff}
   <div class="in">
     <p class="kick rev">Planes</p>
     <h2 class="tit rev" style="margin-top:16px;max-width:16ch">Empieza gratis.<br>Crece cuando quieras.</h2>
+    <p class="lead rev" style="max-width:46ch">Creas tu cuenta gratis y entras. Mejoras a un plan superior <b>desde dentro</b>, cuando ya veas lo que NEXA te trae. Sin decidir nada por adelantado.</p>
     <div class="planes">
       <div class="plan rev">
-        <p class="plan__n">Verificada</p><p class="plan__q">Para empezar y probar</p>
+        <p class="plan__n">Verificada</p><p class="plan__q">Con la que empiezas</p>
         <p class="plan__price">Gratis</p>
-        <ul><li>Perfil verificado</li><li>Tu comunidad te sigue</li><li>Panel con lo básico</li><li>1 usuario</li></ul>
-        <button class="cta" data-abrir data-plan="verificada"><span>Empieza gratis</span></button>
+        <ul><li>Perfil verificado</li><li>Tu comunidad te sigue</li><li>Resumen de tu impacto</li><li>1 usuario</li></ul>
+        <button class="cta" data-abrir><span>Crear cuenta gratis</span></button>
       </div>
       <div class="plan plan--dest rev">
         <p class="plan__n">Activación</p><p class="plan__q">Para un local que quiere llenar</p>
-        <p class="plan__oculto">Ves el precio al registrarte</p>
+        <p class="plan__price">299&nbsp;€<small>/año</small></p>
         <ul><li>Todo lo de Verificada</li><li>Proponer y alojar planes</li><li>Analíticas completas</li><li>Reactivar dormidos</li><li>Hasta 3 usuarios</li></ul>
-        <button class="cta" data-abrir data-plan="activacion"><span>Elegir plan</span></button>
+        <button class="cta" data-abrir><span>Empezar gratis</span></button>
       </div>
       <div class="plan rev">
         <p class="plan__n">Ciudad</p><p class="plan__q">Para marcas con varias sedes</p>
-        <p class="plan__oculto">Ves el precio al registrarte</p>
+        <p class="plan__price">990&nbsp;€<small>/año</small></p>
         <ul><li>Todo lo de Activación</li><li>Multi-sede</li><li>Comparativas entre locales</li><li>Objetivos por sede</li><li>Usuarios ilimitados</li></ul>
-        <button class="cta" data-abrir data-plan="ciudad"><span>Elegir plan</span></button>
+        <button class="cta" data-abrir><span>Empezar gratis</span></button>
       </div>
       <div class="plan rev">
         <p class="plan__n">Red</p><p class="plan__q">Para cadenas y partners</p>
@@ -368,7 +375,7 @@ body.nav-azul .marca__x line{stroke:#fff}
         <a class="cta cta--gh" href="mailto:empresas@nexa.app"><span>Hablar con ventas</span></a>
       </div>
     </div>
-    <p class="planes__nota rev"><b>Ves el precio de cada plan al registrarte</b> · sin permanencia.</p>
+    <p class="planes__nota rev"><b>Ningún plan se paga por adelantado.</b> Entras gratis y mejoras desde tu panel · sin permanencia.</p>
   </div>
 </section>
 
@@ -409,74 +416,70 @@ body.nav-azul .marca__x line{stroke:#fff}
 
     <div class="paso on" data-p="1">
       <p class="reg__k">Paso 1 de 5</p>
-      <h2 class="reg__t">Crea tu cuenta</h2>
-      <p class="reg__d">Empieza en 30 segundos. Sin tarjeta.</p>
-      <div class="campo"><label>Nombre de la empresa</label><input type="text" placeholder="Bar La Brújula"></div>
-      <div class="campo"><label>Email</label><input type="email" placeholder="tu@empresa.com"></div>
-      <div class="campo"><label>Contraseña</label><input type="password" placeholder="••••••••"></div>
+      <h2 class="reg__t">Crea tu cuenta gratis</h2>
+      <p class="reg__d">Sin tarjeta. Sin plan. Entras, lo montas y decides después.</p>
+      <div class="campo"><label>Nombre de la empresa</label><input type="text" id="regNombre" placeholder="Bar La Brújula" autocomplete="organization"></div>
+      <div class="campo"><label>Tu email de trabajo</label><input type="email" id="regEmail" placeholder="tu@empresa.com" autocomplete="email"></div>
+      <div class="campo"><label>Tu nombre</label><input type="text" id="regPersona" placeholder="David" autocomplete="name"></div>
+      <p class="regmini">Te enviaremos un acceso a ese email. Nada de contraseñas que olvidar.</p>
       <div class="reg__acc"><button class="cta" data-next><span>Continuar</span></button></div>
+      <p class="regmini" style="text-align:center;margin-top:18px">¿Ya tienes cuenta? <a href="panel.html" style="color:var(--az);font-weight:800">Entrar</a></p>
     </div>
 
     <div class="paso" data-p="2">
       <p class="reg__k">Paso 2 de 5</p>
-      <h2 class="reg__t">¿Qué eres?</h2>
-      <p class="reg__d">Para enseñarte solo lo que te sirve.</p>
+      <h2 class="reg__t">¿Qué es tu negocio?</h2>
+      <p class="reg__d">Para hablarte de lo tuyo, no en genérico.</p>
       <div class="opts">
-        <button class="opt" data-tipo="local"><b>Local</b><small>Bar, café, sala, gimnasio…</small></button>
-        <button class="opt" data-tipo="marca"><b>Marca</b><small>Producto, evento, club…</small></button>
+        <button class="opt sel" data-tipo="local"><b>Un local</b><small>Bar, café, sala, gimnasio…</small></button>
+        <button class="opt" data-tipo="marca"><b>Una marca</b><small>Producto, evento, club…</small></button>
       </div>
-      <div class="campo"><label>Categoría</label><select><option>Hostelería</option><option>Ocio y cultura</option><option>Deporte y outdoor</option><option>Música</option><option>Otro</option></select></div>
+      <div class="campo"><label>Categoría</label><select id="regCat"><option>Hostelería</option><option>Ocio y cultura</option><option>Deporte y outdoor</option><option>Música y noche</option><option>Bienestar</option><option>Otro</option></select></div>
+      <div class="campo"><label>Ciudad</label><select id="regCiudad"><option>Valencia</option><option disabled>Más ciudades, pronto</option></select></div>
       <div class="reg__acc"><button class="reg__back" data-back>← Atrás</button><button class="cta" data-next><span>Continuar</span></button></div>
     </div>
 
     <div class="paso" data-p="3">
       <p class="reg__k">Paso 3 de 5</p>
-      <h2 class="reg__t">Verifícate</h2>
-      <p class="reg__d">Para que nadie pueda suplantarte.</p>
-      <div class="aviso">Puedes <b>empezar a montarlo ya</b>. Te verificamos a mano en <b>1 día</b> — no bloquea nada.</div>
-      <div class="campo"><label>Dominio web</label><input type="text" placeholder="labrujula.com"></div>
-      <div class="campo"><label>Instagram (opcional)</label><input type="text" placeholder="@labrujula"></div>
+      <h2 class="reg__t">Cuéntanos de lo tuyo</h2>
+      <p class="reg__d">Cuanto mejor te conozcamos, mejor conectas con tu gente.</p>
+      <div class="campo"><label>En una frase, ¿qué vive la gente contigo?</label><input type="text" id="regFrase" placeholder="Cerveza artesana y conciertos íntimos los jueves"></div>
+      <div class="campo"><label>¿Cuánta gente pasa por aquí a la semana?</label>
+        <select id="regAforo"><option>Menos de 100</option><option>100 – 500</option><option>500 – 2.000</option><option>Más de 2.000</option></select></div>
+      <div class="campo"><label>¿Cuántas sedes tienes?</label>
+        <select id="regSedes"><option>Una</option><option>2 – 5</option><option>Más de 5</option></select></div>
       <div class="reg__acc"><button class="reg__back" data-back>← Atrás</button><button class="cta" data-next><span>Continuar</span></button></div>
     </div>
 
     <div class="paso" data-p="4">
       <p class="reg__k">Paso 4 de 5</p>
-      <h2 class="reg__t">Elige tu plan</h2>
-      <p class="reg__d">Aquí sí ves los precios. Sin permanencia.</p>
-      <div class="pplan">
-        <button class="pplan__i sel" data-precio="0"><span><b>Verificada</b><small>Para empezar</small></span><span class="pr">Gratis</span></button>
-        <button class="pplan__i" data-precio="299"><span><b>Activación</b><small>Llenar tu local</small></span><span class="pr">299&nbsp;€/año</span></button>
-        <button class="pplan__i" data-precio="990"><span><b>Ciudad</b><small>Varias sedes</small></span><span class="pr">990&nbsp;€/año</span></button>
-        <button class="pplan__i" data-precio="-1"><span><b>Red</b><small>Cadenas</small></span><span class="pr">A medida</span></button>
+      <h2 class="reg__t">¿Qué quieres conseguir?</h2>
+      <p class="reg__d">Elige lo que más te mueve. Prepararemos tu panel para eso.</p>
+      <div class="metas">
+        <button class="meta sel" data-meta="nuevos"><b>Gente nueva</b><small>Que lleguen personas que no me conocen</small></button>
+        <button class="meta" data-meta="repiten"><b>Que repitan</b><small>Convertir visitas sueltas en clientes fijos</small></button>
+        <button class="meta" data-meta="valle"><b>Llenar franjas flojas</b><small>Dar vida a los días y horas muertas</small></button>
+        <button class="meta" data-meta="eventos"><b>Mover mis eventos</b><small>Que mis planes lleguen a los míos</small></button>
       </div>
       <div class="reg__acc"><button class="reg__back" data-back>← Atrás</button><button class="cta" data-next><span>Continuar</span></button></div>
     </div>
 
     <div class="paso" data-p="5">
       <p class="reg__k">Paso 5 de 5</p>
-      <h2 class="reg__t" id="regPagoT">Ya está</h2>
-      <p class="reg__d" id="regPagoD">Verificada es gratis. Entra y empieza a montarlo.</p>
-      <div id="regPago" hidden>
-        <div class="campo"><label>Razón social</label><input type="text" placeholder="La Brújula S.L."></div>
-        <div class="campo"><label>CIF</label><input type="text" placeholder="B-12345678"></div>
-        <div class="campo"><label>Dirección fiscal</label><input type="text" placeholder="C/ Ejemplo 1, Valencia"></div>
-        <label style="display:block;font-size:.78rem;font-weight:800;letter-spacing:.04em;text-transform:uppercase;color:var(--gris);margin-bottom:8px">Pago en un toque</label>
-        <div class="pay">
-          <button class="oscuro"> Pay</button>
-          <button>G&nbsp;Pay</button>
-          <button>Tarjeta</button>
-        </div>
-        <p style="font-size:.82rem;color:var(--gris-2);margin-bottom:6px">Renovación automática. Cancela cuando quieras.</p>
-      </div>
-      <div class="reg__acc"><button class="reg__back" data-back>← Atrás</button><button class="cta" data-fin><span id="regFinT">Entrar al panel</span></button></div>
+      <h2 class="reg__t">Verifícate</h2>
+      <p class="reg__d">Para que nadie pueda suplantar tu marca.</p>
+      <div class="aviso">Empieza a montarlo <b>ya mismo</b>. Te verificamos a mano en <b>1 día</b> — no bloquea nada, y es <b>gratis</b>.</div>
+      <div class="campo"><label>Web o dominio</label><input type="text" id="regWeb" placeholder="labrujula.com"></div>
+      <div class="campo"><label>Instagram (opcional)</label><input type="text" id="regIg" placeholder="@labrujula"></div>
+      <div class="reg__acc"><button class="reg__back" data-back>← Atrás</button><button class="cta" data-fin><span>Crear mi cuenta</span></button></div>
     </div>
 
     <div class="paso" data-p="6">
       <div class="hecho">
         <div class="hecho__ico"><svg viewBox="0 0 20 20" aria-hidden="true"><line x1="3" y1="11" x2="8" y2="16"/><line x1="8" y1="16" x2="17" y2="4"/></svg></div>
-        <h2 class="reg__t" style="text-align:center">Estás dentro</h2>
-        <p class="reg__d" style="text-align:center">Tu cuenta está lista. Te verificamos en 1 día.</p>
-        <a class="cta" href="panel.html" style="justify-content:center;width:100%"><span>Ir a mi panel</span></a>
+        <h2 class="reg__t" style="text-align:center">Tu cuenta está lista</h2>
+        <p class="reg__d" style="text-align:center">Gratis, sin permanencia. Entra, monta lo tuyo y mejora cuando lo necesites — desde dentro.</p>
+        <a class="cta" href="panel.html" style="justify-content:center;width:100%"><span>Entrar a mi panel</span></a>
       </div>
     </div>
 
@@ -506,35 +509,37 @@ body.nav-azul .marca__x line{stroke:#fff}
   }
   addEventListener("scroll",tema,{passive:true});addEventListener("resize",tema,{passive:true});tema();
 
-  /* Registro */
-  const reg=$("#reg");let paso=1,planSel=0;
+  /* Registro — cuenta gratis, estilo Facebook (el pago vive DENTRO del panel) */
+  const reg=$("#reg");let paso=1;
   const pasos=$$(".paso",reg);
+  let tipoSel="local",metaSel="nuevos";
   function ir(n){paso=n;pasos.forEach(p=>p.classList.toggle("on",+p.dataset.p===n));$("#regProg").style.width=(Math.min(n,5)/5*100)+"%";reg.scrollTo({top:0,behavior:reduce?"auto":"smooth"});}
-  function abrir(plan){
-    reg.classList.add("abierto");document.body.style.overflow="hidden";
-    if(plan&&plan!=="verificada"){const map={activacion:1,ciudad:2}; if(map[plan]!=null){planSel=[0,299,990][map[plan]];} }
-    ir(1);
-  }
+  function abrir(){reg.classList.add("abierto");document.body.style.overflow="hidden";ir(1);}
   function cerrar(){reg.classList.remove("abierto");document.body.style.overflow="";}
-  $$("[data-abrir]").forEach(b=>b.addEventListener("click",()=>abrir(b.dataset.plan)));
+  $$("[data-abrir]").forEach(b=>b.addEventListener("click",abrir));
   $("[data-cerrar]").addEventListener("click",cerrar);
   addEventListener("keydown",e=>{if(e.key==="Escape"&&reg.classList.contains("abierto"))cerrar();});
 
   $$("[data-next]",reg).forEach(b=>b.addEventListener("click",()=>ir(paso+1)));
   $$("[data-back]",reg).forEach(b=>b.addEventListener("click",()=>ir(paso-1)));
-  $$(".opt",reg).forEach(b=>b.addEventListener("click",()=>{$$(".opt",reg).forEach(o=>o.classList.remove("sel"));b.classList.add("sel");}));
-  $$(".pplan__i",reg).forEach(b=>b.addEventListener("click",()=>{$$(".pplan__i",reg).forEach(o=>o.classList.remove("sel"));b.classList.add("sel");planSel=+b.dataset.precio;}));
+  $$(".opt",reg).forEach(b=>b.addEventListener("click",()=>{$$(".opt",reg).forEach(o=>o.classList.remove("sel"));b.classList.add("sel");tipoSel=b.dataset.tipo;}));
+  $$(".meta",reg).forEach(b=>b.addEventListener("click",()=>{$$(".meta",reg).forEach(o=>o.classList.remove("sel"));b.classList.add("sel");metaSel=b.dataset.meta;}));
 
-  // Paso 5 adapta: gratis salta pago; de pago pide facturación
-  const obs=new MutationObserver(()=>{
-    if($('.paso[data-p="5"]').classList.contains("on")){
-      const pago=$("#regPago"),t=$("#regPagoT"),d=$("#regPagoD"),fin=$("#regFinT");
-      if(planSel>0){pago.hidden=false;t.textContent="Facturación y pago";d.textContent="Pago en un toque. Renovación automática, cancela cuando quieras.";fin.textContent="Pagar y entrar";}
-      else{pago.hidden=true;t.textContent="Ya está";d.textContent="Verificada es gratis. Entra y empieza a montarlo.";fin.textContent="Entrar al panel";}
-    }
+  $("[data-fin]",reg).addEventListener("click",()=>{
+    // Se crea la cuenta GRATIS (plan verificada). El pago se hace luego, dentro del panel.
+    const val=id=>($("#"+id)?.value||"").trim();
+    const nombre=val("regNombre")||"Tu empresa";
+    const cuenta={
+      nombre, plan:"verificada", persona:val("regPersona")||"Tú", email:val("regEmail"),
+      tipo:tipoSel, categoria:val("regCat"), ciudad:val("regCiudad")||"Valencia",
+      frase:val("regFrase"), aforo:val("regAforo"), sedes:val("regSedes"),
+      meta:metaSel, web:val("regWeb"), ig:val("regIg"), creada:Date.now()
+    };
+    try{localStorage.setItem("nexa_empresa",JSON.stringify(cuenta));}catch(e){}
+    const url="panel.html?bienvenida=1&nombre="+encodeURIComponent(nombre);
+    $('.paso[data-p="6"] .cta').setAttribute("href",url);
+    ir(6);
   });
-  pasos.forEach(p=>obs.observe(p,{attributes:true,attributeFilter:["class"]}));
-  $("[data-fin]",reg).addEventListener("click",()=>ir(6));
 
   /* Cursor spark (desktop) */
   if(matchMedia("(hover:hover) and (pointer:fine)").matches&&!reduce){
