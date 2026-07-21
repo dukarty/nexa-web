@@ -577,5 +577,7 @@ body.nav-azul .marca__x line{stroke:#fff}
     (function loop(){x+=(tx-x)*.18;y+=(ty-y)*.18;s.style.transform=`translate(${x}px,${y}px) translate(-50%,-50%)`;requestAnimationFrame(loop);})();
   }
 </script>
+<!-- SDK de empresas: en mock (sin config) el registro usa localStorage; con Supabase, alta real -->
+<script src="backend/client/nexa-empresas.js" defer></script>
 </body>
 </html>
