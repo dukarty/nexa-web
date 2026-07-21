@@ -606,6 +606,13 @@ body.claro .pagos .apple{background:#000;color:#fff}
   const side=$("#side"),velo=$("#velo");
   $("#hamb").addEventListener("click",()=>{side.classList.add("abierta");velo.classList.add("on");});
   velo.addEventListener("click",()=>{side.classList.remove("abierta");velo.classList.remove("on");});
+
+  /* Hook para el backend real: el SDK (backend/client/nexa-empresas.js) usa esto
+     para inyectar la cuenta y las métricas reales cuando hay Supabase configurado.
+     Sin config, no se toca nada: el panel sigue en modo demo. */
+  window.NEXA_PANEL={setCuenta:c=>{cuenta=c;pintarCuenta();},aplicarDatos,ver,toast};
 </script>
+<!-- SDK de empresas: en mock (sin config) no hace nada; con Supabase, hidrata datos reales -->
+<script src="backend/client/nexa-empresas.js" defer></script>
 </body>
 </html>
