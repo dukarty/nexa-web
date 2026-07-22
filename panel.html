@@ -356,7 +356,7 @@ body.claro .co__apple{background:#000;color:#fff}
       <button class="hamb" id="hamb" aria-label="Menú"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
       <div><h1 id="tTit">Resumen</h1><p id="tSub">Cómo va tu comunidad en NEXA</p></div>
       <div class="top__r">
-        <div class="seg"><button>7 d</button><button class="on">30 d</button><button>90 d</button></div>
+        <div class="seg" id="segRango"><button data-days="7">7 d</button><button class="on" data-days="30">30 d</button><button data-days="90">90 d</button></div>
         <span class="chip chip--amb" id="verChip" title="Estado de verificación">En revisión</span>
         <button class="icbtn" id="campana" title="Notificaciones" aria-label="Notificaciones"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 9a6 6 0 0 1 12 0c0 5 2 6 2 6H4s2-1 2-6z"/><path d="M10 20a2 2 0 0 0 4 0"/></svg><span class="dot" id="campanaDot"></span></button>
         <button class="icbtn" id="ayudaBtn" title="Ayuda" aria-label="Ayuda"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M9.2 9.2a2.8 2.8 0 0 1 5.4 1c0 1.9-2.6 2.2-2.6 3.8"/><circle cx="12" cy="17.4" r=".6" fill="currentColor" stroke="none"/></svg></button>
@@ -373,7 +373,7 @@ body.claro .co__apple{background:#000;color:#fff}
       </div>
 
       <button class="valor" data-exp="valor">
-        <p class="valor__k">Lo que NEXA te ha traído · últimos 30 días <span class="info">i</span></p>
+        <p class="valor__k">Lo que NEXA te ha traído · <span id="valorVentana">últimos 30 días</span> <span class="info">i</span></p>
         <div class="valor__g">
           <div><div class="valor__n tab" id="vNuevos">—</div><div class="valor__l">clientes nuevos, traídos por alguien</div></div>
           <div><div class="valor__n tab" id="vRepiten">—</div><div class="valor__l">vuelven, sin pagar por que lo hagan</div></div>
@@ -383,6 +383,17 @@ body.claro .co__apple{background:#000;color:#fff}
       </button>
 
       <div class="kpis" id="kpis"></div>
+
+      <div class="box" id="roiBox" style="margin-bottom:20px">
+        <div class="box__h"><b>¿Tu dinero rinde?</b><small id="roiVentana">últimos 30 días</small></div>
+        <div style="display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:16px;margin:6px 0 12px">
+          <div><div id="roiCoste" style="font-size:1.7rem;font-weight:900;letter-spacing:-.02em">—</div><div style="color:var(--tx-2);font-size:.82rem;margin-top:2px">coste por cliente nuevo con NEXA</div></div>
+          <div><div id="roiPubli" style="font-size:1.7rem;font-weight:900;letter-spacing:-.02em">—</div><div style="color:var(--tx-2);font-size:.82rem;margin-top:2px">lo mismo en publicidad (Meta Ads ~20&nbsp;€/cliente)</div></div>
+          <div><div id="roiAhorro" style="font-size:1.7rem;font-weight:900;letter-spacing:-.02em;color:var(--verde)">—</div><div style="color:var(--tx-2);font-size:.82rem;margin-top:2px">te ahorras frente a pagar anuncios</div></div>
+        </div>
+        <p id="roiVerdict" style="font-size:.9rem;font-weight:700;color:var(--tx);background:var(--panel);border:1px solid var(--linea);border-radius:12px;padding:12px 14px;line-height:1.45;margin:0"></p>
+        <p style="color:var(--tx-3);font-size:.7rem;margin:8px 2px 0">Estimación: coste medio de captar un cliente con publicidad local ≈ 20&nbsp;€. Ajustable a tu sector.</p>
+      </div>
 
       <div class="box" style="margin-bottom:20px"><div class="box__h"><b>Cómo NEXA te hace ganar dinero</b><small>el modelo, en 3 frases</small></div>
         <div class="modelo__g">
@@ -824,7 +835,41 @@ body.claro .co__apple{background:#000;color:#fff}
       set("#cRSiguen",c.tamano);set("#cRActivos",c.activos);set("#cRNuevos",c.nuevos_30d);set("#cRDormidos",c.dormidos);
       set("#cTam",c.tamano);set("#cAct",c.activos);set("#cDor",c.dormidos);}
     if(d.series&&d.series.length)pintarEvo(d.series);
+    pintarRoi(d);
   }
+  // ── Rentabilidad (estilo ROAS de Meta Ads, adaptado a NEXA) ──
+  let ventanaDias=30;
+  function pintarRoi(d){
+    if(!$("#roiBox"))return;
+    const nuevos=(d&&d.valor&&+d.valor.nuevos)||0;
+    const rep=(d&&d.valor&&d.valor.repiten!=null)?d.valor.repiten:null;
+    const CPA=20; // coste medio de captar un cliente con publicidad local (estimación)
+    const costeMes=PRECIOMES[plan]||0;
+    const coste=Math.round(costeMes*(ventanaDias/30)); // proporcional a la ventana
+    const publi=nuevos*CPA, ahorro=publi-coste;
+    $("#roiCoste").textContent = nuevos>0 ? (coste===0?"0 €":Math.round(coste/nuevos)+" €") : "—";
+    $("#roiPubli").textContent = nuevos>0 ? (publi+" €") : "—";
+    $("#roiAhorro").textContent = nuevos>0 ? ((ahorro>=0?"+":"")+ahorro+" €") : "—";
+    $("#roiAhorro").style.color = ahorro>=0?"var(--verde)":"var(--rojo)";
+    let v;
+    if(nuevos===0){ v="Aún sin clientes nuevos en esta ventana. En cuanto lleguen, aquí verás en euros cuánto te ahorras frente a la publicidad."; }
+    else if(coste===0){ v="Coste 0 €. Cada uno de estos "+nuevos+" clientes nuevos es margen puro — en publicidad te habrían costado ~"+publi+" €"+(rep!=null?", y el "+rep+"% vuelve sin que pagues otra vez.":"."); }
+    else { const ratio=publi/coste; const rtxt=ratio>=1?((Math.round(ratio*10)/10)+"× más barato"):("un "+Math.round((1-ratio)*100)+"% más caro"); v="Traer estos "+nuevos+" clientes con NEXA te sale "+rtxt+" que en publicidad"+(rep!=null?", y el "+rep+"% vuelve sin volver a pagar.":"."); }
+    $("#roiVerdict").textContent=v;
+  }
+  // ── Selector de rango (7/30/90 días): filtra de verdad ──
+  async function cambiarRango(dias){
+    ventanaDias=dias;
+    $$("#segRango button").forEach(b=>b.classList.toggle("on",+b.dataset.days===dias));
+    const lbl="últimos "+dias+" días";
+    const vv=$("#valorVentana");if(vv)vv.textContent=lbl;
+    const rv=$("#roiVentana");if(rv)rv.textContent=lbl;
+    if(window.NEXAEmpresas&&window.NEXAEmpresas.real&&window.NEXAEmpresas.metrics){
+      const m=await window.NEXAEmpresas.metrics(dias);
+      if(m)aplicarDatos(m); else pintarRoi(null);
+    }
+  }
+  $$("#segRango button").forEach(b=>b.addEventListener("click",()=>cambiarRango(+b.dataset.days)));
   // Gráfico de evolución (SVG puro, sin librerías): barras = encuentros/semana, línea = θ.
   function pintarEvo(series){
     const el=$("#evo");if(!el||!series||!series.length)return;
