@@ -402,10 +402,10 @@ body.claro .co__apple{background:#000;color:#fff}
         </div>
         <div class="box">
           <div class="box__h"><b>Tu comunidad</b></div>
-          <div class="comm__r"><span>Te siguen</span><b>0</b></div>
-          <div class="comm__r"><span>Activos (30 d)</span><b>0</b></div>
-          <div class="comm__r"><span>Nuevos (30 d)</span><b>0</b></div>
-          <div class="comm__r"><span>Dormidos (&gt;30 d)</span><b>0</b></div>
+          <div class="comm__r"><span>Te siguen</span><b id="cRSiguen">0</b></div>
+          <div class="comm__r"><span>Activos (30 d)</span><b id="cRActivos">0</b></div>
+          <div class="comm__r"><span>Nuevos (30 d)</span><b id="cRNuevos">0</b></div>
+          <div class="comm__r"><span>Dormidos (&gt;30 d)</span><b id="cRDormidos">0</b></div>
           <button class="comm__btn" data-go="comunidad">Ver comunidad →</button>
         </div>
       </div>
@@ -414,8 +414,8 @@ body.claro .co__apple{background:#000;color:#fff}
     <!-- ENCUENTROS -->
     <section class="vista" data-vista="encuentros">
       <div class="kpis" style="grid-template-columns:repeat(3,1fr);margin-bottom:12px">
-        <button class="kpi" data-exp="encuentros"><p class="kpi__k">Encuentros <span class="info">i</span></p><p class="kpi__v">—</p><p class="kpi__d dim">Aún sin datos</p></button>
-        <button class="kpi" data-exp="theta"><p class="kpi__k">θ desconocidos <span class="info">i</span></p><p class="kpi__v">—</p><p class="kpi__d dim">Aún sin datos</p></button>
+        <button class="kpi" data-exp="encuentros"><p class="kpi__k">Encuentros <span class="info">i</span></p><p class="kpi__v" id="eEnc">—</p><p class="kpi__d dim">Aún sin datos</p></button>
+        <button class="kpi" data-exp="theta"><p class="kpi__k">θ desconocidos <span class="info">i</span></p><p class="kpi__v" id="eTheta">—</p><p class="kpi__d dim">Aún sin datos</p></button>
         <button class="kpi" data-exp="showup"><p class="kpi__k">Show-up <span class="info">i</span></p><p class="kpi__v">—</p><p class="kpi__d dim">Aún sin datos</p></button>
       </div>
       <div class="box"><div class="box__h"><b>Tus encuentros</b><small>por experiencia</small></div>
@@ -426,9 +426,9 @@ body.claro .co__apple{background:#000;color:#fff}
     <!-- COMUNIDAD -->
     <section class="vista" data-vista="comunidad">
       <div class="kpis" style="grid-template-columns:repeat(3,1fr);margin-bottom:12px">
-        <button class="kpi" data-exp="tam"><p class="kpi__k">Tamaño <span class="info">i</span></p><p class="kpi__v">0</p><p class="kpi__d dim">Aún nadie te sigue</p></button>
-        <button class="kpi" data-exp="activos"><p class="kpi__k">Activos (30 d) <span class="info">i</span></p><p class="kpi__v">0</p><p class="kpi__d dim">Aún sin datos</p></button>
-        <button class="kpi" data-exp="dormidos"><p class="kpi__k">Dormidos <span class="info">i</span></p><p class="kpi__v">0</p><p class="kpi__d dim">Aún sin datos</p></button>
+        <button class="kpi" data-exp="tam"><p class="kpi__k">Tamaño <span class="info">i</span></p><p class="kpi__v" id="cTam">0</p><p class="kpi__d dim">Aún nadie te sigue</p></button>
+        <button class="kpi" data-exp="activos"><p class="kpi__k">Activos (30 d) <span class="info">i</span></p><p class="kpi__v" id="cAct">0</p><p class="kpi__d dim">Aún sin datos</p></button>
+        <button class="kpi" data-exp="dormidos"><p class="kpi__k">Dormidos <span class="info">i</span></p><p class="kpi__v" id="cDor">0</p><p class="kpi__d dim">Aún sin datos</p></button>
       </div>
       <div class="box"><div class="box__h"><b>Segmentos</b><small>solo agregados · nunca datos privados</small></div>
         <div class="vacio"><div class="em"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="9" cy="8" r="3.2"/><path d="M3.5 20c0-3.3 2.7-5 5.5-5s5.5 1.7 5.5 5"/><path d="M16 5.4a3.2 3.2 0 0 1 0 6.3M18.5 20c0-2.5-1-4.2-2.6-5"/></svg></div><b>Tu comunidad aún está por construirse</b><p>Cuando la gente te siga y quede contigo, verás segmentos (recurrentes, nuevos, dormidos) para actuar sobre ellos — siempre en agregado.</p><button class="cta" data-go="perfil">Comparte tu perfil</button></div>
@@ -812,9 +812,17 @@ body.claro .co__apple{background:#000;color:#fff}
   function aplicarDatos(d){
     if(!d)return;
     const set=(sel,v)=>{const el=$(sel);if(el&&v!=null)el.textContent=v;};
-    if(d.valor){set("#vNuevos",d.valor.nuevos);set("#vRepiten",d.valor.repiten);set("#vMas",d.valor.mas);if(d.valor.frase)set("#vFrase",d.valor.frase);}
+    if(d.valor){set("#vNuevos",d.valor.nuevos);set("#vRepiten",d.valor.repiten);set("#vMas",d.valor.mas);
+      const hayDatos=(d.kpis&&d.kpis.encuentros>0);
+      set("#vFrase", d.valor.frase || (hayDatos
+        ? "Cada uno de estos clientes llegó sin que pagaras publicidad, y se queda. Eso es margen puro."
+        : "Aún sin datos — pero el modelo es simple: clientes que vuelven sin pagar publicidad. Eso es margen que se queda."));}
     if(d.kpis){const ks=$$("#kpis .kpi");const m=[d.kpis.encuentros,d.kpis.theta,d.kpis.repeticion,d.kpis.r];
-      ks.forEach((c,i)=>{if(m[i]!=null){$(".kpi__v",c).textContent=m[i];const dd=$(".kpi__d",c);dd.textContent="";dd.classList.remove("dim");}});}
+      ks.forEach((c,i)=>{if(m[i]!=null){$(".kpi__v",c).textContent=m[i];const dd=$(".kpi__d",c);dd.textContent="";dd.classList.remove("dim");}});
+      set("#eEnc",d.kpis.encuentros);set("#eTheta",d.kpis.theta);}
+    if(d.comunidad){const c=d.comunidad;
+      set("#cRSiguen",c.tamano);set("#cRActivos",c.activos);set("#cRNuevos",c.nuevos_30d);set("#cRDormidos",c.dormidos);
+      set("#cTam",c.tamano);set("#cAct",c.activos);set("#cDor",c.dormidos);}
   }
 
   function pintarLadder(){
