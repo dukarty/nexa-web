@@ -137,6 +137,8 @@
             if (serie) data.series = serie;
             const { data: prev } = await sb.rpc("get_business_prev", { bid, days });
             if (prev) data.prev = prev; // periodo anterior (para tendencia)
+            const { data: exps } = await sb.rpc("get_business_experiences", { bid, days });
+            if (exps) data.porExperiencia = exps; // rendimiento por experiencia
           }
         } catch (e) { /* sin serie: el panel muestra estado vacío */ }
         return data;
