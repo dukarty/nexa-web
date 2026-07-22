@@ -379,6 +379,7 @@ body.claro .co__apple{background:#000;color:#fff}
           <div><div class="valor__n tab" id="vRepiten">—</div><div class="valor__l">vuelven, sin pagar por que lo hagan</div></div>
           <div><div class="valor__n tab" id="vMas">—</div><div class="valor__l">llegaron como el +1 de otro</div></div>
         </div>
+        <p id="valorTrend" style="display:none;font-size:.82rem;font-weight:800;margin:2px 0 0"></p>
         <p class="valor__p" id="vFrase">Aún sin datos — pero el modelo es simple: clientes que vuelven sin pagar publicidad. Eso es margen que se queda.</p>
       </button>
 
@@ -836,6 +837,25 @@ body.claro .co__apple{background:#000;color:#fff}
       set("#cTam",c.tamano);set("#cAct",c.activos);set("#cDor",c.dormidos);}
     if(d.series&&d.series.length)pintarEvo(d.series);
     pintarRoi(d);
+    pintarTrend(d);
+  }
+  // ── Tendencia vs periodo anterior (flechas ↑↓, estilo Meta Ads) ──
+  function trendTxt(cur, prev){
+    if(prev==null)return null;
+    cur=+cur||0; prev=+prev||0;
+    if(prev===0)return cur>0?{t:"nuevo este periodo",c:"var(--verde)"}:null;
+    const pct=Math.round((cur-prev)/prev*100);
+    if(pct===0)return {t:"igual que el periodo anterior",c:"var(--tx-3)"};
+    return {t:(pct>0?"↑ ":"↓ ")+Math.abs(pct)+"% vs periodo anterior",c:pct>0?"var(--verde)":"var(--rojo)"};
+  }
+  function pintarTrend(d){
+    if(!d||!d.prev)return;
+    const encCard=$("#kpis .kpi");
+    if(encCard){const t=trendTxt(d.kpis&&d.kpis.encuentros,d.prev.encuentros);const dd=$(".kpi__d",encCard);
+      if(dd&&t){dd.textContent=t.t;dd.style.color=t.c;dd.classList.remove("dim");}}
+    const vt=$("#valorTrend");
+    if(vt){const t=trendTxt(d.valor&&d.valor.nuevos,d.prev.nuevos);
+      if(t){vt.textContent="Clientes nuevos: "+t.t;vt.style.color=t.c;vt.style.display="inline-block";}else{vt.style.display="none";}}
   }
   // ── Rentabilidad (estilo ROAS de Meta Ads, adaptado a NEXA) ──
   let ventanaDias=30;
