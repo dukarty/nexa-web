@@ -68,8 +68,10 @@
       },
       // Equipo real: invita (crea acceso al panel) y quita miembros de la empresa.
       async _bid() {
+        if (this.__bid) return this.__bid;
         const { data: mem } = await sb.from("business_members").select("business_id").limit(1).maybeSingle();
-        return mem && mem.business_id;
+        this.__bid = mem && mem.business_id;
+        return this.__bid;
       },
       async inviteMember(email, rol) {
         const bid = await this._bid(); if (!bid) return { ok: false, error: "sin_empresa" };
@@ -126,25 +128,38 @@
         if (!user) return null;
         return this.account();
       },
-      async metrics(days = 30) {
-        const { data, error } = await inv("business-metrics", { body: { days } });
-        if (error) return null;
-        // Serie temporal para gráficos (RPC directa; la función valida membresía).
-        try {
-          const bid = await this._bid();
-          if (bid && data) {
-            const { data: serie } = await sb.rpc("get_business_series", { bid, days });
-            if (serie) data.series = serie;
-            const { data: prev } = await sb.rpc("get_business_prev", { bid, days });
-            if (prev) data.prev = prev; // periodo anterior (para tendencia)
-            const { data: exps } = await sb.rpc("get_business_experiences", { bid, days });
-            if (exps) data.porExperiencia = exps; // rendimiento por experiencia
-            const { data: sedes } = await sb.rpc("get_business_sedes", { bid, days });
-            if (sedes) data.porSede = sedes; // comparativa entre sedes (plan Marca)
-          }
-        } catch (e) { /* sin serie: el panel muestra estado vacío */ }
+      async metrics(days = 30, opts) {
+        days = +days || 30;
+        const force = opts && opts.force;
+        // Caché por rango (60 s): volver a 7/30/90 ya cargado es instantáneo.
+        this.__mc = this.__mc || {};
+        const hit = this.__mc[days];
+        if (!force && hit && (Date.now() - hit.t) < 60000) return hit.d;
+        // Todo en paralelo: business-metrics + las 4 RPC arrancan a la vez (no en fila).
+        const bid = await this._bid();
+        const baseP = inv("business-metrics", { body: { days } });
+        const rpcP = bid ? Promise.all([
+          sb.rpc("get_business_series", { bid, days }),
+          sb.rpc("get_business_prev", { bid, days }),
+          sb.rpc("get_business_experiences", { bid, days }),
+          sb.rpc("get_business_sedes", { bid, days }),
+        ]) : Promise.resolve(null);
+        let baseRes, rpcRes;
+        try { [baseRes, rpcRes] = await Promise.all([baseP, rpcP]); }
+        catch (e) { return null; }
+        if (!baseRes || baseRes.error || !baseRes.data) return null;
+        const data = baseRes.data;
+        if (rpcRes && rpcRes.length === 4) {
+          if (rpcRes[0] && rpcRes[0].data) data.series = rpcRes[0].data;
+          if (rpcRes[1] && rpcRes[1].data) data.prev = rpcRes[1].data;
+          if (rpcRes[2] && rpcRes[2].data) data.porExperiencia = rpcRes[2].data;
+          if (rpcRes[3] && rpcRes[3].data) data.porSede = rpcRes[3].data;
+        }
+        this.__mc[days] = { t: Date.now(), d: data };
         return data;
       },
+      // Invalida la caché de métricas (tras editar algo que las afecta).
+      _clearMetrics() { this.__mc = {}; },
       async upgrade(plan, period) {
         const { data, error } = await inv("plan-checkout", { body: { plan, period: period || "mes" } });
         if (error) return { ok: false, error: error.message };
@@ -198,6 +213,8 @@
         if (acc) {
           P.setCuenta(acc); if (P.hideGate) P.hideGate();
           const m = await api.metrics(30); if (m && P.aplicarDatos) P.aplicarDatos(m);
+          // Precarga en segundo plano: al pulsar 7d/90d ya estarán listos (instantáneo).
+          if (api.metrics) { setTimeout(() => { api.metrics(7); api.metrics(90); }, 400); }
         } else if (P.showGate) { P.showGate(); }
       } catch (e) { if (P.showGate) P.showGate(); }
     }
