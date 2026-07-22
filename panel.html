@@ -430,8 +430,8 @@ body.claro .co__apple{background:#000;color:#fff}
         <button class="kpi" data-exp="theta"><p class="kpi__k">θ desconocidos <span class="info">i</span></p><p class="kpi__v" id="eTheta">—</p><p class="kpi__d dim">Aún sin datos</p></button>
         <button class="kpi" data-exp="showup"><p class="kpi__k">Show-up <span class="info">i</span></p><p class="kpi__v">—</p><p class="kpi__d dim">Aún sin datos</p></button>
       </div>
-      <div class="box"><div class="box__h"><b>Tus encuentros</b><small>por experiencia</small></div>
-        <div class="vacio"><div class="em"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="9" cy="12" r="6"/><circle cx="15" cy="12" r="6"/></svg></div><b>Aún no has generado encuentros</b><p>Cuando lances una experiencia y dos personas queden contigo, aparecerán aquí con su θ, repetición y +1.</p><button class="cta" data-go="experiencias">Crear una experiencia</button></div>
+      <div class="box"><div class="box__h"><b>Tus encuentros</b><small>por experiencia · qué plan te trae más gente</small></div>
+        <div id="encExp"><div class="vacio"><div class="em"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="9" cy="12" r="6"/><circle cx="15" cy="12" r="6"/></svg></div><b>Aún no has generado encuentros</b><p>Cuando lances una experiencia y dos personas queden contigo, aparecerán aquí con su θ, repetición y +1.</p><button class="cta" data-go="experiencias">Crear una experiencia</button></div></div>
       </div>
     </section>
 
@@ -838,6 +838,20 @@ body.claro .co__apple{background:#000;color:#fff}
     if(d.series&&d.series.length)pintarEvo(d.series);
     pintarRoi(d);
     pintarTrend(d);
+    if(d.porExperiencia)pintarPorExperiencia(d.porExperiencia);
+  }
+  // ── Rendimiento por experiencia (qué plan te trae más gente) ──
+  function pintarPorExperiencia(list){
+    const el=$("#encExp");if(!el)return;
+    if(!list||!list.length)return;
+    const rows=list.map((x,i)=>'<tr>'
+      +'<td style="padding:12px"><b>'+esc(x.titulo)+'</b>'+(i===0?' <span style="font-size:.62rem;font-weight:800;color:var(--verde);background:rgba(74,222,128,.14);border-radius:999px;padding:3px 8px;margin-left:6px">TU MEJOR PLAN</span>':'')+'</td>'
+      +'<td style="padding:12px;text-align:right;font-weight:800">'+(+x.encuentros||0)+'</td>'
+      +'<td style="padding:12px;text-align:right">'+(x.theta!=null?x.theta+'%':'—')+'</td>'
+      +'<td style="padding:12px;text-align:right">'+(+x.personas||0)+'</td></tr>').join("");
+    el.innerHTML='<div style="overflow-x:auto"><table class="tabla" style="width:100%"><thead><tr>'
+      +'<th style="text-align:left">Experiencia</th><th style="text-align:right">Encuentros</th><th style="text-align:right">θ</th><th style="text-align:right">Personas</th>'
+      +'</tr></thead><tbody>'+rows+'</tbody></table></div>';
   }
   // ── Tendencia vs periodo anterior (flechas ↑↓, estilo Meta Ads) ──
   function trendTxt(cur, prev){
