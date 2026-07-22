@@ -75,6 +75,8 @@ button{font:inherit;color:inherit;cursor:pointer;background:none;border:0}
 
 /* Franja VALOR */
 .valor{background:linear-gradient(120deg,#0A5CFF,#0A2E8A);border-radius:18px;padding:clamp(20px,2.6vw,32px);margin-bottom:20px;position:relative;overflow:hidden;text-align:left;width:100%;display:block}
+body.tema-marca .valor,body.tema-marca .pv__cover{background:linear-gradient(120deg,#9B6BFF,#3F1C78)}
+body.tema-elite .valor,body.tema-elite .pv__cover{background:linear-gradient(120deg,#FF4D68,#7E0F23)}
 .valor::after{content:"✕";position:absolute;right:-10px;top:-34px;font-size:11rem;font-weight:900;color:rgba(255,255,255,.06);pointer-events:none}
 .valor__k{font-size:.68rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.7);display:flex;align-items:center;gap:8px}
 .valor__g{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:16px 0}
