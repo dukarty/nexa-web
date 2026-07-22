@@ -37,31 +37,53 @@
         if (!mem) return null;
         const { data: biz } = await sb.from("businesses").select("*").eq("id", mem.business_id).maybeSingle();
         const { data: sub } = await sb.from("business_subscriptions").select("plan").eq("business_id", mem.business_id).maybeSingle();
+        // Equipo real: todos los miembros de la empresa (source of truth: business_members).
+        const { data: miembros } = await sb.from("business_members").select("member_email,role").eq("business_id", mem.business_id);
         const m = biz && biz.meta || {};
         return biz ? {
           nombre: biz.name, plan: (sub && sub.plan) || "verificada", ciudad: biz.city_id,
           categoria: biz.category, descripcion: biz.descripcion, web: biz.web, ig: biz.instagram,
           horario: m.horario || "", persona: user.email, email: user.email,
           business_id: biz.id, verified: biz.verified,
-          // colecciones editables (persistidas en meta)
-          experiencias: m.experiencias || [], objetivo: m.objetivo || null,
-          equipo: m.equipo || [], sedes: m.sedes || [],
+          // colecciones editables (perfil/experiencias/objetivo/sedes en meta; equipo en tabla real)
+          experiencias: m.experiencias || [], objetivo: m.objetivo || null, sedes: m.sedes || [],
+          equipo: (miembros || []).map((x) => ({ email: x.member_email, rol: x.role })),
         } : null;
       },
       // Persiste el perfil y las colecciones editables en Supabase (RLS: solo miembros).
+      // El equipo NO va aquí: es una tabla real (invita/quita miembros).
       async saveProfile(c) {
         if (!c || !c.business_id) return { ok: false };
         const meta = {
           horario: c.horario || "",
           experiencias: c.experiencias || [],
           objetivo: c.objetivo || null,
-          equipo: c.equipo || [],
           sedes: c.sedes || [],
         };
         const { error } = await sb.from("businesses").update({
           name: c.nombre, category: c.categoria, descripcion: c.descripcion,
           web: c.web, instagram: c.ig, meta,
         }).eq("id", c.business_id);
+        return { ok: !error, error: error && error.message };
+      },
+      // Equipo real: invita (crea acceso al panel) y quita miembros de la empresa.
+      async _bid() {
+        const { data: mem } = await sb.from("business_members").select("business_id").limit(1).maybeSingle();
+        return mem && mem.business_id;
+      },
+      async inviteMember(email, rol) {
+        const bid = await this._bid(); if (!bid) return { ok: false, error: "sin_empresa" };
+        const role = ["admin", "editor", "viewer"].includes(rol) ? rol : "editor";
+        const { error } = await sb.from("business_members").insert({
+          business_id: bid, member_email: String(email || "").trim().toLowerCase(), role,
+        });
+        if (error && /duplicate|unique/i.test(error.message)) return { ok: false, error: "Ese email ya está en el equipo." };
+        return { ok: !error, error: error && error.message };
+      },
+      async removeMember(email) {
+        const bid = await this._bid(); if (!bid) return { ok: false, error: "sin_empresa" };
+        const { error } = await sb.from("business_members").delete()
+          .eq("business_id", bid).eq("member_email", String(email || "").trim().toLowerCase());
         return { ok: !error, error: error && error.message };
       },
       // Acceso instantáneo con email + contraseña (sin confirmación por email)
