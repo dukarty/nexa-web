@@ -213,8 +213,12 @@ button{font:inherit;color:inherit;cursor:pointer;background:none;border:0}
 .co__sum{background:linear-gradient(160deg,#0A5CFF,#0A2E8A);color:#fff;padding:30px}
 .co__sum .mod__k{color:rgba(255,255,255,.75)}
 .co__plan{font-size:1.7rem;font-weight:900;letter-spacing:-.03em;margin-top:6px}
-.co__price{font-size:2.2rem;font-weight:900;margin:14px 0}
+.co__price{font-size:2.2rem;font-weight:900;margin:8px 0 2px}
 .co__price small{font-size:.4em;font-weight:700;opacity:.82}
+.co__per{display:inline-flex;background:rgba(255,255,255,.15);border-radius:999px;padding:3px;margin-top:12px}
+.co__per button{padding:6px 16px;border-radius:999px;font-size:.8rem;font-weight:800;color:rgba(255,255,255,.8)}
+.co__per button.on{background:#fff;color:var(--az)}
+.co__ahorro{font-size:.8rem;font-weight:700;color:#fff;background:rgba(255,255,255,.16);border-radius:8px;padding:6px 10px;margin-bottom:10px;display:inline-block}
 .co__ul{list-style:none;display:grid;gap:8px;margin:8px 0 16px}
 .co__ul li{font-size:.9rem;display:flex;gap:8px;color:rgba(255,255,255,.94)}
 .co__ul li::before{content:"✓";font-weight:900}
@@ -424,7 +428,7 @@ body.claro .co__apple{background:#000;color:#fff}
     <section class="vista" data-vista="experiencias">
       <div class="row2">
         <div class="box">
-          <div class="box__h"><b>Crear experiencia</b><small>llega solo a quien te sigue</small></div>
+          <div class="box__h"><b>Crear experiencia</b><small>tu primer evento es gratis</small></div>
           <div class="form">
             <div class="field"><label>Título</label><input id="expTitulo" placeholder="Amanecer en el Garbí"></div>
             <div class="f2">
@@ -470,7 +474,7 @@ body.claro .co__apple{background:#000;color:#fff}
     <!-- SEDES -->
     <section class="vista" data-vista="sedes">
       <div class="row2">
-        <div class="box"><div class="box__h"><b>Añadir sede</b><small>plan Ciudad</small></div>
+        <div class="box"><div class="box__h"><b>Añadir sede</b><small>plan Marca</small></div>
           <div class="form">
             <div class="field"><label>Nombre de la sede</label><input id="sedeNombre" placeholder="Valencia · Ruzafa"></div>
             <button class="btn" id="sedeAdd">Añadir sede</button>
@@ -634,7 +638,7 @@ body.claro .co__apple{background:#000;color:#fff}
   <div class="onb__x"><svg viewBox="0 0 20 20" aria-hidden="true"><line x1="2" y1="18" x2="18" y2="2"/><line x1="18" y1="18" x2="2" y2="2"/></svg></div>
   <div class="oslide on" data-o="1"><p class="mod__k">Bienvenido</p><p class="mod__t" id="onbHi">Hola, empresa</p><p class="mod__p">Tu cuenta está lista. Empieza vacía y se llena sola con lo que pase en NEXA. Toca cualquier dato para saber qué significa.</p></div>
   <div class="oslide" data-o="2"><p class="mod__k">Paso 1</p><p class="mod__t">Completa tu perfil</p><p class="mod__p">Cuanto mejor te presentes, mejor conectas con tu gente. Ve a "Perfil" y cuenta qué vive la gente contigo.</p></div>
-  <div class="oslide" data-o="3"><p class="mod__k">Paso 2</p><p class="mod__t">Cuanto más creces, más desbloqueas</p><p class="mod__p">Gratis ves tu impacto y creas experiencias. Con Activación mides todo. Con Ciudad te comparas con tu sector. Pagas solo cuando ya te renta.</p></div>
+  <div class="oslide" data-o="3"><p class="mod__k">Paso 2</p><p class="mod__t">Cuanto más creces, más desbloqueas</p><p class="mod__p">Gratis creas tu primer evento y ves tu impacto. Con Pro, eventos ilimitados y mides todo. Con Marca te comparas con tu sector. Pagas solo cuando ya te renta.</p></div>
   <div class="onb__dots"><i class="on"></i><i></i><i></i></div>
   <div class="mod__acc"><button class="pri" id="onbNext">Siguiente</button><button class="sec" id="onbSkip">Saltar</button></div>
 </div></div>
@@ -645,8 +649,10 @@ body.claro .co__apple{background:#000;color:#fff}
   <div class="co__body">
     <div class="co__sum">
       <p class="mod__k">Mejorar a</p>
-      <p class="co__plan" id="pagoT">Activación</p>
-      <p class="co__price"><span id="pagoPrice">299 €</span><small>/año · IVA incl.</small></p>
+      <p class="co__plan" id="pagoT">Pro</p>
+      <div class="co__per" id="pagoPeriodo"><button data-per="mes" class="on">Mensual</button><button data-per="anio">Anual</button></div>
+      <p class="co__price"><span id="pagoPrice">29 €/mes</span></p>
+      <p class="co__ahorro" id="pagoAhorro" style="display:none">2 meses gratis al año · IVA incl.</p>
       <ul class="co__ul" id="pagoUl"></ul>
       <p class="co__roi" id="pagoRoi"></p>
     </div>
@@ -694,8 +700,13 @@ body.claro .co__apple{background:#000;color:#fff}
   const $=(s,c=document)=>c.querySelector(s),$$=(s,c=document)=>[...c.querySelectorAll(s)];
   const q=new URLSearchParams(location.search);
   const RANGO={verificada:0,activacion:1,ciudad:2,red:3};
-  const NOMBREPLAN={verificada:"Verificada",activacion:"Activación",ciudad:"Ciudad",red:"Red"};
-  const PRECIOPLAN={verificada:"Gratis",activacion:"299 €/año",ciudad:"990 €/año",red:"A medida"};
+  const NOMBREPLAN={verificada:"Gratis",activacion:"Pro",ciudad:"Marca",red:"Élite"};
+  const PRECIOMES={activacion:29,ciudad:89};        // €/mes
+  const PRECIOANIO={activacion:290,ciudad:890};     // €/año (2 meses gratis)
+  const PRECIOPLAN={verificada:"Gratis",activacion:"desde 29 €/mes",ciudad:"desde 89 €/mes",red:"A medida"};
+  let periodo="mes";  // "mes" | "anio"
+  function precioNum(k){return periodo==="anio"?(PRECIOANIO[k]):(PRECIOMES[k]);}
+  function precioTxt(k){const n=precioNum(k);return n==null?"A medida":(n+" €"+(periodo==="anio"?"/año":"/mes"));}
   const SVG_LOCK='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>';
   const SVG_SPARK='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M12 3v3.5M12 17.5V21M3 12h3.5M17.5 12H21M6.2 6.2l2.4 2.4M15.4 15.4l2.4 2.4M17.8 6.2l-2.4 2.4M8.6 15.4l-2.4 2.4"/></svg>';
   const CATEGORIAS=["Restaurante","Bar / Cervecería","Cafetería / Brunch","Discoteca / Ocio nocturno","Música / Sala de conciertos","Cultura / Arte","Cine / Teatro","Gimnasio / Fitness","Deporte / Club","Outdoor / Aventura","Bienestar / Spa / Yoga","Librería","Coworking / Espacio","Tienda / Retail","Moda","Belleza / Peluquería","Formación / Talleres","Turismo / Guías","Escape room / Ocio","Eventos / Productora","Food truck / Gastroneta","Comunidad / Club social","Otro"];
@@ -752,12 +763,12 @@ body.claro .co__apple{background:#000;color:#fff}
 
   function pintarLadder(){
     const defs=[
-      {need:1,plan:"Activación",t:"Recomendaciones con IA",d:"Cada semana: qué plan lanzar, qué día y a quién, para llenar tu local."},
-      {need:2,plan:"Ciudad",t:"Benchmarks de tu sector",d:"Compárate con negocios como el tuyo en Valencia. Dónde ganas y dónde no."}
+      {need:1,plan:"Pro",t:"Recomendaciones con IA",d:"Cada semana: qué plan lanzar, qué día y a quién, para llenar tu local."},
+      {need:2,plan:"Marca",t:"Benchmarks de tu sector",d:"Compárate con negocios como el tuyo en Valencia. Dónde ganas y dónde no."}
     ];
     $("#ladder").innerHTML=defs.map(x=>{const lock=rango<x.need;
       return '<button class="lad" data-need="'+x.need+'" data-t="'+x.t+'"><div class="lad__i">'+(lock?SVG_LOCK:SVG_SPARK)+'</div><div><b>'+x.t+'</b><p>'+x.d+'</p></div><span class="lad__tag'+(lock?'':' lad__tag--ok')+'">'+(lock?x.plan:"Activo")+'</span></button>';}).join("");
-    $$("#ladder .lad").forEach(b=>b.addEventListener("click",()=>{const need=+b.dataset.need;if(rango<need)abrirUpsell(b.dataset.t,need>=2?"Ciudad":"Activación");else toast("Se llenará con tu actividad real.");}));
+    $$("#ladder .lad").forEach(b=>b.addEventListener("click",()=>{const need=+b.dataset.need;if(rango<need)abrirUpsell(b.dataset.t,need>=2?"Marca":"Pro");else toast("Se llenará con tu actividad real.");}));
   }
 
   /* ── Perfil / vista previa ── */
@@ -813,6 +824,8 @@ body.claro .co__apple{background:#000;color:#fff}
   $("#expCrear").addEventListener("click",()=>{
     const t=$("#expTitulo").value.trim();
     if(!t)return toast("Ponle un título a tu experiencia.");
+    // Primer evento gratis: en el plan Gratis solo 1; para más, sube a Pro
+    if(rango<1 && ((cuenta&&cuenta.experiencias)||[]).length>=1){ return abrirUpsell("Eventos ilimitados","Pro"); }
     cuenta.experiencias=cuenta.experiencias||[];
     cuenta.experiencias.unshift({id:Date.now(),titulo:t,cat:$("#expCat").value,franja:$("#expFranja").value,desc:$("#expDesc").value.trim(),estado:"publicada"});
     guardar();$("#expTitulo").value="";$("#expDesc").value="";
@@ -944,7 +957,7 @@ body.claro .co__apple{background:#000;color:#fff}
     $$(".navi").forEach(n=>{const min=+n.dataset.min;if(min>rango)n.insertAdjacentHTML("beforeend",'<span class="lock">'+SVG_LOCK+'</span>');});
     pintarMejoras();pintarLadder();pintarPerfil();pintarExp();pintarGoal();pintarEquipo();pintarSedes();pintarCheck();
   }
-  function bloqueoNombre(min){return min>=2?"Ciudad":"Activación";}
+  function bloqueoNombre(min){return min>=2?"Marca":"Pro";}
 
   pintarKpis();pintarCuenta();aplicarDatos(DATOS);
 
@@ -962,15 +975,15 @@ body.claro .co__apple{background:#000;color:#fff}
 
   /* Upsell */
   const BENEF={
-    "Activación":["Analítica completa y embudo","Recomendaciones con IA","Reseñas y objetivos","Reactivar clientes dormidos","Informes descargables","Hasta 3 usuarios"],
-    "Ciudad":["Benchmarks de tu sector","Varias sedes en un panel","Comparativas entre locales","Objetivos por sede","Usuarios ilimitados"]
+    "Pro":["Eventos ilimitados","Analítica completa y embudo","Recomendaciones con IA","Reseñas y objetivos","Reactivar clientes dormidos","Hasta 3 usuarios"],
+    "Marca":["Todo lo de Pro","Benchmarks de tu sector","Varias sedes en un panel","Comparativas entre locales","Usuarios ilimitados"]
   };
-  const KEYDE={"Activación":"activacion","Ciudad":"ciudad","Red":"red"};
+  const KEYDE={"Pro":"activacion","Marca":"ciudad","Élite":"red"};
   let upsellKey="activacion";
   function abrirUpsell(feature,planNec){
     upsellKey=KEYDE[planNec]||"activacion";
     $("#upK").textContent="Desbloquea con "+planNec;$("#upT").textContent=feature;
-    $("#upP").textContent=(planNec==="Ciudad"?'"'+feature+'" es parte del plan Ciudad, para marcas con varias sedes.':'"'+feature+'" es parte del plan Activación, para llenar tu local.');
+    $("#upP").textContent=(planNec==="Marca"?'"'+feature+'" es parte del plan Marca, para marcas con varias sedes.':'"'+feature+'" es parte del plan Pro, para llenar tu local.');
     $("#upUl").innerHTML=(BENEF[planNec]||[]).map(b=>"<li>"+b+"</li>").join("");
     $("#upBtn").textContent="Mejorar a "+planNec+" · "+PRECIOPLAN[upsellKey];
     $("#upsell").classList.add("on");
@@ -979,36 +992,41 @@ body.claro .co__apple{background:#000;color:#fff}
   $("#upBtn").addEventListener("click",()=>{$("#upsell").classList.remove("on");abrirPago(upsellKey);});
   $("#upsell").addEventListener("click",e=>{if(e.target.id==="upsell")$("#upsell").classList.remove("on");});
 
-  /* Checkout — nada se desbloquea sin pasar por el pago */
-  const PRECIO_A={activacion:"299 €",ciudad:"990 €",red:"A medida"};
+  /* Checkout — mensual/anual, nada se desbloquea sin pagar */
   const ROI={
-    activacion:"Un cliente que vuelve no te cuesta publicidad. Con solo ~2 al mes, Activación ya se paga sola — el resto es margen.",
-    ciudad:"Compara tus locales y replica lo que funciona en cada uno. Pensado para marcas que ya llenan y quieren escalar."
+    activacion:"Un cliente que vuelve no te cuesta publicidad. Con ~2 al mes, Pro ya se paga solo — el resto es margen.",
+    ciudad:"Compara tus locales y replica lo que funciona en cada uno. Para marcas que ya llenan y quieren escalar."
   };
   let pagoKey="activacion";
   function cerrarPago(){$("#pago").classList.remove("on");}
+  function pintarPrecioCheckout(){
+    const real=!!(window.NEXAEmpresas&&window.NEXAEmpresas.real);
+    const t=precioTxt(pagoKey);
+    $("#pagoPrice").textContent=t;
+    const btn=$("#ccPay");
+    if(btn&&!btn.disabled)btn.innerHTML=real?"Ir a pago seguro":('Pagar <span id="ccPayAmt">'+t+'</span>');
+    $$("#pagoPeriodo button").forEach(b=>b.classList.toggle("on",b.dataset.per===periodo));
+    const ah=$("#pagoAhorro");if(ah)ah.style.display=periodo==="anio"?"block":"none";
+  }
   function abrirPago(k){
     pagoKey=k;
     const real=!!(window.NEXAEmpresas&&window.NEXAEmpresas.real);
     $("#pagoT").textContent=NOMBREPLAN[k];
-    $("#pagoPrice").textContent=PRECIO_A[k]||PRECIOPLAN[k];
     $("#pagoUl").innerHTML=(BENEF[NOMBREPLAN[k]]||[]).map(b=>"<li>"+b+"</li>").join("");
     $("#pagoRoi").textContent=ROI[k]||"";
-    $("#ccPayAmt").textContent=PRECIO_A[k]||"";
-    // reset estados
     $("#pagoPay").hidden=false;$("#pagoDone").hidden=true;
-    const btn=$("#ccPay");btn.disabled=false;btn.innerHTML='Pagar <span id="ccPayAmt">'+(PRECIO_A[k]||"")+'</span>';
+    const btn=$("#ccPay");btn.disabled=false;
     ["#ccNum","#ccExp","#ccCvc","#ccName"].forEach(s=>{const el=$(s);if(el)el.value="";});
-    // Modo real: sin formulario de tarjeta, va a Stripe
     $("#ccFields").style.display=real?"none":"block";
     $("#payOr").style.display=real?"none":"block";
     $("#payApple").style.display=real?"none":"block";
     $("#ccSafe").textContent=real?"Pago seguro con Stripe":"Pago seguro · demo: no se realiza ningún cargo real";
-    if(real)btn.textContent="Ir a pago seguro";
+    pintarPrecioCheckout();
     $("#pago").classList.add("on");
   }
   $$("[data-cerrar-pago]").forEach(b=>b.addEventListener("click",cerrarPago));
   $("#pago").addEventListener("click",e=>{if(e.target.id==="pago")cerrarPago();});
+  document.addEventListener("click",e=>{const p=e.target.closest("#pagoPeriodo button");if(p){periodo=p.dataset.per;pintarPrecioCheckout();}});
 
   // Máscaras
   const num=$("#ccNum"),exp=$("#ccExp"),cvc=$("#ccCvc");
@@ -1032,7 +1050,7 @@ body.claro .co__apple{background:#000;color:#fff}
   async function procesar(btn){
     const orig=btn.innerHTML;btn.disabled=true;btn.innerHTML='<span class="spin"></span>Procesando pago…';
     if(window.NEXAEmpresas&&window.NEXAEmpresas.real){
-      const r=await window.NEXAEmpresas.upgrade(pagoKey);
+      const r=await window.NEXAEmpresas.upgrade(pagoKey, periodo);
       if(r&&r.redirect)return;                       // Stripe real → redirige
       const acc=await window.NEXAEmpresas.account(); if(acc){cuenta=acc;}
       const m=await window.NEXAEmpresas.metrics(30); if(m)aplicarDatos(m);
