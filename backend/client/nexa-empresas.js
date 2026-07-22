@@ -25,6 +25,7 @@
     async listExperiences() { const c = readLS() || {}; return c.experiencias || []; },
     async addExperience(e) { const c = readLS() || {}; c.experiencias = c.experiencias || []; c.experiencias.unshift({ id: Date.now(), titulo: e.titulo, cat: e.cat, franja: e.franja, estado: "publicada" }); writeLS(c); return { ok: true }; },
     async removeExperience(id) { const c = readLS() || {}; c.experiencias = (c.experiencias || []).filter((x) => String(x.id) !== String(id)); writeLS(c); return { ok: true }; },
+    async setFeatured(id, on) { const c = readLS() || {}; c.experiencias = (c.experiencias || []).map((x) => String(x.id) === String(id) ? { ...x, featured: !!on } : x); writeLS(c); return { ok: true, featured: !!on }; },
     async logout() {},
   };
 
@@ -96,9 +97,16 @@
       async listExperiences() {
         const bid = await this._bid(); if (!bid) return [];
         const { data } = await sb.from("business_experiences")
-          .select("id,title,category,slot_kind,published").eq("business_id", bid)
-          .order("created_at", { ascending: false });
-        return (data || []).map((r) => ({ id: r.id, titulo: r.title, cat: r.category, franja: r.slot_kind, estado: r.published ? "publicada" : "borrador" }));
+          .select("id,title,category,slot_kind,published,featured").eq("business_id", bid)
+          .order("featured", { ascending: false }).order("created_at", { ascending: false });
+        return (data || []).map((r) => ({ id: r.id, titulo: r.title, cat: r.category, franja: r.slot_kind, estado: r.published ? "publicada" : "borrador", featured: !!r.featured }));
+      },
+      // Destacar/quitar destacado: el gate por plan lo decide el servidor.
+      async setFeatured(id, on) {
+        const { data, error } = await inv("experience-feature", { body: { experience_id: id, featured: !!on } });
+        if (error) return { ok: false, error: error.message };
+        if (data && data.error) return { ok: false, error: data.error, need: data.need };
+        return { ok: true, featured: !!(data && data.featured) };
       },
       async addExperience(e) {
         const bid = await this._bid(); if (!bid) return { ok: false, error: "sin_empresa" };
