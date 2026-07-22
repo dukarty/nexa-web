@@ -860,6 +860,7 @@ body.claro .co__apple{background:#000;color:#fff}
     if(d.porSede)pintarPorSede(d.porSede);
     if(typeof pintarGoal==="function")pintarGoal(); // progreso de objetivos con datos reales
     if(typeof pintarInsights==="function")pintarInsights(d); // lecturas automáticas del dato
+    if(typeof pintarLadder==="function"){try{pintarLadder();}catch(e){}} // benchmark real cuando hay datos
   }
   // ── Insights automáticos: lee el dato real y lo traduce a frases accionables ──
   function pintarInsights(d){
@@ -1098,16 +1099,25 @@ body.claro .co__apple{background:#000;color:#fff}
 
   function pintarLadder(){
     const s=sectorDe();
+    // Benchmark real cuando el plan está activo; teaser difuminado si está bloqueado.
+    const bm=ultimoDatos&&ultimoDatos.benchmark;
+    const benchPeekLock=nombreCat()+" en Valencia · estás en el puesto ██ de ██. Ganas en repetición, flojeas en θ.";
+    let benchPeekOpen;
+    if(bm&&(+bm.de||0)>1){
+      benchPeekOpen=nombreCat()+" en Valencia · vas en el puesto "+bm.posicion+" de "+bm.de+" ("+(+bm.mis_encuentros||0)+" encuentros en la ventana).";
+    }else{
+      benchPeekOpen="Aún eres de los primeros "+nombreCat().toLowerCase()+" en Valencia dentro de NEXA. En cuanto entren más, verás aquí tu puesto real.";
+    }
     const defs=[
       {need:1,plan:"Pro",t:"Recomendaciones con IA",d:"Cada semana, qué lanzar para llenar tu local.",
-       peek:"Esta semana: lanza "+s.idea+" el "+s.dia+" a las "+s.hora+". Tu "+s.publico+" respondería mejor."},
+       peek:"Esta semana: lanza "+s.idea+" el "+s.dia+" a las "+s.hora+". Tu "+s.publico+" respondería mejor.",peekOpen:null},
       {need:2,plan:"Marca",t:"Benchmarks de tu sector",d:"Compárate con negocios como el tuyo en Valencia.",
-       peek:nombreCat()+" en Valencia · estás en el puesto ██ de ██. Ganas en repetición, flojeas en θ."}
+       peek:benchPeekLock,peekOpen:benchPeekOpen}
     ];
-    $("#ladder").innerHTML=defs.map(x=>{const lock=rango<x.need;
+    $("#ladder").innerHTML=defs.map(x=>{const lock=rango<x.need;const peek=(!lock&&x.peekOpen)?x.peekOpen:x.peek;
       return '<button class="lad" data-need="'+x.need+'" data-t="'+x.t+'"><div class="lad__i">'+(lock?SVG_LOCK:SVG_SPARK)+'</div>'
         +'<div class="lad__b"><b>'+x.t+'</b><p>'+x.d+'</p>'
-        +'<p class="lad__peek'+(lock?' lad__peek--lock':'')+'">'+x.peek+'</p></div>'
+        +'<p class="lad__peek'+(lock?' lad__peek--lock':'')+'">'+peek+'</p></div>'
         +'<span class="lad__tag'+(lock?'':' lad__tag--ok')+'">'+(lock?x.plan:"Activo")+'</span></button>';}).join("");
     $$("#ladder .lad").forEach(b=>b.addEventListener("click",()=>{const need=+b.dataset.need;if(rango<need)abrirUpsell(b.dataset.t,need>=2?"Marca":"Pro");else toast("Se llena con tu actividad real.");}));
   }
