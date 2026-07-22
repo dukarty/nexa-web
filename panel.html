@@ -549,6 +549,7 @@ body.claro .co__apple{background:#000;color:#fff}
         <div class="box"><div class="box__h"><b>Estado</b></div>
           <p id="verEstado" style="font-size:1.4rem;font-weight:900;color:var(--ambar)">En revisión</p>
           <p style="color:var(--tx-2);margin-top:8px">Revisamos tu marca a mano en 1 día para que nadie pueda suplantarte. No bloquea nada: puedes montarlo todo mientras tanto.</p>
+          <button id="verSolicitar" style="margin-top:14px;background:var(--az);color:#fff;border-radius:12px;padding:12px 18px;font-weight:800;display:none">Solicitar verificación</button>
         </div>
         <div class="box"><div class="box__h"><b>Qué te da la verificación</b></div>
           <div class="comm__r"><span>Insignia verificada</span><b class="verde">✓</b></div>
@@ -929,6 +930,19 @@ body.claro .co__apple{background:#000;color:#fff}
     $("#eqEmail").value="";pintarEquipo();pintarCheck();toast("Invitación enviada a "+em+".");
   });
 
+  /* ── Verificación (solicitar; la aprobación es manual/admin) ── */
+  const verBtn=$("#verSolicitar");
+  if(verBtn)verBtn.addEventListener("click",async ()=>{
+    if(window.NEXAEmpresas&&window.NEXAEmpresas.real&&window.NEXAEmpresas.requestVerification){
+      verBtn.disabled=true;const o=verBtn.textContent;verBtn.textContent="Enviando…";
+      const r=await window.NEXAEmpresas.requestVerification();
+      verBtn.disabled=false;verBtn.textContent=o;
+      if(!r||!r.ok)return toast((r&&r.error)||"No se pudo solicitar.");
+    }
+    cuenta=cuenta||{};cuenta.verif_pendiente=true;
+    pintarCuenta();toast("Solicitud de verificación enviada. La revisamos en 1 día.");
+  });
+
   /* Sedes (plan Ciudad) */
   function pintarSedes(){
     const cont=$("#sedeLista");if(!cont)return;
@@ -1017,10 +1031,11 @@ body.claro .co__apple{background:#000;color:#fff}
     $("#ajCat").textContent=(cuenta&&cuenta.categoria)||"—";
     $("#ajEmail").textContent=(cuenta&&cuenta.email)||"—";
     if(cuenta&&cuenta.persona){$("#userAv").textContent=(cuenta.persona.trim()[0]||"T").toUpperCase();$("#userN").textContent=cuenta.persona;}
-    $("#verChip").textContent=(cuenta&&cuenta.verified)?"Verificada":"En revisión";
-    $("#verChip").className="chip "+((cuenta&&cuenta.verified)?"chip--ok":"chip--amb");
-    $("#verEstado").textContent=(cuenta&&cuenta.verified)?"Verificada":"En revisión";
-    $("#verEstado").style.color=(cuenta&&cuenta.verified)?"var(--verde)":"var(--ambar)";
+    {const ver=!!(cuenta&&cuenta.verified),pend=!!(cuenta&&cuenta.verif_pendiente);
+     const estado=ver?"Verificada":(pend?"En revisión":"Sin verificar");
+     $("#verChip").textContent=estado;$("#verChip").className="chip "+(ver?"chip--ok":"chip--amb");
+     $("#verEstado").textContent=estado;$("#verEstado").style.color=ver?"var(--verde)":"var(--ambar)";
+     const vb=$("#verSolicitar");if(vb)vb.style.display=(!ver&&!pend)?"inline-block":"none";}
     $("#planBadge").textContent="Plan · "+NOMBREPLAN[plan];
     $("#facPlan").textContent=NOMBREPLAN[plan];
     $("#facSub").textContent=(plan==="verificada"?"Gratis · sin permanencia. Mejora cuando quieras.":"Renueva en 12 meses · "+PRECIOPLAN[plan]+" · sin permanencia.");
