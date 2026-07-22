@@ -429,9 +429,9 @@ body.claro .co__apple{background:#000;color:#fff}
     <!-- ENCUENTROS -->
     <section class="vista" data-vista="encuentros">
       <div class="kpis" style="grid-template-columns:repeat(3,1fr);margin-bottom:12px">
-        <button class="kpi" data-exp="encuentros"><p class="kpi__k">Encuentros <span class="info">i</span></p><p class="kpi__v" id="eEnc">—</p><p class="kpi__d dim">Aún sin datos</p></button>
-        <button class="kpi" data-exp="theta"><p class="kpi__k">θ desconocidos <span class="info">i</span></p><p class="kpi__v" id="eTheta">—</p><p class="kpi__d dim">Aún sin datos</p></button>
-        <button class="kpi" data-exp="showup"><p class="kpi__k">Show-up <span class="info">i</span></p><p class="kpi__v">—</p><p class="kpi__d dim">Aún sin datos</p></button>
+        <button class="kpi" data-exp="encuentros"><p class="kpi__k">Encuentros <span class="info">i</span></p><p class="kpi__v" id="eEnc">—</p><p class="kpi__d dim" id="eEncD">Aún sin datos</p></button>
+        <button class="kpi" data-exp="theta"><p class="kpi__k">θ desconocidos <span class="info">i</span></p><p class="kpi__v" id="eTheta">—</p><p class="kpi__d dim" id="eThetaD">Aún sin datos</p></button>
+        <button class="kpi" data-exp="showup"><p class="kpi__k">Show-up <span class="info">i</span></p><p class="kpi__v" id="eShow">—</p><p class="kpi__d dim" id="eShowD">Aún sin datos</p></button>
       </div>
       <div class="box"><div class="box__h"><b>Tus encuentros</b><small>por experiencia · qué plan te trae más gente</small></div>
         <div id="encExp"><div class="vacio"><div class="em"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="9" cy="12" r="6"/><circle cx="15" cy="12" r="6"/></svg></div><b>Aún no has generado encuentros</b><p>Cuando lances una experiencia y dos personas queden contigo, aparecerán aquí con su θ, repetición y +1.</p><button class="cta" data-go="experiencias">Crear una experiencia</button></div></div>
@@ -441,12 +441,12 @@ body.claro .co__apple{background:#000;color:#fff}
     <!-- COMUNIDAD -->
     <section class="vista" data-vista="comunidad">
       <div class="kpis" style="grid-template-columns:repeat(3,1fr);margin-bottom:12px">
-        <button class="kpi" data-exp="tam"><p class="kpi__k">Tamaño <span class="info">i</span></p><p class="kpi__v" id="cTam">0</p><p class="kpi__d dim">Aún nadie te sigue</p></button>
-        <button class="kpi" data-exp="activos"><p class="kpi__k">Activos (30 d) <span class="info">i</span></p><p class="kpi__v" id="cAct">0</p><p class="kpi__d dim">Aún sin datos</p></button>
-        <button class="kpi" data-exp="dormidos"><p class="kpi__k">Dormidos <span class="info">i</span></p><p class="kpi__v" id="cDor">0</p><p class="kpi__d dim">Aún sin datos</p></button>
+        <button class="kpi" data-exp="tam"><p class="kpi__k">Tamaño <span class="info">i</span></p><p class="kpi__v" id="cTam">0</p><p class="kpi__d dim" id="cTamD">Aún nadie te sigue</p></button>
+        <button class="kpi" data-exp="activos"><p class="kpi__k">Activos (30 d) <span class="info">i</span></p><p class="kpi__v" id="cAct">0</p><p class="kpi__d dim" id="cActD">Aún sin datos</p></button>
+        <button class="kpi" data-exp="dormidos"><p class="kpi__k">Dormidos <span class="info">i</span></p><p class="kpi__v" id="cDor">0</p><p class="kpi__d dim" id="cDorD">Aún sin datos</p></button>
       </div>
       <div class="box"><div class="box__h"><b>Segmentos</b><small>solo agregados · nunca datos privados</small></div>
-        <div class="vacio"><div class="em"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="9" cy="8" r="3.2"/><path d="M3.5 20c0-3.3 2.7-5 5.5-5s5.5 1.7 5.5 5"/><path d="M16 5.4a3.2 3.2 0 0 1 0 6.3M18.5 20c0-2.5-1-4.2-2.6-5"/></svg></div><b>Tu comunidad aún está por construirse</b><p>Cuando la gente te siga y quede contigo, verás segmentos (recurrentes, nuevos, dormidos) para actuar sobre ellos — siempre en agregado.</p><button class="cta" data-go="perfil">Comparte tu perfil</button></div>
+        <div id="segBox"><div class="vacio"><div class="em"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor"><circle cx="9" cy="8" r="3.2"/><path d="M3.5 20c0-3.3 2.7-5 5.5-5s5.5 1.7 5.5 5"/><path d="M16 5.4a3.2 3.2 0 0 1 0 6.3M18.5 20c0-2.5-1-4.2-2.6-5"/></svg></div><b>Tu comunidad aún está por construirse</b><p>Cuando la gente te siga y quede contigo, verás segmentos (recurrentes, nuevos, dormidos) para actuar sobre ellos — siempre en agregado.</p><button class="cta" data-go="perfil">Comparte tu perfil</button></div></div>
       </div>
     </section>
 
@@ -836,15 +836,49 @@ body.claro .co__apple{background:#000;color:#fff}
         : "Aún sin datos — pero el modelo es simple: clientes que vuelven sin pagar publicidad. Eso es margen que se queda."));}
     if(d.kpis){const ks=$$("#kpis .kpi");const m=[d.kpis.encuentros,d.kpis.theta,d.kpis.repeticion,d.kpis.r];
       ks.forEach((c,i)=>{if(m[i]!=null){$(".kpi__v",c).textContent=m[i];const dd=$(".kpi__d",c);dd.textContent="";dd.classList.remove("dim");}});
-      set("#eEnc",d.kpis.encuentros);set("#eTheta",d.kpis.theta);}
+      set("#eEnc",d.kpis.encuentros);set("#eTheta",d.kpis.theta);
+      // Subtítulos de la sección Encuentros: dejan de decir "Aún sin datos" cuando ya hay actividad
+      const hayEnc=(+d.kpis.encuentros||0)>0;
+      const setSub=(sel,txt)=>{const el=$(sel);if(!el)return;el.textContent=txt;el.classList.toggle("dim",!txt);};
+      if(hayEnc){setSub("#eEncD","en el periodo");setSub("#eThetaD","% entre desconocidos");}
+      if(d.kpis.showup!=null){set("#eShow",d.kpis.showup+"%");setSub("#eShowD","asistencia media");}
+      else{setSub("#eShowD","pendiente de check-in");}}
     if(d.comunidad){const c=d.comunidad;
       set("#cRSiguen",c.tamano);set("#cRActivos",c.activos);set("#cRNuevos",c.nuevos_30d);set("#cRDormidos",c.dormidos);
-      set("#cTam",c.tamano);set("#cAct",c.activos);set("#cDor",c.dormidos);}
+      set("#cTam",c.tamano);set("#cAct",c.activos);set("#cDor",c.dormidos);
+      pintarComunidad(c);}
     if(d.series&&d.series.length)pintarEvo(d.series);
     pintarRoi(d);
     pintarTrend(d);
     if(d.porExperiencia)pintarPorExperiencia(d.porExperiencia);
     if(d.porSede)pintarPorSede(d.porSede);
+  }
+  // ── Comunidad: subtítulos honestos + segmentos reales (nunca datos privados) ──
+  function pintarComunidad(c){
+    if(!c)return;
+    const tam=+c.tamano||0, act=+c.activos||0, dor=+c.dormidos||0, nue=+c.nuevos_30d||0;
+    const setSub=(sel,txt)=>{const el=$(sel);if(!el)return;el.textContent=txt;el.classList.toggle("dim",!txt);};
+    if(tam>0){
+      setSub("#cTamD","personas en tu comunidad");
+      setSub("#cActD",act+" han venido en 30 d");
+      setSub("#cDorD","sin aparecer un tiempo");
+    }
+    const box=$("#segBox");if(!box)return;
+    if(tam<=0)return; // sin comunidad todavía: se queda el estado vacío honesto
+    const recur=Math.max(0,act-nue);
+    const seg=[
+      {n:"Recurrentes",v:recur,d:"vuelven y quedan contigo",col:"var(--verde)"},
+      {n:"Nuevos (30 d)",v:nue,d:"te descubrieron hace poco",col:"var(--az)"},
+      {n:"Dormidos",v:dor,d:"no vienen desde hace tiempo",col:"var(--tx-3)"},
+    ];
+    const max=Math.max(1,...seg.map(s=>s.v));
+    box.innerHTML='<div style="display:flex;flex-direction:column;gap:14px">'+seg.map(s=>{
+      const pct=tam>0?Math.round(100*s.v/tam):0;
+      return '<div><div style="display:flex;justify-content:space-between;align-items:baseline;margin-bottom:6px">'
+        +'<span style="font-weight:700">'+s.n+' <small style="color:var(--tx-3);font-weight:400">· '+s.d+'</small></span>'
+        +'<span style="font-weight:800">'+s.v+' <small style="color:var(--tx-3);font-weight:500">· '+pct+'%</small></span></div>'
+        +'<div style="height:8px;border-radius:999px;background:var(--bg-2);overflow:hidden"><div style="height:100%;width:'+(Math.round(100*s.v/max))+'%;background:'+s.col+';border-radius:999px"></div></div></div>';
+    }).join("")+'</div>';
   }
   // ── Comparativa entre sedes (plan Marca) ──
   let ultimaPorSede=null;
@@ -1067,8 +1101,8 @@ body.claro .co__apple{background:#000;color:#fff}
   /* ── Equipo ── */
   function pintarEquipo(){
     const eq=(cuenta&&cuenta.equipo)||[];
-    const admin=(cuenta&&cuenta.persona)||"Tú";
-    const rows=['<div class="comm__r"><span>'+esc(admin)+' · '+esc((cuenta&&cuenta.email)||"")+'</span><b>Administrador</b></div>']
+    const yo=(cuenta&&cuenta.email)||(cuenta&&cuenta.persona)||"Tú";
+    const rows=['<div class="comm__r"><span>'+esc(yo)+' <small style="color:var(--tx-3)">· tú</small></span><b>Administrador</b></div>']
       .concat(eq.map(m=>'<div class="comm__r"><span>'+esc(m.email)+'</span><b style="color:var(--tx-2)">'+esc(m.rol)+' <button class="lnk" data-eqdel="'+esc(m.email)+'">Quitar</button></b></div>'));
     $("#eqLista").innerHTML=rows.join("");
     $("#eqCount").textContent=(eq.length+1);
