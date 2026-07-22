@@ -44,26 +44,31 @@
           business_id: biz.id, verified: biz.verified,
         } : null;
       },
-      // Login / registro por enlace mágico (sin contraseñas)
-      async login(email) {
-        const { error } = await sb.auth.signInWithOtp({ email, options: { emailRedirectTo: location.origin + "/panel" } });
-        return error ? { ok: false, error: error.message } : { ok: "magic_link" };
+      // Acceso instantáneo con email + contraseña (sin confirmación por email)
+      async login(email, password) {
+        const { error } = await sb.auth.signInWithPassword({ email, password });
+        return error ? { ok: false, error: error.message } : { ok: true, account: await this.account() };
       },
-      // Guarda los datos del registro y envía el enlace; la empresa se crea al volver
-      async signupPending(data) {
-        try { localStorage.setItem("nexa_pending", JSON.stringify(data)); } catch {}
-        return this.login(data.email);
+      // Registro: crea usuario (sesión inmediata) y luego la empresa
+      async signup(data) {
+        let { error: serr } = await sb.auth.signUp({ email: data.email, password: data.password });
+        if (serr && /already|registered|exist/i.test(serr.message)) {
+          const { error: le } = await sb.auth.signInWithPassword({ email: data.email, password: data.password });
+          if (le) return { ok: false, error: "Ese email ya tiene cuenta. Revisa la contraseña o entra desde 'Ya soy empresa'." };
+        } else if (serr) {
+          return { ok: false, error: serr.message };
+        }
+        const { password, ...biz } = data;   // la contraseña no sale al backend de negocio
+        const { data: r, error } = await inv("business-signup", { body: biz });
+        if (error) return { ok: false, error: error.message };
+        if (r && r.error && r.error !== "ya_tienes_empresa") return { ok: false, error: r.error };
+        return { ok: true, account: await this.account() };
       },
-      // Al volver del email: si hay sesión y datos pendientes, crea la empresa
+      // Compat: si hay sesión, devuelve la cuenta
       async completeSignupIfPending() {
         const { data: { user } } = await sb.auth.getUser();
         if (!user) return null;
-        let acc = await this.account();
-        if (!acc) {
-          let p = null; try { p = JSON.parse(localStorage.getItem("nexa_pending") || "null"); } catch {}
-          if (p) { await inv("business-signup", { body: p }); localStorage.removeItem("nexa_pending"); acc = await this.account(); }
-        }
-        return acc;
+        return this.account();
       },
       async metrics(days = 30) { const { data, error } = await inv("business-metrics", { body: { days } }); return error ? null : data; },
       async upgrade(plan) {
