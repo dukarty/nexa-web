@@ -844,6 +844,19 @@ body.claro .co__apple{background:#000;color:#fff}
     pintarRoi(d);
     pintarTrend(d);
     if(d.porExperiencia)pintarPorExperiencia(d.porExperiencia);
+    if(d.porSede)pintarPorSede(d.porSede);
+  }
+  // ── Comparativa entre sedes (plan Marca) ──
+  let ultimaPorSede=null;
+  function pintarPorSede(list){
+    const el=$("#sedeTabla");if(!el||!list||!list.length)return;
+    ultimaPorSede=list;
+    const rows=list.map((x,i)=>'<tr>'
+      +'<td style="padding:12px"><b>'+esc(x.sede)+'</b>'+(i===0&&list.length>1?' <span style="font-size:.62rem;font-weight:800;color:var(--verde);background:rgba(74,222,128,.14);border-radius:999px;padding:3px 8px;margin-left:6px">MÁS FUERTE</span>':'')+'</td>'
+      +'<td style="padding:12px;text-align:right;font-weight:800">'+(+x.encuentros||0)+'</td>'
+      +'<td style="padding:12px;text-align:right">'+(x.theta!=null?x.theta+'%':'—')+'</td>'
+      +'<td style="padding:12px;text-align:right">'+(+x.personas||0)+'</td></tr>').join("");
+    el.innerHTML='<div style="overflow-x:auto"><table class="tabla" style="width:100%"><thead><tr><th style="text-align:left">Sede</th><th style="text-align:right">Encuentros</th><th style="text-align:right">θ</th><th style="text-align:right">Personas</th></tr></thead><tbody>'+rows+'</tbody></table></div>';
   }
   // ── Rendimiento por experiencia (qué plan te trae más gente) ──
   function pintarPorExperiencia(list){
@@ -1094,8 +1107,9 @@ body.claro .co__apple{background:#000;color:#fff}
     $("#sedeCount").textContent=s.length;
     cont.innerHTML=s.length?('<div class="explist">'+s.map(x=>'<div class="expc"><div class="expc__i">'+SVG_BUILD+'</div><div style="flex:1"><b>'+esc(x)+'</b><small>'+esc((cuenta&&cuenta.ciudad)||"Valencia")+'</small></div><button class="expc__del" data-sededel="'+esc(x)+'" title="Quitar" aria-label="Quitar">✕</button></div>').join("")+'</div>')
       :'<div class="vacio"><div class="em">'+SVG_BUILD+'</div><b>Aún sin sedes</b><p>Añade tus locales para compararlos entre sí.</p></div>';
-    $("#sedeTabla").innerHTML=s.length?('<div style="overflow-x:auto"><table class="tabla"><thead><tr><th>Sede</th><th>Encuentros</th><th>θ</th><th>Repetición</th><th>R</th></tr></thead><tbody>'+s.map(x=>'<tr><td>'+esc(x)+'</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>').join("")+'</tbody></table></div>')
+    $("#sedeTabla").innerHTML=s.length?('<div style="overflow-x:auto"><table class="tabla"><thead><tr><th>Sede</th><th>Encuentros</th><th>θ</th><th>Personas</th></tr></thead><tbody>'+s.map(x=>'<tr><td>'+esc(x)+'</td><td>—</td><td>—</td><td>—</td></tr>').join("")+'</tbody></table></div>')
       :'<p style="color:var(--tx-2)">Añade al menos una sede para ver la comparativa.</p>';
+    if(ultimaPorSede&&ultimaPorSede.length)pintarPorSede(ultimaPorSede);
   }
   $("#sedeAdd").addEventListener("click",()=>{
     const n=$("#sedeNombre").value.trim();if(!n)return toast("Pon el nombre de la sede.");
