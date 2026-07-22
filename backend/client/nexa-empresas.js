@@ -22,6 +22,9 @@
     async signupPending(data) { return this.signup(data); },
     async metrics() { return null; },
     async upgrade(plan) { const c = readLS() || {}; c.plan = plan; writeLS(c); return { ok: true, mock: true, plan }; },
+    async listExperiences() { const c = readLS() || {}; return c.experiencias || []; },
+    async addExperience(e) { const c = readLS() || {}; c.experiencias = c.experiencias || []; c.experiencias.unshift({ id: Date.now(), titulo: e.titulo, cat: e.cat, franja: e.franja, estado: "publicada" }); writeLS(c); return { ok: true }; },
+    async removeExperience(id) { const c = readLS() || {}; c.experiencias = (c.experiencias || []).filter((x) => String(x.id) !== String(id)); writeLS(c); return { ok: true }; },
     async logout() {},
   };
 
@@ -86,6 +89,28 @@
         const bid = await this._bid(); if (!bid) return { ok: false, error: "sin_empresa" };
         const { error } = await sb.from("business_members").delete()
           .eq("business_id", bid).eq("member_email", String(email || "").trim().toLowerCase());
+        return { ok: !error, error: error && error.message };
+      },
+      // Experiencias REALES: la misma tabla (business_experiences) que referencian
+      // los encuentros. Así lo que creas aquí es lo que mide el rendimiento por plan.
+      async listExperiences() {
+        const bid = await this._bid(); if (!bid) return [];
+        const { data } = await sb.from("business_experiences")
+          .select("id,title,category,slot_kind,published").eq("business_id", bid)
+          .order("created_at", { ascending: false });
+        return (data || []).map((r) => ({ id: r.id, titulo: r.title, cat: r.category, franja: r.slot_kind, estado: r.published ? "publicada" : "borrador" }));
+      },
+      async addExperience(e) {
+        const bid = await this._bid(); if (!bid) return { ok: false, error: "sin_empresa" };
+        const { data, error } = await sb.from("business_experiences").insert({
+          business_id: bid, title: e.titulo, category: e.cat || null,
+          slot_kind: e.franja === "valle" ? "valle" : "normal", published: true,
+        }).select("id").maybeSingle();
+        return { ok: !error, id: data && data.id, error: error && error.message };
+      },
+      async removeExperience(id) {
+        const bid = await this._bid(); if (!bid) return { ok: false, error: "sin_empresa" };
+        const { error } = await sb.from("business_experiences").delete().eq("id", id).eq("business_id", bid);
         return { ok: !error, error: error && error.message };
       },
       // Verificación: la empresa SOLICITA (marca pendiente). NUNCA se auto-verifica:
