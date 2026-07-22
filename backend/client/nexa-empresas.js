@@ -47,7 +47,7 @@
           business_id: biz.id, verified: biz.verified,
           // colecciones editables (perfil/experiencias/objetivo/sedes en meta; equipo en tabla real)
           experiencias: m.experiencias || [], objetivo: m.objetivo || null, sedes: m.sedes || [],
-          equipo: (miembros || []).map((x) => ({ email: x.member_email, rol: x.role })),
+          equipo: (miembros || []).filter((x) => x.member_email !== user.email).map((x) => ({ email: x.member_email, rol: x.role })),
         } : null;
       },
       // Persiste el perfil y las colecciones editables en Supabase (RLS: solo miembros).
