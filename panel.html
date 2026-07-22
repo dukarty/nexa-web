@@ -915,11 +915,18 @@ body.claro .co__apple{background:#000;color:#fff}
     $("#eqLista").innerHTML=rows.join("");
     $("#eqCount").textContent=(eq.length+1);
   }
-  $("#eqInvitar").addEventListener("click",()=>{
+  $("#eqInvitar").addEventListener("click",async ()=>{
     const em=$("#eqEmail").value.trim();
     if(!/^\S+@\S+\.\S+$/.test(em))return toast("Pon un email válido.");
-    cuenta.equipo=cuenta.equipo||[];cuenta.equipo.push({email:em,rol:$("#eqRol").value});
-    guardar();$("#eqEmail").value="";pintarEquipo();pintarCheck();toast("Invitación enviada a "+em+".");
+    const rol=$("#eqRol").value;
+    if(window.NEXAEmpresas&&window.NEXAEmpresas.real&&window.NEXAEmpresas.inviteMember){
+      const r=await window.NEXAEmpresas.inviteMember(em,rol);
+      if(!r||!r.ok)return toast((r&&r.error)||"No se pudo invitar.");
+      cuenta.equipo=cuenta.equipo||[];cuenta.equipo.push({email:em.toLowerCase(),rol});
+    }else{
+      cuenta.equipo=cuenta.equipo||[];cuenta.equipo.push({email:em,rol});guardar();
+    }
+    $("#eqEmail").value="";pintarEquipo();pintarCheck();toast("Invitación enviada a "+em+".");
   });
 
   /* Sedes (plan Ciudad) */
@@ -940,13 +947,19 @@ body.claro .co__apple{background:#000;color:#fff}
   });
 
   /* Borrados y factura (delegación, a prueba de re-render) */
-  document.addEventListener("click",e=>{
+  document.addEventListener("click",async e=>{
     const del=e.target.closest("[data-del]");
     if(del){cuenta.experiencias=(cuenta.experiencias||[]).filter(x=>String(x.id)!==String(del.dataset.del));guardar();pintarExp();pintarCheck();toast("Experiencia eliminada.");return;}
     const sd=e.target.closest("[data-sededel]");
     if(sd){cuenta.sedes=(cuenta.sedes||[]).filter(x=>x!==sd.dataset.sededel);guardar();pintarSedes();toast("Sede quitada.");return;}
     const eqd=e.target.closest("[data-eqdel]");
-    if(eqd){cuenta.equipo=(cuenta.equipo||[]).filter(m=>m.email!==eqd.dataset.eqdel);guardar();pintarEquipo();pintarCheck();toast("Miembro quitado.");return;}
+    if(eqd){const email=eqd.dataset.eqdel;
+      if(window.NEXAEmpresas&&window.NEXAEmpresas.real&&window.NEXAEmpresas.removeMember){
+        const r=await window.NEXAEmpresas.removeMember(email);
+        if(!r||!r.ok)return toast((r&&r.error)||"No se pudo quitar.");
+        cuenta.equipo=(cuenta.equipo||[]).filter(m=>m.email!==email);
+      }else{cuenta.equipo=(cuenta.equipo||[]).filter(m=>m.email!==email);guardar();}
+      pintarEquipo();pintarCheck();toast("Miembro quitado.");return;}
     if(e.target.closest("[data-pdf]")){
       const c=cuenta||{};const txt="FACTURA · NEXA Empresas\n\nEmpresa: "+(c.nombre||"")+"\nPlan: "+NOMBREPLAN[plan]+"\nImporte: "+PRECIOPLAN[plan]+"\nFecha: hoy\nSin permanencia · cancela cuando quieras\n\nGracias por confiar en NEXA.";
       const a=document.createElement("a");a.href=URL.createObjectURL(new Blob([txt],{type:"text/plain"}));a.download="factura-nexa.txt";a.click();toast("Factura descargada.");
