@@ -1074,25 +1074,37 @@ body.claro .co__apple{background:#000;color:#fff}
   function toast(m){const t=$("#toast");t.textContent=m;t.classList.add("on");clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove("on"),3200);}
 
   /* Gate */
-  $("#gateEntrar").addEventListener("click",async ()=>{
+  function msgGate(t){$("#gateMsg").textContent=t;$("#gateMsg").style.color="var(--rojo)";$("#gateMsg").style.display="block";}
+  async function gateEntrar(){
     const email=$("#gateEmail").value.trim();
     if(window.NEXAEmpresas&&window.NEXAEmpresas.real){
       const pass=$("#gatePass").value;
-      if(!email||!pass){$("#gateMsg").textContent="Pon tu email y contraseña.";$("#gateMsg").style.color="var(--rojo)";$("#gateMsg").style.display="block";return;}
-      const r=await window.NEXAEmpresas.login(email,pass);
-      if(r&&r.ok){
-        const acc=r.account||await window.NEXAEmpresas.account();
-        if(acc){cuenta=acc;sessionStorage.removeItem("nexa_out");$("#gate").classList.remove("on");document.body.style.overflow="";pintarCuenta();const m=await window.NEXAEmpresas.metrics(30);if(m)aplicarDatos(m);toast("Hola de nuevo, "+((acc.nombre)||"empresa")+".");}
-        else {$("#gateMsg").textContent="Entraste, pero aún no tienes empresa. Crea una gratis.";$("#gateMsg").style.color="var(--rojo)";$("#gateMsg").style.display="block";}
-      } else {$("#gateMsg").textContent="Email o contraseña incorrectos.";$("#gateMsg").style.color="var(--rojo)";$("#gateMsg").style.display="block";}
+      if(!email||!pass){msgGate("Pon tu email y contraseña.");return;}
+      const btn=$("#gateEntrar");const orig=btn.textContent;btn.disabled=true;btn.textContent="Entrando…";
+      try{
+        const r=await window.NEXAEmpresas.login(email,pass);
+        if(r&&r.ok){
+          const acc=r.account||await window.NEXAEmpresas.account();
+          if(acc){cuenta=acc;sessionStorage.removeItem("nexa_out");$("#gate").classList.remove("on");document.body.style.overflow="";pintarCuenta();const m=await window.NEXAEmpresas.metrics(30);if(m)aplicarDatos(m);toast("Hola de nuevo, "+((acc.nombre)||"empresa")+".");}
+          else msgGate("Entraste, pero aún no tienes empresa. Crea una gratis.");
+        } else {
+          const e=(r&&r.error)||"";
+          if(/confirm/i.test(e))msgGate("Tu cuenta es de antes y pedía confirmación por email. Crea una nueva gratis — ya sin confirmación.");
+          else if(/invalid|credential|password/i.test(e))msgGate("Email o contraseña incorrectos.");
+          else msgGate(e||"No se pudo entrar. Inténtalo de nuevo.");
+        }
+      }catch(err){msgGate("Error de conexión. Vuelve a intentarlo.");}
+      btn.disabled=false;btn.textContent=orig;
       return;
     }
     const c=leerCuenta();
     const em=email.toLowerCase();
-    if(c&&c.email&&em&&c.email.toLowerCase()!==em){$("#gateMsg").textContent="No hay ninguna cuenta con ese email en este dispositivo.";$("#gateMsg").style.color="var(--rojo)";$("#gateMsg").style.display="block";return;}
+    if(c&&c.email&&em&&c.email.toLowerCase()!==em){msgGate("No hay ninguna cuenta con ese email en este dispositivo.");return;}
     if(c){cuenta=c;sessionStorage.removeItem("nexa_out");$("#gate").classList.remove("on");document.body.style.overflow="";pintarCuenta();aplicarDatos((c&&c.datos)||null);toast("Bienvenido de vuelta, "+((c.nombre)||"empresa")+".");}
-    else{$("#gateMsg").textContent="No encontramos ninguna cuenta en este dispositivo. Crea una gratis — se tarda un minuto.";$("#gateMsg").style.color="var(--rojo)";$("#gateMsg").style.display="block";}
-  });
+    else msgGate("No encontramos ninguna cuenta en este dispositivo. Crea una gratis — se tarda un minuto.");
+  }
+  $("#gateEntrar").addEventListener("click",gateEntrar);
+  ["#gateEmail","#gatePass"].forEach(s=>{const el=$(s);if(el)el.addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();gateEntrar();}});});
 
   /* Onboarding */
   let os=1;
