@@ -392,6 +392,7 @@ body.claro .co__apple{background:#000;color:#fff}
           <div><div id="roiPubli" style="font-size:1.7rem;font-weight:900;letter-spacing:-.02em">—</div><div style="color:var(--tx-2);font-size:.82rem;margin-top:2px">lo mismo en publicidad (Meta Ads ~20&nbsp;€/cliente)</div></div>
           <div><div id="roiAhorro" style="font-size:1.7rem;font-weight:900;letter-spacing:-.02em;color:var(--verde)">—</div><div style="color:var(--tx-2);font-size:.82rem;margin-top:2px">te ahorras frente a pagar anuncios</div></div>
         </div>
+        <div id="roiChart" style="margin:2px 0 14px"></div>
         <p id="roiVerdict" style="font-size:.9rem;font-weight:700;color:var(--tx);background:var(--panel);border:1px solid var(--linea);border-radius:12px;padding:12px 14px;line-height:1.45;margin:0"></p>
         <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:8px">
           <p style="color:var(--tx-3);font-size:.7rem;margin:0">Estimación: coste medio de captar un cliente con publicidad local ≈ 20&nbsp;€. Ajustable a tu sector.</p>
@@ -991,6 +992,16 @@ body.claro .co__apple{background:#000;color:#fff}
     $("#roiPubli").textContent = nuevos>0 ? (publi+" €") : "—";
     $("#roiAhorro").textContent = nuevos>0 ? ((ahorro>=0?"+":"")+ahorro+" €") : "—";
     $("#roiAhorro").style.color = ahorro>=0?"var(--verde)":"var(--rojo)";
+    // Comparativa visual: lo que te cuesta con NEXA vs. lo mismo en publicidad.
+    const rc=$("#roiChart");
+    if(rc){
+      if(nuevos>0){
+        const maxv=Math.max(publi,coste,1);
+        const barra=(lab,val,col,extra)=>'<div style="margin-bottom:10px"><div style="display:flex;justify-content:space-between;font-size:.8rem;margin-bottom:5px"><span style="color:var(--tx-2)">'+lab+'</span><span style="font-weight:800">'+val+' &euro;'+(extra||"")+'</span></div>'
+          +'<div style="height:14px;border-radius:999px;background:var(--bg-2);overflow:hidden"><div style="height:100%;width:'+Math.max(2,Math.round(100*val/maxv))+'%;background:'+col+';border-radius:999px"></div></div></div>';
+        rc.innerHTML=barra("Con NEXA (tu plan)",coste,"var(--az)","")+barra("Lo mismo en publicidad",publi,"var(--tx-3)","");
+      } else { rc.innerHTML=""; }
+    }
     let v;
     if(nuevos===0){ v="Aún sin clientes nuevos en esta ventana. En cuanto lleguen, aquí verás en euros cuánto te ahorras frente a la publicidad."; }
     else if(coste===0){ v="Coste 0 €. Cada uno de estos "+nuevos+" clientes nuevos es margen puro — en publicidad te habrían costado ~"+publi+" €"+(rep!=null?", y el "+rep+"% vuelve sin que pagues otra vez.":"."); }
