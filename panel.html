@@ -1179,7 +1179,7 @@ body.claro .co__apple{background:#000;color:#fff}
     const list=(cuenta&&cuenta.experiencias)||[];
     $("#expCount").textContent=list.length;
     $("#expLista").innerHTML=list.length?('<div class="explist">'+list.map(e=>{
-      const featBtn='<button class="mini" data-feat="'+e.id+'" data-on="'+(e.featured?'1':'0')+'" style="white-space:nowrap;'+(e.featured?'color:var(--az);border-color:var(--az)':'')+'" title="'+(e.featured?'Quitar destacado':'Destacar en NEXA (alcance)')+'">'+(e.featured?'★ Destacada':'☆ Destacar')+'</button>';
+      const featBtn='<button class="mini" data-feat="'+e.id+'" data-on="'+(e.featured?'1':'0')+'" style="white-space:nowrap;'+(e.featured?'background:var(--az);color:#fff;border-color:var(--az)':'')+'" title="'+(e.featured?'Quitar destacado':'Destacar en NEXA (alcance)')+'">'+(e.featured?'★ Destacada':'☆ Destacar')+'</button>';
       return '<div class="expc"><div class="expc__i">'+SVG_SPARK+'</div><div style="flex:1"><b>'+esc(e.titulo)+'</b><small>'+esc(e.cat)+'</small></div><span class="expc__tag'+(e.franja==="valle"?' expc__tag--val':'')+'">'+(e.franja==="valle"?"Franja valle":"Publicada")+'</span>'+featBtn+'<button class="expc__del" data-del="'+e.id+'" title="Quitar" aria-label="Quitar">✕</button></div>';
     }).join("")+'</div>'):'<div class="vacio"><div class="em"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"><path d="M12 3v3.5M12 17.5V21M3 12h3.5M17.5 12H21M6.2 6.2l2.4 2.4M15.4 15.4l2.4 2.4M17.8 6.2l-2.4 2.4M8.6 15.4l-2.4 2.4"/></svg></div><b>Aún no has creado ninguna</b><p>Crea tu primera experiencia arriba. Es lo que enciende el motor: gente que queda, que repite y que trae a otros.</p></div>';
   }
