@@ -1004,7 +1004,7 @@ body.claro .co__apple{background:#000;color:#fff}
     const t=precioTxt(pagoKey);
     $("#pagoPrice").textContent=t;
     const btn=$("#ccPay");
-    if(btn&&!btn.disabled)btn.innerHTML=real?"Ir a pago seguro":('Pagar <span id="ccPayAmt">'+t+'</span>');
+    if(btn&&!btn.disabled)btn.innerHTML='Pagar <span id="ccPayAmt">'+t+'</span>';
     $$("#pagoPeriodo button").forEach(b=>b.classList.toggle("on",b.dataset.per===periodo));
     const ah=$("#pagoAhorro");if(ah)ah.style.display=periodo==="anio"?"block":"none";
   }
@@ -1017,10 +1017,11 @@ body.claro .co__apple{background:#000;color:#fff}
     $("#pagoPay").hidden=false;$("#pagoDone").hidden=true;
     const btn=$("#ccPay");btn.disabled=false;
     ["#ccNum","#ccExp","#ccCvc","#ccName"].forEach(s=>{const el=$(s);if(el)el.value="";});
+    // Apple Pay siempre visible (estética). En real, la tarjeta la pide Stripe (redirección segura).
+    $("#payApple").style.display="block";
+    $("#payOr").style.display="block";
     $("#ccFields").style.display=real?"none":"block";
-    $("#payOr").style.display=real?"none":"block";
-    $("#payApple").style.display=real?"none":"block";
-    $("#ccSafe").textContent=real?"Pago seguro con Stripe":"Pago seguro · demo: no se realiza ningún cargo real";
+    $("#ccSafe").textContent=real?"Pago 100% seguro con Stripe · Apple Pay, Google Pay o tarjeta":"Pago seguro · demo: no se realiza ningún cargo real";
     pintarPrecioCheckout();
     $("#pago").classList.add("on");
   }
