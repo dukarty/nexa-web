@@ -970,7 +970,7 @@ body.claro .co__apple{background:#000;color:#fff}
     $$(".navi .lock").forEach(l=>l.remove());
     $$(".navi").forEach(n=>{const min=+n.dataset.min;if(min>rango)n.insertAdjacentHTML("beforeend",'<span class="lock">'+SVG_LOCK+'</span>');});
     pintarMejoras();pintarLadder();pintarPerfil();pintarExp();pintarGoal();pintarEquipo();pintarSedes();pintarCheck();
-    if(typeof refrescarTema==="function")refrescarTema();
+    try{if(typeof refrescarTema==="function")refrescarTema();}catch(e){}
   }
   function bloqueoNombre(min){return min>=2?"Marca":"Pro";}
 
