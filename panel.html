@@ -852,6 +852,7 @@ body.claro .co__apple{background:#000;color:#fff}
     pintarTrend(d);
     if(d.porExperiencia)pintarPorExperiencia(d.porExperiencia);
     if(d.porSede)pintarPorSede(d.porSede);
+    if(typeof pintarGoal==="function")pintarGoal(); // progreso de objetivos con datos reales
   }
   // ── Comunidad: subtítulos honestos + segmentos reales (nunca datos privados) ──
   function pintarComunidad(c){
@@ -1088,9 +1089,28 @@ body.claro .co__apple{background:#000;color:#fff}
   /* ── Objetivos ── */
   function pintarGoal(){
     const g=cuenta&&cuenta.objetivo;
-    if(g){const et={encuentros:"encuentros/semana",nuevos:"clientes nuevos/semana",repeticion:"% de repetición"}[g.tipo];
-      $("#goalTxt").textContent="Objetivo: "+g.valor+" "+et+". Progreso 0 — se rellenará con tu actividad.";
-      $("#goalTipo").value=g.tipo;$("#goalValor").value=g.valor;}
+    const txt=$("#goalTxt"), bar=$("#goalBar");
+    if(!g){if(txt)txt.textContent="Aún no has fijado un objetivo.";if(bar)bar.style.width="0%";return;}
+    const et={encuentros:"encuentros/semana",nuevos:"clientes nuevos/semana",repeticion:"% de repetición"}[g.tipo];
+    $("#goalTipo").value=g.tipo;$("#goalValor").value=g.valor;
+    // Progreso real: normaliza la actividad de la ventana actual a ritmo semanal.
+    const d=ultimoDatos;
+    let cur=null;
+    if(d){
+      const semanas=Math.max(1,(ventanaDias||30)/7);
+      if(g.tipo==="encuentros" && d.kpis && d.kpis.encuentros!=null) cur=Math.round((+d.kpis.encuentros||0)/semanas);
+      else if(g.tipo==="nuevos" && d.valor && d.valor.nuevos!=null) cur=Math.round((+d.valor.nuevos||0)/semanas);
+      else if(g.tipo==="repeticion" && d.kpis && d.kpis.repeticion!=null) cur=+d.kpis.repeticion||0; // ya es %
+    }
+    if(cur==null){
+      if(txt)txt.textContent="Objetivo: "+g.valor+" "+et+". El progreso se rellenará con tu actividad real.";
+      if(bar)bar.style.width="0%";
+      return;
+    }
+    const pct=Math.max(0,Math.min(100,Math.round(100*cur/g.valor)));
+    const meta=pct>=100?" · ¡meta cumplida! 🎉":"";
+    if(txt)txt.textContent="Objetivo: "+g.valor+" "+et+" · vas por "+cur+" ("+pct+"%)"+meta;
+    if(bar)bar.style.width=pct+"%";
   }
   $("#goalGuardar").addEventListener("click",()=>{
     const v=parseInt($("#goalValor").value,10);
