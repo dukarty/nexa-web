@@ -126,7 +126,19 @@
         if (!user) return null;
         return this.account();
       },
-      async metrics(days = 30) { const { data, error } = await inv("business-metrics", { body: { days } }); return error ? null : data; },
+      async metrics(days = 30) {
+        const { data, error } = await inv("business-metrics", { body: { days } });
+        if (error) return null;
+        // Serie temporal para gráficos (RPC directa; la función valida membresía).
+        try {
+          const bid = await this._bid();
+          if (bid && data) {
+            const { data: serie } = await sb.rpc("get_business_series", { bid, days });
+            if (serie) data.series = serie;
+          }
+        } catch (e) { /* sin serie: el panel muestra estado vacío */ }
+        return data;
+      },
       async upgrade(plan, period) {
         const { data, error } = await inv("plan-checkout", { body: { plan, period: period || "mes" } });
         if (error) return { ok: false, error: error.message };
