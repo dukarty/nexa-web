@@ -15,6 +15,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..100,400;75..100,500;75..100,600;75..100,700;75..100,800;75..100,900&display=swap">
+<script src="backend/client/config.js"></script>
 <style>
 :root{
   --az:#0A5CFF;--az-h:#0040CC;--tinta:#0A0A0A;--gris:#5C5C5C;--gris-2:#9A9A9A;
@@ -569,9 +570,17 @@ body.nav-azul .marca__x line{stroke:#fff}
       frase:val("regFrase"), aforo:val("regAforo"), sedes:val("regSedes"),
       meta:metaSel, web:val("regWeb"), ig:val("regIg"), creada:Date.now()
     };
-    try{localStorage.setItem("nexa_empresa",JSON.stringify(cuenta));}catch(e){}
     const url="panel.html?bienvenida=1&nombre="+encodeURIComponent(nombre);
     $('.paso[data-p="6"] .cta').setAttribute("href",url);
+    if(window.NEXAEmpresas&&window.NEXAEmpresas.real){
+      // Modo real: guarda datos y envía enlace mágico; la empresa se crea al volver del email
+      window.NEXAEmpresas.signupPending(cuenta);
+      const p6=$('.paso[data-p="6"]');
+      p6.querySelector(".reg__t").textContent="Revisa tu email";
+      p6.querySelector(".reg__d").textContent="Te hemos enviado un enlace de acceso a "+(cuenta.email||"tu email")+". Ábrelo para entrar a tu panel.";
+    } else {
+      try{localStorage.setItem("nexa_empresa",JSON.stringify(cuenta));}catch(e){}
+    }
     ir(6);
   });
 

@@ -9,6 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&display=swap">
+<script src="backend/client/config.js"></script>
 <style>
 :root{
   --az:#0A5CFF;--az-h:#0040CC;--verde:#4ADE80;--ambar:#F5A524;--rojo:#F87171;
@@ -707,7 +708,9 @@ body.claro .co__apple{background:#000;color:#fff}
     cuenta={nombre:(q.get("nombre")||"Tu empresa"),plan:"verificada",persona:"Tú",ciudad:"Valencia"};
     try{localStorage.setItem("nexa_empresa",JSON.stringify(cuenta));}catch(e){}
   }
-  if(!cuenta){ $("#gate").classList.add("on"); document.body.style.overflow="hidden"; }
+  const REAL=!!(window.NEXA_EMPRESAS_CONFIG&&window.NEXA_EMPRESAS_CONFIG.supabaseUrl);
+  if(REAL){ $("#gate").classList.add("on"); document.body.style.overflow="hidden"; } // el SDK lo oculta si hay sesión válida
+  else if(!cuenta){ $("#gate").classList.add("on"); document.body.style.overflow="hidden"; }
   else if(sessionStorage.getItem("nexa_out")){ $("#gate").classList.add("on"); document.body.style.overflow="hidden"; }
 
   let plan="verificada",nombre="Tu empresa",rango=0;
@@ -1020,28 +1023,27 @@ body.claro .co__apple{background:#000;color:#fff}
     if(!$("#ccName").value.trim())return "Pon el nombre de la tarjeta";
     return null;
   }
-  function procesar(btn,label){
+  function finExito(btn,orig){
+    $("#pagoPay").hidden=true;$("#pagoDone").hidden=false;
+    $("#pagoDoneTxt").textContent="Pago confirmado. Ya eres "+NOMBREPLAN[pagoKey]+" — todo desbloqueado.";
+    setTimeout(()=>{cerrarPago();btn.disabled=false;btn.innerHTML=orig;pintarCuenta();ver("resumen");toast("Ya eres "+NOMBREPLAN[pagoKey]+".");},1600);
+  }
+  async function procesar(btn){
     const orig=btn.innerHTML;btn.disabled=true;btn.innerHTML='<span class="spin"></span>Procesando pago…';
-    setTimeout(()=>{
-      cuenta=cuenta||{};cuenta.plan=pagoKey;guardar();
-      $("#pagoPay").hidden=true;$("#pagoDone").hidden=false;
-      $("#pagoDoneTxt").textContent="Pago confirmado. Ya eres "+NOMBREPLAN[pagoKey]+" — todo desbloqueado.";
-      setTimeout(()=>{cerrarPago();btn.disabled=false;btn.innerHTML=orig;pintarCuenta();ver("resumen");toast("Ya eres "+NOMBREPLAN[pagoKey]+".");},1600);
-    },1700);
+    if(window.NEXAEmpresas&&window.NEXAEmpresas.real){
+      const r=await window.NEXAEmpresas.upgrade(pagoKey);
+      if(r&&r.redirect)return;                       // Stripe real → redirige
+      const acc=await window.NEXAEmpresas.account(); if(acc){cuenta=acc;}
+      const m=await window.NEXAEmpresas.metrics(30); if(m)aplicarDatos(m);
+      finExito(btn,orig); return;
+    }
+    setTimeout(()=>{ cuenta=cuenta||{};cuenta.plan=pagoKey;guardar(); finExito(btn,orig); },1700);
   }
-  async function viaStripe(){
-    if(window.NEXAEmpresas&&window.NEXAEmpresas.upgrade){const r=await window.NEXAEmpresas.upgrade(pagoKey);if(r&&r.redirect)return true;}
-    return false;
-  }
-  $("#ccPay").addEventListener("click",async ()=>{
-    if(window.NEXAEmpresas&&window.NEXAEmpresas.real){if(await viaStripe())return;}
-    const err=validaTarjeta();if(err)return toast(err);
+  $("#ccPay").addEventListener("click",()=>{
+    if(!(window.NEXAEmpresas&&window.NEXAEmpresas.real)){const err=validaTarjeta();if(err)return toast(err);}
     procesar($("#ccPay"));
   });
-  $("#payApple").addEventListener("click",async ()=>{
-    if(window.NEXAEmpresas&&window.NEXAEmpresas.real){if(await viaStripe())return;}
-    procesar($("#payApple"));
-  });
+  $("#payApple").addEventListener("click",()=>procesar($("#payApple")));
   function pintarMejoras(){
     const cont=$("#facMejoras");if(!cont)return;
     const sup=["activacion","ciudad","red"].filter(k=>(RANGO[k]??9)>rango);
@@ -1090,7 +1092,7 @@ body.claro .co__apple{background:#000;color:#fff}
   /* Bloques clicables: empresa → Perfil, usuario → Ajustes */
   $("#bizBtn").addEventListener("click",()=>ver("perfil"));
   $("#userBtn").addEventListener("click",()=>ver("ajustes"));
-  function logout(){sessionStorage.setItem("nexa_out","1");$("#gate").classList.add("on");document.body.style.overflow="hidden";}
+  async function logout(){if(window.NEXAEmpresas&&window.NEXAEmpresas.real){await window.NEXAEmpresas.logout();}sessionStorage.setItem("nexa_out","1");$("#gate").classList.add("on");document.body.style.overflow="hidden";}
   $("#logoutBtn").addEventListener("click",logout);
 
   const side=$("#side"),velo=$("#velo");
@@ -1098,7 +1100,12 @@ body.claro .co__apple{background:#000;color:#fff}
   velo.addEventListener("click",()=>{side.classList.remove("abierta");velo.classList.remove("on");});
 
   /* Hook para el backend real */
-  window.NEXA_PANEL={setCuenta:c=>{cuenta=c;pintarCuenta();},aplicarDatos,ver,toast};
+  window.NEXA_PANEL={
+    setCuenta:c=>{cuenta=c;pintarCuenta();},
+    aplicarDatos,ver,toast,
+    showGate:()=>{$("#gate").classList.add("on");document.body.style.overflow="hidden";},
+    hideGate:()=>{$("#gate").classList.remove("on");document.body.style.overflow="";}
+  };
 </script>
 <script src="backend/client/nexa-empresas.js" defer></script>
 </body>
