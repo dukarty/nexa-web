@@ -376,7 +376,7 @@ body.claro .co__apple{background:#000;color:#fff}
         <p class="valor__k">Lo que NEXA te ha traído · <span id="valorVentana">últimos 30 días</span> <span class="info">i</span></p>
         <div class="valor__g">
           <div><div class="valor__n tab" id="vNuevos">—</div><div class="valor__l">clientes nuevos, traídos por alguien</div></div>
-          <div><div class="valor__n tab" id="vRepiten">—</div><div class="valor__l">vuelven, sin pagar por que lo hagan</div></div>
+          <div><div class="valor__n tab" id="vRepiten">—</div><div class="valor__l">de tus clientes vuelven, sin pagar por ello</div></div>
           <div><div class="valor__n tab" id="vMas">—</div><div class="valor__l">llegaron como el +1 de otro</div></div>
         </div>
         <p id="valorTrend" style="display:none;font-size:.82rem;font-weight:800;margin:2px 0 0"></p>
@@ -829,14 +829,16 @@ body.claro .co__apple{background:#000;color:#fff}
     if(!d)return;
     ultimoDatos=d;
     const set=(sel,v)=>{const el=$(sel);if(el&&v!=null)el.textContent=v;};
-    if(d.valor){set("#vNuevos",d.valor.nuevos);set("#vRepiten",d.valor.repiten);set("#vMas",d.valor.mas);
+    if(d.valor){set("#vNuevos",d.valor.nuevos);set("#vRepiten",d.valor.repiten!=null?d.valor.repiten+"%":"—");set("#vMas",d.valor.mas);
       const hayDatos=(d.kpis&&d.kpis.encuentros>0);
       set("#vFrase", d.valor.frase || (hayDatos
         ? "Cada uno de estos clientes llegó sin que pagaras publicidad, y se queda. Eso es margen puro."
         : "Aún sin datos — pero el modelo es simple: clientes que vuelven sin pagar publicidad. Eso es margen que se queda."));}
-    if(d.kpis){const ks=$$("#kpis .kpi");const m=[d.kpis.encuentros,d.kpis.theta,d.kpis.repeticion,d.kpis.r];
+    if(d.kpis){const ks=$$("#kpis .kpi");
+      // θ y repetición son PORCENTAJES → se muestran con % para que no se confundan con un recuento.
+      const m=[d.kpis.encuentros, d.kpis.theta!=null?d.kpis.theta+"%":null, d.kpis.repeticion!=null?d.kpis.repeticion+"%":null, d.kpis.r];
       ks.forEach((c,i)=>{if(m[i]!=null){$(".kpi__v",c).textContent=m[i];const dd=$(".kpi__d",c);dd.textContent="";dd.classList.remove("dim");}});
-      set("#eEnc",d.kpis.encuentros);set("#eTheta",d.kpis.theta);
+      set("#eEnc",d.kpis.encuentros);set("#eTheta",d.kpis.theta!=null?d.kpis.theta+"%":"—");
       // Subtítulos de la sección Encuentros: dejan de decir "Aún sin datos" cuando ya hay actividad
       const hayEnc=(+d.kpis.encuentros||0)>0;
       const setSub=(sel,txt)=>{const el=$(sel);if(!el)return;el.textContent=txt;el.classList.toggle("dim",!txt);};
