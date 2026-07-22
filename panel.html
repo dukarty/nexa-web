@@ -1178,9 +1178,10 @@ body.claro .co__apple{background:#000;color:#fff}
   function pintarExp(){
     const list=(cuenta&&cuenta.experiencias)||[];
     $("#expCount").textContent=list.length;
-    $("#expLista").innerHTML=list.length?('<div class="explist">'+list.map(e=>
-      '<div class="expc"><div class="expc__i">'+SVG_SPARK+'</div><div style="flex:1"><b>'+esc(e.titulo)+'</b><small>'+esc(e.cat)+'</small></div><span class="expc__tag'+(e.franja==="valle"?' expc__tag--val':'')+'">'+(e.franja==="valle"?"Franja valle":"Publicada")+'</span><button class="expc__del" data-del="'+e.id+'" title="Quitar" aria-label="Quitar">✕</button></div>'
-    ).join("")+'</div>'):'<div class="vacio"><div class="em"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"><path d="M12 3v3.5M12 17.5V21M3 12h3.5M17.5 12H21M6.2 6.2l2.4 2.4M15.4 15.4l2.4 2.4M17.8 6.2l-2.4 2.4M8.6 15.4l-2.4 2.4"/></svg></div><b>Aún no has creado ninguna</b><p>Crea tu primera experiencia arriba. Es lo que enciende el motor: gente que queda, que repite y que trae a otros.</p></div>';
+    $("#expLista").innerHTML=list.length?('<div class="explist">'+list.map(e=>{
+      const featBtn='<button class="mini" data-feat="'+e.id+'" data-on="'+(e.featured?'1':'0')+'" style="white-space:nowrap;'+(e.featured?'color:var(--az);border-color:var(--az)':'')+'" title="'+(e.featured?'Quitar destacado':'Destacar en NEXA (alcance)')+'">'+(e.featured?'★ Destacada':'☆ Destacar')+'</button>';
+      return '<div class="expc"><div class="expc__i">'+SVG_SPARK+'</div><div style="flex:1"><b>'+esc(e.titulo)+'</b><small>'+esc(e.cat)+'</small></div><span class="expc__tag'+(e.franja==="valle"?' expc__tag--val':'')+'">'+(e.franja==="valle"?"Franja valle":"Publicada")+'</span>'+featBtn+'<button class="expc__del" data-del="'+e.id+'" title="Quitar" aria-label="Quitar">✕</button></div>';
+    }).join("")+'</div>'):'<div class="vacio"><div class="em"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"><path d="M12 3v3.5M12 17.5V21M3 12h3.5M17.5 12H21M6.2 6.2l2.4 2.4M15.4 15.4l2.4 2.4M17.8 6.2l-2.4 2.4M8.6 15.4l-2.4 2.4"/></svg></div><b>Aún no has creado ninguna</b><p>Crea tu primera experiencia arriba. Es lo que enciende el motor: gente que queda, que repite y que trae a otros.</p></div>';
   }
   function esc(s){return String(s||"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));}
   // Carga las experiencias REALES desde la tabla (business_experiences) — las mismas
@@ -1303,6 +1304,27 @@ body.claro .co__apple{background:#000;color:#fff}
 
   /* Borrados y factura (delegación, a prueba de re-render) */
   document.addEventListener("click",async e=>{
+    const feat=e.target.closest("[data-feat]");
+    if(feat){
+      const id=feat.dataset.feat, on=feat.dataset.on!=="1"; // alterna
+      // Destacar es plan Marca+. En planes bajos, invita a mejorar (no bloquea seco).
+      if(on && rango<2){abrirUpsell("Destacar en NEXA","Marca");return;}
+      const R=window.NEXAEmpresas;
+      feat.disabled=true;
+      if(R&&R.setFeatured){
+        const res=await R.setFeatured(id,on);
+        if(!res||!res.ok){
+          if(res&&res.error==="plan_insuficiente"){abrirUpsell("Destacar en NEXA","Marca");}
+          else toast((res&&res.error)||"No se pudo. Inténtalo de nuevo.");
+          feat.disabled=false;
+        }else{
+          if(R.real)await cargarExperiencias();
+          else{cuenta.experiencias=(cuenta.experiencias||[]).map(x=>String(x.id)===String(id)?{...x,featured:on}:x);guardar();pintarExp();}
+          toast(on?"Destacada. Aparecerá primero en el descubrimiento de tu zona.":"Ya no está destacada.");
+        }
+      }
+      return;
+    }
     const del=e.target.closest("[data-del]");
     if(del){const id=del.dataset.del;const R=window.NEXAEmpresas;
       if(R&&R.real&&R.removeExperience){R.removeExperience(id).then(()=>cargarExperiencias());}
