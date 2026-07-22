@@ -1183,15 +1183,36 @@ body.claro .co__apple{background:#000;color:#fff}
     ).join("")+'</div>'):'<div class="vacio"><div class="em"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round"><path d="M12 3v3.5M12 17.5V21M3 12h3.5M17.5 12H21M6.2 6.2l2.4 2.4M15.4 15.4l2.4 2.4M17.8 6.2l-2.4 2.4M8.6 15.4l-2.4 2.4"/></svg></div><b>Aún no has creado ninguna</b><p>Crea tu primera experiencia arriba. Es lo que enciende el motor: gente que queda, que repite y que trae a otros.</p></div>';
   }
   function esc(s){return String(s||"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));}
-  $("#expCrear").addEventListener("click",()=>{
+  // Carga las experiencias REALES desde la tabla (business_experiences) — las mismas
+  // que miden el rendimiento por plan. En modo demo, usa las locales.
+  async function cargarExperiencias(){
+    const R=window.NEXAEmpresas;
+    if(R&&R.real&&R.listExperiences){
+      try{const l=await R.listExperiences();cuenta.experiencias=l||[];pintarExp();pintarCheck();}catch(e){}
+    }
+  }
+  $("#expCrear").addEventListener("click",async()=>{
     const t=$("#expTitulo").value.trim();
     if(!t)return toast("Ponle un título a tu experiencia.");
     // Primer evento gratis: en el plan Gratis solo 1; para más, sube a Pro
     if(rango<1 && ((cuenta&&cuenta.experiencias)||[]).length>=1){ return abrirUpsell("Eventos ilimitados","Pro"); }
-    cuenta.experiencias=cuenta.experiencias||[];
-    cuenta.experiencias.unshift({id:Date.now(),titulo:t,cat:$("#expCat").value,franja:$("#expFranja").value,desc:$("#expDesc").value.trim(),estado:"publicada"});
-    guardar();$("#expTitulo").value="";$("#expDesc").value="";
-    pintarExp();pintarCheck();toast("Experiencia publicada. Ya puede llegar a tu comunidad.");
+    const btn=$("#expCrear");const orig=btn.textContent;btn.disabled=true;btn.textContent="Publicando…";
+    const exp={titulo:t,cat:$("#expCat").value,franja:$("#expFranja").value,desc:$("#expDesc").value.trim()};
+    const R=window.NEXAEmpresas;
+    try{
+      if(R&&R.real&&R.addExperience){
+        const res=await R.addExperience(exp);
+        if(!res||!res.ok){btn.disabled=false;btn.textContent=orig;return toast("No se pudo publicar. Inténtalo de nuevo.");}
+        await cargarExperiencias();
+      }else{
+        cuenta.experiencias=cuenta.experiencias||[];
+        cuenta.experiencias.unshift({id:Date.now(),titulo:exp.titulo,cat:exp.cat,franja:exp.franja,desc:exp.desc,estado:"publicada"});
+        guardar();pintarExp();pintarCheck();
+      }
+      $("#expTitulo").value="";$("#expDesc").value="";
+      toast("Experiencia publicada. Ya puede llegar a tu comunidad.");
+    }catch(e){toast("No se pudo publicar. Inténtalo de nuevo.");}
+    btn.disabled=false;btn.textContent=orig;
   });
 
   /* ── Objetivos ── */
@@ -1283,7 +1304,10 @@ body.claro .co__apple{background:#000;color:#fff}
   /* Borrados y factura (delegación, a prueba de re-render) */
   document.addEventListener("click",async e=>{
     const del=e.target.closest("[data-del]");
-    if(del){cuenta.experiencias=(cuenta.experiencias||[]).filter(x=>String(x.id)!==String(del.dataset.del));guardar();pintarExp();pintarCheck();toast("Experiencia eliminada.");return;}
+    if(del){const id=del.dataset.del;const R=window.NEXAEmpresas;
+      if(R&&R.real&&R.removeExperience){R.removeExperience(id).then(()=>cargarExperiencias());}
+      else{cuenta.experiencias=(cuenta.experiencias||[]).filter(x=>String(x.id)!==String(id));guardar();pintarExp();pintarCheck();}
+      toast("Experiencia eliminada.");return;}
     const sd=e.target.closest("[data-sededel]");
     if(sd){cuenta.sedes=(cuenta.sedes||[]).filter(x=>x!==sd.dataset.sededel);guardar();pintarSedes();toast("Sede quitada.");return;}
     const eqd=e.target.closest("[data-eqdel]");
@@ -1495,7 +1519,7 @@ body.claro .co__apple{background:#000;color:#fff}
         const r=await window.NEXAEmpresas.login(email,pass);
         if(r&&r.ok){
           const acc=r.account||await window.NEXAEmpresas.account();
-          if(acc){cuenta=acc;sessionStorage.removeItem("nexa_out");$("#gate").classList.remove("on");document.body.style.overflow="";pintarCuenta();const m=await window.NEXAEmpresas.metrics(30);if(m)aplicarDatos(m);toast("Hola de nuevo, "+((acc.nombre)||"empresa")+".");}
+          if(acc){cuenta=acc;sessionStorage.removeItem("nexa_out");$("#gate").classList.remove("on");document.body.style.overflow="";pintarCuenta();cargarExperiencias();const m=await window.NEXAEmpresas.metrics(30);if(m)aplicarDatos(m);toast("Hola de nuevo, "+((acc.nombre)||"empresa")+".");}
           else msgGate("Entraste, pero aún no tienes empresa. Crea una gratis.");
         } else {
           const e=(r&&r.error)||"";
@@ -1572,7 +1596,7 @@ body.claro .co__apple{background:#000;color:#fff}
 
   /* Hook para el backend real */
   window.NEXA_PANEL={
-    setCuenta:c=>{cuenta=c;pintarCuenta();},
+    setCuenta:c=>{cuenta=c;pintarCuenta();if(typeof cargarExperiencias==="function")cargarExperiencias();},
     aplicarDatos,ver,toast,
     showGate:()=>{$("#gate").classList.add("on");document.body.style.overflow="hidden";},
     hideGate:()=>{$("#gate").classList.remove("on");document.body.style.overflow="";}
