@@ -71,8 +71,8 @@
         return this.account();
       },
       async metrics(days = 30) { const { data, error } = await inv("business-metrics", { body: { days } }); return error ? null : data; },
-      async upgrade(plan) {
-        const { data, error } = await inv("plan-checkout", { body: { plan } });
+      async upgrade(plan, period) {
+        const { data, error } = await inv("plan-checkout", { body: { plan, period: period || "mes" } });
         if (error) return { ok: false, error: error.message };
         if (data && data.url) { location.href = data.url; return { ok: true, redirect: true }; }
         return { ok: true, mock: !!(data && data.mock), plan };
