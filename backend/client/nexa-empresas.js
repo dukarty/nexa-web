@@ -104,7 +104,12 @@
       // Destacar/quitar destacado: el gate por plan lo decide el servidor.
       async setFeatured(id, on) {
         const { data, error } = await inv("experience-feature", { body: { experience_id: id, featured: !!on } });
-        if (error) return { ok: false, error: error.message };
+        if (error) {
+          // El cuerpo del 403 trae el motivo real (p.ej. plan_insuficiente) para poder mostrar el upsell.
+          let code = "";
+          try { const b = error.context && (await error.context.json()); code = b && b.error; } catch (_) {}
+          return { ok: false, error: code || error.message };
+        }
         if (data && data.error) return { ok: false, error: data.error, need: data.need };
         return { ok: true, featured: !!(data && data.featured) };
       },
