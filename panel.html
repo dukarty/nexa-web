@@ -393,7 +393,10 @@ body.claro .co__apple{background:#000;color:#fff}
           <div><div id="roiAhorro" style="font-size:1.7rem;font-weight:900;letter-spacing:-.02em;color:var(--verde)">—</div><div style="color:var(--tx-2);font-size:.82rem;margin-top:2px">te ahorras frente a pagar anuncios</div></div>
         </div>
         <p id="roiVerdict" style="font-size:.9rem;font-weight:700;color:var(--tx);background:var(--panel);border:1px solid var(--linea);border-radius:12px;padding:12px 14px;line-height:1.45;margin:0"></p>
-        <p style="color:var(--tx-3);font-size:.7rem;margin:8px 2px 0">Estimación: coste medio de captar un cliente con publicidad local ≈ 20&nbsp;€. Ajustable a tu sector.</p>
+        <div style="display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-top:8px">
+          <p style="color:var(--tx-3);font-size:.7rem;margin:0">Estimación: coste medio de captar un cliente con publicidad local ≈ 20&nbsp;€. Ajustable a tu sector.</p>
+          <button id="expInforme" class="mini" style="white-space:nowrap">↓ Descargar informe (CSV)</button>
+        </div>
       </div>
 
       <div class="box" style="margin-bottom:20px"><div class="box__h"><b>Cómo NEXA te hace ganar dinero</b><small>el modelo, en 3 frases</small></div>
@@ -821,8 +824,10 @@ body.claro .co__apple{background:#000;color:#fff}
   $("#explica").addEventListener("click",e=>{if(e.target.id==="explica")$("#explica").classList.remove("on");});
   $("[data-exp='valor']").addEventListener("click",()=>explicar("valor"));
 
+  let ultimoDatos=null;
   function aplicarDatos(d){
     if(!d)return;
+    ultimoDatos=d;
     const set=(sel,v)=>{const el=$(sel);if(el&&v!=null)el.textContent=v;};
     if(d.valor){set("#vNuevos",d.valor.nuevos);set("#vRepiten",d.valor.repiten);set("#vMas",d.valor.mas);
       const hayDatos=(d.kpis&&d.kpis.encuentros>0);
@@ -904,6 +909,38 @@ body.claro .co__apple{background:#000;color:#fff}
     }
   }
   $$("#segRango button").forEach(b=>b.addEventListener("click",()=>cambiarRango(+b.dataset.days)));
+  // ── Exportar informe (CSV, para llevar a una reunión) ──
+  function exportInforme(){
+    const d=ultimoDatos, c=cuenta||{};
+    if(!d){toast("Aún no hay datos que exportar.");return;}
+    const CPA=20, nuevos=(d.valor&&+d.valor.nuevos)||0;
+    const costeMes=PRECIOMES[plan]||0, coste=Math.round(costeMes*(ventanaDias/30));
+    const q=v=>'"'+String(v==null?"":v).replace(/"/g,'""')+'"';
+    const k=d.kpis||{}, v=d.valor||{}, cm=d.comunidad||{}, L=[];
+    L.push(["NEXA · Informe de rendimiento"]);
+    L.push(["Empresa", c.nombre||""]); L.push(["Ciudad", c.ciudad||"Valencia"]);
+    L.push(["Plan", NOMBREPLAN[plan]||plan]); L.push(["Ventana","últimos "+ventanaDias+" días"]);
+    L.push(["Generado", new Date().toLocaleDateString("es-ES")]); L.push([]);
+    L.push(["Métrica","Valor"]);
+    L.push(["Encuentros", k.encuentros]); L.push(["Theta entre desconocidos (%)", k.theta]);
+    L.push(["Repeticion (%)", k.repeticion]); L.push(["Coeficiente +1 (R)", k.r]);
+    L.push(["Clientes nuevos", v.nuevos]); L.push(["Vuelven (%)", v.repiten]); L.push(["Llegaron como +1", v.mas]);
+    L.push(["Comunidad - te siguen", cm.tamano]); L.push(["Comunidad - activos (30d)", cm.activos]); L.push(["Comunidad - dormidos", cm.dormidos]);
+    L.push([]); L.push(["Rentabilidad"]);
+    L.push(["Coste por cliente nuevo (EUR)", nuevos>0?(coste/nuevos).toFixed(2):"0"]);
+    L.push(["Coste equivalente en publicidad (EUR)", nuevos*CPA]);
+    L.push(["Ahorro frente a publicidad (EUR)", nuevos*CPA-coste]);
+    if(d.porExperiencia&&d.porExperiencia.length){
+      L.push([]); L.push(["Experiencia","Encuentros","Theta (%)","Personas"]);
+      d.porExperiencia.forEach(x=>L.push([x.titulo,x.encuentros,x.theta,x.personas]));
+    }
+    const csv="﻿"+L.map(row=>row.map(q).join(",")).join("\r\n");
+    const a=document.createElement("a");
+    a.href=URL.createObjectURL(new Blob([csv],{type:"text/csv;charset=utf-8"}));
+    a.download="informe-nexa-"+ventanaDias+"d.csv"; a.click();
+    toast("Informe descargado.");
+  }
+  { const eb=$("#expInforme"); if(eb)eb.addEventListener("click",exportInforme); }
   // Gráfico de evolución (SVG puro, sin librerías): barras = encuentros/semana, línea = θ.
   function pintarEvo(series){
     const el=$("#evo");if(!el||!series||!series.length)return;
