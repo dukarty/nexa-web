@@ -120,6 +120,10 @@ body.tema-elite .valor,body.tema-elite .pv__cover{background:linear-gradient(120
 .lad b{font-size:.95rem;font-weight:800;display:block}.lad p{color:var(--tx-2);font-size:.84rem;margin-top:2px}
 .lad__tag{margin-left:auto;font-size:.62rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:#8FB4FF;background:rgba(10,92,255,.14);border-radius:999px;padding:5px 10px;white-space:nowrap;flex:none}
 .lad__tag--ok{color:var(--verde);background:rgba(74,222,128,.14)}
+.lad__b{min-width:0}
+.lad__peek{margin-top:8px!important;font-size:.82rem!important;font-weight:600;color:var(--tx)!important;background:var(--panel);border:1px solid var(--linea);border-radius:9px;padding:8px 10px;line-height:1.35}
+.lad__peek--lock{filter:blur(3.4px);user-select:none;opacity:.9}
+.lad{align-items:flex-start}
 
 .row{display:grid;gap:12px;margin-bottom:20px}
 @media(min-width:960px){.row{grid-template-columns:1.6fr 1fr}}
@@ -667,6 +671,7 @@ body.claro .co__apple{background:#000;color:#fff}
       <div class="co__per" id="pagoPeriodo"><button data-per="mes" class="on">Mensual</button><button data-per="anio">Anual</button></div>
       <p class="co__price"><span id="pagoPrice">29 €/mes</span></p>
       <p class="co__ahorro" id="pagoAhorro" style="display:none">2 meses gratis al año · IVA incl.</p>
+      <p class="co__ahorro" id="pagoProrateo" style="display:none"></p>
       <ul class="co__ul" id="pagoUl"></ul>
       <p class="co__roi" id="pagoRoi"></p>
     </div>
@@ -728,6 +733,40 @@ body.claro .co__apple{background:#000;color:#fff}
   const CATEGORIAS=["Restaurante","Bar / Cervecería","Cafetería / Brunch","Discoteca / Ocio nocturno","Música / Sala de conciertos","Cultura / Arte","Cine / Teatro","Gimnasio / Fitness","Deporte / Club","Outdoor / Aventura","Bienestar / Spa / Yoga","Librería","Coworking / Espacio","Tienda / Retail","Moda","Belleza / Peluquería","Formación / Talleres","Turismo / Guías","Escape room / Ocio","Eventos / Productora","Food truck / Gastroneta","Comunidad / Club social","Otro"];
   const SVG_BUILD='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="8" width="7" height="12" rx="1"/><rect x="13" y="4" width="7" height="16" rx="1"/></svg>';
 
+  /* ── MOTOR DE PERSONALIZACIÓN POR TIPO DE EMPRESA ──
+     La categoría define una "familia", y la familia decide qué recomienda NEXA.
+     Así el plan Gratis ya muestra valor a medida: recomendación, primer paso y
+     comparativa hablan del negocio concreto, no de una plantilla. */
+  const FAMILIA={
+    "Restaurante":"gastro","Bar / Cervecería":"gastro","Cafetería / Brunch":"gastro","Food truck / Gastroneta":"gastro",
+    "Discoteca / Ocio nocturno":"noche","Música / Sala de conciertos":"noche","Eventos / Productora":"noche",
+    "Cultura / Arte":"cultura","Cine / Teatro":"cultura","Librería":"cultura",
+    "Gimnasio / Fitness":"fit","Deporte / Club":"fit","Outdoor / Aventura":"fit",
+    "Bienestar / Spa / Yoga":"bienestar","Belleza / Peluquería":"bienestar",
+    "Coworking / Espacio":"comunidad","Comunidad / Club social":"comunidad",
+    "Tienda / Retail":"retail","Moda":"retail",
+    "Formación / Talleres":"formacion","Turismo / Guías":"turismo","Escape room / Ocio":"ocio"
+  };
+  const SECTOR={
+    gastro:{idea:"una mesa para 6 desconocidos con menú cerrado",dia:"jueves",hora:"21:00",publico:"gente nueva del barrio que aún no te conoce",primer:"Monta una “mesa de desconocidos”: 6 plazas, un jueves, menú cerrado."},
+    noche:{idea:"un after-work con música en directo",dia:"jueves",hora:"20:00",publico:"profesionales de 25-35 que salen entre semana",primer:"Abre un after-work: 2 horas, primera consumición con NEXA."},
+    cultura:{idea:"un club de lectura o un pase comentado",dia:"martes",hora:"19:00",publico:"curiosos que van solos y buscan plan",primer:"Crea un club: una obra, un día fijo al mes, aforo pequeño."},
+    fit:{idea:"un reto en grupo de 4 semanas",dia:"sábado",hora:"10:00",publico:"gente que quiere constancia y compañía",primer:"Lanza un reto de 4 semanas con grupo cerrado."},
+    bienestar:{idea:"una sesión en grupo reducido de fin de semana",dia:"domingo",hora:"11:00",publico:"gente que busca desconectar acompañada",primer:"Abre una sesión reducida de fin de semana."},
+    comunidad:{idea:"un encuentro temático abierto a +1",dia:"miércoles",hora:"19:00",publico:"tu comunidad y la gente que traigan",primer:"Convoca un encuentro temático abierto a +1."},
+    retail:{idea:"un pase privado de puertas abiertas",dia:"viernes",hora:"18:00",publico:"clientes fieles y quien traigan",primer:"Haz un pase privado para clientes y sus +1."},
+    formacion:{idea:"un taller práctico de iniciación",dia:"sábado",hora:"11:00",publico:"gente que quiere aprender haciendo",primer:"Programa un taller de iniciación, plazas limitadas."},
+    turismo:{idea:"una ruta en grupo pequeño",dia:"sábado",hora:"10:00",publico:"gente sola que quiere descubrir acompañada",primer:"Abre una ruta de grupo reducido un sábado."},
+    ocio:{idea:"partidas mixtas entre desconocidos",dia:"viernes",hora:"19:00",publico:"grupos y solistas que buscan plan",primer:"Monta partidas mixtas para juntar desconocidos."},
+    _def:{idea:"un plan para juntar a gente que no se conoce",dia:"jueves",hora:"19:00",publico:"gente nueva cerca de ti",primer:"Crea tu primera experiencia: algo que junte a desconocidos."}
+  };
+  function sectorDe(){const c=(cuenta&&cuenta.categoria)||"";return SECTOR[FAMILIA[c]||"_def"]||SECTOR._def;}
+  function nombreCat(){return (cuenta&&cuenta.categoria)||"tu sector";}
+
+  /* ── PRORRATEO: al subir de plan se paga solo la diferencia ── */
+  function esUpgrade(k){return (RANGO[k]??0)>rango && rango>0;}
+  function difProrateo(k){ if(!esUpgrade(k))return null; const a=precioNum(k),b=precioNum(plan); if(a==null||b==null)return null; return Math.max(a-b,0); }
+
   /* ── SESIÓN ── */
   function leerCuenta(){try{return JSON.parse(localStorage.getItem("nexa_empresa")||"null");}catch(e){return null;}}
   function guardar(){try{localStorage.setItem("nexa_empresa",JSON.stringify(cuenta));}catch(e){} if(window.NEXAEmpresas&&window.NEXAEmpresas.real&&window.NEXAEmpresas.saveProfile){try{window.NEXAEmpresas.saveProfile(cuenta);}catch(e){}}}
@@ -778,13 +817,19 @@ body.claro .co__apple{background:#000;color:#fff}
   }
 
   function pintarLadder(){
+    const s=sectorDe();
     const defs=[
-      {need:1,plan:"Pro",t:"Recomendaciones con IA",d:"Cada semana: qué plan lanzar, qué día y a quién, para llenar tu local."},
-      {need:2,plan:"Marca",t:"Benchmarks de tu sector",d:"Compárate con negocios como el tuyo en Valencia. Dónde ganas y dónde no."}
+      {need:1,plan:"Pro",t:"Recomendaciones con IA",d:"Cada semana, qué lanzar para llenar tu local.",
+       peek:"Esta semana: lanza "+s.idea+" el "+s.dia+" a las "+s.hora+". Tu "+s.publico+" respondería mejor."},
+      {need:2,plan:"Marca",t:"Benchmarks de tu sector",d:"Compárate con negocios como el tuyo en Valencia.",
+       peek:nombreCat()+" en Valencia · estás en el puesto ██ de ██. Ganas en repetición, flojeas en θ."}
     ];
     $("#ladder").innerHTML=defs.map(x=>{const lock=rango<x.need;
-      return '<button class="lad" data-need="'+x.need+'" data-t="'+x.t+'"><div class="lad__i">'+(lock?SVG_LOCK:SVG_SPARK)+'</div><div><b>'+x.t+'</b><p>'+x.d+'</p></div><span class="lad__tag'+(lock?'':' lad__tag--ok')+'">'+(lock?x.plan:"Activo")+'</span></button>';}).join("");
-    $$("#ladder .lad").forEach(b=>b.addEventListener("click",()=>{const need=+b.dataset.need;if(rango<need)abrirUpsell(b.dataset.t,need>=2?"Marca":"Pro");else toast("Se llenará con tu actividad real.");}));
+      return '<button class="lad" data-need="'+x.need+'" data-t="'+x.t+'"><div class="lad__i">'+(lock?SVG_LOCK:SVG_SPARK)+'</div>'
+        +'<div class="lad__b"><b>'+x.t+'</b><p>'+x.d+'</p>'
+        +'<p class="lad__peek'+(lock?' lad__peek--lock':'')+'">'+x.peek+'</p></div>'
+        +'<span class="lad__tag'+(lock?'':' lad__tag--ok')+'">'+(lock?x.plan:"Activo")+'</span></button>';}).join("");
+    $$("#ladder .lad").forEach(b=>b.addEventListener("click",()=>{const need=+b.dataset.need;if(rango<need)abrirUpsell(b.dataset.t,need>=2?"Marca":"Pro");else toast("Se llena con tu actividad real.");}));
   }
 
   /* ── Perfil / vista previa ── */
@@ -937,7 +982,7 @@ body.claro .co__apple{background:#000;color:#fff}
     const c=cuenta||{};
     const pasos=[
       {k:"perfil",b:"Completa tu perfil",s:"Cuenta qué vive la gente contigo",ok:!!(c.descripcion&&c.categoria),go:"perfil"},
-      {k:"exp",b:"Crea tu primera experiencia",s:"Enciende el motor de encuentros",ok:!!(c.experiencias&&c.experiencias.length),go:"experiencias"},
+      {k:"exp",b:"Crea tu primera experiencia",s:sectorDe().primer,ok:!!(c.experiencias&&c.experiencias.length),go:"experiencias"},
       {k:"share",b:"Comparte tu perfil",s:"Para que tu comunidad te siga",ok:localStorage.getItem("nexa_compartido")==="1",go:"perfil"},
       {k:"equipo",b:"Invita a tu equipo",s:"Opcional, pero recomendable",ok:!!(c.equipo&&c.equipo.length),go:"equipo"}
     ];
@@ -1021,7 +1066,15 @@ body.claro .co__apple{background:#000;color:#fff}
     const t=precioTxt(pagoKey);
     $("#pagoPrice").textContent=t;
     const btn=$("#ccPay");
-    if(btn&&!btn.disabled)btn.innerHTML='Pagar <span id="ccPayAmt">'+t+'</span>';
+    const dif=difProrateo(pagoKey);
+    const pro=$("#pagoProrateo");
+    if(dif!=null){
+      if(pro){pro.style.display="block";pro.textContent="Ya tienes "+NOMBREPLAN[plan]+". Hoy pagas solo la diferencia: "+dif+" €; luego "+t+".";}
+      if(btn&&!btn.disabled)btn.innerHTML='Pagar diferencia · <span id="ccPayAmt">'+dif+' €</span>';
+    }else{
+      if(pro)pro.style.display="none";
+      if(btn&&!btn.disabled)btn.innerHTML='Pagar <span id="ccPayAmt">'+t+'</span>';
+    }
     $$("#pagoPeriodo button").forEach(b=>b.classList.toggle("on",b.dataset.per===periodo));
     const ah=$("#pagoAhorro");if(ah)ah.style.display=periodo==="anio"?"block":"none";
   }
