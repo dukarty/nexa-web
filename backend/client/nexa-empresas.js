@@ -37,12 +37,32 @@
         if (!mem) return null;
         const { data: biz } = await sb.from("businesses").select("*").eq("id", mem.business_id).maybeSingle();
         const { data: sub } = await sb.from("business_subscriptions").select("plan").eq("business_id", mem.business_id).maybeSingle();
+        const m = biz && biz.meta || {};
         return biz ? {
           nombre: biz.name, plan: (sub && sub.plan) || "verificada", ciudad: biz.city_id,
           categoria: biz.category, descripcion: biz.descripcion, web: biz.web, ig: biz.instagram,
-          horario: (biz.meta && biz.meta.horario) || "", persona: user.email, email: user.email,
+          horario: m.horario || "", persona: user.email, email: user.email,
           business_id: biz.id, verified: biz.verified,
+          // colecciones editables (persistidas en meta)
+          experiencias: m.experiencias || [], objetivo: m.objetivo || null,
+          equipo: m.equipo || [], sedes: m.sedes || [],
         } : null;
+      },
+      // Persiste el perfil y las colecciones editables en Supabase (RLS: solo miembros).
+      async saveProfile(c) {
+        if (!c || !c.business_id) return { ok: false };
+        const meta = {
+          horario: c.horario || "",
+          experiencias: c.experiencias || [],
+          objetivo: c.objetivo || null,
+          equipo: c.equipo || [],
+          sedes: c.sedes || [],
+        };
+        const { error } = await sb.from("businesses").update({
+          name: c.nombre, category: c.categoria, descripcion: c.descripcion,
+          web: c.web, instagram: c.ig, meta,
+        }).eq("id", c.business_id);
+        return { ok: !error, error: error && error.message };
       },
       // Acceso instantáneo con email + contraseña (sin confirmación por email)
       async login(email, password) {
