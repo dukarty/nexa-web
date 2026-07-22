@@ -155,11 +155,38 @@
     };
   }
 
+  // Carga el SDK de Supabase con tolerancia a fallos de CDN.
+  // Un blip puntual de un CDN no debe tumbar el panel: probamos varios y reintentamos.
+  async function importSupabase() {
+    const cdns = [
+      "https://esm.sh/@supabase/supabase-js@2",
+      "https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm",
+      "https://cdn.skypack.dev/@supabase/supabase-js@2",
+    ];
+    for (let attempt = 0; attempt < 3; attempt++) {
+      for (const url of cdns) {
+        try { const m = await import(url); if (m && m.createClient) return m; } catch (e) { /* prueba el siguiente */ }
+      }
+      await new Promise((r) => setTimeout(r, 700 * (attempt + 1)));
+    }
+    throw new Error("supabase_cdn_unreachable");
+  }
+
   async function boot() {
     let api = Mock;
     if (CFG && CFG.supabaseUrl && CFG.supabaseAnonKey) {
-      const { createClient } = await import("https://esm.sh/@supabase/supabase-js@2");
-      api = Real(createClient(CFG.supabaseUrl, CFG.supabaseAnonKey));
+      try {
+        const { createClient } = await importSupabase();
+        api = Real(createClient(CFG.supabaseUrl, CFG.supabaseAnonKey));
+      } catch (e) {
+        // No pudimos cargar el SDK real tras varios reintentos. NO caemos a modo
+        // demo (confundiría al negocio): avisamos y reintentamos el arranque.
+        console.error("[NEXA] No se pudo cargar el SDK de Supabase:", e && e.message);
+        window.NEXAEmpresas = { real: true, loadError: true, login: async () => ({ ok: false, error: "No hay conexión con el servidor. Reintentando…" }), account: async () => null, metrics: async () => null };
+        const P0 = window.NEXA_PANEL; if (P0 && P0.showGate) P0.showGate();
+        setTimeout(boot, 3000);
+        return;
+      }
     }
     window.NEXAEmpresas = api;
 
