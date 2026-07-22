@@ -44,7 +44,7 @@
           nombre: biz.name, plan: (sub && sub.plan) || "verificada", ciudad: biz.city_id,
           categoria: biz.category, descripcion: biz.descripcion, web: biz.web, ig: biz.instagram,
           horario: m.horario || "", persona: user.email, email: user.email,
-          business_id: biz.id, verified: biz.verified,
+          business_id: biz.id, verified: biz.verified, verif_pendiente: !!m.verif_pendiente,
           // colecciones editables (perfil/experiencias/objetivo/sedes en meta; equipo en tabla real)
           experiencias: m.experiencias || [], objetivo: m.objetivo || null, sedes: m.sedes || [],
           equipo: (miembros || []).filter((x) => x.member_email !== user.email).map((x) => ({ email: x.member_email, rol: x.role })),
@@ -86,6 +86,16 @@
           .eq("business_id", bid).eq("member_email", String(email || "").trim().toLowerCase());
         return { ok: !error, error: error && error.message };
       },
+      // Verificación: la empresa SOLICITA (marca pendiente). NUNCA se auto-verifica:
+      // la columna 'verified' está protegida a nivel de columna (solo admin la cambia).
+      async requestVerification() {
+        const bid = await this._bid(); if (!bid) return { ok: false, error: "sin_empresa" };
+        const { data: biz } = await sb.from("businesses").select("meta,verified").eq("id", bid).maybeSingle();
+        if (biz && biz.verified) return { ok: true, already: true };
+        const meta = Object.assign({}, biz && biz.meta, { verif_pendiente: true, verif_fecha: new Date().toISOString() });
+        const { error } = await sb.from("businesses").update({ meta }).eq("id", bid);
+        return { ok: !error, error: error && error.message };
+      },
       // Acceso instantáneo con email + contraseña (sin confirmación por email)
       async login(email, password) {
         const { error } = await sb.auth.signInWithPassword({ email, password });
@@ -100,6 +110,10 @@
         } else if (serr) {
           return { ok: false, error: serr.message };
         }
+        // ACEPTAR INVITACIÓN: si este email ya es miembro de una empresa (le invitaron),
+        // entra a ESA empresa; NO se crea una nueva.
+        const { data: yaMiembro } = await sb.from("business_members").select("business_id").limit(1).maybeSingle();
+        if (yaMiembro) return { ok: true, account: await this.account(), invitado: true };
         const { password, ...biz } = data;   // la contraseña no sale al backend de negocio
         const { data: r, error } = await inv("business-signup", { body: biz });
         if (error) return { ok: false, error: error.message };
