@@ -18,6 +18,8 @@
     real: false,
     async account() { return readLS(); },
     async login() { const c = readLS(); return c ? { ok: true, account: c } : { ok: false, error: "sin_cuenta" }; },
+    async resetPassword() { return { ok: false, error: "La recuperación por correo solo funciona con el backend real." }; },
+    async setNewPassword() { return { ok: true }; },
     async signup(data) { const c = { ...data, plan: "verificada", creada: Date.now() }; writeLS(c); return { ok: true, account: c }; },
     async signupPending(data) { return this.signup(data); },
     async metrics() { return null; },
@@ -140,6 +142,19 @@
       async login(email, password) {
         const { error } = await sb.auth.signInWithPassword({ email, password });
         return error ? { ok: false, error: error.message } : { ok: true, account: await this.account() };
+      },
+      // Recuperar contraseña: envía un enlace al correo del negocio (necesita SMTP
+      // configurado en el proyecto Supabase). El enlace vuelve a /panel con una
+      // sesión temporal de recuperación → allí se pide la nueva contraseña.
+      async resetPassword(email) {
+        const { error } = await sb.auth.resetPasswordForEmail(String(email || "").trim(), { redirectTo: location.origin + "/panel" });
+        return error ? { ok: false, error: error.message } : { ok: true };
+      },
+      // Fija la contraseña nueva (se llama en /panel tras volver del enlace, con la
+      // sesión de recuperación ya activa).
+      async setNewPassword(password) {
+        const { error } = await sb.auth.updateUser({ password });
+        return error ? { ok: false, error: error.message } : { ok: true };
       },
       // Registro: crea usuario (sesión inmediata) y luego la empresa
       async signup(data) {
