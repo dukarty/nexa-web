@@ -2,8 +2,12 @@
  * NEXA · Empresas — SDK de cliente (puente panel/registro ↔ Supabase)
  * ----------------------------------------------------------------------------
  * MOCK (sin config): localStorage, la demo de siempre.
- * REAL (con NEXA_EMPRESAS_CONFIG): Supabase — login por enlace mágico,
- *   empresa real, métricas reales (Edge Functions + RPC), mejora de plan.
+ * REAL (con NEXA_EMPRESAS_CONFIG): Supabase, SOBRE EL ESQUEMA DE LA APP.
+ *   El cliente escribe y LEE la misma tabla `businesses` de la app, por
+ *   `owner_email`, con el perfil ampliado en `meta` (jsonb). SIN Edge Functions
+ *   ni business_members/business_subscriptions (la caja negra que derivó y
+ *   rompía el alta). La RLS garantiza que un negocio solo toca lo suyo y NUNCA
+ *   se auto-asigna plan ni verificación (lo congela un trigger en la BD).
  * Sin claves secretas en este archivo. Nunca.
  * ========================================================================== */
 (function () {
@@ -18,6 +22,8 @@
     real: false,
     async account() { return readLS(); },
     async login() { const c = readLS(); return c ? { ok: true, account: c } : { ok: false, error: "sin_cuenta" }; },
+    async resetPassword() { return { ok: false, error: "La recuperación por correo solo funciona con el backend real." }; },
+    async setNewPassword() { return { ok: true }; },
     async signup(data) { const c = { ...data, plan: "verificada", creada: Date.now() }; writeLS(c); return { ok: true, account: c }; },
     async signupPending(data) { return this.signup(data); },
     async metrics() { return null; },
@@ -29,182 +35,156 @@
     async logout() {},
   };
 
-  /* ── REAL (Supabase) ── */
+  /* ── REAL (Supabase, sobre el esquema de la app) ── */
   function Real(sb) {
-    const inv = (name, opts = {}) => sb.functions.invoke(name, opts);
+    const norm = (e) => String(e || "").trim().toLowerCase();
+    async function miEmail() {
+      const { data: { user } } = await sb.auth.getUser();
+      return user ? norm(user.email) : null;
+    }
+    async function miNegocio() {
+      const email = await miEmail(); if (!email) return null;
+      const { data } = await sb.from("businesses").select("*").eq("owner_email", email)
+        .order("created_at", { ascending: true }).limit(1);
+      return (data && data[0]) || null;
+    }
+    function aCuenta(biz, email) {
+      if (!biz) return null;
+      const m = biz.meta || {};
+      return {
+        nombre: biz.name, plan: biz.plan || "verificada", ciudad: biz.city_id,
+        categoria: biz.category, tipo: biz.type, descripcion: biz.descripcion || null,
+        web: biz.web || null, ig: biz.instagram || null, horario: m.horario || "",
+        persona: email, email, business_id: biz.id,
+        verified: !!biz.verified, verif_pendiente: !!m.verif_pendiente,
+        experiencias: m.experiencias || [], objetivo: m.objetivo || null, sedes: m.sedes || [],
+        equipo: [],
+      };
+    }
     return {
       real: true, sb,
       async account() {
-        const { data: { user } } = await sb.auth.getUser();
-        if (!user) return null;
-        const { data: mem } = await sb.from("business_members").select("business_id").limit(1).maybeSingle();
-        if (!mem) return null;
-        const { data: biz } = await sb.from("businesses").select("*").eq("id", mem.business_id).maybeSingle();
-        const { data: sub } = await sb.from("business_subscriptions").select("plan").eq("business_id", mem.business_id).maybeSingle();
-        // Equipo real: todos los miembros de la empresa (source of truth: business_members).
-        const { data: miembros } = await sb.from("business_members").select("member_email,role").eq("business_id", mem.business_id);
-        const m = biz && biz.meta || {};
-        return biz ? {
-          nombre: biz.name, plan: (sub && sub.plan) || "verificada", ciudad: biz.city_id,
-          categoria: biz.category, descripcion: biz.descripcion, web: biz.web, ig: biz.instagram,
-          horario: m.horario || "", persona: user.email, email: user.email,
-          business_id: biz.id, verified: biz.verified, verif_pendiente: !!m.verif_pendiente,
-          // colecciones editables (perfil/experiencias/objetivo/sedes en meta; equipo en tabla real)
-          experiencias: m.experiencias || [], objetivo: m.objetivo || null, sedes: m.sedes || [],
-          equipo: (miembros || []).filter((x) => x.member_email !== user.email).map((x) => ({ email: x.member_email, rol: x.role })),
-        } : null;
+        const email = await miEmail(); if (!email) return null;
+        return aCuenta(await miNegocio(), email);
       },
-      // Persiste el perfil y las colecciones editables en Supabase (RLS: solo miembros).
-      // El equipo NO va aquí: es una tabla real (invita/quita miembros).
-      async saveProfile(c) {
-        if (!c || !c.business_id) return { ok: false };
-        const meta = {
-          horario: c.horario || "",
-          experiencias: c.experiencias || [],
-          objetivo: c.objetivo || null,
-          sedes: c.sedes || [],
-        };
-        const { error } = await sb.from("businesses").update({
-          name: c.nombre, category: c.categoria, descripcion: c.descripcion,
-          web: c.web, instagram: c.ig, meta,
-        }).eq("id", c.business_id);
-        return { ok: !error, error: error && error.message };
-      },
-      // Equipo real: invita (crea acceso al panel) y quita miembros de la empresa.
-      async _bid() {
-        if (this.__bid) return this.__bid;
-        const { data: mem } = await sb.from("business_members").select("business_id").limit(1).maybeSingle();
-        this.__bid = mem && mem.business_id;
-        return this.__bid;
-      },
-      async inviteMember(email, rol) {
-        const bid = await this._bid(); if (!bid) return { ok: false, error: "sin_empresa" };
-        const role = ["admin", "editor", "viewer"].includes(rol) ? rol : "editor";
-        const { error } = await sb.from("business_members").insert({
-          business_id: bid, member_email: String(email || "").trim().toLowerCase(), role,
-        });
-        if (error && /duplicate|unique/i.test(error.message)) return { ok: false, error: "Ese email ya está en el equipo." };
-        return { ok: !error, error: error && error.message };
-      },
-      async removeMember(email) {
-        const bid = await this._bid(); if (!bid) return { ok: false, error: "sin_empresa" };
-        const { error } = await sb.from("business_members").delete()
-          .eq("business_id", bid).eq("member_email", String(email || "").trim().toLowerCase());
-        return { ok: !error, error: error && error.message };
-      },
-      // Experiencias REALES: la misma tabla (business_experiences) que referencian
-      // los encuentros. Así lo que creas aquí es lo que mide el rendimiento por plan.
-      async listExperiences() {
-        const bid = await this._bid(); if (!bid) return [];
-        const { data } = await sb.from("business_experiences")
-          .select("id,title,category,slot_kind,published,featured").eq("business_id", bid)
-          .order("featured", { ascending: false }).order("created_at", { ascending: false });
-        return (data || []).map((r) => ({ id: r.id, titulo: r.title, cat: r.category, franja: r.slot_kind, estado: r.published ? "publicada" : "borrador", featured: !!r.featured }));
-      },
-      // Destacar/quitar destacado: el gate por plan lo decide el servidor.
-      async setFeatured(id, on) {
-        const { data, error } = await inv("experience-feature", { body: { experience_id: id, featured: !!on } });
-        if (error) {
-          // El cuerpo del 403 trae el motivo real (p.ej. plan_insuficiente) para poder mostrar el upsell.
-          let code = "";
-          try { const b = error.context && (await error.context.json()); code = b && b.error; } catch (_) {}
-          return { ok: false, error: code || error.message };
-        }
-        if (data && data.error) return { ok: false, error: data.error, need: data.need };
-        return { ok: true, featured: !!(data && data.featured) };
-      },
-      async addExperience(e) {
-        const bid = await this._bid(); if (!bid) return { ok: false, error: "sin_empresa" };
-        const { data, error } = await sb.from("business_experiences").insert({
-          business_id: bid, title: e.titulo, category: e.cat || null,
-          slot_kind: e.franja === "valle" ? "valle" : "normal", published: true,
-        }).select("id").maybeSingle();
-        return { ok: !error, id: data && data.id, error: error && error.message };
-      },
-      async removeExperience(id) {
-        const bid = await this._bid(); if (!bid) return { ok: false, error: "sin_empresa" };
-        const { error } = await sb.from("business_experiences").delete().eq("id", id).eq("business_id", bid);
-        return { ok: !error, error: error && error.message };
-      },
-      // Verificación: la empresa SOLICITA (marca pendiente). NUNCA se auto-verifica:
-      // la columna 'verified' está protegida a nivel de columna (solo admin la cambia).
-      async requestVerification() {
-        const bid = await this._bid(); if (!bid) return { ok: false, error: "sin_empresa" };
-        const { data: biz } = await sb.from("businesses").select("meta,verified").eq("id", bid).maybeSingle();
-        if (biz && biz.verified) return { ok: true, already: true };
-        const meta = Object.assign({}, biz && biz.meta, { verif_pendiente: true, verif_fecha: new Date().toISOString() });
-        const { error } = await sb.from("businesses").update({ meta }).eq("id", bid);
-        return { ok: !error, error: error && error.message };
-      },
-      // Acceso instantáneo con email + contraseña (sin confirmación por email)
       async login(email, password) {
-        const { error } = await sb.auth.signInWithPassword({ email, password });
+        const { error } = await sb.auth.signInWithPassword({ email: norm(email), password });
         return error ? { ok: false, error: error.message } : { ok: true, account: await this.account() };
       },
-      // Registro: crea usuario (sesión inmediata) y luego la empresa
+      // Recuperar contraseña: envía un enlace al correo (necesita SMTP configurado
+      // en el proyecto Supabase). El enlace vuelve a /panel con sesión de recuperación.
+      async resetPassword(email) {
+        const { error } = await sb.auth.resetPasswordForEmail(norm(email), { redirectTo: location.origin + "/panel" });
+        return error ? { ok: false, error: error.message } : { ok: true };
+      },
+      async setNewPassword(password) {
+        const { error } = await sb.auth.updateUser({ password });
+        return error ? { ok: false, error: error.message } : { ok: true };
+      },
+      // Registro: crea el usuario (sesión inmediata) y su ficha en `businesses`.
+      // Siempre nace plan 'verificada' y sin verificar (lo fuerza la RLS + trigger).
       async signup(data) {
-        let { error: serr } = await sb.auth.signUp({ email: data.email, password: data.password });
+        const email = norm(data.email);
+        let { error: serr } = await sb.auth.signUp({ email, password: data.password });
         if (serr && /already|registered|exist/i.test(serr.message)) {
-          const { error: le } = await sb.auth.signInWithPassword({ email: data.email, password: data.password });
+          const { error: le } = await sb.auth.signInWithPassword({ email, password: data.password });
           if (le) return { ok: false, error: "Ese email ya tiene cuenta. Revisa la contraseña o entra desde 'Ya soy empresa'." };
         } else if (serr) {
           return { ok: false, error: serr.message };
         }
-        // ACEPTAR INVITACIÓN: si este email ya es miembro de una empresa (le invitaron),
-        // entra a ESA empresa; NO se crea una nueva.
-        const { data: yaMiembro } = await sb.from("business_members").select("business_id").limit(1).maybeSingle();
-        if (yaMiembro) return { ok: true, account: await this.account(), invitado: true };
-        const { password, ...biz } = data;   // la contraseña no sale al backend de negocio
-        const { data: r, error } = await inv("business-signup", { body: biz });
-        if (error) return { ok: false, error: error.message };
-        if (r && r.error && r.error !== "ya_tienes_empresa") return { ok: false, error: r.error };
+        // Asegura sesión (si la confirmación por email estuviera activada, no la habrá).
+        let { data: { session } } = await sb.auth.getSession();
+        if (!session) {
+          const r = await sb.auth.signInWithPassword({ email, password: data.password });
+          session = r.data && r.data.session;
+          if (!session) return { ok: false, error: "Cuenta creada. Confirma tu correo y entra desde 'Ya soy empresa'." };
+        }
+        // ¿Ya tiene ficha? (reintento) → entra a la suya, no crea otra.
+        const ya = await miNegocio();
+        if (ya) return { ok: true, account: aCuenta(ya, email) };
+        const meta = {};
+        if (data.frase) meta.frase = data.frase;
+        if (data.aforo) meta.aforo = data.aforo;
+        const tipo = (data.tipo === "marca" || data.tipo === "local") ? data.tipo : null;
+        const { error } = await sb.from("businesses").insert({
+          owner_email: email, name: data.nombre || "Tu empresa", category: data.categoria || null,
+          type: tipo, city_id: norm(data.ciudad) || "valencia",
+          descripcion: data.descripcion || null, web: data.web || null, instagram: data.ig || null,
+          plan: "verificada", verified: false, meta,
+        });
+        if (error && error.code !== "23505") return { ok: false, error: error.message };
         return { ok: true, account: await this.account() };
       },
-      // Compat: si hay sesión, devuelve la cuenta
+      async signupPending(data) { return this.signup(data); },
+      // Compat con el boot: si hay sesión, devuelve la cuenta.
       async completeSignupIfPending() {
-        const { data: { user } } = await sb.auth.getUser();
-        if (!user) return null;
-        return this.account();
+        const email = await miEmail(); if (!email) return null;
+        return aCuenta(await miNegocio(), email);
       },
-      async metrics(days = 30, opts) {
-        days = +days || 30;
-        const force = opts && opts.force;
-        // Caché por rango (60 s): volver a 7/30/90 ya cargado es instantáneo.
-        this.__mc = this.__mc || {};
-        const hit = this.__mc[days];
-        if (!force && hit && (Date.now() - hit.t) < 60000) return hit.d;
-        // Todo en paralelo: business-metrics + las 4 RPC arrancan a la vez (no en fila).
-        const bid = await this._bid();
-        const baseP = inv("business-metrics", { body: { days } });
-        const rpcP = bid ? Promise.all([
-          sb.rpc("get_business_series", { bid, days }),
-          sb.rpc("get_business_prev", { bid, days }),
-          sb.rpc("get_business_experiences", { bid, days }),
-          sb.rpc("get_business_sedes", { bid, days }),
-        ]) : Promise.resolve(null);
-        let baseRes, rpcRes;
-        try { [baseRes, rpcRes] = await Promise.all([baseP, rpcP]); }
-        catch (e) { return null; }
-        if (!baseRes || baseRes.error || !baseRes.data) return null;
-        const data = baseRes.data;
-        if (rpcRes && rpcRes.length === 4) {
-          if (rpcRes[0] && rpcRes[0].data) data.series = rpcRes[0].data;
-          if (rpcRes[1] && rpcRes[1].data) data.prev = rpcRes[1].data;
-          if (rpcRes[2] && rpcRes[2].data) data.porExperiencia = rpcRes[2].data;
-          if (rpcRes[3] && rpcRes[3].data) data.porSede = rpcRes[3].data;
-        }
-        this.__mc[days] = { t: Date.now(), d: data };
-        return data;
+      // Guarda perfil + colecciones (todo en `businesses`/`meta`). No toca plan/verified.
+      async saveProfile(c) {
+        if (!c) return { ok: false };
+        const email = await miEmail(); if (!email) return { ok: false, error: "sin_sesion" };
+        const meta = { horario: c.horario || "", experiencias: c.experiencias || [], objetivo: c.objetivo || null, sedes: c.sedes || [] };
+        if (c.frase) meta.frase = c.frase;
+        if (c.aforo) meta.aforo = c.aforo;
+        const { error } = await sb.from("businesses").update({
+          name: c.nombre, category: c.categoria, descripcion: c.descripcion,
+          web: c.web, instagram: c.ig, meta,
+        }).eq("owner_email", email);
+        return { ok: !error, error: error && error.message };
       },
-      // Invalida la caché de métricas (tras editar algo que las afecta).
-      _clearMetrics() { this.__mc = {}; },
-      async upgrade(plan, period) {
-        const { data, error } = await inv("plan-checkout", { body: { plan, period: period || "mes" } });
-        if (error) return { ok: false, error: error.message };
-        if (data && data.url) { location.href = data.url; return { ok: true, redirect: true }; }
-        return { ok: true, mock: !!(data && data.mock), plan };
+      // Experiencias del negocio: por ahora viven en meta.experiencias (cliente).
+      async listExperiences() {
+        const biz = await miNegocio();
+        return (biz && biz.meta && biz.meta.experiencias) || [];
       },
-      async logout() { try { await sb.auth.signOut(); } catch {} },
+      async addExperience(e) {
+        const email = await miEmail(); const biz = await miNegocio();
+        if (!email || !biz) return { ok: false, error: "sin_empresa" };
+        const meta = Object.assign({}, biz.meta);
+        meta.experiencias = (meta.experiencias || []).slice();
+        const id = "e" + Date.now();
+        meta.experiencias.unshift({ id, titulo: e.titulo, cat: e.cat, franja: e.franja, estado: "publicada" });
+        const { error } = await sb.from("businesses").update({ meta }).eq("owner_email", email);
+        return { ok: !error, id, error: error && error.message };
+      },
+      async removeExperience(id) {
+        const email = await miEmail(); const biz = await miNegocio();
+        if (!email || !biz) return { ok: false, error: "sin_empresa" };
+        const meta = Object.assign({}, biz.meta);
+        meta.experiencias = (meta.experiencias || []).filter((x) => String(x.id) !== String(id));
+        const { error } = await sb.from("businesses").update({ meta }).eq("owner_email", email);
+        return { ok: !error, error: error && error.message };
+      },
+      async setFeatured(id, on) {
+        const email = await miEmail(); const biz = await miNegocio();
+        if (!email || !biz) return { ok: false, error: "sin_empresa" };
+        const meta = Object.assign({}, biz.meta);
+        meta.experiencias = (meta.experiencias || []).map((x) => String(x.id) === String(id) ? Object.assign({}, x, { featured: !!on }) : x);
+        const { error } = await sb.from("businesses").update({ meta }).eq("owner_email", email);
+        return { ok: !error, featured: !!on, error: error && error.message };
+      },
+      // Equipo y roles: fase posterior (necesita su propia tabla). De momento, aviso.
+      async inviteMember() { return { ok: false, error: "El equipo llega en la próxima fase." }; },
+      async removeMember() { return { ok: false, error: "El equipo llega en la próxima fase." }; },
+      // Verificación: la empresa SOLICITA (marca pendiente). NUNCA se auto-verifica
+      // (el trigger congela `verified`); la aprueba una persona desde el servidor.
+      async requestVerification() {
+        const email = await miEmail(); const biz = await miNegocio();
+        if (!email || !biz) return { ok: false, error: "sin_empresa" };
+        if (biz.verified) return { ok: true, already: true };
+        const meta = Object.assign({}, biz.meta, { verif_pendiente: true, verif_fecha: new Date().toISOString() });
+        const { error } = await sb.from("businesses").update({ meta }).eq("owner_email", email);
+        return { ok: !error, error: error && error.message };
+      },
+      // Métricas: aún no hay backend de atribución para el panel → el panel muestra
+      // sus datos de EJEMPLO (marcados) hasta que se instrumente la atribución real.
+      async metrics() { return null; },
+      // Pago en mock: el plan NO se cambia desde el cliente (el trigger lo congela);
+      // se activará de verdad cuando haya pasarela. Devolvemos ok para el flujo de UI.
+      async upgrade(plan) { return { ok: true, mock: true, plan }; },
+      async logout() { try { await sb.auth.signOut(); } catch (e) {} },
     };
   }
 

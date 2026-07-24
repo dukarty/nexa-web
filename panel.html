@@ -733,6 +733,7 @@ body.claro .co__apple{background:#000;color:#fff}
     <input type="password" id="gatePass" placeholder="Contraseña" autocomplete="current-password">
     <button class="gate__pri" id="gateEntrar">Entrar</button>
     <a class="gate__sec" href="empresas.html">Crear cuenta gratis</a>
+    <button type="button" id="gateReset" style="background:none;border:0;color:inherit;opacity:.6;font:inherit;font-size:12.5px;text-decoration:underline;cursor:pointer;margin-top:2px;padding:6px">¿Olvidaste tu contraseña?</button>
     <p class="gate__msg" id="gateMsg"></p>
     <p class="gate__min">Gratis · sin permanencia · el pago solo se gestiona dentro.</p>
   </div>
@@ -1561,6 +1562,51 @@ body.claro .co__apple{background:#000;color:#fff}
   }
   $("#gateEntrar").addEventListener("click",gateEntrar);
   ["#gateEmail","#gatePass"].forEach(s=>{const el=$(s);if(el)el.addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();gateEntrar();}});});
+
+  /* ── Recuperar contraseña: enviar enlace ── */
+  const _gr=$("#gateReset");
+  if(_gr)_gr.addEventListener("click",async()=>{
+    const email=$("#gateEmail").value.trim();
+    if(!email){msgGate("Escribe tu email arriba y vuelve a pulsar «¿Olvidaste tu contraseña?».");return;}
+    if(!(window.NEXAEmpresas&&window.NEXAEmpresas.real)){msgGate("Un momento, aún cargando…");return;}
+    const o=_gr.textContent;_gr.disabled=true;_gr.textContent="Enviando…";
+    try{
+      const r=await window.NEXAEmpresas.resetPassword(email);
+      if(r&&r.ok){const m=$("#gateMsg");m.style.color="#16B981";m.style.display="block";m.textContent="Te hemos enviado un enlace a "+email+" para cambiar la contraseña. Revisa tu correo (mira también el spam).";}
+      else msgGate((r&&r.error)||"No se pudo enviar el enlace.");
+    }catch(e){msgGate("Error de conexión. Inténtalo de nuevo.");}
+    _gr.disabled=false;_gr.textContent=o;
+  });
+
+  /* ── Volver del enlace de recuperación → overlay para la contraseña nueva ──
+     El hash (#type=recovery) se detecta al cargar; el overlay va POR ENCIMA de todo,
+     así no depende de la hidratación del panel ni choca con ella. El SDK (defer) deja
+     lista la sesión de recuperación antes de que el usuario pulse "Guardar". ── */
+  if(/type=recovery/.test(location.hash)||/type=recovery/.test(location.search)){
+    const ov=document.createElement("div");
+    ov.style.cssText="position:fixed;inset:0;z-index:99999;display:flex;align-items:center;justify-content:center;background:#0A0A0A;color:#fff;padding:24px";
+    ov.innerHTML='<div style="max-width:360px;width:100%;text-align:center">'
+      +'<div style="width:52px;height:52px;border-radius:14px;background:#0A5CFF;display:flex;align-items:center;justify-content:center;margin:0 auto 18px"><svg viewBox="0 0 20 20" width="24" height="24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round"><line x1="2" y1="18" x2="18" y2="2"/><line x1="18" y1="18" x2="2" y2="2"/></svg></div>'
+      +'<h1 style="font-size:26px;font-weight:900;margin:0 0 8px">Nueva contraseña</h1>'
+      +'<p style="color:#9A9AA0;font-size:14px;margin:0 0 18px">Elige una contraseña nueva para tu empresa.</p>'
+      +'<input id="npPass" type="password" placeholder="Nueva contraseña (mín. 6)" autocomplete="new-password" style="width:100%;padding:14px;border-radius:12px;border:1px solid #333;background:#fff;color:#0A0A0A;font-size:15px;margin-bottom:10px">'
+      +'<button id="npGo" style="width:100%;padding:14px;border:0;border-radius:12px;background:#0A5CFF;color:#fff;font-size:15px;font-weight:800;cursor:pointer">Guardar y entrar</button>'
+      +'<p id="npMsg" style="font-size:13px;color:#F0656E;margin-top:12px;min-height:18px"></p></div>';
+    document.body.appendChild(ov);document.body.style.overflow="hidden";
+    const npMsg=m=>{ov.querySelector("#npMsg").textContent=m;};
+    async function _guardarPass(){
+      const p=ov.querySelector("#npPass").value;
+      if(!p||p.length<6){npMsg("Mínimo 6 caracteres.");return;}
+      const b=ov.querySelector("#npGo");b.disabled=true;b.textContent="Guardando…";
+      try{
+        const r=(window.NEXAEmpresas&&window.NEXAEmpresas.setNewPassword)?await window.NEXAEmpresas.setNewPassword(p):{ok:false,error:"Recarga la página y vuelve a abrir el enlace."};
+        if(r&&r.ok){location.replace(location.origin+"/panel");}
+        else{npMsg((r&&r.error)||"No se pudo guardar. Pide otro enlace.");b.disabled=false;b.textContent="Guardar y entrar";}
+      }catch(e){npMsg("Error. Vuelve a intentarlo.");b.disabled=false;b.textContent="Guardar y entrar";}
+    }
+    ov.querySelector("#npGo").addEventListener("click",_guardarPass);
+    ov.querySelector("#npPass").addEventListener("keydown",e=>{if(e.key==="Enter"){e.preventDefault();_guardarPass();}});
+  }
 
   /* Onboarding */
   let os=1;
