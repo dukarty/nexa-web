@@ -214,6 +214,13 @@ body.tema-elite .valor,body.tema-elite .pv__cover{background:linear-gradient(120
 .biz,.side__user{cursor:pointer;transition:background .15s;width:100%}
 .biz:hover,.side__user:hover{background:var(--panel)}
 
+/* Fase pre-comercial (COMERCIAL_ACTIVO=false): sin NADA de pago a la vista — la
+   empresa se registra y usa el panel gratis; el cobro llega al activar el comercial. */
+body.nx-precomercial [data-v="facturacion"],
+body.nx-precomercial [data-vista="facturacion"],
+body.nx-precomercial #pago,
+body.nx-precomercial #upsell { display:none !important; }
+
 /* Checkout */
 .mod__c.co{max-width:720px;padding:0;text-align:left;overflow:hidden}
 .co{max-width:720px;padding:0;text-align:left;overflow:hidden}
@@ -798,6 +805,9 @@ body.claro .co__apple{background:#000;color:#fff}
     try{localStorage.setItem("nexa_empresa",JSON.stringify(cuenta));}catch(e){}
   }
   const REAL=!!(window.NEXA_EMPRESAS_CONFIG&&window.NEXA_EMPRESAS_CONFIG.supabaseUrl);
+  // Fase pre-comercial: sin pago a la vista hasta activar el comercial (y Stripe).
+  const COMERCIAL=!!(window.NEXA_EMPRESAS_CONFIG&&window.NEXA_EMPRESAS_CONFIG.COMERCIAL_ACTIVO);
+  if(!COMERCIAL){ try{document.body.classList.add("nx-precomercial");}catch(e){} }
   if(REAL){ $("#gate").classList.add("on"); document.body.style.overflow="hidden"; } // el SDK lo oculta si hay sesión válida
   else if(!cuenta){ $("#gate").classList.add("on"); document.body.style.overflow="hidden"; }
   else if(sessionStorage.getItem("nexa_out")){ $("#gate").classList.add("on"); document.body.style.overflow="hidden"; }
@@ -1464,6 +1474,7 @@ body.claro .co__apple{background:#000;color:#fff}
     const ah=$("#pagoAhorro");if(ah)ah.style.display=periodo==="anio"?"block":"none";
   }
   function abrirPago(k){
+    if(!COMERCIAL) return;   // pre-comercial: el checkout no se abre
     pagoKey=k;
     const real=!!(window.NEXAEmpresas&&window.NEXAEmpresas.real);
     $("#pagoT").textContent=NOMBREPLAN[k];

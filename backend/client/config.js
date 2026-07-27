@@ -6,4 +6,7 @@
 window.NEXA_EMPRESAS_CONFIG = {
   supabaseUrl: "https://vjpgyxwhobshwaotmwzf.supabase.co",
   supabaseAnonKey: "sb_publishable_rmJ7LK0fhSZTJsOUUzOZ3A_bnY-bQ9-",
+  // Parte comercial (cobro/planes) APAGADA hasta ~50k usuarios: en fase de crecimiento
+  // no se muestra nada de pago. A true (con Stripe) cuando arranque el comercial.
+  COMERCIAL_ACTIVO: false,
 };
