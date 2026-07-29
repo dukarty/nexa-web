@@ -1,0 +1,6 @@
+# NEXA — Valencia · 2026
+User-agent: *
+Allow: /
+Disallow: /panel.html
+
+Sitemap: https://nexavalencia.vercel.app/sitemap.xml
