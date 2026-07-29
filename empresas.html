@@ -236,6 +236,14 @@ body.nav-azul .marca__x line{stroke:#fff}
 .regmsg.on{display:block;animation:sube .3s var(--e)}
 
 @media (prefers-reduced-motion:reduce){.rev{opacity:1;transform:none;transition:none}.paso.on{animation:none}}
+
+/* ── Pulido de titulares (descuadres): aire entre palabras + envoltura equilibrada ── */
+.tit,.card__t,.rnum,.plan__n,.reg__t{word-spacing:.08em}
+.tit,.card__t,.reg__t{text-wrap:balance}
+@media (max-width:600px){
+  .tit--xl{font-size:clamp(2.3rem,10vw,8.5rem)}
+  .hero{padding-left:max(var(--pad),24px);padding-right:max(var(--pad),24px)}
+}
 </style>
 </head>
 <body class="nav-negro">

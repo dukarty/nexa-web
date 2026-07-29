@@ -609,3 +609,7 @@ body.bloq .nav,body.bloq .prog{opacity:0;pointer-events:none}
   .nolist .no s::after{transform:scaleX(1);transition:none}
   .xword__x line{animation:none;stroke-dashoffset:0}
 }
+
+/* ── Pulido de titulares (descuadres): aire entre palabras + envoltura equilibrada ── */
+.ap__t,.tit,.num__t,.frase,.como__t,.ruta__t,.scr__big,.okp__t,.cifra{word-spacing:.08em}
+.tit,.num__t,.okp__t,.frase{text-wrap:balance}
