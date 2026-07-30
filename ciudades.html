@@ -3,10 +3,10 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Ciudades — NEXA</title>
-<meta name="description" content="NEXA empieza por Valencia. Después, tu ciudad, pero solo cuando haya vida. ¿No eres de Valencia? Dinos dónde estás y te avisamos cuando lleguemos.">
+<title>Ciudades — NYXA</title>
+<meta name="description" content="NYXA empieza por Valencia. Después, tu ciudad, pero solo cuando haya vida. ¿No eres de Valencia? Dinos dónde estás y te avisamos cuando lleguemos.">
 <meta property="og:type" content="article">
-<meta property="og:title" content="NEXA — Ciudades">
+<meta property="og:title" content="NYXA — Ciudades">
 <meta property="og:description" content="Valencia primero. Después, la tuya. Dinos tu ciudad.">
 <meta property="og:image" content="https://nexavalencia.vercel.app/og.jpg">
 <link rel="canonical" href="https://nexavalencia.vercel.app/ciudades.html">
@@ -153,7 +153,7 @@ body:not(.oscuro) .nav__links a{color:var(--tinta)}
 <body class="oscuro">
 
 <header class="nav" id="nav">
-  <a class="marca" href="index.html" aria-label="NEXA, inicio">NE<span class="marca__x" aria-hidden="true"><svg viewBox="0 0 20 20"><line x1="2" y1="18" x2="18" y2="2"/><line x1="18" y1="18" x2="2" y2="2"/></svg></span>A</a>
+  <a class="marca" href="index.html" aria-label="NYXA, inicio">NY<span class="marca__x" aria-hidden="true"><svg viewBox="0 0 20 20"><line x1="2" y1="18" x2="18" y2="2"/><line x1="18" y1="18" x2="2" y2="2"/></svg></span>A</a>
   <div class="nav__links">
     <a href="index.html#gesto">Cómo funciona</a>
     <a href="seguridad.html">Seguridad</a>
@@ -166,7 +166,7 @@ body:not(.oscuro) .nav__links a{color:var(--tinta)}
 <!-- HERO -->
 <section class="hero" aria-labelledby="h1">
   <div>
-    <p class="hero__k">NEXA · Ciudades</p>
+    <p class="hero__k">NYXA · Ciudades</p>
     <h1 class="hero__t" id="h1"><span class="w">Valencia</span> <span class="w">primero<span class="pt">.</span></span></h1>
     <p class="hero__s">Después, la tuya. Cuando haya con quién.</p>
   </div>
@@ -184,7 +184,7 @@ body:not(.oscuro) .nav__links a{color:var(--tinta)}
 <section class="sec sec--negro" aria-labelledby="c2">
   <div class="in">
     <p class="ind rev">02 · Ahora mismo</p>
-    <h2 class="tit rev" id="c2">Dónde está<br><span class="az">NEXA</span>.</h2>
+    <h2 class="tit rev" id="c2">Dónde está<br><span class="az">NYXA</span>.</h2>
     <ul class="mapa rev">
       <li><span class="mapa__c">Valencia</span><span class="estado estado--on"><span class="dot"></span>Abriendo · 2026</span></li>
       <li class="esp"><span class="mapa__c">La siguiente</span><span class="estado"><span class="dot"></span>Cuando haya vida</span></li>
@@ -197,7 +197,7 @@ body:not(.oscuro) .nav__links a{color:var(--tinta)}
 <section class="sec" aria-labelledby="c3">
   <p class="ind rev">03 · No eres de Valencia</p>
   <h2 class="tit rev" id="c3">Dinos<br><span class="az">dónde estás.</span></h2>
-  <p class="p rev">Cuando NEXA llegue ahí, te avisamos. Cuanta más gente lo pida, antes.</p>
+  <p class="p rev">Cuando NYXA llegue ahí, te avisamos. Cuanta más gente lo pida, antes.</p>
 
   <form class="form rev" id="cform" novalidate>
     <div class="campo">
@@ -215,7 +215,7 @@ body:not(.oscuro) .nav__links a{color:var(--tinta)}
 
   <div class="ok" id="cok">
     <p class="ok__t">Anotado.</p>
-    <p class="ok__s" id="cokS">Cuando NEXA llegue, te avisamos el primero.</p>
+    <p class="ok__s" id="cokS">Cuando NYXA llegue, te avisamos el primero.</p>
   </div>
 </section>
 
@@ -223,7 +223,7 @@ body:not(.oscuro) .nav__links a{color:var(--tinta)}
 <section class="fin" aria-labelledby="cc">
   <h2 class="fin__t rev" id="cc">Que no se te<br>escape la vida<span class="pt">.</span></h2>
   <a class="cta rev" href="index.html#lista"><span>Entrar en la lista</span><span class="cta__x" aria-hidden="true"><svg viewBox="0 0 20 20"><line x1="2" y1="18" x2="18" y2="2"/><line x1="18" y1="18" x2="2" y2="2"/></svg></span></a>
-  <a class="fin__v" href="index.html">← Volver a NEXA</a>
+  <a class="fin__v" href="index.html">← Volver a NYXA</a>
 </section>
 
 <script src="config.js?v=78"></script>
@@ -261,7 +261,7 @@ body:not(.oscuro) .nav__links a{color:var(--tinta)}
   function fallar(msg) { errEl.textContent = msg; errEl.style.display = "block"; }
 
   async function guardar(datos) {
-    if (!S_URL || !S_KEY) { console.warn("[NEXA] Supabase sin configurar:", datos); return true; }
+    if (!S_URL || !S_KEY) { console.warn("[NYXA] Supabase sin configurar:", datos); return true; }
     const res = await fetch(`${S_URL}/rest/v1/${TABLA}`, {
       method: "POST",
       headers: { "Content-Type": "application/json", apikey: S_KEY, Authorization: `Bearer ${S_KEY}`, Prefer: "return=minimal" },
@@ -284,7 +284,7 @@ body:not(.oscuro) .nav__links a{color:var(--tinta)}
     try {
       await guardar({ email: iEmail.value.trim().toLowerCase(), ciudad: ciudad.toLowerCase() });
       const disp = ciudad.charAt(0).toUpperCase() + ciudad.slice(1);
-      okS.textContent = `Cuando NEXA llegue a ${disp}, te avisamos el primero.`;
+      okS.textContent = `Cuando NYXA llegue a ${disp}, te avisamos el primero.`;
       form.style.display = "none";
       okBox.classList.add("on");
       okBox.setAttribute("tabindex", "-1");

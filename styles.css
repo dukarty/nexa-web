@@ -1,5 +1,5 @@
 /* ═══════════════════════════════════════════════════════════════
-   NEXA
+   NYXA
 
    Negro  = la vida por defecto.
    Blanco = la lucidez.
@@ -181,7 +181,7 @@ body.oscuro .marca{background:transparent;border-color:rgba(255,255,255,.32);col
    en móvil desbordaba y dejaba un hueco blanco a la derecha. */
 .frase span{display:block;opacity:0;transition:opacity .5s ease}
 @media (min-width:900px){.frase span{white-space:nowrap}}
-/* El ancla: quien mira 5 segundos ya sabe qué es NEXA. Siempre visible. */
+/* El ancla: quien mira 5 segundos ya sabe qué es NYXA. Siempre visible. */
 .claim{
   position:absolute;left:50%;bottom:92px;transform:translateX(-50%);
   max-width:34ch;text-align:center;
@@ -327,7 +327,7 @@ body.oscuro .marca{background:transparent;border-color:rgba(255,255,255,.32);col
 /* ═══════════════════════════════════════════════
    04 · EL GESTO
    El producto dentro de la historia: un teléfono con la
-   interfaz real de NEXA, y los 3 pasos encendiéndose al lado.
+   interfaz real de NYXA, y los 3 pasos encendiéndose al lado.
    ═══════════════════════════════════════════════ */
 .gesto{padding:var(--sec) var(--pad);max-width:1300px;margin:0 auto}
 .gesto .tit{margin-bottom:clamp(44px,6vw,72px)}
@@ -485,7 +485,7 @@ body.bloq .nav,body.bloq .prog{opacity:0;pointer-events:none}
 
 /* ═══════════════════════════════════════════════
    05 · LA VUELTA A CASA
-   Cerrada. En negro. Hasta que mandas un NEXA.
+   Cerrada. En negro. Hasta que mandas un NYXA.
    ═══════════════════════════════════════════════ */
 .vuelta{height:100svh;background:var(--tinta);color:#fff;transition:height .1s}
 .vuelta.abierta{height:280vh}
