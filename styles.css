@@ -611,5 +611,5 @@ body.bloq .nav,body.bloq .prog{opacity:0;pointer-events:none}
 }
 
 /* ── Pulido de titulares (descuadres): aire entre palabras + envoltura equilibrada ── */
-.tit,.num__t,.frase,.como__t,.ruta__t,.scr__big,.okp__t,.cifra{word-spacing:.05em}
+.idea__p,.noes__cierre,.num__p,.cifra__l,.ap__s,.quienes__p{text-wrap:pretty}
 .tit,.num__t,.okp__t,.frase{text-wrap:balance}
