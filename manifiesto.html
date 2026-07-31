@@ -126,6 +126,10 @@ body:not(.oscuro) .marca{border-color:var(--tinta);color:var(--tinta);background
 /* ── Pulido de titulares (descuadres): aire entre palabras + envoltura equilibrada ── */
 .hero__t,.tit,.gran,.ruta__t,.cifra{word-spacing:.08em}
 .tit,.gran{text-wrap:balance}
+
+/* ── Cuadrar todo: ni una palabra suelta (viudas) ── */
+p,li,figcaption,blockquote,.lead,.thesis,.p,.card__p,.plan__q,.idea__p,.claim,.form__m,.ok__s,.hero__s,.num__p,.noes__cierre,.cifra__l,.quienes__p,.planes__nota,.regmini,.au .t,.qc li,.fi p,.step p,.hero__k,.reg__d,.mapa__c+.estado,.aviso{text-wrap:pretty}
+h1,h2,h3,.tit,.hero__t,.gran,.ruta__t,.mapa__c,.num__t,.fin__t,.fin__t2,.card__t,.plan__n,.okp__t,.scr__big,.scr__h,.kicker,.reg__t,.como__t{text-wrap:balance}
 </style>
 </head>
 <body class="oscuro">
