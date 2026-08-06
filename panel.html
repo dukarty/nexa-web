@@ -177,6 +177,9 @@ body.tema-elite .valor,body.tema-elite .pv__cover{background:linear-gradient(120
 .expc b{font-weight:800;display:block}.expc small{color:var(--tx-2);font-size:.82rem}
 .expc__tag{margin-left:auto;font-size:.64rem;font-weight:800;text-transform:uppercase;letter-spacing:.06em;color:var(--verde);background:rgba(74,222,128,.14);border-radius:999px;padding:5px 10px;flex:none}
 .expc__tag--val{color:var(--ambar);background:rgba(245,165,36,.14)}
+/* Tarjetas-plantilla clicables (experiencias listas para activar) */
+.expc[data-tpl]{cursor:pointer;background:transparent;text-align:left;width:100%;transition:border-color .15s,transform .15s}
+.expc[data-tpl]:hover{border-color:var(--az);transform:translateY(-2px)}
 
 /* objetivo */
 .goal__bar{height:12px;border-radius:99px;background:var(--panel);overflow:hidden;margin-top:12px}
@@ -471,6 +474,32 @@ body.claro .co__apple{background:#000;color:#fff}
 
     <!-- EXPERIENCIAS -->
     <section class="vista" data-vista="experiencias">
+      <div class="box">
+        <div class="box__h"><b>Experiencias listas para activar</b><small>elige una y ponle fecha</small></div>
+        <div class="explist" id="expPlantillas">
+          <button class="expc" data-tpl data-titulo="Cata para gente con ganas" data-cat="Cata / gastronomía" data-franja="normal" data-desc="12 plazas, una mesa larga y desconocidos con ganas de conocerse. Elige el jueves que quieras.">
+            <span class="expc__i">01</span>
+            <span><b>Cata para gente con ganas</b><small>12 plazas · una mesa larga · el jueves que elijas</small></span>
+            <span class="expc__tag">Lista</span>
+          </button>
+          <button class="expc" data-tpl data-titulo="Ruta y almuerzo de los tuyos" data-cat="Ruta / outdoor" data-franja="normal" data-desc="Salís juntos y acabáis en tu local. El finde que te cuadre.">
+            <span class="expc__i">02</span>
+            <span><b>Ruta y almuerzo de los tuyos</b><small>salís juntos · acabáis en tu local · finde</small></span>
+            <span class="expc__tag">Lista</span>
+          </button>
+          <button class="expc" data-tpl data-titulo="Torneo relámpago entre desconocidos" data-cat="Encuentro" data-franja="valle" data-desc="Llena una franja floja y que la gente vuelva a por la revancha.">
+            <span class="expc__i">03</span>
+            <span><b>Torneo relámpago entre desconocidos</b><small>llena una franja floja · vuelven a por la revancha</small></span>
+            <span class="expc__tag expc__tag--val">Franja valle</span>
+          </button>
+          <button class="expc" data-tpl data-titulo="Taller con after de presentaciones" data-cat="Taller" data-franja="normal" data-desc="Aprenden algo contigo y se quedan a conocerse.">
+            <span class="expc__i">04</span>
+            <span><b>Taller con after de presentaciones</b><small>aprenden contigo · se quedan a conocerse</small></span>
+            <span class="expc__tag">Lista</span>
+          </button>
+        </div>
+        <p style="color:var(--tx-2);font-size:.86rem;margin-top:12px">Pulsa una y te rellenamos la experiencia abajo — solo le pones fecha. Todas pasan un <b style="color:var(--tx)">control de calidad</b> antes de publicarse. ¿Un negocio amigo? <b style="color:var(--tx)">Co-activadla juntos</b>.</p>
+      </div>
       <div class="row2">
         <div class="box">
           <div class="box__h"><b>Crear experiencia</b><small>tu primer evento es gratis</small></div>
@@ -1680,6 +1709,23 @@ body.claro .co__apple{background:#000;color:#fff}
     showGate:()=>{$("#gate").classList.add("on");document.body.style.overflow="hidden";},
     hideGate:()=>{$("#gate").classList.remove("on");document.body.style.overflow="";}
   };
+</script>
+<script>
+/* Experiencias listas para activar: al pulsar una plantilla, rellena el formulario de crear
+   (aditivo — no toca la lógica de publicar; solo precarga los campos y baja al formulario). */
+(function(){
+  var wrap=document.getElementById('expPlantillas'); if(!wrap) return;
+  function set(id,v){var el=document.getElementById(id); if(el&&v!=null) el.value=v;}
+  wrap.querySelectorAll('[data-tpl]').forEach(function(b){
+    b.addEventListener('click',function(){
+      set('expTitulo', b.getAttribute('data-titulo'));
+      set('expDesc', b.getAttribute('data-desc'));
+      set('expCat', b.getAttribute('data-cat'));      // el value de <option> sin value = su texto
+      set('expFranja', b.getAttribute('data-franja'));
+      var t=document.getElementById('expTitulo'); if(t){ t.scrollIntoView({block:'center',behavior:'smooth'}); t.focus(); }
+    });
+  });
+})();
 </script>
 <script src="backend/client/nexa-empresas.js" defer></script>
 </body>
