@@ -115,6 +115,19 @@ body.nav-azul .marca__x line{stroke:#fff}
 .card__p{margin-top:12px;font-size:1rem;color:var(--gris)}
 .sec--negro .card__p{color:rgba(255,255,255,.7)}
 
+/* Experiencias listas para activar (catálogo — como las "Collections" pero de NYXA) */
+.exps{display:grid;gap:14px;margin-top:clamp(40px,5vw,64px)}
+@media(min-width:760px){.exps{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:1100px){.exps{grid-template-columns:repeat(4,1fr)}}
+.exp{border:1.5px solid var(--linea);border-radius:20px;padding:clamp(22px,2.4vw,30px);background:#fff;display:flex;flex-direction:column;gap:12px;transition:border-color .3s var(--e),transform .3s var(--e)}
+.exp:hover{border-color:var(--az);transform:translateY(-3px)}
+.exp__tag{align-self:flex-start;font-size:.64rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--az);border:1.5px solid var(--az);border-radius:999px;padding:5px 11px}
+.exp__t{font-size:clamp(1.15rem,2vw,1.5rem);font-weight:900;letter-spacing:-.03em;text-transform:uppercase;font-variation-settings:"wdth" 86;line-height:1.02}
+.exp__p{font-size:.95rem;color:var(--gris);flex:1}
+.exp__cta{font-size:.78rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--az)}
+.exps__nota{margin-top:24px;font-size:.95rem;color:var(--gris-2);text-align:center;text-wrap:pretty}
+.exps__nota b{color:var(--tinta)}
+
 /* Preview del panel */
 .mock{margin-top:clamp(40px,5vw,64px);border:1.5px solid rgba(255,255,255,.16);border-radius:22px;overflow:hidden;background:#0E0E11}
 .mock__bar{display:flex;align-items:center;gap:8px;padding:14px 18px;border-bottom:1px solid rgba(255,255,255,.1)}
@@ -304,6 +317,42 @@ h1,h2,h3,.tit,.hero__t,.gran,.ruta__t,.mapa__c,.num__t,.fin__t,.fin__t2,.card__t
   </div>
 </section>
 
+<!-- 3b · EXPERIENCIAS LISTAS PARA ACTIVAR -->
+<section class="sec sec--papel">
+  <div class="in">
+    <p class="kick rev">Listas para&nbsp;activar</p>
+    <h2 class="tit rev" style="margin-top:16px;max-width:16ch">Experiencias montadas.<br>Tú solo eliges&nbsp;fecha.</h2>
+    <p class="lead rev" style="max-width:54ch">No inventas nada. Eliges una experiencia ya preparada, le pones fecha y la propones a <b>tu comunidad</b>. Nosotros la revisamos antes de publicarla — para que salga&nbsp;perfecta.</p>
+    <div class="exps">
+      <article class="exp rev">
+        <span class="exp__tag">Cata · 2 h</span>
+        <h3 class="exp__t">Cata para gente con&nbsp;ganas</h3>
+        <p class="exp__p">12 plazas, una mesa larga y el jueves que&nbsp;elijas.</p>
+        <span class="exp__cta">Elegir fecha →</span>
+      </article>
+      <article class="exp rev">
+        <span class="exp__tag">Ruta · sábado</span>
+        <h3 class="exp__t">Ruta y almuerzo de los&nbsp;tuyos</h3>
+        <p class="exp__p">Salís juntos, acabáis en tu local. El finde que te&nbsp;cuadre.</p>
+        <span class="exp__cta">Elegir fecha →</span>
+      </article>
+      <article class="exp rev">
+        <span class="exp__tag">Torneo · noche</span>
+        <h3 class="exp__t">Torneo relámpago entre&nbsp;desconocidos</h3>
+        <p class="exp__p">Llena una franja floja y que la gente vuelva a por la&nbsp;revancha.</p>
+        <span class="exp__cta">Elegir fecha →</span>
+      </article>
+      <article class="exp rev">
+        <span class="exp__tag">Taller · entre semana</span>
+        <h3 class="exp__t">Taller con after de&nbsp;presentaciones</h3>
+        <p class="exp__p">Aprenden algo contigo y se quedan a&nbsp;conocerse.</p>
+        <span class="exp__cta">Elegir fecha →</span>
+      </article>
+    </div>
+    <p class="exps__nota rev">¿No encuentras la que encaja? <b>Propón la tuya</b> y la montamos contigo. Cada experiencia pasa un <b>control de calidad</b> antes de&nbsp;publicarse. ¿Un negocio amigo? <b>Co-activadla juntos</b>.</p>
+  </div>
+</section>
+
 <!-- 4 · EL PANEL (preview) -->
 <section class="sec sec--negro">
   <div class="in">
@@ -312,7 +361,7 @@ h1,h2,h3,.tit,.hero__t,.gran,.ruta__t,.mapa__c,.num__t,.fin__t,.fin__t2,.card__t
     <div class="mock rev" aria-hidden="true">
       <div class="mock__bar"><span class="mock__dot"></span><span class="mock__dot"></span><span class="mock__dot"></span></div>
       <div class="mock__body">
-        <div class="mock__side"><span class="on">Resumen</span><span>Encuentros</span><span>Comunidad</span><span>Activar</span><span>Facturación</span></div>
+        <div class="mock__side"><span class="on">Resumen</span><span>Encuentros</span><span>Experiencias</span><span>Comunidad</span><span>Temporada</span><span>Facturación</span></div>
         <div class="mock__main">
           <div class="mock__kpis">
             <div class="mock__kpi"><small>Encuentros</small><b>212</b></div>
@@ -339,10 +388,10 @@ h1,h2,h3,.tit,.hero__t,.gran,.ruta__t,.mapa__c,.num__t,.fin__t,.fin__t2,.card__t
         <li>Encuentros generados</li><li>θ · entre desconocidos</li><li>Repetición y frecuencia</li><li>Coeficiente +1 (R)</li><li>Embudo completo</li><li>Rendimiento por franja</li>
       </ul></div>
       <div class="rev"><h3>Activar</h3><ul>
-        <li>Proponer una experiencia</li><li>Destacar franja valle</li><li>Reactivar dormidos</li><li>Repetir lo que funciona</li><li>Alojar planes</li><li>Objetivos por semana</li>
+        <li>Experiencias listas para activar</li><li>Elige fecha y lánzala</li><li>Destacar franja valle</li><li>Reactivar dormidos</li><li>Co-activar con otro negocio</li><li>Calendario de temporada</li>
       </ul></div>
       <div class="rev"><h3>Gestionar</h3><ul>
-        <li>Tu comunidad (agregada)</li><li>Segmentos y acciones</li><li>Equipo y roles</li><li>Verificación de marca</li><li>Facturación y facturas</li><li>Ajustes de empresa</li>
+        <li>Tu comunidad (agregada)</li><li>Participantes y asistencia</li><li>Segmentos y acciones</li><li>Equipo y roles</li><li>Verificación de marca</li><li>Facturación y facturas</li>
       </ul></div>
     </div>
   </div>
