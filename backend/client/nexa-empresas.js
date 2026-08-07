@@ -42,11 +42,15 @@
       const { data: { user } } = await sb.auth.getUser();
       return user ? norm(user.email) : null;
     }
+    // Lee la ficha del negocio del usuario logueado vía la RPC `mi_negocio()`
+    // (SECURITY DEFINER). El SELECT DIRECTO a `businesses` está REVOCADO por RGPD
+    // (para no filtrar `owner_email` a cualquiera) → daba 42501 permission denied y
+    // dejaba `account:null` (nadie podía entrar a su panel). La RPC devuelve SOLO tu
+    // fila (incluido tu email), acotada a `current_email()` en el servidor.
     async function miNegocio() {
-      const email = await miEmail(); if (!email) return null;
-      const { data } = await sb.from("businesses").select("*").eq("owner_email", email)
-        .order("created_at", { ascending: true }).limit(1);
-      return (data && data[0]) || null;
+      const { data, error } = await sb.rpc("mi_negocio");
+      if (error) return null;
+      return Array.isArray(data) ? (data[0] || null) : (data || null);
     }
     function aCuenta(biz, email) {
       if (!biz) return null;
@@ -124,14 +128,14 @@
       // Guarda perfil + colecciones (todo en `businesses`/`meta`). No toca plan/verified.
       async saveProfile(c) {
         if (!c) return { ok: false };
-        const email = await miEmail(); if (!email) return { ok: false, error: "sin_sesion" };
+        const biz = await miNegocio(); if (!biz) return { ok: false, error: "sin_empresa" };
         const meta = { horario: c.horario || "", experiencias: c.experiencias || [], objetivo: c.objetivo || null, sedes: c.sedes || [] };
         if (c.frase) meta.frase = c.frase;
         if (c.aforo) meta.aforo = c.aforo;
         const { error } = await sb.from("businesses").update({
           name: c.nombre, category: c.categoria, descripcion: c.descripcion,
           web: c.web, instagram: c.ig, meta,
-        }).eq("owner_email", email);
+        }).eq("id", biz.id);
         return { ok: !error, error: error && error.message };
       },
       // Experiencias del negocio: por ahora viven en meta.experiencias (cliente).
@@ -146,7 +150,7 @@
         meta.experiencias = (meta.experiencias || []).slice();
         const id = "e" + Date.now();
         meta.experiencias.unshift({ id, titulo: e.titulo, cat: e.cat, franja: e.franja, estado: "publicada" });
-        const { error } = await sb.from("businesses").update({ meta }).eq("owner_email", email);
+        const { error } = await sb.from("businesses").update({ meta }).eq("id", biz.id);
         return { ok: !error, id, error: error && error.message };
       },
       async removeExperience(id) {
@@ -154,7 +158,7 @@
         if (!email || !biz) return { ok: false, error: "sin_empresa" };
         const meta = Object.assign({}, biz.meta);
         meta.experiencias = (meta.experiencias || []).filter((x) => String(x.id) !== String(id));
-        const { error } = await sb.from("businesses").update({ meta }).eq("owner_email", email);
+        const { error } = await sb.from("businesses").update({ meta }).eq("id", biz.id);
         return { ok: !error, error: error && error.message };
       },
       async setFeatured(id, on) {
@@ -162,7 +166,7 @@
         if (!email || !biz) return { ok: false, error: "sin_empresa" };
         const meta = Object.assign({}, biz.meta);
         meta.experiencias = (meta.experiencias || []).map((x) => String(x.id) === String(id) ? Object.assign({}, x, { featured: !!on }) : x);
-        const { error } = await sb.from("businesses").update({ meta }).eq("owner_email", email);
+        const { error } = await sb.from("businesses").update({ meta }).eq("id", biz.id);
         return { ok: !error, featured: !!on, error: error && error.message };
       },
       // Equipo y roles: fase posterior (necesita su propia tabla). De momento, aviso.
@@ -175,7 +179,7 @@
         if (!email || !biz) return { ok: false, error: "sin_empresa" };
         if (biz.verified) return { ok: true, already: true };
         const meta = Object.assign({}, biz.meta, { verif_pendiente: true, verif_fecha: new Date().toISOString() });
-        const { error } = await sb.from("businesses").update({ meta }).eq("owner_email", email);
+        const { error } = await sb.from("businesses").update({ meta }).eq("id", biz.id);
         return { ok: !error, error: error && error.message };
       },
       // Métricas: aún no hay backend de atribución para el panel → el panel muestra
