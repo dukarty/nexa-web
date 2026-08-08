@@ -2,133 +2,145 @@
 <html lang="es">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Privacidad — NYXA</title>
 <meta name="description" content="Qué datos recoge NYXA en la lista de espera de Valencia, para qué, y cómo borrarlos.">
 <meta name="robots" content="noindex">
+<link rel="canonical" href="https://nexavalencia.vercel.app/privacidad.html">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..100,400;75..100,500;75..100,600;75..100,700;75..100,800;75..100,900&display=swap">
 <style>
-  :root{--azul:#0A5CFF;--negro:#0A0C11;--gris:#5A6377;--linea:#E8EAEF;--papel:#F6F7F9}
-  *{box-sizing:border-box;margin:0;padding:0}
-  body{
-    font-family:"Inter",-apple-system,BlinkMacSystemFont,system-ui,sans-serif;
-    color:var(--negro);line-height:1.62;font-size:17px;letter-spacing:-.011em;
-    -webkit-font-smoothing:antialiased;padding:0 24px 120px;
-  }
-  .w{max-width:680px;margin:0 auto}
-  header{padding:56px 0 48px}
-  .logo{display:inline-flex;align-items:center;font-weight:800;font-size:1.3rem;letter-spacing:-.05em;margin-bottom:56px}
-  .logo svg{width:.72em;height:.72em;margin:0 .04em;overflow:visible}
-  .logo line{stroke:var(--negro);stroke-width:2.6;stroke-linecap:round}
-  h1{font-size:clamp(2.1rem,5.5vw,3rem);font-weight:800;letter-spacing:-.045em;line-height:1.04;text-wrap:balance}
-  .fecha{color:var(--gris);margin-top:16px;font-size:.9rem}
-  h2{
-    font-size:1.25rem;font-weight:700;letter-spacing:-.03em;
-    margin:48px 0 14px;padding-top:32px;border-top:1px solid var(--linea);
-  }
-  p{margin-bottom:16px;color:#20242E;text-wrap:pretty}
-  ul{margin:0 0 18px 20px}
-  li{margin-bottom:9px;color:#20242E}
-  strong{font-weight:600}
-  a{color:var(--azul);font-weight:600;text-decoration:none;border-bottom:1.5px solid rgba(10,92,255,.25)}
-  a:hover{border-bottom-color:var(--azul)}
-  .box{
-    background:var(--papel);border:1px solid var(--linea);border-left:3px solid var(--azul);
-    border-radius:0 14px 14px 0;padding:20px 22px;margin:24px 0;
-  }
-  .box p:last-child{margin-bottom:0}
-  .pendiente{
-    background:#FFF8E6;border:1px solid #F0DCA0;border-left:3px solid #C99A16;
-    border-radius:0 14px 14px 0;padding:18px 22px;margin:24px 0;font-size:.95rem;
-  }
-  .pendiente p:last-child{margin-bottom:0}
-  footer{margin-top:72px;padding-top:28px;border-top:1px solid var(--linea);font-size:.9rem;color:var(--gris)}
-  :focus-visible{outline:3px solid var(--azul);outline-offset:3px;border-radius:6px}
+:root{
+  --az:#0A5CFF;--az-h:#0040CC;--tinta:#0A0A0A;--gris:#5C5C5C;--gris-2:#9A9A9A;
+  --linea:#E6E6E6;--papel:#F5F5F5;
+  --f:"Archivo","Helvetica Neue",Helvetica,Arial,sans-serif;
+  --pad:clamp(20px,4vw,48px);--e:cubic-bezier(.16,1,.3,1);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;overflow-x:clip;max-width:100%}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{font-family:var(--f);background:#fff;color:var(--tinta);font-size:17px;line-height:1.62;
+  letter-spacing:-.01em;-webkit-font-smoothing:antialiased;overflow-x:clip}
+svg{display:block}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:3px solid var(--az);outline-offset:3px;border-radius:6px}
 
-/* ── Cuadrar todo: ni una palabra suelta (viudas) ── */
-p,li,figcaption,blockquote,.lead,.thesis,.p,.card__p,.plan__q,.idea__p,.claim,.form__m,.ok__s,.hero__s,.num__p,.noes__cierre,.cifra__l,.quienes__p,.planes__nota,.regmini,.au .t,.qc li,.fi p,.step p,.hero__k,.reg__d,.mapa__c+.estado,.aviso{text-wrap:pretty}
-h1,h2,h3,.tit,.hero__t,.gran,.ruta__t,.mapa__c,.num__t,.fin__t,.fin__t2,.card__t,.plan__n,.okp__t,.scr__big,.scr__h,.kicker,.reg__t,.como__t{text-wrap:balance}
+/* NAV — mismo shell que el resto de la web */
+.nav{position:fixed;top:0;left:0;right:0;z-index:80;padding:var(--pad);display:flex;align-items:center;justify-content:space-between;gap:16px}
+.marca{display:inline-flex;align-items:center;font-weight:900;font-size:1.28rem;letter-spacing:-.05em;
+  padding:7px 13px;border-radius:999px;border:1.5px solid var(--tinta);color:var(--tinta);background:#fff}
+.marca__x{display:inline-flex;width:.66em;height:.66em;margin:0 .03em}
+.marca__x svg{width:100%;height:100%;overflow:visible}
+.marca__x line{stroke:var(--az);stroke-width:3;stroke-linecap:round}
+.volver{display:inline-flex;align-items:center;gap:8px;padding:9px 16px;border-radius:999px;background:var(--az);color:#fff;
+  font-size:.72rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;transition:background .2s}
+.volver:hover{background:var(--az-h)}
+
+/* CONTENIDO */
+.w{max-width:680px;margin:0 auto;padding:0 var(--pad) 120px}
+header.doc{padding:clamp(120px,16vw,180px) 0 40px}
+.doc__k{font-size:.7rem;font-weight:800;letter-spacing:.24em;text-transform:uppercase;color:var(--az);margin-bottom:18px}
+h1{font-size:clamp(2.2rem,7vw,4rem);font-weight:900;letter-spacing:-.05em;line-height:.98;text-transform:uppercase;font-variation-settings:"wdth" 88;text-wrap:balance}
+.fecha{color:var(--gris);margin-top:16px;font-size:.9rem;font-weight:600}
+h2{font-size:clamp(1.2rem,2.4vw,1.5rem);font-weight:800;letter-spacing:-.03em;
+  margin:44px 0 14px;padding-top:30px;border-top:1.5px solid var(--linea)}
+p{margin-bottom:16px;color:#20242E;text-wrap:pretty}
+ul{margin:0 0 18px 20px}
+li{margin-bottom:9px;color:#20242E}
+strong{font-weight:800;color:var(--tinta)}
+code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.9em;background:var(--papel);padding:1px 6px;border-radius:6px}
+a.enl{color:var(--az);font-weight:700;border-bottom:1.5px solid rgba(10,92,255,.28)}
+a.enl:hover{border-bottom-color:var(--az)}
+.box{background:var(--papel);border:1px solid var(--linea);border-left:3px solid var(--az);
+  border-radius:0 14px 14px 0;padding:20px 22px;margin:24px 0}
+.box p:last-child{margin-bottom:0}
+footer.doc{max-width:680px;margin:56px auto 0;padding:28px var(--pad) 80px;border-top:1.5px solid var(--linea);font-size:.9rem;color:var(--gris)}
+footer.doc a{color:var(--az);font-weight:700}
 </style>
 </head>
 <body>
-<div class="w">
 
-<header>
-  <a class="logo" href="index.html" aria-label="NYXA, inicio">NE<svg viewBox="0 0 20 20" aria-hidden="true"><line x1="2" y1="18" x2="18" y2="2"/><line x1="18" y1="18" x2="2" y2="2"/></svg>A</a>
-  <h1>Privacidad.</h1>
-  <p class="fecha">Última actualización: 13 de julio de&nbsp;2026</p>
+<header class="nav">
+  <a class="marca" href="index.html" aria-label="NYXA, inicio">NY<span class="marca__x" aria-hidden="true"><svg viewBox="0 0 20 20"><line x1="2" y1="18" x2="18" y2="2"/><line x1="18" y1="18" x2="2" y2="2"/></svg></span>A</a>
+  <a class="volver" href="index.html">Volver a NYXA</a>
 </header>
 
-<div class="box">
-  <p><strong>El resumen, en tres líneas.</strong> Solo te pedimos tu email, y la universidad si quieres dártela. Lo usamos para avisarte cuando abramos Valencia, y para nada más. Escribe a <a href="mailto:hola@nexa.app">hola@nexa.app</a> y lo borramos el mismo&nbsp;día.</p>
+<div class="w">
+  <header class="doc">
+    <p class="doc__k">NYXA · Valencia · 2026</p>
+    <h1>Privacidad.</h1>
+    <p class="fecha">Última actualización: 13 de julio de&nbsp;2026</p>
+  </header>
+
+  <div class="box">
+    <p><strong>El resumen, en tres líneas.</strong> Solo te pedimos tu email, y la universidad si quieres dártela. Lo usamos para avisarte cuando abramos Valencia, y para nada más. Escribe a <a class="enl" href="mailto:hola@nexa.app">hola@nexa.app</a> y lo borramos el mismo&nbsp;día.</p>
+  </div>
+
+  <h2>Quién trata tus&nbsp;datos</h2>
+  <p>NYXA es, hoy, un proyecto en fase de lista de espera en Valencia, todavía sin sociedad constituida. El responsable del tratamiento es la persona física que impulsa el proyecto, con la que puedes contactar&nbsp;en:</p>
+  <ul>
+    <li><strong>Contacto:</strong> <a class="enl" href="mailto:hola@nexa.app">hola@nexa.app</a></li>
+    <li><strong>Ámbito:</strong> Valencia, España (Unión Europea).</li>
+  </ul>
+  <p>En cuanto constituyamos la entidad, actualizaremos esta página con su nombre, NIF y dirección fiscal. Mientras tanto, todos tus derechos se ejercen —igual de rápido— por el correo de&nbsp;arriba.</p>
+
+  <h2>Qué datos&nbsp;recogemos</h2>
+  <p>Solo lo que escribes tú en el formulario de la lista de&nbsp;espera:</p>
+  <ul>
+    <li><strong>Tu email.</strong> Obligatorio. Es la única forma de avisarte.</li>
+    <li><strong>Tu universidad o facultad.</strong> Opcional. Puedes dejarlo en blanco y entras igual.</li>
+    <li><strong>La fecha</strong> en que te apuntaste.</li>
+  </ul>
+  <p>No recogemos tu nombre, ni tu teléfono, ni tu ubicación, ni tu dirección IP con fines de seguimiento. No hay cookies de análisis ni de publicidad en esta web. No te&nbsp;rastreamos.</p>
+
+  <h2>Para qué los&nbsp;usamos</h2>
+  <ul>
+    <li><strong>Avisarte</strong> el día que NYXA abra en Valencia. Un correo, puede que dos. No hay boletín.</li>
+    <li><strong>Medir densidad.</strong> Contamos cuánta gente hay por facultad, de forma agregada, para saber cuándo hay masa crítica suficiente para abrir. No miramos emails uno a uno.</li>
+  </ul>
+  <p>No usamos tus datos para nada más. No los vendemos, ni los cedemos, ni los compartimos con&nbsp;anunciantes.</p>
+
+  <h2>Con qué base&nbsp;legal</h2>
+  <p>Tu <strong>consentimiento</strong> (artículo 6.1.a del RGPD). Nos lo das al escribir tu email y pulsar el botón. Puedes retirarlo cuando quieras, sin dar explicaciones y sin coste: escribe a <a class="enl" href="mailto:hola@nexa.app">hola@nexa.app</a>.</p>
+
+  <h2>Cuánto tiempo los&nbsp;guardamos</h2>
+  <ul>
+    <li>Hasta que nos pidas que los borremos.</li>
+    <li>Si NYXA no llega a abrir en Valencia, <strong>borramos la lista entera</strong>. No nos la quedamos «por si acaso».</li>
+    <li>En cualquier caso, no más de <strong>24 meses</strong> desde que te apuntaste.</li>
+  </ul>
+
+  <h2>Quién más los&nbsp;toca</h2>
+  <p>Nadie los ve salvo nosotros. Pero para que la web funcione hay empresas que alojan la&nbsp;infraestructura:</p>
+  <ul>
+    <li><strong>Supabase</strong> — guarda la base de datos. Los servidores están en <strong>Irlanda</strong> (AWS, <code>eu-west-1</code>). Tus datos no salen de la Unión Europea.</li>
+    <li><strong>Vercel</strong> — aloja esta web. No almacena tu email; solo sirve las páginas.</li>
+    <li><strong>Google Fonts</strong> y <strong>Pexels</strong> — sirven la tipografía y las fotos. Al cargar la página, tu navegador se conecta a sus servidores y estos pueden registrar tu dirección IP, como ocurre al visitar cualquier web.</li>
+  </ul>
+
+  <h2>Qué puedes&nbsp;exigirnos</h2>
+  <p>El RGPD te da estos derechos, y los puedes ejercer todos escribiendo a <a class="enl" href="mailto:hola@nexa.app">hola@nexa.app</a>:</p>
+  <ul>
+    <li><strong>Acceso</strong> — que te digamos qué tenemos tuyo.</li>
+    <li><strong>Rectificación</strong> — corregir un email mal escrito.</li>
+    <li><strong>Supresión</strong> — que lo borremos todo. Lo hacemos el mismo día.</li>
+    <li><strong>Oposición y limitación</strong> — que dejemos de usarlo.</li>
+    <li><strong>Portabilidad</strong> — que te lo demos en un archivo.</li>
+  </ul>
+  <p>Si crees que no lo hacemos bien, puedes reclamar ante la <a class="enl" href="https://www.aepd.es" target="_blank" rel="noopener">Agencia Española de Protección de Datos</a>. Pero antes, escríbenos: lo&nbsp;arreglamos.</p>
+
+  <h2>Menores</h2>
+  <p>Para apuntarte a la lista tienes que tener <strong>14 años o más</strong>. Si detectamos que alguien menor se ha apuntado, borramos sus&nbsp;datos.</p>
+
+  <h2>Cambios</h2>
+  <p>Si cambiamos algo de esta página, actualizamos la fecha de arriba. Si el cambio es importante, te lo decimos por&nbsp;email.</p>
 </div>
 
-<h2>Quién trata tus&nbsp;datos</h2>
-<p>NYXA es, hoy, un proyecto en fase de lista de espera en Valencia, todavía sin sociedad constituida. El responsable del tratamiento es la persona física que impulsa el proyecto, con la que puedes contactar&nbsp;en:</p>
-<ul>
-  <li><strong>Contacto:</strong> <a href="mailto:hola@nexa.app">hola@nexa.app</a></li>
-  <li><strong>Ámbito:</strong> Valencia, España (Unión Europea).</li>
-</ul>
-<p>En cuanto constituyamos la entidad, actualizaremos esta página con su nombre, NIF y dirección fiscal. Mientras tanto, todos tus derechos se ejercen —igual de rápido— por el correo de&nbsp;arriba.</p>
-
-<h2>Qué datos&nbsp;recogemos</h2>
-<p>Solo lo que escribes tú en el formulario de la lista de&nbsp;espera:</p>
-<ul>
-  <li><strong>Tu email.</strong> Obligatorio. Es la única forma de avisarte.</li>
-  <li><strong>Tu universidad o facultad.</strong> Opcional. Puedes dejarlo en blanco y entras igual.</li>
-  <li><strong>La fecha</strong> en que te apuntaste.</li>
-</ul>
-<p>No recogemos tu nombre, ni tu teléfono, ni tu ubicación, ni tu dirección IP con fines de seguimiento. No hay cookies de análisis ni de publicidad en esta web. No te&nbsp;rastreamos.</p>
-
-<h2>Para qué los&nbsp;usamos</h2>
-<ul>
-  <li><strong>Avisarte</strong> el día que NYXA abra en Valencia. Un correo, puede que dos. No hay boletín.</li>
-  <li><strong>Medir densidad.</strong> Contamos cuánta gente hay por facultad, de forma agregada, para saber cuándo hay masa crítica suficiente para abrir. No miramos emails uno a uno.</li>
-</ul>
-<p>No usamos tus datos para nada más. No los vendemos, ni los cedemos, ni los compartimos con&nbsp;anunciantes.</p>
-
-<h2>Con qué base&nbsp;legal</h2>
-<p>Tu <strong>consentimiento</strong> (artículo 6.1.a del RGPD). Nos lo das al escribir tu email y pulsar el botón. Puedes retirarlo cuando quieras, sin dar explicaciones y sin coste: escribe a <a href="mailto:hola@nexa.app">hola@nexa.app</a>.</p>
-
-<h2>Cuánto tiempo los&nbsp;guardamos</h2>
-<ul>
-  <li>Hasta que nos pidas que los borremos.</li>
-  <li>Si NYXA no llega a abrir en Valencia, <strong>borramos la lista entera</strong>. No nos la quedamos «por si acaso».</li>
-  <li>En cualquier caso, no más de <strong>24 meses</strong> desde que te apuntaste.</li>
-</ul>
-
-<h2>Quién más los&nbsp;toca</h2>
-<p>Nadie los ve salvo nosotros. Pero para que la web funcione hay empresas que alojan la&nbsp;infraestructura:</p>
-<ul>
-  <li><strong>Supabase</strong> — guarda la base de datos. Los servidores están en <strong>Irlanda</strong> (AWS, <code>eu-west-1</code>). Tus datos no salen de la Unión Europea.</li>
-  <li><strong>Vercel</strong> — aloja esta web. No almacena tu email; solo sirve las páginas.</li>
-  <li><strong>Google Fonts</strong> y <strong>Pexels</strong> — sirven la tipografía y las fotos. Al cargar la página, tu navegador se conecta a sus servidores y estos pueden registrar tu dirección IP, como ocurre al visitar cualquier web.</li>
-</ul>
-
-<h2>Qué puedes&nbsp;exigirnos</h2>
-<p>El RGPD te da estos derechos, y los puedes ejercer todos escribiendo a <a href="mailto:hola@nexa.app">hola@nexa.app</a>:</p>
-<ul>
-  <li><strong>Acceso</strong> — que te digamos qué tenemos tuyo.</li>
-  <li><strong>Rectificación</strong> — corregir un email mal escrito.</li>
-  <li><strong>Supresión</strong> — que lo borremos todo. Lo hacemos el mismo día.</li>
-  <li><strong>Oposición y limitación</strong> — que dejemos de usarlo.</li>
-  <li><strong>Portabilidad</strong> — que te lo demos en un archivo.</li>
-</ul>
-<p>Si crees que no lo hacemos bien, puedes reclamar ante la <a href="https://www.aepd.es" target="_blank" rel="noopener">Agencia Española de Protección de Datos</a>. Pero antes, escríbenos: lo&nbsp;arreglamos.</p>
-
-<h2>Menores</h2>
-<p>Para apuntarte a la lista tienes que tener <strong>14 años o más</strong>. Si detectamos que alguien menor se ha apuntado, borramos sus&nbsp;datos.</p>
-
-<h2>Cambios</h2>
-<p>Si cambiamos algo de esta página, actualizamos la fecha de arriba. Si el cambio es importante, te lo decimos por&nbsp;email.</p>
-
-<footer>
+<footer class="doc">
   <p><a href="index.html">← Volver a&nbsp;NYXA</a></p>
 </footer>
 
-</div>
 </body>
 </html>
