@@ -14,13 +14,14 @@
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..100,400;75..100,500;75..100,600;75..100,700;75..100,800;75..100,900&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
 <script src="backend/client/config.js"></script>
 <style>
 :root{
-  --az:#0A5CFF;--az-h:#0040CC;--tinta:#0A0A0A;--gris:#5C5C5C;--gris-2:#9A9A9A;
-  --linea:#E6E6E6;--papel:#F5F5F5;
-  --f:"Archivo","Helvetica Neue",Helvetica,Arial,sans-serif;
+  /* Paleta de la APP (Sistema B): blanco cálido + tinta #0A0C11 + azul único #2f66ff. */
+  --az:#2f66ff;--az-h:#1f4fd6;--tinta:#0A0C11;--gris:#5D6779;--gris-2:#8B93A3;
+  --linea:#E4E7EC;--papel:#FBF9F4;--card:#ffffff;--blue-soft:#EDF3FF;
+  --f:"Plus Jakarta Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
   --pad:clamp(20px,4vw,48px);--sec:clamp(96px,12vw,170px);--e:cubic-bezier(.16,1,.3,1);
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
@@ -261,6 +262,21 @@ body.nav-azul .marca__x line{stroke:#fff}
 /* ── Cuadrar todo: ni una palabra suelta (viudas) ── */
 p,li,figcaption,blockquote,.lead,.thesis,.p,.card__p,.plan__q,.idea__p,.claim,.form__m,.ok__s,.hero__s,.num__p,.noes__cierre,.cifra__l,.quienes__p,.planes__nota,.regmini,.au .t,.qc li,.fi p,.step p,.hero__k,.reg__d,.mapa__c+.estado,.aviso{text-wrap:pretty}
 h1,h2,h3,.tit,.hero__t,.gran,.ruta__t,.mapa__c,.num__t,.fin__t,.fin__t2,.card__t,.plan__n,.okp__t,.scr__big,.scr__h,.kicker,.reg__t,.como__t{text-wrap:balance}
+
+/* ═══ PALETA DE LA APP (Sistema B): la web va CLARA/cálida como la app ═══
+   Neutraliza los fondos oscuros heredados → blanco cálido + tinta #0A0C11 + azul #2f66ff.
+   La sección azul se mantiene como ÚNICO acento; el mock del panel sigue oscuro (captura). */
+body{background:var(--papel)}
+.hero,.sec--negro,.fin{background:var(--papel);color:var(--tinta)}
+.hero .tit,.hero__s .b,.fin .tit,.sec--negro .b,.rflow b{color:var(--tinta)}
+.hero__s,.hero__meta,.conf,.sec--negro .lead,.sec--negro .card__p,.rflow li{color:var(--gris)}
+.sec--negro .card{border-color:var(--linea);background:var(--card)}
+.rflow{border-top-color:var(--linea)}.rflow li{border-bottom-color:var(--linea)}
+.conf span::before{background:var(--az)}
+.hero__x line{stroke:var(--az)}
+/* Nav: esas secciones ahora son CLARAS → marca en tinta (no blanca). El azul sigue con marca blanca. */
+body.nav-negro{--nav-fg:var(--tinta)}
+body.nav-azul{--nav-fg:#fff}
 </style>
 </head>
 <body class="nav-negro">
