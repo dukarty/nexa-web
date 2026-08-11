@@ -168,28 +168,30 @@ body.oscuro .marca{border-color:var(--tinta);color:var(--tinta);background:#fff}
 body.oscuro .nav__links a{color:var(--tinta)}
 body.oscuro .marca__x line{stroke:var(--az)}
 .cue{background:rgba(10,12,17,.14)}
+/* Textos pequeños y notas: sin palabras viudas colgando en la ultima linea */
+p,li,figcaption,blockquote,.exps__nota,.planes__nota,.exp__t,.exp__p,.card__p,.reg__d,.au,.step,.fi,.qc,.hero__s,.sub{text-wrap:pretty}
 /* Pantallas grandes (Mac grande / TV 4K): el contenido acompaña al tamaño,
    no se queda en una isla estrecha centrada. */
 @media (min-width:1700px){
   html{font-size:clamp(17px,1.02vw,23px)}
-  .in,.sec{max-width:min(1560px,84vw)}
+  .in{max-width:min(1560px,84vw)}
 }
 @media (min-width:2600px){
   html{font-size:26px}
-  .in,.sec{max-width:1800px}
+  .in{max-width:1800px}
 }
+/* Pie de pagina (enlaces entre paginas; el menu de la barra es minimo NYXA+Entrar) */
+.ft{display:flex;flex-wrap:wrap;align-items:center;gap:16px 26px;padding:40px var(--pad);border-top:1.5px solid var(--linea);max-width:1300px;margin:0 auto;font-size:.76rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--gris-2)}
+.ft a{color:var(--gris-2)}
+.ft a:hover{color:var(--az)}
+.ft__n{display:flex;flex-wrap:wrap;gap:12px 18px;margin-left:auto}
+@media(max-width:640px){.ft{justify-content:center;text-align:center}.ft__n{margin:0 auto;justify-content:center}}
 </style>
 </head>
 <body class="oscuro">
 
 <header class="nav" id="nav">
   <a class="marca" href="index.html" aria-label="NYXA, inicio">NY<span class="marca__x" aria-hidden="true"><svg viewBox="0 0 20 20"><line x1="2" y1="18" x2="18" y2="2"/><line x1="18" y1="18" x2="2" y2="2"/></svg></span>A</a>
-  <div class="nav__links">
-    <a href="index.html#gesto">Cómo funciona</a>
-    <a href="seguridad.html" aria-current="page">Seguridad</a>
-    <a href="ciudades.html">Ciudades</a>
-    <a href="manifiesto.html">Quiénes somos</a>
-  </div>
   <a class="volver" href="index.html#lista">Entrar</a>
 </header>
 
@@ -306,5 +308,16 @@ body.oscuro .marca__x line{stroke:var(--az)}
     })();
   }
 </script>
+<footer class="ft">
+  <span>NY✕A · Valencia © 2026</span>
+  <nav class="ft__n" aria-label="Enlaces">
+    <a href="index.html#gesto">Cómo funciona</a>
+    <a href="ciudades.html">Ciudades</a>
+    <a href="seguridad.html">Seguridad</a>
+    <a href="manifiesto.html">Quiénes somos</a>
+    <a href="empresas.html">Empresas</a>
+    <a href="privacidad.html">Privacidad</a>
+  </nav>
+</footer>
 </body>
 </html>
