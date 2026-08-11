@@ -186,18 +186,18 @@ p,li,figcaption,blockquote,.exps__nota,.planes__nota,.exp__t,.exp__p,.card__p,.r
   html{font-size:26px}
   .in{max-width:1800px}
 }
+/* Pie de pagina (enlaces entre paginas; el menu de la barra es minimo NYXA+Entrar) */
+.ft{display:flex;flex-wrap:wrap;align-items:center;gap:16px 26px;padding:40px var(--pad);border-top:1.5px solid var(--linea);max-width:1300px;margin:0 auto;font-size:.76rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--gris-2)}
+.ft a{color:var(--gris-2)}
+.ft a:hover{color:var(--az)}
+.ft__n{display:flex;flex-wrap:wrap;gap:12px 18px;margin-left:auto}
+@media(max-width:640px){.ft{justify-content:center;text-align:center}.ft__n{margin:0 auto;justify-content:center}}
 </style>
 </head>
 <body class="oscuro">
 
 <header class="nav" id="nav">
   <a class="marca" href="index.html" aria-label="NYXA, inicio">NY<span class="marca__x" aria-hidden="true"><svg viewBox="0 0 20 20"><line x1="2" y1="18" x2="18" y2="2"/><line x1="18" y1="18" x2="2" y2="2"/></svg></span>A</a>
-  <div class="nav__links">
-    <a href="index.html#gesto">Cómo funciona</a>
-    <a href="seguridad.html">Seguridad</a>
-    <a href="ciudades.html" aria-current="page">Ciudades</a>
-    <a href="manifiesto.html">Quiénes somos</a>
-  </div>
   <a class="volver" href="index.html#lista">Entrar</a>
 </header>
 
@@ -357,5 +357,16 @@ p,li,figcaption,blockquote,.exps__nota,.planes__nota,.exp__t,.exp__p,.card__p,.r
     })();
   }
 </script>
+<footer class="ft">
+  <span>NY✕A · Valencia © 2026</span>
+  <nav class="ft__n" aria-label="Enlaces">
+    <a href="index.html#gesto">Cómo funciona</a>
+    <a href="ciudades.html">Ciudades</a>
+    <a href="seguridad.html">Seguridad</a>
+    <a href="manifiesto.html">Quiénes somos</a>
+    <a href="empresas.html">Empresas</a>
+    <a href="privacidad.html">Privacidad</a>
+  </nav>
+</footer>
 </body>
 </html>
