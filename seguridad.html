@@ -173,25 +173,52 @@ p,li,figcaption,blockquote,.exps__nota,.planes__nota,.exp__t,.exp__p,.card__p,.r
 /* Pantallas grandes (Mac grande / TV 4K): el contenido acompaña al tamaño,
    no se queda en una isla estrecha centrada. */
 @media (min-width:1700px){
-  html{font-size:clamp(17px,1.02vw,23px)}
   .in{max-width:min(1560px,84vw)}
 }
 @media (min-width:2600px){
-  html{font-size:26px}
   .in{max-width:1800px}
 }
-/* Pie de pagina (enlaces entre paginas; el menu de la barra es minimo NYXA+Entrar) */
-.ft{display:flex;flex-wrap:wrap;align-items:center;gap:16px 26px;padding:40px var(--pad);border-top:1.5px solid var(--linea);max-width:1300px;margin:0 auto;font-size:.76rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--gris-2)}
-.ft a{color:var(--gris-2)}
-.ft a:hover{color:var(--az)}
-.ft__n{display:flex;flex-wrap:wrap;gap:12px 18px;margin-left:auto}
-@media(max-width:640px){.ft{justify-content:center;text-align:center}.ft__n{margin:0 auto;justify-content:center}}
+
+/* MENÚ ÚNICO — barra fija arriba, con animación (igual en toda la web) */
+.nav{animation:navIn .6s var(--e) both}
+@keyframes navIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
+.nav__links{display:flex;flex-wrap:wrap;align-items:center;gap:clamp(12px,1.7vw,26px);margin-left:auto;margin-right:clamp(14px,2vw,26px)}
+.nav__links a{position:relative;font-size:.75rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;white-space:nowrap;opacity:.74;transition:opacity .25s,color .5s}
+.nav__links a:hover{opacity:1}
+.nav__links a::after{content:"";position:absolute;left:0;right:100%;bottom:-5px;height:2px;background:var(--az);transition:right .3s var(--e)}
+.nav__links a:hover::after,.nav__links a[aria-current="page"]::after{right:0}
+.nav__links a[aria-current="page"]{color:var(--az);opacity:1}
+@media(max-width:840px){.nav__links{order:3;width:100%;margin:8px 0 0;justify-content:center;gap:8px 14px}.nav__links a{font-size:.66rem;opacity:1}}
+
+/* Menú móvil: hamburguesa con desplegable (no amontonar enlaces en el hero) */
+.burger{display:none;width:42px;height:42px;border:1.5px solid var(--tinta);border-radius:999px;background:#fff;align-items:center;justify-content:center;cursor:pointer;flex:none;margin-left:10px;transition:background .2s}
+.burger span{position:relative;display:block;width:16px;height:2px;background:var(--tinta);border-radius:2px}
+.burger span::before,.burger span::after{content:"";position:absolute;left:0;width:16px;height:2px;background:var(--tinta);border-radius:2px;transition:transform .3s,top .3s}
+.burger span::before{top:-5px}.burger span::after{top:5px}
+.nav.open .burger span{background:transparent}
+.nav.open .burger span::before{top:0;transform:rotate(45deg)}
+.nav.open .burger span::after{top:0;transform:rotate(-45deg)}
+@media(max-width:840px){
+  .burger{display:inline-flex}
+  .nav__links{position:absolute;top:100%;left:0;right:0;width:auto;display:none;flex-direction:column;align-items:flex-start;gap:16px;background:var(--papel);border-top:1px solid var(--linea);box-shadow:0 24px 40px -24px rgba(10,12,17,.35);padding:18px var(--pad) 24px;margin:0}
+  .nav.open .nav__links{display:flex}
+  .nav__links a{color:var(--tinta);font-size:.84rem;opacity:1}
+  .nav__links a::after{display:none}
+}
 </style>
 </head>
 <body class="oscuro">
 
 <header class="nav" id="nav">
   <a class="marca" href="index.html" aria-label="NYXA, inicio">NY<span class="marca__x" aria-hidden="true"><svg viewBox="0 0 20 20"><line x1="2" y1="18" x2="18" y2="2"/><line x1="18" y1="18" x2="2" y2="2"/></svg></span>A</a>
+  <nav class="nav__links" aria-label="Secciones">
+    <a href="index.html#gesto">Cómo funciona</a>
+    <a href="ciudades.html">Ciudades</a>
+    <a href="seguridad.html" aria-current="page">Seguridad</a>
+    <a href="manifiesto.html">Quiénes somos</a>
+    <a href="empresas.html">Empresas</a>
+  </nav>
+  <button class="burger" aria-label="Abrir menú" aria-expanded="false"><span></span></button>
   <a class="volver" href="index.html#lista">Entrar</a>
 </header>
 
@@ -308,16 +335,6 @@ p,li,figcaption,blockquote,.exps__nota,.planes__nota,.exp__t,.exp__p,.card__p,.r
     })();
   }
 </script>
-<footer class="ft">
-  <span>NY✕A · Valencia © 2026</span>
-  <nav class="ft__n" aria-label="Enlaces">
-    <a href="index.html#gesto">Cómo funciona</a>
-    <a href="ciudades.html">Ciudades</a>
-    <a href="seguridad.html">Seguridad</a>
-    <a href="manifiesto.html">Quiénes somos</a>
-    <a href="empresas.html">Empresas</a>
-    <a href="privacidad.html">Privacidad</a>
-  </nav>
-</footer>
+<script>document.addEventListener("click",function(e){var b=e.target.closest(".burger");if(!b)return;var n=b.closest(".nav");n.classList.toggle("open");b.setAttribute("aria-expanded",n.classList.contains("open"));});</script>
 </body>
 </html>
