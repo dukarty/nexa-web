@@ -62,6 +62,14 @@ footer.doc a{color:var(--az);font-weight:700}
    una medida de lectura cómoda (no se estira a lo ancho). */
 @media (min-width:1700px){  .w{max-width:min(1120px,80vw)} }
 @media (min-width:2600px){  .w{max-width:1320px} }
+
+/* ═══ BARRA ESTILO APPLE: fina, translúcida y con desenfoque, legible sobre CUALQUIER sección ═══ */
+.nav{padding-top:11px;padding-bottom:11px;background:rgba(251,249,244,.72);-webkit-backdrop-filter:saturate(1.8) blur(20px);backdrop-filter:saturate(1.8) blur(20px);border-bottom:1px solid rgba(10,12,17,.07)}
+.nav .marca,.nav .marca__n{color:var(--tinta)!important;background:#fff!important;border-color:var(--tinta)!important}
+.nav__links a,.nav .empr{color:var(--tinta)!important}
+.nav .marca__x line{stroke:var(--az)!important}
+.burger{border-color:rgba(10,12,17,.28)!important;background:#fff!important}
+@media(max-width:840px){.nav__links{background:rgba(251,249,244,.98)!important}}
 </style>
 </head>
 <body>
