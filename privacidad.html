@@ -88,7 +88,7 @@ img{max-width:100%;height:auto}
 </head>
 <body>
 
-<nav class="nav" aria-label="Principal">
+<header class="nav" aria-label="Principal">
   <a class="marca" href="index.html" aria-label="NYXA, inicio">NY<span class="marca__x" aria-hidden="true"><svg viewBox="0 0 20 20"><line x1="2" y1="18" x2="18" y2="2"/><line x1="18" y1="18" x2="2" y2="2"/></svg></span>A</a>
   <a class="volver" href="index.html">Volver a NYXA</a>
 </header>
@@ -126,7 +126,7 @@ img{max-width:100%;height:auto}
       <tbody>
         <tr><td><strong>Email</strong></td><td>Tu dirección de correo</td><td>Es tu identidad en la app, tu forma de iniciar sesión y la única vía para avisarte</td></tr>
         <tr><td><strong>Nombre, foto de perfil, ciudad y descripción</strong></td><td>Lo que muestras de ti</td><td>Es lo que ve otra persona antes de decidir si queda contigo</td></tr>
-        <tr><td><strong>Fecha de nacimiento</strong></td><td>Tu día de nacimiento</td><td><strong>Solo</strong> para comprobar que eres mayor de 18. Vive en una tabla aparte, no sale por la API, no se puede editar y ni siquiera te la devolvemos a ti</td></tr>
+        <tr><td><strong>Fecha de nacimiento</strong></td><td>Tu día de nacimiento</td><td>Para comprobar que eres mayor de 18 y para mostrar tu <strong>edad</strong> (el número, p.&nbsp;ej. «24»). La <strong>fecha completa</strong> vive en una tabla aparte, no sale por la API, no se puede editar y ni siquiera te la devolvemos a ti</td></tr>
         <tr><td><strong>Selfie de verificación</strong> (si te verificas)</td><td>Una foto en directo con una pose aleatoria</td><td>Comprobar que eres una persona real y quien dices. La revisa una persona del equipo y <strong>se borra en cuanto hay una decisión</strong>. No se guarda de forma permanente, no se compara automáticamente con nada, no se genera un patrón facial</td></tr>
         <tr><td><strong>Tus experiencias y deseos</strong></td><td>Categorías, deseos, fotos de experiencias, lugar y fecha</td><td>Es el corazón del producto: sin esto no hay ningún plan que proponerte</td></tr>
         <tr><td><strong>Con quién lo has vivido</strong></td><td>La confirmación de que quedaste con alguien</td><td>Dar sentido a los encuentros reales, que son la razón de ser de la app</td></tr>
@@ -177,12 +177,17 @@ img{max-width:100%;height:auto}
         <tr><td><strong>Apple</strong></td><td>Distribución de la app y notificaciones push, cuando exista la versión de App Store</td><td>Según los términos de Apple</td></tr>
         <tr><td><strong>Stripe</strong></td><td>Procesa el pago <strong>solo si algún día activas una suscripción</strong> (hoy desactivado). Tus datos de tarjeta los trata Stripe; nosotros no los vemos nunca</td><td><strong>EE. UU.</strong></td></tr>
         <tr><td><strong>Twilio</strong></td><td>Envío de SMS <strong>si en el futuro</strong> activamos la verificación por SMS (hoy desactivado)</td><td><strong>EE. UU.</strong></td></tr>
+        <tr><td><strong>CARTO</strong></td><td>Teselas del mapa (proveedor de mapas base)</td><td>Red global (CDN). Recibe tu IP y la zona del mapa que ves</td></tr>
+        <tr><td><strong>OpenStreetMap / Nominatim</strong></td><td>Geocodificación: convertir coordenadas en el nombre de tu ciudad durante el onboarding</td><td>Fundación OpenStreetMap (UE/Reino Unido). <strong>IMPORTANTE:</strong> en el onboarding recibe tu ubicación GPS precisa para deducir tu ciudad</td></tr>
+        <tr><td><strong>Photon / Komoot</strong></td><td>Autocompletar lugares al crear un plan</td><td>Alemania (<strong>UE</strong>). Recibe el texto que buscas y un sesgo por tu zona</td></tr>
+        <tr><td><strong>Resend</strong></td><td>Envío del email de verificación de estudiante (cuando aplica)</td><td><strong>EE. UU.</strong> Recibe tu dirección de email</td></tr>
       </tbody>
     </table>
   </div>
 
   <h3>Transferencias internacionales</h3>
   <p>La mayor parte de tus datos se guarda y trata <strong>dentro de la Unión Europea</strong> (Supabase, en Irlanda). Pero <strong>parte del tratamiento ocurre en Estados Unidos</strong>: la IA de Anthropic que revisa tus pruebas y sugiere planes y, si algún día lo activas, el cobro con Stripe. Decir «tus datos no salen de la UE» sería más bonito, pero no sería&nbsp;verdad.</p>
+  <p>Los mapas y el geocodificado se apoyan además en proveedores de <strong>OpenStreetMap</strong> (Nominatim, para deducir tu ciudad; Photon/Komoot, para autocompletar lugares) y en <strong>CARTO</strong> (las teselas del mapa). Aquí hay un punto que queremos decirte a la cara: <strong>durante el onboarding tu ubicación GPS <em>precisa</em> se envía a Nominatim con un único fin, deducir el nombre de tu ciudad</strong>. Esa ubicación precisa <strong>no se guarda</strong>: dentro de la app, a otras personas solo se les muestra tu posición <strong>difuminada</strong> (aprox. 400 m), nunca la exacta.</p>
   <p>Para esas transferencias fuera del Espacio Económico Europeo, los proveedores aportan garantías adecuadas: <strong>cláusulas contractuales tipo (SCC)</strong> de la Comisión Europea y/o marcos de adecuación como el <strong>EU-US Data Privacy Framework</strong>.</p>
 
   <h2>5 · Cuánto tiempo conservamos tus&nbsp;datos</h2>
