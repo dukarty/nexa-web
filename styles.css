@@ -630,6 +630,14 @@ h1,h2,h3,.tit,.hero__t,.gran,.ruta__t,.mapa__c,.num__t,.fin__t,.fin__t2,.card__t
    y el TELÉFONO (.fono) — ahí el negro es el marco/el fondo real.
    ═══════════════════════════════════════════════════════════════ */
 
+/* TITULARES · cada frase entera en su línea (el <br> ya separa las frases).
+   NADA de balance: partía cada frase en dos trozos cortos ("SÉ DE" arriba,
+   "LOS PRIMEROS." abajo). Con pretty cada frase llena su línea con naturalidad. */
+.tit,.tit--fin,.frase,.cerrado__t,.tuyo__t,.okp__t,.scr__big,.scr__h,
+.momento__t,.ruta__t,.como__t,.num__t,.noes__cierre,.idea__p,.quienes__p,.resumen{
+  text-wrap:pretty;
+}
+
 /* Plus Jakarta no tiene eje de ancho: neutralizamos "wdth" para que
    los titulares no se rendericen con métricas fantasma. */
 .tit,.tit--fin,.ap__t,.hora,.num__big,.num__t,.nolist .no,.ruta__t,.como__t,
@@ -661,6 +669,9 @@ body.oscuro .empr{color:var(--tinta)}
    "EMPIEZA" y "NYXA." no se corten en NINGÚN ancho ── */
 .ap__in{max-width:min(1180px,92vw)}
 .ap__t{font-size:clamp(2.5rem,9vw,8.2rem);letter-spacing:-.045em}
+/* El titular final: tamaño para que cada frase entre en su línea
+   ("Sé de los primeros." de una sola tirada, sin dejar "SÉ DE" arriba). */
+.tit--fin{font-size:clamp(2.3rem,6.4vw,6rem)}
 @media (max-width:600px){.ap__l{white-space:normal}}
 
 /* El pie no debe recortarse en móvil: que los enlaces bajen de línea */
