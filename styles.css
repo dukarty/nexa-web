@@ -17,7 +17,7 @@
   --az-h:#1f4fd6;
   --tinta:#0A0C11;
   --gris:#5D6779;
-  --gris-2:#8B93A3;
+  --gris-2:#737B89;
   --linea:#E4E7EC;
   --papel:#FBF9F4;
   --card:#ffffff;
@@ -59,7 +59,7 @@ a{color:inherit;text-decoration:none}
   opacity:0;transition:width .25s var(--e),height .25s var(--e),background .25s,opacity .3s;
   will-change:transform;
 }
-.spark.big{width:58px;height:58px;background:rgba(10,92,255,.12)}
+.spark.big{width:58px;height:58px;background:rgba(47,102,255,.12)}
 @media (hover:none),(pointer:coarse){.spark{display:none}}
 @media (prefers-reduced-motion:reduce){.spark{display:none}}
 
@@ -372,7 +372,7 @@ body.oscuro .marca{background:transparent;border-color:rgba(255,255,255,.32);col
 /* Tarjetas de experiencia (sin foto: la foto es el premio del final) */
 .tile{
   display:flex;flex-direction:column;gap:3px;text-align:left;cursor:pointer;
-  background:var(--papel,#F5F5F5);border:1.5px solid transparent;border-radius:16px;padding:15px 16px;
+  background:var(--papel,#F5F5F5);border:1.5px solid var(--linea);border-radius:16px;padding:15px 16px;
   transition:border-color .2s,transform .2s var(--e),background .2s;
 }
 .tile:hover{transform:translateY(-2px)}
@@ -383,7 +383,7 @@ body.oscuro .marca{background:transparent;border-color:rgba(255,255,255,.32);col
 /* Filas de persona */
 .fila-p{
   display:flex;align-items:center;gap:12px;text-align:left;cursor:pointer;
-  background:var(--papel,#F5F5F5);border:1.5px solid transparent;border-radius:16px;padding:12px 14px;
+  background:var(--papel,#F5F5F5);border:1.5px solid var(--linea);border-radius:16px;padding:12px 14px;
   transition:border-color .2s,transform .2s var(--e),background .2s;
 }
 .fila-p:hover{transform:translateX(3px)}
@@ -410,7 +410,7 @@ body.oscuro .marca{background:transparent;border-color:rgba(255,255,255,.32);col
 
 /* Pantalla de aceptado, dentro del móvil */
 .scr--ok{justify-content:center;text-align:center;gap:8px;background:var(--tinta);color:#fff}
-.okp__badge{align-self:center;background:rgba(10,92,255,.16);color:#7FA8FF;
+.okp__badge{align-self:center;background:rgba(47,102,255,.16);color:#7FA8FF;
   font-size:.68rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;padding:8px 14px;border-radius:999px}
 .okp__t{margin-top:14px;font-size:1.9rem;font-weight:900;line-height:1;letter-spacing:-.05em;
   text-transform:uppercase;font-variation-settings:"wdth" 84}
@@ -537,7 +537,7 @@ body.bloq .nav,body.bloq .prog{opacity:0;pointer-events:none}
   padding:9px 6px;font-size:1.15rem;font-weight:900;font-variant-numeric:tabular-nums;
   transition:border-color .2s,box-shadow .2s;
 }
-.edad input:focus{outline:none;border-color:var(--az);box-shadow:0 0 0 4px rgba(10,92,255,.14)}
+.edad input:focus{outline:none;border-color:var(--az);box-shadow:0 0 0 4px rgba(47,102,255,.14)}
 .edad input::-webkit-outer-spin-button,.edad input::-webkit-inner-spin-button{-webkit-appearance:none;margin:0}
 .sem__lienzo{width:100%;max-width:1000px}
 #rejilla{width:100%;height:auto;display:block;cursor:crosshair}
@@ -567,7 +567,7 @@ body.bloq .nav,body.bloq .prog{opacity:0;pointer-events:none}
   padding:16px 24px;font-size:1rem;font-weight:600;transition:border-color .2s,box-shadow .2s;
 }
 .form input::placeholder{color:var(--gris-2);font-weight:500}
-.form input:focus{outline:none;border-color:var(--az);box-shadow:0 0 0 4px rgba(10,92,255,.14)}
+.form input:focus{outline:none;border-color:var(--az);box-shadow:0 0 0 4px rgba(47,102,255,.14)}
 .form input:focus-visible{outline:none}
 .form__e{margin-top:13px;font-size:.88rem;font-weight:700;color:var(--az)}
 .form__m{margin-top:16px;font-size:.82rem;color:var(--gris-2)}
@@ -703,7 +703,7 @@ body.oscuro .empr{color:var(--tinta)}
 .nav__links a{color:var(--tinta)}
 
 /* Menú móvil: hamburguesa con desplegable (no amontonar enlaces en el hero) */
-.burger{display:none;width:42px;height:42px;border:1.5px solid var(--tinta);border-radius:999px;background:#fff;align-items:center;justify-content:center;cursor:pointer;flex:none;margin-left:10px;transition:background .2s}
+.burger{display:none;width:42px;height:42px;border:1.5px solid var(--tinta);border-radius:999px;background:#fff;align-items:center;justify-content:center;cursor:pointer;flex:none;margin-left:auto;transition:background .2s}
 .burger span{position:relative;display:block;width:16px;height:2px;background:var(--tinta);border-radius:2px}
 .burger span::before,.burger span::after{content:"";position:absolute;left:0;width:16px;height:2px;background:var(--tinta);border-radius:2px;transition:transform .3s,top .3s}
 .burger span::before{top:-5px}.burger span::after{top:5px}
