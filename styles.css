@@ -226,7 +226,7 @@ body.oscuro .marca{background:transparent;border-color:rgba(255,255,255,.32);col
 /* ═══════════════════════════════════════════════
    03 · LA IDEA / 05 · EL RESULTADO — beats que explican
    ═══════════════════════════════════════════════ */
-.idea{padding:var(--sec) var(--pad);max-width:1300px;margin:0 auto;text-align:center}
+.idea{padding:var(--sec) var(--pad);max-width:1120px;margin:0 auto;text-align:center}
 .idea .tit{margin:0 auto}
 .idea__p{
   margin:clamp(30px,4vw,48px) auto 0;max-width:46ch;
@@ -235,7 +235,7 @@ body.oscuro .marca{background:transparent;border-color:rgba(255,255,255,.32);col
 .idea__p b{color:var(--tinta);font-weight:800}
 
 /* ═══ EL FILTRO — posicionamiento por contraste ═══ */
-.noes{padding:var(--sec) var(--pad);max-width:1300px;margin:0 auto}
+.noes{padding:var(--sec) var(--pad);max-width:1120px;margin:0 auto}
 .noes .tit{margin-bottom:clamp(30px,4vw,52px)}
 .nolist{border-top:1.5px solid var(--tinta)}
 .nolist li{padding:clamp(20px,2.8vw,36px) 0;border-bottom:1.5px solid var(--linea);
@@ -252,7 +252,7 @@ body.oscuro .marca{background:transparent;border-color:rgba(255,255,255,.32);col
 .noes__cierre b{color:var(--az)}
 
 /* ═══ 06 · ASÍ SE USA — ruta de 4 pasos ═══ */
-.pasos{padding:var(--sec) var(--pad);max-width:1300px;margin:0 auto}
+.pasos{padding:var(--sec) var(--pad);max-width:1120px;margin:0 auto}
 .pasos .tit{margin-bottom:clamp(30px,4vw,52px)}
 .ruta{border-top:1.5px solid var(--tinta)}
 .ruta__i{
@@ -263,7 +263,7 @@ body.oscuro .marca{background:transparent;border-color:rgba(255,255,255,.32);col
 .ruta__t{font-size:clamp(1.5rem,4.6vw,3.4rem);font-weight:900;line-height:1.02;letter-spacing:-.045em;text-transform:uppercase;font-variation-settings:"wdth" 86;text-wrap:balance}
 
 /* ═══ 08 · QUIÉNES SOMOS ═══ */
-.quienes{padding:var(--sec) var(--pad);max-width:1300px;margin:0 auto}
+.quienes{padding:var(--sec) var(--pad);max-width:1120px;margin:0 auto}
 .quienes .tit{margin-bottom:clamp(30px,4vw,44px)}
 .quienes__p{max-width:56ch;font-size:clamp(1.1rem,1.9vw,1.5rem);font-weight:600;line-height:1.55;color:var(--gris)}
 .creemos{margin-top:clamp(40px,5vw,64px);display:grid;gap:0;border-top:1.5px solid var(--tinta);max-width:640px}
@@ -295,7 +295,7 @@ body.oscuro .marca{background:transparent;border-color:rgba(255,255,255,.32);col
 /* ═══════════════════════════════════════════════
    03 · LO QUE NO HAS PEDIDO
    ═══════════════════════════════════════════════ */
-.pedir{padding:var(--sec) var(--pad);max-width:1300px;margin:0 auto;text-align:center}
+.pedir{padding:var(--sec) var(--pad);max-width:1120px;margin:0 auto;text-align:center}
 .linea{
   display:flex;align-items:center;gap:12px;margin:clamp(40px,5vw,68px) auto 0;max-width:640px;
   border-bottom:2px solid var(--tinta);padding-bottom:10px;transition:border-color .3s;
@@ -334,7 +334,7 @@ body.oscuro .marca{background:transparent;border-color:rgba(255,255,255,.32);col
    El producto dentro de la historia: un teléfono con la
    interfaz real de NYXA, y los 3 pasos encendiéndose al lado.
    ═══════════════════════════════════════════════ */
-.gesto{padding:var(--sec) var(--pad);max-width:1300px;margin:0 auto}
+.gesto{padding:var(--sec) var(--pad);max-width:1120px;margin:0 auto}
 .gesto .tit{margin-bottom:clamp(44px,6vw,72px)}
 .demo{display:grid;gap:clamp(40px,6vw,80px);align-items:center}
 @media (min-width:900px){.demo{grid-template-columns:auto 1fr}}
@@ -529,7 +529,7 @@ body.bloq .nav,body.bloq .prog{opacity:0;pointer-events:none}
 /* ═══════════════════════════════════════════════
    06 · LAS SEMANAS
    ═══════════════════════════════════════════════ */
-.semanas{padding:var(--sec) var(--pad);max-width:1300px;margin:0 auto}
+.semanas{padding:var(--sec) var(--pad);max-width:1120px;margin:0 auto}
 .sem__hd{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:26px;margin-bottom:48px}
 .edad{display:inline-flex;align-items:center;gap:9px;font-size:.95rem;font-weight:700;color:var(--gris)}
 .edad input{
@@ -552,7 +552,7 @@ body.bloq .nav,body.bloq .prog{opacity:0;pointer-events:none}
 /* ═══════════════════════════════════════════════
    07 · ENTRAR
    ═══════════════════════════════════════════════ */
-.lista{padding:var(--sec) var(--pad);max-width:1300px;margin:0 auto;border-top:1.5px solid var(--tinta)}
+.lista{padding:var(--sec) var(--pad);max-width:1120px;margin:0 auto;border-top:1.5px solid var(--tinta)}
 /* La frase que se le repite a un amigo. */
 .resumen{margin-bottom:22px;font-size:clamp(1.15rem,2.4vw,1.9rem);font-weight:700;line-height:1.2;letter-spacing:-.03em;color:var(--gris);max-width:24ch}
 .resumen b{color:var(--tinta);font-weight:900}
@@ -681,13 +681,13 @@ body.oscuro .empr{color:var(--tinta)}
    al tamaño de pantalla en vez de quedar en una isla diminuta ═══ */
 @media (min-width:1700px){
   :root{--sec:clamp(210px,12vw,320px)}
-  .idea,.noes,.pasos,.quienes,.pedir,.gesto,.semanas,.lista{max-width:min(1560px,84vw)}
-  .ap__in{max-width:min(1500px,80vw)}
-  .sem__lienzo{max-width:1300px}
+  
+  
+  .sem__lienzo{max-width:1120px}
 }
 @media (min-width:2600px){
-  .idea,.noes,.pasos,.quienes,.pedir,.gesto,.semanas,.lista{max-width:1800px}
-  .ap__in{max-width:1700px}
+  
+  
 }
 
 /* MENÚ ÚNICO — barra fija arriba, con animación (igual en toda la web) */
@@ -717,3 +717,11 @@ body.oscuro .empr{color:var(--tinta)}
   .nav__links a{color:var(--tinta);font-size:.84rem;opacity:1}
   .nav__links a::after{display:none}
 }
+
+/* ═══ BARRA ESTILO APPLE: fina, translúcida y con desenfoque, legible sobre CUALQUIER sección ═══ */
+.nav{padding-top:11px;padding-bottom:11px;background:rgba(251,249,244,.72);-webkit-backdrop-filter:saturate(1.8) blur(20px);backdrop-filter:saturate(1.8) blur(20px);border-bottom:1px solid rgba(10,12,17,.07)}
+.nav .marca,.nav .marca__n{color:var(--tinta)!important;background:#fff!important;border-color:var(--tinta)!important}
+.nav__links a,.nav .empr{color:var(--tinta)!important}
+.nav .marca__x line{stroke:var(--az)!important}
+.burger{border-color:rgba(10,12,17,.28)!important;background:#fff!important}
+@media(max-width:840px){.nav__links{background:rgba(251,249,244,.98)!important}}

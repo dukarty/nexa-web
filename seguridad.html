@@ -85,9 +85,9 @@ body:not(.oscuro) .nav__links a{color:var(--tinta)}
 @keyframes cae{0%{top:-9px;opacity:0}18%{opacity:1}82%{opacity:1}100%{top:48px;opacity:0}}
 
 /* SECCIÓN base */
-.sec{padding:var(--sec) var(--pad);max-width:1300px;margin:0 auto}
+.sec{padding:var(--sec) var(--pad);max-width:1120px;margin:0 auto}
 .sec--negro{background:var(--tinta);color:#fff;max-width:none}
-.sec--negro .in{max-width:1300px;margin:0 auto}
+.sec--negro .in{max-width:1120px;margin:0 auto}
 .ind{font-size:.68rem;font-weight:800;letter-spacing:.22em;color:var(--az);margin-bottom:18px;font-variant-numeric:tabular-nums}
 .tit{font-size:clamp(2rem,6vw,5rem);font-weight:900;line-height:.98;letter-spacing:-.05em;text-transform:uppercase;
   font-variation-settings:"wdth" 86;text-wrap:balance}
@@ -173,10 +173,10 @@ p,li,figcaption,blockquote,.exps__nota,.planes__nota,.exp__t,.exp__p,.card__p,.r
 /* Pantallas grandes (Mac grande / TV 4K): el contenido acompaña al tamaño,
    no se queda en una isla estrecha centrada. */
 @media (min-width:1700px){
-  .in{max-width:min(1560px,84vw)}
+  
 }
 @media (min-width:2600px){
-  .in{max-width:1800px}
+  
 }
 
 /* MENÚ ÚNICO — barra fija arriba, con animación (igual en toda la web) */
@@ -205,6 +205,14 @@ p,li,figcaption,blockquote,.exps__nota,.planes__nota,.exp__t,.exp__p,.card__p,.r
   .nav__links a{color:var(--tinta);font-size:.84rem;opacity:1}
   .nav__links a::after{display:none}
 }
+
+/* ═══ BARRA ESTILO APPLE: fina, translúcida y con desenfoque, legible sobre CUALQUIER sección ═══ */
+.nav{padding-top:11px;padding-bottom:11px;background:rgba(251,249,244,.72);-webkit-backdrop-filter:saturate(1.8) blur(20px);backdrop-filter:saturate(1.8) blur(20px);border-bottom:1px solid rgba(10,12,17,.07)}
+.nav .marca,.nav .marca__n{color:var(--tinta)!important;background:#fff!important;border-color:var(--tinta)!important}
+.nav__links a,.nav .empr{color:var(--tinta)!important}
+.nav .marca__x line{stroke:var(--az)!important}
+.burger{border-color:rgba(10,12,17,.28)!important;background:#fff!important}
+@media(max-width:840px){.nav__links{background:rgba(251,249,244,.98)!important}}
 </style>
 </head>
 <body class="oscuro">
