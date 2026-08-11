@@ -12,15 +12,18 @@
    ═══════════════════════════════════════════════════════════════ */
 
 :root{
-  --az:#0A5CFF;
-  --az-h:#0040CC;
-  --tinta:#0A0A0A;
-  --gris:#5C5C5C;
-  --gris-2:#9A9A9A;
-  --linea:#E6E6E6;
-  --papel:#F5F5F5;
+  /* Paleta de la app (Sistema B): papel cálido + un solo azul + tinta */
+  --az:#2f66ff;
+  --az-h:#1f4fd6;
+  --tinta:#0A0C11;
+  --gris:#5D6779;
+  --gris-2:#8B93A3;
+  --linea:#E4E7EC;
+  --papel:#FBF9F4;
+  --card:#ffffff;
+  --blue-soft:#EDF3FF;
 
-  --f:"Archivo","Helvetica Neue",Helvetica,Arial,sans-serif;
+  --f:"Plus Jakarta Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
   --pad:clamp(20px,4vw,48px);
   --sec:clamp(120px,15vw,210px);
   --e:cubic-bezier(.16,1,.3,1);
@@ -32,7 +35,7 @@
 html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;overflow-x:clip;max-width:100%}
 @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
 body{
-  font-family:var(--f);background:#fff;color:var(--tinta);
+  font-family:var(--f);background:var(--papel);color:var(--tinta);
   font-size:17px;line-height:1.5;letter-spacing:-.01em;
   -webkit-font-smoothing:antialiased;
   overflow-x:clip;   /* «hidden» mataría el position:sticky */
@@ -619,3 +622,61 @@ body.bloq .nav,body.bloq .prog{opacity:0;pointer-events:none}
 /* ── Cuadrar todo: ni una palabra suelta (viudas) ── */
 p,li,figcaption,blockquote,.lead,.thesis,.p,.card__p,.plan__q,.idea__p,.claim,.form__m,.ok__s,.hero__s,.num__p,.noes__cierre,.cifra__l,.quienes__p,.planes__nota,.regmini,.au .t,.qc li,.fi p,.step p,.hero__k,.reg__d,.mapa__c+.estado,.aviso{text-wrap:pretty}
 h1,h2,h3,.tit,.hero__t,.gran,.ruta__t,.mapa__c,.num__t,.fin__t,.fin__t2,.card__t,.plan__n,.okp__t,.scr__big,.scr__h,.kicker,.reg__t,.como__t{text-wrap:balance}
+
+/* ═══════════════════════════════════════════════════════════════
+   SISTEMA B · TODO CLARO (paleta de la app) + RESPONSIVE TOTAL
+   Las secciones que eran NEGRAS pasan a papel cálido + tinta.
+   Solo siguen oscuras a propósito las de FOTO (.result, .momento)
+   y el TELÉFONO (.fono) — ahí el negro es el marco/el fondo real.
+   ═══════════════════════════════════════════════════════════════ */
+
+/* Plus Jakarta no tiene eje de ancho: neutralizamos "wdth" para que
+   los titulares no se rendericen con métricas fantasma. */
+.tit,.tit--fin,.ap__t,.hora,.num__big,.num__t,.nolist .no,.ruta__t,.como__t,
+.cerrado__t,.tuyo__t,.scr__big,.okp__t,.momento__t,.cifra strong,.result__t{
+  font-variation-settings:normal;
+}
+
+/* ── Secciones que eran NEGRAS → papel cálido + tinta ── */
+.apertura,.bucle,.vuelta{background:var(--papel);color:var(--tinta)}
+.numero{background:var(--papel)}
+
+/* Nav sobre claro: logo y enlaces en tinta (aunque body siga .oscuro) */
+body.oscuro .marca{background:var(--card);border-color:var(--tinta);color:var(--tinta)}
+body.oscuro .empr{color:var(--tinta)}
+
+/* Textos que eran blancos translúcidos → grises de la paleta */
+.ap__s{color:var(--gris)}
+.ap__meta{color:var(--gris-2)}
+.scrollcue{background:rgba(10,12,17,.16)}
+.dia{color:var(--gris-2)}
+.claim{color:var(--gris)}
+.baja{color:var(--gris-2)}
+.baja::after{background:var(--gris-2)}
+.cerrado__s{color:var(--gris)}
+.vuelta__pie{color:var(--gris)}
+.spark.big{background:rgba(47,102,255,.10)}
+
+/* ── Hero: Plus Jakarta es más ancho → titular a medida para que
+   "EMPIEZA" y "NYXA." no se corten en NINGÚN ancho ── */
+.ap__in{max-width:min(1180px,92vw)}
+.ap__t{font-size:clamp(2.5rem,9vw,8.2rem);letter-spacing:-.045em}
+@media (max-width:600px){.ap__l{white-space:normal}}
+
+/* El pie no debe recortarse en móvil: que los enlaces bajen de línea */
+@media (max-width:640px){.ft__n{flex-wrap:wrap;justify-content:center;row-gap:10px}}
+
+/* ═══ PANTALLAS GRANDES (Mac grande / TV 4K): el contenido acompaña
+   al tamaño de pantalla en vez de quedar en una isla diminuta ═══ */
+@media (min-width:1700px){
+  :root{--sec:clamp(210px,12vw,320px)}
+  html{font-size:clamp(17px,1.02vw,23px)}
+  .idea,.noes,.pasos,.quienes,.pedir,.gesto,.semanas,.lista{max-width:min(1560px,84vw)}
+  .ap__in{max-width:min(1500px,80vw)}
+  .sem__lienzo{max-width:1300px}
+}
+@media (min-width:2600px){
+  html{font-size:26px}
+  .idea,.noes,.pasos,.quienes,.pedir,.gesto,.semanas,.lista{max-width:1800px}
+  .ap__in{max-width:1700px}
+}

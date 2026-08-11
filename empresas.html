@@ -277,6 +277,16 @@ body{background:var(--papel)}
 /* Nav: esas secciones ahora son CLARAS → marca en tinta (no blanca). El azul sigue con marca blanca. */
 body.nav-negro{--nav-fg:var(--tinta)}
 body.nav-azul{--nav-fg:#fff}
+/* Plus Jakarta no tiene eje de ancho: neutralizamos "wdth" para que los
+   titulares no salgan con métricas fantasma (era la causa del recorte en móvil). */
+.tit,.tit--xl,.rnum,.card__t,.exp__t,.plan__price{font-variation-settings:normal}
+/* Móvil pequeño: ni un titular ni un botón se salen de pantalla */
+@media (max-width:430px){
+  .tit{font-size:clamp(1.6rem,8vw,2.4rem)}
+  .tit--xl{font-size:clamp(2.2rem,10vw,3rem)}
+  .rnum{font-size:clamp(3.6rem,20vw,5rem)}
+  .cta,.cta--gh{max-width:100%;white-space:normal;text-align:center}
+}
 </style>
 </head>
 <body class="nav-negro">
