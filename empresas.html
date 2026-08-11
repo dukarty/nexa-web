@@ -262,6 +262,11 @@ body.nav-azul .marca__x line{stroke:#fff}
 /* ── Cuadrar todo: ni una palabra suelta (viudas) ── */
 p,li,figcaption,blockquote,.lead,.thesis,.p,.card__p,.plan__q,.idea__p,.claim,.form__m,.ok__s,.hero__s,.num__p,.noes__cierre,.cifra__l,.quienes__p,.planes__nota,.regmini,.au .t,.qc li,.fi p,.step p,.hero__k,.reg__d,.mapa__c+.estado,.aviso{text-wrap:pretty}
 h1,h2,h3,.tit,.hero__t,.gran,.ruta__t,.mapa__c,.num__t,.fin__t,.fin__t2,.card__t,.plan__n,.okp__t,.scr__big,.scr__h,.kicker,.reg__t,.como__t{text-wrap:balance}
+/* Titulares: cada frase entera en su línea (el <br> separa las frases).
+   pretty en vez de balance → la frase llena su línea, sin trozos cortos colgando. */
+h1,h2,h3,.tit,.tit--xl,.hero__t,.gran,.fin__t,.fin__t2,.ruta__t,.mapa__c,.num__t,.card__t,.reg__t,.okp__t,.scr__big,.scr__h,.como__t,.lead{text-wrap:pretty}
+/* El titular más grande, más contenido para que la 2ª frase no quede en trozos */
+.tit--xl{font-size:clamp(2.4rem,7vw,6.2rem)}
 
 /* ═══ PALETA DE LA APP (Sistema B): la web va CLARA/cálida como la app ═══
    Neutraliza los fondos oscuros heredados → blanco cálido + tinta #0A0C11 + azul #2f66ff.
