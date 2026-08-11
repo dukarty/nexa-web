@@ -41,8 +41,8 @@ a{color:inherit;text-decoration:none}
 /* CONTENIDO */
 .w{max-width:680px;margin:0 auto;padding:0 var(--pad) 120px}
 header.doc{padding:clamp(120px,16vw,180px) 0 40px}
-.doc__k{font-size:.7rem;font-weight:800;letter-spacing:.24em;text-transform:uppercase;color:var(--az);margin-bottom:18px}
-h1{font-size:clamp(2.2rem,7vw,4rem);font-weight:900;letter-spacing:-.05em;line-height:.98;text-transform:uppercase;font-variation-settings:"wdth" 88;text-wrap:balance}
+.doc__k{font-size:.7rem;font-weight:800;letter-spacing:.24em;text-transform:uppercase;color:var(--az-h);margin-bottom:18px}
+h1{font-size:clamp(2.2rem,7vw,4rem);font-weight:900;letter-spacing:-.05em;line-height:.98;text-transform:uppercase;font-variation-settings:normal;text-wrap:balance}
 .fecha{color:var(--gris);margin-top:16px;font-size:.9rem;font-weight:600}
 h2{font-size:clamp(1.2rem,2.4vw,1.5rem);font-weight:800;letter-spacing:-.03em;
   margin:44px 0 14px;padding-top:30px;border-top:1.5px solid var(--linea)}
@@ -51,7 +51,7 @@ ul{margin:0 0 18px 20px}
 li{margin-bottom:9px;color:#20242E}
 strong{font-weight:800;color:var(--tinta)}
 code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.9em;background:var(--papel);padding:1px 6px;border-radius:6px}
-a.enl{color:var(--az);font-weight:700;border-bottom:1.5px solid rgba(47,102,255,.28)}
+a.enl{color:var(--az-h);font-weight:700;border-bottom:1.5px solid rgba(47,102,255,.28)}
 a.enl:hover{border-bottom-color:var(--az)}
 .box{background:var(--papel);border:1px solid var(--linea);border-left:3px solid var(--az);
   border-radius:0 14px 14px 0;padding:20px 22px;margin:24px 0}
@@ -81,12 +81,12 @@ img{max-width:100%;height:auto}
 </head>
 <body>
 
-<header class="nav">
+<nav class="nav" aria-label="Principal">
   <a class="marca" href="index.html" aria-label="NYXA, inicio">NY<span class="marca__x" aria-hidden="true"><svg viewBox="0 0 20 20"><line x1="2" y1="18" x2="18" y2="2"/><line x1="18" y1="18" x2="2" y2="2"/></svg></span>A</a>
   <a class="volver" href="index.html">Volver a NYXA</a>
 </header>
 
-<div class="w">
+<div class="w" role="main">
   <header class="doc">
     <p class="doc__k">NYXA · Valencia · 2026</p>
     <h1>Privacidad.</h1>
