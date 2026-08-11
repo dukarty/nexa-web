@@ -25,7 +25,7 @@
 
   --f:"Plus Jakarta Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
   --pad:clamp(20px,4vw,48px);
-  --sec:clamp(120px,15vw,210px);
+  --sec:clamp(110px,14vw,190px);
   --e:cubic-bezier(.16,1,.3,1);
 }
 
@@ -72,7 +72,7 @@ a{color:inherit;text-decoration:none}
 /* La única tipografía. El tamaño hace la jerarquía. */
 .tit{
   font-size:clamp(2.1rem,6.4vw,5.6rem);font-weight:900;line-height:.94;letter-spacing:-.05em;
-  text-transform:uppercase;font-variation-settings:"wdth" 85;text-wrap:balance;
+  text-transform:uppercase;font-variation-settings:normal;text-wrap:balance;
 }
 .tit--fin{font-size:clamp(2.4rem,8.4vw,8rem);line-height:.9}
 
@@ -120,7 +120,7 @@ body.oscuro .marca{background:transparent;border-color:rgba(255,255,255,.32);col
 .ap__in{max-width:1100px}
 .ap__t{
   font-size:clamp(2.9rem,11.5vw,10.5rem);font-weight:900;line-height:.9;letter-spacing:-.055em;
-  text-transform:uppercase;font-variation-settings:"wdth" 84;
+  text-transform:uppercase;font-variation-settings:normal;
 }
 /* Reveal palabra por palabra: cada una sube desde detrás de su línea.
    Suave, nada forzado. */
@@ -175,7 +175,7 @@ body.oscuro .marca{background:transparent;border-color:rgba(255,255,255,.32);col
      color:rgba(255,255,255,.42);margin-bottom:clamp(10px,1.6vw,20px)}
 .hora{
   font-size:clamp(4.4rem,17vw,15rem);font-weight:900;line-height:.82;letter-spacing:-.06em;
-  font-variant-numeric:tabular-nums;font-variation-settings:"wdth" 84;
+  font-variant-numeric:tabular-nums;font-variation-settings:normal;
 }
 .frase{
   margin-top:clamp(26px,4vw,54px);
@@ -208,12 +208,12 @@ body.oscuro .marca{background:transparent;border-color:rgba(255,255,255,.32);col
 .num__k{font-size:.72rem;font-weight:800;letter-spacing:.32em;text-transform:uppercase;color:var(--gris-2);margin-bottom:clamp(8px,1.4vw,18px)}
 .num__big{
   font-size:clamp(6rem,26vw,22rem);font-weight:900;line-height:.82;letter-spacing:-.06em;
-  font-variant-numeric:tabular-nums;font-variation-settings:"wdth" 84;
+  font-variant-numeric:tabular-nums;font-variation-settings:normal;
 }
 .num__t{
   margin-top:clamp(14px,2.4vw,30px);position:relative;
   font-size:clamp(1.6rem,4.8vw,4.2rem);font-weight:900;line-height:1;letter-spacing:-.05em;
-  text-transform:uppercase;font-variation-settings:"wdth" 85;min-height:1.1em;width:100%;
+  text-transform:uppercase;font-variation-settings:normal;min-height:1.1em;width:100%;
 }
 .num__t span{display:block;transition:opacity .45s ease}
 .num__t #numB{position:absolute;left:0;right:0;top:0;opacity:0}
@@ -241,7 +241,7 @@ body.oscuro .marca{background:transparent;border-color:rgba(255,255,255,.32);col
 .nolist li{padding:clamp(20px,2.8vw,36px) 0;border-bottom:1.5px solid var(--linea);
   display:flex;flex-wrap:wrap;align-items:baseline;gap:4px clamp(16px,3vw,40px)}
 .nolist .no{font-size:clamp(1.6rem,4.8vw,3.4rem);font-weight:900;letter-spacing:-.045em;
-  text-transform:uppercase;font-variation-settings:"wdth" 86;line-height:1;flex:none}
+  text-transform:uppercase;font-variation-settings:normal;line-height:1;flex:none}
 .nolist .no s{position:relative;text-decoration:none}
 .nolist .no s::after{content:"";position:absolute;left:-.02em;right:-.02em;top:54%;height:.07em;
   background:var(--az);transform:scaleX(0);transform-origin:left;transition:transform .8s var(--e) .15s}
@@ -260,7 +260,7 @@ body.oscuro .marca{background:transparent;border-color:rgba(255,255,255,.32);col
   padding:clamp(20px,2.8vw,36px) 0;border-bottom:1.5px solid var(--linea);
 }
 .ruta__n{font-size:.72rem;font-weight:800;letter-spacing:.14em;color:var(--az);flex:none;font-variant-numeric:tabular-nums;padding-top:.7em}
-.ruta__t{font-size:clamp(1.5rem,4.6vw,3.4rem);font-weight:900;line-height:1.02;letter-spacing:-.045em;text-transform:uppercase;font-variation-settings:"wdth" 86;text-wrap:balance}
+.ruta__t{font-size:clamp(1.5rem,4.6vw,3.4rem);font-weight:900;line-height:1.02;letter-spacing:-.045em;text-transform:uppercase;font-variation-settings:normal;text-wrap:balance}
 
 /* ═══ 08 · QUIÉNES SOMOS ═══ */
 .quienes{padding:var(--sec) var(--pad);max-width:1120px;margin:0 auto}
@@ -321,7 +321,7 @@ body.oscuro .marca{background:transparent;border-color:rgba(255,255,255,.32);col
 .tuyo__t{
   margin:16px auto 0;max-width:15ch;
   font-size:clamp(2.1rem,7.4vw,6.6rem);font-weight:900;line-height:.94;letter-spacing:-.055em;
-  text-transform:uppercase;font-variation-settings:"wdth" 83;text-wrap:balance;
+  text-transform:uppercase;font-variation-settings:normal;text-wrap:balance;
 }
 .tuyo__p{
   margin:clamp(28px,3.4vw,44px) auto 0;max-width:30ch;
@@ -400,7 +400,7 @@ body.oscuro .marca{background:transparent;border-color:rgba(255,255,255,.32);col
 .scr__k{font-size:.86rem;font-weight:600;color:var(--gris)}
 .scr__k b{color:var(--tinta);font-weight:800}
 .scr__big{margin:6px auto 2px;max-width:12ch;font-size:1.9rem;font-weight:900;line-height:1;
-  letter-spacing:-.045em;text-transform:uppercase;font-variation-settings:"wdth" 86}
+  letter-spacing:-.045em;text-transform:uppercase;font-variation-settings:normal}
 .scr__por{font-size:.82rem;font-weight:700;color:var(--az);margin-bottom:22px}
 .fenv{width:100%;background:var(--az);color:#fff;border:0;border-radius:14px;cursor:pointer;
   padding:16px;font-size:.92rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;transition:background .2s}
@@ -413,7 +413,7 @@ body.oscuro .marca{background:transparent;border-color:rgba(255,255,255,.32);col
 .okp__badge{align-self:center;background:rgba(47,102,255,.16);color:#7FA8FF;
   font-size:.68rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;padding:8px 14px;border-radius:999px}
 .okp__t{margin-top:14px;font-size:1.9rem;font-weight:900;line-height:1;letter-spacing:-.05em;
-  text-transform:uppercase;font-variation-settings:"wdth" 84}
+  text-transform:uppercase;font-variation-settings:normal}
 .okp__s{font-size:.92rem;font-weight:600;color:rgba(255,255,255,.7)}
 .okp__chat{margin-top:22px;font-size:.82rem;font-weight:700;color:var(--az)}
 
@@ -426,7 +426,7 @@ body.oscuro .marca{background:transparent;border-color:rgba(255,255,255,.32);col
 }
 .como li.on{opacity:1;padding-left:10px}
 .como__n{font-size:.72rem;font-weight:800;letter-spacing:.12em;color:var(--az);flex:none;font-variant-numeric:tabular-nums}
-.como__t{font-size:clamp(1.3rem,3.2vw,2.3rem);font-weight:900;letter-spacing:-.04em;line-height:1.05;text-transform:uppercase;font-variation-settings:"wdth" 86}
+.como__t{font-size:clamp(1.3rem,3.2vw,2.3rem);font-weight:900;letter-spacing:-.04em;line-height:1.05;text-transform:uppercase;font-variation-settings:normal}
 .como__t b{color:var(--az)}
 .como__pie{margin-top:clamp(22px,3vw,34px);font-size:clamp(.95rem,1.5vw,1.15rem);font-weight:600;color:var(--gris);max-width:40ch;line-height:1.5}
 .como__pie b{color:var(--tinta);font-weight:800}
@@ -477,7 +477,7 @@ body.bloq .nav,body.bloq .prog{opacity:0;pointer-events:none}
 @keyframes sube{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:none}}
 .momento__t{
   margin-top:18px;font-size:clamp(2.2rem,6.6vw,5.6rem);font-weight:900;letter-spacing:-.055em;
-  line-height:.94;text-transform:uppercase;font-variation-settings:"wdth" 84;
+  line-height:.94;text-transform:uppercase;font-variation-settings:normal;
   opacity:0;animation:sube .9s var(--e) .65s forwards;
 }
 .momento__s{margin-top:16px;font-size:1.05rem;font-weight:600;color:rgba(255,255,255,.75);
@@ -510,7 +510,7 @@ body.bloq .nav,body.bloq .prog{opacity:0;pointer-events:none}
 .vuelta.abierta .cerrado{opacity:0;pointer-events:none}
 .cerrado__t{
   font-size:clamp(2rem,6.4vw,5.4rem);font-weight:900;line-height:.94;letter-spacing:-.05em;
-  text-transform:uppercase;font-variation-settings:"wdth" 85;
+  text-transform:uppercase;font-variation-settings:normal;
 }
 .cerrado__s{margin-top:20px;font-size:clamp(1rem,1.7vw,1.3rem);color:rgba(255,255,255,.5);font-weight:600}
 .enlace{
@@ -544,7 +544,7 @@ body.bloq .nav,body.bloq .prog{opacity:0;pointer-events:none}
 .sem__pie{display:flex;flex-wrap:wrap;align-items:flex-end;gap:clamp(20px,3vw,44px);margin-top:48px;border-top:1.5px solid var(--tinta);padding-top:30px}
 .cifra strong{
   font-size:clamp(4rem,11vw,9.5rem);font-weight:900;letter-spacing:-.06em;line-height:.82;
-  font-variant-numeric:tabular-nums;display:block;font-variation-settings:"wdth" 84;
+  font-variant-numeric:tabular-nums;display:block;font-variation-settings:normal;
 }
 .cifra__l{font-size:clamp(1rem,1.5vw,1.2rem);font-weight:800;line-height:1.3;letter-spacing:-.02em;padding-bottom:.5em}
 .cifra__l span{font-weight:500;color:var(--gris)}
@@ -680,7 +680,7 @@ body.oscuro .empr{color:var(--tinta)}
 /* ═══ PANTALLAS GRANDES (Mac grande / TV 4K): el contenido acompaña
    al tamaño de pantalla en vez de quedar en una isla diminuta ═══ */
 @media (min-width:1700px){
-  :root{--sec:clamp(210px,12vw,320px)}
+  
   
   
   .sem__lienzo{max-width:1120px}
@@ -698,7 +698,7 @@ body.oscuro .empr{color:var(--tinta)}
 .nav__links a:hover{opacity:1}
 .nav__links a::after{content:"";position:absolute;left:0;right:100%;bottom:-5px;height:2px;background:var(--az);transition:right .3s var(--e)}
 .nav__links a:hover::after,.nav__links a[aria-current="page"]::after{right:0}
-.nav__links a[aria-current="page"]{color:var(--az);opacity:1}
+.nav__links a[aria-current="page"]{color:var(--az-h);opacity:1}
 @media(max-width:840px){.nav__links{order:3;width:100%;margin:8px 0 0;justify-content:center;gap:8px 14px}.nav__links a{font-size:.66rem;opacity:1}}
 .nav__links a{color:var(--tinta)}
 
