@@ -182,8 +182,8 @@ function pintar() {
 
     let color = "#0A0A0A";
     if (e === 0) { color = "#DEDEDE"; r *= 0.72; }
-    if (e === 2) { color = "#0A5CFF"; r *= 1.45; }
-    if (e === 3) { color = "#0A5CFF"; r *= 1.6; }
+    if (e === 2) { color = "#2f66ff"; r *= 1.45; }
+    if (e === 3) { color = "#2f66ff"; r *= 1.6; }
 
     ctx.beginPath();
     ctx.arc(x, y, r, 0, 6.2832);
