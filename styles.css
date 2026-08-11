@@ -725,3 +725,10 @@ body.oscuro .empr{color:var(--tinta)}
 .nav .marca__x line{stroke:var(--az)!important}
 .burger{border-color:rgba(10,12,17,.28)!important;background:#fff!important}
 @media(max-width:840px){.nav__links{background:rgba(251,249,244,.98)!important}}
+
+/* ═══ PULIDO FINAL (detalles Apple) ═══ */
+html{scroll-padding-top:96px}                 /* anclajes del menú no quedan bajo la barra fija */
+::selection{background:var(--az);color:#fff}  /* selección de texto en azul de marca */
+::-moz-selection{background:var(--az);color:#fff}
+body{text-rendering:optimizeLegibility;-moz-osx-font-smoothing:grayscale}
+img{max-width:100%;height:auto}
