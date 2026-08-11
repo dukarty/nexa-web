@@ -696,7 +696,7 @@ body.claro .co__apple{background:#000;color:#fff}
   <p class="mod__k">Centro de ayuda</p>
   <p class="mod__t">¿Cómo funciona NYXA para tu negocio?</p>
   <p class="mod__p">Creas tu perfil, tu comunidad te sigue y les propones experiencias. Mides cuánta gente nueva traes y cuánta vuelve. El dinero nunca compra alcance: solo desbloquea herramientas.</p>
-  <div class="mod__acc"><a class="pri" href="mailto:empresas@nexa.app" style="text-align:center">Escribir a soporte</a><button class="sec" data-cerrar-ayuda>Cerrar</button></div>
+  <div class="mod__acc"><a class="pri" href="mailto:holanyxa@gmail.com" style="text-align:center">Escribir a soporte</a><button class="sec" data-cerrar-ayuda>Cerrar</button></div>
 </div></div>
 
 <!-- UPSELL -->
@@ -1564,7 +1564,7 @@ body.claro .co__apple{background:#000;color:#fff}
     const cont=$("#facMejoras");if(!cont)return;
     const sup=["activacion","ciudad","red"].filter(k=>(RANGO[k]??9)>rango);
     if(!sup.length){cont.innerHTML='<p style="color:var(--tx-2)">Estás en el plan máximo. Gracias por confiar.</p>';return;}
-    cont.innerHTML=sup.map(k=>'<div class="mejora"><div><b>'+NOMBREPLAN[k]+'</b><small>'+PRECIOPLAN[k]+'</small></div>'+(k==="red"?'<a class="mini" href="mailto:empresas@nexa.app">Hablar</a>':'<button class="mini" data-mejorar="'+k+'">Mejorar</button>')+'</div>').join("");
+    cont.innerHTML=sup.map(k=>'<div class="mejora"><div><b>'+NOMBREPLAN[k]+'</b><small>'+PRECIOPLAN[k]+'</small></div>'+(k==="red"?'<a class="mini" href="mailto:holanyxa@gmail.com">Hablar</a>':'<button class="mini" data-mejorar="'+k+'">Mejorar</button>')+'</div>').join("");
     $$("[data-mejorar]",cont).forEach(b=>b.addEventListener("click",()=>abrirPago(b.dataset.mejorar)));
   }
 
