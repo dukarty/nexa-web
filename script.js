@@ -314,7 +314,7 @@ if (fono) {
       $("#momT").textContent = est.exp;
       $("#momS").textContent = `con ${est.per} · el sábado que viene`;
       momento.hidden = false;
-      document.body.classList.add("bloq");
+      document.body.classList.add("bloq");var _mn=document.querySelector("main");document.querySelectorAll(".nav").forEach(n=>{n.inert=true;});if(_mn)Array.from(_mn.children).forEach(el=>{if(el.id!=="momento"&&!el.contains(momento))el.inert=true;});momento._foco=document.activeElement;var _mc=momento.querySelector("button,a[href]");if(_mc)setTimeout(function(){_mc.focus();},80);
       $("#cerrarMom").focus();
       encender(1);      // una semana tuya deja de estar apagada
     }, reduce ? 120 : 1600);
@@ -329,7 +329,7 @@ if (fono) {
 
 function cerrarMomento() {
   momento.hidden = true;
-  document.body.classList.remove("bloq");
+  document.body.classList.remove("bloq");document.querySelectorAll(".nav").forEach(n=>{n.inert=false;});var _mn2=document.querySelector("main");if(_mn2)Array.from(_mn2.children).forEach(el=>{el.inert=false;});if(momento&&momento._foco)momento._foco.focus();
   fono?._reset?.();
   $("#semanas")?.scrollIntoView({ behavior: reduce ? "auto" : "smooth", block: "start" });
 }

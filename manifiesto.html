@@ -39,15 +39,15 @@ body:not(.oscuro) .marca{border-color:var(--tinta);color:var(--tinta);background
 .marca__x{display:inline-flex;width:.66em;height:.66em;margin:0 .03em}
 .marca__x svg{width:100%;height:100%;overflow:visible}
 .marca__x line{stroke:var(--az);stroke-width:3;stroke-linecap:round}
-.volver{display:inline-flex;align-items:center;gap:8px;padding:9px 16px;border-radius:999px;background:var(--az);color:#fff;
-  font-size:.72rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;transition:background .2s}
+.volver{display:inline-flex;align-items:center;gap:8px;padding:9px 18px;border-radius:999px;background:var(--az);color:#fff;
+  font-size:.74rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;transition:background .2s}
 .volver:hover{background:var(--az-h)}
 
 /* HERO */
 .hero{min-height:100svh;background:var(--tinta);color:#fff;display:flex;align-items:center;justify-content:center;
   text-align:center;padding:var(--pad);position:relative}
 .hero__k{font-size:.72rem;font-weight:800;letter-spacing:.3em;text-transform:uppercase;color:rgba(255,255,255,.45);margin-bottom:clamp(16px,2vw,28px)}
-.hero__t{font-size:clamp(2.6rem,9vw,8.5rem);font-weight:900;line-height:.9;letter-spacing:-.055em;text-transform:uppercase;font-variation-settings:"wdth" 86}
+.hero__t{font-size:clamp(2.6rem,9vw,8.5rem);font-weight:900;line-height:.9;letter-spacing:-.055em;text-transform:uppercase;font-variation-settings:normal}
 .hero__t .w{display:inline-block;transform:translateY(105%);opacity:0;animation:sube .95s var(--e) forwards}
 .hero__t .w:nth-child(2){animation-delay:.12s}
 .hero__t .pt{color:var(--az)}
@@ -65,7 +65,7 @@ body:not(.oscuro) .marca{border-color:var(--tinta);color:var(--tinta);background
 .sec--negro .in{max-width:1120px;margin:0 auto}
 .ind{font-size:.68rem;font-weight:800;letter-spacing:.22em;color:var(--az-h);margin-bottom:18px;font-variant-numeric:tabular-nums}
 .tit{font-size:clamp(2rem,6vw,5rem);font-weight:900;line-height:.98;letter-spacing:-.05em;text-transform:uppercase;
-  font-variation-settings:"wdth" 86;text-wrap:balance}
+  font-variation-settings:normal;text-wrap:balance}
 .az{color:var(--az)}
 .p{margin-top:clamp(28px,3.6vw,46px);max-width:52ch;font-size:clamp(1.1rem,1.9vw,1.55rem);font-weight:600;line-height:1.55;color:var(--gris)}
 .sec--negro .p{color:rgba(255,255,255,.72)}
@@ -76,10 +76,10 @@ body:not(.oscuro) .marca{border-color:var(--tinta);color:var(--tinta);background
 .ruta{margin-top:clamp(30px,4vw,52px);border-top:1.5px solid var(--tinta)}
 .ruta li{display:flex;align-items:baseline;gap:clamp(18px,4vw,60px);padding:clamp(18px,2.6vw,32px) 0;border-bottom:1.5px solid var(--linea)}
 .ruta__n{font-size:.72rem;font-weight:800;letter-spacing:.14em;color:var(--az-h);flex:none;padding-top:.7em;font-variant-numeric:tabular-nums}
-.ruta__t{font-size:clamp(1.4rem,4.4vw,3.2rem);font-weight:900;line-height:1.02;letter-spacing:-.045em;text-transform:uppercase;font-variation-settings:"wdth" 86}
+.ruta__t{font-size:clamp(1.4rem,4.4vw,3.2rem);font-weight:900;line-height:1.02;letter-spacing:-.045em;text-transform:uppercase;font-variation-settings:normal}
 
 /* Tachado firma: quiero vivir → vivido */
-.gran{font-size:clamp(1.8rem,5vw,3.6rem);font-weight:900;line-height:1.05;letter-spacing:-.045em;text-transform:uppercase;font-variation-settings:"wdth" 86;text-wrap:balance}
+.gran{font-size:clamp(1.8rem,5vw,3.6rem);font-weight:900;line-height:1.05;letter-spacing:-.045em;text-transform:uppercase;font-variation-settings:normal;text-wrap:balance}
 .tach{position:relative;white-space:nowrap}
 .tach::after{content:"";position:absolute;left:-.03em;right:-.03em;top:52%;height:.08em;background:var(--az);
   transform:scaleX(0);transform-origin:left;transition:transform 1s var(--e) .2s}
@@ -91,12 +91,12 @@ body:not(.oscuro) .marca{border-color:var(--tinta);color:var(--tinta);background
   font-size:clamp(1.1rem,2.4vw,1.8rem);font-weight:800;letter-spacing:-.03em}
 
 /* Cifra grande */
-.cifra{font-size:clamp(4rem,15vw,13rem);font-weight:900;line-height:.82;letter-spacing:-.06em;font-variation-settings:"wdth" 84;margin-top:clamp(20px,3vw,40px)}
+.cifra{font-size:clamp(4rem,15vw,13rem);font-weight:900;line-height:.82;letter-spacing:-.06em;font-variation-settings:normal;margin-top:clamp(20px,3vw,40px)}
 .cifra__l{margin-top:14px;max-width:44ch;font-size:clamp(1rem,1.6vw,1.25rem);font-weight:600;color:rgba(255,255,255,.6);line-height:1.5}
 
 /* Cierre */
 .fin{background:var(--tinta);color:#fff;text-align:center;padding:var(--sec) var(--pad)}
-.fin__t{font-size:clamp(2.4rem,9vw,8rem);font-weight:900;line-height:.9;letter-spacing:-.055em;text-transform:uppercase;font-variation-settings:"wdth" 85;text-wrap:balance}
+.fin__t{font-size:clamp(2.4rem,9vw,8rem);font-weight:900;line-height:.9;letter-spacing:-.055em;text-transform:uppercase;font-variation-settings:normal;text-wrap:balance}
 .fin__t .pt{color:var(--az)}
 .cta{display:inline-flex;align-items:center;gap:11px;margin-top:clamp(36px,4vw,56px);background:var(--az);color:#fff;border-radius:999px;
   padding:17px 30px;font-size:.86rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;transition:background .2s,transform .3s var(--e)}
@@ -166,7 +166,7 @@ p,li,figcaption,blockquote,.exps__nota,.planes__nota,.exp__t,.exp__p,.card__p,.r
 .nav__links a:hover{opacity:1}
 .nav__links a::after{content:"";position:absolute;left:0;right:100%;bottom:-5px;height:2px;background:var(--az);transition:right .3s var(--e)}
 .nav__links a:hover::after,.nav__links a[aria-current="page"]::after{right:0}
-.nav__links a[aria-current="page"]{color:var(--az);opacity:1}
+.nav__links a[aria-current="page"]{color:var(--az-h);opacity:1}
 @media(max-width:840px){.nav__links{order:3;width:100%;margin:8px 0 0;justify-content:center;gap:8px 14px}.nav__links a{font-size:.66rem;opacity:1}}
 .nav__links a{color:#fff}
 body:not(.oscuro) .nav__links a{color:var(--tinta)}
@@ -201,6 +201,13 @@ html{scroll-padding-top:96px}                 /* anclajes del menú no quedan ba
 ::-moz-selection{background:var(--az);color:#fff}
 body{text-rendering:optimizeLegibility;-moz-osx-font-smoothing:grayscale}
 img{max-width:100%;height:auto}
+
+/* Pie coherente en toda la web */
+.ft{display:flex;flex-wrap:wrap;align-items:center;gap:16px 26px;padding:40px var(--pad);border-top:1.5px solid var(--linea);max-width:1120px;margin:0 auto;font-size:.76rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--gris-2)}
+.ft a{color:var(--gris-2)}
+.ft a:hover{color:var(--az)}
+.ft__n{display:flex;flex-wrap:wrap;gap:12px 18px;margin-left:auto}
+@media(max-width:640px){.ft{justify-content:center;text-align:center}.ft__n{margin:0 auto;justify-content:center}}
 </style>
 </head>
 <body class="oscuro">
@@ -311,5 +318,16 @@ img{max-width:100%;height:auto}
   }
 </script>
 <script>document.addEventListener("click",function(e){var b=e.target.closest(".burger");if(!b)return;var n=b.closest(".nav");n.classList.toggle("open");b.setAttribute("aria-expanded",n.classList.contains("open"));});</script>
+<footer class="ft">
+  <span>NY✕A · Valencia © 2026</span>
+  <nav class="ft__n" aria-label="Enlaces">
+    <a href="index.html#gesto">Cómo funciona</a>
+    <a href="ciudades.html">Ciudades</a>
+    <a href="seguridad.html">Seguridad</a>
+    <a href="manifiesto.html">Quiénes somos</a>
+    <a href="empresas.html">Empresas</a>
+    <a href="privacidad.html">Privacidad</a>
+  </nav>
+</footer>
 </body>
 </html>
