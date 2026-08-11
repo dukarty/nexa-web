@@ -292,6 +292,16 @@ body.nav-azul{--nav-fg:#fff}
   .rnum{font-size:clamp(3.6rem,20vw,5rem)}
   .cta,.cta--gh{max-width:100%;white-space:normal;text-align:center}
 }
+/* Pantallas grandes (Mac grande / TV 4K): el contenido acompaña al tamaño,
+   no se queda en una isla estrecha centrada. */
+@media (min-width:1700px){
+  html{font-size:clamp(17px,1.02vw,23px)}
+  .in,.sec{max-width:min(1560px,84vw)}
+}
+@media (min-width:2600px){
+  html{font-size:26px}
+  .in,.sec{max-width:1800px}
+}
 </style>
 </head>
 <body class="nav-negro">

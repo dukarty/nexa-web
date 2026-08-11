@@ -58,6 +58,10 @@ a.enl:hover{border-bottom-color:var(--az)}
 .box p:last-child{margin-bottom:0}
 footer.doc{max-width:680px;margin:56px auto 0;padding:28px var(--pad) 80px;border-top:1.5px solid var(--linea);font-size:.9rem;color:var(--gris)}
 footer.doc a{color:var(--az);font-weight:700}
+/* Pantallas grandes: el texto legal no se queda diminuto, pero mantiene
+   una medida de lectura cómoda (no se estira a lo ancho). */
+@media (min-width:1700px){ html{font-size:clamp(17px,1.02vw,22px)} .w{max-width:min(1120px,80vw)} }
+@media (min-width:2600px){ html{font-size:25px} .w{max-width:1320px} }
 </style>
 </head>
 <body>
