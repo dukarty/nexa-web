@@ -97,7 +97,7 @@ img{max-width:100%;height:auto}
   <header class="doc">
     <p class="doc__k">NYXA · Valencia · 2026</p>
     <h1>Política de&nbsp;Privacidad.</h1>
-    <p class="fecha">Última actualización: 11 de agosto de&nbsp;2026</p>
+    <p class="fecha">Última actualización: 18 de agosto de&nbsp;2026</p>
   </header>
 
   <div class="box">
@@ -135,7 +135,8 @@ img{max-width:100%;height:auto}
         <tr><td><strong>Denuncias</strong></td><td>Una denuncia y una copia de lo denunciado en ese momento</td><td>Poder revisar la denuncia aunque el contenido original se borre después</td></tr>
         <tr><td><strong>Ubicación aproximada</strong></td><td>Tu posición <strong>difuminada</strong> (aprox. 400 m)</td><td>Enseñarte planes y gente cerca. Nunca mostramos tu ubicación exacta a otras personas</td></tr>
         <tr><td><strong>Token de notificaciones push</strong></td><td>Un identificador que da tu navegador o dispositivo</td><td>Poder enviarte avisos (un mensaje nuevo, una confirmación), a través del servicio de tu navegador o sistema (Google, Apple o Mozilla)</td></tr>
-        <tr><td><strong>Analítica de uso</strong> (solo si la aceptas)</td><td>Eventos de producto anónimos por defecto, identificados por email solo si consientes</td><td>Entender si la app se entiende y funciona. <strong>Apagada por defecto</strong>; solo se activa si aceptas expresamente el aviso de analítica</td></tr>
+        <tr><td><strong>Analítica de uso</strong> (solo si la aceptas)</td><td>Eventos de producto (qué pantallas, cuánto tarda un paso) en <strong>nuestra propia base de datos</strong>, identificados por un id interno anónimo — <strong>nunca por tu email</strong> ni por el contenido de tus mensajes</td><td>Entender si la app se entiende y funciona. <strong>Apagada por defecto</strong>; solo se activa si aceptas expresamente el aviso de analítica. No usamos proveedores externos de analítica</td></tr>
+        <tr><td><strong>Invitaciones</strong></td><td>Quién invita a quién, cuando alguien se registra a través de tu enlace personal de invitación</td><td>Entender el crecimiento boca a boca. <strong>No condiciona el registro</strong> (cualquiera puede registrarse sin invitación) y no se comparte con terceros</td></tr>
       </tbody>
     </table>
   </div>
@@ -156,7 +157,8 @@ img{max-width:100%;height:auto}
         <tr><td>Tu perfil, tus experiencias, tus deseos, los NYXAs y los chats</td><td><strong>Ejecución del contrato</strong> — art. 6.1.b. Sin esto, sencillamente, no hay servicio</td></tr>
         <tr><td>Comprobar la edad (mayor de 18), moderar contenido, atender denuncias y prevenir abusos</td><td><strong>Obligación legal</strong> (art. 6.1.c) e <strong>interés legítimo</strong> (art. 6.1.f) en mantener un entorno seguro</td></tr>
         <tr><td>Selfie de verificación de identidad</td><td><strong>Consentimiento explícito</strong> (art. 6.1.a): eliges verificarte, con un clic, sin casillas premarcadas. Tratado con el mismo cuidado que un dato sensible aunque —en el MVP actual, sin comparación facial automática— no constituye dato biométrico del art. 9 RGPD</td></tr>
-        <tr><td>Analítica de uso (PostHog) y almacenamiento no esencial en el navegador</td><td><strong>Consentimiento</strong> (art. 6.1.a RGPD + ePrivacy). Puedes retirarlo cuando quieras</td></tr>
+        <tr><td>Analítica de uso (propia, en nuestra base de datos) y almacenamiento no esencial en el navegador</td><td><strong>Consentimiento</strong> (art. 6.1.a RGPD + ePrivacy). Puedes retirarlo cuando quieras</td></tr>
+        <tr><td>Invitaciones (atribución de quién invita a quién)</td><td><strong>Interés legítimo</strong> (art. 6.1.f) en entender el crecimiento boca a boca; no condiciona el registro</td></tr>
         <tr><td>Notificaciones push</td><td><strong>Consentimiento</strong> (art. 6.1.a) al aceptar los avisos en tu navegador o dispositivo</td></tr>
       </tbody>
     </table>
@@ -172,10 +174,8 @@ img{max-width:100%;height:auto}
         <tr><td><strong>Supabase</strong></td><td>Base de datos, almacenamiento de fotos, autenticación</td><td>Servidores en Irlanda (<strong>UE</strong>)</td></tr>
         <tr><td><strong>Vercel</strong></td><td>Sirve la aplicación</td><td>Estados Unidos / red global (con garantías adecuadas, ver transferencias)</td></tr>
         <tr><td><strong>Anthropic</strong></td><td>La IA que revisa las pruebas de tus experiencias, sugiere planes y responde a Nyx. Recibe el texto y las fotos de cada consulta</td><td><strong>EE. UU.</strong> (fuera de la UE)</td></tr>
-        <tr><td><strong>PostHog</strong></td><td>Analítica de producto (solo si la aceptas)</td><td>Servidores en la <strong>UE</strong>. Apagada por defecto</td></tr>
         <tr><td><strong>Servicios de notificaciones push</strong></td><td>Entregar los avisos push</td><td>Google (Android/Chrome), Apple (iOS/Safari) o Mozilla, según tu dispositivo/navegador</td></tr>
         <tr><td><strong>Apple</strong></td><td>Distribución de la app y notificaciones push, cuando exista la versión de App Store</td><td>Según los términos de Apple</td></tr>
-        <tr><td><strong>Stripe</strong></td><td>Procesa el pago <strong>solo si algún día activas una suscripción</strong> (hoy desactivado). Tus datos de tarjeta los trata Stripe; nosotros no los vemos nunca</td><td><strong>EE. UU.</strong></td></tr>
         <tr><td><strong>Twilio</strong></td><td>Envío de SMS <strong>si en el futuro</strong> activamos la verificación por SMS (hoy desactivado)</td><td><strong>EE. UU.</strong></td></tr>
         <tr><td><strong>CARTO</strong></td><td>Teselas del mapa (proveedor de mapas base)</td><td>Red global (CDN). Recibe tu IP y la zona del mapa que ves</td></tr>
         <tr><td><strong>OpenStreetMap / Nominatim</strong></td><td>Geocodificación: convertir coordenadas en el nombre de tu ciudad durante el onboarding</td><td>Fundación OpenStreetMap (UE/Reino Unido). <strong>IMPORTANTE:</strong> en el onboarding recibe tu ubicación GPS precisa para deducir tu ciudad</td></tr>
@@ -186,7 +186,7 @@ img{max-width:100%;height:auto}
   </div>
 
   <h3>Transferencias internacionales</h3>
-  <p>La mayor parte de tus datos se guarda y trata <strong>dentro de la Unión Europea</strong> (Supabase, en Irlanda). Pero <strong>parte del tratamiento ocurre en Estados Unidos</strong>: la IA de Anthropic que revisa tus pruebas y sugiere planes y, si algún día lo activas, el cobro con Stripe. Decir «tus datos no salen de la UE» sería más bonito, pero no sería&nbsp;verdad.</p>
+  <p>La mayor parte de tus datos se guarda y trata <strong>dentro de la Unión Europea</strong> (Supabase, en Irlanda). Pero <strong>parte del tratamiento ocurre en Estados Unidos</strong>: la IA de Anthropic que revisa tus pruebas y sugiere planes. Decir «tus datos no salen de la UE» sería más bonito, pero no sería&nbsp;verdad.</p>
   <p>Los mapas y el geocodificado se apoyan además en proveedores de <strong>OpenStreetMap</strong> (Nominatim, para deducir tu ciudad; Photon/Komoot, para autocompletar lugares) y en <strong>CARTO</strong> (las teselas del mapa). Aquí hay un punto que queremos decirte a la cara: <strong>durante el onboarding tu ubicación GPS <em>precisa</em> se envía a Nominatim con un único fin, deducir el nombre de tu ciudad</strong>. Esa ubicación precisa <strong>no se guarda</strong>: dentro de la app, a otras personas solo se les muestra tu posición <strong>difuminada</strong> (aprox. 400 m), nunca la exacta.</p>
   <p>Para esas transferencias fuera del Espacio Económico Europeo, los proveedores aportan garantías adecuadas: <strong>cláusulas contractuales tipo (SCC)</strong> de la Comisión Europea y/o marcos de adecuación como el <strong>EU-US Data Privacy Framework</strong>.</p>
 
@@ -199,7 +199,7 @@ img{max-width:100%;height:auto}
         <tr><td>Si borras la cuenta</td><td>Desapareces al instante para los demás y tienes <strong>15 días para arrepentirte</strong>. Pasado ese plazo, se elimina de forma definitiva (derecho de supresión, art. 17 — ver sección 6)</td></tr>
         <tr><td>Selfie de verificación</td><td>Se borra en cuanto hay una decisión de moderación, y en todo caso en un <strong>máximo de 30 días</strong> si nadie la revisa. Si borras la cuenta mientras está pendiente, se borra de inmediato</td></tr>
         <tr><td>Denuncias y registro de moderación</td><td>Se conservan <strong>aunque borres la cuenta</strong>: son la prueba de por qué se tomó una decisión, y borrarlas dejaría indefensa a la persona a la que protegían</td></tr>
-        <tr><td>Analítica de uso</td><td>Solo si la aceptaste; se conserva conforme a la configuración de retención de PostHog</td></tr>
+        <tr><td>Analítica de uso</td><td>Solo si la aceptaste; se guarda en <strong>nuestra base de datos</strong>. Los eventos ligados a tu cuenta se borran cuando borras la cuenta (art. 17)</td></tr>
       </tbody>
     </table>
   </div>
@@ -226,10 +226,10 @@ img{max-width:100%;height:auto}
   </ul>
 
   <h2>7 · Cookies y analítica de&nbsp;uso</h2>
-  <p>NYXA <strong>no usa cookies publicitarias ni de seguimiento de terceros</strong>. El único almacenamiento no esencial en tu navegador es el que instala la analítica de producto (<strong>PostHog</strong>), y solo se activa si <strong>aceptas expresamente</strong> el aviso de analítica.</p>
+  <p>NYXA <strong>no usa cookies publicitarias ni de seguimiento de terceros</strong>. El único almacenamiento no esencial en tu navegador es el que usa nuestra <strong>analítica de producto propia</strong> (en nuestra base de datos, sin proveedores externos), y solo se activa si <strong>aceptas expresamente</strong> el aviso de analítica.</p>
   <ul>
     <li><strong>Apagada por defecto.</strong> Mientras no aceptes, no se manda ningún dato de analítica y ni siquiera se carga el módulo.</li>
-    <li><strong>Configuración sin seguimiento cruzado:</strong> la analítica se identifica únicamente por email (y solo si consientes), no captura clics automáticamente ni sigue tu actividad en otras webs o apps.</li>
+    <li><strong>Configuración sin seguimiento cruzado:</strong> la analítica se identifica por un <strong>id interno anónimo</strong>, nunca por tu email ni por el contenido que escribes, no captura clics automáticamente ni sigue tu actividad en otras webs o apps.</li>
     <li><strong>Puedes rechazarla</strong> y seguir usando la app con normalidad, y <strong>puedes retirar el consentimiento</strong> más tarde.</li>
   </ul>
   <p>El almacenamiento estrictamente necesario para que la app funcione (mantener tu sesión, recordar tus preferencias) no requiere consentimiento y no se usa para&nbsp;perfilarte.</p>
