@@ -3,340 +3,236 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-
-<title>NYXA — Que no se te escape la vida | Experiencias reales en Valencia</title>
-<meta name="description" content="Tienes 800 contactos y hablas con seis. NYXA es la app para vivir experiencias reales con gente que quiere vivir lo mismo que tú. Dices qué quieres vivir, NYXA te dice con quién. Valencia, 2026.">
+<title>NYXA — Haz que hoy pase algo | Valencia, 1 de octubre</title>
+<meta name="description" content="Dime qué quieres vivir. Te digo con quién. En persona, en Valencia. NYXA no es citas, es salir. Abre el 1 de octubre — entra en la lista.">
 <link rel="canonical" href="https://nexavalencia.vercel.app/">
 <meta name="theme-color" content="#FBF9F4">
-<meta name="robots" content="index,follow,max-image-preview:large">
-
+<meta name="robots" content="index,follow">
+<link rel="icon" href="/favicon.svg">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="NYXA">
 <meta property="og:url" content="https://nexavalencia.vercel.app/">
-<meta property="og:title" content="NYXA — Que no se te escape la vida">
-<meta property="og:description" content="Dices qué quieres vivir. NYXA te dice con quién. Experiencias reales en Valencia.">
+<meta property="og:title" content="NYXA — Haz que hoy pase algo">
+<meta property="og:description" content="Dime qué quieres vivir. Te digo con quién. Valencia, 1 de octubre.">
 <meta property="og:image" content="https://nexavalencia.vercel.app/og.jpg">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
 <meta property="og:locale" content="es_ES">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="NYXA — Que no se te escape la vida">
-<meta name="twitter:description" content="Dices qué quieres vivir. NYXA te dice con quién.">
+<meta name="twitter:title" content="NYXA — Haz que hoy pase algo">
+<meta name="twitter:description" content="Dime qué quieres vivir. Te digo con quién.">
 <meta name="twitter:image" content="https://nexavalencia.vercel.app/og.jpg">
+<style>
+  :root{
+    --paper:#FBF9F4; --card:#FFFFFF; --ink:#0A0C11; --ink-2:#3B4251; --muted:#8A909E;
+    --blue:#2f66ff; --blue-ink:#1e4fd6; --blue-soft:#EDF3FF; --line:#E7E4DC; --line-2:#DAD6CC;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{-webkit-text-size-adjust:100%}
+  body{background:var(--paper);color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",system-ui,sans-serif;
+    -webkit-font-smoothing:antialiased;line-height:1.4;min-height:100svh;overflow-x:hidden}
+  a{color:inherit}
 
-<script type="application/ld+json">
-{
-  "@context":"https://schema.org",
-  "@graph":[
-    {"@type":"Organization","@id":"https://nexavalencia.vercel.app/#org","name":"NYXA",
-     "url":"https://nexavalencia.vercel.app/","logo":"https://nexavalencia.vercel.app/favicon.svg",
-     "slogan":"Que no se te escape la vida",
-     "areaServed":{"@type":"City","name":"Valencia","address":{"@type":"PostalAddress","addressCountry":"ES"}}},
-    {"@type":"WebSite","@id":"https://nexavalencia.vercel.app/#web","url":"https://nexavalencia.vercel.app/",
-     "name":"NYXA","inLanguage":"es-ES","publisher":{"@id":"https://nexavalencia.vercel.app/#org"}},
-    {"@type":"SoftwareApplication","name":"NYXA","applicationCategory":"SocialNetworkingApplication",
-     "operatingSystem":"iOS, Android",
-     "description":"App para vivir experiencias reales con gente que quiere vivir lo mismo que tú. Dices qué quieres vivir este año y NYXA te dice con quién. Primera ciudad: Valencia.",
-     "offers":{"@type":"Offer","price":"0","priceCurrency":"EUR"}},
-    {"@type":"FAQPage","mainEntity":[
-      {"@type":"Question","name":"¿Qué es NYXA?","acceptedAnswer":{"@type":"Answer","text":"Una app para vivir experiencias reales con gente que quiere vivir lo mismo que tú. Dices qué quieres vivir este año y NYXA te dice con quién."}},
-      {"@type":"Question","name":"¿NYXA es una app de citas?","acceptedAnswer":{"@type":"Answer","text":"No. Aquí no se escribe a desconocidos: propones vivir algo concreto y solo si aceptan se abre la conversación."}},
-      {"@type":"Question","name":"¿Cuánto cuesta NYXA?","acceptedAnswer":{"@type":"Answer","text":"Es gratis."}},
-      {"@type":"Question","name":"¿Por qué NYXA solo está en Valencia?","acceptedAnswer":{"@type":"Answer","text":"Porque una app social vacía no le sirve a nadie. Abrimos otra ciudad cuando en Valencia haya vida."}}
-    ]}
-  ]
-}
-</script>
+  .stage{position:relative;min-height:100svh;display:flex;flex-direction:column;justify-content:center;
+    padding:clamp(76px,12vh,120px) 24px;overflow:hidden}
+  .stage::before{content:"";position:absolute;inset:0;z-index:0;pointer-events:none;
+    background:radial-gradient(58% 50% at 50% 34%, var(--blue-soft), transparent 60%)}
 
-<link rel="icon" href="favicon.svg" type="image/svg+xml">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="preconnect" href="https://images.pexels.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
-<link rel="stylesheet" href="styles.css?v=94">
+  /* meta en esquinas */
+  .meta{position:absolute;z-index:3;font-size:11.5px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
+  .meta.tl{top:26px;left:28px}
+  .meta.bl{bottom:26px;left:28px}
+  .meta.br{bottom:26px;right:28px;text-align:right;line-height:1.5}
+  .wm{font-size:19px;font-weight:800;letter-spacing:-.02em;color:var(--ink);text-transform:none}
+  .wm .x{color:var(--blue)}
+  .meta a{text-decoration:none;color:var(--muted)}.meta a:hover{color:var(--ink-2)}
+  /* bloque de lanzamiento (arriba dcha) — legible, no minúsculo */
+  .launch{position:absolute;z-index:3;top:24px;right:28px;text-align:right;line-height:1.35}
+  .launch .l1{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+  .launch .l2{margin-top:3px;font-size:15px;font-weight:800;letter-spacing:-.01em;color:var(--ink)}
+  .launch .l3{margin-top:2px;font-size:13px;font-weight:750;color:var(--blue-ink);font-variant-numeric:tabular-nums}
+  @media(max-width:720px){
+    .meta.br{display:none}
+    .launch{position:static;text-align:center;margin:0 auto 4px}
+    .launch .l1{display:none}
+    .meta.bl{left:0;right:0;text-align:center}
+    .meta.tl{position:static;text-align:center;margin-bottom:14px}
+    .stage{padding-top:28px}
+  }
+
+  /* núcleo */
+  .core{position:relative;z-index:2;width:100%;max-width:900px;margin:0 auto;text-align:center}
+  .kick{font-size:12.5px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--blue)}
+  h1{margin-top:20px;font-size:clamp(46px,10.5vw,116px);font-weight:800;letter-spacing:-.05em;line-height:.9;text-wrap:balance}
+  .cyc{position:relative;display:inline-block;min-width:1ch}
+  .cyc span{transition:opacity .4s ease, transform .4s cubic-bezier(.2,.8,.2,1);display:inline-block}
+  .sub{margin:26px auto 0;max-width:540px;font-size:clamp(16px,2.3vw,20px);line-height:1.5;color:var(--ink-2)}
+  .sub b{color:var(--ink);font-weight:700}
+
+  /* form */
+  form{margin:34px auto 0;max-width:440px}
+  .box{background:var(--card);border:1px solid var(--line-2);border-radius:18px;padding:8px;
+    box-shadow:0 24px 60px -34px rgba(10,12,17,.5)}
+  .inp{width:100%;background:transparent;border:0;border-radius:12px;padding:15px 14px;font-size:16px;color:var(--ink);outline:0;font-family:inherit}
+  .inp::placeholder{color:var(--muted)}
+  .inp + .inp{border-top:1px solid var(--line)}
+  .inp:focus{background:var(--blue-soft)}
+  .go{width:100%;margin-top:8px;background:var(--ink);color:#fff;border:0;border-radius:13px;padding:16px;font-size:16px;font-weight:750;
+    letter-spacing:-.01em;cursor:pointer;transition:transform .1s,background .2s}
+  .go:hover{background:#000}
+  .go:active{transform:scale(.985)}
+  .go:disabled{opacity:.6;cursor:default}
+  .err{margin-top:10px;font-size:13px;font-weight:650;color:#CE3A30}
+  .fine{margin-top:14px;font-size:12.5px;color:var(--muted)}
+  .fine a{color:var(--ink-2)}
+  .proof{margin-top:10px;font-size:13px;color:var(--ink-2)}
+  .proof b{color:var(--ink);font-weight:750}
+
+  /* éxito */
+  .ok{margin:34px auto 0;max-width:440px}
+  .ok .xx{font-size:40px;font-weight:800;color:var(--blue);line-height:1}
+  .ok .h{margin-top:12px;font-size:23px;font-weight:800;letter-spacing:-.02em;text-wrap:balance}
+  .ok .num{color:var(--blue-ink)}
+  .ok .p{margin:10px auto 0;max-width:360px;font-size:15px;color:var(--ink-2);line-height:1.5;text-wrap:balance}
+  .ok .p b{color:var(--ink)}
+  .share{margin-top:18px;display:flex;gap:10px}
+  .sh{flex:1;text-decoration:none;text-align:center;border:1.5px solid var(--line-2);border-radius:12px;padding:13px;
+    font-size:14px;font-weight:700;color:var(--ink);cursor:pointer;transition:border-color .15s,background .15s}
+  .sh:hover{border-color:var(--blue);background:var(--blue-soft)}
+  .sh.wa{background:var(--ink);color:#fff;border-color:var(--ink)}
+  .follow{margin-top:14px;font-size:13px;color:var(--muted)}.follow a{color:var(--blue-ink);font-weight:700;text-decoration:none}
+
+  @media(prefers-reduced-motion:reduce){.cyc span{transition:none}}
+</style>
 </head>
 <body>
-
-<a class="skip" href="#lista">Ir a la lista de espera</a>
-<div class="prog" id="prog" aria-hidden="true"></div>
-
-<header class="nav" id="nav">
-  <nav class="nav__in" aria-label="Principal">
-    <a class="marca" href="#top" aria-label="NYXA, inicio">
-      NY<span class="marca__x" aria-hidden="true"><svg viewBox="0 0 20 20"><line x1="2" y1="18" x2="18" y2="2"/><line x1="18" y1="18" x2="2" y2="2"/></svg></span>A
-    </a>
-  <nav class="nav__links" aria-label="Secciones">
-    <a href="index.html#gesto" aria-current="page">Cómo funciona</a>
-    <a href="ciudades.html">Ciudades</a>
-    <a href="seguridad.html">Seguridad</a>
-    <a href="manifiesto.html">Quiénes somos</a>
-    <a href="empresas.html">Empresas</a>
-  </nav>
-  <button class="burger" aria-label="Abrir menú" aria-expanded="false"><span></span></button>
-    <a class="pill" href="#lista">Entrar</a>
-  </nav>
-</header>
-
-<main id="top">
-
-<!-- ═══════════════ 00 · LA APERTURA ═══════════════
-     La primera frase. La firma. «It always starts with a swipe» → esto. -->
-<section class="apertura" id="apertura" aria-labelledby="ap">
-  <div class="ap__in">
-    <h1 class="ap__t" id="ap">
-      <span class="ap__l"><em>Todo</em> <em>empieza</em></span>
-      <span class="ap__l"><em>con</em> <em>un</em> <em class="xword">NY<span class="xword__x" aria-hidden="true"><svg viewBox="0 0 20 20"><line x1="2" y1="18" x2="18" y2="2"/><line x1="18" y1="18" x2="2" y2="2"/></svg></span>A</em><em class="az">.</em></span>
-    </h1>
-    <p class="ap__s">Eliges qué y con quién. NYXA da el&nbsp;paso.</p>
-    <div class="ap__act">
-      <a class="cta cta--hero" href="#lista">
-        <span>Entrar en la lista</span>
-        <span class="cta__x" aria-hidden="true"><svg viewBox="0 0 20 20"><line x1="2" y1="18" x2="18" y2="2"/><line x1="18" y1="18" x2="2" y2="2"/></svg></span>
-      </a>
-    </div>
-    <span class="scrollcue" aria-hidden="true"><span class="scrollcue__dot"></span></span>
+<main class="stage">
+  <div class="meta tl"><span class="wm">NY<span class="x">X</span>A</span></div>
+  <div class="launch">
+    <div class="l1">Abrimos la primera ciudad</div>
+    <div class="l2">Valencia · 1 oct 2026</div>
+    <div class="l3">Faltan <span id="cd">—</span> días</div>
   </div>
-</section>
+  <div class="meta bl"><a href="/privacidad.html">Privacidad</a> · <a href="/terminos.html">Términos</a></div>
+  <div class="meta br">Menos pantalla.<br>Más vida.</div>
 
-<!-- ═══════════════ 01 · EL BUCLE ═══════════════
-     Negro. El reloj da la vuelta entera y te deja donde estabas. -->
-<section class="bucle" id="bucle" aria-labelledby="frB">
-  <div class="fijo">
-    <p class="dia" id="dia">Domingo</p>
-    <p class="hora" id="hora">23:47</p>
-    <p class="frase" id="h1">
-      <span id="frA">No ha pasado nada esta semana.</span>
-      <span class="az" id="frB">Otra vez.</span>
-    </p>
-    <p class="claim">NYXA — Eliges qué vivir y con quién. La propuesta,&nbsp;hecha.</p>
-    <span class="baja" id="baja" aria-hidden="true">Baja</span>
-  </div>
-</section>
+  <div class="core">
+    <div class="kick">Conoce gente exactamente igual que tú</div>
+    <h1>Haz que hoy<br>pase <span class="cyc" id="cyc"><span>algo.</span></span></h1>
+    <p class="sub">Dime qué quieres vivir.<br><b>Te digo con quién.</b></p>
 
-<!-- ═══════════════ 02 · EL NÚMERO ═══════════════
-     Una cifra gigante que baja de 800 a 6 con el scroll. Rodeado de
-     gente, con seis vives algo de verdad. Se entiende sin tocar nada. -->
-<section class="numero" id="numero" aria-labelledby="h2-num">
-  <div class="fijo">
-    <p class="num__k">En tu&nbsp;móvil</p>
-    <p class="num__big" id="numBig">800</p>
-    <h2 class="num__t" id="h2-num">
-      <span id="numA">personas guardadas.</span>
-      <span class="az" id="numB">Con seis vives algo.</span>
-    </h2>
-    <p class="num__p" id="numP">No es que no tengas a nadie. Es que nadie da el primer&nbsp;paso.</p>
-  </div>
-</section>
-
-<!-- ═══════════════ 03 · EL GESTO ═══════════════
-     Eliges con palabras. La foto no existe todavía. -->
-<section class="gesto" id="gesto" aria-labelledby="h2-ges">
-  <p class="ind">03 · Esto es la&nbsp;app</p>
-  <h2 class="tit" id="h2-ges">Aquí no se escribe a&nbsp;nadie.<br><span class="az">Se&nbsp;propone.</span></h2>
-
-  <!-- El producto, dentro de la historia: un teléfono con la interfaz real,
-       y tú avanzas por el flujo tocando la propia pantalla. -->
-  <div class="demo">
-    <div class="fono" id="fono">
-      <div class="fono__cuerpo">
-        <span class="fono__notch" aria-hidden="true"></span>
-        <div class="fono__scr" id="fscr">
-          <div class="app__bar">
-            <span class="app__logo">NY<i aria-hidden="true">✕</i>A</span>
-            <span class="app__paso" id="appPaso">Paso 1 de 3</span>
-          </div>
-
-          <!-- P1 · elegir experiencia -->
-          <div class="scr is-on" data-fp="1">
-            <p class="scr__h">¿Qué quieres&nbsp;vivir?</p>
-            <button class="tile" type="button"
-                    data-exp="Amanecer en la Albufera"
-                    data-img="https://images.pexels.com/photos/32876381/pexels-photo-32876381.jpeg?auto=compress&cs=tinysrgb&w=1800">
-              <span class="tile__t">Amanecer en la Albufera</span>
-              <span class="tile__m">La Albufera · madrugada</span>
-            </button>
-            <button class="tile" type="button"
-                    data-exp="Hoguera en el Saler"
-                    data-img="https://images.pexels.com/photos/7148674/pexels-photo-7148674.jpeg?auto=compress&cs=tinysrgb&w=1800">
-              <span class="tile__t">Hoguera en el Saler</span>
-              <span class="tile__m">El Saler · noche</span>
-            </button>
-            <button class="tile" type="button"
-                    data-exp="El concierto del jueves"
-                    data-img="https://images.pexels.com/photos/1105666/pexels-photo-1105666.jpeg?auto=compress&cs=tinysrgb&w=1800">
-              <span class="tile__t">El concierto del jueves</span>
-              <span class="tile__m">Sala · 22:00</span>
-            </button>
-          </div>
-
-          <!-- P2 · elegir persona -->
-          <div class="scr" data-fp="2">
-            <button class="volver" type="button" data-fvolver="1">← Cambiar</button>
-            <p class="scr__h">¿Con&nbsp;quién?</p>
-            <button class="fila-p" type="button" data-per="Marta" data-por="Está en tu «quiero vivir» y en el suyo">
-              <span class="fila-p__a">M</span>
-              <span class="fila-p__i"><b>Marta</b><i>Está en tu «quiero vivir» y en el suyo</i></span>
-            </button>
-            <button class="fila-p" type="button" data-per="Iván" data-por="A 15 min y nunca habéis coincidido">
-              <span class="fila-p__a">I</span>
-              <span class="fila-p__i"><b>Iván</b><i>A 15 min y nunca habéis coincidido</i></span>
-            </button>
-            <button class="fila-p" type="button" data-per="Nuria" data-por="Sale en las 9 de dos amigos tuyos">
-              <span class="fila-p__a">N</span>
-              <span class="fila-p__i"><b>Nuria</b><i>Sale en las 9 de dos amigos tuyos</i></span>
-            </button>
-          </div>
-
-          <!-- P3 · enviar (la propuesta ya está hecha) -->
-          <div class="scr scr--env" data-fp="3">
-            <button class="volver" type="button" data-fvolver="2">← Cambiar</button>
-            <p class="scr__k">Le propones a <b id="fPer">Marta</b></p>
-            <p class="scr__big" id="fExp">Amanecer en la&nbsp;Albufera</p>
-            <p class="scr__por" id="fPor">Está en tu «quiero vivir» y en el&nbsp;suyo</p>
-            <button class="fenv" type="button" id="enviar"><span id="btnT">Enviar NYXA</span></button>
-            <p class="scr__f">No escribes ni una palabra. Ya está&nbsp;redactado.</p>
-          </div>
-
-          <!-- P4 · aceptado, dentro del propio móvil -->
-          <div class="scr scr--ok" data-fp="4">
-            <span class="okp__badge">Marta ha aceptado</span>
-            <p class="okp__t" id="fOkT">Amanecer en la&nbsp;Albufera</p>
-            <p class="okp__s">Sábado · 07:00 · La&nbsp;Albufera</p>
-            <span class="okp__chat">Ahora sí: se abre el chat.</span>
-          </div>
-        </div>
+    <form id="wl" novalidate>
+      <div class="box">
+        <input class="inp" id="nombre" type="text" autocomplete="given-name" placeholder="Tu nombre" aria-label="Tu nombre" required>
+        <input class="inp" id="email" type="email" inputmode="email" autocomplete="email" placeholder="Tu email" aria-label="Tu email" required>
       </div>
-    </div>
+      <button class="go" type="submit"><span>Quiero entrar</span></button>
+      <div class="err" id="err" hidden></div>
+      <div class="proof" id="proof" hidden></div>
+    </form>
 
-    <!-- Los tres pasos, encendiéndose a la vez que el teléfono avanza. -->
-    <div class="demo__guia">
-      <ol class="como" id="como">
-        <li data-paso="1"><span class="como__n">01</span><span class="como__t">Eliges un plan.</span></li>
-        <li data-paso="2"><span class="como__n">02</span><span class="como__t">Eliges a alguien concreto.</span></li>
-        <li data-paso="3"><span class="como__n">03</span><span class="como__t">Le llega la propuesta <b>ya hecha</b>.</span></li>
-      </ol>
-      <p class="como__pie">Sin grupos. Sin «¿alguien se apunta?».<br>Y el chat <b>se gana</b>: solo se abre si&nbsp;acepta.</p>
-    </div>
-  </div>
-</section>
-
-<!-- ══════ EL MOMENTO — la primera imagen de toda la web ══════ -->
-<div class="momento" id="momento" role="dialog" aria-modal="true" aria-labelledby="momT" hidden>
-  <img id="momImg" src="" alt="">
-  <div class="momento__velo" aria-hidden="true"></div>
-  <div class="momento__c">
-    <p class="momento__k">Aceptado</p>
-    <p class="momento__t" id="momT">Amanecer en la&nbsp;Albufera</p>
-    <p class="momento__s" id="momS">con Marta · el sábado que&nbsp;viene</p>
-    <p class="momento__e">Y una semana de tu vida deja de estar&nbsp;apagada.</p>
-    <button class="cta cta--w" type="button" id="cerrarMom"><span>Seguir</span></button>
-  </div>
-</div>
-
-<!-- ═══════════════ 05 · EL RESULTADO ═══════════════
-     Continuación de la 03: qué pasa cuando aceptan. Misma estética
-     editorial, sin foto que rompa el ritmo. -->
-<section class="idea" id="result" aria-labelledby="h2-res">
-  <p class="ind">04</p>
-  <h2 class="tit" id="h2-res">Y si dice que sí,<br><span class="az">lo&nbsp;vivís</span>.</h2>
-  <p class="idea__p">Un plan, un día, alguien esperándote. <b>Una semana deja de estar&nbsp;vacía.</b></p>
-</section>
-
-<!-- ═══════════════ · EL FILTRO ═══════════════
-     Posicionamiento por contraste (Hinge/BeReal). El nombre se tacha
-     en azul al aparecer. -->
-<section class="noes" id="noes" aria-labelledby="h2-noes">
-  <p class="ind">El&nbsp;filtro</p>
-  <h2 class="tit" id="h2-noes">No es lo que ya&nbsp;conoces.</h2>
-  <ol class="nolist">
-    <li class="reveal"><span class="no">No es <s>Tinder</s>.</span><span class="por">Aquí no se escribe a desconocidos.</span></li>
-    <li class="reveal"><span class="no">No es <s>Instagram</s>.</span><span class="por">No enseñas quién quieres parecer.</span></li>
-    <li class="reveal"><span class="no">No es <s>una app de planes</s>.</span><span class="por">No hay catálogo, ni eventos, ni entradas.</span></li>
-  </ol>
-  <p class="noes__cierre reveal">Convierte las <b>ganas sueltas en planes de&nbsp;verdad</b>.</p>
-</section>
-
-<!-- ═══════════════ LAS SEMANAS ═══════════════ -->
-<section class="semanas" id="semanas" aria-labelledby="h2-sem">
-  <div class="sem__hd">
-    <div>
-      <p class="ind">05</p>
-      <h2 class="tit" id="h2-sem">Un punto.<br>Una&nbsp;semana.</h2>
-    </div>
-    <div class="edad">
-      <label for="edad">Tengo</label>
-      <input id="edad" type="number" min="14" max="89" value="20" inputmode="numeric" aria-label="Tu edad en años">
-      <span>años</span>
+    <div class="ok" id="ok" hidden>
+      <div class="xx">✕</div>
+      <div class="h" id="okH">Ya estás dentro.</div>
+      <p class="p" id="okP">Te avisaremos cuando puedas conocer gente como tú.<span id="numLine"></span></p>
+      <div class="share">
+        <a class="sh wa" id="shWa" target="_blank" rel="noopener">WhatsApp</a>
+        <button class="sh" id="shCopy" type="button">Copiar enlace</button>
+      </div>
+      <p class="follow">Trae a los tuyos y síguenos en <a href="https://instagram.com/nyxa.app" target="_blank" rel="noopener">@nyxa.app</a>.</p>
     </div>
   </div>
-
-  <div class="sem__lienzo">
-    <canvas id="rejilla" role="img" aria-label="Las 4.160 semanas de una vida. Las ya vividas aparecen apagadas."></canvas>
-  </div>
-
-  <div class="sem__pie">
-    <p class="cifra"><strong id="quedan">3120</strong></p>
-    <p class="cifra__l">Semanas que te quedan.<br><span>Las apagadas no&nbsp;vuelven.</span></p>
-  </div>
-</section>
-
-<!-- ═══════════════ 10 · ENTRAR ═══════════════ -->
-<section class="lista" id="lista" aria-labelledby="h2-lis">
-  <p class="ind">06</p>
-  <h2 class="tit tit--fin" id="h2-lis">Que no se te escape la&nbsp;vida.<br><span class="az">Sé de los&nbsp;primeros.</span></h2>
-
-  <form class="form" id="waitlist" novalidate>
-    <div class="form__r">
-      <label class="sr" for="email">Email</label>
-      <input id="email" name="email" type="email" inputmode="email" autocomplete="email" required placeholder="tu@email.com">
-      <button class="cta" type="submit" id="submit"><span>Entrar</span><span class="cta__x" aria-hidden="true"><svg viewBox="0 0 20 20"><line x1="2" y1="18" x2="18" y2="2"/><line x1="18" y1="18" x2="2" y2="2"/></svg></span></button>
-    </div>
-    <p class="form__e" id="err" role="alert" hidden></p>
-    <p class="form__m">Te escribimos una vez: el día que abrimos. <a href="privacidad.html">Privacidad</a>.</p>
-  </form>
-
-  <div class="ok" id="ok" hidden>
-    <p class="ok__t">Estás&nbsp;dentro.</p>
-    <p class="ok__s">Abrimos Valencia cuando seamos suficientes para que valga la pena. Te&nbsp;avisamos.</p>
-  </div>
-
-  <details class="faq">
-    <summary>Preguntas <i aria-hidden="true"></i></summary>
-    <div class="faq__b">
-      <h3 class="faq__h">¿Qué es NYXA,&nbsp;exactamente?</h3>
-      <p>Una app para vivir experiencias reales con gente que quiere vivir lo mismo que tú. Dices qué quieres vivir este año y NYXA te dice con&nbsp;quién.</p>
-      <h3 class="faq__h">¿Es&nbsp;Tinder?</h3>
-      <p>No. Aquí no se escribe a desconocidos: propones vivir algo concreto, y solo si aceptan hay&nbsp;conversación.</p>
-      <h3 class="faq__h">¿Es una app de&nbsp;planes?</h3>
-      <p>No hay catálogo, ni eventos, ni entradas. El plan es la excusa; la compañía es el&nbsp;producto.</p>
-      <h3 class="faq__h">¿Y si no conozco a&nbsp;nadie?</h3>
-      <p>De eso&nbsp;va.</p>
-      <h3 class="faq__h">¿Cuánto&nbsp;cuesta?</h3>
-      <p>Gratis.</p>
-      <h3 class="faq__h">¿Por qué solo&nbsp;Valencia?</h3>
-      <p>Porque una app social vacía no le sirve a nadie. Preferimos ser imprescindibles para mil personas antes que irrelevantes para un&nbsp;millón.</p>
-    </div>
-  </details>
-</section>
-
 </main>
 
-<footer class="ft">
-  <span class="marca marca--ft">NY<span class="marca__x" aria-hidden="true"><svg viewBox="0 0 20 20"><line x1="2" y1="18" x2="18" y2="2"/><line x1="18" y1="18" x2="2" y2="2"/></svg></span>A</span>
-  <p class="ft__c">Valencia · © <span id="y">2026</span></p>
-  <nav class="ft__n" aria-label="Enlaces">
-    <a href="seguridad.html">Seguridad</a>
-    <a href="ciudades.html">Ciudades</a>
-    <a href="empresas.html">Empresas</a>
-    <a href="manifiesto.html">Quiénes somos</a>
-    <a href="privacidad.html">Privacidad</a>
-    <a href="terminos.html">Términos</a>
-    <a href="mailto:holanyxa@gmail.com">holanyxa@gmail.com</a>
-  </nav>
-</footer>
+<script src="/config.js"></script>
+<script>
+(function(){
+  var $ = function(s){return document.querySelector(s)};
+  var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion:reduce)").matches;
 
-<script src="config.js?v=79"></script>
-<script src="script.js?v=80" defer></script>
-<script>document.addEventListener("click",function(e){var b=e.target.closest(".burger");if(!b)return;var n=b.closest(".nav");n.classList.toggle("open");b.setAttribute("aria-expanded",n.classList.contains("open"));});</script>
+  // Cuenta atrás (días) al 1-oct-2026.
+  var target = new Date("2026-10-01T00:00:00+02:00").getTime();
+  $("#cd").textContent = Math.max(0, Math.ceil((target - Date.now())/86400000));
+
+  // La palabra que cambia: "algo" se vuelve concreto (los mundos, en su color).
+  var PAL = [
+    { t:"algo.",        c:"#2f66ff" },
+    { t:"una cena.",    c:"#E76F51" },
+    { t:"un concierto.",c:"#8B5CF6" },
+    { t:"una ruta.",    c:"#57A773" },
+    { t:"un planazo.",  c:"#2596BE" },
+    { t:"algo real.",   c:"#E76F51" }
+  ];
+  var cyc = $("#cyc"), i = 0;
+  cyc.firstElementChild.style.color = PAL[0].c;
+  if(!reduce){
+    setInterval(function(){
+      i = (i+1)%PAL.length;
+      var out = cyc.firstElementChild;
+      out.style.opacity = 0; out.style.transform = "translateY(-10px)";
+      setTimeout(function(){
+        var s = document.createElement("span");
+        s.textContent = PAL[i].t; s.style.color = PAL[i].c;
+        s.style.opacity = 0; s.style.transform = "translateY(10px)";
+        cyc.innerHTML = ""; cyc.appendChild(s);
+        requestAnimationFrame(function(){ s.style.opacity = 1; s.style.transform = "none"; });
+      }, 380);
+    }, 2200);
+  }
+
+  // Supabase (solo-insertar) + contador público (RPC opcional).
+  var CFG = window.NEXA || {};
+  var URL = CFG.SUPABASE_URL || "", KEY = CFG.SUPABASE_ANON_KEY || "", TABLA = CFG.TABLA || "waitlist";
+  var H = { "Content-Type":"application/json", apikey:KEY, Authorization:"Bearer "+KEY };
+  async function contar(){ if(!URL||!KEY) return null;
+    try{ var r=await fetch(URL+"/rest/v1/rpc/waitlist_valencia_count",{method:"POST",headers:H,body:"{}"});
+      if(!r.ok) return null; var n=await r.json(); return (typeof n==="number")?n:null; }catch(e){ return null; } }
+  contar().then(function(n){ var p=$("#proof"); if(!p) return;
+    if(n!=null&&n>=25){ p.innerHTML='Ya somos <b>'+n.toLocaleString("es-ES")+'</b> esperando en Valencia.'; p.hidden=false; } });
+
+  var valido=function(v){ return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test((v||"").trim()); };
+  $("#wl").addEventListener("submit", async function(e){
+    e.preventDefault();
+    var nombre=$("#nombre"), email=$("#email"), btn=$(".go"), err=$("#err");
+    err.hidden=true;
+    if(!nombre.value.trim()){ err.textContent="¿Cómo te llamas?"; err.hidden=false; nombre.focus(); return; }
+    if(!valido(email.value)){ err.textContent="Ese email no parece un email."; err.hidden=false; email.focus(); return; }
+    btn.disabled=true; btn.firstElementChild.textContent="Un segundo…";
+    var datos={ nombre:nombre.value.trim(), email:email.value.trim().toLowerCase(), ciudad:"valencia", acepta_novedades:true };
+    async function insertar(payload){
+      var res=await fetch(URL+"/rest/v1/"+TABLA,{method:"POST",headers:Object.assign({Prefer:"return=minimal"},H),body:JSON.stringify(payload)});
+      if(res.status===409) return "dup";           // email ya en la lista (unique)
+      if(res.ok) return "ok";
+      // Si la columna 'nombre' aún no existe, reintenta SIN ella: el email igual se guarda.
+      if("nombre" in payload){ var d2=Object.assign({},payload); delete d2.nombre;
+        var r2=await fetch(URL+"/rest/v1/"+TABLA,{method:"POST",headers:Object.assign({Prefer:"return=minimal"},H),body:JSON.stringify(d2)});
+        if(r2.status===409) return "dup"; if(r2.ok) return "ok"; throw new Error(await r2.text());
+      }
+      throw new Error(await res.text());
+    }
+    try{
+      var estado = (URL&&KEY) ? await insertar(datos) : "ok";
+      if(estado==="dup"){
+        $("#okH").textContent = "Ya estabas dentro 😉";
+        $("#okP").innerHTML = "Te avisaremos cuando abra Valencia. Trae a los tuyos mientras tanto.";
+      }
+      $("#wl").hidden=true;
+      var ok=$("#ok"); ok.hidden=false;
+      if(estado!=="dup"){ var n=await contar(); if(n!=null){ $("#numLine").innerHTML=' Eres el <span class="num">nº '+n.toLocaleString("es-ES")+'</span> de Valencia.'; } }
+      var link="https://nexavalencia.vercel.app/";
+      var msg="Me acabo de apuntar a NYXA — la app para vivir cosas de verdad en Valencia (no es Tinder, es salir). Abre el 1 de octubre. Entra tú también: "+link;
+      $("#shWa").href="https://wa.me/?text="+encodeURIComponent(msg);
+      $("#shCopy").addEventListener("click", function(){
+        var self=this;
+        function ok(){ self.textContent="¡Copiado!"; setTimeout(function(){ self.textContent="Copiar enlace"; }, 1800); }
+        function legacy(){ try{ var ta=document.createElement("textarea"); ta.value=link; ta.setAttribute("readonly",""); ta.style.position="fixed"; ta.style.top="0"; ta.style.opacity="0"; document.body.appendChild(ta); ta.focus(); ta.select(); ta.setSelectionRange(0,link.length); var done=document.execCommand("copy"); document.body.removeChild(ta); done?ok():(self.textContent=link); }catch(e){ self.textContent=link; } }
+        if(navigator.clipboard && navigator.clipboard.writeText){ navigator.clipboard.writeText(link).then(ok).catch(legacy); }
+        else { legacy(); }
+      });
+      ok.setAttribute("tabindex","-1"); ok.focus();
+    }catch(ex){ console.error(ex); btn.disabled=false; btn.firstElementChild.textContent="Quiero entrar";
+      err.textContent="No ha entrado. Prueba otra vez en un momento."; err.hidden=false; }
+  });
+})();
+</script>
 </body>
 </html>

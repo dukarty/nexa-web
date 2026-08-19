@@ -1,27 +1,18 @@
 {
-  "$schema": "https://openapi.vercel.sh/vercel.json",
   "cleanUrls": true,
   "trailingSlash": false,
-  "headers": [
-    {
-      "source": "/(.*)",
-      "headers": [
-        { "key": "X-Content-Type-Options", "value": "nosniff" },
-        { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" },
-        { "key": "X-Frame-Options", "value": "SAMEORIGIN" }
-      ]
-    },
-    {
-      "source": "/(.*).(css|js)",
-      "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=0, must-revalidate" }
-      ]
-    },
-    {
-      "source": "/(.*).(jpg|png|webp|avif|svg|woff2)",
-      "headers": [
-        { "key": "Cache-Control", "value": "public, max-age=31536000, immutable" }
-      ]
-    }
+  "redirects": [
+    { "source": "/ciudades", "destination": "/", "permanent": false },
+    { "source": "/ciudades.html", "destination": "/", "permanent": false },
+    { "source": "/manifiesto", "destination": "/", "permanent": false },
+    { "source": "/manifiesto.html", "destination": "/", "permanent": false },
+    { "source": "/seguridad", "destination": "/", "permanent": false },
+    { "source": "/seguridad.html", "destination": "/", "permanent": false },
+    { "source": "/empresas", "destination": "/", "permanent": false },
+    { "source": "/empresas.html", "destination": "/", "permanent": false },
+    { "source": "/panel", "destination": "/", "permanent": false },
+    { "source": "/panel.html", "destination": "/", "permanent": false },
+    { "source": "/aviso-legal", "destination": "/", "permanent": false },
+    { "source": "/aviso-legal.html", "destination": "/", "permanent": false }
   ]
 }
