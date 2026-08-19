@@ -63,8 +63,8 @@
   .core{position:relative;z-index:2;width:100%;max-width:900px;margin:0 auto;text-align:center}
   .kick{font-size:12.5px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--blue)}
   h1{margin-top:20px;font-size:clamp(46px,10.5vw,116px);font-weight:800;letter-spacing:-.05em;line-height:.9;text-wrap:balance}
-  .cyc{position:relative;display:inline-block;min-width:1ch}
-  .cyc span{transition:opacity .4s ease, transform .4s cubic-bezier(.2,.8,.2,1);display:inline-block}
+  .cyc{display:inline-block;white-space:nowrap;transition:width .42s cubic-bezier(.4,0,.2,1)}
+  .cyc span{display:inline-block;transition:opacity .32s ease}
   .sub{margin:26px auto 0;max-width:540px;font-size:clamp(16px,2.3vw,20px);line-height:1.5;color:var(--ink-2)}
   .sub b{color:var(--ink);font-weight:700}
 
@@ -165,18 +165,24 @@
   var cyc = $("#cyc"), i = 0;
   cyc.firstElementChild.style.color = PAL[0].c;
   if(!reduce){
+    // Fija el ancho actual para poder animarlo: al cambiar de palabra, el ancho
+    // transiciona suave (la línea centrada se recoloca despacio, sin el salto feo).
+    var fija = function(){ var c=cyc.firstElementChild; if(c) cyc.style.width = Math.ceil(c.getBoundingClientRect().width) + "px"; };
+    fija();
     setInterval(function(){
-      i = (i+1)%PAL.length;
       var out = cyc.firstElementChild;
-      out.style.opacity = 0; out.style.transform = "translateY(-10px)";
+      out.style.opacity = 0;
       setTimeout(function(){
+        i = (i+1)%PAL.length;
         var s = document.createElement("span");
-        s.textContent = PAL[i].t; s.style.color = PAL[i].c;
-        s.style.opacity = 0; s.style.transform = "translateY(10px)";
+        s.textContent = PAL[i].t; s.style.color = PAL[i].c; s.style.opacity = 0;
         cyc.innerHTML = ""; cyc.appendChild(s);
-        requestAnimationFrame(function(){ s.style.opacity = 1; s.style.transform = "none"; });
-      }, 380);
-    }, 2200);
+        cyc.style.width = Math.ceil(s.getBoundingClientRect().width) + "px";
+        requestAnimationFrame(function(){ s.style.opacity = 1; });
+      }, 320);
+    }, 2400);
+    // En resize (cambia el tamaño de letra) re-ajusta el ancho SIN animar, para que no clipe.
+    addEventListener("resize", function(){ cyc.style.transition="none"; fija(); requestAnimationFrame(function(){ cyc.style.transition=""; }); });
   }
 
   // Supabase (solo-insertar) + contador público (RPC opcional).
