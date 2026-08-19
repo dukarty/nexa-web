@@ -346,6 +346,40 @@ html{scroll-padding-top:96px}                 /* anclajes del menú no quedan ba
 ::-moz-selection{background:var(--az);color:#fff}
 body{text-rendering:optimizeLegibility;-moz-osx-font-smoothing:grayscale}
 img{max-width:100%;height:auto}
+
+/* ═══ REDISEÑO VISUAL: aire, diagramas, tabla, manifiesto ═══ */
+.sec{padding:clamp(100px,14vw,180px) var(--pad)}
+.motor-diag{display:flex;align-items:stretch;gap:clamp(12px,2vw,22px);margin-top:clamp(44px,6vw,76px);flex-wrap:wrap}
+.nodo{flex:1;min-width:180px;background:var(--card);border:1.5px solid var(--linea);border-radius:22px;padding:clamp(24px,2.8vw,36px);display:flex;flex-direction:column;gap:8px}
+.nodo--az{background:var(--az);border-color:var(--az);color:#fff;box-shadow:0 26px 54px -26px rgba(47,102,255,.55)}
+.nodo__t{font-size:clamp(1.3rem,2.4vw,1.9rem);font-weight:900;letter-spacing:-.03em}
+.nodo__s{font-size:.95rem;font-weight:600;color:var(--gris)}
+.nodo--az .nodo__s{color:rgba(255,255,255,.85)}
+.flecha{align-self:center;color:var(--gris-2);font-size:1.7rem;flex:none;font-weight:700}
+@media(max-width:720px){.motor-diag{flex-direction:column}.flecha{transform:rotate(90deg)}}
+.diag-cap{margin-top:24px;font-size:.98rem;color:var(--gris-2);font-weight:600}
+.compuesto{margin-top:clamp(40px,6vw,72px);display:flex;align-items:center;justify-content:center;gap:clamp(18px,4vw,54px);flex-wrap:wrap}
+.compuesto__n{font-size:clamp(4rem,14vw,11rem);font-weight:900;line-height:.8;letter-spacing:-.06em;color:#fff;font-variant-numeric:tabular-nums}
+.compuesto__n.az{color:var(--az)}
+.compuesto__x{font-size:clamp(2rem,5vw,4rem);color:rgba(255,255,255,.35)}
+.compuesto__l{flex-basis:100%;text-align:center;margin-top:22px;font-size:.95rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--az)}
+.vstabla{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:clamp(40px,5vw,64px)}
+.vstabla__col{border:1.5px solid var(--linea);border-radius:22px;padding:clamp(24px,3vw,38px);background:var(--card)}
+.vstabla__col--az{background:var(--az);border-color:var(--az);color:#fff}
+.vstabla h3{font-size:clamp(1.1rem,2vw,1.5rem);font-weight:900;letter-spacing:-.03em;margin-bottom:20px}
+.vstabla ul{list-style:none;display:flex;flex-direction:column;gap:0}
+.vstabla li{font-size:clamp(1.05rem,1.9vw,1.4rem);font-weight:800;letter-spacing:-.02em;padding:14px 0;border-bottom:1px solid var(--linea)}
+.vstabla__col--az li{border-bottom-color:rgba(255,255,255,.22)}
+.vstabla li:last-child{border-bottom:0}
+.manif{text-align:center;padding:clamp(120px,20vw,240px) var(--pad)}
+.manif h2{font-size:clamp(2.8rem,9vw,7.5rem);font-weight:900;line-height:.94;letter-spacing:-.05em;color:#fff;text-wrap:balance;max-width:16ch;margin:0 auto}
+.manif p{margin-top:26px;font-size:clamp(1.1rem,2vw,1.5rem);font-weight:600;color:rgba(255,255,255,.72)}
+.sello{display:inline-flex;align-items:center;gap:8px;font-size:.72rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#fff;background:rgba(47,102,255,.22);padding:7px 14px;border-radius:999px;margin-bottom:22px}
+.callouts{display:flex;flex-wrap:wrap;gap:14px 30px;justify-content:center;margin-top:30px}
+.callouts span{font-size:.95rem;font-weight:700;color:rgba(255,255,255,.78)}
+.plan__wait{display:inline-block;margin-top:14px;font-size:.66rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--gris-2)}
+.cierre-cta{margin-top:clamp(44px,5vw,64px);text-align:center}
+.cierre-cta .friccion{margin-top:18px;font-size:.78rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase;color:var(--gris-2)}
 </style>
 </head>
 <body class="nav-negro">
@@ -367,92 +401,41 @@ img{max-width:100%;height:auto}
 <!-- 1 · HERO -->
 <section class="hero">
   <svg class="hero__x" viewBox="0 0 20 20" aria-hidden="true"><line x1="2" y1="18" x2="18" y2="2"/><line x1="18" y1="18" x2="2" y2="2"/></svg>
-  <h1 class="tit tit--xl">Más clientes.<br>Los que&nbsp;<span class="az">vuelven</span>.</h1>
-  <p class="hero__s lead">No compras anuncios ni alcance. Abres un plan y NYXA lo lleva a la gente de tu ciudad que quiere vivirlo —por interés y cercanía— hasta que aparece. <span class="b">Cuerpos reales, no&nbsp;impresiones.</span></p>
+  <p class="kick" style="color:var(--gris-2);margin-bottom:24px">NYXA para empresas · Valencia 2026</p>
+  <h1 class="tit tit--xl">O eres tú, o es el de&nbsp;<span class="az">enfrente</span>.</h1>
+  <p class="hero__s lead">Abres un plan. Te llevamos gente real, no impresiones.</p>
   <div class="hero__acc">
     <button class="cta" data-abrir><span>Reserva tu sitio</span><span class="cta__x" aria-hidden="true"><svg viewBox="0 0 20 20"><line x1="2" y1="18" x2="18" y2="2"/><line x1="18" y1="18" x2="2" y2="2"/></svg></span></button>
-    <a class="cta cta--gh" href="panel.html"><span>Ver el panel</span></a>
+    <a class="cta cta--gh" href="#como"><span>Cómo funciona</span></a>
   </div>
-  <p class="hero__meta">Aún no está abierto · Valencia 2026 · Reserva tu&nbsp;sitio</p>
+  <p class="hero__meta" style="color:var(--gris-2)">Aún no lanzado · El panel es una maqueta</p>
 </section>
 
-<!-- 2 · POR QUÉ FUNCIONA (motor R) -->
-<section class="sec sec--negro">
+<!-- 2 · CÓMO FUNCIONA -->
+<section class="sec sec--papel" id="como">
   <div class="in">
-    <p class="kick rev">Por qué&nbsp;funciona</p>
-    <div class="motor" style="margin-top:clamp(30px,4vw,52px)">
-      <div class="rev">
-        <div class="rnum">1,3<small>El motor R</small></div>
-        <p class="lead" style="margin-top:22px">Cada encuentro <span class="b">trae al siguiente</span>: alguien viene, trae a un +1, ese +1 vuelve con otro. El anuncio se apaga cuando dejas de pagar. Esto crece&nbsp;solo.</p>
-      </div>
-      <ol class="rflow rev">
-        <li><span class="n">01</span><span>Propones un plan a <b>tu comunidad</b>.</span></li>
-        <li><span class="n">02</span><span>Dos personas lo viven <b>en tu local</b>.</span></li>
-        <li><span class="n">03</span><span>Una trae a alguien nuevo la próxima vez.</span></li>
-        <li><span class="n">04</span><span>Ese alguien <b>repite</b>. Y trae a otro.</span></li>
-      </ol>
+    <p class="kick rev">Cómo funciona</p>
+    <h2 class="tit rev" style="margin-top:16px;max-width:16ch">Tú traes el plan.<br>Nosotros la&nbsp;<span class="az">gente</span>.</h2>
+    <div class="motor-diag rev">
+      <div class="nodo"><span class="nodo__t">Tu plan</span><span class="nodo__s">Una cena, una ruta, un torneo, un run club</span></div>
+      <span class="flecha" aria-hidden="true">→</span>
+      <div class="nodo nodo--az"><span class="nodo__t">El motor</span><span class="nodo__s">Lo reparte por encaje: interés + zona</span></div>
+      <span class="flecha" aria-hidden="true">→</span>
+      <div class="nodo"><span class="nodo__t">Gente real</span><span class="nodo__s">Aparece quien encaja. Cuerpos, no impresiones</span></div>
     </div>
+    <p class="diag-cap rev">Una pizzería abre una cena; aparece quien vive cerca y le encaja.</p>
   </div>
 </section>
 
-<!-- 3 · LO QUE CONSIGUES -->
-<section class="sec">
-  <div class="in">
-    <p class="kick rev">Lo que&nbsp;consigues</p>
-    <h2 class="tit rev" style="margin-top:16px;max-width:16ch">Tres cosas que un anuncio no te&nbsp;da.</h2>
-    <div class="tres">
-      <div class="card rev"><p class="card__k">01</p><p class="card__t">Gente&nbsp;nueva</p><p class="card__p">Personas que no te conocían y llegan porque alguien las trajo a vivir algo&nbsp;contigo.</p></div>
-      <div class="card rev"><p class="card__k">02</p><p class="card__t">Que&nbsp;repite</p><p class="card__p">No una visita suelta: un motivo para volver. Mides cuánta gente vuelve y cada&nbsp;cuánto.</p></div>
-      <div class="card rev"><p class="card__k">03</p><p class="card__t">Que llena tu&nbsp;local</p><p class="card__p">Activa las franjas flojas. Un martes vacío se convierte en un martes con una mesa&nbsp;reservada.</p></div>
-    </div>
-  </div>
-</section>
-
-<!-- 3b · EXPERIENCIAS LISTAS PARA ACTIVAR -->
-<section class="sec sec--papel">
-  <div class="in">
-    <p class="kick rev">Por qué a ti</p>
-    <h2 class="tit rev" style="margin-top:16px;max-width:16ch">En tu esquina cabe uno.<br>O eres tú o es el de&nbsp;<span class="az">enfrente</span>.</h2>
-    <p class="lead rev" style="max-width:54ch">Imagina una pizzería que monta un run club mensual: NYXA llevaría ese plan a los <b>runners de su calle</b>, y se llenaría de clientes nuevos que vuelven. Ese plan podías abrirlo tú. La comunidad que sale a vivir cosas en tu radio es densa, pero <b>finita</b>: cuando piense en salir, aparecerá un&nbsp;nombre.</p>
-    <div class="exps">
-      <article class="exp rev" data-abrir role="button" tabindex="0">
-        <span class="exp__tag">Cata · 2 h</span>
-        <h3 class="exp__t">Cata para gente con&nbsp;ganas</h3>
-        <p class="exp__p">12 plazas, una mesa larga y el jueves que&nbsp;elijas.</p>
-        <span class="exp__cta">Me interesa →</span>
-      </article>
-      <article class="exp rev" data-abrir role="button" tabindex="0">
-        <span class="exp__tag">Ruta · sábado</span>
-        <h3 class="exp__t">Ruta y almuerzo de los&nbsp;tuyos</h3>
-        <p class="exp__p">Salís juntos, acabáis en tu local. El finde que te&nbsp;cuadre.</p>
-        <span class="exp__cta">Me interesa →</span>
-      </article>
-      <article class="exp rev" data-abrir role="button" tabindex="0">
-        <span class="exp__tag">Torneo · noche</span>
-        <h3 class="exp__t">Torneo relámpago entre&nbsp;desconocidos</h3>
-        <p class="exp__p">Llena una franja floja y que la gente vuelva a por la&nbsp;revancha.</p>
-        <span class="exp__cta">Me interesa →</span>
-      </article>
-      <article class="exp rev" data-abrir role="button" tabindex="0">
-        <span class="exp__tag">Taller · entre semana</span>
-        <h3 class="exp__t">Taller con after de&nbsp;presentaciones</h3>
-        <p class="exp__p">Aprenden algo contigo y se quedan a&nbsp;conocerse.</p>
-        <span class="exp__cta">Me interesa →</span>
-      </article>
-    </div>
-    <p class="exps__nota rev">¿No está la tuya? La montamos contigo. Todas pasan <b>control de calidad</b>. ¿Un negocio amigo? <b>Co-actívala</b>.</p>
-  </div>
-</section>
-
-<!-- 4 · EL PANEL (preview) -->
-<section class="sec sec--negro">
-  <div class="in">
-    <p class="kick rev">El&nbsp;panel</p>
-    <h2 class="tit rev" style="margin-top:16px;max-width:18ch">Todo lo que pasa,<br>en números que&nbsp;entiendes.</h2>
-    <div class="mock rev" aria-hidden="true">
+<!-- 3 · EL PANEL (maqueta) -->
+<section class="sec sec--negro" id="panel">
+  <div class="in" style="text-align:center">
+    <span class="sello rev">Maqueta</span>
+    <h2 class="tit rev" style="max-width:14ch;margin:0 auto">Todo, <span class="az">medido</span>.</h2>
+    <div class="mock rev" aria-hidden="true" style="margin-top:clamp(40px,6vw,72px)">
       <div class="mock__bar"><span class="mock__dot"></span><span class="mock__dot"></span><span class="mock__dot"></span></div>
       <div class="mock__body">
-        <div class="mock__side"><span class="on">Resumen</span><span>Encuentros</span><span>Experiencias</span><span>Comunidad</span><span>Temporada</span><span>Facturación</span></div>
+        <div class="mock__side"><span class="on">Resumen</span><span>Encuentros</span><span>Comunidad</span><span>Temporada</span></div>
         <div class="mock__main">
           <div class="mock__kpis">
             <div class="mock__kpi"><small>Encuentros</small><b>212</b></div>
@@ -464,93 +447,73 @@ img{max-width:100%;height:auto}
         </div>
       </div>
     </div>
-    <p class="lead rev" style="margin-top:26px">En tu panel verás cuántos encuentros generas, cuántos son entre gente que no te conocía, cuánta vuelve y cada cuánto, y si tu comunidad crece sola (el efecto&nbsp;R).</p>
-    <div style="margin-top:28px" class="rev"><button class="cta cta--gh" data-abrir><span>Apúntate y lo&nbsp;verás</span></button></div>
+    <div class="callouts rev"><span>Gente que <b>aparece</b></span><span>Que <b>vuelve</b></span><span>Tu <b>franja valle</b>, llena</span></div>
   </div>
 </section>
 
-<!-- 5 · TODO LO QUE INCLUYE (suite) -->
-<section class="sec">
+<!-- 4 · LO QUE GANAS -->
+<section class="sec sec--papel">
   <div class="in">
-    <p class="kick rev">Todo lo que&nbsp;incluye</p>
-    <h2 class="tit rev" style="margin-top:16px;max-width:14ch">Una suite, tres&nbsp;trabajos.</h2>
-    <div class="suite">
-      <div class="rev"><h3>Medir</h3><ul>
-        <li>Encuentros generados</li><li>Entre desconocidos</li><li>Repetición y frecuencia</li><li>Coeficiente +1 (R)</li><li>Embudo completo</li><li>Rendimiento por franja</li>
-      </ul></div>
-      <div class="rev"><h3>Activar</h3><ul>
-        <li>Planes que la gente quiere</li><li>Ábrelo y se&nbsp;llena</li><li>Destacar franja valle</li><li>Reactivar dormidos</li><li>Co-activar con otro negocio</li><li>Calendario de temporada</li>
-      </ul></div>
-      <div class="rev"><h3>Gestionar</h3><ul>
-        <li>Tu comunidad (agregada)</li><li>Participantes y asistencia</li><li>Segmentos y acciones</li><li>Equipo y roles</li><li>Verificación de marca</li><li>Facturación y facturas</li>
-      </ul></div>
+    <p class="kick rev">Lo que ganas</p>
+    <h2 class="tit rev" style="margin-top:16px;max-width:14ch">Tres cosas. <span class="az">Medibles</span>.</h2>
+    <div class="tres">
+      <div class="card rev"><p class="card__k">01</p><h3 class="card__t">Gente nueva</h3><p class="card__p">Que no te conocía y aparece por el plan.</p></div>
+      <div class="card rev"><p class="card__k">02</p><h3 class="card__t">Que vuelve</h3><p class="card__p">Y acaba trayendo a alguien.</p></div>
+      <div class="card rev"><p class="card__k">03</p><h3 class="card__t">Llenas el valle</h3><p class="card__p">Tu peor día, con gente que quería justo eso.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- 5 · LA VENTAJA DEL PRIMERO -->
+<section class="sec sec--negro">
+  <div class="in" style="text-align:center">
+    <p class="kick rev">La ventaja del primero</p>
+    <h2 class="tit rev" style="margin-top:16px;max-width:16ch;margin-inline:auto">Un referente por&nbsp;<span class="az">zona</span>.</h2>
+    <p class="lead rev" style="color:rgba(255,255,255,.82);max-width:40ch;margin-inline:auto">El primero compone. El segundo hereda lo que sobre.</p>
+    <div class="compuesto rev">
+      <span class="compuesto__n">1</span><span class="compuesto__x" aria-hidden="true">→</span>
+      <span class="compuesto__n">2</span><span class="compuesto__x" aria-hidden="true">→</span>
+      <span class="compuesto__n az">4</span>
+      <span class="compuesto__l">R&nbsp;&gt;&nbsp;1 · cada encuentro trae al siguiente</span>
     </div>
   </div>
 </section>
 
 <!-- 6 · VS ANUNCIOS -->
-<section class="sec sec--negro">
-  <div class="in">
-    <p class="kick rev">vs.&nbsp;anuncios</p>
-    <h2 class="tit rev" style="margin-top:16px;max-width:18ch">El dinero de los anuncios se&nbsp;va.<br>El tuyo <span class="az">se&nbsp;queda</span>.</h2>
-    <div class="vs">
-      <div class="vs__c vs__c--a rev"><h3>Un&nbsp;anuncio</h3><p>Pagas por que te vean. Dejas de pagar y desapareces. Alquilas&nbsp;atención.</p></div>
-      <div class="vs__c vs__c--b rev"><h3>Con&nbsp;NYXA</h3><p>Pagas por activar a los tuyos. Cada encuentro construye comunidad. Compras algo que se&nbsp;queda.</p></div>
-    </div>
-  </div>
-</section>
-
-<!-- 7 · PLANES -->
 <section class="sec sec--papel">
   <div class="in">
-    <p class="kick rev">Planes</p>
-    <h2 class="tit rev" style="margin-top:16px;max-width:16ch">Empieza gratis.<br>Crece cuando&nbsp;quieras.</h2>
-    <p class="lead rev" style="max-width:52ch">Dos formas de pagar, y las dos solo cuando funciona: las <b>herramientas</b> (tu panel, según tu tamaño) y el <b>resultado</b> (cada cliente nuevo que te traemos y vuelve). <b>Nunca pagas por alcance.</b> En el lanzamiento de Valencia, empiezas&nbsp;gratis.</p>
-    <div class="planes">
-      <div class="plan rev">
-        <p class="plan__n">Gratis</p><p class="plan__q">Para empezar&nbsp;hoy</p>
-        <p class="plan__price">Gratis</p>
-        <ul><li>Perfil verificado</li><li>Tu comunidad te sigue</li><li><b>Tu primer evento gratis</b></li><li>Resumen de tu impacto</li></ul>
-        <button class="cta" data-abrir><span>Apúntate</span></button>
-      </div>
-      <div class="plan plan--dest rev">
-        <p class="plan__n">Pro</p><p class="plan__q">Para el local que quiere&nbsp;llenar</p>
-        <p class="plan__price plan__oculto">Lo ves al&nbsp;entrar</p>
-        <ul><li>Todo lo de Gratis</li><li>Eventos ilimitados</li><li>Analítica completa</li><li>Reactivar dormidos + IA</li><li>Hasta 3 usuarios</li></ul>
-        <button class="cta" data-abrir><span>Apúntate</span></button>
-      </div>
-      <div class="plan rev">
-        <p class="plan__n">Marca</p><p class="plan__q">Para marcas con varias&nbsp;sedes</p>
-        <p class="plan__price plan__oculto">Lo ves al&nbsp;entrar</p>
-        <ul><li>Todo lo de Pro</li><li>Multi-sede + comparativas</li><li>Benchmarks de tu sector</li><li>Objetivos por sede</li><li>Usuarios ilimitados</li></ul>
-        <button class="cta" data-abrir><span>Apúntate</span></button>
-      </div>
-      <div class="plan rev">
-        <p class="plan__n">Élite</p><p class="plan__q">Branding al máximo ·&nbsp;cadenas</p>
-        <p class="plan__price">A&nbsp;medida</p>
-        <ul><li>Todo lo de Marca</li><li>Presencia destacada</li><li>Integraciones</li><li>Soporte dedicado</li><li>Acuerdos por volumen</li></ul>
-        <button class="cta cta--gh" data-abrir><span>Apúntate</span></button>
-      </div>
+    <p class="kick rev">Frente a los anuncios</p>
+    <h2 class="tit rev" style="margin-top:16px;max-width:16ch">Un anuncio se apaga.<br>Esto <span class="az">se queda</span>.</h2>
+    <div class="vstabla rev">
+      <div class="vstabla__col"><h3>El anuncio</h3><ul><li>Se apaga</li><li>Pagas visibilidad</li><li>Impresiones</li><li>Puja</li></ul></div>
+      <div class="vstabla__col vstabla__col--az"><h3>NYXA</h3><ul><li>Se queda</li><li>Pagas resultado</li><li>Cuerpos</li><li>Encaje</li></ul></div>
     </div>
-    <p class="planes__nota rev"><b>En el lanzamiento, todo gratis.</b> Cuando Valencia esté activa eliges plan — mensual o anual (2 meses gratis), sin permanencia. Y por cada cliente nuevo que te traemos y vuelve, pagas solo por resultado. <b>Entramos zona por zona:</b> cuando la tuya se llena, se&nbsp;cierra.</p>
   </div>
 </section>
 
-<!-- 8 · LA LÍNEA (azul) -->
-<section class="sec sec--azul">
+<!-- 7 · MANIFIESTO -->
+<section class="manif sec--negro">
+  <h2 class="rev">Aquí no se&nbsp;puja.</h2>
+  <p class="rev">Lo elige el encaje, no quién paga más.</p>
+</section>
+
+<!-- 8 · PLANES -->
+<section class="sec sec--papel">
   <div class="in">
-    <p class="kick rev" style="color:#fff">La línea que no&nbsp;cruzamos</p>
-    <h2 class="tit rev" style="margin-top:16px;color:#fff;max-width:16ch">Aquí no ganas por pagar&nbsp;más.</h2>
-    <p class="lead rev" style="color:rgba(255,255,255,.85);max-width:50ch">Tu plan llega a la gente correcta porque <b>encaja</b> —por interés y cercanía—, no porque pujes más que nadie. No hay pujas, no hay comprar el feed, no hay quitarle el sitio a otro con la cartera. Esa regla, que parece un límite, es tu foso: aquí nadie te desplaza&nbsp;pagando.</p>
+    <p class="kick rev">Planes · Lista de espera</p>
+    <h2 class="tit rev" style="margin-top:16px;max-width:16ch">Elige cuando&nbsp;<span class="az">abramos</span>.</h2>
+    <p class="lead rev">Gratis para empezar. Sin permanencia.</p>
+    <div class="planes">
+      <div class="plan rev"><p class="plan__n">Gratis</p><p class="plan__q">Empieza a ocupar tu nicho</p><span class="plan__wait">Lista de espera</span></div>
+      <div class="plan plan--dest rev"><p class="plan__n">Pro</p><p class="plan__q">Para el local que quiere llenar</p><span class="plan__wait">Lista de espera</span></div>
+      <div class="plan rev"><p class="plan__n">Marca</p><p class="plan__q">Referente de varias zonas</p><span class="plan__wait">Lista de espera</span></div>
+      <div class="plan rev"><p class="plan__n">Élite</p><p class="plan__q">El mapa de tu ciudad</p><span class="plan__wait">Lista de espera</span></div>
+    </div>
+    <div class="cierre-cta rev">
+      <button class="cta" data-abrir><span>Reserva tu sitio</span><span class="cta__x" aria-hidden="true"><svg viewBox="0 0 20 20"><line x1="2" y1="18" x2="18" y2="2"/><line x1="18" y1="18" x2="2" y2="2"/></svg></span></button>
+      <p class="friccion">Gratis para empezar · Sin permanencia · Un referente por zona</p>
+    </div>
   </div>
-</section>
-
-<!-- 9 · FINAL -->
-<section class="fin">
-  <p class="kick rev">Valencia ·&nbsp;2026</p>
-  <h2 class="tit rev" style="margin-top:16px;max-width:16ch">Entras ahora o entras&nbsp;tarde.</h2>
-  <div class="rev"><button class="cta" data-abrir><span>Reserva tu sitio</span><span class="cta__x" aria-hidden="true"><svg viewBox="0 0 20 20"><line x1="2" y1="18" x2="18" y2="2"/><line x1="18" y1="18" x2="2" y2="2"/></svg></span></button></div>
-  <div class="conf rev"><span>Tus datos son tuyos</span><span>RGPD</span><span>Sin anuncios</span><span>Cancela cuando quieras</span></div>
 </section>
 
 <footer class="ft">
