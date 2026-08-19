@@ -13,13 +13,16 @@
 <meta property="og:site_name" content="NYXA">
 <meta property="og:url" content="https://nexavalencia.vercel.app/">
 <meta property="og:title" content="NYXA — Haz que hoy pase algo">
-<meta property="og:description" content="Dime qué quieres vivir. Te digo con quién. Valencia, 1 de octubre.">
-<meta property="og:image" content="https://nexavalencia.vercel.app/og.jpg">
+<meta property="og:description" content="Aún no ha abierto. Apúntate a la lista de espera y entra el 1 de octubre en Valencia.">
+<meta property="og:image" content="https://nexavalencia.vercel.app/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:type" content="image/png">
 <meta property="og:locale" content="es_ES">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="NYXA — Haz que hoy pase algo">
 <meta name="twitter:description" content="Dime qué quieres vivir. Te digo con quién.">
-<meta name="twitter:image" content="https://nexavalencia.vercel.app/og.jpg">
+<meta name="twitter:image" content="https://nexavalencia.vercel.app/og.png">
 <style>
   :root{
     --paper:#FBF9F4; --card:#FFFFFF; --ink:#0A0C11; --ink-2:#3B4251; --muted:#8A909E;
@@ -89,7 +92,11 @@
 
   /* éxito */
   .ok{margin:34px auto 0;max-width:440px}
-  .ok .xx{font-size:40px;font-weight:800;color:var(--blue);line-height:1}
+  .ok .okcd{display:flex;align-items:baseline;justify-content:center;gap:9px;line-height:1;margin-bottom:2px}
+  .ok .okcd .lbl{font-size:13px;font-weight:750;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+  .ok .okcd .n{font-size:clamp(58px,11vw,82px);font-weight:800;letter-spacing:-.04em;color:var(--blue)}
+  .ok .okcd .u{font-size:22px;font-weight:750;color:var(--ink-2)}
+  .fine b{color:var(--ink-2);font-weight:750}
   .ok .h{margin-top:12px;font-size:23px;font-weight:800;letter-spacing:-.02em;text-wrap:balance}
   .ok .num{color:var(--blue-ink)}
   .ok .p{margin:10px auto 0;max-width:360px;font-size:15px;color:var(--ink-2);line-height:1.5;text-wrap:balance}
@@ -125,13 +132,14 @@
         <input class="inp" id="nombre" type="text" autocomplete="given-name" placeholder="Tu nombre" aria-label="Tu nombre" required>
         <input class="inp" id="email" type="email" inputmode="email" autocomplete="email" placeholder="Tu email" aria-label="Tu email" required>
       </div>
-      <button class="go" type="submit"><span>Quiero entrar</span></button>
+      <button class="go" type="submit"><span>Reservar mi sitio</span></button>
+      <div class="fine">Es la lista de espera. NYXA aún no ha abierto — te avisamos el <b>1 de octubre</b>.</div>
       <div class="err" id="err" hidden></div>
       <div class="proof" id="proof" hidden></div>
     </form>
 
     <div class="ok" id="ok" hidden>
-      <div class="xx">✕</div>
+      <div class="okcd"><span class="lbl">Faltan</span><span class="n" id="okDias">43</span><span class="u">días</span></div>
       <div class="h" id="okH">Ya estás dentro.</div>
       <p class="p" id="okP">Te avisaremos cuando puedas conocer gente como tú.<span id="numLine"></span></p>
       <div class="share">
@@ -151,7 +159,9 @@
 
   // Cuenta atrás (días) al 1-oct-2026.
   var target = new Date("2026-10-01T00:00:00+02:00").getTime();
-  $("#cd").textContent = Math.max(0, Math.ceil((target - Date.now())/86400000));
+  var dias = Math.max(0, Math.ceil((target - Date.now())/86400000));
+  $("#cd").textContent = dias;
+  var od = document.getElementById("okDias"); if(od) od.textContent = dias;
 
   // La palabra que cambia: "algo" se vuelve concreto (los mundos, en su color).
   var PAL = [
@@ -235,7 +245,7 @@
         else { legacy(); }
       });
       ok.setAttribute("tabindex","-1"); ok.focus();
-    }catch(ex){ console.error(ex); btn.disabled=false; btn.firstElementChild.textContent="Quiero entrar";
+    }catch(ex){ console.error(ex); btn.disabled=false; btn.firstElementChild.textContent="Reservar mi sitio";
       err.textContent="No ha entrado. Prueba otra vez en un momento."; err.hidden=false; }
   });
 })();
