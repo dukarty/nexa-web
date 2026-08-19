@@ -346,6 +346,19 @@ html{scroll-padding-top:96px}                 /* anclajes del menú no quedan ba
 ::-moz-selection{background:var(--az);color:#fff}
 body{text-rendering:optimizeLegibility;-moz-osx-font-smoothing:grayscale}
 img{max-width:100%;height:auto}
+
+/* ── Destacados (respiraderos) + pasos + nota maqueta ── */
+.pq{padding:clamp(56px,9vw,120px) var(--pad);max-width:1000px;margin:0 auto;text-align:center}
+.pq p{font-size:clamp(1.9rem,5.2vw,3.8rem);font-weight:900;line-height:1.04;letter-spacing:-.04em;text-wrap:pretty;max-width:20ch;margin:0 auto}
+.pq .az{color:var(--az)}
+.pasos{margin-top:clamp(30px,4vw,52px);border-top:1.5px solid var(--linea)}
+.pasos li{display:flex;gap:clamp(16px,3vw,32px);align-items:baseline;padding:clamp(20px,2.6vw,30px) 0;border-bottom:1.5px solid var(--linea)}
+.pasos .n{flex:none;font-size:clamp(1.4rem,3vw,2.2rem);font-weight:900;letter-spacing:-.04em;color:var(--az);font-variant-numeric:tabular-nums;min-width:1.3em}
+.pasos p{font-size:clamp(1.05rem,1.8vw,1.35rem);font-weight:600;color:var(--gris);line-height:1.4;margin:0}
+.pasos b{color:var(--tinta);font-weight:800}
+.maqueta{margin-top:14px;font-size:.76rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--gris-2)}
+.ejemplo{margin-top:clamp(28px,3.4vw,44px);padding:clamp(22px,3vw,34px);border-radius:20px;background:var(--blue-soft);border:1.5px solid var(--linea);font-size:clamp(1.05rem,1.7vw,1.3rem);font-weight:600;color:var(--tinta);line-height:1.5;max-width:60ch}
+.sec--negro .ejemplo{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.14);color:#fff}
 </style>
 </head>
 <body class="nav-negro">
@@ -367,92 +380,95 @@ img{max-width:100%;height:auto}
 <!-- 1 · HERO -->
 <section class="hero">
   <svg class="hero__x" viewBox="0 0 20 20" aria-hidden="true"><line x1="2" y1="18" x2="18" y2="2"/><line x1="18" y1="18" x2="2" y2="2"/></svg>
-  <h1 class="tit tit--xl">Más clientes.<br>Los que&nbsp;<span class="az">vuelven</span>.</h1>
-  <p class="hero__s lead">No compras anuncios ni alcance. Abres un plan y NYXA lo lleva a la gente de tu ciudad que quiere vivirlo —por interés y cercanía— hasta que aparece. <span class="b">Cuerpos reales, no&nbsp;impresiones.</span></p>
+  <p class="kick" style="color:var(--gris-2);margin-bottom:22px">NYXA para empresas · Valencia · Lista de espera</p>
+  <h1 class="tit">En tu zona cabe un&nbsp;referente.<br>O eres tú, o es el de&nbsp;<span class="az">enfrente</span>.</h1>
+  <p class="hero__s lead">No compras anuncios ni alcance. Abres un plan —una cata, una ruta, un torneo, un run club— y NYXA lo lleva a la gente de tu ciudad que quiere vivir justo eso, por interés y cercanía, hasta que aparece. <span class="b">Cuerpos reales que cruzan tu puerta, no impresiones.</span></p>
   <div class="hero__acc">
     <button class="cta" data-abrir><span>Reserva tu sitio</span><span class="cta__x" aria-hidden="true"><svg viewBox="0 0 20 20"><line x1="2" y1="18" x2="18" y2="2"/><line x1="18" y1="18" x2="2" y2="2"/></svg></span></button>
-    <a class="cta cta--gh" href="panel.html"><span>Ver el panel</span></a>
+    <a class="cta cta--gh" href="#panel"><span>Ver el panel</span></a>
   </div>
-  <p class="hero__meta">Aún no está abierto · Valencia 2026 · Reserva tu&nbsp;sitio</p>
+  <p class="hero__meta" style="color:var(--gris-2)">Todavía no hemos abierto · El panel es una maqueta · Tu competidor aún no está dentro</p>
 </section>
 
-<!-- 2 · POR QUÉ FUNCIONA (motor R) -->
-<section class="sec sec--negro">
-  <div class="in">
-    <p class="kick rev">Por qué&nbsp;funciona</p>
-    <div class="motor" style="margin-top:clamp(30px,4vw,52px)">
-      <div class="rev">
-        <div class="rnum">1,3<small>El motor R</small></div>
-        <p class="lead" style="margin-top:22px">Cada encuentro <span class="b">trae al siguiente</span>: alguien viene, trae a un +1, ese +1 vuelve con otro. El anuncio se apaga cuando dejas de pagar. Esto crece&nbsp;solo.</p>
-      </div>
-      <ol class="rflow rev">
-        <li><span class="n">01</span><span>Propones un plan a <b>tu comunidad</b>.</span></li>
-        <li><span class="n">02</span><span>Dos personas lo viven <b>en tu local</b>.</span></li>
-        <li><span class="n">03</span><span>Una trae a alguien nuevo la próxima vez.</span></li>
-        <li><span class="n">04</span><span>Ese alguien <b>repite</b>. Y trae a otro.</span></li>
-      </ol>
-    </div>
-  </div>
-</section>
-
-<!-- 3 · LO QUE CONSIGUES -->
+<!-- 2 · POR QUÉ AHORA -->
 <section class="sec">
   <div class="in">
-    <p class="kick rev">Lo que&nbsp;consigues</p>
-    <h2 class="tit rev" style="margin-top:16px;max-width:16ch">Tres cosas que un anuncio no te&nbsp;da.</h2>
-    <div class="tres">
-      <div class="card rev"><p class="card__k">01</p><p class="card__t">Gente&nbsp;nueva</p><p class="card__p">Personas que no te conocían y llegan porque alguien las trajo a vivir algo&nbsp;contigo.</p></div>
-      <div class="card rev"><p class="card__k">02</p><p class="card__t">Que&nbsp;repite</p><p class="card__p">No una visita suelta: un motivo para volver. Mides cuánta gente vuelve y cada&nbsp;cuánto.</p></div>
-      <div class="card rev"><p class="card__k">03</p><p class="card__t">Que llena tu&nbsp;local</p><p class="card__p">Activa las franjas flojas. Un martes vacío se convierte en un martes con una mesa&nbsp;reservada.</p></div>
-    </div>
+    <p class="kick rev">Por qué ahora</p>
+    <h2 class="tit rev" style="margin-top:16px;max-width:20ch">No llegas pronto.<br>Llegas <span class="az">justo a tiempo</span>.</h2>
+    <p class="lead rev">Una categoría no la inventa nadie. La abre el cruce de dos curvas. Y las dos acaban de cambiar de signo.</p>
+    <p class="lead rev" style="margin-top:20px">Ya lo notas: el anuncio local cada vez cuesta más y aparece menos gente. Y un negocio de barrio no gana una subasta contra cadenas con presupuesto infinito.</p>
+    <p class="lead rev" style="margin-top:20px">Al mismo tiempo, mira fuera: los run clubs que se llenan solos, las quedadas que reúnen a cientos cada semana. La gente ya levanta la mano para salir a vivir cosas. <b>Ese canal existe; nadie lo ha puesto todavía al servicio de un negocio.</b></p>
+    <p class="lead rev" style="margin-top:20px">Es el momento exacto en que la distribución deja de comprarse y empieza a construirse.</p>
   </div>
 </section>
 
-<!-- 3b · EXPERIENCIAS LISTAS PARA ACTIVAR -->
+<!-- 3 · CÓMO FUNCIONA -->
 <section class="sec sec--papel">
   <div class="in">
-    <p class="kick rev">Por qué a ti</p>
-    <h2 class="tit rev" style="margin-top:16px;max-width:16ch">En tu esquina cabe uno.<br>O eres tú o es el de&nbsp;<span class="az">enfrente</span>.</h2>
-    <p class="lead rev" style="max-width:54ch">Imagina una pizzería que monta un run club mensual: NYXA llevaría ese plan a los <b>runners de su calle</b>, y se llenaría de clientes nuevos que vuelven. Ese plan podías abrirlo tú. La comunidad que sale a vivir cosas en tu radio es densa, pero <b>finita</b>: cuando piense en salir, aparecerá un&nbsp;nombre.</p>
-    <div class="exps">
-      <article class="exp rev" data-abrir role="button" tabindex="0">
-        <span class="exp__tag">Cata · 2 h</span>
-        <h3 class="exp__t">Cata para gente con&nbsp;ganas</h3>
-        <p class="exp__p">12 plazas, una mesa larga y el jueves que&nbsp;elijas.</p>
-        <span class="exp__cta">Me interesa →</span>
-      </article>
-      <article class="exp rev" data-abrir role="button" tabindex="0">
-        <span class="exp__tag">Ruta · sábado</span>
-        <h3 class="exp__t">Ruta y almuerzo de los&nbsp;tuyos</h3>
-        <p class="exp__p">Salís juntos, acabáis en tu local. El finde que te&nbsp;cuadre.</p>
-        <span class="exp__cta">Me interesa →</span>
-      </article>
-      <article class="exp rev" data-abrir role="button" tabindex="0">
-        <span class="exp__tag">Torneo · noche</span>
-        <h3 class="exp__t">Torneo relámpago entre&nbsp;desconocidos</h3>
-        <p class="exp__p">Llena una franja floja y que la gente vuelva a por la&nbsp;revancha.</p>
-        <span class="exp__cta">Me interesa →</span>
-      </article>
-      <article class="exp rev" data-abrir role="button" tabindex="0">
-        <span class="exp__tag">Taller · entre semana</span>
-        <h3 class="exp__t">Taller con after de&nbsp;presentaciones</h3>
-        <p class="exp__p">Aprenden algo contigo y se quedan a&nbsp;conocerse.</p>
-        <span class="exp__cta">Me interesa →</span>
-      </article>
-    </div>
-    <p class="exps__nota rev">¿No está la tuya? La montamos contigo. Todas pasan <b>control de calidad</b>. ¿Un negocio amigo? <b>Co-actívala</b>.</p>
+    <p class="kick rev">Cómo funciona</p>
+    <h2 class="tit rev" style="margin-top:16px;max-width:18ch">Tú traes el plan.<br>Nosotros traemos a la <span class="az">gente</span>.</h2>
+    <p class="lead rev">NYXA no es un tablón de anuncios. Es el motor de distribución y encaje que coloca tu plan, por interés y cercanía, ante quien quiere vivirlo. Tu único trabajo: abrir el plan.</p>
+    <ul class="pasos rev">
+      <li><span class="n">1</span><p><b>Abres un plan.</b> Una cata el martes flojo. Una ruta el domingo. Un torneo. Un run club mensual. Lo que sabes hacer.</p></li>
+      <li><span class="n">2</span><p><b>El motor lo reparte.</b> Lo lleva solo a la gente de tu ciudad que ya quiere vivir eso, por lo que le interesa y por dónde está. No a diez mil desconocidos al azar.</p></li>
+      <li><span class="n">3</span><p><b>Aparecen personas.</b> No impresiones: cuerpos que aceptaron venir y cruzan tu puerta. Desconocidos, sí. Se llaman clientes nuevos.</p></li>
+    </ul>
+    <p class="ejemplo rev">Una pizzería quiere llenar los martes y monta un run club mensual. NYXA propone ese plan a los runners cercanos. Aparecen los correctos. La pizzería se queda con clientes nuevos que vuelven cada mes. <b>No compró visitas. Ocupó un nicho.</b></p>
+    <p class="lead rev" style="margin-top:24px">Montar el plan es tu oficio. Llenarlo es el nuestro. No aprendes a pujar, ni a grabar, ni a entender un algoritmo.</p>
   </div>
 </section>
 
-<!-- 4 · EL PANEL (preview) -->
+<!-- 4 · LO QUE GANAS -->
+<section class="sec">
+  <div class="in">
+    <p class="kick rev">Lo que consigues</p>
+    <h2 class="tit rev" style="margin-top:16px;max-width:16ch">Gente nueva. Que vuelve. Que llena tu <span class="az">peor día</span>.</h2>
+    <p class="lead rev">Tres cosas que un anuncio te promete y casi nunca cumple, porque no deja nada detrás. Cada una se llena una sola vez por zona: la que no ocupas tú, la ocupa otro.</p>
+    <div class="tres">
+      <div class="card rev"><p class="card__k">01</p><h3 class="card__t">Clientes nuevos</h3><p class="card__p">Gente que no te conocía y aparece por el plan. O cruzan tu puerta, o la de al lado.</p></div>
+      <div class="card rev"><p class="card__k">02</p><h3 class="card__t">Que vuelven</h3><p class="card__p">El que viene una vez tiene un motivo para volver. Y el que vuelve acaba trayendo a alguien. Repetición, no un pico que se evapora.</p></div>
+      <div class="card rev"><p class="card__k">03</p><h3 class="card__t">Tu franja valle, llena</h3><p class="card__p">Ese martes muerto, puesto delante de quien quería justo eso, a esa hora.</p></div>
+    </div>
+    <p class="lead rev" style="margin-top:clamp(30px,4vw,48px)">Piensa en tu franja muerta. Ahora imagina esa misma hora llena <b>en el local de al lado</b>, con gente que pudo aparecer en el tuyo. Esa escena va a existir. La única pregunta es de quién es el local.</p>
+    <p class="lead rev" style="margin-top:16px;color:var(--gris-2)">Y lo mides todo —cuántos aparecieron, cuántos no te conocían, cuántos volvieron— en cuanto abra tu ciudad.</p>
+  </div>
+</section>
+
+<!-- PQ -->
+<section class="pq"><p>El que empieza no va un paso por delante. <span class="az">Va componiendo.</span></p></section>
+
+<!-- 5 · POR QUÉ A TI -->
 <section class="sec sec--negro">
   <div class="in">
-    <p class="kick rev">El&nbsp;panel</p>
-    <h2 class="tit rev" style="margin-top:16px;max-width:18ch">Todo lo que pasa,<br>en números que&nbsp;entiendes.</h2>
+    <p class="kick rev">Por qué a ti</p>
+    <h2 class="tit rev" style="margin-top:16px;max-width:20ch">Piensa en tu competidor leyendo esto <span class="az">ahora mismo</span>.</h2>
+    <p class="lead rev">Si entra él primero, su martes valle se llena con la gente que debería haber aparecido en tu casa. Y esa gente deja de buscar alternativa.</p>
+    <p class="lead rev" style="margin-top:20px"><b>El primero no compite: ocupa.</b> El segundo no llega a un campo vacío. Llega a una comunidad que ya tiene su sitio, su grupo y su costumbre.</p>
+    <p class="lead rev" style="margin-top:20px">Cuando una comunidad se densifica alrededor de un negocio, sus miembros dejan de buscar. El coste de cambio no lo pones tú: lo pone el hábito. El segundo paga más y araña menos.</p>
+    <p class="lead rev" style="margin-top:20px">Seamos claros: hoy no hay tablero lleno. Hay una lista de espera. <b>Tu competidor todavía no está dentro. El hueco sigue abierto.</b> La única decisión que se toma hoy es de quién será ese sitio.</p>
+  </div>
+</section>
+
+<!-- 6 · VENTAJA DEL PRIMERO -->
+<section class="sec sec--papel">
+  <div class="in">
+    <p class="kick rev">La ventaja del primero</p>
+    <h2 class="tit rev" style="margin-top:16px;max-width:18ch">No es un peldaño. Es interés <span class="az">compuesto</span>.</h2>
+    <p class="lead rev">Alguien viene. Trae a uno. Ese vuelve con otro. Cada encuentro paga el siguiente y la comunidad crece sola mientras tú decides. Es el efecto R: por encima de uno, se alimenta solo.</p>
+    <p class="lead rev" style="margin-top:20px">El que empieza hoy no suma clientes: los multiplica. El que empieza dentro de un año arranca de cero contra una bola de nieve que lleva un año rodando. Esa distancia no se mantiene: <b>se ensancha</b>.</p>
+    <p class="lead rev" style="margin-top:20px;color:var(--gris-2)">Honestidad: aún no hay una curva medida que enseñarte. Es el diseño del motor. Pero el compuesto es matemática, no fe: con la misma R, quien empieza antes va siempre por delante.</p>
+  </div>
+</section>
+
+<!-- 7 · EL PANEL (maqueta) -->
+<section class="sec sec--negro" id="panel">
+  <div class="in">
+    <p class="kick rev">El panel · Maqueta</p>
+    <h2 class="tit rev" style="margin-top:16px;max-width:20ch">Un anuncio te da impresiones. NYXA te da gente que puedes <span class="az">contar</span>.</h2>
     <div class="mock rev" aria-hidden="true">
       <div class="mock__bar"><span class="mock__dot"></span><span class="mock__dot"></span><span class="mock__dot"></span></div>
       <div class="mock__body">
-        <div class="mock__side"><span class="on">Resumen</span><span>Encuentros</span><span>Experiencias</span><span>Comunidad</span><span>Temporada</span><span>Facturación</span></div>
+        <div class="mock__side"><span class="on">Resumen</span><span>Encuentros</span><span>Comunidad</span><span>Temporada</span></div>
         <div class="mock__main">
           <div class="mock__kpis">
             <div class="mock__kpi"><small>Encuentros</small><b>212</b></div>
@@ -464,93 +480,64 @@ img{max-width:100%;height:auto}
         </div>
       </div>
     </div>
-    <p class="lead rev" style="margin-top:26px">En tu panel verás cuántos encuentros generas, cuántos son entre gente que no te conocía, cuánta vuelve y cada cuánto, y si tu comunidad crece sola (el efecto&nbsp;R).</p>
-    <div style="margin-top:28px" class="rev"><button class="cta cta--gh" data-abrir><span>Apúntate y lo&nbsp;verás</span></button></div>
+    <p class="maqueta rev">Maqueta · números de ejemplo</p>
+    <ul class="pasos rev" style="border-top-color:rgba(255,255,255,.18)">
+      <li style="border-bottom-color:rgba(255,255,255,.12)"><span class="n">·</span><p style="color:rgba(255,255,255,.82)"><b style="color:#fff">Encuentros reales:</b> cuerpos que aparecieron por tu plan, no alcance difuso.</p></li>
+      <li style="border-bottom-color:rgba(255,255,255,.12)"><span class="n">·</span><p style="color:rgba(255,255,255,.82)"><b style="color:#fff">Desconocidos que se hicieron clientes:</b> la gente nueva, contada una a una.</p></li>
+      <li style="border-bottom-color:rgba(255,255,255,.12)"><span class="n">·</span><p style="color:rgba(255,255,255,.82)"><b style="color:#fff">Repetición y R:</b> cuántos vuelven y a cuántos traen. La prueba de que construyes un activo.</p></li>
+    </ul>
+    <p class="lead rev" style="margin-top:24px;color:rgba(255,255,255,.85)">Esto es una maqueta. El panel se enciende con datos reales cuando abra tu ciudad. No inventamos métricas: cuando las haya, serán tuyas, no una foto de vanidad.</p>
   </div>
 </section>
 
-<!-- 5 · TODO LO QUE INCLUYE (suite) -->
-<section class="sec">
-  <div class="in">
-    <p class="kick rev">Todo lo que&nbsp;incluye</p>
-    <h2 class="tit rev" style="margin-top:16px;max-width:14ch">Una suite, tres&nbsp;trabajos.</h2>
-    <div class="suite">
-      <div class="rev"><h3>Medir</h3><ul>
-        <li>Encuentros generados</li><li>Entre desconocidos</li><li>Repetición y frecuencia</li><li>Coeficiente +1 (R)</li><li>Embudo completo</li><li>Rendimiento por franja</li>
-      </ul></div>
-      <div class="rev"><h3>Activar</h3><ul>
-        <li>Planes que la gente quiere</li><li>Ábrelo y se&nbsp;llena</li><li>Destacar franja valle</li><li>Reactivar dormidos</li><li>Co-activar con otro negocio</li><li>Calendario de temporada</li>
-      </ul></div>
-      <div class="rev"><h3>Gestionar</h3><ul>
-        <li>Tu comunidad (agregada)</li><li>Participantes y asistencia</li><li>Segmentos y acciones</li><li>Equipo y roles</li><li>Verificación de marca</li><li>Facturación y facturas</li>
-      </ul></div>
-    </div>
-  </div>
-</section>
-
-<!-- 6 · VS ANUNCIOS -->
+<!-- 8 · VS ANUNCIOS -->
 <section class="sec sec--negro">
   <div class="in">
-    <p class="kick rev">vs.&nbsp;anuncios</p>
-    <h2 class="tit rev" style="margin-top:16px;max-width:18ch">El dinero de los anuncios se&nbsp;va.<br>El tuyo <span class="az">se&nbsp;queda</span>.</h2>
+    <p class="kick rev">Dos formas de llenar un martes</p>
+    <h2 class="tit rev" style="margin-top:16px;max-width:16ch">Un anuncio se apaga.<br>Esto <span class="az">se queda</span>.</h2>
     <div class="vs">
-      <div class="vs__c vs__c--a rev"><h3>Un&nbsp;anuncio</h3><p>Pagas por que te vean. Dejas de pagar y desapareces. Alquilas&nbsp;atención.</p></div>
-      <div class="vs__c vs__c--b rev"><h3>Con&nbsp;NYXA</h3><p>Pagas por activar a los tuyos. Cada encuentro construye comunidad. Compras algo que se&nbsp;queda.</p></div>
+      <div class="vs__c vs__c--a rev"><h3>El anuncio</h3><p>Pagas para gritarle tu oferta a diez mil desconocidos al azar y rezas para que aparezca alguien. Pagas, apareces, dejas de pagar, desapareces como si nunca hubieras estado.</p></div>
+      <div class="vs__c vs__c--b rev"><h3>NYXA</h3><p>Abres un plan y el motor te trae a las personas correctas de tu ciudad, las que sí querían vivirlo. Y que pueden volver, y traer a otra.</p></div>
     </div>
+    <p class="lead rev" style="margin-top:clamp(30px,4vw,44px);color:rgba(255,255,255,.85)">La diferencia no es el precio. Es qué te queda cuando dejas de invertir. Apaga tus anuncios y mira qué queda: <b style="color:#fff">nada</b>. Aquí, cuando paras, la gente sigue viniendo.</p>
   </div>
 </section>
 
-<!-- 7 · PLANES -->
-<section class="sec sec--papel">
-  <div class="in">
-    <p class="kick rev">Planes</p>
-    <h2 class="tit rev" style="margin-top:16px;max-width:16ch">Empieza gratis.<br>Crece cuando&nbsp;quieras.</h2>
-    <p class="lead rev" style="max-width:52ch">Dos formas de pagar, y las dos solo cuando funciona: las <b>herramientas</b> (tu panel, según tu tamaño) y el <b>resultado</b> (cada cliente nuevo que te traemos y vuelve). <b>Nunca pagas por alcance.</b> En el lanzamiento de Valencia, empiezas&nbsp;gratis.</p>
-    <div class="planes">
-      <div class="plan rev">
-        <p class="plan__n">Gratis</p><p class="plan__q">Para empezar&nbsp;hoy</p>
-        <p class="plan__price">Gratis</p>
-        <ul><li>Perfil verificado</li><li>Tu comunidad te sigue</li><li><b>Tu primer evento gratis</b></li><li>Resumen de tu impacto</li></ul>
-        <button class="cta" data-abrir><span>Apúntate</span></button>
-      </div>
-      <div class="plan plan--dest rev">
-        <p class="plan__n">Pro</p><p class="plan__q">Para el local que quiere&nbsp;llenar</p>
-        <p class="plan__price plan__oculto">Lo ves al&nbsp;entrar</p>
-        <ul><li>Todo lo de Gratis</li><li>Eventos ilimitados</li><li>Analítica completa</li><li>Reactivar dormidos + IA</li><li>Hasta 3 usuarios</li></ul>
-        <button class="cta" data-abrir><span>Apúntate</span></button>
-      </div>
-      <div class="plan rev">
-        <p class="plan__n">Marca</p><p class="plan__q">Para marcas con varias&nbsp;sedes</p>
-        <p class="plan__price plan__oculto">Lo ves al&nbsp;entrar</p>
-        <ul><li>Todo lo de Pro</li><li>Multi-sede + comparativas</li><li>Benchmarks de tu sector</li><li>Objetivos por sede</li><li>Usuarios ilimitados</li></ul>
-        <button class="cta" data-abrir><span>Apúntate</span></button>
-      </div>
-      <div class="plan rev">
-        <p class="plan__n">Élite</p><p class="plan__q">Branding al máximo ·&nbsp;cadenas</p>
-        <p class="plan__price">A&nbsp;medida</p>
-        <ul><li>Todo lo de Marca</li><li>Presencia destacada</li><li>Integraciones</li><li>Soporte dedicado</li><li>Acuerdos por volumen</li></ul>
-        <button class="cta cta--gh" data-abrir><span>Apúntate</span></button>
-      </div>
-    </div>
-    <p class="planes__nota rev"><b>En el lanzamiento, todo gratis.</b> Cuando Valencia esté activa eliges plan — mensual o anual (2 meses gratis), sin permanencia. Y por cada cliente nuevo que te traemos y vuelve, pagas solo por resultado. <b>Entramos zona por zona:</b> cuando la tuya se llena, se&nbsp;cierra.</p>
-  </div>
-</section>
-
-<!-- 8 · LA LÍNEA (azul) -->
+<!-- 9 · LA LÍNEA (azul) -->
 <section class="sec sec--azul">
   <div class="in">
-    <p class="kick rev" style="color:#fff">La línea que no&nbsp;cruzamos</p>
-    <h2 class="tit rev" style="margin-top:16px;color:#fff;max-width:16ch">Aquí no ganas por pagar&nbsp;más.</h2>
-    <p class="lead rev" style="color:rgba(255,255,255,.85);max-width:50ch">Tu plan llega a la gente correcta porque <b>encaja</b> —por interés y cercanía—, no porque pujes más que nadie. No hay pujas, no hay comprar el feed, no hay quitarle el sitio a otro con la cartera. Esa regla, que parece un límite, es tu foso: aquí nadie te desplaza&nbsp;pagando.</p>
+    <p class="kick rev" style="color:#fff">La línea que no cruzamos</p>
+    <h2 class="tit rev" style="margin-top:16px;color:#fff;max-width:12ch">Aquí no se&nbsp;puja.</h2>
+    <p class="lead rev" style="color:rgba(255,255,255,.9);max-width:52ch">No lo decimos por ética. Lo decimos porque es tu foso.</p>
+    <p class="lead rev" style="color:rgba(255,255,255,.9);max-width:52ch;margin-top:20px">En un anuncio, el que llega mañana con más presupuesto te tapa. La cadena grande suelta más dinero y te borra del mapa. Ese juego no lo puedes ganar, y lo sabes.</p>
+    <p class="lead rev" style="color:rgba(255,255,255,.9);max-width:52ch;margin-top:20px">Por eso aquí no existe. El plan llega a quien encaja —interés y cercanía—, lo decide el motor, no la cartera. El día que seas el referente de tu nicho, <b style="color:#fff">nadie te desplaza pagando más. Ni el más grande.</b> Su dinero recompra alcance; no recompra a tu gente. Tu sitio no está a la venta.</p>
   </div>
 </section>
 
-<!-- 9 · FINAL -->
+<!-- 10 · PLANES -->
+<section class="sec sec--papel">
+  <div class="in">
+    <p class="kick rev">Planes · En el lanzamiento, gratis</p>
+    <h2 class="tit rev" style="margin-top:16px;max-width:18ch">En el lanzamiento, gratis.<br>Después, un referente por&nbsp;zona.</h2>
+    <p class="lead rev" style="max-width:54ch">Se paga por herramientas —un panel según tu tamaño— y por resultado —gente que aparece y vuelve—. Nunca por alcance. La escasez no es un truco de web: es estructural.</p>
+    <div class="planes">
+      <div class="plan rev"><p class="plan__n">Gratis</p><p class="plan__q">Empieza a ocupar tu nicho</p><p class="plan__price">Gratis</p><ul><li>Abre tu primer plan</li><li>El motor lo reparte por encaje</li><li>Perfil verificado</li></ul><button class="cta" data-abrir><span>Reserva tu sitio</span></button></div>
+      <div class="plan plan--dest rev"><p class="plan__n">Pro</p><p class="plan__q">Para el local que quiere llenar</p><p class="plan__price plan__oculto">Lo ves al&nbsp;entrar</p><ul><li>Más planes, más franjas</li><li>Panel: encuentros, repetición, R</li><li>Reactivar dormidos</li></ul><button class="cta" data-abrir><span>Reserva tu sitio</span></button></div>
+      <div class="plan rev"><p class="plan__n">Marca</p><p class="plan__q">Referente de varias zonas</p><p class="plan__price plan__oculto">Lo ves al&nbsp;entrar</p><ul><li>Multi-sede + comparativas</li><li>Gestión y activación</li><li>Objetivos por sede</li></ul><button class="cta" data-abrir><span>Reserva tu sitio</span></button></div>
+      <div class="plan rev"><p class="plan__n">Élite</p><p class="plan__q">Quedarte el mapa de tu ciudad</p><p class="plan__price">A&nbsp;medida</p><ul><li>Todo lo de Marca</li><li>Acompañamiento dedicado</li><li>Acuerdos por volumen</li></ul><button class="cta cta--gh" data-abrir><span>Reserva tu sitio</span></button></div>
+    </div>
+    <p class="planes__nota rev">Un nicho por zona solo admite a un primero. Hoy el sitio está libre porque nada ha empezado todavía. No inventamos tracción: <b>te ofrecemos el sitio antes de que exista la cola. Después, ya hay cola.</b></p>
+  </div>
+</section>
+
+<!-- 11 · CIERRE -->
 <section class="fin">
-  <p class="kick rev">Valencia ·&nbsp;2026</p>
-  <h2 class="tit rev" style="margin-top:16px;max-width:16ch">Entras ahora o entras&nbsp;tarde.</h2>
-  <div class="rev"><button class="cta" data-abrir><span>Reserva tu sitio</span><span class="cta__x" aria-hidden="true"><svg viewBox="0 0 20 20"><line x1="2" y1="18" x2="18" y2="2"/><line x1="18" y1="18" x2="2" y2="2"/></svg></span></button></div>
-  <div class="conf rev"><span>Tus datos son tuyos</span><span>RGPD</span><span>Sin anuncios</span><span>Cancela cuando quieras</span></div>
+  <p class="kick rev">La decisión que se toma hoy</p>
+  <h2 class="tit rev" style="margin-top:16px;max-width:18ch">Entras ahora o te lo cuentan cuando ya tenga&nbsp;dueño.</h2>
+  <p class="lead rev" style="color:rgba(255,255,255,.85);max-width:52ch;margin:22px auto 0">Vas a querer pruebas antes de entrar. Es lógico. Pero la prueba de que esto funciona la va a dar el primero de tu categoría. No tú. Y para cuando la tengas delante, el sitio ya tendrá nombre.</p>
+  <p class="lead rev" style="color:rgba(255,255,255,.85);max-width:52ch;margin:16px auto 0"><b style="color:#fff">El hueco de tu zona se adjudica una vez.</b> La única pregunta es si es tuyo o del de enfrente.</p>
+  <div class="rev" style="margin-top:clamp(30px,4vw,44px)"><button class="cta" data-abrir><span>Reserva tu sitio</span><span class="cta__x" aria-hidden="true"><svg viewBox="0 0 20 20"><line x1="2" y1="18" x2="18" y2="2"/><line x1="18" y1="18" x2="2" y2="2"/></svg></span></button></div>
+  <div class="conf rev"><span>Aún no hemos lanzado</span><span>El panel es una maqueta</span><span>Aquí no se puja</span></div>
 </section>
 
 <footer class="ft">
