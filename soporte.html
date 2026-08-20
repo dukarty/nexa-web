@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Soporte — NYXA</title>
+<meta name="description" content="Centro de ayuda de NYXA. Contacta con nuestro equipo, resuelve dudas frecuentes y gestiona tu cuenta.">
+<link rel="canonical" href="https://nexavalencia.vercel.app/soporte">
+<meta name="theme-color" content="#FBF9F4">
+<meta name="robots" content="index,follow">
+<link rel="icon" href="/favicon.svg">
+<style>
+  :root{
+    --paper:#FBF9F4; --card:#FFFFFF; --ink:#0A0C11; --ink-2:#3B4251; --muted:#8A909E;
+    --blue:#2f66ff; --blue-ink:#1e4fd6; --blue-soft:#EDF3FF; --line:#E7E4DC; --line-2:#DAD6CC;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{-webkit-text-size-adjust:100%}
+  body{background:var(--paper);color:var(--ink);
+    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",system-ui,sans-serif;
+    -webkit-font-smoothing:antialiased;line-height:1.5;min-height:100svh}
+  a{color:inherit}
+  .wrap{max-width:680px;margin:0 auto;padding:clamp(40px,8vh,72px) 24px 80px}
+
+  header{margin-bottom:34px}
+  .wm{font-size:20px;font-weight:800;letter-spacing:-.02em;color:var(--ink);text-decoration:none;display:inline-block}
+  .wm .x{color:var(--blue)}
+  .kick{margin-top:26px;font-size:12.5px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--blue)}
+  h1{margin-top:10px;font-size:clamp(34px,7vw,52px);font-weight:800;letter-spacing:-.04em;line-height:.98;text-wrap:balance}
+  .lead{margin-top:16px;font-size:clamp(16px,2.3vw,18px);color:var(--ink-2);max-width:520px;text-wrap:balance}
+
+  .contact{margin-top:30px;background:var(--card);border:1px solid var(--line-2);border-radius:20px;padding:24px;
+    box-shadow:0 24px 60px -40px rgba(10,12,17,.45)}
+  .contact .l{font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+  .contact .mail{margin-top:8px;display:inline-block;font-size:clamp(20px,4.5vw,26px);font-weight:800;letter-spacing:-.02em;
+    color:var(--blue-ink);text-decoration:none}
+  .contact .mail:hover{text-decoration:underline}
+  .contact .t{margin-top:10px;font-size:14.5px;color:var(--ink-2)}
+  .contact .t b{color:var(--ink);font-weight:700}
+
+  h2{margin:46px 0 6px;font-size:14px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+  .faq{border-top:1px solid var(--line)}
+  details{border-bottom:1px solid var(--line);padding:4px 0}
+  summary{list-style:none;cursor:pointer;padding:16px 2px;font-size:17px;font-weight:750;letter-spacing:-.01em;
+    display:flex;justify-content:space-between;align-items:center;gap:14px}
+  summary::-webkit-details-marker{display:none}
+  summary .pm{flex:none;width:22px;height:22px;position:relative}
+  summary .pm::before,summary .pm::after{content:"";position:absolute;background:var(--muted);border-radius:2px;transition:transform .2s,opacity .2s}
+  summary .pm::before{top:10px;left:3px;right:3px;height:2px}
+  summary .pm::after{left:10px;top:3px;bottom:3px;width:2px}
+  details[open] summary .pm::after{opacity:0;transform:rotate(90deg)}
+  details[open] summary{color:var(--blue-ink)}
+  .ans{padding:0 2px 18px;font-size:15.5px;color:var(--ink-2);line-height:1.6}
+  .ans b{color:var(--ink);font-weight:700}
+  .ans a{color:var(--blue-ink);font-weight:650}
+
+  footer{margin-top:48px;padding-top:22px;border-top:1px solid var(--line);font-size:13.5px;color:var(--muted)}
+  footer a{color:var(--ink-2);text-decoration:none;font-weight:650}
+  footer a:hover{color:var(--ink)}
+  footer .r{margin-top:8px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <a class="wm" href="/">NY<span class="x">X</span>A</a>
+    <div class="kick">Centro de ayuda</div>
+    <h1>Soporte</h1>
+    <p class="lead">¿Tienes una duda, un problema o quieres darnos tu opinión? Estamos aquí para ayudarte.</p>
+  </header>
+
+  <section class="contact">
+    <div class="l">Escríbenos</div>
+    <a class="mail" href="mailto:holanyxa@gmail.com?subject=Ayuda%20NYXA">holanyxa@gmail.com</a>
+    <p class="t">Lee tu mensaje una persona del equipo y te respondemos en <b>24–48&nbsp;horas</b> (normalmente antes). Cuéntanos qué te pasa con el mayor detalle posible y, si puedes, adjunta una captura.</p>
+  </section>
+
+  <h2>Preguntas frecuentes</h2>
+  <div class="faq">
+    <details>
+      <summary>¿Qué es NYXA?<span class="pm"></span></summary>
+      <div class="ans">NYXA es una app para <b>conocer gente y vivir planes reales en persona</b>. Dices qué te apetece hacer y te ponemos en contacto con personas cercanas que quieren vivir lo mismo. <b>No es una app de citas</b>: es salir, quedar y hacer que hoy pase algo.</div>
+    </details>
+    <details>
+      <summary>¿Cómo reporto un problema o un error?<span class="pm"></span></summary>
+      <div class="ans">Escríbenos a <a href="mailto:holanyxa@gmail.com?subject=Problema%20NYXA">holanyxa@gmail.com</a> contándonos qué ha ocurrido, en qué pantalla y, si puedes, con una captura. Te respondemos y lo resolvemos lo antes posible.</div>
+    </details>
+    <details>
+      <summary>¿Cómo edito mi perfil o mis datos?<span class="pm"></span></summary>
+      <div class="ans">Dentro de la app, entra en <b>Perfil → Editar perfil</b> para cambiar tu foto, tu nombre y el resto de tu información en cualquier momento.</div>
+    </details>
+    <details>
+      <summary>¿Cómo elimino mi cuenta?<span class="pm"></span></summary>
+      <div class="ans">Puedes eliminar tu cuenta desde <b>Ajustes → Cuenta → Eliminar cuenta</b> dentro de la app. Al hacerlo se borran tu perfil y tus datos asociados. Si prefieres, pídenoslo por email a <a href="mailto:holanyxa@gmail.com?subject=Eliminar%20cuenta%20NYXA">holanyxa@gmail.com</a> y lo gestionamos nosotros.</div>
+    </details>
+    <details>
+      <summary>¿Cómo reporto o bloqueo a alguien?<span class="pm"></span></summary>
+      <div class="ans">Tu seguridad es lo primero. Desde el perfil o la conversación de cualquier persona puedes <b>bloquearla o reportarla</b>. Revisamos cada reporte. Si es urgente, escríbenos directamente a <a href="mailto:holanyxa@gmail.com?subject=Reporte%20urgente%20NYXA">holanyxa@gmail.com</a>.</div>
+    </details>
+    <details>
+      <summary>¿Cómo tratáis mis datos personales?<span class="pm"></span></summary>
+      <div class="ans">Cuidamos tus datos y cumplimos el RGPD. Puedes leer los detalles en nuestra <a href="/privacidad.html">Política de privacidad</a> y en los <a href="/terminos.html">Términos</a>. Para cualquier solicitud sobre tus datos, escríbenos a <a href="mailto:holanyxa@gmail.com?subject=Datos%20NYXA">holanyxa@gmail.com</a>.</div>
+    </details>
+    <details>
+      <summary>¿Tiene coste usar NYXA?<span class="pm"></span></summary>
+      <div class="ans">Puedes usar NYXA de forma gratuita. Si en el futuro añadimos funciones premium opcionales, siempre te lo indicaremos con claridad antes de cualquier cobro.</div>
+    </details>
+  </div>
+
+  <footer>
+    Equipo NYXA · <a href="mailto:holanyxa@gmail.com">holanyxa@gmail.com</a>
+    <div class="r"><a href="/privacidad.html">Privacidad</a> · <a href="/terminos.html">Términos</a> · <a href="/">Inicio</a></div>
+  </footer>
+</div>
+</body>
+</html>
