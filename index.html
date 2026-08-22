@@ -209,7 +209,7 @@
     try{ var r=await fetch(URL+"/rest/v1/rpc/waitlist_valencia_count",{method:"POST",headers:H,body:"{}"});
       if(!r.ok) return null; var n=await r.json(); return (typeof n==="number")?n:null; }catch(e){ return null; } }
   contar().then(function(n){ var p=$("#proof"); if(!p) return;
-    if(n!=null&&n>=25){ p.innerHTML='Ya somos <b>'+n.toLocaleString("es-ES")+'</b> esperando en Valencia.'; p.hidden=false; } });
+    if(n!=null&&n>=25){ p.innerHTML='Ya somos <b>'+n.toLocaleString("es-ES")+'</b> personas esperando a hacer planes.'; p.hidden=false; } });
 
   var valido=function(v){ return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test((v||"").trim()); };
   var paisSel=$("#pais"), provSel=$("#provincia");
