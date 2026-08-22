@@ -109,14 +109,18 @@
   .follow{margin-top:14px;font-size:13px;color:var(--muted)}.follow a{color:var(--blue-ink);font-weight:700;text-decoration:none}
 
   @media(prefers-reduced-motion:reduce){.cyc span{transition:none}}
+  .sel{appearance:none;-webkit-appearance:none;cursor:pointer;color:var(--ink);
+    background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8'%3E%3Cpath d='M1 1.5 6 6.5 11 1.5' fill='none' stroke='%238A909E' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E");
+    background-repeat:no-repeat;background-position:right 16px center;padding-right:40px}
+  .sel:required:invalid{color:var(--muted)}
+  .sel[hidden]{display:none}
 </style>
 </head>
 <body>
 <main class="stage">
   <div class="meta tl"><span class="wm">NY<span class="x">X</span>A</span></div>
   <div class="launch">
-    <div class="l1">Abrimos la primera ciudad</div>
-    <div class="l2">Valencia · 1 oct 2026</div>
+    <div class="l2">La app sale el 1 oct 2026 a las 19:00h</div>
     <div class="l3">Faltan <span id="cd">—</span> días</div>
   </div>
   <div class="meta bl"><a href="/privacidad.html">Privacidad</a> · <a href="/terminos.html">Términos</a></div>
@@ -131,6 +135,8 @@
       <div class="box">
         <input class="inp" id="nombre" type="text" autocomplete="given-name" placeholder="Tu nombre" aria-label="Tu nombre" required>
         <input class="inp" id="email" type="email" inputmode="email" autocomplete="email" placeholder="Tu email" aria-label="Tu email" required>
+        <select class="inp sel" id="pais" aria-label="Tu país" required><option value="" disabled selected>Tu país</option><option value="España">España</option><option value="Italia">Italia</option><option value="Portugal">Portugal</option><option value="Francia">Francia</option><option value="Reino Unido">Reino Unido</option><option value="Alemania">Alemania</option><option value="Otro">Otro</option></select>
+        <select class="inp sel" id="provincia" aria-label="Tu provincia" hidden><option value="" disabled selected>Tu provincia</option><option value="A Coruña">A Coruña</option><option value="Álava">Álava</option><option value="Albacete">Albacete</option><option value="Alicante">Alicante</option><option value="Almería">Almería</option><option value="Asturias">Asturias</option><option value="Ávila">Ávila</option><option value="Badajoz">Badajoz</option><option value="Barcelona">Barcelona</option><option value="Bizkaia">Bizkaia</option><option value="Burgos">Burgos</option><option value="Cáceres">Cáceres</option><option value="Cádiz">Cádiz</option><option value="Cantabria">Cantabria</option><option value="Castellón">Castellón</option><option value="Ciudad Real">Ciudad Real</option><option value="Córdoba">Córdoba</option><option value="Cuenca">Cuenca</option><option value="Gipuzkoa">Gipuzkoa</option><option value="Girona">Girona</option><option value="Granada">Granada</option><option value="Guadalajara">Guadalajara</option><option value="Huelva">Huelva</option><option value="Huesca">Huesca</option><option value="Illes Balears">Illes Balears</option><option value="Jaén">Jaén</option><option value="La Rioja">La Rioja</option><option value="Las Palmas">Las Palmas</option><option value="León">León</option><option value="Lleida">Lleida</option><option value="Lugo">Lugo</option><option value="Madrid">Madrid</option><option value="Málaga">Málaga</option><option value="Murcia">Murcia</option><option value="Navarra">Navarra</option><option value="Ourense">Ourense</option><option value="Palencia">Palencia</option><option value="Pontevedra">Pontevedra</option><option value="Salamanca">Salamanca</option><option value="Santa Cruz de Tenerife">Santa Cruz de Tenerife</option><option value="Segovia">Segovia</option><option value="Sevilla">Sevilla</option><option value="Soria">Soria</option><option value="Tarragona">Tarragona</option><option value="Teruel">Teruel</option><option value="Toledo">Toledo</option><option value="Valencia">Valencia</option><option value="Valladolid">Valladolid</option><option value="Zamora">Zamora</option><option value="Zaragoza">Zaragoza</option></select>
       </div>
       <button class="go" type="submit"><span>Reservar mi sitio</span></button>
       <div class="fine">Es la lista de espera. NYXA aún no ha abierto — te avisamos el <b>1 de octubre</b>.</div>
@@ -206,24 +212,27 @@
     if(n!=null&&n>=25){ p.innerHTML='Ya somos <b>'+n.toLocaleString("es-ES")+'</b> esperando en Valencia.'; p.hidden=false; } });
 
   var valido=function(v){ return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test((v||"").trim()); };
+  var paisSel=$("#pais"), provSel=$("#provincia");
+  paisSel.addEventListener("change", function(){ var es=paisSel.value==="España"; provSel.hidden=!es; if(!es) provSel.value=""; });
   $("#wl").addEventListener("submit", async function(e){
     e.preventDefault();
     var nombre=$("#nombre"), email=$("#email"), btn=$(".go"), err=$("#err");
     err.hidden=true;
     if(!nombre.value.trim()){ err.textContent="¿Cómo te llamas?"; err.hidden=false; nombre.focus(); return; }
     if(!valido(email.value)){ err.textContent="Ese email no parece un email."; err.hidden=false; email.focus(); return; }
+    if(!paisSel.value){ err.textContent="¿De dónde eres? Elige país."; err.hidden=false; paisSel.focus(); return; }
+    if(paisSel.value==="España" && !provSel.value){ err.textContent="Elige tu provincia."; err.hidden=false; provSel.focus(); return; }
     btn.disabled=true; btn.firstElementChild.textContent="Un segundo…";
-    var datos={ nombre:nombre.value.trim(), email:email.value.trim().toLowerCase(), ciudad:"valencia", acepta_novedades:true };
+    var _prov=(paisSel.value==="España"?provSel.value:"");
+    var datos={ nombre:nombre.value.trim(), email:email.value.trim().toLowerCase(), pais:paisSel.value, provincia:_prov, ciudad:(_prov?_prov.toLowerCase():paisSel.value.toLowerCase()), acepta_novedades:true };
     async function insertar(payload){
       var res=await fetch(URL+"/rest/v1/"+TABLA,{method:"POST",headers:Object.assign({Prefer:"return=minimal"},H),body:JSON.stringify(payload)});
       if(res.status===409) return "dup";           // email ya en la lista (unique)
       if(res.ok) return "ok";
-      // Si la columna 'nombre' aún no existe, reintenta SIN ella: el email igual se guarda.
-      if("nombre" in payload){ var d2=Object.assign({},payload); delete d2.nombre;
-        var r2=await fetch(URL+"/rest/v1/"+TABLA,{method:"POST",headers:Object.assign({Prefer:"return=minimal"},H),body:JSON.stringify(d2)});
-        if(r2.status===409) return "dup"; if(r2.ok) return "ok"; throw new Error(await r2.text());
-      }
-      throw new Error(await res.text());
+      // Si alguna columna nueva (nombre/pais/provincia) aún no existe, reintenta con lo mínimo: el email igual se guarda.
+      var d2={ email:payload.email, acepta_novedades:true };
+      var r2=await fetch(URL+"/rest/v1/"+TABLA,{method:"POST",headers:Object.assign({Prefer:"return=minimal"},H),body:JSON.stringify(d2)});
+      if(r2.status===409) return "dup"; if(r2.ok) return "ok"; throw new Error(await r2.text());
     }
     try{
       var estado = (URL&&KEY) ? await insertar(datos) : "ok";
