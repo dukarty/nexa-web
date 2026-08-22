@@ -229,20 +229,17 @@
       var res=await fetch(URL+"/rest/v1/"+TABLA,{method:"POST",headers:Object.assign({Prefer:"return=minimal"},H),body:JSON.stringify(payload)});
       if(res.status===409) return "dup";           // email ya en la lista (unique)
       if(res.ok) return "ok";
-      // Si alguna columna nueva (nombre/pais/provincia) aún no existe, reintenta con lo mínimo: el email igual se guarda.
-      var d2={ email:payload.email, acepta_novedades:true };
-      var r2=await fetch(URL+"/rest/v1/"+TABLA,{method:"POST",headers:Object.assign({Prefer:"return=minimal"},H),body:JSON.stringify(d2)});
-      if(r2.status===409) return "dup"; if(r2.ok) return "ok"; throw new Error(await r2.text());
+      throw new Error(await res.text());   // registro completo o nada: nunca se guarda a medias
     }
     try{
       var estado = (URL&&KEY) ? await insertar(datos) : "ok";
       if(estado==="dup"){
         $("#okH").textContent = "Ya estabas dentro 😉";
-        $("#okP").innerHTML = "Te avisaremos cuando abra Valencia. Trae a los tuyos mientras tanto.";
+        $("#okP").innerHTML = "Te avisaremos cuando abramos. Trae a los tuyos mientras tanto.";
       }
       $("#wl").hidden=true;
       var ok=$("#ok"); ok.hidden=false;
-      if(estado!=="dup"){ var n=await contar(); if(n!=null){ $("#numLine").innerHTML=' Eres el <span class="num">nº '+n.toLocaleString("es-ES")+'</span> de Valencia.'; } }
+      if(estado!=="dup"){ var n=await contar(); if(n!=null){ $("#numLine").innerHTML=' Eres el <span class="num">nº '+n.toLocaleString("es-ES")+'</span> de la lista.'; } }
       var link="https://nexavalencia.vercel.app/";
       var msg="Me acabo de apuntar a NYXA — la app para vivir cosas de verdad en Valencia (no es Tinder, es salir). Abre el 1 de octubre. Entra tú también: "+link;
       $("#shWa").href="https://wa.me/?text="+encodeURIComponent(msg);
