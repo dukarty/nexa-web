@@ -1,18 +1,4 @@
 {
   "cleanUrls": true,
-  "trailingSlash": false,
-  "redirects": [
-    { "source": "/ciudades", "destination": "/", "permanent": false },
-    { "source": "/ciudades.html", "destination": "/", "permanent": false },
-    { "source": "/manifiesto", "destination": "/", "permanent": false },
-    { "source": "/manifiesto.html", "destination": "/", "permanent": false },
-    { "source": "/seguridad", "destination": "/", "permanent": false },
-    { "source": "/seguridad.html", "destination": "/", "permanent": false },
-    { "source": "/empresas", "destination": "/", "permanent": false },
-    { "source": "/empresas.html", "destination": "/", "permanent": false },
-    { "source": "/panel", "destination": "/", "permanent": false },
-    { "source": "/panel.html", "destination": "/", "permanent": false },
-    { "source": "/aviso-legal", "destination": "/", "permanent": false },
-    { "source": "/aviso-legal.html", "destination": "/", "permanent": false }
-  ]
+  "trailingSlash": false
 }
