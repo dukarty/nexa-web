@@ -20,7 +20,7 @@
     font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",system-ui,sans-serif;
     -webkit-font-smoothing:antialiased;line-height:1.5;min-height:100svh}
   a{color:inherit}
-  .wrap{max-width:680px;margin:0 auto;padding:clamp(40px,8vh,72px) 24px 80px}
+  .wrap{max-width:760px;margin:0 auto;padding:96px 24px 80px}
 
   header{margin-bottom:34px}
   .wm{font-size:20px;font-weight:800;letter-spacing:-.02em;color:var(--ink);text-decoration:none;display:inline-block}
@@ -61,9 +61,29 @@
 </style>
 </head>
 <body>
+<style>
+.snav{position:fixed;top:0;left:0;right:0;z-index:50;height:60px;display:flex;align-items:center;background:rgba(251,249,244,.72);backdrop-filter:saturate(1.8) blur(20px);-webkit-backdrop-filter:saturate(1.8) blur(20px);border-bottom:1px solid rgba(10,12,17,.06)}
+.snav__in{max-width:1120px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;width:100%}
+.snav__b{font-weight:800;font-size:20px;letter-spacing:-.02em;text-decoration:none;color:#0A0C11}.snav__b i{color:#2f66ff;font-style:normal}
+.snav__l{display:flex;gap:24px}
+.snav__l a{font-size:14.5px;font-weight:600;color:#3B4251;text-decoration:none}.snav__l a:hover{color:#0A0C11}
+.snav__cta{background:#2f66ff;color:#fff;text-decoration:none;font-size:14px;font-weight:700;padding:9px 18px;border-radius:999px;white-space:nowrap}
+@media(max-width:860px){.snav__l{display:none}}
+</style>
+<header class="snav"><div class="snav__in">
+  <a class="snav__b" href="index.html">NY<i aria-hidden="true">✕</i>A</a>
+  <nav class="snav__l" aria-label="Principal">
+    <a href="index.html#gesto">Cómo funciona</a>
+    <a href="ciudades.html">Ciudades</a>
+    <a href="seguridad.html">Seguridad</a>
+    <a href="manifiesto.html">Quiénes somos</a>
+    <a href="empresas.html">Empresas</a>
+    <a href="momentos.html">Momentos</a>
+  </nav>
+  <a class="snav__cta" href="https://apps.apple.com/es/app/nyxa/id6800325033" target="_blank" rel="noopener">Descargar</a>
+</div></header>
 <div class="wrap">
   <header>
-    <a class="wm" href="/">NY<span class="x">X</span>A</a>
     <div class="kick">Centro de ayuda</div>
     <h1>Soporte</h1>
     <p class="lead">¿Tienes una duda, un problema o quieres darnos tu opinión? Estamos aquí para ayudarte.</p>
