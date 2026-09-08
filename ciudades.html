@@ -381,6 +381,44 @@ img{max-width:100%;height:auto}
 </script>
 <script>document.addEventListener("click",function(e){var b=e.target.closest(".burger");if(!b)return;var n=b.closest(".nav");n.classList.toggle("open");b.setAttribute("aria-expanded",n.classList.contains("open"));});</script>
 <style>
+.dl{background:linear-gradient(180deg,#EDF3FF,#FBF9F4);padding:clamp(64px,9vw,100px) 24px;font-family:-apple-system,BlinkMacSystemFont,"Plus Jakarta Sans","Segoe UI",system-ui,sans-serif;text-align:center;line-height:1.5}
+.dl *{box-sizing:border-box}
+.dl__in{max-width:860px;margin:0 auto}
+.dl__k{font-size:13px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:#2f66ff;margin:0}
+.dl__t{font-size:clamp(28px,4.8vw,48px);font-weight:800;letter-spacing:-.035em;line-height:1.04;margin:14px auto 0;color:#0A0C11;text-wrap:balance;max-width:19ch}
+.dl__steps{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:44px;text-align:left}
+@media(max-width:640px){.dl__steps{grid-template-columns:1fr;gap:14px;max-width:360px;margin-left:auto;margin-right:auto}}
+.dl__s{background:#fff;border:1px solid #E7E4DC;border-radius:18px;padding:24px}
+.dl__s span{display:inline-flex;width:30px;height:30px;align-items:center;justify-content:center;border-radius:50%;background:#2f66ff;color:#fff;font-weight:800;font-size:14px}
+.dl__s b{display:block;margin-top:14px;font-size:17px;font-weight:800;color:#0A0C11;letter-spacing:-.01em}
+.dl__s i{display:block;margin-top:5px;font-style:normal;color:#5D6779;font-size:14.5px;line-height:1.45}
+.dl__cta{margin-top:40px;display:inline-flex;flex-direction:column;align-items:center;gap:12px}
+.dl__as{line-height:0;transition:transform .15s}.dl__as:hover{transform:translateY(-2px)}
+.dl__and{font-size:13px;font-weight:700;color:#737B89;letter-spacing:.02em}
+</style>
+<section class="dl" aria-label="Descargar NYXA">
+  <div class="dl__in">
+    <p class="dl__k">Empieza hoy</p>
+    <h2 class="dl__t">Descárgala gratis y haz que esta semana pase algo.</h2>
+    <div class="dl__steps">
+      <div class="dl__s"><span>1</span><b>Descárgala</b><i>En la App Store, gratis y sin tarjeta.</i></div>
+      <div class="dl__s"><span>2</span><b>Di qué quieres vivir</b><i>Una cena, un concierto, una ruta…</i></div>
+      <div class="dl__s"><span>3</span><b>NYXA te dice con quién</b><i>Y quedáis de verdad, en persona.</i></div>
+    </div>
+    <div class="dl__cta">
+      <a class="dl__as" href="https://apps.apple.com/es/app/nyxa/id6800325033" target="_blank" rel="noopener" aria-label="Descargar NYXA en la App Store">
+        <svg width="150" height="50" viewBox="0 0 120 40" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true">
+          <rect width="120" height="40" rx="7" fill="#0A0C11"/>
+          <path fill="#fff" transform="translate(11,8.5) scale(0.95)" d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.63 5.98.32 7.11-.61 1.35-1.46 2.7-2.31 3.99l-.06.11M12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25"/>
+          <text x="38" y="16" fill="#fff" font-family="-apple-system,'Plus Jakarta Sans',sans-serif" font-size="6.5" font-weight="400">Descárgalo en el</text>
+          <text x="37.5" y="30.5" fill="#fff" font-family="-apple-system,'Plus Jakarta Sans',sans-serif" font-size="14.5" font-weight="600" letter-spacing="-0.4">App Store</text>
+        </svg>
+      </a>
+      <span class="dl__and">Android muy pronto</span>
+    </div>
+  </div>
+</section>
+<style>
 .nf{background:#0A0C11;color:#fff;padding:clamp(56px,7vw,72px) 24px 40px;font-family:-apple-system,BlinkMacSystemFont,"Plus Jakarta Sans","Segoe UI",system-ui,sans-serif;line-height:1.5}
 .nf *{box-sizing:border-box}
 .nf__in{max-width:1120px;margin:0 auto}
