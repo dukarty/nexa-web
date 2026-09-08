@@ -350,6 +350,38 @@ img{max-width:100%;height:auto}
 </script>
 <script>document.addEventListener("click",function(e){var b=e.target.closest(".burger");if(!b)return;var n=b.closest(".nav");n.classList.toggle("open");b.setAttribute("aria-expanded",n.classList.contains("open"));});</script>
 <style>
+.sf{background:#FBF9F4;padding:clamp(64px,9vw,100px) 24px;font-family:-apple-system,BlinkMacSystemFont,"Plus Jakarta Sans","Segoe UI",system-ui,sans-serif;line-height:1.5}
+.sf *{box-sizing:border-box}
+.sf__in{max-width:1000px;margin:0 auto}
+.sf__k{font-size:13px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:#2f66ff;margin:0;text-align:center}
+.sf__t{font-size:clamp(28px,4.6vw,46px);font-weight:800;letter-spacing:-.035em;line-height:1.05;margin:14px auto 0;color:#0A0C11;text-align:center;text-wrap:balance;max-width:18ch}
+.sf__grid{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:44px}
+@media(max-width:640px){.sf__grid{grid-template-columns:1fr}}
+.sf__c{background:#fff;border:1px solid #E7E4DC;border-radius:18px;padding:26px}
+.sf__c h3{font-size:18px;font-weight:800;letter-spacing:-.01em;color:#0A0C11;margin:0}
+.sf__c p{margin:8px 0 0;color:#5D6779;font-size:15px;line-height:1.5}
+.sf__bad{margin-top:20px;background:#0A0C11;color:#fff;border-radius:18px;padding:28px 30px}
+.sf__badt{font-size:13px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#8fb0ff}
+.sf__bad p{margin:10px 0 0;color:#c7cdd8;font-size:15.5px;line-height:1.55;max-width:70ch}
+.sf__bad b{color:#fff}.sf__bad a{color:#8fb0ff;font-weight:700;text-decoration:none}.sf__bad a:hover{text-decoration:underline}
+</style>
+<section class="sf" aria-label="Consejos de seguridad">
+  <div class="sf__in">
+    <p class="sf__k">Quedar con cabeza</p>
+    <h2 class="sf__t">Consejos para tu primera quedada.</h2>
+    <div class="sf__grid">
+      <div class="sf__c"><h3>Sitio público la primera vez</h3><p>Un café, un parque, un plan con más gente. Nada de sitios privados al principio.</p></div>
+      <div class="sf__c"><h3>Avisa a alguien de confianza</h3><p>Dile con quién quedas, dónde y a qué hora. Comparte tu ubicación si te quedas más tranquilo.</p></div>
+      <div class="sf__c"><h3>Ve a tu ritmo</h3><p>No tienes que quedarte. Si algo no te encaja, te vas — no le debes nada a nadie.</p></div>
+      <div class="sf__c"><h3>Fíate de tu instinto</h3><p>Si algo te chirría, corta. Siempre puedes bloquear y reportar desde la app.</p></div>
+    </div>
+    <div class="sf__bad">
+      <div class="sf__badt">¿Algo va mal?</div>
+      <p>Bloquea y reporta desde la app a un toque — <b>lo miramos de verdad</b>. Si hay peligro inmediato, llama al <b>112</b>. Y para cualquier cosa, escríbenos a <a href="mailto:holanyxa@gmail.com?subject=Seguridad%20NYXA">holanyxa@gmail.com</a>.</p>
+    </div>
+  </div>
+</section>
+<style>
 .dl{background:linear-gradient(180deg,#EDF3FF,#FBF9F4);padding:clamp(64px,9vw,100px) 24px;font-family:-apple-system,BlinkMacSystemFont,"Plus Jakarta Sans","Segoe UI",system-ui,sans-serif;text-align:center;line-height:1.5}
 .dl *{box-sizing:border-box}
 .dl__in{max-width:860px;margin:0 auto}
