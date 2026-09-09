@@ -780,9 +780,9 @@ body.claro .co__apple{background:#000;color:#fff}
   const q=new URLSearchParams(location.search);
   const RANGO={verificada:0,activacion:1,ciudad:2,red:3};
   const NOMBREPLAN={verificada:"Gratis",activacion:"Pro",ciudad:"Marca",red:"Élite"};
-  const PRECIOMES={activacion:29,ciudad:89};        // €/mes
-  const PRECIOANIO={activacion:290,ciudad:890};     // €/año (2 meses gratis)
-  const PRECIOPLAN={verificada:"Gratis",activacion:"desde 29 €/mes",ciudad:"desde 89 €/mes",red:"A medida"};
+  const PRECIOMES={activacion:29,ciudad:99};        // €/mes (alineado con Stripe: Pro 29, Referente 99)
+  const PRECIOANIO={activacion:290,ciudad:990};     // €/año (2 meses gratis) — Stripe: Pro 290, Referente 990
+  const PRECIOPLAN={verificada:"Gratis",activacion:"desde 29 €/mes",ciudad:"desde 99 €/mes",red:"A medida"};
   let periodo="mes";  // "mes" | "anio"
   function precioNum(k){return periodo==="anio"?(PRECIOANIO[k]):(PRECIOMES[k]);}
   function precioTxt(k){const n=precioNum(k);return n==null?"A medida":(n+" €"+(periodo==="anio"?"/año":"/mes"));}
@@ -1709,6 +1709,33 @@ body.claro .co__apple{background:#000;color:#fff}
     showGate:()=>{$("#gate").classList.add("on");document.body.style.overflow="hidden";},
     hideGate:()=>{$("#gate").classList.remove("on");document.body.style.overflow="";}
   };
+
+  /* ── Volver de Stripe Checkout (SOLO web) ──
+     El plan/saldo lo activa el WEBHOOK de Stripe en la BD (asíncrono, 1-3s). Al
+     volver con ?pago=ok, confirmamos y recargamos la cuenta reintentando hasta
+     ver el plan nuevo. Limpiamos la URL para no repetir el aviso en un refresh. */
+  if(q.get("pago")==="ok"){
+    try{history.replaceState({},"",location.pathname);}catch(e){}
+    setTimeout(()=>toast("¡Pago recibido! Activando tu plan…"),600);
+    let intentos=0;
+    (async function esperarPlan(){
+      if(!(window.NEXAEmpresas&&window.NEXAEmpresas.real&&window.NEXAEmpresas.account)){setTimeout(esperarPlan,1200);return;}
+      const acc=await window.NEXAEmpresas.account();
+      if(acc){
+        cuenta=acc;pintarCuenta();
+        if(acc.plan&&acc.plan!=="verificada"){
+          if(typeof estrenarTemaPlan==="function")estrenarTemaPlan(acc.plan);
+          toast("Listo — ya eres "+(NOMBREPLAN[acc.plan]||"premium")+". Todo desbloqueado.");
+          return;
+        }
+      }
+      if(intentos++<6)setTimeout(esperarPlan,2000);
+      else toast("Pago recibido. Si tu plan no aparece en un minuto, recarga la página.");
+    })();
+  }else if(q.get("pago")==="cancelado"){
+    try{history.replaceState({},"",location.pathname);}catch(e){}
+    setTimeout(()=>toast("Pago cancelado — no se ha hecho ningún cargo."),600);
+  }
 </script>
 <script>
 /* Experiencias listas para activar: al pulsar una plantilla, rellena el formulario de crear
