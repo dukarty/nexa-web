@@ -59,6 +59,26 @@ h1,h2,h3,p{overflow-wrap:break-word}
 .how{background:linear-gradient(180deg,#fff,#F4F1EA);padding:clamp(56px,8vw,88px) 0;text-align:center}
 .how h2{font-size:clamp(28px,4.6vw,46px);font-weight:800;letter-spacing:-.035em;text-wrap:balance;max-width:20ch;margin:14px auto 0}
 .how p{color:var(--ink2);max-width:50ch;margin:16px auto 0;font-size:clamp(16px,2vw,19px);text-wrap:pretty}
+/* menú móvil (reutilizable) */
+.nav__right{display:flex;align-items:center;gap:12px}
+.burger{display:none;width:42px;height:42px;border:1px solid var(--line);border-radius:12px;background:var(--card);cursor:pointer;position:relative;padding:0}
+.burger span{position:absolute;left:11px;right:11px;height:2px;background:var(--ink);border-radius:2px;transition:transform .2s,opacity .2s}
+.burger span:nth-child(1){top:14px}.burger span:nth-child(2){top:20px}.burger span:nth-child(3){top:26px}
+.burger[aria-expanded="true"] span:nth-child(1){transform:translateY(6px) rotate(45deg)}
+.burger[aria-expanded="true"] span:nth-child(2){opacity:0}
+.burger[aria-expanded="true"] span:nth-child(3){transform:translateY(-6px) rotate(-45deg)}
+.mmenu{position:fixed;top:60px;left:0;right:0;bottom:0;z-index:49;background:var(--paper);border-top:1px solid var(--line);padding:10px 24px 28px;display:flex;flex-direction:column;overflow:auto;transform:translateY(-10px);opacity:0;pointer-events:none;transition:transform .2s,opacity .2s}
+.mmenu[data-open="true"]{transform:none;opacity:1;pointer-events:auto}
+.mmenu a{padding:15px 6px;font-size:17px;font-weight:700;color:var(--ink);text-decoration:none;border-bottom:1px solid var(--line)}
+.mmenu__cta{margin-top:14px;background:var(--blue);color:#fff!important;text-align:center;border-radius:999px!important;border:0!important;padding:15px!important}
+@media(max-width:860px){.burger{display:block}}
+@media(min-width:861px){.mmenu{display:none}}
+/* momentos: tarjetas con más vida */
+.idea{min-height:248px;transition:transform .2s ease,box-shadow .2s ease}
+.idea::after{content:"";position:absolute;inset:0;z-index:-1;background:radial-gradient(120% 85% at 78% 0%,rgba(255,255,255,.22),transparent 58%)}
+.idea:hover{transform:translateY(-5px);box-shadow:0 34px 64px -30px rgba(10,12,17,.55)}
+.idea .go{margin-top:14px;font-size:14px;font-weight:800;letter-spacing:.01em;display:inline-flex;align-items:center;gap:7px;opacity:.95}
+.idea .go svg{width:15px;height:15px}
 </style>
 </head>
 <body>
@@ -74,9 +94,21 @@ h1,h2,h3,p{overflow-wrap:break-word}
       <a href="empresas.html">Empresas</a>
       <a href="momentos.html" aria-current="page">Momentos</a>
     </nav>
-    <a class="pill" href="descargar.html">Descargar</a>
+    <div class="nav__right">
+      <a class="pill" href="descargar.html">Descargar</a>
+      <button class="burger" aria-label="Abrir menú" aria-expanded="false" aria-controls="mmenu"><span></span><span></span><span></span></button>
+    </div>
   </div>
 </header>
+<div class="mmenu" id="mmenu">
+  <a href="index.html#gesto">Cómo funciona</a>
+  <a href="ciudades.html">Ciudades</a>
+  <a href="seguridad.html">Seguridad</a>
+  <a href="manifiesto.html">Quiénes somos</a>
+  <a href="empresas.html">Empresas</a>
+  <a href="momentos.html" aria-current="page">Momentos</a>
+  <a class="mmenu__cta" href="descargar.html">Descargar gratis</a>
+</div>
 
 <main>
   <section class="phero">
@@ -214,5 +246,16 @@ h1,h2,h3,p{overflow-wrap:break-word}
     </div>
   </div>
 </footer>
+<script>
+(function(){
+  var b=document.querySelector('.burger'), m=document.getElementById('mmenu');
+  if(!b||!m) return;
+  function set(o){b.setAttribute('aria-expanded',o);m.setAttribute('data-open',o);document.body.style.overflow=o?'hidden':'';}
+  b.addEventListener('click',function(){set(b.getAttribute('aria-expanded')!=='true');});
+  m.addEventListener('click',function(e){if(e.target.tagName==='A')set(false);});
+  document.addEventListener('keydown',function(e){if(e.key==='Escape')set(false);});
+  window.addEventListener('resize',function(){if(window.innerWidth>860)set(false);});
+})();
+</script>
 </body>
 </html>
