@@ -28,17 +28,21 @@ alter table businesses add column if not exists stripe_customer text;
 
 ## 3. Secretos de las Edge Functions
 ```bash
+# Los price IDs ya están puestos (test). Solo cambia sk_test_XXXX y whsec_XXXX.
 supabase secrets set \
   STRIPE_SECRET_KEY=sk_test_XXXX \
   STRIPE_WEBHOOK_SECRET=whsec_XXXX \
   SITE_URL=https://holanyxa.com \
-  STRIPE_PRICE_PRO_MENSUAL=price_XXX \
-  STRIPE_PRICE_PRO_ANUAL=price_XXX \
-  STRIPE_PRICE_REFERENTE_MENSUAL=price_XXX \
-  STRIPE_PRICE_REFERENTE_ANUAL=price_XXX \
-  STRIPE_PRICE_IMPULSAR_120=price_XXX \
-  STRIPE_PRICE_IMPULSAR_55=price_XXX
+  STRIPE_PRICE_PRO_MENSUAL=price_1Tw3nv7BhCP3U7pVHEUEpugZ \
+  STRIPE_PRICE_PRO_ANUAL=price_1Tw3nv7BhCP3U7pVJGzK5ZAh \
+  STRIPE_PRICE_REFERENTE_MENSUAL=price_1UDmXv7BhCP3U7pVJxLsQvGm \
+  STRIPE_PRICE_REFERENTE_ANUAL=price_1UDmYk7BhCP3U7pVF7lkD4H5 \
+  STRIPE_PRICE_IMPULSAR_120=price_1UDmbO7BhCP3U7pVRgvsdZxP \
+  STRIPE_PRICE_IMPULSAR_55=price_1UDmbz7BhCP3U7pVCJ7yfNCP
 ```
+
+> **Price IDs (test) — ya rellenados arriba:**
+> Pro 29/mes `price_1Tw3nv7BhCP3U7pVHEUEpugZ` · Pro 290/año `price_1Tw3nv7BhCP3U7pVJGzK5ZAh` · Referente 99/mes `price_1UDmXv7BhCP3U7pVJxLsQvGm` · Referente 990/año `price_1UDmYk7BhCP3U7pVF7lkD4H5` · Impulsar 120 `price_1UDmbO7BhCP3U7pVRgvsdZxP` · Impulsar 55 `price_1UDmbz7BhCP3U7pVCJ7yfNCP`
 `SUPABASE_URL` y `SUPABASE_SERVICE_ROLE_KEY` ya los inyecta Supabase.
 
 ## 4. Desplegar
