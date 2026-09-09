@@ -431,6 +431,9 @@ img{max-width:100%;height:auto}
 .nf__bottom{margin-top:48px;padding-top:24px;border-top:1px solid rgba(255,255,255,.1);display:flex;flex-wrap:wrap;gap:14px 24px;align-items:center;justify-content:space-between;color:#6b7280;font-size:13px}
 .nf__soc{display:flex;gap:22px;flex-wrap:wrap}
 .nf__soc a{color:#9aa3b2;text-decoration:none;font-weight:700}.nf__soc a:hover{color:#2f66ff}
+.nf__soc a,.nf__lang{display:inline-flex;align-items:center;gap:7px}
+.nf__soc a svg,.nf__lang svg{flex:none}
+.nf__lang{color:#6b7280;font-weight:600}
 </style>
 <footer class="nf">
   <div class="nf__in">
@@ -471,8 +474,9 @@ img{max-width:100%;height:auto}
     <div class="nf__bottom">
       <span>NYXA · Valencia · © 2026</span>
       <div class="nf__soc">
-        <a href="https://instagram.com/nyxa.app" target="_blank" rel="noopener">Instagram</a>
-        <a href="mailto:holanyxa@gmail.com">holanyxa@gmail.com</a>
+        <a href="https://instagram.com/nyxa.app" target="_blank" rel="noopener" aria-label="Instagram"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="2.6" y="2.6" width="18.8" height="18.8" rx="5.4" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="4.1" stroke="currentColor" stroke-width="1.8"/><circle cx="17.4" cy="6.6" r="1.25" fill="currentColor"/></svg>Instagram</a>
+        <a href="mailto:holanyxa@gmail.com" aria-label="Escríbenos por email"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="2.6" y="4.8" width="18.8" height="14.4" rx="2.6" stroke="currentColor" stroke-width="1.8"/><path d="M3.4 6.6l8.6 6 8.6-6" stroke="currentColor" stroke-width="1.8" fill="none"/></svg>holanyxa@gmail.com</a>
+        <span class="nf__lang"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.7"/><path d="M3 12h18M12 3c2.6 2.5 2.6 15 0 18M12 3c-2.6 2.5-2.6 15 0 18" stroke="currentColor" stroke-width="1.7"/></svg>Español (España)</span>
       </div>
     </div>
   </div>
