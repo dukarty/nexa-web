@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Descargar NYXA — gratis en iPhone</title>
+<meta name="description" content="Descarga NYXA gratis en la App Store. Di qué te apetece hacer y queda con gente cercana que quiere vivir lo mismo. Escanea el QR o pulsa para descargar.">
+<link rel="canonical" href="https://nexavalencia.vercel.app/descargar">
+<meta name="theme-color" content="#FBF9F4">
+<meta name="robots" content="index,follow">
+<link rel="icon" href="/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#FBF9F4; --card:#FFFFFF; --ink:#0A0C11; --ink-2:#3B4251; --muted:#8A909E;
+    --blue:#2f66ff; --blue-ink:#1e4fd6; --blue-soft:#EDF3FF; --line:#E7E4DC; --line-2:#DAD6CC;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{-webkit-text-size-adjust:100%;scroll-behavior:smooth}
+  body{background:var(--paper);color:var(--ink);
+    font-family:"Plus Jakarta Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif;
+    -webkit-font-smoothing:antialiased;line-height:1.5;min-height:100svh}
+  a{color:inherit}
+
+  /* ---- barra superior ---- */
+  .snav{position:fixed;top:0;left:0;right:0;z-index:50;height:60px;display:flex;align-items:center;background:rgba(251,249,244,.72);backdrop-filter:saturate(1.8) blur(20px);-webkit-backdrop-filter:saturate(1.8) blur(20px);border-bottom:1px solid rgba(10,12,17,.06)}
+  .snav__in{max-width:1120px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;width:100%}
+  .snav__b{font-weight:800;font-size:20px;letter-spacing:-.02em;text-decoration:none;color:var(--ink)}.snav__b i{color:var(--blue);font-style:normal}
+  .snav__l{display:flex;gap:24px}
+  .snav__l a{font-size:14.5px;font-weight:600;color:var(--ink-2);text-decoration:none}.snav__l a:hover{color:var(--ink)}
+  .snav__cta{background:var(--blue);color:#fff;text-decoration:none;font-size:14px;font-weight:700;padding:9px 18px;border-radius:999px;white-space:nowrap}
+  @media(max-width:860px){.snav__l{display:none}}
+
+  /* ---- hero ---- */
+  .dhero{padding:120px 24px 72px}
+  .dhero__in{max-width:1120px;margin:0 auto;display:grid;grid-template-columns:1.1fr .9fr;gap:56px;align-items:center}
+  @media(max-width:900px){.dhero__in{grid-template-columns:1fr;gap:40px}}
+  .kick{font-size:12.5px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--blue)}
+  h1{margin-top:14px;font-size:clamp(40px,6.4vw,68px);font-weight:800;letter-spacing:-.045em;line-height:.98;text-wrap:balance}
+  .lead{margin-top:18px;font-size:clamp(17px,2.3vw,20px);color:var(--ink-2);max-width:42ch;text-wrap:pretty}
+
+  .badges{display:flex;flex-wrap:wrap;gap:14px;margin-top:30px;align-items:center}
+  .b-as{display:inline-block;line-height:0;border-radius:13px;transition:transform .15s,box-shadow .15s;box-shadow:0 16px 34px -22px rgba(10,12,17,.7)}
+  .b-as:hover{transform:translateY(-2px);box-shadow:0 22px 44px -22px rgba(10,12,17,.75)}
+  .b-soon{display:inline-flex;flex-direction:column;justify-content:center;height:56px;padding:0 20px;border-radius:13px;
+    border:1px solid var(--line-2);background:var(--card);color:var(--muted);text-decoration:none;cursor:default}
+  .b-soon .s{font-size:10.5px;font-weight:700;letter-spacing:.02em;text-transform:uppercase}
+  .b-soon .m{font-size:15px;font-weight:800;color:var(--ink-2);letter-spacing:-.01em;margin-top:1px}
+
+  .meta{margin-top:22px;display:flex;flex-wrap:wrap;gap:8px 18px;font-size:14.5px;color:var(--muted);font-weight:600}
+  .meta b{color:var(--ink);font-weight:800}
+  .meta .dot{display:inline-flex;align-items:center;gap:7px}
+  .meta .dot::before{content:"";width:6px;height:6px;border-radius:50%;background:var(--blue)}
+
+  /* ---- tarjeta QR ---- */
+  .qrwrap{display:flex;justify-content:center}
+  .qr{background:var(--card);border:1px solid var(--line);border-radius:26px;padding:30px;width:100%;max-width:360px;
+    text-align:center;box-shadow:0 40px 90px -50px rgba(10,12,17,.55)}
+  .qr__code{background:#fff;border:1px solid var(--line);border-radius:18px;padding:16px;display:inline-flex}
+  .qr__code svg{width:190px;height:190px;display:block}
+  .qr__t{margin-top:18px;font-size:18px;font-weight:800;letter-spacing:-.02em;color:var(--ink)}
+  .qr__p{margin-top:6px;font-size:14px;color:var(--muted);line-height:1.5}
+
+  /* ---- pasos ---- */
+  .steps{background:linear-gradient(180deg,#FFFFFF,#F4F1EA);border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:clamp(56px,8vw,92px) 24px}
+  .steps__in{max-width:1120px;margin:0 auto}
+  .steps__k{font-size:13px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--blue);margin:0}
+  .steps__t{font-size:clamp(28px,4.6vw,48px);font-weight:800;letter-spacing:-.035em;line-height:1.04;margin:12px 0 0;text-wrap:balance;max-width:18ch}
+  .steps__grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:44px}
+  @media(max-width:760px){.steps__grid{grid-template-columns:1fr}}
+  .step{background:var(--card);border:1px solid var(--line);border-radius:20px;padding:28px}
+  .step__n{display:inline-flex;width:34px;height:34px;align-items:center;justify-content:center;border-radius:50%;background:var(--blue-soft);color:var(--blue-ink);font-weight:800;font-size:15px}
+  .step h3{margin:16px 0 0;font-size:19px;font-weight:800;letter-spacing:-.02em;color:var(--ink)}
+  .step p{margin:8px 0 0;font-size:15px;color:var(--ink-2);line-height:1.55}
+
+  /* ---- disponibilidad ---- */
+  .avail{padding:clamp(56px,8vw,92px) 24px}
+  .avail__in{max-width:1120px;margin:0 auto;display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+  @media(max-width:760px){.avail__in{grid-template-columns:1fr}}
+  .fact{border:1px solid var(--line);border-radius:20px;padding:26px;background:var(--card)}
+  .fact h4{font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:0}
+  .fact .v{margin-top:10px;font-size:22px;font-weight:800;letter-spacing:-.02em;color:var(--ink)}
+  .fact p{margin:8px 0 0;font-size:14.5px;color:var(--ink-2);line-height:1.55}
+  .fact a{color:var(--blue-ink);font-weight:700;text-decoration:none}
+  .fact a:hover{text-decoration:underline}
+
+  /* ---- cierre ---- */
+  .close{padding:clamp(56px,8vw,96px) 24px 8px;text-align:center}
+  .close h2{font-size:clamp(30px,5vw,54px);font-weight:800;letter-spacing:-.04em;line-height:1.02;text-wrap:balance}
+  .close .b-as{margin-top:28px}
+</style>
+</head>
+<body>
+<header class="snav"><div class="snav__in">
+  <a class="snav__b" href="index.html">NY<i aria-hidden="true">✕</i>A</a>
+  <nav class="snav__l" aria-label="Principal">
+    <a href="index.html#gesto">Cómo funciona</a>
+    <a href="ciudades.html">Ciudades</a>
+    <a href="seguridad.html">Seguridad</a>
+    <a href="manifiesto.html">Quiénes somos</a>
+    <a href="empresas.html">Empresas</a>
+    <a href="momentos.html">Momentos</a>
+  </nav>
+  <a class="snav__cta" href="https://apps.apple.com/es/app/nyxa/id6800325033" target="_blank" rel="noopener">Descargar</a>
+</div></header>
+
+<section class="dhero">
+  <div class="dhero__in">
+    <div>
+      <div class="kick">Descarga la app · Gratis</div>
+      <h1>Que hoy<br>pase algo.</h1>
+      <p class="lead">Descarga NYXA, di qué te apetece hacer y te ponemos con gente cercana que quiere vivir lo mismo. Sin postureo: se propone, se queda y se sale.</p>
+      <div class="badges">
+        <a class="b-as" href="https://apps.apple.com/es/app/nyxa/id6800325033" target="_blank" rel="noopener" aria-label="Descargar NYXA en la App Store">
+          <svg width="180" height="60" viewBox="0 0 120 40" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true">
+            <rect width="120" height="40" rx="8" fill="#0A0C11"/>
+            <path fill="#fff" transform="translate(11,8.5) scale(0.95)" d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.63 5.98.32 7.11-.61 1.35-1.46 2.7-2.31 3.99l-.06.11M12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25"/>
+            <text x="38" y="16" fill="#fff" font-family="-apple-system,'Plus Jakarta Sans',sans-serif" font-size="6.5" font-weight="400">Descárgalo en el</text>
+            <text x="37.5" y="30.5" fill="#fff" font-family="-apple-system,'Plus Jakarta Sans',sans-serif" font-size="14.5" font-weight="600" letter-spacing="-0.4">App Store</text>
+          </svg>
+        </a>
+        <span class="b-soon" aria-label="Android muy pronto">
+          <span class="s">Android</span>
+          <span class="m">Muy pronto</span>
+        </span>
+      </div>
+      <div class="meta">
+        <span class="dot"><b>+1.600</b>&nbsp;ya en NYXA</span>
+        <span class="dot">Gratis</span>
+        <span class="dot">iPhone · iOS 15+</span>
+      </div>
+    </div>
+    <div class="qrwrap">
+      <div class="qr">
+        <div class="qr__code"><svg viewBox="0 0 33 33" width="190" height="190" xmlns="http://www.w3.org/2000/svg" shape-rendering="crispEdges" role="img" aria-label="Código QR para descargar NYXA"><g fill="#0A0C11"><rect x="0" y="0" width="7" height="1"/><rect x="10" y="0" width="1" height="1"/><rect x="12" y="0" width="1" height="1"/><rect x="18" y="0" width="4" height="1"/><rect x="23" y="0" width="1" height="1"/><rect x="26" y="0" width="7" height="1"/><rect x="0" y="1" width="1" height="1"/><rect x="6" y="1" width="1" height="1"/><rect x="15" y="1" width="1" height="1"/><rect x="18" y="1" width="1" height="1"/><rect x="20" y="1" width="2" height="1"/><rect x="24" y="1" width="1" height="1"/><rect x="26" y="1" width="1" height="1"/><rect x="32" y="1" width="1" height="1"/><rect x="0" y="2" width="1" height="1"/><rect x="2" y="2" width="3" height="1"/><rect x="6" y="2" width="1" height="1"/><rect x="8" y="2" width="3" height="1"/><rect x="12" y="2" width="1" height="1"/><rect x="14" y="2" width="2" height="1"/><rect x="19" y="2" width="3" height="1"/><rect x="23" y="2" width="1" height="1"/><rect x="26" y="2" width="1" height="1"/><rect x="28" y="2" width="3" height="1"/><rect x="32" y="2" width="1" height="1"/><rect x="0" y="3" width="1" height="1"/><rect x="2" y="3" width="3" height="1"/><rect x="6" y="3" width="1" height="1"/><rect x="8" y="3" width="2" height="1"/><rect x="11" y="3" width="1" height="1"/><rect x="15" y="3" width="1" height="1"/><rect x="18" y="3" width="2" height="1"/><rect x="23" y="3" width="1" height="1"/><rect x="26" y="3" width="1" height="1"/><rect x="28" y="3" width="3" height="1"/><rect x="32" y="3" width="1" height="1"/><rect x="0" y="4" width="1" height="1"/><rect x="2" y="4" width="3" height="1"/><rect x="6" y="4" width="1" height="1"/><rect x="8" y="4" width="4" height="1"/><rect x="13" y="4" width="5" height="1"/><rect x="20" y="4" width="5" height="1"/><rect x="26" y="4" width="1" height="1"/><rect x="28" y="4" width="3" height="1"/><rect x="32" y="4" width="1" height="1"/><rect x="0" y="5" width="1" height="1"/><rect x="6" y="5" width="1" height="1"/><rect x="8" y="5" width="1" height="1"/><rect x="12" y="5" width="3" height="1"/><rect x="19" y="5" width="1" height="1"/><rect x="21" y="5" width="1" height="1"/><rect x="26" y="5" width="1" height="1"/><rect x="32" y="5" width="1" height="1"/><rect x="0" y="6" width="7" height="1"/><rect x="8" y="6" width="1" height="1"/><rect x="10" y="6" width="1" height="1"/><rect x="12" y="6" width="1" height="1"/><rect x="14" y="6" width="1" height="1"/><rect x="16" y="6" width="1" height="1"/><rect x="18" y="6" width="1" height="1"/><rect x="20" y="6" width="1" height="1"/><rect x="22" y="6" width="1" height="1"/><rect x="24" y="6" width="1" height="1"/><rect x="26" y="6" width="7" height="1"/><rect x="8" y="7" width="5" height="1"/><rect x="14" y="7" width="1" height="1"/><rect x="16" y="7" width="1" height="1"/><rect x="19" y="7" width="4" height="1"/><rect x="0" y="8" width="1" height="1"/><rect x="2" y="8" width="5" height="1"/><rect x="10" y="8" width="2" height="1"/><rect x="13" y="8" width="2" height="1"/><rect x="16" y="8" width="4" height="1"/><rect x="22" y="8" width="1" height="1"/><rect x="24" y="8" width="1" height="1"/><rect x="26" y="8" width="5" height="1"/><rect x="0" y="9" width="4" height="1"/><rect x="7" y="9" width="1" height="1"/><rect x="9" y="9" width="2" height="1"/><rect x="13" y="9" width="1" height="1"/><rect x="16" y="9" width="9" height="1"/><rect x="26" y="9" width="2" height="1"/><rect x="29" y="9" width="2" height="1"/><rect x="32" y="9" width="1" height="1"/><rect x="1" y="10" width="1" height="1"/><rect x="3" y="10" width="1" height="1"/><rect x="5" y="10" width="3" height="1"/><rect x="11" y="10" width="5" height="1"/><rect x="17" y="10" width="1" height="1"/><rect x="20" y="10" width="1" height="1"/><rect x="26" y="10" width="1" height="1"/><rect x="28" y="10" width="1" height="1"/><rect x="30" y="10" width="2" height="1"/><rect x="2" y="11" width="2" height="1"/><rect x="8" y="11" width="2" height="1"/><rect x="12" y="11" width="2" height="1"/><rect x="15" y="11" width="1" height="1"/><rect x="17" y="11" width="3" height="1"/><rect x="21" y="11" width="4" height="1"/><rect x="28" y="11" width="3" height="1"/><rect x="0" y="12" width="3" height="1"/><rect x="4" y="12" width="1" height="1"/><rect x="6" y="12" width="2" height="1"/><rect x="11" y="12" width="2" height="1"/><rect x="14" y="12" width="3" height="1"/><rect x="20" y="12" width="1" height="1"/><rect x="28" y="12" width="2" height="1"/><rect x="32" y="12" width="1" height="1"/><rect x="1" y="13" width="3" height="1"/><rect x="7" y="13" width="1" height="1"/><rect x="9" y="13" width="5" height="1"/><rect x="15" y="13" width="1" height="1"/><rect x="17" y="13" width="2" height="1"/><rect x="21" y="13" width="7" height="1"/><rect x="30" y="13" width="3" height="1"/><rect x="0" y="14" width="1" height="1"/><rect x="2" y="14" width="3" height="1"/><rect x="6" y="14" width="1" height="1"/><rect x="9" y="14" width="2" height="1"/><rect x="13" y="14" width="1" height="1"/><rect x="15" y="14" width="3" height="1"/><rect x="20" y="14" width="2" height="1"/><rect x="24" y="14" width="8" height="1"/><rect x="5" y="15" width="1" height="1"/><rect x="7" y="15" width="1" height="1"/><rect x="9" y="15" width="1" height="1"/><rect x="13" y="15" width="1" height="1"/><rect x="15" y="15" width="1" height="1"/><rect x="21" y="15" width="1" height="1"/><rect x="23" y="15" width="4" height="1"/><rect x="30" y="15" width="1" height="1"/><rect x="0" y="16" width="1" height="1"/><rect x="6" y="16" width="1" height="1"/><rect x="8" y="16" width="1" height="1"/><rect x="10" y="16" width="2" height="1"/><rect x="15" y="16" width="3" height="1"/><rect x="22" y="16" width="1" height="1"/><rect x="25" y="16" width="1" height="1"/><rect x="27" y="16" width="2" height="1"/><rect x="32" y="16" width="1" height="1"/><rect x="1" y="17" width="2" height="1"/><rect x="5" y="17" width="1" height="1"/><rect x="7" y="17" width="8" height="1"/><rect x="16" y="17" width="1" height="1"/><rect x="18" y="17" width="6" height="1"/><rect x="26" y="17" width="2" height="1"/><rect x="29" y="17" width="4" height="1"/><rect x="0" y="18" width="1" height="1"/><rect x="2" y="18" width="2" height="1"/><rect x="6" y="18" width="1" height="1"/><rect x="9" y="18" width="1" height="1"/><rect x="12" y="18" width="5" height="1"/><rect x="18" y="18" width="1" height="1"/><rect x="24" y="18" width="1" height="1"/><rect x="27" y="18" width="2" height="1"/><rect x="30" y="18" width="2" height="1"/><rect x="1" y="19" width="2" height="1"/><rect x="4" y="19" width="1" height="1"/><rect x="7" y="19" width="1" height="1"/><rect x="9" y="19" width="4" height="1"/><rect x="14" y="19" width="2" height="1"/><rect x="19" y="19" width="4" height="1"/><rect x="24" y="19" width="1" height="1"/><rect x="27" y="19" width="5" height="1"/><rect x="2" y="20" width="2" height="1"/><rect x="5" y="20" width="4" height="1"/><rect x="10" y="20" width="6" height="1"/><rect x="18" y="20" width="2" height="1"/><rect x="21" y="20" width="1" height="1"/><rect x="28" y="20" width="2" height="1"/><rect x="32" y="20" width="1" height="1"/><rect x="0" y="21" width="3" height="1"/><rect x="4" y="21" width="2" height="1"/><rect x="8" y="21" width="2" height="1"/><rect x="11" y="21" width="2" height="1"/><rect x="14" y="21" width="3" height="1"/><rect x="20" y="21" width="2" height="1"/><rect x="23" y="21" width="5" height="1"/><rect x="29" y="21" width="1" height="1"/><rect x="32" y="21" width="1" height="1"/><rect x="0" y="22" width="1" height="1"/><rect x="4" y="22" width="1" height="1"/><rect x="6" y="22" width="4" height="1"/><rect x="12" y="22" width="2" height="1"/><rect x="19" y="22" width="1" height="1"/><rect x="21" y="22" width="1" height="1"/><rect x="27" y="22" width="1" height="1"/><rect x="29" y="22" width="1" height="1"/><rect x="31" y="22" width="1" height="1"/><rect x="0" y="23" width="1" height="1"/><rect x="3" y="23" width="3" height="1"/><rect x="8" y="23" width="1" height="1"/><rect x="11" y="23" width="1" height="1"/><rect x="14" y="23" width="1" height="1"/><rect x="16" y="23" width="1" height="1"/><rect x="19" y="23" width="3" height="1"/><rect x="23" y="23" width="3" height="1"/><rect x="29" y="23" width="4" height="1"/><rect x="0" y="24" width="1" height="1"/><rect x="2" y="24" width="1" height="1"/><rect x="4" y="24" width="3" height="1"/><rect x="8" y="24" width="3" height="1"/><rect x="13" y="24" width="1" height="1"/><rect x="17" y="24" width="1" height="1"/><rect x="19" y="24" width="1" height="1"/><rect x="22" y="24" width="1" height="1"/><rect x="24" y="24" width="5" height="1"/><rect x="31" y="24" width="2" height="1"/><rect x="8" y="25" width="1" height="1"/><rect x="11" y="25" width="4" height="1"/><rect x="16" y="25" width="2" height="1"/><rect x="19" y="25" width="1" height="1"/><rect x="23" y="25" width="2" height="1"/><rect x="28" y="25" width="1" height="1"/><rect x="30" y="25" width="3" height="1"/><rect x="0" y="26" width="7" height="1"/><rect x="9" y="26" width="1" height="1"/><rect x="11" y="26" width="2" height="1"/><rect x="14" y="26" width="4" height="1"/><rect x="20" y="26" width="1" height="1"/><rect x="22" y="26" width="3" height="1"/><rect x="26" y="26" width="1" height="1"/><rect x="28" y="26" width="1" height="1"/><rect x="30" y="26" width="2" height="1"/><rect x="0" y="27" width="1" height="1"/><rect x="6" y="27" width="1" height="1"/><rect x="8" y="27" width="3" height="1"/><rect x="14" y="27" width="1" height="1"/><rect x="16" y="27" width="3" height="1"/><rect x="20" y="27" width="1" height="1"/><rect x="23" y="27" width="2" height="1"/><rect x="28" y="27" width="3" height="1"/><rect x="32" y="27" width="1" height="1"/><rect x="0" y="28" width="1" height="1"/><rect x="2" y="28" width="3" height="1"/><rect x="6" y="28" width="1" height="1"/><rect x="8" y="28" width="1" height="1"/><rect x="10" y="28" width="1" height="1"/><rect x="14" y="28" width="1" height="1"/><rect x="16" y="28" width="1" height="1"/><rect x="20" y="28" width="3" height="1"/><rect x="24" y="28" width="6" height="1"/><rect x="31" y="28" width="2" height="1"/><rect x="0" y="29" width="1" height="1"/><rect x="2" y="29" width="3" height="1"/><rect x="6" y="29" width="1" height="1"/><rect x="8" y="29" width="3" height="1"/><rect x="12" y="29" width="2" height="1"/><rect x="15" y="29" width="1" height="1"/><rect x="18" y="29" width="1" height="1"/><rect x="24" y="29" width="2" height="1"/><rect x="28" y="29" width="1" height="1"/><rect x="32" y="29" width="1" height="1"/><rect x="0" y="30" width="1" height="1"/><rect x="2" y="30" width="3" height="1"/><rect x="6" y="30" width="1" height="1"/><rect x="8" y="30" width="1" height="1"/><rect x="11" y="30" width="2" height="1"/><rect x="15" y="30" width="4" height="1"/><rect x="20" y="30" width="3" height="1"/><rect x="24" y="30" width="4" height="1"/><rect x="29" y="30" width="2" height="1"/><rect x="0" y="31" width="1" height="1"/><rect x="6" y="31" width="1" height="1"/><rect x="9" y="31" width="1" height="1"/><rect x="15" y="31" width="1" height="1"/><rect x="21" y="31" width="1" height="1"/><rect x="23" y="31" width="1" height="1"/><rect x="28" y="31" width="3" height="1"/><rect x="0" y="32" width="7" height="1"/><rect x="8" y="32" width="1" height="1"/><rect x="12" y="32" width="2" height="1"/><rect x="15" y="32" width="1" height="1"/><rect x="17" y="32" width="2" height="1"/><rect x="22" y="32" width="1" height="1"/><rect x="24" y="32" width="1" height="1"/><rect x="27" y="32" width="1" height="1"/><rect x="31" y="32" width="1" height="1"/></g></svg></div>
+        <div class="qr__t">Escanéalo con tu iPhone</div>
+        <p class="qr__p">Apunta con la cámara y abre el enlace. Te lleva directo a NYXA en la App Store.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="steps">
+  <div class="steps__in">
+    <p class="steps__k">Empezar es fácil</p>
+    <h2 class="steps__t">De descargarla a quedar, en un rato.</h2>
+    <div class="steps__grid">
+      <div class="step">
+        <span class="step__n">1</span>
+        <h3>Descárgala gratis</h3>
+        <p>La instalas desde la App Store y creas tu perfil en un minuto con Apple o Google. Sin rellenar formularios eternos.</p>
+      </div>
+      <div class="step">
+        <span class="step__n">2</span>
+        <h3>Di qué te apetece</h3>
+        <p>Un café, correr al amanecer, un concierto el jueves. Lo propones y NYXA te acerca a gente que quiere lo mismo, cerca de ti.</p>
+      </div>
+      <div class="step">
+        <span class="step__n">3</span>
+        <h3>Quedad de verdad</h3>
+        <p>Si encajáis, hay chat y quedáis. El plan es la excusa; lo que importa es que hoy pase algo, en persona.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="avail">
+  <div class="avail__in">
+    <div class="fact">
+      <h4>Disponible en</h4>
+      <div class="v">iPhone</div>
+      <p>Descárgala hoy en la App Store. Necesitas iOS 15 o superior.</p>
+    </div>
+    <div class="fact">
+      <h4>Android</h4>
+      <div class="v">Muy pronto</div>
+      <p>Estamos en ello. Síguenos en <a href="https://instagram.com/nyxa.app" target="_blank" rel="noopener">Instagram</a> y te avisamos en cuanto salga.</p>
+    </div>
+    <div class="fact">
+      <h4>Precio</h4>
+      <div class="v">Gratis</div>
+      <p>Usar NYXA no cuesta nada. Si algún día hay funciones premium, te lo diremos con total claridad.</p>
+    </div>
+  </div>
+</section>
+
+<section class="close">
+  <h2>Que no se te<br>escape la vida.</h2>
+  <a class="b-as" href="https://apps.apple.com/es/app/nyxa/id6800325033" target="_blank" rel="noopener" aria-label="Descargar NYXA en la App Store">
+    <svg width="200" height="66" viewBox="0 0 120 40" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true">
+      <rect width="120" height="40" rx="8" fill="#0A0C11"/>
+      <path fill="#fff" transform="translate(11,8.5) scale(0.95)" d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.63 5.98.32 7.11-.61 1.35-1.46 2.7-2.31 3.99l-.06.11M12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25"/>
+      <text x="38" y="16" fill="#fff" font-family="-apple-system,'Plus Jakarta Sans',sans-serif" font-size="6.5" font-weight="400">Descárgalo en el</text>
+      <text x="37.5" y="30.5" fill="#fff" font-family="-apple-system,'Plus Jakarta Sans',sans-serif" font-size="14.5" font-weight="600" letter-spacing="-0.4">App Store</text>
+    </svg>
+  </a>
+</section>
+
+<style>
+.nf{background:#0A0C11;color:#fff;padding:clamp(56px,7vw,72px) 24px 40px;font-family:"Plus Jakarta Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif;line-height:1.5}
+.nf *{box-sizing:border-box}
+.nf__in{max-width:1120px;margin:0 auto}
+.nf__top{display:grid;grid-template-columns:1.2fr 2fr;gap:48px}
+@media(max-width:820px){.nf__top{grid-template-columns:1fr;gap:40px}}
+.nf__logo{font-size:24px;font-weight:800;letter-spacing:-.02em;color:#fff}.nf__logo i{color:#2f66ff;font-style:normal}
+.nf__tag{color:#9aa3b2;font-size:15px;margin-top:12px;max-width:26ch}
+.nf__as{display:inline-block;margin-top:20px;line-height:0}
+.nf__cols{display:grid;grid-template-columns:repeat(4,1fr);gap:28px}
+@media(max-width:560px){.nf__cols{grid-template-columns:repeat(2,1fr);gap:32px 20px}}
+.nf__col h4{font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#6b7280;margin:0 0 14px}
+.nf__col a{display:block;color:#d7dbe2;text-decoration:none;font-size:15px;font-weight:600;margin:11px 0;transition:color .15s}
+.nf__col a:hover{color:#fff}
+.nf__bottom{margin-top:48px;padding-top:24px;border-top:1px solid rgba(255,255,255,.1);display:flex;flex-wrap:wrap;gap:14px 24px;align-items:center;justify-content:space-between;color:#6b7280;font-size:13px}
+.nf__soc{display:flex;gap:22px;flex-wrap:wrap}
+.nf__soc a{color:#9aa3b2;text-decoration:none;font-weight:700}.nf__soc a:hover{color:#2f66ff}
+.nf__soc a:hover{color:#2f66ff}
+.nf__soc a,.nf__lang{display:inline-flex;align-items:center;gap:7px}
+.nf__soc a svg,.nf__lang svg{flex:none}
+.nf__lang{color:#6b7280;font-weight:600}
+</style>
+<footer class="nf">
+  <div class="nf__in">
+    <div class="nf__top">
+      <div>
+        <div class="nf__logo">NY<i aria-hidden="true">✕</i>A</div>
+        <p class="nf__tag">Que no se te escape la vida. Experiencias reales, en persona.</p>
+        <a class="nf__as" href="https://apps.apple.com/es/app/nyxa/id6800325033" target="_blank" rel="noopener" aria-label="Descargar NYXA en la App Store">
+          <svg width="132" height="44" viewBox="0 0 120 40" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true">
+            <rect width="120" height="40" rx="7" fill="#fff"/>
+            <path fill="#0A0C11" transform="translate(11,8.5) scale(0.95)" d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.63 5.98.32 7.11-.61 1.35-1.46 2.7-2.31 3.99l-.06.11M12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25"/>
+            <text x="38" y="16" fill="#0A0C11" font-family="-apple-system,'Plus Jakarta Sans',sans-serif" font-size="6.5" font-weight="400">Descárgalo en el</text>
+            <text x="37.5" y="30.5" fill="#0A0C11" font-family="-apple-system,'Plus Jakarta Sans',sans-serif" font-size="14.5" font-weight="600" letter-spacing="-0.4">App Store</text>
+          </svg>
+        </a>
+      </div>
+      <nav class="nf__cols" aria-label="Enlaces del pie">
+        <div class="nf__col"><h4>Producto</h4>
+          <a href="index.html#gesto">Cómo funciona</a>
+          <a href="ciudades.html">Ciudades</a>
+          <a href="momentos.html">Momentos</a>
+          <a href="descargar.html">Descargar la app</a>
+        </div>
+        <div class="nf__col"><h4>Empresa</h4>
+          <a href="manifiesto.html">Quiénes somos</a>
+          <a href="empresas.html">NYXA para empresas</a>
+        </div>
+        <div class="nf__col"><h4>Confianza</h4>
+          <a href="seguridad.html">Seguridad</a>
+          <a href="soporte.html">Ayuda</a>
+        </div>
+        <div class="nf__col"><h4>Legal</h4>
+          <a href="privacidad.html">Privacidad</a>
+          <a href="terminos.html">Términos</a>
+        </div>
+      </nav>
+    </div>
+    <div class="nf__bottom">
+      <span>NYXA · Valencia · © 2026</span>
+      <div class="nf__soc">
+        <a href="https://instagram.com/nyxa.app" target="_blank" rel="noopener" aria-label="Instagram"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="2.6" y="2.6" width="18.8" height="18.8" rx="5.4" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="4.1" stroke="currentColor" stroke-width="1.8"/><circle cx="17.4" cy="6.6" r="1.25" fill="currentColor"/></svg>Instagram</a>
+        <a href="mailto:holanyxa@gmail.com" aria-label="Escríbenos por email"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="2.6" y="4.8" width="18.8" height="14.4" rx="2.6" stroke="currentColor" stroke-width="1.8"/><path d="M3.4 6.6l8.6 6 8.6-6" stroke="currentColor" stroke-width="1.8" fill="none"/></svg>holanyxa@gmail.com</a>
+        <span class="nf__lang"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.7"/><path d="M3 12h18M12 3c2.6 2.5 2.6 15 0 18M12 3c-2.6 2.5-2.6 15 0 18" stroke="currentColor" stroke-width="1.7"/></svg>Español (España)</span>
+      </div>
+    </div>
+  </div>
+</footer>
+</body>
+</html>
