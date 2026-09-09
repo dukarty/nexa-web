@@ -386,6 +386,70 @@ img{max-width:100%;height:auto}
 </style>
 </head>
 <body class="nav-negro">
+<style>
+.tnav{position:fixed;top:0;left:0;right:0;z-index:90;height:60px;display:flex;align-items:center;background:rgba(251,249,244,.72);backdrop-filter:saturate(1.8) blur(20px);-webkit-backdrop-filter:saturate(1.8) blur(20px);border-bottom:1px solid rgba(10,12,17,.06);font-family:"Plus Jakarta Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif;transition:background .3s,border-color .3s}
+.tnav__in{max-width:1120px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;width:100%}
+.tnav__b{font-weight:800;font-size:20px;letter-spacing:-.02em;text-decoration:none;color:#0A0C11}.tnav__b i{color:#2f66ff;font-style:normal}
+.tnav__l{display:flex;gap:24px}
+.tnav__l a{font-size:14.5px;font-weight:600;color:#3B4251;text-decoration:none;text-transform:none;letter-spacing:normal}
+.tnav__l a:hover,.tnav__l a[aria-current="page"]{color:#0A0C11}
+.tnav__r{display:flex;align-items:center;gap:12px}
+.tnav__cta{background:#2f66ff;color:#fff;border:0;cursor:pointer;font-family:inherit;font-size:14px;font-weight:700;padding:9px 18px;border-radius:999px;white-space:nowrap}
+.tnav__burger{display:none;width:42px;height:42px;border:1px solid #E7E4DC;border-radius:12px;background:#fff;cursor:pointer;position:relative;padding:0}
+.tnav__burger span{position:absolute;left:11px;right:11px;height:2px;background:#0A0C11;border-radius:2px;transition:transform .2s,opacity .2s,background .2s}
+.tnav__burger span:nth-child(1){top:14px}.tnav__burger span:nth-child(2){top:20px}.tnav__burger span:nth-child(3){top:26px}
+.tnav__burger[aria-expanded="true"] span:nth-child(1){transform:translateY(6px) rotate(45deg)}
+.tnav__burger[aria-expanded="true"] span:nth-child(2){opacity:0}
+.tnav__burger[aria-expanded="true"] span:nth-child(3){transform:translateY(-6px) rotate(-45deg)}
+/* variante sobre hero oscuro */
+.tnav.over{background:transparent;border-color:transparent}
+.tnav.over .tnav__b{color:#fff}
+.tnav.over .tnav__l a{color:rgba(255,255,255,.82)}
+.tnav.over .tnav__l a:hover,.tnav.over .tnav__l a[aria-current="page"]{color:#fff}
+.tnav.over .tnav__burger{background:rgba(255,255,255,.08);border-color:rgba(255,255,255,.3)}
+.tnav.over .tnav__burger span{background:#fff}
+.tmenu{position:fixed;top:60px;left:0;right:0;bottom:0;z-index:89;background:#FBF9F4;border-top:1px solid #E7E4DC;padding:10px 24px 28px;display:flex;flex-direction:column;overflow:auto;transform:translateY(-10px);opacity:0;pointer-events:none;transition:transform .2s,opacity .2s;font-family:"Plus Jakarta Sans",-apple-system,sans-serif}
+.tmenu[data-open="true"]{transform:none;opacity:1;pointer-events:auto}
+.tmenu a{padding:15px 6px;font-size:17px;font-weight:700;color:#0A0C11;text-decoration:none;border-bottom:1px solid #E7E4DC;text-transform:none;letter-spacing:normal}
+.tmenu__cta{margin-top:14px;background:#2f66ff;color:#fff;border:0;cursor:pointer;font-family:inherit;font-size:17px;font-weight:700;text-align:center;border-radius:999px;padding:15px}
+@media(max-width:860px){.tnav__l{display:none}.tnav__burger{display:block}}
+@media(min-width:861px){.tmenu{display:none}}
+#nav{display:none!important}
+</style>
+<header class="tnav"><div class="tnav__in">
+  <a class="tnav__b" href="index.html">NY<i aria-hidden="true">✕</i>A</a>
+  <nav class="tnav__l" aria-label="Principal">
+    <a href="index.html#gesto">Cómo funciona</a>
+    <a href="ciudades.html">Ciudades</a>
+    <a href="seguridad.html">Seguridad</a>
+    <a href="manifiesto.html">Quiénes somos</a>
+    <a href="empresas.html" aria-current="page">Empresas</a>
+    <a href="momentos.html">Momentos</a>
+  </nav>
+  <div class="tnav__r">
+    <button class="tnav__cta" data-abrir>Entrar</button>
+    <button class="tnav__burger" aria-label="Abrir menú" aria-expanded="false" aria-controls="tmenu"><span></span><span></span><span></span></button>
+  </div>
+</div></header>
+<div class="tmenu" id="tmenu">
+  <a href="index.html#gesto">Cómo funciona</a>
+  <a href="ciudades.html">Ciudades</a>
+  <a href="seguridad.html">Seguridad</a>
+  <a href="manifiesto.html">Quiénes somos</a>
+  <a href="empresas.html" aria-current="page">Empresas</a>
+  <a href="momentos.html">Momentos</a>
+  <button class="tmenu__cta" data-abrir>Entrar gratis</button>
+</div>
+<script>
+(function(){var b=document.querySelector(".tnav__burger"),m=document.getElementById("tmenu"),nav=document.querySelector(".tnav"),hero=document.querySelector(".hero");
+function set(o){b.setAttribute("aria-expanded",o);m.setAttribute("data-open",o);document.body.style.overflow=o?"hidden":"";}
+b.addEventListener("click",function(){set(b.getAttribute("aria-expanded")!=="true");});
+m.addEventListener("click",function(e){if(e.target.tagName==="A")set(false);});
+document.addEventListener("keydown",function(e){if(e.key==="Escape")set(false);});
+window.addEventListener("resize",function(){if(window.innerWidth>860)set(false);});
+})();
+</script>
+
 
 <header class="nav" id="nav">
   <a class="marca" href="index.html" aria-label="NYXA, inicio">
@@ -570,7 +634,7 @@ img{max-width:100%;height:auto}
           <a href="index.html#gesto">Cómo funciona</a>
           <a href="ciudades.html">Ciudades</a>
           <a href="momentos.html">Momentos</a>
-          <a href="https://apps.apple.com/es/app/nyxa/id6800325033" target="_blank" rel="noopener">Descargar la app</a>
+          <a href="descargar.html">Descargar la app</a>
         </div>
         <div class="nf__col"><h4>Empresa</h4>
           <a href="manifiesto.html">Quiénes somos</a>
