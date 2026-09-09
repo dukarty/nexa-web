@@ -9,6 +9,9 @@
 <meta name="theme-color" content="#FBF9F4">
 <meta name="robots" content="index,follow">
 <link rel="icon" href="/favicon.svg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
   :root{
     --paper:#FBF9F4; --card:#FFFFFF; --ink:#0A0C11; --ink-2:#3B4251; --muted:#8A909E;
@@ -17,31 +20,47 @@
   *{box-sizing:border-box;margin:0;padding:0}
   html{-webkit-text-size-adjust:100%}
   body{background:var(--paper);color:var(--ink);
-    font-family:-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",system-ui,sans-serif;
+    font-family:"Plus Jakarta Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif;
     -webkit-font-smoothing:antialiased;line-height:1.5;min-height:100svh}
   a{color:inherit}
-  .wrap{max-width:760px;margin:0 auto;padding:96px 24px 80px}
 
-  header{margin-bottom:34px}
-  .wm{font-size:20px;font-weight:800;letter-spacing:-.02em;color:var(--ink);text-decoration:none;display:inline-block}
-  .wm .x{color:var(--blue)}
-  .kick{margin-top:26px;font-size:12.5px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--blue)}
-  h1{margin-top:10px;font-size:clamp(34px,7vw,52px);font-weight:800;letter-spacing:-.04em;line-height:.98;text-wrap:balance}
-  .lead{margin-top:16px;font-size:clamp(16px,2.3vw,18px);color:var(--ink-2);max-width:520px;text-wrap:balance}
+  /* ---- barra superior ---- */
+  .snav{position:fixed;top:0;left:0;right:0;z-index:50;height:60px;display:flex;align-items:center;background:rgba(251,249,244,.72);backdrop-filter:saturate(1.8) blur(20px);-webkit-backdrop-filter:saturate(1.8) blur(20px);border-bottom:1px solid rgba(10,12,17,.06)}
+  .snav__in{max-width:1120px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;width:100%}
+  .snav__b{font-weight:800;font-size:20px;letter-spacing:-.02em;text-decoration:none;color:var(--ink)}.snav__b i{color:var(--blue);font-style:normal}
+  .snav__l{display:flex;gap:24px}
+  .snav__l a{font-size:14.5px;font-weight:600;color:var(--ink-2);text-decoration:none}.snav__l a:hover{color:var(--ink)}
+  .snav__cta{background:var(--blue);color:#fff;text-decoration:none;font-size:14px;font-weight:700;padding:9px 18px;border-radius:999px;white-space:nowrap}
+  @media(max-width:860px){.snav__l{display:none}}
 
-  .contact{margin-top:30px;background:var(--card);border:1px solid var(--line-2);border-radius:20px;padding:24px;
-    box-shadow:0 24px 60px -40px rgba(10,12,17,.45)}
+  /* ---- hero a dos columnas (ocupa todo el ancho) ---- */
+  .hero{padding:118px 24px 64px}
+  .hero__in{max-width:1120px;margin:0 auto;display:grid;grid-template-columns:1.05fr .95fr;gap:56px;align-items:center}
+  @media(max-width:900px){.hero__in{grid-template-columns:1fr;gap:32px}}
+  .kick{font-size:12.5px;font-weight:800;letter-spacing:.16em;text-transform:uppercase;color:var(--blue)}
+  h1{margin-top:12px;font-size:clamp(40px,6vw,64px);font-weight:800;letter-spacing:-.04em;line-height:.98;text-wrap:balance}
+  .lead{margin-top:18px;font-size:clamp(17px,2.3vw,20px);color:var(--ink-2);max-width:40ch;text-wrap:pretty}
+
+  .contact{background:var(--card);border:1px solid var(--line-2);border-radius:22px;padding:32px;
+    box-shadow:0 30px 70px -46px rgba(10,12,17,.5)}
   .contact .l{font-size:12px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
-  .contact .mail{margin-top:8px;display:inline-block;font-size:clamp(20px,4.5vw,26px);font-weight:800;letter-spacing:-.02em;
-    color:var(--blue-ink);text-decoration:none}
+  .contact .mail{margin-top:10px;display:inline-block;font-size:clamp(22px,4vw,30px);font-weight:800;letter-spacing:-.02em;
+    color:var(--blue-ink);text-decoration:none;word-break:break-word}
   .contact .mail:hover{text-decoration:underline}
-  .contact .t{margin-top:10px;font-size:14.5px;color:var(--ink-2)}
+  .contact .t{margin-top:14px;font-size:15px;color:var(--ink-2);line-height:1.6}
   .contact .t b{color:var(--ink);font-weight:700}
+  .contact .btn{display:inline-block;margin-top:20px;background:var(--blue);color:#fff;text-decoration:none;font-weight:700;
+    font-size:15px;padding:14px 24px;border-radius:999px;transition:transform .15s,background .15s}
+  .contact .btn:hover{background:var(--blue-ink);transform:translateY(-2px)}
 
-  h2{margin:46px 0 6px;font-size:14px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+  /* ---- banda de FAQ ---- */
+  .faqband{background:linear-gradient(180deg,#FFFFFF,#F4F1EA);border-top:1px solid var(--line);padding:clamp(56px,8vw,88px) 24px}
+  .faqband__in{max-width:840px;margin:0 auto}
+  .faqband h2{font-size:13px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--blue);margin-bottom:8px}
+  .faqband .sub{font-size:clamp(26px,4vw,40px);font-weight:800;letter-spacing:-.035em;line-height:1.05;margin-bottom:26px;text-wrap:balance}
   .faq{border-top:1px solid var(--line)}
   details{border-bottom:1px solid var(--line);padding:4px 0}
-  summary{list-style:none;cursor:pointer;padding:16px 2px;font-size:17px;font-weight:750;letter-spacing:-.01em;
+  summary{list-style:none;cursor:pointer;padding:20px 2px;font-size:18px;font-weight:700;letter-spacing:-.01em;
     display:flex;justify-content:space-between;align-items:center;gap:14px}
   summary::-webkit-details-marker{display:none}
   summary .pm{flex:none;width:22px;height:22px;position:relative}
@@ -50,26 +69,12 @@
   summary .pm::after{left:10px;top:3px;bottom:3px;width:2px}
   details[open] summary .pm::after{opacity:0;transform:rotate(90deg)}
   details[open] summary{color:var(--blue-ink)}
-  .ans{padding:0 2px 18px;font-size:15.5px;color:var(--ink-2);line-height:1.6}
+  .ans{padding:0 2px 20px;font-size:16px;color:var(--ink-2);line-height:1.65;max-width:70ch}
   .ans b{color:var(--ink);font-weight:700}
   .ans a{color:var(--blue-ink);font-weight:650}
-
-  footer{margin-top:48px;padding-top:22px;border-top:1px solid var(--line);font-size:13.5px;color:var(--muted)}
-  footer a{color:var(--ink-2);text-decoration:none;font-weight:650}
-  footer a:hover{color:var(--ink)}
-  footer .r{margin-top:8px}
 </style>
 </head>
 <body>
-<style>
-.snav{position:fixed;top:0;left:0;right:0;z-index:50;height:60px;display:flex;align-items:center;background:rgba(251,249,244,.72);backdrop-filter:saturate(1.8) blur(20px);-webkit-backdrop-filter:saturate(1.8) blur(20px);border-bottom:1px solid rgba(10,12,17,.06)}
-.snav__in{max-width:1120px;margin:0 auto;padding:0 24px;display:flex;align-items:center;justify-content:space-between;width:100%}
-.snav__b{font-weight:800;font-size:20px;letter-spacing:-.02em;text-decoration:none;color:#0A0C11}.snav__b i{color:#2f66ff;font-style:normal}
-.snav__l{display:flex;gap:24px}
-.snav__l a{font-size:14.5px;font-weight:600;color:#3B4251;text-decoration:none}.snav__l a:hover{color:#0A0C11}
-.snav__cta{background:#2f66ff;color:#fff;text-decoration:none;font-size:14px;font-weight:700;padding:9px 18px;border-radius:999px;white-space:nowrap}
-@media(max-width:860px){.snav__l{display:none}}
-</style>
 <header class="snav"><div class="snav__in">
   <a class="snav__b" href="index.html">NY<i aria-hidden="true">✕</i>A</a>
   <nav class="snav__l" aria-label="Principal">
@@ -82,65 +87,62 @@
   </nav>
   <a class="snav__cta" href="https://apps.apple.com/es/app/nyxa/id6800325033" target="_blank" rel="noopener">Descargar</a>
 </div></header>
-<div class="wrap">
-  <header>
-    <div class="kick">Centro de ayuda</div>
-    <h1>Soporte</h1>
-    <p class="lead">¿Tienes una duda, un problema o quieres darnos tu opinión? Estamos aquí para ayudarte.</p>
-  </header>
 
-  <section class="contact">
-    <div class="l">Escríbenos</div>
-    <a class="mail" href="mailto:holanyxa@gmail.com?subject=Ayuda%20NYXA">holanyxa@gmail.com</a>
-    <p class="t">Lee tu mensaje una persona del equipo y te respondemos en <b>24–48&nbsp;horas</b> (normalmente antes). Cuéntanos qué te pasa con el mayor detalle posible y, si puedes, adjunta una captura.</p>
-  </section>
-
-  <h2>Preguntas frecuentes</h2>
-  <div class="faq">
-    <details>
-      <summary>¿Qué es NYXA?<span class="pm"></span></summary>
-      <div class="ans">NYXA es una app para <b>conocer gente y vivir planes reales en persona</b>. Dices qué te apetece hacer y te ponemos en contacto con personas cercanas que quieren vivir lo mismo. <b>No es una app de citas</b>: es salir, quedar y hacer que hoy pase algo.</div>
-    </details>
-    <details>
-      <summary>¿Cómo reporto un problema o un error?<span class="pm"></span></summary>
-      <div class="ans">Escríbenos a <a href="mailto:holanyxa@gmail.com?subject=Problema%20NYXA">holanyxa@gmail.com</a> contándonos qué ha ocurrido, en qué pantalla y, si puedes, con una captura. Te respondemos y lo resolvemos lo antes posible.</div>
-    </details>
-    <details>
-      <summary>¿Cómo edito mi perfil o mis datos?<span class="pm"></span></summary>
-      <div class="ans">Dentro de la app, entra en <b>Perfil → Editar perfil</b> para cambiar tu foto, tu nombre y el resto de tu información en cualquier momento.</div>
-    </details>
-    <details>
-      <summary>¿Cómo elimino mi cuenta?<span class="pm"></span></summary>
-      <div class="ans">Puedes eliminar tu cuenta desde <b>Ajustes → Cuenta → Eliminar cuenta</b> dentro de la app. Al hacerlo se borran tu perfil y tus datos asociados. Si prefieres, pídenoslo por email a <a href="mailto:holanyxa@gmail.com?subject=Eliminar%20cuenta%20NYXA">holanyxa@gmail.com</a> y lo gestionamos nosotros.</div>
-    </details>
-    <details>
-      <summary>¿Cómo reporto o bloqueo a alguien?<span class="pm"></span></summary>
-      <div class="ans">Tu seguridad es lo primero. Desde el perfil o la conversación de cualquier persona puedes <b>bloquearla o reportarla</b>. Revisamos cada reporte. Si es urgente, escríbenos directamente a <a href="mailto:holanyxa@gmail.com?subject=Reporte%20urgente%20NYXA">holanyxa@gmail.com</a>.</div>
-    </details>
-    <details>
-      <summary>¿Cómo tratáis mis datos personales?<span class="pm"></span></summary>
-      <div class="ans">Cuidamos tus datos y cumplimos el RGPD. Puedes leer los detalles en nuestra <a href="/privacidad.html">Política de privacidad</a> y en los <a href="/terminos.html">Términos</a>. Para cualquier solicitud sobre tus datos, escríbenos a <a href="mailto:holanyxa@gmail.com?subject=Datos%20NYXA">holanyxa@gmail.com</a>.</div>
-    </details>
-    <details>
-      <summary>¿Tiene coste usar NYXA?<span class="pm"></span></summary>
-      <div class="ans">Puedes usar NYXA de forma gratuita. Si en el futuro añadimos funciones premium opcionales, siempre te lo indicaremos con claridad antes de cualquier cobro.</div>
-    </details>
+<section class="hero">
+  <div class="hero__in">
+    <div>
+      <div class="kick">Centro de ayuda</div>
+      <h1>Estamos aquí para ayudarte.</h1>
+      <p class="lead">¿Una duda, un problema o quieres darnos tu opinión? Escríbenos y te contesta una persona del equipo.</p>
+    </div>
+    <div class="contact">
+      <div class="l">Escríbenos</div>
+      <a class="mail" href="mailto:holanyxa@gmail.com?subject=Ayuda%20NYXA">holanyxa@gmail.com</a>
+      <p class="t">Lee tu mensaje una persona del equipo y te respondemos en <b>24–48&nbsp;horas</b> (normalmente antes). Cuéntanos qué te pasa con el mayor detalle posible y, si puedes, adjunta una captura.</p>
+      <a class="btn" href="mailto:holanyxa@gmail.com?subject=Ayuda%20NYXA">Escribir un correo</a>
+    </div>
   </div>
-
-  <style>
-.sc{background:#EDF3FF;padding:clamp(48px,7vw,76px) 24px;text-align:center;font-family:-apple-system,BlinkMacSystemFont,"Plus Jakarta Sans","Segoe UI",system-ui,sans-serif;line-height:1.5}
-.sc__t{font-size:clamp(24px,3.6vw,36px);font-weight:800;letter-spacing:-.03em;color:#0A0C11;margin:0;text-wrap:balance}
-.sc__p{color:#5D6779;margin:12px auto 0;max-width:44ch;font-size:16px}
-.sc__b{display:inline-block;margin-top:24px;background:#2f66ff;color:#fff;text-decoration:none;font-weight:700;font-size:16px;padding:15px 28px;border-radius:999px;transition:transform .15s,background .15s}
-.sc__b:hover{background:#1f4fd6;transform:translateY(-2px)}
-</style>
-<section class="sc" aria-label="Contacto">
-  <h2 class="sc__t">¿No encuentras tu respuesta?</h2>
-  <p class="sc__p">Escríbenos y te contestamos. Estamos aquí para ayudarte con lo que necesites.</p>
-  <a class="sc__b" href="mailto:holanyxa@gmail.com?subject=Ayuda%20NYXA">Escríbenos a holanyxa@gmail.com</a>
 </section>
+
+<section class="faqband">
+  <div class="faqband__in">
+    <h2>Preguntas frecuentes</h2>
+    <p class="sub">Lo que más nos preguntáis.</p>
+    <div class="faq">
+      <details>
+        <summary>¿Qué es NYXA?<span class="pm"></span></summary>
+        <div class="ans">NYXA es una app para <b>conocer gente y vivir planes reales en persona</b>. Dices qué te apetece hacer y te ponemos en contacto con personas cercanas que quieren vivir lo mismo. <b>No es una app de citas</b>: es salir, quedar y hacer que hoy pase algo.</div>
+      </details>
+      <details>
+        <summary>¿Cómo reporto un problema o un error?<span class="pm"></span></summary>
+        <div class="ans">Escríbenos a <a href="mailto:holanyxa@gmail.com?subject=Problema%20NYXA">holanyxa@gmail.com</a> contándonos qué ha ocurrido, en qué pantalla y, si puedes, con una captura. Te respondemos y lo resolvemos lo antes posible.</div>
+      </details>
+      <details>
+        <summary>¿Cómo edito mi perfil o mis datos?<span class="pm"></span></summary>
+        <div class="ans">Dentro de la app, entra en <b>Perfil → Editar perfil</b> para cambiar tu foto, tu nombre y el resto de tu información en cualquier momento.</div>
+      </details>
+      <details>
+        <summary>¿Cómo elimino mi cuenta?<span class="pm"></span></summary>
+        <div class="ans">Puedes eliminar tu cuenta desde <b>Ajustes → Cuenta → Eliminar cuenta</b> dentro de la app. Al hacerlo se borran tu perfil y tus datos asociados. Si prefieres, pídenoslo por email a <a href="mailto:holanyxa@gmail.com?subject=Eliminar%20cuenta%20NYXA">holanyxa@gmail.com</a> y lo gestionamos nosotros.</div>
+      </details>
+      <details>
+        <summary>¿Cómo reporto o bloqueo a alguien?<span class="pm"></span></summary>
+        <div class="ans">Tu seguridad es lo primero. Desde el perfil o la conversación de cualquier persona puedes <b>bloquearla o reportarla</b>. Revisamos cada reporte. Si es urgente, escríbenos directamente a <a href="mailto:holanyxa@gmail.com?subject=Reporte%20urgente%20NYXA">holanyxa@gmail.com</a>.</div>
+      </details>
+      <details>
+        <summary>¿Cómo tratáis mis datos personales?<span class="pm"></span></summary>
+        <div class="ans">Cuidamos tus datos y cumplimos el RGPD. Puedes leer los detalles en nuestra <a href="/privacidad.html">Política de privacidad</a> y en los <a href="/terminos.html">Términos</a>. Para cualquier solicitud sobre tus datos, escríbenos a <a href="mailto:holanyxa@gmail.com?subject=Datos%20NYXA">holanyxa@gmail.com</a>.</div>
+      </details>
+      <details>
+        <summary>¿Tiene coste usar NYXA?<span class="pm"></span></summary>
+        <div class="ans">Puedes usar NYXA de forma gratuita. Si en el futuro añadimos funciones premium opcionales, siempre te lo indicaremos con claridad antes de cualquier cobro.</div>
+      </details>
+    </div>
+  </div>
+</section>
+
 <style>
-.nf{background:#0A0C11;color:#fff;padding:clamp(56px,7vw,72px) 24px 40px;font-family:-apple-system,BlinkMacSystemFont,"Plus Jakarta Sans","Segoe UI",system-ui,sans-serif;line-height:1.5}
+.nf{background:#0A0C11;color:#fff;padding:clamp(56px,7vw,72px) 24px 40px;font-family:"Plus Jakarta Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif;line-height:1.5}
 .nf *{box-sizing:border-box}
 .nf__in{max-width:1120px;margin:0 auto}
 .nf__top{display:grid;grid-template-columns:1.2fr 2fr;gap:48px}
@@ -156,6 +158,9 @@
 .nf__bottom{margin-top:48px;padding-top:24px;border-top:1px solid rgba(255,255,255,.1);display:flex;flex-wrap:wrap;gap:14px 24px;align-items:center;justify-content:space-between;color:#6b7280;font-size:13px}
 .nf__soc{display:flex;gap:22px;flex-wrap:wrap}
 .nf__soc a{color:#9aa3b2;text-decoration:none;font-weight:700}.nf__soc a:hover{color:#2f66ff}
+.nf__soc a,.nf__lang{display:inline-flex;align-items:center;gap:7px}
+.nf__soc a svg,.nf__lang svg{flex:none}
+.nf__lang{color:#6b7280;font-weight:600}
 </style>
 <footer class="nf">
   <div class="nf__in">
@@ -196,12 +201,12 @@
     <div class="nf__bottom">
       <span>NYXA · Valencia · © 2026</span>
       <div class="nf__soc">
-        <a href="https://instagram.com/nyxa.app" target="_blank" rel="noopener">Instagram</a>
-        <a href="mailto:holanyxa@gmail.com">holanyxa@gmail.com</a>
+        <a href="https://instagram.com/nyxa.app" target="_blank" rel="noopener" aria-label="Instagram"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="2.6" y="2.6" width="18.8" height="18.8" rx="5.4" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="4.1" stroke="currentColor" stroke-width="1.8"/><circle cx="17.4" cy="6.6" r="1.25" fill="currentColor"/></svg>Instagram</a>
+        <a href="mailto:holanyxa@gmail.com" aria-label="Escríbenos por email"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="2.6" y="4.8" width="18.8" height="14.4" rx="2.6" stroke="currentColor" stroke-width="1.8"/><path d="M3.4 6.6l8.6 6 8.6-6" stroke="currentColor" stroke-width="1.8" fill="none"/></svg>holanyxa@gmail.com</a>
+        <span class="nf__lang"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.7"/><path d="M3 12h18M12 3c2.6 2.5 2.6 15 0 18M12 3c-2.6 2.5-2.6 15 0 18" stroke="currentColor" stroke-width="1.7"/></svg>Español (España)</span>
       </div>
     </div>
   </div>
 </footer>
-</div>
 </body>
 </html>
