@@ -465,112 +465,244 @@ window.addEventListener("resize",function(){if(window.innerWidth>860)set(false);
   <button class="nav__cta" data-abrir>Entrar</button>
 </header>
 
-<!-- 1 · HERO -->
-<section class="hero">
-  <svg class="hero__x" viewBox="0 0 20 20" aria-hidden="true"><line x1="2" y1="18" x2="18" y2="2"/><line x1="18" y1="18" x2="2" y2="2"/></svg>
-  <p class="kick" style="color:var(--gris-2);margin-bottom:24px">NYXA para empresas · Valencia 2026</p>
-  <h1 class="tit tit--xl">O eres tú, o es el de&nbsp;<span class="az">enfrente</span>.</h1>
-  <p class="hero__s lead">Llena tu local con clientes nuevos que vuelven. Sin anuncios: te llevamos a las personas de tu zona que ya buscan justo lo que&nbsp;ofreces.</p>
-  <div class="hero__acc">
-    <button class="cta" data-abrir><span>Reserva tu zona gratis</span><span class="cta__x" aria-hidden="true"><svg viewBox="0 0 20 20"><line x1="2" y1="18" x2="18" y2="2"/><line x1="18" y1="18" x2="2" y2="2"/></svg></span></button>
-    <a class="cta cta--gh" href="#como"><span>Cómo funciona</span></a>
-  </div>
-  <p class="hero__meta" style="color:var(--gris-2)">La app ya está viva en la <a href="https://apps.apple.com/es/app/nyxa/id6800325033" target="_blank" rel="noopener" style="color:var(--az);font-weight:800">App Store</a> · +1.600 personas ya en NYXA · Abrimos a los primeros negocios en Valencia</p>
-</section>
+<style>
+/* ===== Empresas · B2B profesional (tono Meta for Business) ===== */
+.eb{font-family:"Plus Jakarta Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif;color:var(--tinta,#0A0C11)}
+.eb *{box-sizing:border-box}
+.eb-in{max-width:1120px;margin:0 auto;padding:0 24px}
+.eb-kick{font-size:13px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--az,#2f66ff);margin:0}
+.eb-h1{font-size:clamp(34px,5vw,56px);font-weight:800;letter-spacing:-.035em;line-height:1.03;margin:14px 0 0;max-width:15ch;text-wrap:balance}
+.eb-h2{font-size:clamp(28px,3.8vw,42px);font-weight:800;letter-spacing:-.03em;line-height:1.05;margin:12px 0 0;max-width:20ch;text-wrap:balance}
+.eb-lead{font-size:clamp(16px,1.5vw,19px);color:var(--gris,#5D6779);line-height:1.55;margin:18px 0 0;max-width:52ch;text-wrap:pretty}
+.eb-btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;background:var(--az,#2f66ff);color:#fff;border:0;cursor:pointer;font-family:inherit;font-size:16px;font-weight:700;padding:15px 26px;border-radius:12px;text-decoration:none;transition:transform .15s,background .15s}
+.eb-btn:hover{background:var(--az-h,#1f4fd6);transform:translateY(-2px)}
+.eb-btn--gh{background:transparent;color:var(--tinta,#0A0C11);border:1.5px solid var(--linea,#E4E7EC)}
+.eb-btn--gh:hover{background:#fff;border-color:#cfd4dc}
+.eb-cta-row{display:flex;flex-wrap:wrap;gap:12px;margin-top:30px}
+.eb-trust{margin-top:18px;font-size:14px;font-weight:600;color:var(--gris-2,#737B89)}
+.eb-trust b{color:var(--tinta,#0A0C11)}
 
-<!-- 1.5 · QUÉ ES NYXA (contexto para el negocio) -->
-<section class="sec sec--papel" id="que-es">
-  <div class="in" style="text-align:center">
-    <p class="kick rev">Primero, qué es NYXA</p>
-    <h2 class="tit rev" style="margin-top:16px;max-width:20ch;margin-inline:auto">La app donde la gente <span class="az">queda de&nbsp;verdad</span>.</h2>
-    <p class="lead rev" style="max-width:46ch;margin-inline:auto">La gente dice qué quiere vivir —una cena, un concierto, una ruta— y NYXA le dice con quién. En persona, no por chat. <b>Ya en la App Store, con +1.600 personas ya&nbsp;dentro.</b></p>
-    <p class="lead rev" style="max-width:46ch;margin-inline:auto;margin-top:14px">Y ahí entras tú: <b>tu negocio es el sitio donde eso&nbsp;pasa.</b></p>
-  </div>
-</section>
+/* hero */
+.eb-hero{padding:104px 0 64px;background:linear-gradient(180deg,#fff,var(--papel,#FBF9F4))}
+.eb-hero__grid{display:grid;grid-template-columns:1.02fr .98fr;gap:56px;align-items:center}
+@media(max-width:920px){.eb-hero__grid{grid-template-columns:1fr;gap:40px}}
 
-<!-- 2 · CÓMO FUNCIONA -->
-<section class="sec sec--papel" id="como">
-  <div class="in">
-    <p class="kick rev">Cómo funciona</p>
-    <h2 class="tit rev" style="margin-top:16px;max-width:16ch">Tú traes el plan.<br>Nosotros la&nbsp;<span class="az">gente</span>.</h2>
-    <div class="motor-diag rev">
-      <div class="nodo"><span class="nodo__t">Tu plan</span><span class="nodo__s">Una cena, una ruta, un torneo, un run club</span></div>
-      <span class="flecha" aria-hidden="true">→</span>
-      <div class="nodo nodo--az"><span class="nodo__t">El motor</span><span class="nodo__s">Lo reparte por encaje: interés + zona</span></div>
-      <span class="flecha" aria-hidden="true">→</span>
-      <div class="nodo"><span class="nodo__t">Gente real</span><span class="nodo__s">Aparece quien encaja. Cuerpos, no impresiones</span></div>
-    </div>
-    <p class="diag-cap rev">Ejemplo: una pizzería abre una cena de barrio un martes flojo. NYXA se la propone a la gente de su zona a la que le encaja — y aparece quien de verdad quería justo eso. Cero anuncios, cero pujas.</p>
-  </div>
-</section>
+/* panel maqueta */
+.eb-panel{background:var(--card,#fff);border:1px solid var(--linea,#E4E7EC);border-radius:18px;box-shadow:0 50px 90px -50px rgba(10,12,17,.5);overflow:hidden}
+.eb-panel__bar{height:40px;display:flex;align-items:center;gap:7px;padding:0 14px;border-bottom:1px solid var(--linea,#E4E7EC);background:#fbfbfc}
+.eb-panel__bar i{width:10px;height:10px;border-radius:50%;background:#e0e2e7;display:inline-block}
+.eb-panel__tag{margin-left:auto;font-size:11px;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--gris-2,#737B89)}
+.eb-panel__body{padding:20px}
+.eb-panel__row{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.eb-kpi{background:var(--papel,#FBF9F4);border:1px solid var(--linea,#E4E7EC);border-radius:12px;padding:12px}
+.eb-kpi small{display:block;font-size:10.5px;font-weight:700;color:var(--gris-2,#737B89);text-transform:uppercase;letter-spacing:.03em}
+.eb-kpi b{display:block;font-size:22px;font-weight:800;letter-spacing:-.02em;margin-top:4px}
+.eb-kpi b.az{color:var(--az,#2f66ff)}
+.eb-panel__chart{margin-top:14px;background:var(--papel,#FBF9F4);border:1px solid var(--linea,#E4E7EC);border-radius:12px;padding:16px}
+.eb-panel__chart svg{display:block;width:100%;height:96px}
 
-<!-- 3 · EL PANEL (maqueta) -->
-<section class="sec sec--negro" id="panel">
-  <div class="in" style="text-align:center">
-    <span class="sello rev">Maqueta</span>
-    <h2 class="tit rev" style="max-width:14ch;margin:0 auto">Todo, <span class="az">medido</span>.</h2>
-    <div class="mock rev" aria-hidden="true" style="margin-top:clamp(40px,6vw,72px)">
-      <div class="mock__bar"><span class="mock__dot"></span><span class="mock__dot"></span><span class="mock__dot"></span></div>
-      <div class="mock__body">
-        <div class="mock__side"><span class="on">Resumen</span><span>Encuentros</span><span>Comunidad</span><span>Temporada</span></div>
-        <div class="mock__main">
-          <div class="mock__kpis">
-            <div class="mock__kpi"><small>Encuentros</small><b>212</b></div>
-            <div class="mock__kpi"><small>Entre&nbsp;desconoc.</small><b>44%</b></div>
-            <div class="mock__kpi"><small>Repetición</small><b>61%</b></div>
-            <div class="mock__kpi"><small>R</small><b>1,3</b></div>
+/* secciones */
+.eb-sec{padding:clamp(52px,7vw,84px) 0}
+.eb-sec--tint{background:linear-gradient(180deg,#fff,#F4F1EA);border-top:1px solid var(--linea,#E4E7EC);border-bottom:1px solid var(--linea,#E4E7EC)}
+.eb-grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:44px}
+@media(max-width:820px){.eb-grid3{grid-template-columns:1fr}}
+.eb-card{background:var(--card,#fff);border:1px solid var(--linea,#E4E7EC);border-radius:16px;padding:28px}
+.eb-card__n{display:inline-flex;width:34px;height:34px;align-items:center;justify-content:center;border-radius:10px;background:var(--blue-soft,#EDF3FF);color:var(--az-h,#1f4fd6);font-weight:800;font-size:15px}
+.eb-card h3{font-size:19px;font-weight:800;letter-spacing:-.01em;margin:16px 0 0}
+.eb-card p{color:var(--gris,#5D6779);font-size:15px;line-height:1.55;margin:8px 0 0}
+.eb-note{margin-top:28px;font-size:15px;color:var(--gris-2,#737B89);line-height:1.6;max-width:70ch;border-left:3px solid var(--linea,#E4E7EC);padding-left:16px}
+
+/* para quién */
+.eb-for{padding:28px 0;border-bottom:1px solid var(--linea,#E4E7EC)}
+.eb-for__in{display:flex;flex-wrap:wrap;align-items:center;gap:10px 20px;justify-content:center;text-align:center}
+.eb-for__lead{font-size:14px;font-weight:700;color:var(--gris-2,#737B89)}
+.eb-for__list{font-size:15px;font-weight:700;color:var(--tinta,#0A0C11)}
+.eb-for__list span{color:var(--az,#2f66ff);margin:0 2px}
+
+/* comparación */
+.eb-vs{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:44px;max-width:760px}
+@media(max-width:560px){.eb-vs{grid-template-columns:1fr}}
+.eb-vs__col{border:1px solid var(--linea,#E4E7EC);border-radius:16px;padding:26px;background:var(--card,#fff)}
+.eb-vs__col--az{background:var(--az,#2f66ff);border-color:var(--az,#2f66ff);color:#fff}
+.eb-vs__col h3{font-size:15px;font-weight:800;text-transform:uppercase;letter-spacing:.06em;margin:0}
+.eb-vs__col ul{list-style:none;margin:16px 0 0;padding:0}
+.eb-vs__col li{padding:10px 0;font-size:16px;font-weight:600;border-top:1px solid var(--linea,#E4E7EC)}
+.eb-vs__col li:first-child{border-top:0}
+.eb-vs__col--az li{border-color:rgba(255,255,255,.18)}
+
+/* precios */
+.eb-plans{display:grid;grid-template-columns:repeat(4,1fr);gap:14px;margin-top:44px}
+@media(max-width:820px){.eb-plans{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:460px){.eb-plans{grid-template-columns:1fr}}
+.eb-plan{background:var(--card,#fff);border:1px solid var(--linea,#E4E7EC);border-radius:16px;padding:24px}
+.eb-plan--dest{border-color:var(--az,#2f66ff);box-shadow:0 0 0 1px var(--az,#2f66ff)}
+.eb-plan__n{font-size:18px;font-weight:800;letter-spacing:-.01em}
+.eb-plan__q{color:var(--gris,#5D6779);font-size:14px;margin:6px 0 0;line-height:1.45}
+.eb-plan__tag{display:inline-block;margin-top:14px;font-size:12px;font-weight:800;color:var(--az-h,#1f4fd6);background:var(--blue-soft,#EDF3FF);border-radius:999px;padding:5px 12px}
+
+/* faq */
+.eb-faq{max-width:800px;margin:36px auto 0;border-top:1px solid var(--linea,#E4E7EC)}
+.eb-faq details{border-bottom:1px solid var(--linea,#E4E7EC)}
+.eb-faq summary{list-style:none;cursor:pointer;padding:20px 2px;font-size:18px;font-weight:700;letter-spacing:-.01em;display:flex;justify-content:space-between;align-items:center;gap:14px}
+.eb-faq summary::-webkit-details-marker{display:none}
+.eb-faq summary .pm{flex:none;width:22px;height:22px;position:relative}
+.eb-faq summary .pm::before,.eb-faq summary .pm::after{content:"";position:absolute;background:var(--gris-2,#737B89);border-radius:2px;transition:transform .2s,opacity .2s}
+.eb-faq summary .pm::before{top:10px;left:3px;right:3px;height:2px}
+.eb-faq summary .pm::after{left:10px;top:3px;bottom:3px;width:2px}
+.eb-faq details[open] summary .pm::after{opacity:0}
+.eb-faq details[open] summary{color:var(--az-h,#1f4fd6)}
+.eb-faq .ans{padding:0 2px 20px;font-size:16px;color:var(--gris,#5D6779);line-height:1.65;max-width:72ch}
+.eb-faq .ans b{color:var(--tinta,#0A0C11)}
+
+/* cierre */
+.eb-final{background:var(--tinta,#0A0C11);color:#fff;text-align:center;padding:clamp(56px,8vw,96px) 24px}
+.eb-final h2{font-size:clamp(30px,4.6vw,48px);font-weight:800;letter-spacing:-.035em;line-height:1.05;max-width:20ch;margin:0 auto;text-wrap:balance}
+.eb-final p{color:#c7ccd6;font-size:17px;margin:16px auto 0;max-width:44ch}
+.eb-final .eb-btn{margin-top:28px}
+.eb-final .eb-trust{color:#8b93a2}
+</style>
+
+<div class="eb">
+  <!-- HERO -->
+  <section class="eb-hero">
+    <div class="eb-in eb-hero__grid">
+      <div>
+        <p class="eb-kick">NYXA para negocios</p>
+        <h1 class="eb-h1">Llena tu local con clientes nuevos que vuelven.</h1>
+        <p class="eb-lead">Sin anuncios ni pujas. NYXA lleva tu negocio a las personas de tu zona que ya buscan justo lo que ofreces — y te lo mide todo en un panel.</p>
+        <div class="eb-cta-row">
+          <button class="eb-btn" data-abrir>Empezar gratis</button>
+          <a class="eb-btn eb-btn--gh" href="#como">Ver cómo funciona</a>
+        </div>
+        <p class="eb-trust">Gratis para empezar · Sin tarjeta · Sin permanencia</p>
+      </div>
+      <div class="eb-panel" aria-hidden="true">
+        <div class="eb-panel__bar"><i></i><i></i><i></i><span class="eb-panel__tag">Vista previa del panel</span></div>
+        <div class="eb-panel__body">
+          <div class="eb-panel__row">
+            <div class="eb-kpi"><small>Clientes</small><b>212</b></div>
+            <div class="eb-kpi"><small>Nuevos</small><b>44%</b></div>
+            <div class="eb-kpi"><small>Repiten</small><b class="az">61%</b></div>
+            <div class="eb-kpi"><small>Días llenos</small><b>+18</b></div>
           </div>
-          <div class="mock__chart"><svg viewBox="0 0 400 130" preserveAspectRatio="none"><polyline points="0,110 40,100 80,96 120,84 160,80 200,66 240,60 280,44 320,40 360,26 400,18" fill="none" stroke="var(--az)" stroke-width="2.5"/></svg></div>
+          <div class="eb-panel__chart">
+            <svg viewBox="0 0 400 96" preserveAspectRatio="none"><polyline points="0,84 40,78 80,74 120,64 160,60 200,50 240,44 280,32 320,28 360,18 400,12" fill="none" stroke="#2f66ff" stroke-width="3"/></svg>
+          </div>
         </div>
       </div>
     </div>
-    <div class="callouts rev"><span>Gente que <b>aparece</b></span><span>Que <b>vuelve</b></span><span>Tu <b>franja valle</b>, llena</span></div>
-  </div>
-</section>
+  </section>
 
-<!-- 4 · LO QUE GANAS -->
-<section class="sec sec--papel">
-  <div class="in">
-    <p class="kick rev">Lo que ganas</p>
-    <h2 class="tit rev" style="margin-top:16px;max-width:14ch">Tres cosas. <span class="az">Medibles</span>.</h2>
-    <div class="tres">
-      <div class="card rev"><p class="card__k">01</p><h3 class="card__t">Gente nueva</h3><p class="card__p">Que no te conocía y aparece por el plan.</p></div>
-      <div class="card rev"><p class="card__k">02</p><h3 class="card__t">Que vuelve</h3><p class="card__p">Y acaba trayendo a alguien.</p></div>
-      <div class="card rev"><p class="card__k">03</p><h3 class="card__t">Llenas el valle</h3><p class="card__p">Tu peor día, con gente que quería justo eso.</p></div>
+  <!-- PARA QUIÉN -->
+  <section class="eb-for">
+    <div class="eb-in eb-for__in">
+      <span class="eb-for__lead">Pensado para los negocios donde la gente queda:</span>
+      <span class="eb-for__list">Bares<span>·</span>Restaurantes<span>·</span>Cafeterías<span>·</span>Gimnasios<span>·</span>Salas<span>·</span>Clubs<span>·</span>Tiendas<span>·</span>Espacios</span>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- 6 · VS ANUNCIOS -->
-<section class="sec sec--papel">
-  <div class="in">
-    <p class="kick rev">Frente a los anuncios</p>
-    <h2 class="tit rev" style="margin-top:16px;max-width:16ch">Un anuncio se apaga.<br>Esto <span class="az">se queda</span>.</h2>
-    <div class="vstabla rev">
-      <div class="vstabla__col"><h3>El anuncio</h3><ul><li>Se apaga</li><li>Pagas visibilidad</li><li>Impresiones</li><li>Puja</li></ul></div>
-      <div class="vstabla__col vstabla__col--az"><h3>NYXA</h3><ul><li>Se queda</li><li>Pagas resultado</li><li>Cuerpos</li><li>Encaje</li></ul></div>
+  <!-- CÓMO FUNCIONA -->
+  <section class="eb-sec" id="como">
+    <div class="eb-in">
+      <p class="eb-kick">Cómo funciona</p>
+      <h2 class="eb-h2">Tú pones el plan. Nosotros, la gente.</h2>
+      <div class="eb-grid3">
+        <div class="eb-card"><span class="eb-card__n">1</span><h3>Propones un plan</h3><p>Una cena de barrio, una cata, un torneo, una clase abierta. Lo que quieras llenar.</p></div>
+        <div class="eb-card"><span class="eb-card__n">2</span><h3>Se lo llevamos a quien encaja</h3><p>NYXA lo reparte entre las personas de tu zona a las que de verdad les interesa. Por encaje, no por puja.</p></div>
+        <div class="eb-card"><span class="eb-card__n">3</span><h3>Aparecen clientes reales</h3><p>Gente que quería justo eso, cruzando tu puerta. Personas, no impresiones.</p></div>
+      </div>
+      <p class="eb-note">Ejemplo: una pizzería abre una cena de barrio un martes flojo. NYXA se la propone a la gente de su zona a la que le encaja — y aparece quien de verdad quería justo eso. Cero anuncios, cero pujas.</p>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- 8 · PLANES -->
-<section class="sec sec--papel">
-  <div class="in">
-    <p class="kick rev">Acceso temprano · Valencia</p>
-    <h2 class="tit rev" style="margin-top:16px;max-width:18ch">Entrar es <span class="az">gratis</span>.</h2>
-    <p class="lead rev">Reservas tu zona gratis: sin tarjeta y sin permanencia. Los planes y precios los ves dentro, en tu panel. Un referente por zona: cuando se toma, se&nbsp;cierra.</p>
-    <div class="planes">
-      <div class="plan rev"><p class="plan__n">Gratis</p><p class="plan__q">Empieza a ocupar tu nicho</p><span class="plan__wait">Acceso temprano</span></div>
-      <div class="plan plan--dest rev"><p class="plan__n">Pro</p><p class="plan__q">Para el local que quiere llenar</p><span class="plan__wait">Acceso temprano</span></div>
-      <div class="plan rev"><p class="plan__n">Marca</p><p class="plan__q">Referente de varias zonas</p><span class="plan__wait">Acceso temprano</span></div>
-      <div class="plan rev"><p class="plan__n">Élite</p><p class="plan__q">El mapa de tu ciudad</p><span class="plan__wait">Acceso temprano</span></div>
+  <!-- LO QUE CONSIGUES -->
+  <section class="eb-sec eb-sec--tint">
+    <div class="eb-in">
+      <p class="eb-kick">Lo que consigues</p>
+      <h2 class="eb-h2">Resultados que puedes medir.</h2>
+      <div class="eb-grid3">
+        <div class="eb-card"><h3>Clientes nuevos</h3><p>Personas que no te conocían y llegan por el plan, no por un anuncio.</p></div>
+        <div class="eb-card"><h3>Que vuelven</h3><p>La app está hecha para que se repita. El cliente vuelve y trae a alguien.</p></div>
+        <div class="eb-card"><h3>Tus días flojos, llenos</h3><p>Da vida a las franjas muertas con gente que quería justo lo que ofreces ese día.</p></div>
+      </div>
     </div>
-    <div class="cierre-cta rev">
-      <button class="cta" data-abrir><span>Reserva tu zona gratis</span><span class="cta__x" aria-hidden="true"><svg viewBox="0 0 20 20"><line x1="2" y1="18" x2="18" y2="2"/><line x1="18" y1="18" x2="2" y2="2"/></svg></span></button>
-      <p class="friccion">Gratis · Sin tarjeta · Sin permanencia · Un referente por zona</p>
+  </section>
+
+  <!-- FRENTE A LOS ANUNCIOS -->
+  <section class="eb-sec">
+    <div class="eb-in">
+      <p class="eb-kick">Frente a los anuncios</p>
+      <h2 class="eb-h2">Pagas resultados, no impresiones.</h2>
+      <div class="eb-vs">
+        <div class="eb-vs__col">
+          <h3>Un anuncio</h3>
+          <ul><li>Se apaga cuando dejas de pagar</li><li>Pagas por visibilidad</li><li>Impresiones y clics</li><li>Gana quien más puja</li></ul>
+        </div>
+        <div class="eb-vs__col eb-vs__col--az">
+          <h3>NYXA</h3>
+          <ul><li>Se queda: construye tu comunidad</li><li>Pagas por clientes reales</li><li>Personas que cruzan tu puerta</li><li>Gana el que mejor encaja</li></ul>
+        </div>
+      </div>
     </div>
-  </div>
-</section>
+  </section>
+
+  <!-- PRECIOS -->
+  <section class="eb-sec eb-sec--tint" id="precios">
+    <div class="eb-in">
+      <p class="eb-kick">Precios</p>
+      <h2 class="eb-h2">Empieza gratis. Sube cuando lo necesites.</h2>
+      <p class="eb-lead">Reservas tu zona gratis, sin tarjeta y sin permanencia. Los planes y precios los ves dentro, en tu panel. Solo hay un referente por zona: cuando se toma, se cierra.</p>
+      <div class="eb-plans">
+        <div class="eb-plan"><p class="eb-plan__n">Gratis</p><p class="eb-plan__q">Empieza a ocupar tu zona.</p><span class="eb-plan__tag">Acceso temprano</span></div>
+        <div class="eb-plan eb-plan--dest"><p class="eb-plan__n">Pro</p><p class="eb-plan__q">Para el local que quiere llenar.</p><span class="eb-plan__tag">Acceso temprano</span></div>
+        <div class="eb-plan"><p class="eb-plan__n">Marca</p><p class="eb-plan__q">Referente de varias zonas.</p><span class="eb-plan__tag">Acceso temprano</span></div>
+        <div class="eb-plan"><p class="eb-plan__n">Élite</p><p class="eb-plan__q">El mapa de tu ciudad.</p><span class="eb-plan__tag">Acceso temprano</span></div>
+      </div>
+      <div class="eb-cta-row">
+        <button class="eb-btn" data-abrir>Reservar mi zona gratis</button>
+      </div>
+      <p class="eb-trust">Gratis · Sin tarjeta · Sin permanencia · Un referente por zona</p>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="eb-sec">
+    <div class="eb-in">
+      <p class="eb-kick">Preguntas</p>
+      <h2 class="eb-h2">Lo que preguntan los negocios.</h2>
+      <div class="eb-faq">
+        <details>
+          <summary>¿Cuánto cuesta?<span class="pm"></span></summary>
+          <div class="ans">Empezar es <b>gratis</b>: reservas tu zona sin tarjeta y sin permanencia. Si más adelante quieres más alcance, hay planes de pago — pero los ves y los decides tú <b>dentro del panel</b>, sin sorpresas.</div>
+        </details>
+        <details>
+          <summary>¿Cómo llegan los clientes?<span class="pm"></span></summary>
+          <div class="ans">Tú propones un plan y NYXA se lo lleva a las personas de tu zona a las que les encaja. Aparecen clientes reales interesados — no compras impresiones ni pujas contra nadie.</div>
+        </details>
+        <details>
+          <summary>¿Tengo que hacer algo cada día?<span class="pm"></span></summary>
+          <div class="ans">No. Montas tu perfil una vez y propones planes cuando quieras llenar algo. El panel te muestra qué funciona para que hagas más de lo que trae gente.</div>
+        </details>
+        <details>
+          <summary>¿Hay permanencia?<span class="pm"></span></summary>
+          <div class="ans">Ninguna. Entras gratis, sin tarjeta y sin ataduras. Te quedas si te trae clientes.</div>
+        </details>
+        <details>
+          <summary>¿Por qué solo un negocio por zona?<span class="pm"></span></summary>
+          <div class="ans">Para que ser el referente signifique algo. El primero de cada zona construye su comunidad; cuando esa plaza se toma, se cierra. Por eso conviene entrar pronto.</div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- CIERRE -->
+  <section class="eb-final">
+    <h2>Reserva tu zona en Valencia.</h2>
+    <p>Un referente por zona. Cuando se toma, se cierra.</p>
+    <button class="eb-btn" data-abrir>Empezar gratis</button>
+    <p class="eb-trust">Gratis · Sin tarjeta · Sin permanencia</p>
+  </section>
+</div>
 
 <style>
 .nf{background:#0A0C11;color:#fff;padding:clamp(56px,7vw,72px) 24px 40px;font-family:-apple-system,BlinkMacSystemFont,"Plus Jakarta Sans","Segoe UI",system-ui,sans-serif;line-height:1.5}
