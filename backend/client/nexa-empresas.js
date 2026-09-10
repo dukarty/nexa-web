@@ -185,9 +185,45 @@
       // Métricas: aún no hay backend de atribución para el panel → el panel muestra
       // sus datos de EJEMPLO (marcados) hasta que se instrumente la atribución real.
       async metrics() { return null; },
-      // Pago en mock: el plan NO se cambia desde el cliente (el trigger lo congela);
-      // se activará de verdad cuando haya pasarela. Devolvemos ok para el flujo de UI.
-      async upgrade(plan) { return { ok: true, mock: true, plan }; },
+      // Pago REAL (SOLO web): abre Stripe Checkout vía la Edge Function `crear-checkout`.
+      // El plan NO se toca desde el cliente (lo congela el trigger); lo activa el
+      // webhook de Stripe tras el pago. Aquí solo redirigimos a la pasarela.
+      //   plan: "activacion" (Pro) | "ciudad" (Referente)   periodo: "mes" | "anio"
+      async _checkout(producto) {
+        const biz = await miNegocio();
+        if (!biz) return { ok: false, error: "Entra con tu cuenta de empresa para pagar." };
+        const email = await miEmail();
+        try {
+          const r = await fetch(CFG.supabaseUrl + "/functions/v1/crear-checkout", {
+            method: "POST",
+            headers: {
+              "content-type": "application/json",
+              "apikey": CFG.supabaseAnonKey,
+              "authorization": "Bearer " + CFG.supabaseAnonKey,
+            },
+            body: JSON.stringify({ producto, business_id: biz.id, email }),
+          });
+          const j = await r.json().catch(() => ({}));
+          if (r.ok && j && j.url) { window.location.href = j.url; return { ok: true, redirect: true }; }
+          return { ok: false, error: (j && j.error) || "No se pudo abrir el pago. Inténtalo de nuevo." };
+        } catch (e) {
+          return { ok: false, error: (e && e.message) || "Error de red al abrir el pago." };
+        }
+      },
+      async upgrade(plan, periodo) {
+        const PROD = {
+          activacion: { mes: "pro_mensual", anio: "pro_anual" },
+          ciudad: { mes: "referente_mensual", anio: "referente_anual" },
+        };
+        const producto = (PROD[plan] || {})[periodo === "anio" ? "anio" : "mes"];
+        if (!producto) return { ok: false, error: "Ese plan no está disponible." };
+        return this._checkout(producto);
+      },
+      // Packs Impulsar (pago único): "impulsar_120" (~25 personas) | "impulsar_55" (~10).
+      async comprarImpulsar(pack) {
+        const producto = pack === "55" || pack === "impulsar_55" ? "impulsar_55" : "impulsar_120";
+        return this._checkout(producto);
+      },
       async logout() { try { await sb.auth.signOut(); } catch (e) {} },
     };
   }

@@ -548,7 +548,7 @@ body.claro .co__apple{background:#000;color:#fff}
     <!-- SEDES -->
     <section class="vista" data-vista="sedes">
       <div class="row2">
-        <div class="box"><div class="box__h"><b>Añadir sede</b><small>plan Marca</small></div>
+        <div class="box"><div class="box__h"><b>Añadir sede</b><small>NYXA Max</small></div>
           <div class="form">
             <div class="field"><label>Nombre de la sede</label><input id="sedeNombre" placeholder="Valencia · Ruzafa"></div>
             <button class="btn" id="sedeAdd">Añadir sede</button>
@@ -779,10 +779,10 @@ body.claro .co__apple{background:#000;color:#fff}
   const $=(s,c=document)=>c.querySelector(s),$$=(s,c=document)=>[...c.querySelectorAll(s)];
   const q=new URLSearchParams(location.search);
   const RANGO={verificada:0,activacion:1,ciudad:2,red:3};
-  const NOMBREPLAN={verificada:"Gratis",activacion:"Pro",ciudad:"Marca",red:"Élite"};
-  const PRECIOMES={activacion:29,ciudad:89};        // €/mes
-  const PRECIOANIO={activacion:290,ciudad:890};     // €/año (2 meses gratis)
-  const PRECIOPLAN={verificada:"Gratis",activacion:"desde 29 €/mes",ciudad:"desde 89 €/mes",red:"A medida"};
+  const NOMBREPLAN={verificada:"NYXA",activacion:"NYXA Pro",ciudad:"NYXA Max",red:"NYXA Ultra"};
+  const PRECIOMES={activacion:29,ciudad:99};        // €/mes (alineado con Stripe: Pro 29, Referente 99)
+  const PRECIOANIO={activacion:290,ciudad:990};     // €/año (2 meses gratis) — Stripe: Pro 290, Referente 990
+  const PRECIOPLAN={verificada:"Gratis",activacion:"desde 29 €/mes",ciudad:"desde 99 €/mes",red:"A medida"};
   let periodo="mes";  // "mes" | "anio"
   function precioNum(k){return periodo==="anio"?(PRECIOANIO[k]):(PRECIOMES[k]);}
   function precioTxt(k){const n=precioNum(k);return n==null?"A medida":(n+" €"+(periodo==="anio"?"/año":"/mes"));}
@@ -975,7 +975,7 @@ body.claro .co__apple{background:#000;color:#fff}
         +'<div style="height:8px;border-radius:999px;background:var(--bg-2);overflow:hidden"><div style="height:100%;width:'+(Math.round(100*s.v/max))+'%;background:'+s.col+';border-radius:999px"></div></div></div>';
     }).join("")+'</div>';
   }
-  // ── Comparativa entre sedes (plan Marca) ──
+  // ── Comparativa entre sedes (NYXA Max) ──
   let ultimaPorSede=null;
   function pintarPorSede(list){
     const el=$("#sedeTabla");if(!el||!list||!list.length)return;
@@ -1160,9 +1160,9 @@ body.claro .co__apple{background:#000;color:#fff}
       benchPeekOpen="Aún eres de los primeros "+nombreCat().toLowerCase()+" en Valencia dentro de NYXA. En cuanto entren más, verás aquí tu puesto real.";
     }
     const defs=[
-      {need:1,plan:"Pro",t:"Recomendaciones con IA",d:"Cada semana, qué lanzar para llenar tu local.",
+      {need:1,plan:"NYXA Pro",t:"Recomendaciones con IA",d:"Cada semana, qué lanzar para llenar tu local.",
        peek:"Esta semana: lanza "+s.idea+" el "+s.dia+" a las "+s.hora+". Tu "+s.publico+" respondería mejor.",peekOpen:null},
-      {need:2,plan:"Marca",t:"Benchmarks de tu sector",d:"Compárate con negocios como el tuyo en Valencia.",
+      {need:2,plan:"NYXA Max",t:"Benchmarks de tu sector",d:"Compárate con negocios como el tuyo en Valencia.",
        peek:benchPeekLock,peekOpen:benchPeekOpen}
     ];
     $("#ladder").innerHTML=defs.map(x=>{const lock=rango<x.need;const peek=(!lock&&x.peekOpen)?x.peekOpen:x.peek;
@@ -1170,7 +1170,7 @@ body.claro .co__apple{background:#000;color:#fff}
         +'<div class="lad__b"><b>'+x.t+'</b><p>'+x.d+'</p>'
         +'<p class="lad__peek'+(lock?' lad__peek--lock':'')+'">'+peek+'</p></div>'
         +'<span class="lad__tag'+(lock?'':' lad__tag--ok')+'">'+(lock?x.plan:"Activo")+'</span></button>';}).join("");
-    $$("#ladder .lad").forEach(b=>b.addEventListener("click",()=>{const need=+b.dataset.need;if(rango<need)abrirUpsell(b.dataset.t,need>=2?"Marca":"Pro");else toast("Se llena con tu actividad real.");}));
+    $$("#ladder .lad").forEach(b=>b.addEventListener("click",()=>{const need=+b.dataset.need;if(rango<need)abrirUpsell(b.dataset.t,need>=2?"NYXA Max":"NYXA Pro");else toast("Se llena con tu actividad real.");}));
   }
 
   /* ── Perfil / vista previa ── */
@@ -1236,7 +1236,7 @@ body.claro .co__apple{background:#000;color:#fff}
     const t=$("#expTitulo").value.trim();
     if(!t)return toast("Ponle un título a tu experiencia.");
     // Primer evento gratis: en el plan Gratis solo 1; para más, sube a Pro
-    if(rango<1 && ((cuenta&&cuenta.experiencias)||[]).length>=1){ return abrirUpsell("Eventos ilimitados","Pro"); }
+    if(rango<1 && ((cuenta&&cuenta.experiencias)||[]).length>=1){ return abrirUpsell("Eventos ilimitados","NYXA Pro"); }
     const btn=$("#expCrear");const orig=btn.textContent;btn.disabled=true;btn.textContent="Publicando…";
     const exp={titulo:t,cat:$("#expCat").value,franja:$("#expFranja").value,desc:$("#expDesc").value.trim()};
     const R=window.NEXAEmpresas;
@@ -1347,14 +1347,14 @@ body.claro .co__apple{background:#000;color:#fff}
     const feat=e.target.closest("[data-feat]");
     if(feat){
       const id=feat.dataset.feat, on=feat.dataset.on!=="1"; // alterna
-      // Destacar es plan Marca+. En planes bajos, invita a mejorar (no bloquea seco).
-      if(on && rango<2){abrirUpsell("Destacar en NYXA","Marca");return;}
+      // Destacar es NYXA Max+. En planes bajos, invita a mejorar (no bloquea seco).
+      if(on && rango<2){abrirUpsell("Destacar en NYXA","NYXA Max");return;}
       const R=window.NEXAEmpresas;
       feat.disabled=true;
       if(R&&R.setFeatured){
         const res=await R.setFeatured(id,on);
         if(!res||!res.ok){
-          if(res&&res.error==="plan_insuficiente"){abrirUpsell("Destacar en NYXA","Marca");}
+          if(res&&res.error==="plan_insuficiente"){abrirUpsell("Destacar en NYXA","NYXA Max");}
           else toast((res&&res.error)||"No se pudo. Inténtalo de nuevo.");
           feat.disabled=false;
         }else{
@@ -1443,7 +1443,7 @@ body.claro .co__apple{background:#000;color:#fff}
     pintarMejoras();pintarLadder();pintarPerfil();pintarExp();pintarGoal();pintarEquipo();pintarSedes();pintarCheck();
     try{if(typeof refrescarTema==="function")refrescarTema();}catch(e){}
   }
-  function bloqueoNombre(min){return min>=2?"Marca":"Pro";}
+  function bloqueoNombre(min){return min>=2?"NYXA Max":"NYXA Pro";}
 
   pintarKpis();pintarCuenta();aplicarDatos(DATOS);
 
@@ -1461,15 +1461,15 @@ body.claro .co__apple{background:#000;color:#fff}
 
   /* Upsell */
   const BENEF={
-    "Pro":["Eventos ilimitados","Analítica completa y embudo","Recomendaciones con IA","Reseñas y objetivos","Reactivar clientes dormidos","Hasta 3 usuarios"],
-    "Marca":["Todo lo de Pro","Benchmarks de tu sector","Varias sedes en un panel","Comparativas entre locales","Usuarios ilimitados"]
+    "NYXA Pro":["Eventos ilimitados","Analítica completa y embudo","Recomendaciones con IA","Reseñas y objetivos","Reactivar clientes dormidos","Hasta 3 usuarios"],
+    "NYXA Max":["Todo lo de NYXA Pro","Benchmarks de tu sector","Varias sedes en un panel","Comparativas entre locales","Usuarios ilimitados"]
   };
-  const KEYDE={"Pro":"activacion","Marca":"ciudad","Élite":"red"};
+  const KEYDE={"NYXA Pro":"activacion","NYXA Max":"ciudad","NYXA Ultra":"red"};
   let upsellKey="activacion";
   function abrirUpsell(feature,planNec){
     upsellKey=KEYDE[planNec]||"activacion";
     $("#upK").textContent="Desbloquea con "+planNec;$("#upT").textContent=feature;
-    $("#upP").textContent=(planNec==="Marca"?'"'+feature+'" es parte del plan Marca, para marcas con varias sedes.':'"'+feature+'" es parte del plan Pro, para llenar tu local.');
+    $("#upP").textContent=(planNec==="NYXA Max"?'"'+feature+'" es parte de NYXA Max, para marcas con varias sedes.':'"'+feature+'" es parte de NYXA Pro, para llenar tu local.');
     $("#upUl").innerHTML=(BENEF[planNec]||[]).map(b=>"<li>"+b+"</li>").join("");
     $("#upBtn").textContent="Mejorar a "+planNec+" · "+PRECIOPLAN[upsellKey];
     $("#upsell").classList.add("on");
@@ -1667,7 +1667,7 @@ body.claro .co__apple{background:#000;color:#fff}
   /* Tema — cada plan tiñe la web de su color; siempre se puede volver a blanco.
      Gratis: claro ⇄ oscuro. De pago: color del plan ⇄ blanco. Con memoria. */
   const TEMA_PLAN={verificada:null,activacion:"pro",ciudad:"marca",red:"elite"};
-  const NOMBRE_TEMA={claro:"Blanco",oscuro:"Oscuro",pro:"Azul Pro",marca:"Violeta Marca",elite:"Rojo Élite"};
+  const NOMBRE_TEMA={claro:"Blanco",oscuro:"Oscuro",pro:"Azul NYXA Pro",marca:"Violeta NYXA Max",elite:"Rojo NYXA Ultra"};
   function aplicarTema(t){
     document.body.classList.remove("claro","tema-pro","tema-marca","tema-elite");
     if(t==="claro")document.body.classList.add("claro");
@@ -1709,6 +1709,33 @@ body.claro .co__apple{background:#000;color:#fff}
     showGate:()=>{$("#gate").classList.add("on");document.body.style.overflow="hidden";},
     hideGate:()=>{$("#gate").classList.remove("on");document.body.style.overflow="";}
   };
+
+  /* ── Volver de Stripe Checkout (SOLO web) ──
+     El plan/saldo lo activa el WEBHOOK de Stripe en la BD (asíncrono, 1-3s). Al
+     volver con ?pago=ok, confirmamos y recargamos la cuenta reintentando hasta
+     ver el plan nuevo. Limpiamos la URL para no repetir el aviso en un refresh. */
+  if(q.get("pago")==="ok"){
+    try{history.replaceState({},"",location.pathname);}catch(e){}
+    setTimeout(()=>toast("¡Pago recibido! Activando tu plan…"),600);
+    let intentos=0;
+    (async function esperarPlan(){
+      if(!(window.NEXAEmpresas&&window.NEXAEmpresas.real&&window.NEXAEmpresas.account)){setTimeout(esperarPlan,1200);return;}
+      const acc=await window.NEXAEmpresas.account();
+      if(acc){
+        cuenta=acc;pintarCuenta();
+        if(acc.plan&&acc.plan!=="verificada"){
+          if(typeof estrenarTemaPlan==="function")estrenarTemaPlan(acc.plan);
+          toast("Listo — ya eres "+(NOMBREPLAN[acc.plan]||"premium")+". Todo desbloqueado.");
+          return;
+        }
+      }
+      if(intentos++<6)setTimeout(esperarPlan,2000);
+      else toast("Pago recibido. Si tu plan no aparece en un minuto, recarga la página.");
+    })();
+  }else if(q.get("pago")==="cancelado"){
+    try{history.replaceState({},"",location.pathname);}catch(e){}
+    setTimeout(()=>toast("Pago cancelado — no se ha hecho ningún cargo."),600);
+  }
 </script>
 <script>
 /* Experiencias listas para activar: al pulsar una plantilla, rellena el formulario de crear
