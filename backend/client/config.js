@@ -6,7 +6,9 @@
 window.NEXA_EMPRESAS_CONFIG = {
   supabaseUrl: "https://vjpgyxwhobshwaotmwzf.supabase.co",
   supabaseAnonKey: "sb_publishable_rmJ7LK0fhSZTJsOUUzOZ3A_bnY-bQ9-",
-  // Parte comercial (cobro/planes) APAGADA hasta ~50k usuarios: en fase de crecimiento
-  // no se muestra nada de pago. A true (con Stripe) cuando arranque el comercial.
-  COMERCIAL_ACTIVO: false,
+  // Parte comercial (cobro/planes) ENCENDIDA (10-sep-2026): el panel muestra
+  // facturación, planes y el bloque "Tu plan y el salto". El cobro va por Stripe
+  // Checkout (crear-checkout). NOTA: Stripe sigue en modo PRUEBA (sk_test) — para
+  // cobrar de verdad, pasar Stripe a live (ver 4-OPERACIONES/ENCENDER-COBRO-EMPRESAS.md).
+  COMERCIAL_ACTIVO: true,
 };
