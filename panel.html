@@ -376,6 +376,26 @@ body.claro .co__apple{background:#000;color:#fff}
 
     <!-- RESUMEN -->
     <section class="vista on" data-vista="resumen">
+      <style>
+        .psalto{display:grid;grid-template-columns:1fr 1.35fr;gap:14px;margin-bottom:20px}
+        @media(max-width:720px){.psalto{grid-template-columns:1fr}}
+        .psalto__now,.psalto__next{border-radius:16px;padding:18px 20px}
+        .psalto__now{background:var(--panel);border:1px solid var(--linea)}
+        .psalto__next{background:var(--az);color:#fff}
+        .psalto__k{display:block;font-size:.66rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;opacity:.75;margin-bottom:6px}
+        .psalto__now b,.psalto__next b{font-size:1.15rem;font-weight:900;letter-spacing:-.01em;display:block}
+        .psalto__now p{color:var(--tx-2);font-size:.9rem;margin:6px 0 12px;line-height:1.45}
+        .psalto__next ul{list-style:none;margin:10px 0 8px;padding:0;display:grid;gap:5px}
+        .psalto__next li{font-size:.9rem;font-weight:600;padding-left:20px;position:relative}
+        .psalto__next li::before{content:"✓";position:absolute;left:0;font-weight:900}
+        .psalto__roi{font-size:.82rem;opacity:.92;margin:2px 0 14px;line-height:1.4}
+        .psalto__cta{display:inline-block;background:#fff;color:var(--az);border:0;border-radius:999px;padding:11px 20px;font-weight:800;font-size:.9rem;cursor:pointer;text-decoration:none;font-family:inherit}
+        .psalto__ver{background:none;border:0;color:var(--az);font-weight:800;font-size:.82rem;cursor:pointer;padding:0;font-family:inherit}
+        .mejora__ul{list-style:none;margin:8px 0 0;padding:0;display:grid;gap:3px}
+        .mejora__ul li{font-size:.8rem;color:var(--tx-2);padding-left:16px;position:relative}
+        .mejora__ul li::before{content:"✓";position:absolute;left:0;color:var(--az);font-weight:900}
+      </style>
+      <div id="planSalto"></div>
       <div class="check" id="check">
         <div class="check__h"><b>Primeros pasos</b><small id="checkPct">0 %</small></div>
         <div class="check__bar"><i id="checkBar" style="width:0%"></i></div>
@@ -783,6 +803,10 @@ body.claro .co__apple{background:#000;color:#fff}
   const PRECIOMES={activacion:29,ciudad:99};        // €/mes (alineado con Stripe: Pro 29, Referente 99)
   const PRECIOANIO={activacion:290,ciudad:990};     // €/año (2 meses gratis) — Stripe: Pro 290, Referente 990
   const PRECIOPLAN={verificada:"Gratis",activacion:"desde 29 €/mes",ciudad:"desde 99 €/mes",red:"A medida"};
+  // Qué desbloquea cada plan (para la escalera de Facturación y el bloque "Tu plan y el salto")
+  const BULLETSPLAN={activacion:["Analítica completa e IA","Reactivar clientes dormidos","Hasta 3 usuarios"],ciudad:["Varias sedes en un panel","Comparativas y benchmarks","Usuarios ilimitados"],red:["Todo lo de Max, a medida","Multi-ciudad","Acompañamiento directo"]};
+  const QUEPLAN={verificada:"Tu perfil, tus experiencias y tu panel. Para estar dentro.",activacion:"Analítica, IA y clientes que vuelven. Para llenar de verdad.",ciudad:"Varias sedes comparadas en un panel. Para escalar por la ciudad.",red:"Todo, a la medida de tu marca."};
+  const VENTAPLAN={activacion:{roi:"Con ~2 clientes que vuelven al mes, NYXA Pro ya se paga solo — el resto es margen."},ciudad:{roi:"Para marcas que ya llenan y quieren replicar lo que funciona en cada local."},red:{roi:"Lo montamos a la medida de tu marca. Hablamos."}};
   let periodo="mes";  // "mes" | "anio"
   function precioNum(k){return periodo==="anio"?(PRECIOANIO[k]):(PRECIOMES[k]);}
   function precioTxt(k){const n=precioNum(k);return n==null?"A medida":(n+" €"+(periodo==="anio"?"/año":"/mes"));}
@@ -1440,7 +1464,7 @@ body.claro .co__apple{background:#000;color:#fff}
       :'<tr><td style="padding:12px">Hoy</td><td style="padding:12px">'+NOMBREPLAN[plan]+' · anual</td><td style="padding:12px;text-align:right">'+PRECIOPLAN[plan]+'</td><td style="padding:12px;text-align:right"><button class="mini" data-pdf>PDF</button></td></tr>';
     $$(".navi .lock").forEach(l=>l.remove());
     $$(".navi").forEach(n=>{const min=+n.dataset.min;if(min>rango)n.insertAdjacentHTML("beforeend",'<span class="lock">'+SVG_LOCK+'</span>');});
-    pintarMejoras();pintarLadder();pintarPerfil();pintarExp();pintarGoal();pintarEquipo();pintarSedes();pintarCheck();
+    pintarMejoras();pintarLadder();pintarPlanSalto();pintarPerfil();pintarExp();pintarGoal();pintarEquipo();pintarSedes();pintarCheck();
     try{if(typeof refrescarTema==="function")refrescarTema();}catch(e){}
   }
   function bloqueoNombre(min){return min>=2?"NYXA Max":"NYXA Pro";}
@@ -1564,8 +1588,24 @@ body.claro .co__apple{background:#000;color:#fff}
     const cont=$("#facMejoras");if(!cont)return;
     const sup=["activacion","ciudad","red"].filter(k=>(RANGO[k]??9)>rango);
     if(!sup.length){cont.innerHTML='<p style="color:var(--tx-2)">Estás en el plan máximo. Gracias por confiar.</p>';return;}
-    cont.innerHTML=sup.map(k=>'<div class="mejora"><div><b>'+NOMBREPLAN[k]+'</b><small>'+PRECIOPLAN[k]+'</small></div>'+(k==="red"?'<a class="mini" href="mailto:holanyxa@gmail.com">Hablar</a>':'<button class="mini" data-mejorar="'+k+'">Mejorar</button>')+'</div>').join("");
+    cont.innerHTML=sup.map(k=>'<div class="mejora"><div style="flex:1"><b>'+NOMBREPLAN[k]+'</b><small>'+PRECIOPLAN[k]+'</small><ul class="mejora__ul">'+((BULLETSPLAN[k]||[]).map(b=>'<li>'+b+'</li>').join(''))+'</ul></div>'+(k==="red"?'<a class="mini" href="mailto:holanyxa@gmail.com">Hablar</a>':'<button class="mini" data-mejorar="'+k+'">Mejorar</button>')+'</div>').join("");
     $$("[data-mejorar]",cont).forEach(b=>b.addEventListener("click",()=>abrirPago(b.dataset.mejorar)));
+  }
+  // Bloque "Tu plan y el salto" (Resumen) — vende de un vistazo qué tienes y qué ganas subiendo. Solo con comercial ON.
+  function pintarPlanSalto(){
+    const cont=$("#planSalto");if(!cont)return;
+    if(!COMERCIAL){cont.innerHTML="";return;}
+    const orden=["verificada","activacion","ciudad","red"];
+    const sig=orden[orden.indexOf(plan)+1];
+    if(!sig){cont.innerHTML='<div class="psalto" style="grid-template-columns:1fr"><div class="psalto__now"><span class="psalto__k">Tu plan</span><b>'+NOMBREPLAN[plan]+'</b><p>Estás en el plan máximo. Gracias por confiar en NYXA.</p></div></div>';return;}
+    const now='<div class="psalto__now"><span class="psalto__k">Tu plan</span><b>'+NOMBREPLAN[plan]+(plan==="verificada"?" · Gratis":"")+'</b><p>'+(QUEPLAN[plan]||"")+'</p><button class="psalto__ver" data-ir-fact>Ver todos los planes →</button></div>';
+    const esUltra=sig==="red";
+    const bull=(BULLETSPLAN[sig]||[]).map(b=>'<li>'+b+'</li>').join('');
+    const cta=esUltra?'<a class="psalto__cta" href="mailto:holanyxa@gmail.com">Hablar con NYXA</a>':'<button class="psalto__cta" data-subir="'+sig+'">Subir a '+NOMBREPLAN[sig]+'</button>';
+    const next='<div class="psalto__next"><span class="psalto__k">El salto</span><b>'+NOMBREPLAN[sig]+' · '+(PRECIOPLAN[sig]||"")+'</b><ul>'+bull+'</ul><p class="psalto__roi">'+((VENTAPLAN[sig]||{}).roi||"")+'</p>'+cta+'</div>';
+    cont.innerHTML='<div class="psalto">'+now+next+'</div>';
+    const s=cont.querySelector("[data-subir]");if(s)s.addEventListener("click",()=>abrirPago(s.dataset.subir));
+    const v=cont.querySelector("[data-ir-fact]");if(v)v.addEventListener("click",()=>ver("facturacion"));
   }
 
   function toast(m){const t=$("#toast");t.textContent=m;t.classList.add("on");clearTimeout(t._t);t._t=setTimeout(()=>t.classList.remove("on"),3200);}
