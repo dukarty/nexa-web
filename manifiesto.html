@@ -59,6 +59,35 @@ a{color:inherit}
 .xs__c h3{font-size:18px;font-weight:800;color:var(--ink);margin:14px 0 0;letter-spacing:-.01em}
 .xs__c h3 s{color:#8A909E;text-decoration-color:var(--blue);text-decoration-thickness:2px}
 .xs__c p{color:var(--gris);font-size:15px;margin:8px 0 0;line-height:1.5}
+/* proceso: stepper conectado (4 pasos) */
+.flow{position:relative;margin-top:48px;display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+.flow::before{content:"";position:absolute;top:26px;left:12.5%;right:12.5%;height:2px;background:linear-gradient(90deg,var(--blue),rgba(47,102,255,.3));z-index:0}
+.flow__step{position:relative;text-align:center;padding:0 6px}
+.flow__n{position:relative;z-index:2;display:inline-flex;width:52px;height:52px;align-items:center;justify-content:center;border-radius:50%;background:var(--blue);color:#fff;font-weight:800;font-size:20px;box-shadow:0 8px 22px -6px rgba(47,102,255,.55)}
+.flow__step h3{font-size:17px;font-weight:800;margin:16px 0 0;letter-spacing:-.01em;color:var(--ink)}
+.flow__step p{color:var(--gris);font-size:14.5px;margin:8px auto 0;max-width:26ch;line-height:1.5}
+@media(max-width:820px){
+ .flow{grid-template-columns:1fr;gap:0;max-width:460px;margin-inline:auto}
+ .flow::before{left:25px;right:auto;top:34px;bottom:34px;width:2px;height:auto;background:linear-gradient(180deg,var(--blue),rgba(47,102,255,.3))}
+ .flow__step{display:grid;grid-template-columns:52px 1fr;gap:18px;text-align:left;padding:14px 0}
+ .flow__n{grid-row:1/span 2}.flow__step h3{margin:2px 0 0}.flow__step p{margin:6px 0 0;max-width:none}
+}
+/* principios: lista con icono, sin cajas */
+.beliefs{display:grid;grid-template-columns:1fr 1fr;gap:30px 40px;margin-top:40px;max-width:900px}
+@media(max-width:700px){.beliefs{grid-template-columns:1fr;gap:24px}}
+.belief{display:grid;grid-template-columns:28px 1fr;gap:16px;align-items:start}
+.belief__b{margin-top:4px;width:28px;height:28px;border-radius:9px;background:var(--soft);display:inline-flex;align-items:center;justify-content:center}
+.belief__b svg{width:16px;height:16px;color:var(--blue)}
+.belief h3{font-size:18px;font-weight:800;letter-spacing:-.01em;margin:0;color:var(--ink)}
+.belief p{color:var(--gris);font-size:15px;line-height:1.55;margin:6px 0 0}
+/* "no es X": afirmaciones grandes, sin cajas */
+.nots{list-style:none;margin-top:38px;max-width:860px}
+.nots li{display:grid;grid-template-columns:minmax(180px,.9fr) 1.3fr;gap:10px 44px;align-items:baseline;padding:24px 4px;border-top:1px solid var(--line)}
+.nots li:last-child{border-bottom:1px solid var(--line)}
+@media(max-width:640px){.nots li{grid-template-columns:1fr;gap:6px}}
+.nots h3{font-size:clamp(23px,3.6vw,32px);font-weight:800;letter-spacing:-.025em;margin:0;color:var(--ink)}
+.nots h3 s{color:#8A909E;text-decoration-color:var(--blue);text-decoration-thickness:2px}
+.nots p{color:var(--gris);font-size:16px;line-height:1.5;margin:0}
 </style>
 </head>
 <body>
@@ -111,11 +140,11 @@ a{color:inherit}
     <div class="in">
       <p class="xs__k">Cómo funciona</p>
       <h2 class="xs__t">Se propone. No se escribe a nadie.</h2>
-      <div class="xs__grid">
-        <div class="xs__c"><span class="xs__n">1</span><h3>Dices qué te apetece</h3><p>Un café, una ruta, un concierto. Lo que te apetezca vivir esta semana.</p></div>
-        <div class="xs__c"><span class="xs__n">2</span><h3>Te acercamos a quien encaja</h3><p>Gente cercana con ganas de vivir lo mismo. Sin buscar entre miles de perfiles.</p></div>
-        <div class="xs__c"><span class="xs__n">3</span><h3>Le llega la propuesta ya hecha</h3><p>Nada de escribir a desconocidos. Le llega un plan concreto: aceptar o no.</p></div>
-        <div class="xs__c"><span class="xs__n">4</span><h3>Si dice que sí, lo vivís</h3><p>Se abre el chat, quedáis y salís. En persona, no por pantalla.</p></div>
+      <div class="flow">
+        <div class="flow__step"><span class="flow__n">1</span><h3>Dices qué te apetece</h3><p>Un café, una ruta, un concierto. Lo que te apetezca vivir esta semana.</p></div>
+        <div class="flow__step"><span class="flow__n">2</span><h3>Te acercamos a quien encaja</h3><p>Gente cercana con ganas de vivir lo mismo. Sin buscar entre miles de perfiles.</p></div>
+        <div class="flow__step"><span class="flow__n">3</span><h3>Le llega la propuesta ya hecha</h3><p>Nada de escribir a desconocidos. Le llega un plan concreto: aceptar o no.</p></div>
+        <div class="flow__step"><span class="flow__n">4</span><h3>Si dice que sí, lo vivís</h3><p>Se abre el chat, quedáis y salís. En persona, no por pantalla.</p></div>
       </div>
     </div>
   </section>
@@ -124,11 +153,11 @@ a{color:inherit}
     <div class="in">
       <p class="xs__k">Nuestros principios</p>
       <h2 class="xs__t">En lo que creemos, sin medias tintas.</h2>
-      <div class="xs__grid">
-        <div class="xs__c"><h3>En persona, no por pantalla</h3><p>La vida pasa fuera del móvil. NYXA suma gente a tu semana, no tiempo de scroll.</p></div>
-        <div class="xs__c"><h3>Se propone, no se escribe</h3><p>Nada de escribir a desconocidos. Propones vivir algo concreto, y solo si aceptan hay chat.</p></div>
-        <div class="xs__c"><h3>El plan es la excusa</h3><p>La compañía es el producto. El plan solo es la forma de que ocurra.</p></div>
-        <div class="xs__c"><h3>Sin feed, sin likes, sin vender tus datos</h3><p>No queremos retenerte en una pantalla. Queremos que salgas.</p></div>
+      <div class="beliefs">
+        <div class="belief"><span class="belief__b"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4 4 10-10"/></svg></span><div><h3>En persona, no por pantalla</h3><p>La vida pasa fuera del móvil. NYXA suma gente a tu semana, no tiempo de scroll.</p></div></div>
+        <div class="belief"><span class="belief__b"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4 4 10-10"/></svg></span><div><h3>Se propone, no se escribe</h3><p>Nada de escribir a desconocidos. Propones vivir algo concreto, y solo si aceptan hay chat.</p></div></div>
+        <div class="belief"><span class="belief__b"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4 4 10-10"/></svg></span><div><h3>El plan es la excusa</h3><p>La compañía es el producto. El plan solo es la forma de que ocurra.</p></div></div>
+        <div class="belief"><span class="belief__b"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4 4 10-10"/></svg></span><div><h3>Sin feed, sin likes, sin vender tus datos</h3><p>No queremos retenerte en una pantalla. Queremos que salgas.</p></div></div>
       </div>
     </div>
   </section>
@@ -137,11 +166,11 @@ a{color:inherit}
     <div class="in">
       <p class="xs__k">Para que quede claro</p>
       <h2 class="xs__t">No es lo que ya conoces.</h2>
-      <div class="xs__grid">
-        <div class="xs__c"><h3>No es <s>Tinder</s></h3><p>Aquí no se escribe a desconocidos. Propones un plan concreto.</p></div>
-        <div class="xs__c"><h3>No es <s>Instagram</s></h3><p>No enseñas quién quieres parecer. Quedas de verdad.</p></div>
-        <div class="xs__c"><h3>No es <s>un catálogo de eventos</s></h3><p>No compras entradas: le propones un plan a alguien concreto.</p></div>
-      </div>
+      <ol class="nots">
+        <li><h3>No es <s>Tinder</s></h3><p>Aquí no se escribe a desconocidos. Propones un plan concreto.</p></li>
+        <li><h3>No es <s>Instagram</s></h3><p>No enseñas quién quieres parecer. Quedas de verdad.</p></li>
+        <li><h3>No es <s>un catálogo de eventos</s></h3><p>No compras entradas: le propones un plan a alguien concreto.</p></li>
+      </ol>
     </div>
   </section>
 </main>
