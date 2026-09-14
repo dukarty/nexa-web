@@ -522,15 +522,17 @@ body.claro .co__apple{background:#000;color:#fff}
       </div>
       <div class="row2">
         <div class="box">
-          <div class="box__h"><b>Crear experiencia</b><small>tu primer evento es gratis</small></div>
+          <div class="box__h"><b>Crear un plan</b><small>llega a la gente de tu ciudad</small></div>
           <div class="form">
-            <div class="field"><label>Título</label><input id="expTitulo" placeholder="Amanecer en el Garbí"></div>
-            <div class="f2">
-              <div class="field"><label>Categoría</label><select id="expCat"><option>Encuentro</option><option>Ruta / outdoor</option><option>Cata / gastronomía</option><option>Música / directo</option><option>Taller</option></select></div>
-              <div class="field"><label>Franja</label><select id="expFranja"><option value="normal">Franja normal</option><option value="valle">Franja valle (día flojo)</option></select></div>
+            <div class="field"><label>Foto del plan</label>
+              <input id="expFoto" type="file" accept="image/*" style="display:none">
+              <button type="button" id="expFotoBtn" style="width:100%;padding:12px;border:1.5px dashed var(--linea);border-radius:12px;background:var(--panel);color:var(--tx-2);font-weight:700;cursor:pointer;font-family:inherit">📷 Añadir una foto</button>
+              <img id="expFotoPrev" alt="" style="display:none;width:100%;max-height:220px;object-fit:cover;border-radius:12px;margin-top:10px">
             </div>
-            <div class="field"><label>Qué van a vivir</label><textarea id="expDesc" placeholder="Un café antes del amanecer y una charla con desconocidos que se van conociendo…"></textarea></div>
-            <button class="btn" id="expCrear">Publicar experiencia</button>
+            <div class="field"><label>Título</label><input id="expTitulo" placeholder="Cena de barrio · martes" maxlength="60"></div>
+            <div class="field"><label>¿Qué actividad es?</label><select id="expCat"><option value="">Cargando actividades…</option></select></div>
+            <div class="field"><label>Qué van a vivir</label><textarea id="expDesc" placeholder="Una cena tranquila entre gente del barrio que se va conociendo…"></textarea></div>
+            <button class="btn" id="expCrear">Publicar plan</button>
           </div>
         </div>
         <div class="box">
@@ -1252,30 +1254,67 @@ body.claro .co__apple{background:#000;color:#fff}
   // que miden el rendimiento por plan. En modo demo, usa las locales.
   async function cargarExperiencias(){
     const R=window.NEXAEmpresas;
+    cargarActividades();
     if(R&&R.real&&R.listExperiences){
       try{const l=await R.listExperiences();cuenta.experiencias=l||[];pintarExp();pintarCheck();}catch(e){}
     }
   }
+  // Rellena el selector con las actividades REALES de la app (así el plan cuadra con
+  // lo que la gente busca). Se agrupan por mundo. Una sola vez.
+  let _actividadesCargadas=false, _expFotoFile=null;
+  async function cargarActividades(){
+    const sel=$("#expCat"); if(!sel||_actividadesCargadas) return;
+    const R=window.NEXAEmpresas;
+    if(!(R&&R.real&&R.listActividades)){ sel.innerHTML='<option value="">Elige una actividad…</option>'; return; }
+    try{
+      const cats=await R.listActividades();
+      if(!cats.length){ sel.innerHTML='<option value="">(no disponible ahora)</option>'; return; }
+      const WORLDS={'1':'Aventura y naturaleza','2':'Música y fiesta','3':'Deporte','4':'Comida y casa','5':'Viajes','6':'Ciudad y cultura','7':'Crear','8':'Valencia','9':'Baile','10':'Grupo y vida'};
+      const porMundo={}; cats.forEach(c=>{(porMundo[c.world]=porMundo[c.world]||[]).push(c);});
+      let html='<option value="">Elige una actividad…</option>';
+      Object.keys(porMundo).forEach(w=>{
+        html+='<optgroup label="'+esc(WORLDS[String(w)]||('Mundo '+w))+'">';
+        porMundo[w].forEach(c=>{ html+='<option value="'+esc(c.id)+'">'+esc(c.label)+'</option>'; });
+        html+='</optgroup>';
+      });
+      sel.innerHTML=html; _actividadesCargadas=true;
+    }catch(e){ sel.innerHTML='<option value="">(no disponible ahora)</option>'; }
+  }
+  // La foto: el botón abre el selector de archivo; al elegir, se ve la previa.
+  (function(){
+    const inp=$("#expFoto"),btn=$("#expFotoBtn"),prev=$("#expFotoPrev");
+    if(btn&&inp)btn.addEventListener("click",()=>inp.click());
+    if(inp)inp.addEventListener("change",()=>{
+      const f=inp.files&&inp.files[0]; _expFotoFile=f||null;
+      if(f&&prev){prev.src=URL.createObjectURL(f);prev.style.display="block";if(btn)btn.textContent="📷 Cambiar foto";}
+    });
+  })();
   $("#expCrear").addEventListener("click",async()=>{
     const t=$("#expTitulo").value.trim();
-    if(!t)return toast("Ponle un título a tu experiencia.");
-    // Primer evento gratis: en el plan Gratis solo 1; para más, sube a Pro
+    const cat=$("#expCat").value;
+    if(!_expFotoFile)return toast("Añade una foto para tu plan.");
+    if(!cat)return toast("Elige qué actividad es tu plan.");
+    if(!t)return toast("Ponle un título a tu plan.");
+    // Primer plan gratis: en el plan Gratis solo 1; para más, sube a NYXA Pro
     if(rango<1 && ((cuenta&&cuenta.experiencias)||[]).length>=1){ return abrirUpsell("Eventos ilimitados","NYXA Pro"); }
     const btn=$("#expCrear");const orig=btn.textContent;btn.disabled=true;btn.textContent="Publicando…";
-    const exp={titulo:t,cat:$("#expCat").value,franja:$("#expFranja").value,desc:$("#expDesc").value.trim()};
+    const exp={titulo:t,category_id:cat,desc:$("#expDesc").value.trim(),photo:_expFotoFile};
     const R=window.NEXAEmpresas;
     try{
       if(R&&R.real&&R.addExperience){
         const res=await R.addExperience(exp);
-        if(!res||!res.ok){btn.disabled=false;btn.textContent=orig;return toast("No se pudo publicar. Inténtalo de nuevo.");}
+        if(!res||!res.ok){btn.disabled=false;btn.textContent=orig;return toast((res&&res.error)||"No se pudo publicar. Inténtalo de nuevo.");}
         await cargarExperiencias();
       }else{
         cuenta.experiencias=cuenta.experiencias||[];
-        cuenta.experiencias.unshift({id:Date.now(),titulo:exp.titulo,cat:exp.cat,franja:exp.franja,desc:exp.desc,estado:"publicada"});
+        cuenta.experiencias.unshift({id:Date.now(),titulo:exp.titulo,cat:exp.category_id,desc:exp.desc,estado:"publicada"});
         guardar();pintarExp();pintarCheck();
       }
-      $("#expTitulo").value="";$("#expDesc").value="";
-      toast("Experiencia publicada. Ya puede llegar a tu comunidad.");
+      $("#expTitulo").value="";$("#expDesc").value="";$("#expCat").value="";
+      _expFotoFile=null; const prev=$("#expFotoPrev"); if(prev){prev.style.display="none";prev.src="";}
+      const fbtn=$("#expFotoBtn"); if(fbtn)fbtn.textContent="📷 Añadir una foto";
+      const finp=$("#expFoto"); if(finp)finp.value="";
+      toast("Plan publicado. Ya puede llegar a tu comunidad.");
     }catch(e){toast("No se pudo publicar. Inténtalo de nuevo.");}
     btn.disabled=false;btn.textContent=orig;
   });

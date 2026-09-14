@@ -138,37 +138,60 @@
         }).eq("id", biz.id);
         return { ok: !error, error: error && error.message };
       },
-      // Experiencias del negocio: por ahora viven en meta.experiencias (cliente).
+      // ── Experiencias del negocio = filas REALES en `experiences` con business_id
+      //    + sponsored=true. Eso es lo que la app LEE y muestra en el feed (como
+      //    "Patrocinado"). La foto va al bucket 'nexa' (igual que la app). El ALCANCE
+      //    lo da el plan: gratis NO se intercala, de pago sí (la "línea sagrada": el
+      //    dinero compra frecuencia, nunca posición de matching). No tocamos la app. ──
+      async listActividades() {
+        const { data, error } = await sb.from("categories")
+          .select("id, label, world").eq("activa", true)
+          .order("world", { ascending: true }).order("label", { ascending: true });
+        return error ? [] : (data || []);
+      },
+      async _subirFotoExp(file) {
+        const ext = ((file.name || "foto.jpg").split(".").pop() || "jpg").toLowerCase().replace(/[^a-z0-9]/g, "") || "jpg";
+        const rid = (self.crypto && crypto.randomUUID) ? crypto.randomUUID() : (Date.now() + "-" + Math.round(Math.random() * 1e9));
+        const path = "biz/" + rid + "." + ext;
+        const { error } = await sb.storage.from("nexa").upload(path, file, { contentType: file.type || "image/jpeg", upsert: false });
+        if (error) throw new Error(error.message);
+        const { data } = sb.storage.from("nexa").getPublicUrl(path);
+        return data.publicUrl;
+      },
       async listExperiences() {
-        const biz = await miNegocio();
-        return (biz && biz.meta && biz.meta.experiencias) || [];
+        const biz = await miNegocio(); if (!biz) return [];
+        const { data, error } = await sb.from("experiences")
+          .select("id, title, category_id, photo_url, created_at")
+          .eq("business_id", biz.id).order("created_at", { ascending: false });
+        if (error) return [];
+        return (data || []).map((x) => ({ id: x.id, titulo: x.title, cat: x.category_id, foto: x.photo_url, estado: "publicada" }));
       },
       async addExperience(e) {
         const email = await miEmail(); const biz = await miNegocio();
-        if (!email || !biz) return { ok: false, error: "sin_empresa" };
-        const meta = Object.assign({}, biz.meta);
-        meta.experiencias = (meta.experiencias || []).slice();
-        const id = "e" + Date.now();
-        meta.experiencias.unshift({ id, titulo: e.titulo, cat: e.cat, franja: e.franja, estado: "publicada" });
-        const { error } = await sb.from("businesses").update({ meta }).eq("id", biz.id);
-        return { ok: !error, id, error: error && error.message };
+        if (!email || !biz) return { ok: false, error: "Entra con tu cuenta de empresa." };
+        if (!e.category_id) return { ok: false, error: "Elige la actividad de tu plan." };
+        if (!e.photo && !e.photo_url) return { ok: false, error: "Añade una foto para tu plan." };
+        let photo_url = e.photo_url || "";
+        try { if (e.photo) photo_url = await this._subirFotoExp(e.photo); }
+        catch (err) { return { ok: false, error: "No se pudo subir la foto: " + (err && err.message ? err.message : err) }; }
+        const row = {
+          user_email: email, business_id: biz.id, sponsored: true,
+          category_id: e.category_id,
+          title: (String(e.titulo || "").trim().slice(0, 60)) || "Plan",
+          photo_url,
+        };
+        if (e.desc) row.caption = String(e.desc).trim().slice(0, 280);
+        if (e.place) row.place = String(e.place).trim().slice(0, 120);
+        const { data, error } = await sb.from("experiences").insert(row).select("id").single();
+        return error ? { ok: false, error: error.message } : { ok: true, id: data.id };
       },
       async removeExperience(id) {
-        const email = await miEmail(); const biz = await miNegocio();
-        if (!email || !biz) return { ok: false, error: "sin_empresa" };
-        const meta = Object.assign({}, biz.meta);
-        meta.experiencias = (meta.experiencias || []).filter((x) => String(x.id) !== String(id));
-        const { error } = await sb.from("businesses").update({ meta }).eq("id", biz.id);
+        const { error } = await sb.from("experiences").delete().eq("id", id);
         return { ok: !error, error: error && error.message };
       },
-      async setFeatured(id, on) {
-        const email = await miEmail(); const biz = await miNegocio();
-        if (!email || !biz) return { ok: false, error: "sin_empresa" };
-        const meta = Object.assign({}, biz.meta);
-        meta.experiencias = (meta.experiencias || []).map((x) => String(x.id) === String(id) ? Object.assign({}, x, { featured: !!on }) : x);
-        const { error } = await sb.from("businesses").update({ meta }).eq("id", biz.id);
-        return { ok: !error, featured: !!on, error: error && error.message };
-      },
+      // "Destacar" no aplica al modelo actual de la app (el orden del feed es la
+      // recencia, no una marca). Se conserva la firma para no romper el panel.
+      async setFeatured(id, on) { return { ok: true, featured: !!on, noop: true }; },
       // Equipo y roles: fase posterior (necesita su propia tabla). De momento, aviso.
       async inviteMember() { return { ok: false, error: "El equipo llega en la próxima fase." }; },
       async removeMember() { return { ok: false, error: "El equipo llega en la próxima fase." }; },
