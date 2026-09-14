@@ -511,6 +511,33 @@ window.addEventListener("resize",function(){if(window.innerWidth>860)set(false);
 .eb-card__n{display:inline-flex;width:34px;height:34px;align-items:center;justify-content:center;border-radius:10px;background:var(--blue-soft,#EDF3FF);color:var(--az-h,#1f4fd6);font-weight:800;font-size:15px}
 .eb-card h3{font-size:19px;font-weight:800;letter-spacing:-.01em;margin:16px 0 0}
 .eb-card p{color:var(--gris,#5D6779);font-size:15px;line-height:1.55;margin:8px 0 0}
+/* variedad (sin cajas repetidas) */
+.eb-facts{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;margin-top:44px}
+@media(max-width:820px){.eb-facts{grid-template-columns:1fr;gap:24px;max-width:480px}}
+.eb-fact{display:grid;grid-template-columns:52px 1fr;gap:16px;align-items:start}
+.eb-fact__ic{width:52px;height:52px;border-radius:15px;background:var(--blue-soft);color:var(--az);display:inline-flex;align-items:center;justify-content:center}
+.eb-fact__ic svg{width:26px;height:26px}
+.eb-fact h3{font-size:18px;font-weight:800;letter-spacing:-.01em;margin:0;color:var(--tinta)}
+.eb-fact p{color:var(--gris);font-size:14.5px;line-height:1.5;margin:6px 0 0}
+.eb-fact h3 [data-cnt]{font-variant-numeric:tabular-nums}
+.eb-flow{position:relative;display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:44px}
+.eb-flow::before{content:"";position:absolute;top:26px;left:16.66%;right:16.66%;height:2px;background:linear-gradient(90deg,var(--az),rgba(47,102,255,.3))}
+.eb-step{position:relative;text-align:center;padding:0 8px}
+.eb-step__n{position:relative;z-index:2;display:inline-flex;width:52px;height:52px;align-items:center;justify-content:center;border-radius:50%;background:var(--az);color:#fff;font-weight:800;font-size:20px;box-shadow:0 8px 22px -6px rgba(47,102,255,.55)}
+.eb-step h3{font-size:18px;font-weight:800;margin:16px 0 0;letter-spacing:-.01em;color:var(--tinta)}
+.eb-step p{color:var(--gris);font-size:14.5px;margin:8px auto 0;max-width:28ch;line-height:1.5}
+@media(max-width:820px){
+ .eb-flow{grid-template-columns:1fr;gap:0;max-width:460px}
+ .eb-flow::before{left:25px;right:auto;top:34px;bottom:34px;width:2px;height:auto;background:linear-gradient(180deg,var(--az),rgba(47,102,255,.3))}
+ .eb-step{display:grid;grid-template-columns:52px 1fr;gap:18px;text-align:left;padding:14px 0}
+ .eb-step__n{grid-row:1/span 2}.eb-step h3{margin:2px 0 0}.eb-step p{margin:6px 0 0;max-width:none}
+}
+.eb-wins{list-style:none;margin-top:44px;max-width:780px}
+.eb-win{display:grid;grid-template-columns:auto 1fr;gap:26px;align-items:baseline;padding:24px 4px;border-top:1px solid var(--linea)}
+.eb-win:last-child{border-bottom:1px solid var(--linea)}
+.eb-win__n{font-size:clamp(30px,5vw,44px);font-weight:800;letter-spacing:-.04em;color:var(--az);font-variant-numeric:tabular-nums;line-height:1}
+.eb-win h3{font-size:19px;font-weight:800;letter-spacing:-.01em;margin:0;color:var(--tinta)}
+.eb-win p{color:var(--gris);font-size:15.5px;line-height:1.55;margin:7px 0 0;max-width:52ch}
 .eb-note{margin-top:28px;font-size:15px;color:var(--gris-2,#737B89);line-height:1.6;max-width:70ch;border-left:3px solid var(--linea,#E4E7EC);padding-left:16px}
 
 /* para quién */
@@ -600,10 +627,19 @@ window.addEventListener("resize",function(){if(window.innerWidth>860)set(false);
       <p class="eb-kick">Primero, qué es NYXA</p>
       <h2 class="eb-h2">La app donde la gente de tu ciudad queda de verdad.</h2>
       <p class="eb-lead">Miles de personas usan NYXA para decir qué quieren vivir —una cena, una ruta, salir un jueves— y quedar en persona con gente que quiere lo mismo. Tu negocio es el sitio donde eso pasa.</p>
-      <div class="eb-grid3" style="margin-top:36px">
-        <div class="eb-card"><h3>Ya en la App Store</h3><p>NYXA está viva y descargable hoy. No es una promesa ni un «lo que viene».</p></div>
-        <div class="eb-card"><h3>+1.600 personas en Valencia</h3><p>Y creciendo cada semana. Gente real de tu ciudad buscando qué hacer y con quién.</p></div>
-        <div class="eb-card"><h3>En persona, no scroll</h3><p>La app existe para que la gente salga y quede de verdad — no para retenerla en una pantalla.</p></div>
+      <div class="eb-facts">
+        <div class="eb-fact">
+          <span class="eb-fact__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v10"/><path d="M8 9l4 4 4-4"/><path d="M5 17v2a2 2 0 002 2h10a2 2 0 002-2v-2"/></svg></span>
+          <div><h3>Ya en la App Store</h3><p>NYXA está viva y descargable hoy. No es una promesa ni un «lo que viene».</p></div>
+        </div>
+        <div class="eb-fact">
+          <span class="eb-fact__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3"/><path d="M3.5 20a5.5 5.5 0 0111 0"/><path d="M16 5.5a3 3 0 010 5.6"/><path d="M18.5 20a5.5 5.5 0 00-2.7-4.7"/></svg></span>
+          <div><h3><span data-cnt="valencia">—</span>&nbsp;personas en Valencia</h3><p>Y creciendo cada semana. Gente real de tu ciudad buscando qué hacer y con quién.</p></div>
+        </div>
+        <div class="eb-fact">
+          <span class="eb-fact__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-6-5.2-6-10a6 6 0 1112 0c0 4.8-6 10-6 10z"/><circle cx="12" cy="11" r="2.2"/></svg></span>
+          <div><h3>En persona, no scroll</h3><p>La app existe para que la gente salga y quede de verdad — no para retenerla en una pantalla.</p></div>
+        </div>
       </div>
     </div>
   </section>
@@ -613,10 +649,10 @@ window.addEventListener("resize",function(){if(window.innerWidth>860)set(false);
     <div class="eb-in">
       <p class="eb-kick">Cómo funciona</p>
       <h2 class="eb-h2">Tú pones el plan. Nosotros, la gente.</h2>
-      <div class="eb-grid3">
-        <div class="eb-card"><span class="eb-card__n">1</span><h3>Propones un plan</h3><p>Una cena de barrio, una cata, un torneo, una clase abierta. Lo que quieras llenar.</p></div>
-        <div class="eb-card"><span class="eb-card__n">2</span><h3>Se lo llevamos a quien encaja</h3><p>NYXA lo reparte entre las personas de tu zona a las que de verdad les interesa. Por encaje, no por puja.</p></div>
-        <div class="eb-card"><span class="eb-card__n">3</span><h3>Aparecen clientes reales</h3><p>Gente que quería justo eso, cruzando tu puerta. Personas, no impresiones.</p></div>
+      <div class="eb-flow">
+        <div class="eb-step"><span class="eb-step__n">1</span><h3>Propones un plan</h3><p>Una cena de barrio, una cata, un torneo, una clase abierta. Lo que quieras llenar.</p></div>
+        <div class="eb-step"><span class="eb-step__n">2</span><h3>Se lo llevamos a quien encaja</h3><p>NYXA lo reparte entre las personas de tu zona a las que de verdad les interesa. Por encaje, no por puja.</p></div>
+        <div class="eb-step"><span class="eb-step__n">3</span><h3>Aparecen clientes reales</h3><p>Gente que quería justo eso, cruzando tu puerta. Personas, no impresiones.</p></div>
       </div>
       <p class="eb-note">Ejemplo: una pizzería abre una cena de barrio un martes flojo. NYXA se la propone a la gente de su zona a la que le encaja — y aparece quien de verdad quería justo eso. Cero anuncios, cero pujas.</p>
     </div>
@@ -627,11 +663,11 @@ window.addEventListener("resize",function(){if(window.innerWidth>860)set(false);
     <div class="eb-in">
       <p class="eb-kick">Lo que consigues</p>
       <h2 class="eb-h2">Resultados que puedes medir.</h2>
-      <div class="eb-grid3">
-        <div class="eb-card"><h3>Clientes nuevos</h3><p>Personas que no te conocían y llegan por el plan, no por un anuncio.</p></div>
-        <div class="eb-card"><h3>Que vuelven</h3><p>La app está hecha para que se repita. El cliente vuelve y trae a alguien.</p></div>
-        <div class="eb-card"><h3>Tus días flojos, llenos</h3><p>Da vida a las franjas muertas con gente que quería justo lo que ofreces ese día.</p></div>
-      </div>
+      <ol class="eb-wins">
+        <li class="eb-win"><span class="eb-win__n">01</span><div><h3>Clientes nuevos</h3><p>Personas que no te conocían y llegan por el plan, no por un anuncio.</p></div></li>
+        <li class="eb-win"><span class="eb-win__n">02</span><div><h3>Que vuelven</h3><p>La app está hecha para que se repita. El cliente vuelve y trae a alguien.</p></div></li>
+        <li class="eb-win"><span class="eb-win__n">03</span><div><h3>Tus días flojos, llenos</h3><p>Da vida a las franjas muertas con gente que quería justo lo que ofreces ese día.</p></div></li>
+      </ol>
     </div>
   </section>
 
@@ -984,5 +1020,29 @@ window.addEventListener("resize",function(){if(window.innerWidth>860)set(false);
 <!-- SDK de empresas: en mock (sin config) el registro usa localStorage; con Supabase, alta real -->
 <script src="backend/client/nexa-empresas.js" defer></script>
 <script>document.addEventListener("click",function(e){var b=e.target.closest(".burger");if(!b)return;var n=b.closest(".nav");n.classList.toggle("open");b.setAttribute("aria-expanded",n.classList.contains("open"));});</script>
+<script>
+/* Contador VIVO de personas (dato real desde la BD; se refresca solo) */
+(function(){
+  var SB="https://vjpgyxwhobshwaotmwzf.supabase.co";
+  var KEY="sb_publishable_rmJ7LK0fhSZTJsOUUzOZ3A_bnY-bQ9-";
+  var FALLBACK={total:966,valencia:442}; /* último dato real conocido (14-sep); la cifra viva lo pisa */
+  var state={total:null,valencia:null};
+  var nf=new Intl.NumberFormat('es-ES');
+  function els(k){return [].slice.call(document.querySelectorAll('[data-cnt="'+k+'"]'));}
+  function tween(el,from,to){from=from||0;var start=null,dur=900;
+    function step(ts){if(start===null)start=ts;var p=Math.min(1,(ts-start)/dur);
+      var e=1-Math.pow(1-p,3);el.textContent=nf.format(Math.round(from+(to-from)*e));
+      if(p<1)requestAnimationFrame(step);}
+    requestAnimationFrame(step);setTimeout(function(){el.textContent=nf.format(to);},dur+60);}
+  function render(data){['total','valencia'].forEach(function(k){
+    if(typeof data[k]!=='number')return;var prev=state[k];state[k]=data[k];
+    var from=prev==null?Math.max(0,data[k]-40):prev;els(k).forEach(function(el){tween(el,from,data[k]);});});}
+  function fetchStats(){return fetch(SB+"/rest/v1/rpc/nyxa_stats_publico",{method:"POST",
+      headers:{apikey:KEY,Authorization:"Bearer "+KEY,"Content-Type":"application/json"},body:"{}"})
+      .then(function(r){if(!r.ok)throw 0;return r.json();});}
+  function tick(){fetchStats().then(render).catch(function(){if(state.total===null)render(FALLBACK);});}
+  if(document.querySelector('[data-cnt]')){tick();setInterval(tick,20000);}
+})();
+</script>
 </body>
 </html>

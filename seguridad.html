@@ -79,6 +79,25 @@ details[open] summary{color:var(--blueink)}
 .sos__112{flex:none;display:inline-flex;flex-direction:column;align-items:center;justify-content:center;background:#fff;color:var(--ink);border-radius:18px;padding:16px 22px;text-decoration:none;min-width:120px}
 .sos__112 b{font-size:30px;font-weight:800;letter-spacing:-.02em}
 .sos__112 span{font-size:12px;font-weight:700;color:var(--gris2);text-transform:uppercase;letter-spacing:.06em;margin-top:2px}
+/* reglas: trío con icono, sin cajas */
+.rules{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;margin-top:44px}
+@media(max-width:760px){.rules{grid-template-columns:1fr;gap:28px;max-width:460px;margin-inline:auto}}
+.rule{text-align:center;padding:0 6px}
+@media(max-width:760px){.rule{display:grid;grid-template-columns:60px 1fr;gap:18px;text-align:left;align-items:start}}
+.rule__ic{display:inline-flex;width:60px;height:60px;align-items:center;justify-content:center;border-radius:18px;background:var(--soft);color:var(--blue)}
+.rule__ic svg{width:28px;height:28px}
+.rule h3{font-size:18px;font-weight:800;letter-spacing:-.01em;color:var(--ink);margin:16px 0 0}
+@media(max-width:760px){.rule h3{margin:2px 0 0}.rule__ic{grid-row:1/span 2}}
+.rule p{color:var(--gris);font-size:15px;line-height:1.5;margin:8px auto 0;max-width:30ch}
+@media(max-width:760px){.rule p{margin:6px 0 0;max-width:none}}
+/* consejos: checklist, sin cajas */
+.checks{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:22px 32px;margin-top:40px;max-width:860px}
+@media(max-width:700px){.checks{grid-template-columns:1fr;gap:20px}}
+.checks li{display:grid;grid-template-columns:30px 1fr;gap:16px;align-items:start}
+.checks__ic{margin-top:2px;width:30px;height:30px;border-radius:50%;background:rgba(47,102,255,.12);display:inline-flex;align-items:center;justify-content:center}
+.checks__ic svg{width:17px;height:17px;color:var(--blue)}
+.checks h3{font-size:17px;font-weight:800;letter-spacing:-.01em;color:var(--ink);margin:0}
+.checks p{color:var(--gris);font-size:15px;line-height:1.5;margin:5px 0 0;max-width:44ch}
 </style>
 </head>
 <body>
@@ -123,10 +142,19 @@ details[open] summary{color:var(--blueink)}
     <div class="in">
       <p class="xs__k">Cómo te cuidamos</p>
       <h2 class="xs__t">Tres reglas que no se rompen.</h2>
-      <div class="xs__grid">
-        <div class="xs__c"><span class="xs__n">1</span><h3>Cero mensajes de desconocidos</h3><p>Nadie puede escribirte porque sí. Se propone un plan; solo si dices que sí, hay conversación.</p></div>
-        <div class="xs__c"><span class="xs__n">2</span><h3>Quedas con cabeza</h3><p>NYXA no comparte dónde estás. Tú eliges el sitio, la hora y con cuánta gente. Siempre en tu terreno.</p></div>
-        <div class="xs__c"><span class="xs__n">3</span><h3>Fuera en un toque</h3><p>Bloquear y reportar, a un gesto. Revisamos cada aviso. Aquí, molestar sale caro.</p></div>
+      <div class="rules">
+        <div class="rule">
+          <span class="rule__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 4.5-3 7.6-7 9-4-1.4-7-4.5-7-9V6l7-3z"/><path d="M9 12l2 2 4-4"/></svg></span>
+          <h3>Cero mensajes de desconocidos</h3><p>Nadie puede escribirte porque sí. Se propone un plan; solo si dices que sí, hay conversación.</p>
+        </div>
+        <div class="rule">
+          <span class="rule__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-6-5.2-6-10a6 6 0 1112 0c0 4.8-6 10-6 10z"/><circle cx="12" cy="11" r="2.2"/></svg></span>
+          <h3>Quedas con cabeza</h3><p>NYXA no comparte dónde estás. Tú eliges el sitio, la hora y con cuánta gente. Siempre en tu terreno.</p>
+        </div>
+        <div class="rule">
+          <span class="rule__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M6 6l12 12"/></svg></span>
+          <h3>Fuera en un toque</h3><p>Bloquear y reportar, a un gesto. Revisamos cada aviso. Aquí, molestar sale caro.</p>
+        </div>
       </div>
     </div>
   </section>
@@ -160,12 +188,12 @@ details[open] summary{color:var(--blueink)}
     <div class="in">
       <p class="xs__k">Quedar con cabeza</p>
       <h2 class="xs__t">Consejos para tu primera quedada.</h2>
-      <div class="xs__grid">
-        <div class="xs__c"><h3>Sitio público la primera vez</h3><p>Un café, un parque, un plan con más gente. Nada de sitios privados al principio.</p></div>
-        <div class="xs__c"><h3>Avisa a alguien de confianza</h3><p>Dile con quién quedas, dónde y a qué hora. Comparte tu ubicación si te quedas más tranquilo.</p></div>
-        <div class="xs__c"><h3>Ve a tu ritmo</h3><p>No tienes que quedarte. Si algo no te encaja, te vas — no le debes nada a nadie.</p></div>
-        <div class="xs__c"><h3>Fíate de tu instinto</h3><p>Si algo te chirría, corta. Siempre puedes bloquear y reportar desde la app.</p></div>
-      </div>
+      <ul class="checks">
+        <li><span class="checks__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4 4 10-10"/></svg></span><div><h3>Sitio público la primera vez</h3><p>Un café, un parque, un plan con más gente. Nada de sitios privados al principio.</p></div></li>
+        <li><span class="checks__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4 4 10-10"/></svg></span><div><h3>Avisa a alguien de confianza</h3><p>Dile con quién quedas, dónde y a qué hora. Comparte tu ubicación si te quedas más tranquilo.</p></div></li>
+        <li><span class="checks__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4 4 10-10"/></svg></span><div><h3>Ve a tu ritmo</h3><p>No tienes que quedarte. Si algo no te encaja, te vas — no le debes nada a nadie.</p></div></li>
+        <li><span class="checks__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4 4 10-10"/></svg></span><div><h3>Fíate de tu instinto</h3><p>Si algo te chirría, corta. Siempre puedes bloquear y reportar desde la app.</p></div></li>
+      </ul>
       <div class="sos">
         <div>
           <div class="sos__t">¿Algo va mal?</div>
