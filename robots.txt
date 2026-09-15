@@ -1,6 +1,7 @@
-# NEXA — Valencia · 2026
+# NYXA · holanyxa.com
 User-agent: *
 Allow: /
+Disallow: /panel
 Disallow: /panel.html
 
-Sitemap: https://nexavalencia.vercel.app/sitemap.xml
+Sitemap: https://holanyxa.com/sitemap.xml
