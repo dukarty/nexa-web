@@ -230,6 +230,15 @@ a{color:inherit}
  ]
 }
 </script>
+<style>/*HEROPHOTO*/
+.phero{position:relative;overflow:hidden;padding:clamp(120px,16vw,168px) 0 clamp(64px,9vw,96px);background:#0A0C11}
+.phero::before{content:"";position:absolute;inset:0;background:url('img/madrid-hero.jpg') center/cover;opacity:.5}
+.phero::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(10,12,17,.4),rgba(10,12,17,.82))}
+.phero .in{position:relative;z-index:2}
+.phero .kick{color:#cfe0ff}.phero h1{color:#fff}.phero h1 .b{color:#8fb0ff}.phero p{color:rgba(255,255,255,.92)}
+.photocred{position:absolute;right:12px;bottom:9px;z-index:3;font-size:10px;color:rgba(255,255,255,.55);text-decoration:none}
+.photocred:hover{color:#fff}
+</style>
 </head>
 <body>
 
@@ -268,7 +277,8 @@ a{color:inherit}
       <h1>Conocer gente en <span class="b">Madrid</span>.</h1>
       <p>Sin apps de citas ni grupos de WhatsApp muertos. Dices qué te apetece vivir y NYXA te dice con quién —gente de Madrid con las mismas ganas— y quedáis en persona.</p>
     </div>
-  </section>
+      <a class="photocred" href="https://commons.wikimedia.org/wiki/File:Gran_V%C3%ADa_(Madrid)_55.jpg" target="_blank" rel="noopener">Foto: Luis García · CC BY-SA 3.0 · Wikimedia</a>
+</section>
 
   <section class="xs">
     <div class="in">
@@ -421,6 +431,9 @@ a{color:inherit}
           <a href="ciudades.html">Ciudades</a>
           <a href="momentos.html">Momentos</a>
           <a href="descargar.html">Descargar la app</a>
+          <a href="conocer-gente-valencia.html">Conocer gente en Valencia</a>
+          <a href="conocer-gente-barcelona.html">Conocer gente en Barcelona</a>
+          <a href="conocer-gente-madrid.html">Conocer gente en Madrid</a>
         </div>
         <div class="nf__col"><h4>Empresa</h4>
           <a href="manifiesto.html">Quiénes somos</a>
