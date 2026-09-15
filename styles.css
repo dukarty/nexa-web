@@ -684,6 +684,13 @@ body.oscuro .empr{color:var(--tinta)}
 .tit--fin{font-size:clamp(2.3rem,6.4vw,6rem)}
 @media (max-width:600px){.ap__l{white-space:normal}}
 
+/* "No es X": en móvil la frase larga (catálogo de eventos) no cabe en una línea.
+   Apilamos titular y explicación y dejamos que el titular parta de línea. */
+@media (max-width:560px){
+  .nolist li{flex-direction:column;align-items:stretch;gap:6px}
+  .nolist .no{font-size:clamp(1.35rem,6.6vw,2rem);overflow-wrap:break-word}
+}
+
 /* El pie no debe recortarse en móvil: que los enlaces bajen de línea */
 @media (max-width:640px){.ft__n{flex-wrap:wrap;justify-content:center;row-gap:10px}}
 
