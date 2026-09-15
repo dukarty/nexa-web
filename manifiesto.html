@@ -42,7 +42,9 @@ a{color:inherit}
 @media(max-width:860px){.nav__links{display:none}.burger{display:block}}
 @media(min-width:861px){.mmenu{display:none}}
 /* hero */
-.phero{padding:132px 0 24px;text-align:center}
+.phero{padding:132px 0 24px;text-align:center;position:relative;overflow:hidden}
+.phero::before{content:"✕";position:absolute;top:50%;left:50%;transform:translate(-50%,-44%);font-size:min(56vw,560px);line-height:1;font-weight:800;color:var(--blue);opacity:.055;pointer-events:none;z-index:0}
+.phero .in{position:relative;z-index:1}
 .kick{font-size:13px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--blue)}
 .phero h1{font-size:clamp(44px,8vw,84px);font-weight:800;letter-spacing:-.05em;line-height:.98;margin:16px auto 0;max-width:15ch;text-wrap:balance}
 .phero h1 .b{color:var(--blue)}
