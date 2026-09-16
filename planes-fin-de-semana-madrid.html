@@ -294,6 +294,33 @@ a{color:inherit}
 .photocred{position:absolute;right:12px;bottom:9px;z-index:3;font-size:10px;color:rgba(255,255,255,.55);text-decoration:none}
 .photocred:hover{color:#fff}
 </style>
+<style>/*VLOG*/
+.vlog{display:grid;gap:clamp(44px,7vw,88px);margin-top:52px}
+.vblock{display:grid;grid-template-columns:1.02fr .98fr;gap:clamp(24px,4vw,56px);align-items:center}
+.vblock__img{border-radius:22px;overflow:hidden;aspect-ratio:4/3;box-shadow:0 30px 60px -34px rgba(10,12,17,.42);background:#e9ecf2}
+.vblock__img img{width:100%;height:100%;object-fit:cover;display:block}
+.vblock:nth-child(even) .vblock__img{order:2}
+.vblock__k{font-size:13px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);margin:0}
+.vblock h3{font-size:clamp(23px,3.2vw,32px);font-weight:800;letter-spacing:-.02em;margin:12px 0 0;color:var(--ink);line-height:1.08}
+.vblock p{color:var(--gris);font-size:16.5px;line-height:1.62;margin:16px 0 0;max-width:46ch}
+@media(max-width:760px){.vblock{grid-template-columns:1fr;gap:16px}.vblock:nth-child(even) .vblock__img{order:0}}
+.vcred{margin-top:44px;font-size:12px;color:var(--gris2);line-height:1.55;max-width:80ch}
+.vcred a{color:var(--gris2);text-decoration:underline}
+</style>
+<style>/*CONVERT*/
+.midcta{background:linear-gradient(135deg,#2f66ff,#1e4fd6);color:#fff;border-radius:24px;padding:clamp(30px,4.5vw,48px);text-align:center;margin:8px 0;box-shadow:0 30px 60px -34px rgba(47,102,255,.6)}
+.midcta h3{font-size:clamp(22px,3.1vw,31px);font-weight:800;letter-spacing:-.02em;color:#fff;margin:0;line-height:1.1}
+.midcta p{color:rgba(255,255,255,.92);margin:12px auto 0;max-width:46ch;font-size:16px;line-height:1.55}
+.midcta a{display:inline-flex;align-items:center;gap:9px;margin-top:20px;background:#fff;color:#0A0C11;font-weight:800;font-size:16px;text-decoration:none;padding:14px 28px;border-radius:999px;transition:transform .15s}
+.midcta a:hover{transform:translateY(-2px)}
+.dlbar{position:fixed;left:0;right:0;bottom:0;z-index:60;background:rgba(10,12,17,.94);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);color:#fff;display:flex;align-items:center;justify-content:center;gap:18px;padding:12px 18px;border-top:1px solid rgba(255,255,255,.12);transform:translateY(110%);transition:transform .32s cubic-bezier(.16,1,.3,1)}
+.dlbar.on{transform:none}
+.dlbar b{font-size:14.5px;font-weight:750}.dlbar b i{color:#8fb0ff;font-style:normal;font-weight:800}
+.dlbar a{background:var(--blue);color:#fff;text-decoration:none;font-weight:800;font-size:14px;padding:11px 20px;border-radius:999px;white-space:nowrap;transition:background .15s}
+.dlbar a:hover{background:#4d7bff}
+@media(max-width:560px){.dlbar{gap:12px;padding:10px 12px}.dlbar b{font-size:12.5px}.dlbar a{padding:10px 15px;font-size:13px}}
+body{padding-bottom:64px}
+</style>
 </head>
 <body>
 
@@ -330,7 +357,7 @@ a{color:inherit}
     <div class="in">
       <p class="kick">Guía · Madrid</p>
       <h1>Planes de <span class="b">fin de semana</span> en Madrid.</h1>
-      <p class="lead2">¿No sabes qué hacer este finde en Madrid? Aquí tienes planes para sábado y domingo, de día y de noche, escapadas cerca y opción para si llueve. Y al final, cómo hacerlos aunque no tengas con quién.</p>
+      <p class="lead2">¿No sabes qué hacer este finde en Madrid? Estos son los planes que funcionan de verdad —y cómo hacerlos aunque no tengas con quién.</p>
     </div>
       <a class="photocred" href="https://commons.wikimedia.org/wiki/File:Gran_V%C3%ADa_(Madrid)_55.jpg" target="_blank" rel="noopener">Foto: Luis García · CC BY-SA 3.0 · Wikimedia</a>
 </section>
@@ -339,17 +366,34 @@ a{color:inherit}
     <div class="in">
       <p class="xs__k">Qué hacer este finde</p>
       <h2 class="xs__t">De sábado por la mañana al domingo por la tarde.</h2>
-      <div class="wkgrid">
-        <div class="wk"><span class="tag">Sábado de día</span><h3>El Rastro y cañas por La Latina</h3><p>El domingo más madrileño empieza el sábado: rebuscar y de cañas.</p></div>
-        <div class="wk"><span class="tag">Sábado de día</span><h3>Picnic y barca en El Retiro</h3><p>Manta al césped o remar en el estanque. El parque del centro da para todo.</p></div>
-        <div class="wk"><span class="tag">Sábado de noche</span><h3>Terrazas por Malasaña</h3><p>El barrio más animado para empezar la noche con gente con ganas.</p></div>
-        <div class="wk"><span class="tag">Sábado de noche</span><h3>Concierto en El Sol o Costello</h3><p>Un garito con historia y la banda pequeña que descubres en directo.</p></div>
-        <div class="wk"><span class="tag">Domingo</span><h3>Madrid Río en bici o corriendo</h3><p>Kilómetros a la orilla del Manzanares, sin coches y sin resaca.</p></div>
-        <div class="wk"><span class="tag">Domingo</span><h3>Atardecer en el Templo de Debod</h3><p>El mejor cielo de Madrid para cerrar el finde.</p></div>
-        <div class="wk"><span class="tag">Escapada</span><h3>La Pedriza o Cercedilla</h3><p>Plena sierra a una hora en Cercanías. Senderismo y aire limpio.</p></div>
-        <div class="wk"><span class="tag">Escapada</span><h3>Toledo o Segovia</h3><p>Ciudad histórica a un salto en tren o AVE. Finde cultural completo.</p></div>
-        <div class="wk"><span class="tag">Si llueve</span><h3>Prado, Reina Sofía y café</h3><p>Los grandes museos y a resguardo. Plan de interior que nunca falla.</p></div>
+      <div class="vlog">
+      <article class="vblock">
+        <div class="vblock__img"><img src="img/mad-rastro.jpg" alt="El Rastro, Ribera de Curtidores, Madrid" loading="lazy" width="1000" height="750"></div>
+        <div class="vblock__txt"><p class="vblock__k">Sábado de día</p><h3>El Rastro y cañas por La Latina</h3><p>Rebuscar en el Rastro y bajar a La Latina de cañas. El plan más madrileño para empezar el finde.</p></div>
+      </article>
+      <article class="vblock">
+        <div class="vblock__img"><img src="img/mad-retiro.jpg" alt="Palacio de Cristal, Parque del Retiro, Madrid" loading="lazy" width="1000" height="750"></div>
+        <div class="vblock__txt"><p class="vblock__k">Sábado de día</p><h3>Picnic y barca en El Retiro</h3><p>Manta al césped o remar en el estanque, con el Palacio de Cristal de fondo. El parque del centro da para todo.</p></div>
+      </article>
+      <article class="vblock">
+        <div class="vblock__img"><img src="img/mad-malasana.jpg" alt="Plaza del Dos de Mayo, Malasaña, Madrid" loading="lazy" width="1000" height="750"></div>
+        <div class="vblock__txt"><p class="vblock__k">Sábado de noche</p><h3>Terrazas por Malasaña</h3><p>El barrio más animado para empezar la noche con gente con ganas. De terraza en terraza.</p></div>
+      </article>
+      <div class="midcta">
+        <h3>Que este finde pase algo.</h3>
+        <p>Dices qué te apetece hacer este finde en Madrid y NYXA te dice con quién. Le llega el plan ya hecho; si dice que sí, quedáis. En persona.</p>
+        <a href="descargar.html">Descargar NYXA gratis →</a>
       </div>
+      <article class="vblock">
+        <div class="vblock__img"><img src="img/mad-debod.jpg" alt="Templo de Debod al anochecer, Madrid" loading="lazy" width="1000" height="750"></div>
+        <div class="vblock__txt"><p class="vblock__k">Domingo</p><h3>Atardecer en el Templo de Debod</h3><p>El mejor cielo de Madrid, gratis, para cerrar el finde. Llévate algo de picar y a disfrutar.</p></div>
+      </article>
+      <article class="vblock">
+        <div class="vblock__img"><img src="img/mad-rio.jpg" alt="Parque lineal del Manzanares, Madrid Río" loading="lazy" width="1000" height="750"></div>
+        <div class="vblock__txt"><p class="vblock__k">Domingo</p><h3>Madrid Río en bici o corriendo</h3><p>Kilómetros a la orilla del Manzanares, sin coches. El domingo activo y sin resaca.</p></div>
+      </article>
+      </div>
+      <p class="vcred">Fotos: El Rastro © victorgrigas · El Retiro © Diego Delso · Malasaña © Alessio Maffeis · Templo de Debod © Javier Perez Montes · Madrid Río © Javier Perez Montes — <a href="https://commons.wikimedia.org" target="_blank" rel="noopener">Wikimedia Commons</a> (CC BY-SA / CC0).</p>
     </div>
   </section>
 
@@ -553,5 +597,10 @@ window.addEventListener('resize',function(){if(window.innerWidth>860)set(false);
   if(document.querySelector('[data-cnt]')){tick();setInterval(tick,20000);}
 })();
 </script>
+<div class="dlbar" id="dlbar" aria-hidden="true">
+  <b>Que este finde <i>pase algo</i>. NYXA pone la gente.</b>
+  <a href="descargar.html">Descargar gratis</a>
+</div>
+<script>(function(){var bar=document.getElementById("dlbar");if(!bar)return;var hero=document.querySelector(".phero");function onScroll(){var past=hero?(hero.getBoundingClientRect().bottom<0):(window.scrollY>500);var atEnd=(window.innerHeight+window.scrollY)>=(document.body.scrollHeight-120);bar.classList.toggle("on",past&&!atEnd);}window.addEventListener("scroll",onScroll,{passive:true});window.addEventListener("resize",onScroll);onScroll();})();</script>
 </body>
 </html>
