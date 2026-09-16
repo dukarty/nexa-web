@@ -323,6 +323,23 @@ a{color:inherit}
 .vcred{margin-top:44px;font-size:12px;color:var(--gris2);line-height:1.55;max-width:80ch}
 .vcred a{color:var(--gris2);text-decoration:underline}
 </style>
+<style>/*CONVERT*/
+/* CTA intercalado */
+.midcta{background:linear-gradient(135deg,#2f66ff,#1e4fd6);color:#fff;border-radius:24px;padding:clamp(30px,4.5vw,48px);text-align:center;margin:8px 0;box-shadow:0 30px 60px -34px rgba(47,102,255,.6)}
+.midcta h3{font-size:clamp(22px,3.1vw,31px);font-weight:800;letter-spacing:-.02em;color:#fff;margin:0;line-height:1.1}
+.midcta p{color:rgba(255,255,255,.92);margin:12px auto 0;max-width:46ch;font-size:16px;line-height:1.55}
+.midcta a{display:inline-flex;align-items:center;gap:9px;margin-top:20px;background:#fff;color:#0A0C11;font-weight:800;font-size:16px;text-decoration:none;padding:14px 28px;border-radius:999px;transition:transform .15s}
+.midcta a:hover{transform:translateY(-2px)}
+/* barra fija de descarga */
+.dlbar{position:fixed;left:0;right:0;bottom:0;z-index:60;background:rgba(10,12,17,.94);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);color:#fff;display:flex;align-items:center;justify-content:center;gap:18px;padding:12px 18px;border-top:1px solid rgba(255,255,255,.12);transform:translateY(110%);transition:transform .32s cubic-bezier(.16,1,.3,1)}
+.dlbar.on{transform:none}
+.dlbar b{font-size:14.5px;font-weight:750}
+.dlbar b i{color:#8fb0ff;font-style:normal;font-weight:800}
+.dlbar a{background:var(--blue);color:#fff;text-decoration:none;font-weight:800;font-size:14px;padding:11px 20px;border-radius:999px;white-space:nowrap;transition:background .15s}
+.dlbar a:hover{background:#4d7bff}
+@media(max-width:560px){.dlbar{gap:12px;padding:10px 12px}.dlbar b{font-size:12.5px}.dlbar a{padding:10px 15px;font-size:13px}}
+body{padding-bottom:64px}
+</style>
 </head>
 <body>
 
@@ -379,6 +396,11 @@ a{color:inherit}
         <div class="vblock__img"><img src="img/va-saler.jpg" alt="Atardecer en la playa de El Saler, Valencia" loading="lazy" width="1000" height="750"></div>
         <div class="vblock__txt"><p class="vblock__k">03 · De noche</p><h3>Hoguera en El Saler</h3><p>Cuando aprieta el calor, la playa del Saler se llena de grupos, fuego y música baja. Llevas algo de picar, alguien saca una guitarra y, de repente, son las tres. El plan de verano más fácil de Valencia.</p></div>
       </article>
+      <div class="midcta">
+        <h3>Todo esto es mejor con quien encaja.</h3>
+        <p>NYXA es la app que te dice con quién vivir cada uno de estos planes en Valencia. Dices qué te apetece; ella pone a la persona. Y quedáis en persona.</p>
+        <a href="descargar.html">Descargar NYXA gratis →</a>
+      </div>
       <article class="vblock">
         <div class="vblock__img"><img src="img/va-mercado.jpg" alt="Interior del Mercado de Colón, Valencia" loading="lazy" width="1000" height="750"></div>
         <div class="vblock__txt"><p class="vblock__k">04 · Sin prisa</p><h3>Brunch en el Mercado de Colón</h3><p>Un edificio modernista precioso, lleno de luz, cafés y puestos. Un domingo tranquilo, buena conversación y un sitio que entra por los ojos. Ideal para conocer a alguien con calma.</p></div>
@@ -595,6 +617,17 @@ window.addEventListener('resize',function(){if(window.innerWidth>860)set(false);
   function tick(){fetchStats().then(render).catch(function(){if(state.total===null)render(FALLBACK);});}
   if(document.querySelector('[data-cnt]')){tick();setInterval(tick,20000);}
 })();
+</script>
+<div class="dlbar" id="dlbar" aria-hidden="true">
+  <b>Estos planes, <i>con la gente adecuada</i>. NYXA la pone.</b>
+  <a href="descargar.html">Descargar gratis</a>
+</div>
+<script>
+(function(){var bar=document.getElementById('dlbar');if(!bar)return;var hero=document.querySelector('.phero');
+function onScroll(){var past=hero?(hero.getBoundingClientRect().bottom<0):(window.scrollY>500);
+  var atEnd=(window.innerHeight+window.scrollY)>=(document.body.scrollHeight-120);
+  bar.classList.toggle('on', past && !atEnd);}
+window.addEventListener('scroll',onScroll,{passive:true});window.addEventListener('resize',onScroll);onScroll();})();
 </script>
 </body>
 </html>
