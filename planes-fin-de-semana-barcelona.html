@@ -294,6 +294,33 @@ a{color:inherit}
 .photocred{position:absolute;right:12px;bottom:9px;z-index:3;font-size:10px;color:rgba(255,255,255,.55);text-decoration:none}
 .photocred:hover{color:#fff}
 </style>
+<style>/*VLOG*/
+.vlog{display:grid;gap:clamp(44px,7vw,88px);margin-top:52px}
+.vblock{display:grid;grid-template-columns:1.02fr .98fr;gap:clamp(24px,4vw,56px);align-items:center}
+.vblock__img{border-radius:22px;overflow:hidden;aspect-ratio:4/3;box-shadow:0 30px 60px -34px rgba(10,12,17,.42);background:#e9ecf2}
+.vblock__img img{width:100%;height:100%;object-fit:cover;display:block}
+.vblock:nth-child(even) .vblock__img{order:2}
+.vblock__k{font-size:13px;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--blue);margin:0}
+.vblock h3{font-size:clamp(23px,3.2vw,32px);font-weight:800;letter-spacing:-.02em;margin:12px 0 0;color:var(--ink);line-height:1.08}
+.vblock p{color:var(--gris);font-size:16.5px;line-height:1.62;margin:16px 0 0;max-width:46ch}
+@media(max-width:760px){.vblock{grid-template-columns:1fr;gap:16px}.vblock:nth-child(even) .vblock__img{order:0}}
+.vcred{margin-top:44px;font-size:12px;color:var(--gris2);line-height:1.55;max-width:80ch}
+.vcred a{color:var(--gris2);text-decoration:underline}
+</style>
+<style>/*CONVERT*/
+.midcta{background:linear-gradient(135deg,#2f66ff,#1e4fd6);color:#fff;border-radius:24px;padding:clamp(30px,4.5vw,48px);text-align:center;margin:8px 0;box-shadow:0 30px 60px -34px rgba(47,102,255,.6)}
+.midcta h3{font-size:clamp(22px,3.1vw,31px);font-weight:800;letter-spacing:-.02em;color:#fff;margin:0;line-height:1.1}
+.midcta p{color:rgba(255,255,255,.92);margin:12px auto 0;max-width:46ch;font-size:16px;line-height:1.55}
+.midcta a{display:inline-flex;align-items:center;gap:9px;margin-top:20px;background:#fff;color:#0A0C11;font-weight:800;font-size:16px;text-decoration:none;padding:14px 28px;border-radius:999px;transition:transform .15s}
+.midcta a:hover{transform:translateY(-2px)}
+.dlbar{position:fixed;left:0;right:0;bottom:0;z-index:60;background:rgba(10,12,17,.94);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);color:#fff;display:flex;align-items:center;justify-content:center;gap:18px;padding:12px 18px;border-top:1px solid rgba(255,255,255,.12);transform:translateY(110%);transition:transform .32s cubic-bezier(.16,1,.3,1)}
+.dlbar.on{transform:none}
+.dlbar b{font-size:14.5px;font-weight:750}.dlbar b i{color:#8fb0ff;font-style:normal;font-weight:800}
+.dlbar a{background:var(--blue);color:#fff;text-decoration:none;font-weight:800;font-size:14px;padding:11px 20px;border-radius:999px;white-space:nowrap;transition:background .15s}
+.dlbar a:hover{background:#4d7bff}
+@media(max-width:560px){.dlbar{gap:12px;padding:10px 12px}.dlbar b{font-size:12.5px}.dlbar a{padding:10px 15px;font-size:13px}}
+body{padding-bottom:64px}
+</style>
 </head>
 <body>
 
@@ -330,7 +357,7 @@ a{color:inherit}
     <div class="in">
       <p class="kick">Guía · Barcelona</p>
       <h1>Planes de <span class="b">fin de semana</span> en Barcelona.</h1>
-      <p class="lead2">¿No sabes qué hacer este finde en Barcelona? Aquí tienes planes para sábado y domingo, de día y de noche, escapadas cerca y opción para días de lluvia. Y al final, cómo hacerlos aunque no tengas con quién.</p>
+      <p class="lead2">¿No sabes qué hacer este finde en Barcelona? Estos son los planes que funcionan de verdad —y cómo hacerlos aunque no tengas con quién.</p>
     </div>
       <a class="photocred" href="https://commons.wikimedia.org/wiki/File:Barcelona_skyline_2007.jpg" target="_blank" rel="noopener">Foto: Diliff · CC BY 2.5 · Wikimedia</a>
 </section>
@@ -339,17 +366,34 @@ a{color:inherit}
     <div class="in">
       <p class="xs__k">Qué hacer este finde</p>
       <h2 class="xs__t">De sábado por la mañana al domingo por la tarde.</h2>
-      <div class="wkgrid">
-        <div class="wk"><span class="tag">Sábado de día</span><h3>Els Encants y vuelta por el Born</h3><p>Rebuscar en el mercadillo y luego callejear entre tiendas y terrazas.</p></div>
-        <div class="wk"><span class="tag">Sábado de día</span><h3>Playa y voley en la Barceloneta</h3><p>El mar a pie de metro y un partido improvisado para romper el hielo.</p></div>
-        <div class="wk"><span class="tag">Sábado de noche</span><h3>Vermut y cañas por Poble Sec o Gràcia</h3><p>Ambiente de barrio, de bar en bar, como manda la ciudad.</p></div>
-        <div class="wk"><span class="tag">Sábado de noche</span><h3>Directo en Sala Apolo o el Raval</h3><p>La escena musical de Barcelona es enorme; elige garito y a disfrutar.</p></div>
-        <div class="wk"><span class="tag">Domingo</span><h3>Búnkers del Carmel al atardecer</h3><p>El mejor mirador de la ciudad, gratis. De los domingos más bonitos.</p></div>
-        <div class="wk"><span class="tag">Domingo</span><h3>Carretera de les Aigües</h3><p>Andar o correr por Collserola con toda Barcelona a tus pies.</p></div>
-        <div class="wk"><span class="tag">Escapada</span><h3>Montserrat en tren</h3><p>Montaña, monasterio y vistas increíbles a una hora de la ciudad.</p></div>
-        <div class="wk"><span class="tag">Escapada</span><h3>Sitges o la Costa Brava</h3><p>Playa y pueblo con encanto para un finde de sol.</p></div>
-        <div class="wk"><span class="tag">Si llueve</span><h3>Ruta de museos y brunch</h3><p>MNAC, MACBA o el Picasso, y a resguardo con un buen café.</p></div>
+      <div class="vlog">
+      <article class="vblock">
+        <div class="vblock__img"><img src="img/bcn-barceloneta.jpg" alt="Playa de la Barceloneta, Barcelona" loading="lazy" width="1000" height="750"></div>
+        <div class="vblock__txt"><p class="vblock__k">Sábado de día</p><h3>Playa en la Barceloneta</h3><p>El mar a pie de metro: baño, voley y cañas en el chiringuito. El sábado más fácil de Barcelona.</p></div>
+      </article>
+      <article class="vblock">
+        <div class="vblock__img"><img src="img/bcn-gracia.jpg" alt="Plaça del Sol, Gràcia, Barcelona" loading="lazy" width="1000" height="750"></div>
+        <div class="vblock__txt"><p class="vblock__k">Sábado de día</p><h3>Vermut por Gràcia</h3><p>De plaza en plaza, sin prisa, como manda el barrio. Un vermut de mediodía que se alarga solo.</p></div>
+      </article>
+      <article class="vblock">
+        <div class="vblock__img"><img src="img/bcn-bunkers.jpg" alt="Vistas desde los búnkers del Carmel, Barcelona" loading="lazy" width="1000" height="750"></div>
+        <div class="vblock__txt"><p class="vblock__k">Domingo</p><h3>Atardecer en los búnkers</h3><p>El mejor mirador de la ciudad, gratis. De los domingos más bonitos para cerrar el finde.</p></div>
+      </article>
+      <div class="midcta">
+        <h3>Que este finde pase algo.</h3>
+        <p>Dices qué te apetece hacer este finde en Barcelona y NYXA te dice con quién. Le llega el plan ya hecho; si dice que sí, quedáis. En persona.</p>
+        <a href="descargar.html">Descargar NYXA gratis →</a>
       </div>
+      <article class="vblock">
+        <div class="vblock__img"><img src="img/bcn-ciutadella.jpg" alt="Parc de la Ciutadella, Barcelona" loading="lazy" width="1000" height="750"></div>
+        <div class="vblock__txt"><p class="vblock__k">Domingo</p><h3>Picnic en la Ciutadella</h3><p>Manta, remar en el lago y músicos improvisando. El parque del centro da para toda la tarde.</p></div>
+      </article>
+      <article class="vblock">
+        <div class="vblock__img"><img src="img/bcn-born.jpg" alt="Santa Maria del Mar, el Born, Barcelona" loading="lazy" width="1000" height="750"></div>
+        <div class="vblock__txt"><p class="vblock__k">Escapada</p><h3>Ruta por el Born</h3><p>Callejear, entrar donde no habías entrado y acabar de tapas. Un plan de finde con mil paradas.</p></div>
+      </article>
+      </div>
+      <p class="vcred">Fotos: Barceloneta © Matti Blume · Gràcia © Pere López Brosa · Búnkers del Carmel © Alexey Komarov · Ciutadella © Harvey Barrison · El Born © Pere López — <a href="https://commons.wikimedia.org" target="_blank" rel="noopener">Wikimedia Commons</a> (CC BY-SA / CC0).</p>
     </div>
   </section>
 
@@ -553,5 +597,10 @@ window.addEventListener('resize',function(){if(window.innerWidth>860)set(false);
   if(document.querySelector('[data-cnt]')){tick();setInterval(tick,20000);}
 })();
 </script>
+<div class="dlbar" id="dlbar" aria-hidden="true">
+  <b>Que este finde <i>pase algo</i>. NYXA pone la gente.</b>
+  <a href="descargar.html">Descargar gratis</a>
+</div>
+<script>(function(){var bar=document.getElementById("dlbar");if(!bar)return;var hero=document.querySelector(".phero");function onScroll(){var past=hero?(hero.getBoundingClientRect().bottom<0):(window.scrollY>500);var atEnd=(window.innerHeight+window.scrollY)>=(document.body.scrollHeight-120);bar.classList.toggle("on",past&&!atEnd);}window.addEventListener("scroll",onScroll,{passive:true});window.addEventListener("resize",onScroll);onScroll();})();</script>
 </body>
 </html>
