@@ -214,3 +214,9 @@ section{position:relative;overflow:hidden}
 .gcard h3{font-size:17px;font-weight:800;letter-spacing:-.01em}
 .gcard h3 .neg{color:var(--az)}
 .gcard p{color:var(--gris);font-size:14.5px;margin-top:7px;line-height:1.5}
+
+/* ═══ teaser (banda con CTA a otra página) ═══ */
+.teaser{background:var(--card);border:1px solid var(--linea);border-radius:24px;padding:32px 36px;display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap;box-shadow:var(--sh-sm)}
+.teaser h3{font-size:clamp(20px,2.4vw,26px);font-weight:800;letter-spacing:-.02em}
+.teaser p{color:var(--gris);font-size:15px;margin-top:6px;max-width:44ch}
+.tcenter{text-align:center}
