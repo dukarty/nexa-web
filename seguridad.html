@@ -17,323 +17,128 @@
 <meta property="og:locale" content="es_ES">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Seguridad en NYXA · Quedar con cabeza">
-<meta name="twitter:description" content="Nadie te escribe sin tu sí, nunca compartimos dónde estás, y bloqueas o reportas en un toque. Consejos para tu primera quedada.">
+<meta name="twitter:description" content="Nadie te escribe sin tu sí. Consejos para tu primera quedada.">
 <meta name="twitter:image" content="https://holanyxa.com/og.jpg">
-<meta name="theme-color" content="#FBF9F4">
-<meta name="robots" content="index,follow">
-<link rel="icon" href="/favicon.svg">
+<meta name="theme-color" content="#F9F7F3">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<style>
-:root{--paper:#FBF9F4;--ink:#0A0C11;--ink2:#3B4251;--gris:#5D6779;--gris2:#737B89;--blue:#2f66ff;--blueink:#1e4fd6;--soft:#EDF3FF;--line:#E7E4DC;--card:#fff;--f:"Plus Jakarta Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif}
-*{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{background:var(--paper);color:var(--ink);font-family:var(--f);-webkit-font-smoothing:antialiased;line-height:1.5;overflow-x:hidden}
-a{color:inherit}
-.in{max-width:1120px;margin:0 auto;padding:0 24px}
-/* nav */
-.nav{position:fixed;top:0;left:0;right:0;z-index:50;height:60px;display:flex;align-items:center;background:rgba(251,249,244,.72);backdrop-filter:saturate(1.8) blur(20px);-webkit-backdrop-filter:saturate(1.8) blur(20px);border-bottom:1px solid rgba(10,12,17,.06)}
-.nav .in{display:flex;align-items:center;justify-content:space-between;width:100%}
-.brand{font-weight:800;font-size:20px;letter-spacing:-.02em;text-decoration:none;color:var(--ink)}.brand i{color:var(--blue);font-style:normal}
-.nav__links{display:flex;gap:24px}
-.nav__links a{font-size:14.5px;font-weight:600;color:var(--ink2);text-decoration:none;transition:color .15s}
-.nav__links a:hover,.nav__links a[aria-current]{color:var(--ink)}
-.nav__right{display:flex;align-items:center;gap:12px}
-.pill{background:var(--blue);color:#fff;text-decoration:none;font-size:14px;font-weight:700;padding:9px 18px;border-radius:999px;transition:transform .15s,background .15s;white-space:nowrap}
-.pill:hover{background:var(--blueink);transform:translateY(-1px)}
-.burger{display:none;width:42px;height:42px;border:1px solid var(--line);border-radius:12px;background:var(--card);cursor:pointer;position:relative;padding:0}
-.burger span{position:absolute;left:11px;right:11px;height:2px;background:var(--ink);border-radius:2px;transition:transform .2s,opacity .2s}
-.burger span:nth-child(1){top:14px}.burger span:nth-child(2){top:20px}.burger span:nth-child(3){top:26px}
-.burger[aria-expanded="true"] span:nth-child(1){transform:translateY(6px) rotate(45deg)}
-.burger[aria-expanded="true"] span:nth-child(2){opacity:0}
-.burger[aria-expanded="true"] span:nth-child(3){transform:translateY(-6px) rotate(-45deg)}
-.mmenu{position:fixed;top:60px;left:0;right:0;bottom:0;z-index:49;background:var(--paper);border-top:1px solid var(--line);padding:10px 24px 28px;display:flex;flex-direction:column;overflow:auto;transform:translateY(-10px);opacity:0;pointer-events:none;transition:transform .2s,opacity .2s}
-.mmenu[data-open="true"]{transform:none;opacity:1;pointer-events:auto}
-.mmenu a{padding:15px 6px;font-size:17px;font-weight:700;color:var(--ink);text-decoration:none;border-bottom:1px solid var(--line)}
-.mmenu__cta{margin-top:14px;background:var(--blue);color:#fff!important;text-align:center;border-radius:999px!important;border:0!important;padding:15px!important}
-@media(max-width:860px){.nav__links{display:none}.burger{display:block}}
-@media(min-width:861px){.mmenu{display:none}}
-/* hero */
-.phero{padding:132px 0 24px;text-align:center}
-.kick{font-size:13px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--blue)}
-.phero h1{font-size:clamp(44px,8vw,84px);font-weight:800;letter-spacing:-.05em;line-height:.98;margin:16px auto 0;max-width:14ch;text-wrap:balance}
-.phero h1 .b{color:var(--blue)}
-.phero p{font-size:clamp(17px,2.1vw,21px);color:var(--ink2);max-width:40ch;margin:20px auto 0;text-wrap:pretty}
-/* secciones xs */
-.xs{padding:clamp(52px,7vw,84px) 0;line-height:1.5}
-.xs--tint{background:linear-gradient(180deg,#fff,#F4F1EA);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
-.xs__k{font-size:13px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--blue);margin:0}
-.xs__t{font-size:clamp(28px,4.6vw,48px);font-weight:800;letter-spacing:-.035em;line-height:1.05;margin:14px 0 0;color:var(--ink);text-wrap:balance;max-width:20ch}
-.xs__s{font-size:clamp(16px,2vw,19px);color:var(--ink2);max-width:56ch;margin:16px 0 0;text-wrap:pretty}
-.xs__grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin-top:40px}
-.xs__c{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:26px}
-.xs__n{display:inline-flex;width:32px;height:32px;align-items:center;justify-content:center;border-radius:50%;background:var(--soft);color:var(--blueink);font-weight:800;font-size:14px}
-.xs__c h3{font-size:18px;font-weight:800;color:var(--ink);margin:14px 0 0;letter-spacing:-.01em}
-.xs__c p{color:var(--gris);font-size:15px;margin:8px 0 0;line-height:1.5}
-/* faq */
-.faq{max-width:760px;margin:36px auto 0;border-top:1px solid var(--line)}
-details{border-bottom:1px solid var(--line);padding:4px 0}
-summary{list-style:none;cursor:pointer;padding:18px 2px;font-size:17px;font-weight:700;letter-spacing:-.01em;display:flex;justify-content:space-between;align-items:center;gap:14px}
-summary::-webkit-details-marker{display:none}
-summary .pm{flex:none;width:22px;height:22px;position:relative}
-summary .pm::before,summary .pm::after{content:"";position:absolute;background:var(--gris2);border-radius:2px;transition:transform .2s,opacity .2s}
-summary .pm::before{top:10px;left:3px;right:3px;height:2px}
-summary .pm::after{left:10px;top:3px;bottom:3px;width:2px}
-details[open] summary .pm::after{opacity:0;transform:rotate(90deg)}
-details[open] summary{color:var(--blueink)}
-.ans{padding:0 2px 18px;font-size:15.5px;color:var(--ink2);line-height:1.6}
-.ans a{color:var(--blueink);font-weight:650}
-/* banner sos */
-.sos{background:var(--ink);color:#fff;border-radius:24px;padding:clamp(28px,4vw,40px);margin-top:40px;display:flex;flex-wrap:wrap;align-items:center;gap:20px 32px;justify-content:space-between}
-.sos__t{font-size:clamp(20px,2.6vw,26px);font-weight:800;letter-spacing:-.02em}
-.sos__p{color:#c7ccd6;font-size:15px;margin-top:8px;max-width:58ch;line-height:1.55}
-.sos__p a{color:#fff;font-weight:700}
-.sos__112{flex:none;display:inline-flex;flex-direction:column;align-items:center;justify-content:center;background:#fff;color:var(--ink);border-radius:18px;padding:16px 22px;text-decoration:none;min-width:120px}
-.sos__112 b{font-size:30px;font-weight:800;letter-spacing:-.02em}
-.sos__112 span{font-size:12px;font-weight:700;color:var(--gris2);text-transform:uppercase;letter-spacing:.06em;margin-top:2px}
-/* reglas: trío con icono, sin cajas */
-.rules{display:grid;grid-template-columns:repeat(3,1fr);gap:32px;margin-top:44px}
-@media(max-width:760px){.rules{grid-template-columns:1fr;gap:28px;max-width:460px;margin-inline:auto}}
-.rule{text-align:center;padding:0 6px}
-@media(max-width:760px){.rule{display:grid;grid-template-columns:60px 1fr;gap:18px;text-align:left;align-items:start}}
-.rule__ic{display:inline-flex;width:60px;height:60px;align-items:center;justify-content:center;border-radius:18px;background:var(--soft);color:var(--blue)}
-.rule__ic svg{width:28px;height:28px}
-.rule h3{font-size:18px;font-weight:800;letter-spacing:-.01em;color:var(--ink);margin:16px 0 0}
-@media(max-width:760px){.rule h3{margin:2px 0 0}.rule__ic{grid-row:1/span 2}}
-.rule p{color:var(--gris);font-size:15px;line-height:1.5;margin:8px auto 0;max-width:30ch}
-@media(max-width:760px){.rule p{margin:6px 0 0;max-width:none}}
-/* consejos: checklist, sin cajas */
-.checks{list-style:none;display:grid;grid-template-columns:1fr 1fr;gap:22px 32px;margin-top:40px;max-width:860px}
-@media(max-width:700px){.checks{grid-template-columns:1fr;gap:20px}}
-.checks li{display:grid;grid-template-columns:30px 1fr;gap:16px;align-items:start}
-.checks__ic{margin-top:2px;width:30px;height:30px;border-radius:50%;background:rgba(47,102,255,.12);display:inline-flex;align-items:center;justify-content:center}
-.checks__ic svg{width:17px;height:17px;color:var(--blue)}
-.checks h3{font-size:17px;font-weight:800;letter-spacing:-.01em;color:var(--ink);margin:0}
-.checks p{color:var(--gris);font-size:15px;line-height:1.5;margin:5px 0 0;max-width:44ch}
-</style>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
+<link rel="stylesheet" href="styles.css?v=97">
 </head>
 <body>
+<a class="skip" href="#reglas">Saltar al contenido</a>
 
-<header class="nav">
-  <div class="in">
-    <a class="brand" href="index.html">NY<i aria-hidden="true">✕</i>A</a>
-    <nav class="nav__links" aria-label="Principal">
-      <a href="index.html#gesto">Cómo funciona</a>
+<header class="nav" id="top">
+  <div class="nav__in">
+    <a class="marca" href="index.html" aria-label="NYXA, inicio">NY<span class="marca__x" aria-hidden="true"><svg viewBox="0 0 20 20"><line x1="3" y1="17" x2="17" y2="3"/><line x1="17" y1="17" x2="3" y2="3"/></svg></span>A</a>
+    <nav class="nav__links" aria-label="Secciones">
+      <a href="index.html#como">Cómo funciona</a>
       <a href="ciudades.html">Ciudades</a>
       <a href="seguridad.html" aria-current="page">Seguridad</a>
       <a href="manifiesto.html">Quiénes somos</a>
       <a href="empresas.html">Empresas</a>
       <a href="momentos.html">Momentos</a>
     </nav>
-    <div class="nav__right">
+    <div style="display:flex;align-items:center;gap:10px">
       <a class="pill" href="descargar.html">Descargar</a>
-      <button class="burger" aria-label="Abrir menú" aria-expanded="false" aria-controls="mmenu"><span></span><span></span><span></span></button>
+      <button class="burger" aria-label="Abrir menú" aria-expanded="false"><span></span></button>
     </div>
   </div>
 </header>
-<div class="mmenu" id="mmenu">
-  <a href="index.html#gesto">Cómo funciona</a>
-  <a href="ciudades.html">Ciudades</a>
-  <a href="seguridad.html" aria-current="page">Seguridad</a>
-  <a href="manifiesto.html">Quiénes somos</a>
-  <a href="empresas.html">Empresas</a>
-  <a href="momentos.html">Momentos</a>
-  <a class="mmenu__cta" href="descargar.html">Descargar gratis</a>
-</div>
 
 <main>
-  <section class="phero">
-    <div class="in">
-      <p class="kick">Seguridad</p>
-      <h1>Tú <span class="b">decides</span>.</h1>
-      <p>Nadie entra en tu vida sin tu sí.</p>
-    </div>
-  </section>
+  <!-- 1 · HERO -->
+  <section class="phero"><div class="glow breathe"></div><div class="wrap">
+    <p class="klabel">Seguridad</p>
+    <h1>Tú <span class="x">decides</span>.</h1>
+    <p class="plead">Nadie entra en tu vida sin tu sí.</p>
+  </div></section>
 
-  <section class="xs">
-    <div class="in">
-      <p class="xs__k">Cómo te cuidamos</p>
-      <h2 class="xs__t">Tres reglas que no se rompen.</h2>
-      <div class="rules">
-        <div class="rule">
-          <span class="rule__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 4.5-3 7.6-7 9-4-1.4-7-4.5-7-9V6l7-3z"/><path d="M9 12l2 2 4-4"/></svg></span>
-          <h3>Cero mensajes de desconocidos</h3><p>Nadie puede escribirte porque sí. Se propone un plan; solo si dices que sí, hay conversación.</p>
-        </div>
-        <div class="rule">
-          <span class="rule__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-6-5.2-6-10a6 6 0 1112 0c0 4.8-6 10-6 10z"/><circle cx="12" cy="11" r="2.2"/></svg></span>
-          <h3>Quedas con cabeza</h3><p>NYXA no comparte dónde estás. Tú eliges el sitio, la hora y con cuánta gente. Siempre en tu terreno.</p>
-        </div>
-        <div class="rule">
-          <span class="rule__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M6 6l12 12"/></svg></span>
-          <h3>Fuera en un toque</h3><p>Bloquear y reportar, a un gesto. Revisamos cada aviso. Aquí, molestar sale caro.</p>
-        </div>
-      </div>
+  <!-- 2 · TRES REGLAS -->
+  <section class="sec" id="reglas"><div class="wrap">
+    <p class="klabel reveal">Cómo te cuidamos</p>
+    <h2 class="h2 reveal" style="margin-top:12px">Tres reglas que<br>no se rompen.</h2>
+    <div class="gcards reveal d1">
+      <div class="gcard"><div class="gi"><svg viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg></div><h3>Cero mensajes de desconocidos</h3><p>Nadie te escribe porque sí. Se propone un plan.</p></div>
+      <div class="gcard"><div class="gi"><svg viewBox="0 0 24 24"><path d="M12 21s7-5.5 7-11a7 7 0 0 0-14 0c0 5.5 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></svg></div><h3>Quedas con cabeza</h3><p>No compartimos dónde estás. Tú eliges sitio y hora.</p></div>
+      <div class="gcard"><div class="gi"><svg viewBox="0 0 24 24"><path d="M12 3l7 3v5c0 4.5-3 8-7 10-4-2-7-5.5-7-10V6z"/><path d="M9 12l2 2 4-4"/></svg></div><h3>Fuera en un toque</h3><p>Bloquear y reportar a un gesto. Revisamos cada aviso.</p></div>
     </div>
-  </section>
+  </div></section>
 
-  <section class="xs xs--tint">
-    <div class="in">
-      <p class="xs__k">Preguntas</p>
-      <h2 class="xs__t">Lo que preguntas.</h2>
-      <div class="faq">
-        <details>
-          <summary>¿Pueden escribirme sin más?<span class="pm"></span></summary>
-          <div class="ans">No. Sin tu sí, no hay chat. Primero se propone un plan; la conversación solo se abre si ambos aceptáis.</div>
-        </details>
-        <details>
-          <summary>¿Veis dónde estoy?<span class="pm"></span></summary>
-          <div class="ans">No. Nunca compartimos tu ubicación. Tú eliges dónde y cuándo quedar.</div>
-        </details>
-        <details>
-          <summary>¿Y si me arrepiento?<span class="pm"></span></summary>
-          <div class="ans">No vas. No le debes nada a nadie. Puedes cancelar o irte cuando quieras.</div>
-        </details>
-        <details>
-          <summary>¿Y mis datos?<span class="pm"></span></summary>
-          <div class="ans">Pedimos los justos y no los vendemos. Puedes leer los detalles en nuestra <a href="/privacidad.html">Política de privacidad</a>.</div>
-        </details>
-      </div>
-    </div>
-  </section>
+  <!-- 3 · CONSEJOS -->
+  <section class="sec sec--tint"><div class="wrap">
+    <p class="klabel reveal">Quedar con cabeza</p>
+    <h2 class="h2 reveal" style="margin-top:12px">Consejos para tu<br>primera quedada.</h2>
+    <ol class="crit reveal d1">
+      <li><span class="crit__n">01</span><div><h3>Sitio público la primera vez</h3><p>Un café, un parque, un plan con más gente.</p></div></li>
+      <li><span class="crit__n">02</span><div><h3>Avisa a alguien de confianza</h3><p>Dile con quién quedas, dónde y a qué hora.</p></div></li>
+      <li><span class="crit__n">03</span><div><h3>Ve a tu ritmo</h3><p>No tienes que quedarte. Si algo no encaja, te vas.</p></div></li>
+      <li><span class="crit__n">04</span><div><h3>Fíate de tu instinto</h3><p>Si algo te chirría, corta. Bloquea y reporta.</p></div></li>
+    </ol>
+  </div></section>
 
-  <section class="xs">
-    <div class="in">
-      <p class="xs__k">Quedar con cabeza</p>
-      <h2 class="xs__t">Consejos para tu primera quedada.</h2>
-      <ul class="checks">
-        <li><span class="checks__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4 4 10-10"/></svg></span><div><h3>Sitio público la primera vez</h3><p>Un café, un parque, un plan con más gente. Nada de sitios privados al principio.</p></div></li>
-        <li><span class="checks__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4 4 10-10"/></svg></span><div><h3>Avisa a alguien de confianza</h3><p>Dile con quién quedas, dónde y a qué hora. Comparte tu ubicación si te quedas más tranquilo.</p></div></li>
-        <li><span class="checks__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4 4 10-10"/></svg></span><div><h3>Ve a tu ritmo</h3><p>No tienes que quedarte. Si algo no te encaja, te vas — no le debes nada a nadie.</p></div></li>
-        <li><span class="checks__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.5l4 4 10-10"/></svg></span><div><h3>Fíate de tu instinto</h3><p>Si algo te chirría, corta. Siempre puedes bloquear y reportar desde la app.</p></div></li>
-      </ul>
-      <div class="sos">
-        <div>
-          <div class="sos__t">¿Algo va mal?</div>
-          <p class="sos__p">Bloquea y reporta desde la app a un toque — lo miramos de verdad. Si hay peligro inmediato, llama al 112. Y para cualquier cosa, escríbenos a <a href="mailto:holanyxa@gmail.com">holanyxa@gmail.com</a>.</p>
-        </div>
-        <a class="sos__112" href="tel:112"><b>112</b><span>Emergencias</span></a>
-      </div>
+  <!-- 4 · CIERRE -->
+  <div class="wrap"><div class="close reveal">
+    <h2>Sal con NYXA.<br>Tú decides siempre.</h2>
+    <p>Descárgala gratis y queda con cabeza, con quien quiere lo mismo.</p>
+    <div class="mcta">
+      <a class="appstore" href="https://apps.apple.com/es/app/nyxa/id6800325033" aria-label="Descargar NYXA en la App Store"><svg viewBox="0 0 24 24" fill="#0A0C11" aria-hidden="true"><path d="M16.5 1.6c.1 1-.3 2-.9 2.8-.7.8-1.7 1.4-2.7 1.3-.1-1 .4-2 1-2.7.6-.8 1.7-1.3 2.6-1.4zM19.3 17c-.5 1.1-.7 1.6-1.3 2.5-.9 1.4-2.1 3.1-3.6 3.1-1.4 0-1.7-.9-3.6-.9s-2.3.9-3.6.9C5.1 22.6 4 21 3 19.6.6 16.1.3 12 1.8 9.8 2.9 8.3 4.5 7.3 6 7.3c1.6 0 2.6 1 3.9 1 1.3 0 2-1 3.9-1 1.3 0 2.7.7 3.7 2-3.2 1.8-2.7 6.4.8 7.7z"/></svg><span><small>Descárgalo en</small><b>App Store</b></span></a>
     </div>
-  </section>
+  </div></div>
 </main>
 
-<style>
-.dl{background:linear-gradient(180deg,#EDF3FF,#FBF9F4);padding:clamp(64px,9vw,100px) 24px;font-family:"Plus Jakarta Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif;text-align:center;line-height:1.5}
-.dl *{box-sizing:border-box}
-.dl__in{max-width:860px;margin:0 auto}
-.dl__k{font-size:13px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:#2f66ff;margin:0}
-.dl__t{font-size:clamp(28px,4.8vw,48px);font-weight:800;letter-spacing:-.035em;line-height:1.04;margin:14px auto 0;color:#0A0C11;text-wrap:balance;max-width:19ch}
-.dl__steps{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;margin-top:44px;text-align:left}
-@media(max-width:640px){.dl__steps{grid-template-columns:1fr;gap:14px;max-width:360px;margin-left:auto;margin-right:auto}}
-.dl__s{background:#fff;border:1px solid #E7E4DC;border-radius:18px;padding:24px}
-.dl__s span{display:inline-flex;width:30px;height:30px;align-items:center;justify-content:center;border-radius:50%;background:#2f66ff;color:#fff;font-weight:800;font-size:14px}
-.dl__s b{display:block;margin-top:14px;font-size:17px;font-weight:800;color:#0A0C11;letter-spacing:-.01em}
-.dl__s i{display:block;margin-top:5px;font-style:normal;color:#5D6779;font-size:14.5px;line-height:1.45}
-.dl__cta{margin-top:40px;display:inline-flex;flex-direction:column;align-items:center;gap:12px}
-.dl__as{line-height:0;transition:transform .15s}.dl__as:hover{transform:translateY(-2px)}
-.dl__and{font-size:13px;font-weight:700;color:#737B89;letter-spacing:.02em}
-</style>
-<section class="dl" aria-label="Descargar NYXA">
-  <div class="dl__in">
-    <p class="dl__k">Empieza hoy</p>
-    <h2 class="dl__t">Descárgala gratis y haz que esta semana pase algo.</h2>
-    <div class="dl__steps">
-      <div class="dl__s"><span>1</span><b>Descárgala</b><i>En la App Store, gratis y sin tarjeta.</i></div>
-      <div class="dl__s"><span>2</span><b>Di qué quieres vivir</b><i>Una cena, un concierto, una ruta…</i></div>
-      <div class="dl__s"><span>3</span><b>NYXA te dice con quién</b><i>Y quedáis de verdad, en persona.</i></div>
+<footer class="nf"><div class="nf__in">
+  <div class="nf__top">
+    <div class="nf__brand">
+      <a class="marca" href="index.html">NY<span class="marca__x" aria-hidden="true"><svg viewBox="0 0 20 20"><line x1="3" y1="17" x2="17" y2="3"/><line x1="17" y1="17" x2="3" y2="3"/></svg></span>A</a>
+      <p>Eliges qué vivir. Te decimos con quién. Quedáis de verdad.</p>
+      <a class="appstore" href="https://apps.apple.com/es/app/nyxa/id6800325033" aria-label="Descargar NYXA en la App Store"><svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M16.5 1.6c.1 1-.3 2-.9 2.8-.7.8-1.7 1.4-2.7 1.3-.1-1 .4-2 1-2.7.6-.8 1.7-1.3 2.6-1.4zM19.3 17c-.5 1.1-.7 1.6-1.3 2.5-.9 1.4-2.1 3.1-3.6 3.1-1.4 0-1.7-.9-3.6-.9s-2.3.9-3.6.9C5.1 22.6 4 21 3 19.6.6 16.1.3 12 1.8 9.8 2.9 8.3 4.5 7.3 6 7.3c1.6 0 2.6 1 3.9 1 1.3 0 2-1 3.9-1 1.3 0 2.7.7 3.7 2-3.2 1.8-2.7 6.4.8 7.7z"/></svg><span><small>Descárgalo en</small><b>App Store</b></span></a>
     </div>
-    <div class="dl__cta">
-      <a class="dl__as" href="https://apps.apple.com/es/app/nyxa/id6800325033" target="_blank" rel="noopener" aria-label="Descargar NYXA en la App Store">
-        <svg width="150" height="50" viewBox="0 0 120 40" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true">
-          <rect width="120" height="40" rx="7" fill="#0A0C11"/>
-          <path fill="#fff" transform="translate(11,8.5) scale(0.95)" d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.63 5.98.32 7.11-.61 1.35-1.46 2.7-2.31 3.99l-.06.11M12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25"/>
-          <text x="38" y="16" fill="#fff" font-family="-apple-system,'Plus Jakarta Sans',sans-serif" font-size="6.5" font-weight="400">Descárgalo en el</text>
-          <text x="37.5" y="30.5" fill="#fff" font-family="-apple-system,'Plus Jakarta Sans',sans-serif" font-size="14.5" font-weight="600" letter-spacing="-0.4">App Store</text>
-        </svg>
-      </a>
-      <span class="dl__and">Android muy pronto</span>
+    <nav class="nf__cols" aria-label="Enlaces del pie">
+      <div class="nf__col"><h4>Producto</h4>
+        <a href="index.html#como">Cómo funciona</a>
+        <a href="ciudades.html">Ciudades</a>
+        <a href="momentos.html">Momentos</a>
+        <a href="descargar.html">Descargar la app</a>
+        <a href="conocer-gente-valencia.html">Conocer gente en Valencia</a>
+        <a href="conocer-gente-barcelona.html">Conocer gente en Barcelona</a>
+        <a href="conocer-gente-madrid.html">Conocer gente en Madrid</a>
+      </div>
+      <div class="nf__col"><h4>Empresa</h4>
+        <a href="manifiesto.html">Quiénes somos</a>
+        <a href="empresas.html">NYXA para empresas</a>
+      </div>
+      <div class="nf__col"><h4>Confianza</h4>
+        <a href="seguridad.html">Seguridad</a>
+        <a href="soporte.html">Ayuda</a>
+      </div>
+      <div class="nf__col"><h4>Legal</h4>
+        <a href="privacidad.html">Privacidad</a>
+        <a href="terminos.html">Términos</a>
+      </div>
+    </nav>
+  </div>
+  <div class="nf__bottom">
+    <span>NYXA · Valencia · © <span id="y">2026</span></span>
+    <div class="nf__soc">
+      <a href="https://instagram.com/nyxa.app" target="_blank" rel="noopener" aria-label="Instagram"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="2.6" y="2.6" width="18.8" height="18.8" rx="5.4" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="4.1" stroke="currentColor" stroke-width="1.8"/><circle cx="17.4" cy="6.6" r="1.25" fill="currentColor"/></svg>Instagram</a>
+      <a href="mailto:holanyxa@gmail.com" aria-label="Escríbenos por email"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="2.6" y="4.8" width="18.8" height="14.4" rx="2.6" stroke="currentColor" stroke-width="1.8"/><path d="M3.4 6.6l8.6 6 8.6-6" stroke="currentColor" stroke-width="1.8" fill="none"/></svg>holanyxa@gmail.com</a>
+      <span class="nf__lang"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.7"/><path d="M3 12h18M12 3c2.6 2.5 2.6 15 0 18M12 3c-2.6 2.5-2.6 15 0 18" stroke="currentColor" stroke-width="1.7"/></svg>Español (España)</span>
     </div>
   </div>
-</section>
+</div></footer>
 
-<style>
-.nf{background:#0A0C11;color:#fff;padding:clamp(56px,7vw,72px) 24px 40px;font-family:"Plus Jakarta Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif;line-height:1.5}
-.nf *{box-sizing:border-box}
-.nf__in{max-width:1120px;margin:0 auto}
-.nf__top{display:grid;grid-template-columns:1.2fr 2fr;gap:48px}
-@media(max-width:820px){.nf__top{grid-template-columns:1fr;gap:40px}}
-.nf__logo{font-size:24px;font-weight:800;letter-spacing:-.02em;color:#fff}.nf__logo i{color:#2f66ff;font-style:normal}
-.nf__tag{color:#9aa3b2;font-size:15px;margin-top:12px;max-width:26ch}
-.nf__as{display:inline-block;margin-top:20px;line-height:0}
-.nf__cols{display:grid;grid-template-columns:repeat(4,1fr);gap:28px}
-@media(max-width:560px){.nf__cols{grid-template-columns:repeat(2,1fr);gap:32px 20px}}
-.nf__col h4{font-size:12px;font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:#6b7280;margin:0 0 14px}
-.nf__col a{display:block;color:#d7dbe2;text-decoration:none;font-size:15px;font-weight:600;margin:11px 0;transition:color .15s}
-.nf__col a:hover{color:#fff}
-.nf__bottom{margin-top:48px;padding-top:24px;border-top:1px solid rgba(255,255,255,.1);display:flex;flex-wrap:wrap;gap:14px 24px;align-items:center;justify-content:space-between;color:#6b7280;font-size:13px}
-.nf__soc{display:flex;gap:22px;flex-wrap:wrap}
-.nf__soc a{color:#9aa3b2;text-decoration:none;font-weight:700}.nf__soc a:hover{color:#2f66ff}
-.nf__soc a,.nf__lang{display:inline-flex;align-items:center;gap:7px}
-.nf__soc a svg,.nf__lang svg{flex:none}
-.nf__lang{color:#6b7280;font-weight:600}
-</style>
-<footer class="nf">
-  <div class="nf__in">
-    <div class="nf__top">
-      <div>
-        <div class="nf__logo">NY<i aria-hidden="true">✕</i>A</div>
-        <p class="nf__tag">Que no se te escape la vida. Experiencias reales, en persona.</p>
-        <a class="nf__as" href="https://apps.apple.com/es/app/nyxa/id6800325033" target="_blank" rel="noopener" aria-label="Descargar NYXA en la App Store">
-          <svg width="132" height="44" viewBox="0 0 120 40" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true">
-            <rect width="120" height="40" rx="7" fill="#fff"/>
-            <path fill="#0A0C11" transform="translate(11,8.5) scale(0.95)" d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.63 5.98.32 7.11-.61 1.35-1.46 2.7-2.31 3.99l-.06.11M12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25"/>
-            <text x="38" y="16" fill="#0A0C11" font-family="-apple-system,'Plus Jakarta Sans',sans-serif" font-size="6.5" font-weight="400">Descárgalo en el</text>
-            <text x="37.5" y="30.5" fill="#0A0C11" font-family="-apple-system,'Plus Jakarta Sans',sans-serif" font-size="14.5" font-weight="600" letter-spacing="-0.4">App Store</text>
-          </svg>
-        </a>
-      </div>
-      <nav class="nf__cols" aria-label="Enlaces del pie">
-        <div class="nf__col"><h4>Producto</h4>
-          <a href="index.html#gesto">Cómo funciona</a>
-          <a href="ciudades.html">Ciudades</a>
-          <a href="momentos.html">Momentos</a>
-          <a href="descargar.html">Descargar la app</a>
-          <a href="conocer-gente-valencia.html">Conocer gente en Valencia</a>
-          <a href="conocer-gente-barcelona.html">Conocer gente en Barcelona</a>
-          <a href="conocer-gente-madrid.html">Conocer gente en Madrid</a>
-        </div>
-        <div class="nf__col"><h4>Empresa</h4>
-          <a href="manifiesto.html">Quiénes somos</a>
-          <a href="empresas.html">NYXA para empresas</a>
-        </div>
-        <div class="nf__col"><h4>Confianza</h4>
-          <a href="seguridad.html">Seguridad</a>
-          <a href="soporte.html">Ayuda</a>
-        </div>
-        <div class="nf__col"><h4>Legal</h4>
-          <a href="privacidad.html">Privacidad</a>
-          <a href="terminos.html">Términos</a>
-        </div>
-      </nav>
-    </div>
-    <div class="nf__bottom">
-      <span>NYXA · Valencia · © 2026</span>
-      <div class="nf__soc">
-        <a href="https://instagram.com/nyxa.app" target="_blank" rel="noopener" aria-label="Instagram"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="2.6" y="2.6" width="18.8" height="18.8" rx="5.4" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="4.1" stroke="currentColor" stroke-width="1.8"/><circle cx="17.4" cy="6.6" r="1.25" fill="currentColor"/></svg>Instagram</a>
-        <a href="mailto:holanyxa@gmail.com" aria-label="Escríbenos por email"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="2.6" y="4.8" width="18.8" height="14.4" rx="2.6" stroke="currentColor" stroke-width="1.8"/><path d="M3.4 6.6l8.6 6 8.6-6" stroke="currentColor" stroke-width="1.8" fill="none"/></svg>holanyxa@gmail.com</a>
-        <span class="nf__lang"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.7"/><path d="M3 12h18M12 3c2.6 2.5 2.6 15 0 18M12 3c-2.6 2.5-2.6 15 0 18" stroke="currentColor" stroke-width="1.7"/></svg>Español (España)</span>
-      </div>
-    </div>
-  </div>
-</footer>
 <script>
-(function(){var b=document.querySelector('.burger'),m=document.getElementById('mmenu');if(!b||!m)return;
-function set(o){b.setAttribute('aria-expanded',o);m.setAttribute('data-open',o);document.body.style.overflow=o?'hidden':'';}
-b.addEventListener('click',function(){set(b.getAttribute('aria-expanded')!=='true');});
-m.addEventListener('click',function(e){if(e.target.tagName==='A')set(false);});
-document.addEventListener('keydown',function(e){if(e.key==='Escape')set(false);});
-window.addEventListener('resize',function(){if(window.innerWidth>860)set(false);});})();
+(function(){
+  var rm=matchMedia('(prefers-reduced-motion:reduce)').matches;
+  document.addEventListener('click',function(e){var b=e.target.closest('.burger');if(!b)return;var n=b.closest('.nav');n.classList.toggle('open');b.setAttribute('aria-expanded',n.classList.contains('open'));});
+  document.querySelectorAll('.nav__links a').forEach(function(a){a.addEventListener('click',function(){document.querySelector('.nav').classList.remove('open');});});
+  var y=document.getElementById('y');if(y)y.textContent=new Date().getFullYear();
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target);}})},{threshold:.12});
+  document.querySelectorAll('.reveal').forEach(function(el){rm?el.classList.add('on'):io.observe(el);});
+  addEventListener('load',function(){document.querySelectorAll('.reveal:not(.on)').forEach(function(el){var r=el.getBoundingClientRect();if(r.top<innerHeight+80&&r.bottom>-80)el.classList.add('on');});});
+})();
 </script>
 </body>
 </html>
