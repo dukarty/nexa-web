@@ -185,3 +185,23 @@ section{position:relative;overflow:hidden}
 }
 @media(max-width:520px){.nf__cols{grid-template-columns:1fr 1fr}}
 @media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}.breathe{animation:none}.xsvg line{transition:none;stroke-dashoffset:0}}
+
+/* ═══ páginas interiores (Ciudades, Empresas, Seguridad, …) ═══ */
+.phero{padding:clamp(94px,12vw,138px) 0 clamp(28px,5vw,48px);text-align:center;position:relative;overflow:hidden}
+.phero .glow{width:540px;height:540px;top:-170px;left:50%;transform:translateX(-50%)}
+.phero h1{font-size:clamp(42px,7vw,84px);font-weight:800;letter-spacing:-.045em;line-height:.98;margin:16px auto 0;max-width:15ch;text-wrap:balance}
+.phero h1 .x{color:var(--az)}
+.phero .plead{font-size:clamp(17px,1.8vw,21px);color:#41454E;max-width:40ch;margin:18px auto 0;text-wrap:pretty}
+.sec{padding:clamp(54px,8vw,90px) 0;position:relative;overflow:hidden}
+.sec--tint{background:linear-gradient(180deg,#fff,var(--soft));border-top:1px solid var(--linea-2);border-bottom:1px solid var(--linea-2)}
+.sec--center{text-align:center}
+.sec .lead{font-size:clamp(16px,1.6vw,19px);color:#41454E;max-width:52ch;margin:16px 0 0;text-wrap:pretty}
+.sec--center .lead{margin-left:auto;margin-right:auto}
+.crit{list-style:none;margin-top:34px;max-width:760px}
+.crit li{display:grid;grid-template-columns:auto 1fr;gap:24px;align-items:baseline;padding:22px 4px;border-top:1px solid var(--linea)}
+.crit li:last-child{border-bottom:1px solid var(--linea)}
+.crit__n{font-size:clamp(28px,4.5vw,42px);font-weight:800;letter-spacing:-.04em;color:var(--az);font-variant-numeric:tabular-nums;line-height:1}
+.crit li h3{font-size:18px;font-weight:800;letter-spacing:-.01em;margin:0}
+.crit li p{color:var(--gris);font-size:15px;margin:6px 0 0;line-height:1.5;max-width:48ch}
+.bignum{font-size:clamp(56px,11vw,116px);font-weight:800;letter-spacing:-.05em;line-height:1;color:var(--az);font-variant-numeric:tabular-nums}
+.bignum small{display:block;font-size:clamp(14px,2.4vw,18px);font-weight:600;color:var(--gris-2);letter-spacing:normal;margin-top:10px}
