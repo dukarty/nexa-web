@@ -21,28 +21,96 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
 <link rel="stylesheet" href="styles.css?v=98">
 <style>
-/* tarjetas de ideas — específico de Momentos */
-.ideas{padding:clamp(48px,7vw,80px) 0}
-.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
-@media(max-width:900px){.grid{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:600px){.grid{grid-template-columns:1fr}}
-.idea{position:relative;border-radius:22px;overflow:hidden;min-height:224px;padding:26px;display:flex;flex-direction:column;justify-content:flex-end;color:#fff;isolation:isolate;transition:transform .2s var(--e),box-shadow .2s var(--e)}
-.idea::before{content:"";position:absolute;inset:0;z-index:-1}
-.idea::after{content:"";position:absolute;inset:0;z-index:-1;background:radial-gradient(120% 85% at 78% 0%,rgba(255,255,255,.22),transparent 58%)}
-.idea:hover{transform:translateY(-5px);box-shadow:0 34px 64px -30px rgba(10,12,17,.55)}
-.idea.i1::before{background:linear-gradient(150deg,#2f66ff,#12307a)}
-.idea.i2::before{background:linear-gradient(150deg,#ff7a45,#b5340f)}
-.idea.i3::before{background:linear-gradient(150deg,#12b886,#0a5f47)}
-.idea.i4::before{background:linear-gradient(150deg,#845ef7,#3d2a7a)}
-.idea.i5::before{background:linear-gradient(150deg,#e8590c,#7a2708)}
-.idea.i6::before{background:linear-gradient(150deg,#0a0c11,#2b3242)}
-.idea small{font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;opacity:.85}
-.idea h3{font-size:clamp(21px,3vw,27px);font-weight:800;letter-spacing:-.02em;line-height:1.05;margin-top:8px}
-.idea p{font-size:14.5px;margin-top:8px;color:rgba(255,255,255,.88);line-height:1.45}
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --bg:#F9F7F3;--bg2:#F1ECE4;--ink:#0A0C11;--ink2:#3A4152;--gris:#6B7280;--gris2:#9AA1B2;
+  --az:#2F66FF;--az-d:#1B4AE0;--soft:#EAF0FF;--soft2:#F2F6FF;--linea:#E8E1D6;--linea2:#EDE7DD;--verde:#0FB981;
+  /* acentos suaves por franja (tintes, no bloques) */
+  --am-b:#FFF1E4;--am-t:#B96A1E; --di-b:#E9F0FF;--di-t:#2455E0; --ta-b:#FCEBEF;--ta-t:#C0475F; --no-b:#ECEAFB;--no-t:#5B4FC7; --fi-b:#E4F6EE;--fi-t:#0C946A;
+  --sh1:0 1px 2px rgba(11,13,20,.05);--sh2:0 6px 18px -8px rgba(11,13,20,.16);--sh3:0 26px 56px -30px rgba(11,13,20,.3);
+  --f:"Plus Jakarta Sans",-apple-system,"Segoe UI",system-ui,sans-serif}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:var(--f);line-height:1.5;-webkit-font-smoothing:antialiased;overflow-x:clip;font-feature-settings:"ss01"}
+.wrap{max-width:1200px;margin:0 auto;padding:0 26px}
+.eyer{display:inline-block;font-size:12.5px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:var(--az)}
+.x{color:var(--az)}
+#top.stuck{border-color:var(--linea);box-shadow:0 6px 26px -20px rgba(11,13,20,.6)}
+
+/* ===== HERO + TICKER (renombrado .hero→.mhero: styles.css ya define .hero global) ===== */
+.mhero{padding:76px 0 20px;text-align:center;position:relative;overflow:hidden}
+.mhero h1{font-size:clamp(40px,7vw,104px);line-height:.96;letter-spacing:-.045em;font-weight:800;text-transform:uppercase;text-wrap:balance;max-width:15ch;margin:16px auto 0}
+.mhero .sub{font-size:clamp(17px,2vw,22px);color:var(--gris);margin:22px auto 0;max-width:42ch;line-height:1.5}
+.mhero .sub b{color:var(--ink);font-weight:700}
+.ticker{margin-top:44px;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.ticker-in{display:inline-flex;gap:14px;white-space:nowrap;animation:slide 34s linear infinite;will-change:transform}
+.ticker:hover .ticker-in{animation-play-state:paused}
+@keyframes slide{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+.tk{display:inline-flex;align-items:center;gap:9px;padding:12px 20px;border-radius:999px;border:1px solid var(--linea);background:#fff;font-size:16px;font-weight:700;box-shadow:var(--sh1);flex:none}
+.tk .e{font-size:19px}
+
+/* ===== GALERÍA ===== */
+/* overflow-x:clip;overflow-y:visible para que .filters (sticky) sobreviva a section{overflow:hidden} del sistema global */
+.gal{padding:64px 0 96px;overflow-x:clip;overflow-y:visible}
+.gal .top{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;margin-bottom:14px}
+.gal h2{font-size:clamp(26px,3.2vw,42px);letter-spacing:-.03em;font-weight:800;margin-top:8px}
+.gal .note{font-size:14px;color:var(--gris);max-width:30ch}
+.filters{display:flex;gap:10px;flex-wrap:wrap;margin:22px 0 34px;position:sticky;top:78px;z-index:20;background:linear-gradient(180deg,var(--bg) 70%,transparent);padding:8px 0}
+.fbtn{padding:10px 18px;border-radius:999px;border:1.5px solid var(--linea);background:#fff;font-family:var(--f);font-size:14.5px;font-weight:700;color:var(--ink2);cursor:pointer;transition:.15s}
+.fbtn:hover{border-color:var(--az);color:var(--ink)}
+.fbtn.on{background:var(--ink);border-color:var(--ink);color:#fff}
+.fcount{margin-left:auto;align-self:center;font-size:14px;color:var(--gris);font-weight:600}.fcount b{color:var(--ink);font-weight:800}
+@media(max-width:560px){.fcount{display:none}}
+
+.mgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;grid-auto-flow:dense}
+.mtile{background:#fff;border:1px solid var(--linea);border-radius:22px;padding:26px;box-shadow:var(--sh1);display:flex;flex-direction:column;min-height:230px;transition:transform .5s cubic-bezier(.16,1,.3,1),opacity .45s,box-shadow .2s;cursor:pointer}
+.mtile:hover{transform:translateY(-4px);box-shadow:var(--sh3)}
+.mtile.big{grid-column:span 2}
+.mtile .emo{font-size:40px;line-height:1}
+.mtile.big .emo{font-size:54px}
+.mtile .tag{display:inline-flex;align-self:flex-start;align-items:center;gap:6px;margin-top:16px;padding:5px 12px;border-radius:999px;font-size:12px;font-weight:800;letter-spacing:.02em;text-transform:uppercase}
+.mtile h3{font-size:clamp(20px,2.2vw,26px);font-weight:800;letter-spacing:-.02em;line-height:1.05;margin-top:14px}
+.mtile.big h3{font-size:clamp(24px,2.8vw,34px)}
+.mtile p{margin-top:8px;font-size:15px;color:var(--gris);line-height:1.5;text-wrap:pretty}
+.mtile .go{margin-top:auto;padding-top:16px;font-size:14px;font-weight:800;color:var(--az);display:inline-flex;align-items:center;gap:6px;transition:gap .18s}
+.mtile:hover .go{gap:11px}
+/* franjas */
+.fr-am .tag{background:var(--am-b);color:var(--am-t)} .fr-di .tag{background:var(--di-b);color:var(--di-t)}
+.fr-ta .tag{background:var(--ta-b);color:var(--ta-t)} .fr-no .tag{background:var(--no-b);color:var(--no-t)}
+.fr-fi .tag{background:var(--fi-b);color:var(--fi-t)}
+.mtile.hide{display:none}
+@media(max-width:900px){.mgrid{grid-template-columns:1fr 1fr}.mtile.big{grid-column:span 2}}
+@media(max-width:560px){.mgrid{grid-template-columns:1fr}.mtile.big{grid-column:span 1}.mtile{min-height:0}}
+
+/* ===== DE LAS GANAS A UN PLAN ===== */
+.bridge{padding:88px 0;background:linear-gradient(180deg,var(--bg),var(--soft2));text-align:center;border-top:1px solid var(--linea)}
+.bridge h2{font-size:clamp(28px,4vw,54px);letter-spacing:-.04em;font-weight:800;line-height:1.02;max-width:18ch;margin:12px auto 0;text-wrap:balance}
+.bridge h2 .x{color:var(--az)}
+.bflow{display:flex;justify-content:center;align-items:stretch;gap:0;flex-wrap:wrap;margin:44px auto 0;max-width:820px}
+.bstep{flex:1;min-width:200px;padding:22px 20px;position:relative}
+.bstep .e{font-size:30px}
+.bstep b{display:block;margin-top:12px;font-size:17px;font-weight:800;letter-spacing:-.02em}
+.bstep span{display:block;margin-top:6px;font-size:14px;color:var(--gris);line-height:1.4}
+.bstep:not(:last-child):after{content:"→";position:absolute;right:-8px;top:32px;color:var(--az);font-weight:800;font-size:20px}
+@media(max-width:640px){.bstep:not(:last-child):after{content:"↓";right:auto;left:50%;transform:translateX(-50%);top:auto;bottom:-6px}}
+
+/* ===== CIERRE (renombrado .close→.mclose: styles.css ya define .close global con fondo azul + texto blanco) ===== */
+.mclose{padding:100px 0;text-align:center;position:relative;overflow:hidden;background:var(--soft2)}
+.mclose .xbg{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:min(52vw,620px);font-weight:800;color:var(--az);opacity:.05;line-height:1;pointer-events:none;letter-spacing:-.05em}
+.mclose .wrap{position:relative;z-index:1}
+.mclose h2{font-size:clamp(34px,5.2vw,76px);letter-spacing:-.045em;font-weight:800;text-transform:uppercase;line-height:.98;max-width:16ch;margin:12px auto 0;color:var(--ink)}
+.mclose p{margin:18px auto 0;max-width:38ch;font-size:clamp(16px,1.8vw,20px);color:var(--gris);line-height:1.5;text-wrap:pretty}
+.mclose .cta{margin-top:32px;display:flex;justify-content:center}
+
+.reveal{opacity:0;transform:translateY(22px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1)}
+.reveal.on{opacity:1;transform:none}
+
+@media (min-width:1500px){.wrap{max-width:1340px}.mhero h1{font-size:118px}.mclose h2{font-size:88px}}
+@media (min-width:1920px){.wrap{max-width:1520px}.mhero h1{font-size:134px}.mclose h2{font-size:100px}.mgrid{grid-template-columns:repeat(4,1fr)}.mtile.big{grid-column:span 2}}
+@media (min-width:2500px){.wrap{max-width:1740px}.mhero h1{font-size:158px}}
 </style>
 </head>
 <body>
-<a class="skip" href="#ideas">Saltar al contenido</a>
+<a class="skip" href="#gal">Saltar al contenido</a>
 
 <header class="nav" id="top">
   <div class="nav__in">
@@ -63,33 +131,60 @@
 </header>
 
 <main>
-  <!-- 1 · HERO -->
-  <section class="phero"><div class="glow breathe"></div><div class="wrap">
-    <p class="klabel">Momentos</p>
-    <h1>Ideas para no <span class="x">quedarte en casa</span>.</h1>
-    <p class="plead">No hace falta un planazo. NYXA convierte esas ganas en un plan, con quien quiere lo mismo.</p>
+  <!-- HERO + CINTA DE PLANES -->
+  <section class="mhero">
+    <div class="wrap">
+      <span class="eyer">Momentos</span>
+      <h1>Ideas para no quedarte en <span class="x">casa</span>.</h1>
+      <p class="sub">No hace falta un planazo. NYXA convierte esas ganas en un plan, <b>con quien quiere lo mismo</b>.</p>
+    </div>
+    <div class="ticker"><div class="ticker-in" id="tk"></div></div>
+  </section>
+
+  <!-- GALERÍA FILTRABLE -->
+  <section class="gal" id="gal"><div class="wrap">
+    <div class="top">
+      <div>
+        <span class="eyer">La vida, fuera del móvil</span>
+        <h2>Elige tu momento.</h2>
+      </div>
+      <p class="note">Son ideas de verdad. En NYXA cada una se convierte en un plan con gente.</p>
+    </div>
+    <div class="filters" id="filters">
+      <button class="fbtn on" data-f="all">Todo</button>
+      <button class="fbtn" data-f="am">Al amanecer</button>
+      <button class="fbtn" data-f="di">De día</button>
+      <button class="fbtn" data-f="ta">Por la tarde</button>
+      <button class="fbtn" data-f="no">De noche</button>
+      <button class="fbtn" data-f="fi">El finde</button>
+      <span class="fcount"><b id="mcount">0</b> planes</span>
+    </div>
+    <div class="mgrid" id="mgrid"></div>
   </div></section>
 
-  <!-- 2 · IDEAS -->
-  <section class="ideas" id="ideas"><div class="wrap">
-    <div class="grid reveal">
-      <article class="idea i1"><small>Al amanecer</small><h3>Amanecer en la Albufera</h3><p>Madrugar sí vale la pena cuando hay con quién.</p></article>
-      <article class="idea i2"><small>Entre semana</small><h3>El concierto del jueves</h3><p>La sala pequeña, la banda que nadie conoce todavía.</p></article>
-      <article class="idea i3"><small>Al atardecer</small><h3>Una ruta con vistas</h3><p>Salir de la ciudad y volver con la cabeza en su sitio.</p></article>
-      <article class="idea i4"><small>Sin prisa</small><h3>Café y charla de verdad</h3><p>Una hora, una mesa, una conversación que no es por chat.</p></article>
-      <article class="idea i5"><small>De noche</small><h3>Hoguera en el Saler</h3><p>Playa, fuego y gente. El plan más fácil del verano.</p></article>
-      <article class="idea i6"><small>Un martes cualquiera</small><h3>Cena de barrio</h3><p>El sitio de siempre deja de estar vacío.</p></article>
+  <!-- DE LAS GANAS A UN PLAN -->
+  <section class="bridge"><div class="wrap">
+    <span class="eyer">Cómo pasa de verdad</span>
+    <h2>De las ganas a un plan de <span class="x">verdad</span>.</h2>
+    <div class="bflow">
+      <div class="bstep reveal"><div class="e">💭</div><b>Eliges un momento</b><span>El que te apetezca hoy.</span></div>
+      <div class="bstep reveal"><div class="e">🧭</div><b>Te decimos con quién</b><span>Gente cerca con las mismas ganas.</span></div>
+      <div class="bstep reveal"><div class="e">🤝</div><b>Quedáis y lo vivís</b><span>En persona, no por pantalla.</span></div>
     </div>
   </div></section>
 
-  <!-- 3 · CIERRE -->
-  <div class="wrap"><div class="close reveal">
-    <h2>De las ganas a un<br>plan de verdad.</h2>
-    <p>Dices qué te apetece. NYXA te dice con quién, y quedáis.</p>
-    <div class="mcta">
-      <a class="appstore" href="https://apps.apple.com/es/app/nyxa/id6800325033" aria-label="Descargar NYXA en la App Store"><svg viewBox="0 0 24 24" fill="#0A0C11" aria-hidden="true"><path d="M16.5 1.6c.1 1-.3 2-.9 2.8-.7.8-1.7 1.4-2.7 1.3-.1-1 .4-2 1-2.7.6-.8 1.7-1.3 2.6-1.4zM19.3 17c-.5 1.1-.7 1.6-1.3 2.5-.9 1.4-2.1 3.1-3.6 3.1-1.4 0-1.7-.9-3.6-.9s-2.3.9-3.6.9C5.1 22.6 4 21 3 19.6.6 16.1.3 12 1.8 9.8 2.9 8.3 4.5 7.3 6 7.3c1.6 0 2.6 1 3.9 1 1.3 0 2-1 3.9-1 1.3 0 2.7.7 3.7 2-3.2 1.8-2.7 6.4.8 7.7z"/></svg><span><small>Descárgalo en</small><b>App Store</b></span></a>
+  <!-- CIERRE -->
+  <section class="mclose">
+    <div class="xbg">✕</div>
+    <div class="wrap">
+      <span class="eyer">¿Qué hacemos hoy?</span>
+      <h2>Haz que esta semana <span class="x">pase algo</span>.</h2>
+      <p>Dices qué te apetece. Te decimos con quién. Quedáis de verdad.</p>
+      <div class="cta">
+        <a class="appstore" href="https://apps.apple.com/es/app/nyxa/id6800325033" aria-label="Descargar NYXA en la App Store"><svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M16.5 1.6c.1 1-.3 2-.9 2.8-.7.8-1.7 1.4-2.7 1.3-.1-1 .4-2 1-2.7.6-.8 1.7-1.3 2.6-1.4zM19.3 17c-.5 1.1-.7 1.6-1.3 2.5-.9 1.4-2.1 3.1-3.6 3.1-1.4 0-1.7-.9-3.6-.9s-2.3.9-3.6.9C5.1 22.6 4 21 3 19.6.6 16.1.3 12 1.8 9.8 2.9 8.3 4.5 7.3 6 7.3c1.6 0 2.6 1 3.9 1 1.3 0 2-1 3.9-1 1.3 0 2.7.7 3.7 2-3.2 1.8-2.7 6.4.8 7.7z"/></svg><span><small>Descárgalo en</small><b>App Store</b></span></a>
+      </div>
     </div>
-  </div></div>
+  </section>
 </main>
 
 <footer class="nf"><div class="nf__in">
@@ -139,9 +234,69 @@
   document.addEventListener('click',function(e){var b=e.target.closest('.burger');if(!b)return;var n=b.closest('.nav');n.classList.toggle('open');b.setAttribute('aria-expanded',n.classList.contains('open'));});
   document.querySelectorAll('.nav__links a').forEach(function(a){a.addEventListener('click',function(){document.querySelector('.nav').classList.remove('open');});});
   var y=document.getElementById('y');if(y)y.textContent=new Date().getFullYear();
-  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target);}})},{threshold:.12});
+
+  // cinta de planes (ticker)
+  var TK=[['☕','café'],['🥾','ruta'],['🎶','concierto'],['🔥','hoguera'],['🍝','cena'],['🌅','amanecer'],['⚽','partido'],['🍷','vermut'],['🎨','expo'],['🏃','correr']];
+  var tk=document.getElementById('tk');
+  if(tk){var h=TK.map(function(t){return '<span class="tk"><span class="e">'+t[0]+'</span>'+t[1]+'</span>';}).join('');tk.innerHTML=h+h;if(rm)tk.style.animation='none';}
+
+  // ===== CATALOGO DE MOMENTOS (data-driven: ampliar = añadir aquí; en producción puede venir de un JSON del sitio) =====
+  // fr: franjas para el filtro (am amanecer / di dia / ta tarde / no noche / fi finde). Son TIPOS de plan, no atados a ciudad.
+  var MOMENTOS=[
+    {e:'🌅',fr:['am'],tag:'Al amanecer',t:'Ver amanecer',p:'En la playa o en un mirador. Madrugar vale la pena cuando hay con quién.',big:true},
+    {e:'☕',fr:['di'],tag:'Sin prisa',t:'Café y charla de verdad',p:'Una hora, una mesa, una conversación que no es por chat.'},
+    {e:'🥾',fr:['ta','fi'],tag:'Al atardecer',t:'Ruta con vistas',p:'Salir de la ciudad y volver con la cabeza en su sitio.'},
+    {e:'🎶',fr:['no'],tag:'Entre semana',t:'Concierto pequeño',p:'La sala de siempre, la banda que nadie conoce todavía.'},
+    {e:'🔥',fr:['no','fi'],tag:'De noche',t:'Hoguera en la playa',p:'Playa, fuego y gente. El plan más fácil del verano.',big:true},
+    {e:'🍝',fr:['no'],tag:'Un martes cualquiera',t:'Cena de barrio',p:'El sitio de siempre deja de estar vacío.'},
+    {e:'⚽',fr:['ta'],tag:'Después de currar',t:'Partido en el parque',p:'Bajar, sudar y reírte un rato. Sin más.'},
+    {e:'🍷',fr:['fi'],tag:'Domingo lento',t:'Mercado y vermut',p:'Pasear sin rumbo y acabar en una terraza.'},
+    {e:'🎨',fr:['di','ta'],tag:'Plan tranquilo',t:'Una expo y luego caña',p:'Ver algo, comentarlo y alargar la tarde.'},
+    {e:'🏊',fr:['am','ta'],tag:'Refrescar',t:'Baño a las seis',p:'El chapuzón que te reordena el día entero.'},
+    {e:'🚴',fr:['ta'],tag:'Al atardecer',t:'Bici hasta el mar',p:'Rodar hasta que se ponga el sol y volver con hambre.'},
+    {e:'🧗',fr:['di'],tag:'Adrenalina',t:'Escalada para novatos',p:'Miedo compartido y caña después. Engancha.'},
+    {e:'🎲',fr:['no'],tag:'Noche de casa',t:'Juegos de mesa',p:'Una mesa, fichas y risas hasta tarde.'},
+    {e:'🎤',fr:['no'],tag:'De noche',t:'Karaoke sin vergüenza',p:'Cantar fatal y que dé exactamente igual.'},
+    {e:'🧘',fr:['am'],tag:'Empezar bien',t:'Yoga en el parque',p:'Estirar al aire libre antes de que el día arranque.'},
+    {e:'🎬',fr:['no','fi'],tag:'Cae la noche',t:'Cine de verano',p:'Peli al aire libre y cañas al salir.',big:true},
+    {e:'🍤',fr:['no'],tag:'De tapeo',t:'Ruta de tapas',p:'De barra en barra, sin plan fijo, con hambre y ganas.'},
+    {e:'📷',fr:['di','ta'],tag:'A tu ritmo',t:'Fotowalk por la ciudad',p:'Perderse con una cámara y mirar de otra forma.'},
+    {e:'🏃',fr:['am'],tag:'Antes de todo',t:'Salir a correr',p:'Unos kilómetros con quien no te deja rajarte.'},
+    {e:'🛶',fr:['am','fi'],tag:'Primera hora',t:'Kayak al alba',p:'El río o el mar cuando aún no hay nadie.'},
+    {e:'🥘',fr:['no'],tag:'En casa',t:'Cocinar juntos',p:'Comprar, cocinar y cenar lo que salga. Y repetir.'},
+    {e:'🌳',fr:['ta','fi'],tag:'Sin reloj',t:'Picnic en el parque',p:'Manta, comida y una tarde que no se acaba.',big:true},
+    {e:'⛰️',fr:['fi'],tag:'Escapada',t:'Finde en la montaña',p:'Coger el coche y ver dónde acabáis.'},
+    {e:'🕺',fr:['no'],tag:'Hasta tarde',t:'Salir a bailar',p:'Bailar hasta que cierren, con buena gente.'},
+    {e:'🧺',fr:['fi'],tag:'Domingo',t:'Brunch sin prisa',p:'Empezar el domingo con calma y sin culpa.'},
+    {e:'☀️',fr:['di'],tag:'Mediodía',t:'Terraza al sol',p:'Una caña, sombra a medias y el móvil en el bolsillo.'},
+    {e:'🎸',fr:['no'],tag:'Micro abierto',t:'Jam de barrio',p:'Tocar sin que nadie te juzgue. O solo mirar.'},
+    {e:'🏓',fr:['ta'],tag:'Competir de mentira',t:'Ping pong y risas',p:'Perder da igual si te ríes ganando.'}
+  ];
+
+  var mgrid=document.getElementById('mgrid');
+  if(mgrid){
+    mgrid.innerHTML=MOMENTOS.map(function(m){
+      return '<div class="mtile '+(m.big?'big ':'')+'fr-'+m.fr[0]+' reveal" data-fr="'+m.fr.join(' ')+'">'
+        +'<div class="emo">'+m.e+'</div>'
+        +'<span class="tag">'+m.tag+'</span>'
+        +'<h3>'+m.t+'</h3><p>'+m.p+'</p>'
+        +'<span class="go">Montar este plan →</span></div>';
+    }).join('');
+  }
+  var tiles=[].slice.call(document.querySelectorAll('.mtile'));
+
+  // reveals (tras render, cubre tiles + resto de la página)
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target);}})},{threshold:.1});
   document.querySelectorAll('.reveal').forEach(function(el){rm?el.classList.add('on'):io.observe(el);});
   addEventListener('load',function(){document.querySelectorAll('.reveal:not(.on)').forEach(function(el){var r=el.getBoundingClientRect();if(r.top<innerHeight+80&&r.bottom>-80)el.classList.add('on');});});
+
+  // filtros (multi-franja) + contador
+  var filters=document.getElementById('filters'),countEl=document.getElementById('mcount');
+  function applyFilter(f){var n=0;tiles.forEach(function(t){var ok=f==='all'||t.dataset.fr.split(' ').indexOf(f)>=0;t.classList.toggle('hide',!ok);if(ok)n++;});if(countEl)countEl.textContent=n;}
+  if(filters){filters.addEventListener('click',function(e){var b=e.target.closest('.fbtn');if(!b)return;filters.querySelectorAll('.fbtn').forEach(function(x){x.classList.toggle('on',x===b);});applyFilter(b.dataset.f);});}
+  applyFilter('all');
+
+  var navtop=document.getElementById('top');if(navtop){addEventListener('scroll',function(){navtop.classList.toggle('stuck',(window.scrollY||0)>8);},{passive:true});}
 })();
 </script>
 </body>
