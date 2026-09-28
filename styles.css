@@ -220,3 +220,8 @@ section{position:relative;overflow:hidden}
 .teaser h3{font-size:clamp(20px,2.4vw,26px);font-weight:800;letter-spacing:-.02em}
 .teaser p{color:var(--gris);font-size:15px;margin-top:6px;max-width:44ch}
 .tcenter{text-align:center}
+
+/* ==== Pantallas grandes (Mac grande, monitores): el contenido se expande ==== */
+@media (min-width:1500px){ .wrap,.nav__in,.nf__in{max-width:1320px} }
+@media (min-width:1920px){ .wrap,.nav__in,.nf__in{max-width:1500px} }
+@media (min-width:2500px){ .wrap,.nav__in,.nf__in{max-width:1720px} }
