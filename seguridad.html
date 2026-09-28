@@ -33,7 +33,7 @@
   --e:cubic-bezier(.16,1,.3,1);--f:"Plus Jakarta Sans",-apple-system,"Segoe UI",system-ui,sans-serif}
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--ink);font-family:var(--f);line-height:1.5;-webkit-font-smoothing:antialiased;overflow-x:hidden;font-feature-settings:"ss01"}
+body{background:var(--bg);color:var(--ink);font-family:var(--f);line-height:1.5;-webkit-font-smoothing:antialiased;overflow-x:clip;font-feature-settings:"ss01"}
 .wrap{max-width:1180px;margin:0 auto;padding:0 24px}
 a{color:inherit;text-decoration:none}
 #top.stuck{border-color:var(--linea);box-shadow:0 6px 26px -20px rgba(11,13,20,.6)}
@@ -54,7 +54,7 @@ a{color:inherit;text-decoration:none}
 .hnote{margin-top:16px;font-size:14px;color:var(--gris);font-weight:600}
 
 /* ===== STORY — móvil fijo + reglas que pasan (scrollytelling) ===== */
-.story{position:relative;padding:40px 0 60px}
+.story{position:relative;padding:40px 0 60px;overflow-x:clip;overflow-y:visible}
 .story-head{text-align:center;padding:40px 0 0}
 .story-head h2{font-size:clamp(30px,4.2vw,50px);letter-spacing:-.04em;font-weight:800;text-wrap:balance;margin-top:12px}
 .storygrid{display:grid;grid-template-columns:1fr 360px;gap:70px;align-items:start;margin-top:20px}
