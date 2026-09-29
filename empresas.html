@@ -304,10 +304,18 @@ footer{background:#080A12;color:#98A0B4;padding:64px 0 40px}
 .fbrand p{font-size:14px;color:#8A93A9;max-width:30ch;line-height:1.55}
 .fbot{margin-top:48px;padding-top:24px;border-top:1px solid #191C28;display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;font-size:13px;color:#6D758C}
 
+/* cabecera de sección asimétrica (rompe la monotonía de bloques centrados) */
+.shead{display:flex;justify-content:space-between;align-items:flex-end;gap:40px;text-align:left;flex-wrap:wrap}
+.shead .stx{max-width:600px}
+.shead .lead{margin-top:0;max-width:40ch}
+@media(max-width:820px){.shead{flex-direction:column;align-items:flex-start;gap:14px}.shead .lead{margin-top:2px}}
+
+a:focus-visible,button:focus-visible,input:focus-visible,select:focus-visible,summary:focus-visible,[role=button]:focus-visible{outline:2.5px solid var(--az);outline-offset:3px;border-radius:8px}
+
 /* ==== Pantallas grandes (Mac grande, monitores): la web se expande ==== */
-@media (min-width:1500px){.wrap{max-width:1320px}.hero-in{padding:90px 0 80px}.h1{font-size:66px}.hsub{font-size:21px}.h2{font-size:52px}.lead{font-size:19px}.sec{padding:112px 0}.stage .panel{max-width:470px}.datos .big{font-size:74px}.calc__hero .v{font-size:88px}.panel__big{font-size:48px}}
-@media (min-width:1920px){.wrap{max-width:1500px}.hero-in{padding:104px 0 92px}.h1{font-size:80px}.hsub{font-size:23px}.h2{font-size:64px}.lead{font-size:21px}.sec{padding:136px 0}.stage .panel{max-width:540px}.datos .big{font-size:88px}.calc__hero .v{font-size:104px}.panel__big{font-size:54px}.big-quote{font-size:60px}}
-@media (min-width:2500px){.wrap{max-width:1720px}.h1{font-size:92px}.h2{font-size:72px}.sec{padding:160px 0}.stage .panel{max-width:600px}}
+@media (min-width:1500px){.wrap{max-width:1320px}.hero-in{padding:90px 0 80px}.h1{font-size:90px}.hsub{font-size:21px}.h2{font-size:60px}.lead{font-size:19px}.sec{padding:112px 0}.stage .panel{max-width:470px}.datos .big{font-size:74px}.calc__hero .v{font-size:88px}.panel__big{font-size:48px}}
+@media (min-width:1920px){.wrap{max-width:1500px}.hero-in{padding:104px 0 92px}.h1{font-size:106px}.hsub{font-size:23px}.h2{font-size:70px}.lead{font-size:21px}.sec{padding:136px 0}.stage .panel{max-width:540px}.datos .big{font-size:88px}.calc__hero .v{font-size:104px}.panel__big{font-size:54px}.big-quote{font-size:60px}}
+@media (min-width:2500px){.wrap{max-width:1720px}.h1{font-size:126px}.sec{padding:160px 0}.stage .panel{max-width:600px}}
 </style>
 </head>
 <body>
@@ -472,7 +480,7 @@ window.addEventListener("resize",function(){if(window.innerWidth>860)set(false);
 </div></section>
 
 <!-- CASOS (tabs) -->
-<section class="sec alt" id="negocio"><div class="wrap center">
+<section class="sec alt" id="negocio"><div class="wrap">
   <span class="eyer reveal">Casos</span>
   <h2 class="h2 mt reveal">Sea cual sea tu negocio, atraemos a los clientes que encajan.</h2>
   <div class="tabs reveal">
@@ -539,10 +547,11 @@ window.addEventListener("resize",function(){if(window.innerWidth>860)set(false);
 </div></section>
 
 <!-- PLANES -->
-<section class="sec" id="precios"><div class="wrap center">
-  <span class="eyer reveal">Precios</span>
-  <h2 class="h2 mt reveal">Una opción para cada negocio.</h2>
-  <p class="lead reveal">Cada plan incluye personas al mes. Lo que ves grande es la gente que entra.</p>
+<section class="sec" id="precios"><div class="wrap">
+  <div class="shead reveal">
+    <div class="stx"><span class="eyer">Precios</span><h2 class="h2 mt">Una opción para cada negocio.</h2></div>
+    <p class="lead">Cada plan incluye personas al mes. Lo que ves grande es la gente que entra.</p>
+  </div>
   <div class="planes">
     <div class="plan reveal"><div class="ppl">15€<small>al mes</small></div><div class="m">te llevamos 2 clientes</div><div class="c"><b>1 gratis</b> al empezar<br>Perfil y panel propio</div></div>
     <div class="plan reveal d1"><div class="ppl">49€<small>al mes</small></div><div class="m">te llevamos 7 clientes</div><div class="c"><b>3 gratis</b> al empezar<br>Se propone en tu zona</div></div>
@@ -554,7 +563,7 @@ window.addEventListener("resize",function(){if(window.innerWidth>860)set(false);
     <span>¿Quieres más de los que incluye? <b>Subes de plan</b> o pagas los extras — y los pides tú.</span>
     <span>Tus <b>primeros clientes, gratis</b> — según tu plan. Sin tarjeta, sin permanencia.</span>
   </div>
-  <p class="eyer reveal" style="margin-top:56px">Compara los planes</p>
+  <p class="eyer reveal" style="margin-top:56px;text-align:center">Compara los planes</p>
   <div class="vtab-wrap reveal">
     <div class="vtab-scroll">
       <table class="vtab">
