@@ -52,6 +52,7 @@ a{color:inherit;text-decoration:none}
 .reveal{opacity:0;transform:translateY(26px);transition:opacity .7s var(--e),transform .7s var(--e)}.reveal.on{opacity:1;transform:none}
 .reveal.d1{transition-delay:.1s}.reveal.d2{transition-delay:.2s}.reveal.d3{transition-delay:.3s}
 @media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none}}
+a:focus-visible,button:focus-visible,[role=button]:focus-visible{outline:2.5px solid #2F66FF;outline-offset:3px;border-radius:8px}
 
 /* ===== HERO-MAPA (el mapa ES el protagonista) ===== */
 .maphero{position:relative;overflow:hidden;background:radial-gradient(70% 60% at 80% 10%,var(--soft),transparent 60%)}
@@ -112,6 +113,11 @@ a{color:inherit;text-decoration:none}
 .exline.done{background:var(--az)}
 
 /* ===== CIUDADES: franjas editoriales (nombre gigante, no tarjetas) ===== */
+.csec-top{display:flex;justify-content:space-between;align-items:flex-end;gap:26px;flex-wrap:wrap;padding:70px 0 10px}
+.csec-top .th{text-align:left}
+.csec-top h2{font-size:clamp(28px,3.6vw,42px);letter-spacing:-.035em;font-weight:800;margin-top:12px}
+.csec-top .cs-note{max-width:30ch;font-size:15px;color:var(--gris);line-height:1.5;text-align:left;padding-bottom:6px}
+@media(max-width:700px){.csec-top{flex-direction:column;align-items:flex-start;gap:10px;padding:52px 0 6px}}
 .cband{border-top:1px solid var(--linea);padding:52px 0;position:relative}
 .cband:first-of-type{border-top:0}
 .cband-in{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:30px;align-items:center}
@@ -145,9 +151,9 @@ a{color:inherit;text-decoration:none}
 .cierre .lead{font-size:18px;color:var(--gris);margin:16px auto 0;max-width:42ch;line-height:1.5}
 .cierre .cta{display:flex;gap:13px;justify-content:center;flex-wrap:wrap;margin-top:30px}
 /* Pantallas grandes: la web se expande */
-@media (min-width:1500px){.wrap{max-width:1320px}.mh-title{font-size:92px}.mh-sub{font-size:20px}}
-@media (min-width:1920px){.wrap{max-width:1500px}.mh-title{font-size:106px}.mapstage{max-width:640px}}
-@media (min-width:2500px){.wrap{max-width:1720px}.mapstage{max-width:720px}}
+@media (min-width:1500px){.wrap{max-width:1320px}.mh-title{font-size:90px}.mh-sub{font-size:20px}.expand h2,.cierre h2{font-size:60px}}
+@media (min-width:1920px){.wrap{max-width:1500px}.mh-title{font-size:106px}.mapstage{max-width:640px}.expand h2,.cierre h2{font-size:70px}}
+@media (min-width:2500px){.wrap{max-width:1720px}.mh-title{font-size:126px}.mapstage{max-width:720px}}
 </style>
 </head>
 <body>
@@ -215,7 +221,7 @@ a{color:inherit;text-decoration:none}
     <h2>Una ciudad encendida. Y no vamos a parar.</h2>
     <div class="exbar reveal"><i class="f1"></i><i class="f2"></i><i class="f3"></i></div>
     <div class="exsteps">
-      <div class="exnode on reveal"><div class="en-k">Ahora</div><div class="en-c"><em>Valencia</em></div><div class="en-d">La que prende primero. Miles quedando de verdad.</div></div>
+      <div class="exnode on reveal"><div class="en-k">Ahora</div><div class="en-c"><em>Valencia</em></div><div class="en-d">La primera en encenderse. Aquí es donde ya se queda de verdad.</div></div>
       <div class="exline done reveal"></div>
       <div class="exnode reveal d1"><div class="en-k">Calentando</div><div class="en-c">BCN · Madrid</div><div class="en-d">Las dos grandes, entrando cada semana.</div></div>
       <div class="exline reveal d1"></div>
@@ -226,9 +232,9 @@ a{color:inherit;text-decoration:none}
   </div></section>
 
   <!-- CIUDADES: franjas editoriales -->
-  <section><div class="wrap" style="text-align:center;padding:70px 0 10px">
-    <span class="eyer reveal">Explora</span>
-    <h2 class="reveal" style="font-size:clamp(28px,3.6vw,42px);letter-spacing:-.035em;font-weight:800;margin-top:12px">Entra por tu ciudad.</h2>
+  <section><div class="wrap csec-top">
+    <div class="th"><span class="eyer reveal">Explora</span><h2 class="reveal">Entra por tu ciudad.</h2></div>
+    <p class="cs-note reveal d1">Cada ciudad tiene su ritmo. Toca la tuya y mira quién ya está dentro.</p>
   </div>
   <div class="wrap">
     <div class="cband reveal">
