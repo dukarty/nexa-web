@@ -55,6 +55,7 @@ body{background:var(--bg);color:var(--ink);font-family:var(--f);line-height:1.5;
 .gal .top{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;margin-bottom:14px}
 .gal h2{font-size:clamp(26px,3.2vw,42px);letter-spacing:-.03em;font-weight:800;margin-top:8px;text-wrap:balance}
 .gal .note{font-size:14px;color:var(--gris);max-width:30ch}
+@media(max-width:700px){.gal .top{flex-direction:column;align-items:flex-start;gap:10px}.gal .note{max-width:none}}
 .filters{display:flex;gap:10px;flex-wrap:wrap;margin:22px 0 34px;position:sticky;top:78px;z-index:20;background:linear-gradient(180deg,var(--bg) 70%,transparent);padding:8px 0}
 .fbtn{padding:10px 18px;border-radius:999px;border:1.5px solid var(--linea);background:#fff;font-family:var(--f);font-size:14.5px;font-weight:700;color:var(--ink2);cursor:pointer;transition:.15s}
 .fbtn:hover{border-color:var(--az);color:var(--ink)}
