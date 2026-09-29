@@ -39,20 +39,21 @@ body{background:var(--bg);color:var(--ink);font-family:var(--f);line-height:1.5;
 /* ===== HERO + TICKER (renombrado .hero→.mhero: styles.css ya define .hero global) ===== */
 .mhero{padding:76px 0 20px;text-align:center;position:relative;overflow:hidden}
 .mhero h1{font-size:clamp(40px,7vw,104px);line-height:.96;letter-spacing:-.045em;font-weight:800;text-transform:uppercase;text-wrap:balance;max-width:15ch;margin:16px auto 0}
-.mhero .sub{font-size:clamp(17px,2vw,22px);color:var(--gris);margin:22px auto 0;max-width:42ch;line-height:1.5}
+.mhero .sub{font-size:clamp(17px,2vw,22px);color:var(--gris);margin:22px auto 0;max-width:42ch;line-height:1.5;text-wrap:balance}
 .mhero .sub b{color:var(--ink);font-weight:700}
 .ticker{margin-top:44px;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
 .ticker-in{display:inline-flex;gap:14px;white-space:nowrap;animation:slide 34s linear infinite;will-change:transform}
 .ticker:hover .ticker-in{animation-play-state:paused}
 @keyframes slide{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-.tk{display:inline-flex;align-items:center;gap:9px;padding:12px 20px;border-radius:999px;border:1px solid var(--linea);background:#fff;font-size:16px;font-weight:700;box-shadow:var(--sh1);flex:none}
-.tk .e{font-size:19px}
+.tk{display:inline-flex;align-items:center;gap:10px;padding:12px 20px;border-radius:999px;border:1px solid var(--linea);background:#fff;font-size:16px;font-weight:700;box-shadow:var(--sh1);flex:none}
+.tk .e{display:inline-flex;color:var(--az);flex:none}
+.tk .e svg{width:19px;height:19px;display:block}
 
 /* ===== GALERÍA ===== */
 /* overflow-x:clip;overflow-y:visible para que .filters (sticky) sobreviva a section{overflow:hidden} del sistema global */
 .gal{padding:64px 0 96px;overflow-x:clip;overflow-y:visible}
 .gal .top{display:flex;justify-content:space-between;align-items:flex-end;gap:24px;flex-wrap:wrap;margin-bottom:14px}
-.gal h2{font-size:clamp(26px,3.2vw,42px);letter-spacing:-.03em;font-weight:800;margin-top:8px}
+.gal h2{font-size:clamp(26px,3.2vw,42px);letter-spacing:-.03em;font-weight:800;margin-top:8px;text-wrap:balance}
 .gal .note{font-size:14px;color:var(--gris);max-width:30ch}
 .filters{display:flex;gap:10px;flex-wrap:wrap;margin:22px 0 34px;position:sticky;top:78px;z-index:20;background:linear-gradient(180deg,var(--bg) 70%,transparent);padding:8px 0}
 .fbtn{padding:10px 18px;border-radius:999px;border:1.5px solid var(--linea);background:#fff;font-family:var(--f);font-size:14.5px;font-weight:700;color:var(--ink2);cursor:pointer;transition:.15s}
@@ -65,8 +66,10 @@ body{background:var(--bg);color:var(--ink);font-family:var(--f);line-height:1.5;
 .mtile{background:#fff;border:1px solid var(--linea);border-radius:22px;padding:26px;box-shadow:var(--sh1);display:flex;flex-direction:column;min-height:230px;transition:transform .5s cubic-bezier(.16,1,.3,1),opacity .45s,box-shadow .2s;cursor:pointer}
 .mtile:hover{transform:translateY(-4px);box-shadow:var(--sh3)}
 .mtile.big{grid-column:span 2}
-.mtile .emo{font-size:40px;line-height:1}
-.mtile.big .emo{font-size:54px}
+.mtile .emo{width:52px;height:52px;border-radius:15px;background:var(--soft);color:var(--az);display:grid;place-items:center;flex:none}
+.mtile .emo svg{width:25px;height:25px;display:block}
+.mtile.big .emo{width:64px;height:64px;border-radius:17px}
+.mtile.big .emo svg{width:30px;height:30px}
 .mtile .tag{display:inline-flex;align-self:flex-start;align-items:center;gap:6px;margin-top:16px;padding:5px 12px;border-radius:999px;font-size:12px;font-weight:800;letter-spacing:.02em;text-transform:uppercase}
 .mtile h3{font-size:clamp(20px,2.2vw,26px);font-weight:800;letter-spacing:-.02em;line-height:1.05;margin-top:14px}
 .mtile.big h3{font-size:clamp(24px,2.8vw,34px)}
@@ -88,7 +91,8 @@ body{background:var(--bg);color:var(--ink);font-family:var(--f);line-height:1.5;
 .modal.open .modal-card{transform:none}
 .modal-x{position:absolute;top:15px;right:15px;width:34px;height:34px;border-radius:50%;border:0;background:var(--bg2);color:var(--ink2);font-size:14px;cursor:pointer;font-family:var(--f);transition:.15s}
 .modal-x:hover{background:var(--linea)}
-.m-emo{font-size:58px;line-height:1}
+.m-emo{width:76px;height:76px;border-radius:22px;background:var(--soft);color:var(--az);display:grid;place-items:center;margin:0 auto}
+.m-emo svg{width:34px;height:34px;display:block}
 .modal-card .eyer{margin-top:14px}
 .modal-card h3{font-size:clamp(23px,4vw,30px);font-weight:800;letter-spacing:-.03em;margin-top:6px;line-height:1.05}
 .m-sub{margin-top:14px;font-size:16px;color:var(--gris);line-height:1.5}
@@ -98,32 +102,44 @@ body{background:var(--bg);color:var(--ink);font-family:var(--f);line-height:1.5;
 .modal-card .appstore{margin:0 auto}
 .m-note{margin-top:14px;font-size:13px;color:var(--gris2);font-weight:600}
 
-/* ===== DE LAS GANAS A UN PLAN ===== */
-.bridge{padding:88px 0;background:linear-gradient(180deg,var(--bg),var(--soft2));text-align:center;border-top:1px solid var(--linea)}
+/* ===== DE LAS GANAS A UN PLAN (asimétrico en desktop: título a la izq, pasos a la der) ===== */
+.bridge{padding:88px 0;background:linear-gradient(180deg,var(--bg),var(--soft2));border-top:1px solid var(--linea)}
+.bridge .wrap{text-align:center}
 .bridge h2{font-size:clamp(28px,4vw,54px);letter-spacing:-.04em;font-weight:800;line-height:1.02;max-width:18ch;margin:12px auto 0;text-wrap:balance}
 .bridge h2 .x{color:var(--az)}
 .bflow{display:flex;justify-content:center;align-items:stretch;gap:0;flex-wrap:wrap;margin:44px auto 0;max-width:820px}
 .bstep{flex:1;min-width:200px;padding:22px 20px;position:relative}
-.bstep .e{font-size:30px}
-.bstep b{display:block;margin-top:12px;font-size:17px;font-weight:800;letter-spacing:-.02em}
+.bstep .e{width:54px;height:54px;border-radius:16px;background:var(--soft);color:var(--az);display:grid;place-items:center;margin:0 auto}
+.bstep .e svg{width:25px;height:25px;display:block}
+.bstep b{display:block;margin-top:14px;font-size:17px;font-weight:800;letter-spacing:-.02em}
 .bstep span{display:block;margin-top:6px;font-size:14px;color:var(--gris);line-height:1.4}
-.bstep:not(:last-child):after{content:"→";position:absolute;right:-8px;top:32px;color:var(--az);font-weight:800;font-size:20px}
+.bstep:not(:last-child):after{content:"→";position:absolute;right:-8px;top:36px;color:var(--az);font-weight:800;font-size:20px}
 @media(max-width:640px){.bstep:not(:last-child):after{content:"↓";right:auto;left:50%;transform:translateX(-50%);top:auto;bottom:-6px}}
+@media(min-width:980px){
+  .bridge .wrap{display:grid;grid-template-columns:.85fr 1.15fr;gap:56px;align-items:center;text-align:left}
+  .bridge h2{margin:12px 0 0}
+  .bflow{margin:0;max-width:none;justify-content:flex-start}
+  .bstep{text-align:left;padding:0 20px 0 0;min-width:0}
+  .bstep .e{margin:0}
+  .bstep:not(:last-child):after{content:"↓";right:auto;left:26px;top:auto;bottom:-14px}
+}
 
 /* ===== CIERRE (renombrado .close→.mclose: styles.css ya define .close global con fondo azul + texto blanco) ===== */
 .mclose{padding:100px 0;text-align:center;position:relative;overflow:hidden;background:var(--soft2)}
 .mclose .xbg{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:min(52vw,620px);font-weight:800;color:var(--az);opacity:.05;line-height:1;pointer-events:none;letter-spacing:-.05em}
 .mclose .wrap{position:relative;z-index:1}
-.mclose h2{font-size:clamp(34px,5.2vw,76px);letter-spacing:-.045em;font-weight:800;text-transform:uppercase;line-height:.98;max-width:16ch;margin:12px auto 0;color:var(--ink)}
+.mclose h2{font-size:clamp(34px,5.2vw,76px);letter-spacing:-.045em;font-weight:800;text-transform:uppercase;line-height:.98;max-width:16ch;margin:12px auto 0;color:var(--ink);text-wrap:balance}
 .mclose p{margin:18px auto 0;max-width:38ch;font-size:clamp(16px,1.8vw,20px);color:var(--gris);line-height:1.5;text-wrap:pretty}
 .mclose .cta{margin-top:32px;display:flex;justify-content:center}
 
 .reveal{opacity:0;transform:translateY(22px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1)}
 .reveal.on{opacity:1;transform:none}
 
-@media (min-width:1500px){.wrap{max-width:1340px}.mhero h1{font-size:118px}.mclose h2{font-size:88px}}
-@media (min-width:1920px){.wrap{max-width:1520px}.mhero h1{font-size:134px}.mclose h2{font-size:100px}.mgrid{grid-template-columns:repeat(4,1fr)}.mtile.big{grid-column:span 2}}
-@media (min-width:2500px){.wrap{max-width:1740px}.mhero h1{font-size:158px}}
+a:focus-visible,button:focus-visible,[role=button]:focus-visible,.fbtn:focus-visible{outline:2.5px solid #2F66FF;outline-offset:3px;border-radius:8px}
+
+@media (min-width:1500px){.wrap{max-width:1320px}.mhero h1{font-size:90px}.gal h2{font-size:52px}.bridge h2{font-size:60px}.mclose h2{font-size:82px}}
+@media (min-width:1920px){.wrap{max-width:1500px}.mhero h1{font-size:106px}.gal h2{font-size:58px}.bridge h2{font-size:70px}.mclose h2{font-size:96px}.mgrid{grid-template-columns:repeat(4,1fr)}.mtile.big{grid-column:span 2}}
+@media (min-width:2500px){.wrap{max-width:1720px}.mhero h1{font-size:126px}.mclose h2{font-size:112px}}
 </style>
 </head>
 <body>
@@ -181,12 +197,14 @@ body{background:var(--bg);color:var(--ink);font-family:var(--f);line-height:1.5;
 
   <!-- DE LAS GANAS A UN PLAN -->
   <section class="bridge"><div class="wrap">
-    <span class="eyer">Cómo pasa de verdad</span>
-    <h2>De las ganas a un plan de <span class="x">verdad</span>.</h2>
+    <div>
+      <span class="eyer">Cómo pasa de verdad</span>
+      <h2>De las ganas a un plan de <span class="x">verdad</span>.</h2>
+    </div>
     <div class="bflow">
-      <div class="bstep reveal"><div class="e">💭</div><b>Eliges un momento</b><span>El que te apetezca hoy.</span></div>
-      <div class="bstep reveal"><div class="e">🧭</div><b>Te decimos con quién</b><span>Gente cerca con las mismas ganas.</span></div>
-      <div class="bstep reveal"><div class="e">🤝</div><b>Quedáis y lo vivís</b><span>En persona, no por pantalla.</span></div>
+      <div class="bstep reveal"><div class="e" data-ic="idea"></div><b>Eliges un momento</b><span>El que te apetezca hoy.</span></div>
+      <div class="bstep reveal"><div class="e" data-ic="brujula"></div><b>Te decimos con quién</b><span>Gente cerca con las mismas ganas.</span></div>
+      <div class="bstep reveal"><div class="e" data-ic="manos"></div><b>Quedáis y lo vivís</b><span>En persona, no por pantalla.</span></div>
     </div>
   </div></section>
 
@@ -208,7 +226,7 @@ body{background:var(--bg);color:var(--ink);font-family:var(--f);line-height:1.5;
 <div class="modal" id="modal" aria-hidden="true">
   <div class="modal-card">
     <button class="modal-x" id="modalX" aria-label="Cerrar">✕</button>
-    <div class="m-emo" id="mEmo">☕</div>
+    <div class="m-emo" id="mEmo"></div>
     <span class="eyer">Tu plan</span>
     <h3 id="mTitle">Café y charla de verdad</h3>
     <p class="m-sub">Este plan se monta en la app: dices que sí y <b>NYXA te dice con quién</b>. Quedáis y lo vivís.</p>
@@ -266,49 +284,86 @@ body{background:var(--bg);color:var(--ink);font-family:var(--f);line-height:1.5;
   document.querySelectorAll('.nav__links a').forEach(function(a){a.addEventListener('click',function(){document.querySelector('.nav').classList.remove('open');});});
   var y=document.getElementById('y');if(y)y.textContent=new Date().getFullYear();
 
+  // ===== SET DE ICONOS (SVG, line, stroke currentColor — sustituye a los emojis) =====
+  var I='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round">';
+  var ICONS={
+    cafe:I+'<path d="M17 8h1a4 4 0 1 1 0 8h-1"/><path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z"/><path d="M6 2v2M10 2v2M14 2v2"/></svg>',
+    ruta:I+'<path d="M8 3 4 7l4 4M4 7h11a4 4 0 0 1 4 4v6M20 21l-4-4-4 4"/></svg>',
+    musica:I+'<path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>',
+    fuego:I+'<path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.4-.5-2-1-3-1-2.1-.2-4 2-6 .5 2.5 2 4.9 4 6.5s3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.2.4-2.3 1-3a2.5 2.5 0 0 0 2.5 2.5Z"/></svg>',
+    cena:I+'<path d="M3 2v7a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2V2M5 2v20M21 15V2a5 5 0 0 0-5 5v6a2 2 0 0 0 2 2h3Zm0 0v7"/></svg>',
+    amanecer:I+'<path d="M12 2v6M5.6 10.6 4.2 9.2M18.4 10.6l1.4-1.4M2 18h2M20 18h2M3 22h18M16 18a4 4 0 0 0-8 0M9 5l3-3 3 3"/></svg>',
+    partido:I+'<circle cx="12" cy="12" r="9"/><path d="m12 7.5 3 2.2-1.1 3.5H10.1L9 9.7Z"/><path d="M12 3v4.5M8.6 20 9.6 13.2M15.4 20 14.4 13.2M3 12h4.3M21 12h-4.3"/></svg>',
+    vino:I+'<path d="M8 22h8M12 15v7M7 3h10l-1 7a4 4 0 0 1-8 0z"/></svg>',
+    arte:I+'<circle cx="13.5" cy="6.5" r="1.5"/><circle cx="17.5" cy="10.5" r="1.5"/><circle cx="8.5" cy="7.5" r="1.5"/><circle cx="6.5" cy="12.5" r="1.5"/><path d="M12 2a10 10 0 0 0 0 20c1.1 0 2-.9 2-2 0-.5-.2-1-.5-1.3-.3-.4-.5-.8-.5-1.2a2 2 0 0 1 2-2h2.3A4.2 4.2 0 0 0 22 11c0-5-4.5-9-10-9Z"/></svg>',
+    natacion:I+'<circle cx="18" cy="6" r="2"/><path d="M6 12c1.5-1 3-1 4 0s2.5 1 4 0 3-1 4 0M14 12l-3-3-4 2M2 18c1.5-1 3-1 4 0s2.5 1 4 0 3-1 4 0 3-1 4 0"/></svg>',
+    bici:I+'<circle cx="5.5" cy="17.5" r="3.5"/><circle cx="18.5" cy="17.5" r="3.5"/><path d="M15 6a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z"/><path d="m12 17.5-2.5-6 4-2.5 1.5 3h3"/></svg>',
+    escalada:I+'<circle cx="13" cy="5" r="2"/><path d="M12 8v6l-3 6M12 12l4 2 3-2M9 14l-4 1"/></svg>',
+    juegos:I+'<rect x="2" y="6" width="20" height="12" rx="2"/><path d="M6 12h4M8 10v4M15 13h.01M18 11h.01"/></svg>',
+    karaoke:I+'<path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2M12 19v3"/></svg>',
+    yoga:I+'<circle cx="12" cy="4" r="2"/><path d="M12 6v6M6 20l6-8 6 8M4 12h16"/></svg>',
+    cine:I+'<rect x="2" y="6" width="20" height="12" rx="2"/><path d="M2 10h20M7 6v12M17 6v12M4 6l2-3M20 6l-2-3M12 6l-2-3M12 6l2-3"/></svg>',
+    tapas:I+'<circle cx="12" cy="12" r="9"/><path d="M12 3v18M3 12h18"/></svg>',
+    fotos:I+'<path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3Z"/><circle cx="12" cy="13" r="3"/></svg>',
+    correr:I+'<circle cx="17" cy="5" r="2"/><path d="M14 8l-2 3 3 2v6M12 11 8 9l-3 3M8 9l2-3"/></svg>',
+    kayak:I+'<path d="M4 20 20 4M6 6l4 4M14 14l4 4M3 21l3-1M21 3l-1 3"/></svg>',
+    paella:I+'<circle cx="12" cy="13" r="7"/><path d="M19 13h3M2 13h3M12 6V4"/></svg>',
+    arbol:I+'<path d="M12 22v-8M9 8a3 3 0 1 1 6 0M6.5 14a3.5 3.5 0 1 1 2-6.4M17.5 14a3.5 3.5 0 1 0-2-6.4M7 14a4 4 0 0 0 10 0"/></svg>',
+    montana:I+'<path d="m8 3 4 8 5-5 5 14H2L8 3z"/></svg>',
+    baile:I+'<circle cx="14" cy="4" r="2"/><path d="M13 8l-2 4 3 2 1 6M11 12l-4 1-2 4M14 10l4-1"/></svg>',
+    brunch:I+'<path d="M3 2v7a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2V2M5 2v20M21 15V2a5 5 0 0 0-5 5v6a2 2 0 0 0 2 2h3Zm0 0v7"/></svg>',
+    sol:I+'<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M6.3 17.7l-1.4 1.4M19.1 4.9l-1.4 1.4"/></svg>',
+    guitarra:I+'<circle cx="7" cy="17" r="4.2"/><circle cx="7" cy="17" r="1.2"/><path d="M9.8 14.2 17 7"/><circle cx="18.3" cy="5.7" r="1.4"/></svg>',
+    pingpong:I+'<circle cx="8" cy="8" r="4.3"/><path d="M8 12.3V18"/><circle cx="17" cy="17" r="1.8"/></svg>',
+    idea:I+'<path d="M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.3 1 2.1V17h6v-.2c0-.8.4-1.6 1-2.1A7 7 0 0 0 12 2Z"/></svg>',
+    brujula:I+'<circle cx="12" cy="12" r="9"/><path d="m16 8-2 6-6 2 2-6z"/></svg>',
+    manos:I+'<path d="M11 12 8 9a2 2 0 0 0-3 3l4 4a4 4 0 0 0 6 0M13 12l3-3a2 2 0 0 1 3 3l-4 4M8 6l2 2M16 6l-2 2"/></svg>'
+  };
+
   // cinta de planes (ticker)
-  var TK=[['☕','café'],['🥾','ruta'],['🎶','concierto'],['🔥','hoguera'],['🍝','cena'],['🌅','amanecer'],['⚽','partido'],['🍷','vermut'],['🎨','expo'],['🏃','correr']];
+  var TK=[['cafe','café'],['ruta','ruta'],['musica','concierto'],['fuego','hoguera'],['cena','cena'],['amanecer','amanecer'],['partido','partido'],['vino','vermut'],['arte','expo'],['correr','correr']];
   var tk=document.getElementById('tk');
-  if(tk){var h=TK.map(function(t){return '<span class="tk"><span class="e">'+t[0]+'</span>'+t[1]+'</span>';}).join('');tk.innerHTML=h+h;if(rm)tk.style.animation='none';}
+  if(tk){var h=TK.map(function(t){return '<span class="tk"><span class="e">'+ICONS[t[0]]+'</span>'+t[1]+'</span>';}).join('');tk.innerHTML=h+h;if(rm)tk.style.animation='none';}
 
   // ===== CATALOGO DE MOMENTOS (data-driven: ampliar = añadir aquí; en producción puede venir de un JSON del sitio) =====
   // fr: franjas para el filtro (am amanecer / di dia / ta tarde / no noche / fi finde). Son TIPOS de plan, no atados a ciudad.
+  // ic: clave del icono SVG (ver ICONS arriba).
   var MOMENTOS=[
-    {e:'🌅',fr:['am'],tag:'Al amanecer',t:'Ver amanecer',p:'En la playa o en un mirador. Madrugar vale la pena cuando hay con quién.',big:true},
-    {e:'☕',fr:['di'],tag:'Sin prisa',t:'Café y charla de verdad',p:'Una hora, una mesa, una conversación que no es por chat.'},
-    {e:'🥾',fr:['ta','fi'],tag:'Al atardecer',t:'Ruta con vistas',p:'Salir de la ciudad y volver con la cabeza en su sitio.'},
-    {e:'🎶',fr:['no'],tag:'Entre semana',t:'Concierto pequeño',p:'La sala de siempre, la banda que nadie conoce todavía.'},
-    {e:'🔥',fr:['no','fi'],tag:'De noche',t:'Hoguera en la playa',p:'Playa, fuego y gente. El plan más fácil del verano.',big:true},
-    {e:'🍝',fr:['no'],tag:'Un martes cualquiera',t:'Cena de barrio',p:'El sitio de siempre deja de estar vacío.'},
-    {e:'⚽',fr:['ta'],tag:'Después de currar',t:'Partido en el parque',p:'Bajar, sudar y reírte un rato. Sin más.'},
-    {e:'🍷',fr:['fi'],tag:'Domingo lento',t:'Mercado y vermut',p:'Pasear sin rumbo y acabar en una terraza.'},
-    {e:'🎨',fr:['di','ta'],tag:'Plan tranquilo',t:'Una expo y luego caña',p:'Ver algo, comentarlo y alargar la tarde.'},
-    {e:'🏊',fr:['am','ta'],tag:'Refrescar',t:'Baño a las seis',p:'El chapuzón que te reordena el día entero.'},
-    {e:'🚴',fr:['ta'],tag:'Al atardecer',t:'Bici hasta el mar',p:'Rodar hasta que se ponga el sol y volver con hambre.'},
-    {e:'🧗',fr:['di'],tag:'Adrenalina',t:'Escalada para novatos',p:'Miedo compartido y caña después. Engancha.'},
-    {e:'🎲',fr:['no'],tag:'Noche de casa',t:'Juegos de mesa',p:'Una mesa, fichas y risas hasta tarde.'},
-    {e:'🎤',fr:['no'],tag:'De noche',t:'Karaoke sin vergüenza',p:'Cantar fatal y que dé exactamente igual.'},
-    {e:'🧘',fr:['am'],tag:'Empezar bien',t:'Yoga en el parque',p:'Estirar al aire libre antes de que el día arranque.'},
-    {e:'🎬',fr:['no','fi'],tag:'Cae la noche',t:'Cine de verano',p:'Peli al aire libre y cañas al salir.',big:true},
-    {e:'🍤',fr:['no'],tag:'De tapeo',t:'Ruta de tapas',p:'De barra en barra, sin plan fijo, con hambre y ganas.'},
-    {e:'📷',fr:['di','ta'],tag:'A tu ritmo',t:'Fotowalk por la ciudad',p:'Perderse con una cámara y mirar de otra forma.'},
-    {e:'🏃',fr:['am'],tag:'Antes de todo',t:'Salir a correr',p:'Unos kilómetros con quien no te deja rajarte.'},
-    {e:'🛶',fr:['am','fi'],tag:'Primera hora',t:'Kayak al alba',p:'El río o el mar cuando aún no hay nadie.'},
-    {e:'🥘',fr:['no'],tag:'En casa',t:'Cocinar juntos',p:'Comprar, cocinar y cenar lo que salga. Y repetir.'},
-    {e:'🌳',fr:['ta','fi'],tag:'Sin reloj',t:'Picnic en el parque',p:'Manta, comida y una tarde que no se acaba.',big:true},
-    {e:'⛰️',fr:['fi'],tag:'Escapada',t:'Finde en la montaña',p:'Coger el coche y ver dónde acabáis.'},
-    {e:'🕺',fr:['no'],tag:'Hasta tarde',t:'Salir a bailar',p:'Bailar hasta que cierren, con buena gente.'},
-    {e:'🧺',fr:['fi'],tag:'Domingo',t:'Brunch sin prisa',p:'Empezar el domingo con calma y sin culpa.'},
-    {e:'☀️',fr:['di'],tag:'Mediodía',t:'Terraza al sol',p:'Una caña, sombra a medias y el móvil en el bolsillo.'},
-    {e:'🎸',fr:['no'],tag:'Micro abierto',t:'Jam de barrio',p:'Tocar sin que nadie te juzgue. O solo mirar.'},
-    {e:'🏓',fr:['ta'],tag:'Competir de mentira',t:'Ping pong y risas',p:'Perder da igual si te ríes ganando.'}
+    {ic:'amanecer',fr:['am'],tag:'Al amanecer',t:'Ver amanecer',p:'En la playa o en un mirador. Madrugar vale la pena cuando hay con quién.',big:true},
+    {ic:'cafe',fr:['di'],tag:'Sin prisa',t:'Café y charla de verdad',p:'Una hora, una mesa, una conversación que no es por chat.'},
+    {ic:'ruta',fr:['ta','fi'],tag:'Al atardecer',t:'Ruta con vistas',p:'Salir de la ciudad y volver con la cabeza en su sitio.'},
+    {ic:'musica',fr:['no'],tag:'Entre semana',t:'Concierto pequeño',p:'La sala de siempre, la banda que nadie conoce todavía.'},
+    {ic:'fuego',fr:['no','fi'],tag:'De noche',t:'Hoguera en la playa',p:'Playa, fuego y gente. El plan más fácil del verano.',big:true},
+    {ic:'cena',fr:['no'],tag:'Un martes cualquiera',t:'Cena de barrio',p:'El sitio de siempre deja de estar vacío.'},
+    {ic:'partido',fr:['ta'],tag:'Después de currar',t:'Partido en el parque',p:'Bajar, sudar y reírte un rato. Sin más.'},
+    {ic:'vino',fr:['fi'],tag:'Domingo lento',t:'Mercado y vermut',p:'Pasear sin rumbo y acabar en una terraza.'},
+    {ic:'arte',fr:['di','ta'],tag:'Plan tranquilo',t:'Una expo y luego caña',p:'Ver algo, comentarlo y alargar la tarde.'},
+    {ic:'natacion',fr:['am','ta'],tag:'Refrescar',t:'Baño a las seis',p:'El chapuzón que te reordena el día entero.'},
+    {ic:'bici',fr:['ta'],tag:'Al atardecer',t:'Bici hasta el mar',p:'Rodar hasta que se ponga el sol y volver con hambre.'},
+    {ic:'escalada',fr:['di'],tag:'Adrenalina',t:'Escalada para novatos',p:'Miedo compartido y caña después. Engancha.'},
+    {ic:'juegos',fr:['no'],tag:'Noche de casa',t:'Juegos de mesa',p:'Una mesa, fichas y risas hasta tarde.'},
+    {ic:'karaoke',fr:['no'],tag:'De noche',t:'Karaoke sin vergüenza',p:'Cantar fatal y que dé exactamente igual.'},
+    {ic:'yoga',fr:['am'],tag:'Empezar bien',t:'Yoga en el parque',p:'Estirar al aire libre antes de que el día arranque.'},
+    {ic:'cine',fr:['no','fi'],tag:'Cae la noche',t:'Cine de verano',p:'Peli al aire libre y cañas al salir.',big:true},
+    {ic:'tapas',fr:['no'],tag:'De tapeo',t:'Ruta de tapas',p:'De barra en barra, sin plan fijo, con hambre y ganas.'},
+    {ic:'fotos',fr:['di','ta'],tag:'A tu ritmo',t:'Fotowalk por la ciudad',p:'Perderse con una cámara y mirar de otra forma.'},
+    {ic:'correr',fr:['am'],tag:'Antes de todo',t:'Salir a correr',p:'Unos kilómetros con quien no te deja rajarte.'},
+    {ic:'kayak',fr:['am','fi'],tag:'Primera hora',t:'Kayak al alba',p:'El río o el mar cuando aún no hay nadie.'},
+    {ic:'paella',fr:['no'],tag:'En casa',t:'Cocinar juntos',p:'Comprar, cocinar y cenar lo que salga. Y repetir.'},
+    {ic:'arbol',fr:['ta','fi'],tag:'Sin reloj',t:'Picnic en el parque',p:'Manta, comida y una tarde que no se acaba.',big:true},
+    {ic:'montana',fr:['fi'],tag:'Escapada',t:'Finde en la montaña',p:'Coger el coche y ver dónde acabáis.'},
+    {ic:'baile',fr:['no'],tag:'Hasta tarde',t:'Salir a bailar',p:'Bailar hasta que cierren, con buena gente.'},
+    {ic:'brunch',fr:['fi'],tag:'Domingo',t:'Brunch sin prisa',p:'Empezar el domingo con calma y sin culpa.'},
+    {ic:'sol',fr:['di'],tag:'Mediodía',t:'Terraza al sol',p:'Una caña, sombra a medias y el móvil en el bolsillo.'},
+    {ic:'guitarra',fr:['no'],tag:'Micro abierto',t:'Jam de barrio',p:'Tocar sin que nadie te juzgue. O solo mirar.'},
+    {ic:'pingpong',fr:['ta'],tag:'Competir de mentira',t:'Ping pong y risas',p:'Perder da igual si te ríes ganando.'}
   ];
 
   var mgrid=document.getElementById('mgrid');
   if(mgrid){
     mgrid.innerHTML=MOMENTOS.map(function(m){
-      return '<div class="mtile '+(m.big?'big ':'')+'fr-'+m.fr[0]+' reveal" data-fr="'+m.fr.join(' ')+'">'
-        +'<div class="emo">'+m.e+'</div>'
+      return '<div class="mtile '+(m.big?'big ':'')+'fr-'+m.fr[0]+' reveal" data-fr="'+m.fr.join(' ')+'" data-ic="'+m.ic+'">'
+        +'<div class="emo">'+ICONS[m.ic]+'</div>'
         +'<span class="tag">'+m.tag+'</span>'
         +'<h3>'+m.t+'</h3><p>'+m.p+'</p>'
         +'<span class="go">Montar este plan →</span></div>';
@@ -316,11 +371,14 @@ body{background:var(--bg);color:var(--ink);font-family:var(--f);line-height:1.5;
   }
   var tiles=[].slice.call(document.querySelectorAll('.mtile'));
 
+  // pasos "de las ganas a un plan": rellenar iconos por data-ic
+  document.querySelectorAll('.bstep .e[data-ic]').forEach(function(el){var k=el.getAttribute('data-ic');if(ICONS[k])el.innerHTML=ICONS[k];});
+
   // modal de conversión: al elegir un plan -> "se monta en la app" + App Store
   var modal=document.getElementById('modal'),mEmo=document.getElementById('mEmo'),mTitle=document.getElementById('mTitle');
-  function openModal(emo,title){if(!modal)return;mEmo.textContent=emo;mTitle.textContent=title;modal.classList.add('open');document.body.style.overflow='hidden';}
+  function openModal(ic,title){if(!modal)return;mEmo.innerHTML=ICONS[ic]||ICONS.cafe;mTitle.textContent=title;modal.classList.add('open');document.body.style.overflow='hidden';}
   function closeModal(){if(!modal)return;modal.classList.remove('open');document.body.style.overflow='';}
-  tiles.forEach(function(t){t.addEventListener('click',function(){openModal(t.querySelector('.emo').textContent,t.querySelector('h3').textContent);});});
+  tiles.forEach(function(t){t.addEventListener('click',function(){openModal(t.dataset.ic,t.querySelector('h3').textContent);});});
   if(modal){document.getElementById('modalX').addEventListener('click',closeModal);modal.addEventListener('click',function(e){if(e.target===modal)closeModal();});addEventListener('keydown',function(e){if(e.key==='Escape')closeModal();});}
 
   // reveals (tras render, cubre tiles + resto de la página)
