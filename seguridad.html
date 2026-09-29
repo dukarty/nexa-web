@@ -37,13 +37,14 @@ body{background:var(--bg);color:var(--ink);font-family:var(--f);line-height:1.5;
 .wrap{max-width:1180px;margin:0 auto;padding:0 24px}
 a{color:inherit;text-decoration:none}
 #top.stuck{border-color:var(--linea);box-shadow:0 6px 26px -20px rgba(11,13,20,.6)}
+a:focus-visible,button:focus-visible,[role=button]:focus-visible{outline:2.5px solid #2F66FF;outline-offset:3px;border-radius:8px}
 .eyer{font-size:12.5px;font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:var(--az)}
 .reveal{opacity:0;transform:translateY(26px);transition:opacity .7s var(--e),transform .7s var(--e)}.reveal.on{opacity:1;transform:none}
 .d1{transition-delay:.1s}.d2{transition-delay:.2s}.d3{transition-delay:.3s}
 @media(prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none}}
 
 /* ===== HERO — centrado, a lo grande (distinto: NO split) ===== */
-.hero{position:relative;overflow:hidden;text-align:center;padding:80px 0 70px;background:radial-gradient(60% 70% at 50% -10%,var(--soft),transparent 62%)}
+.hero{position:relative;overflow:hidden;text-align:center;padding:68px 0 60px;background:radial-gradient(60% 70% at 50% -10%,var(--soft),transparent 62%)}
 .hero .xbg{position:absolute;top:-6%;left:50%;transform:translateX(-50%);font-size:min(46vw,620px);font-weight:800;color:var(--az);opacity:.05;line-height:1;pointer-events:none;z-index:0;letter-spacing:-.05em}
 .hero .wrap{position:relative;z-index:1}
 .hpill{display:inline-flex;align-items:center;gap:8px;padding:6px 14px;border-radius:999px;border:1px solid var(--linea);background:rgba(255,255,255,.75);font-size:13px;font-weight:700;color:var(--ink2);box-shadow:var(--sh1)}
@@ -92,7 +93,7 @@ a{color:inherit;text-decoration:none}
 .mobmock .ps-empty{flex:none;min-height:80px}
 
 /* ===== CONSEJOS — cinta de 4 (distinto) ===== */
-.tips{background:var(--bg2);padding:88px 0}
+.tips{background:var(--bg2);padding:74px 0}
 .tips .wrap{text-align:center}
 .tips h2{font-size:clamp(28px,3.8vw,44px);letter-spacing:-.035em;font-weight:800;text-wrap:balance;margin-top:12px}
 .tipgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:44px;text-align:left}
@@ -105,7 +106,7 @@ a{color:inherit;text-decoration:none}
 .tip b{font-size:16.5px;font-weight:800;letter-spacing:-.01em;line-height:1.2;display:block}.tip span{display:block;color:var(--gris);font-size:14px;margin-top:8px;line-height:1.5}
 
 /* ===== CIERRE ===== */
-.cierre{position:relative;overflow:hidden;background:radial-gradient(60% 90% at 50% 0%,var(--soft),var(--bg) 70%);padding:96px 0;text-align:center}
+.cierre{position:relative;overflow:hidden;background:radial-gradient(60% 90% at 50% 0%,var(--soft),var(--bg) 70%);padding:84px 0;text-align:center}
 .cierre h2{font-size:clamp(32px,4.6vw,60px);letter-spacing:-.045em;font-weight:800;text-transform:uppercase;text-wrap:balance;margin:12px auto 0;line-height:1}.cierre h2 .x{color:var(--az)}
 .cierre .lead{font-size:18px;color:var(--gris);margin:18px auto 0;max-width:42ch;line-height:1.5;text-wrap:pretty}
 .cierre .cta{display:flex;gap:13px;justify-content:center;flex-wrap:wrap;margin-top:30px}
