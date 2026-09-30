@@ -1,9 +1,15 @@
 // supabase/functions/stripe-webhook/index.ts
-// Escucha a Stripe y, cuando un pago se confirma, actualiza la tabla `businesses`:
-//  - suscripción pagada  -> pone el plan del negocio (Pro / Referente)
-//  - pack Impulsar pagado -> suma saldo de Impulsar (meta.impulsar_saldo)
-//  - suscripción cancelada -> vuelve a plan gratis ('verificada')
+// Escucha a Stripe y, al confirmarse un pago, actualiza `businesses`:
+//   - suscripción pagada   -> plan_tier (comercial) + plan (frecuencia de feed) + stripe_customer
+//   - cliente extra pagado  -> suma saldo de extras (meta.extra_saldo)
+//   - suscripción cancelada -> vuelve a 'alta' / 'verificada'
 // Usa la SERVICE ROLE key (solo servidor). Verifica la firma del webhook.
+//
+// DOS COLUMNAS, A PROPÓSITO (ver migración 20260930120000):
+//   · plan_tier = tramo COMERCIAL (lo que gatea el panel): alta|p15|p49|p99|p199|medida
+//   · plan      = FRECUENCIA de feed que lee la app YA DESPLEGADA (no se puede renombrar
+//                 sin romper el feed de los negocios de pago en los iPhone instalados)
+// El webhook es el ÚNICO sitio que mueve ambas (el cliente las tiene congeladas por trigger).
 
 import Stripe from "https://esm.sh/stripe@16?target=deno";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
@@ -18,24 +24,16 @@ const supa = createClient(
   Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!,
 );
 
-// price id -> slug de plan que ENTIENDE el panel.
-// El panel usa hoy: verificada (gratis) / activacion / ciudad / red.
-//   Pro       -> "activacion"   Referente -> "ciudad"
-// (Rellenar con los price IDs reales de Pro y Referente, mensual y anual.)
-const PLAN_POR_PRICE: Record<string, string> = {
-  // [Deno.env.get("STRIPE_PRICE_PRO_MENSUAL")!]:       "activacion",
-  // [Deno.env.get("STRIPE_PRICE_PRO_ANUAL")!]:         "activacion",
-  // [Deno.env.get("STRIPE_PRICE_REFERENTE_MENSUAL")!]: "ciudad",
-  // [Deno.env.get("STRIPE_PRICE_REFERENTE_ANUAL")!]:   "ciudad",
-};
-function planDePrice(priceId?: string): string {
-  const env = {
-    [Deno.env.get("STRIPE_PRICE_PRO_MENSUAL") ?? "_"]: "activacion",
-    [Deno.env.get("STRIPE_PRICE_PRO_ANUAL") ?? "_"]: "activacion",
-    [Deno.env.get("STRIPE_PRICE_REFERENTE_MENSUAL") ?? "_"]: "ciudad",
-    [Deno.env.get("STRIPE_PRICE_REFERENTE_ANUAL") ?? "_"]: "ciudad",
+// price id -> { tramo comercial, frecuencia de feed }.
+// 15 € no se "propone en su zona" (eso empieza en 49 €, PRECIOS-NYXA.md) -> plan feed = verificada.
+function tramoDePrice(priceId?: string): { tier: string; plan: string } {
+  const map: Record<string, { tier: string; plan: string }> = {
+    [Deno.env.get("STRIPE_PRICE_P15") ?? "_15"]:  { tier: "p15",  plan: "verificada" },
+    [Deno.env.get("STRIPE_PRICE_P49") ?? "_49"]:  { tier: "p49",  plan: "activacion" },
+    [Deno.env.get("STRIPE_PRICE_P99") ?? "_99"]:  { tier: "p99",  plan: "ciudad" },
+    [Deno.env.get("STRIPE_PRICE_P199") ?? "_199"]:{ tier: "p199", plan: "red" },
   };
-  return (priceId && env[priceId]) || "activacion";
+  return (priceId && map[priceId]) || { tier: "p49", plan: "activacion" };
 }
 
 Deno.serve(async (req) => {
@@ -57,26 +55,26 @@ Deno.serve(async (req) => {
         const priceId = items.data[0]?.price?.id;
 
         if (s.mode === "subscription") {
-          const plan = planDePrice(priceId);
+          const { tier, plan } = tramoDePrice(priceId);
           await supa.from("businesses")
-            .update({ plan, stripe_customer: s.customer as string })
+            .update({ plan_tier: tier, plan, stripe_customer: s.customer as string })
             .eq("id", bizId);
         } else if (s.mode === "payment") {
-          // Impulsar: sumar el importe pagado como saldo
-          const importe = (s.amount_total ?? 0) / 100;
+          // Cliente extra (7,50 €): sumar unidades pagadas como saldo de extras.
+          const qty = items.data[0]?.quantity ?? 1;
           const { data } = await supa.from("businesses").select("meta").eq("id", bizId).single();
           const meta = (data?.meta as Record<string, unknown>) ?? {};
-          meta.impulsar_saldo = (Number(meta.impulsar_saldo) || 0) + importe;
+          meta.extra_saldo = (Number(meta.extra_saldo) || 0) + qty;
           await supa.from("businesses").update({ meta }).eq("id", bizId);
         }
       }
     }
 
-    // baja / cancelación de suscripción -> vuelve a gratis
+    // baja / cancelación de suscripción -> vuelve a 'alta' (sin plan de pago)
     if (event.type === "customer.subscription.deleted") {
       const sub = event.data.object as Stripe.Subscription;
       await supa.from("businesses")
-        .update({ plan: "verificada" })
+        .update({ plan_tier: "alta", plan: "verificada" })
         .eq("stripe_customer", sub.customer as string);
     }
   } catch (e) {
