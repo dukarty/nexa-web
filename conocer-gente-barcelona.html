@@ -530,8 +530,9 @@ a:focus-visible,button:focus-visible,.pchip:focus-visible,.fq:focus-visible,.chi
       <a class="btn-store" href="https://apps.apple.com/es/app/nyxa/id6800325033" target="_blank" rel="noopener" aria-label="Descargar NYXA en la App Store"><svg viewBox="0 0 384 512"><path d="M318.7 268.7c-.2-36.7 16.4-64.4 50-84.8-18.8-26.9-47.2-41.7-84.7-44.6-35.5-2.8-74.3 20.7-88.5 20.7-15 0-49.4-19.7-76.4-19.7C63.3 141.2 4 184.8 4 273.5q0 39.3 14.4 81.2c12.8 36.7 59 126.7 107.2 125.2 25.2-.6 43-17.9 75.8-17.9 31.8 0 48.3 17.9 76.4 17.9 48.6-.7 90.4-82.5 102.6-119.3-65.2-30.7-61.7-90-61.7-91.9zm-56.6-164.2c27.3-32.4 24.8-61.9 24-72.5-24.1 1.4-52 16.4-67.9 34.9-17.5 19.8-27.8 44.3-25.6 71.9 26.1 2 49.9-11.4 69.5-34.3z"/></svg><span class="t"><small>Descárgalo gratis en</small><b>App Store</b></span></a>
     </div>
     <div class="ilinks">
-      <a class="ilink" href="conocer-gente-valencia.html">Conocer gente en Valencia →</a>
-      <a class="ilink" href="conocer-gente-madrid.html">Conocer gente en Madrid →</a>
+      <a class="ilink" href="planes-fin-de-semana-barcelona.html">Finde en Barcelona →</a>
+      <a class="ilink" href="hacer-amigos-en-barcelona.html">Hacer amigos en Barcelona →</a>
+      <a class="ilink" href="planes-para-conocer-gente-en-barcelona.html">12 planes en Barcelona →</a>
     </div>
   </div>
 </section>
@@ -676,18 +677,13 @@ window.addEventListener('resize',function(){if(window.innerWidth>860)set(false);
 
   // MATCHER
   var PLANS=[
-    {chip:'Un café',ic:'cafe',zone:'Gràcia',wants:'ir a por un café',people:[{n:'Núria, 26',z:'Gràcia',t:['charlas largas','plantas','domingos lentos']},{n:'Marc, 30',z:'Vallcarca',t:['café de especialidad','skate','arte de calle']}]},
-    {chip:'Vermut',ic:'vino',zone:'El Born',wants:'ir de vermut',people:[{n:'Laia, 27',z:'El Born',t:['terraceo','tapas','charla']},{n:'Pau, 29',z:'La Ribera',t:['vermut casero','mercado','risas']}]},
-    {chip:'Paseo por Ciutadella',ic:'arbol',zone:'Parc de la Ciutadella',wants:'pasear por la Ciutadella',people:[{n:'Júlia, 25',z:'El Born',t:['naturaleza','bici','calma']},{n:'Arnau, 28',z:'La Barceloneta',t:['picnic','fotos','charla']}]},
-    {chip:'Playa',ic:'playa',zone:'La Barceloneta',wants:'ir a la playa',people:[{n:'Bruna, 26',z:'La Barceloneta',t:['sol','voley','baño']},{n:'Jan, 30',z:'El Poblenou',t:['arena','fútbol playa','siesta']}]},
-    {chip:'Atardecer',ic:'atardecer',zone:'Búnkers del Carmel',wants:'ver el atardecer',people:[{n:'Aina, 27',z:'El Carmel',t:['fotos','vistas','tranquilidad']},{n:'Roger, 29',z:'Gràcia',t:['cerveza','charla','calma']}]},
-    {chip:'Brunch',ic:'brunch',zone:'Sant Antoni',wants:'ir a un brunch',people:[{n:'Carla, 28',z:'Sant Antoni',t:['brunch','mercadillos','domingos lentos']},{n:'Biel, 31',z:'Poble Sec',t:['café','charla','planazos suaves']}]},
-    {chip:'Expo',ic:'arte',zone:'El Raval (MACBA)',wants:'ir a una expo',people:[{n:'Martina, 25',z:'El Raval',t:['arte contemporáneo','museos','charla']},{n:'Pol, 27',z:'Sant Antoni',t:['diseño','fotografía','curiosidad']}]},
-    {chip:'Mercado',ic:'mercado',zone:'La Boqueria',wants:'ir al mercado',people:[{n:'Marc, 30',z:'El Gòtic',t:['tapas','vermut','gastronomía']},{n:'Laia, 27',z:'El Raval',t:['mercado','cocina','curiosidad']}]},
-    {chip:'Amanecer',ic:'amanecer',zone:'Platja del Bogatell',wants:'ver el amanecer',people:[{n:'Pau, 29',z:'El Poblenou',t:['madrugar','playa','fotos']},{n:'Júlia, 25',z:'La Barceloneta',t:['calma','café','silencio']}]},
-    {chip:'Música',ic:'musica',zone:'Poble Sec',wants:'ir a un concierto',people:[{n:'Arnau, 28',z:'Poble Sec',t:['indie','directos','salas pequeñas']},{n:'Bruna, 26',z:'Sants',t:['vinilos','conciertos','noche']}]},
-    {chip:'Picnic',ic:'picnic',zone:'Montjuïc',wants:'hacer un picnic',people:[{n:'Jan, 30',z:'Poble Sec',t:['naturaleza','vistas','calma']},{n:'Aina, 27',z:'Montjuïc',t:['picnic','fotos','charla']}]},
-    {chip:'Tapas',ic:'tapas',zone:'El Gòtic',wants:'ir de tapas',people:[{n:'Roger, 29',z:'El Gòtic',t:['tapas','vino','charla']},{n:'Carla, 28',z:'El Born',t:['gastronomía','terraceo','risas']}]}
+    {chip:'Un café',ic:'cafe',wants:'ir a por un café',people:[{n:'Núria, 26',z:'Gràcia',t:['charlas largas','plantas','domingos lentos']},{n:'Marc, 30',z:'Vallcarca',t:['café de especialidad','skate','arte de calle']}]},
+    {chip:'Vermut en el Born',ic:'vino',wants:'ir de vermut',people:[{n:'Laia, 27',z:'El Born',t:['terraceo','tapas','charla']},{n:'Pau, 29',z:'La Ribera',t:['vermut casero','mercado','risas']}]},
+    {chip:'Paseo por la Ciutadella',ic:'arbol',wants:'pasear por la Ciutadella',people:[{n:'Júlia, 25',z:'El Born',t:['naturaleza','bici','calma']},{n:'Arnau, 28',z:'La Barceloneta',t:['picnic','fotos','charla']}]},
+    {chip:'Un concierto',ic:'musica',wants:'ir a un concierto',people:[{n:'Arnau, 28',z:'Poble Sec',t:['indie','directos','salas pequeñas']},{n:'Bruna, 26',z:'Sants',t:['vinilos','conciertos','noche']}]},
+    {chip:'Amanecer en el Bogatell',ic:'amanecer',wants:'ver el amanecer',people:[{n:'Pau, 29',z:'El Poblenou',t:['madrugar','playa','fotos']},{n:'Júlia, 25',z:'La Barceloneta',t:['calma','café','silencio']}]},
+    {chip:'Playa en la Barceloneta',ic:'playa',wants:'ir a la playa',people:[{n:'Bruna, 26',z:'La Barceloneta',t:['sol','voley','baño']},{n:'Jan, 30',z:'El Poblenou',t:['arena','fútbol playa','siesta']}]},
+    {chip:'Brunch de domingo',ic:'brunch',wants:'ir a un brunch',people:[{n:'Carla, 28',z:'Sant Antoni',t:['brunch','mercadillos','domingos lentos']},{n:'Biel, 31',z:'Poble Sec',t:['café','charla','planazos suaves']}]}
   ];
   var stage=document.getElementById('stage'),chipsBox=document.getElementById('chips');
   if(stage&&chipsBox){
