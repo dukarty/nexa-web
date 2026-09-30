@@ -1,0 +1,2204 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>NYXA Empresas · Panel</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+
+<!--
+  ============================================================================
+  MAQUETA DE VALIDACIÓN v3 — NO es el panel.html de producción. NO se despliega.
+  NO es un PR. Parte de v2 (modelo, 10 vistas, gating, copy — TODO aprobado y
+  sin tocar) y da el salto ESTÉTICO que David pidió: nivel "Apple / App Store
+  Connect". Cambia el lenguaje visual (aire, tipografía, tarjetas, color como
+  acento puntual, no como relleno) y reconstruye por completo la vista
+  "Tu página" como una experiencia de creación exprés con 4 plantillas y
+  preview en vivo.
+
+  DE DÓNDE SALE CADA COSA:
+  - Modelo, precios y copy exactos: PRECIOS-NYXA.md (cerrado 28-sep-2026) y el
+    Business Plan (§5 "Cómo ganamos dinero", §6 "Cómo sabemos quién apareció").
+  - Gating por plan (tabla §3.3) y el mecanismo del Buzón (consentimiento por
+    caso, nunca lista): features-panel-y-pagina-venta.md.
+
+  QUÉ ES DE EJEMPLO AQUÍ DENTRO:
+  Todos los números (negocio "Sputnik", rocódromo en Ruzafa, Valencia — plan
+  de 99 €) son un EJEMPLO ficticio y plausible. Hoy NYXA tiene 0 clientes B2B
+  cobrando de verdad (Stripe live bloqueado por SL+IBAN, piloto Ruzafa sin
+  empezar). Conectar esto a datos reales (Supabase / API del panel) es tarea
+  del CTO, en fase posterior — buscar "EJEMPLO" en el JS.
+
+  UN HECHO = UN NÚMERO: los datos de septiembre y el resto de la serie
+  histórica se leen SIEMPRE del mismo array (HIST, más abajo) en cada vista
+  donde aparecen — resumen, aviso de demanda, histórico, exportación CSV,
+  y ahora también el "aviso honesto" dentro de la propia página de venta.
+  Nunca se recalculan aparte.
+
+  MECANISMO DE CONVERSIÓN/UPSELL (reforzado en este pase, §3.1 de
+  features-panel-y-pagina-venta.md — "que el panel empuje a subir de plan sin
+  que nadie llame"):
+  - La CAMPANA (arriba dcha) ahora es funcional: panel de avisos reales
+    (array NOTIFS, más abajo) con punto rojo mientras hay algo sin ver, cada
+    aviso con su CTA a Planes o al aviso de demanda.
+  - NUDGE contextual (.nudge): banner discreto en Resumen y Quién viene,
+    siempre con los mismos tres números (43 fuera / ≈2.150 € / 45 en 199 € a
+    4,42 €) y un CTA "Ver si te compensa subir". Se oculta solo si el plan
+    simulado ya es 199 €+ (ya no hay más demanda que capturar).
+  - El "resumen del día 1" (.mailcard, en El aviso de demanda) se ve como
+    preview real del correo que le llega al negocio, con el mismo copy y
+    los mismos números — no un cálculo aparte.
+  Regla dura: todo se basa en demanda REAL (quien pidió entrar y no cupo),
+  igual que el resto del panel. Nada de urgencia falsa.
+  ============================================================================
+-->
+
+<style id="nyxa-font">
+@font-face{font-family:'Plus Jakarta Sans';font-weight:400 900;font-display:swap;
+  src:local('Plus Jakarta Sans');}
+</style>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap">
+
+<style>
+:root{
+  --pm-color:#2f66ff;
+  --paper:#F5F5F7;--card:#FFFFFF;--card2:#FAFAFA;--card3:#F1F1F3;
+  --ink:#1D1D1F;--ink2:#6E6E73;--ink3:#A1A1A6;
+  --line:rgba(0,0,0,.08);--line2:rgba(0,0,0,.05);
+  --az:#2f66ff;--az-h:#1e4fd6;--az-soft:#EDF2FF;--az-soft2:rgba(47,102,255,.07);
+  --verde:#1F8B4C;--verde-soft:#E9F7EF;
+  --ambar:#B4700A;--ambar-soft:#FCF2E0;
+  --rojo:#D6394A;--rojo-soft:#FCEAEC;
+  --morado:#7A3CFF;--morado-soft:#F2EDFF;
+  --f:"Plus Jakarta Sans",-apple-system,BlinkMacSystemFont,"SF Pro Display","Segoe UI",system-ui,sans-serif;
+  --e:cubic-bezier(.16,1,.3,1);
+  --r:20px;--r-sm:12px;--r-lg:26px;
+  --shadow-sm:0 1px 2px rgba(0,0,0,.04);
+  --shadow-md:0 1px 1px rgba(0,0,0,.02),0 14px 34px -16px rgba(0,0,0,.14);
+  --shadow-lg:0 24px 64px -20px rgba(0,0,0,.22);
+}
+body.dark{
+  --paper:#000000;--card:#1C1C1E;--card2:#141416;--card3:#232326;
+  --ink:#F5F5F7;--ink2:#98989D;--ink3:#636366;
+  --line:rgba(255,255,255,.1);--line2:rgba(255,255,255,.06);
+  --az:#5E8CFF;--az-h:#7FA2FF;--az-soft:rgba(94,140,255,.15);--az-soft2:rgba(94,140,255,.09);
+  --verde:#32D74B;--verde-soft:rgba(50,215,75,.13);
+  --ambar:#FF9F0A;--ambar-soft:rgba(255,159,10,.13);
+  --rojo:#FF453A;--rojo-soft:rgba(255,69,58,.13);
+  --morado:#BF5AF2;--morado-soft:rgba(191,90,242,.15);
+  --shadow-sm:0 1px 2px rgba(0,0,0,.35);--shadow-md:0 14px 34px -16px rgba(0,0,0,.55);--shadow-lg:0 24px 64px -20px rgba(0,0,0,.65);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{font-family:var(--f);background:var(--paper);color:var(--ink);font-size:15px;line-height:1.5;letter-spacing:-.011em;-webkit-font-smoothing:antialiased;transition:background .25s,color .25s}
+svg{display:block}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;cursor:pointer;background:none;border:0}
+input,select,textarea{font:inherit}
+:focus-visible{outline:2px solid var(--az);outline-offset:2px}
+.tab{font-variant-numeric:tabular-nums}
+[hidden]{display:none!important}
+::selection{background:var(--az);color:#fff}
+
+/* ===== metabar (fuera del producto: simulador + aviso de maqueta) ===== */
+.metabar{position:sticky;top:0;z-index:80;display:flex;flex-wrap:wrap;align-items:center;gap:9px 16px;
+  background:repeating-linear-gradient(135deg,#FFF6D9,#FFF6D9 10px,#FFF2C4 10px,#FFF2C4 20px);
+  border-bottom:1.5px dashed #D9B54A;padding:10px clamp(14px,3vw,28px);font-size:.78rem;color:#5B4A12}
+body.dark .metabar{background:repeating-linear-gradient(135deg,#2A2205,#2A2205 10px,#332A08 10px,#332A08 20px);border-color:#7A621C;color:#E8C863}
+.metabar b{font-weight:900;text-transform:uppercase;letter-spacing:.06em;font-size:.68rem;background:#D9B54A;color:#3A2E05;padding:3px 9px;border-radius:999px}
+body.dark .metabar b{background:#7A621C;color:#FFF3C9}
+.metabar__sim{margin-left:auto;display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.metabar__sim span{font-weight:700}
+.simpills{display:inline-flex;background:rgba(255,255,255,.55);border:1px solid #D9B54A;border-radius:999px;padding:3px;gap:2px}
+body.dark .simpills{background:rgba(0,0,0,.25)}
+.simpills button{padding:6px 12px;border-radius:999px;font-size:.76rem;font-weight:800;color:#5B4A12}
+body.dark .simpills button{color:#E8C863}
+.simpills button.on{background:#3A2E05;color:#FFF3C9}
+body.dark .simpills button.on{background:#E8C863;color:#241D04}
+
+/* ===== app shell ===== */
+.app{display:grid;grid-template-columns:272px minmax(0,1fr);min-height:100vh}
+.velo{position:fixed;inset:0;background:rgba(0,0,0,.4);backdrop-filter:blur(2px);z-index:55;display:none}
+.velo.on{display:block}
+
+.side{background:var(--card);border-right:1px solid var(--line);display:flex;flex-direction:column;padding:22px 14px;position:sticky;top:0;height:100vh;overflow-y:auto}
+.side__logo{display:flex;align-items:center;gap:5px;padding:6px 10px 20px;font-weight:800;font-size:1.02rem;letter-spacing:-.03em}
+.side__logo .x{display:inline-flex;width:13px;height:13px}
+.side__logo .x svg{width:100%;height:100%;overflow:visible}
+.side__logo .x line{stroke:var(--az);stroke-width:3.2;stroke-linecap:round}
+.biz{display:flex;align-items:center;gap:11px;padding:11px;border:1px solid var(--line);border-radius:14px;margin-bottom:10px;background:var(--card2);width:100%;transition:border-color .2s,background .2s}
+.biz:hover{border-color:var(--az)}
+.biz__a{width:36px;height:36px;border-radius:10px;background:linear-gradient(135deg,#2f66ff,#7a3cff);display:grid;place-items:center;font-weight:800;color:#fff;flex:none;font-size:1rem}
+.biz__i{text-align:left;min-width:0}
+.biz__i b{display:block;font-size:.9rem;font-weight:700;line-height:1.2}
+.biz__i small{color:var(--ink2);font-size:.75rem}
+.planbadge{display:inline-flex;align-items:center;gap:6px;font-size:.65rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--az);background:var(--az-soft);border-radius:999px;padding:6px 11px;margin:0 3px 18px}
+.grp{font-size:.63rem;font-weight:800;letter-spacing:.11em;text-transform:uppercase;color:var(--ink3);padding:18px 10px 7px}
+.navi{display:flex;align-items:center;gap:11px;width:100%;text-align:left;padding:10px 11px;border-radius:11px;color:var(--ink2);font-weight:600;font-size:.87rem;transition:background .18s,color .18s}
+.navi:hover{background:var(--card2);color:var(--ink)}
+.navi.on{background:var(--az-soft);color:var(--az);font-weight:700}
+.navi.on .ic{opacity:1;color:var(--az)}
+.navi.locked{opacity:.5}
+.navi .ic{width:16px;height:16px;flex:none;opacity:.75}
+.navi .lock{margin-left:auto;width:13px;height:13px;opacity:.45;flex:none}
+.side__foot{margin-top:auto;padding-top:14px;border-top:1px solid var(--line)}
+.side__tag{display:flex;align-items:center;gap:8px;padding:8px;border-radius:10px;font-size:.72rem;color:var(--ink3)}
+.themebtn{display:flex;align-items:center;gap:10px;width:100%;padding:9px 10px;border-radius:11px;color:var(--ink2);font-weight:600;font-size:.82rem;transition:background .18s}
+.themebtn:hover{background:var(--card2)}
+.themebtn .ic{width:15px;height:15px}
+
+.main{padding:0 clamp(20px,3.2vw,48px) 88px;max-width:1320px;margin-inline:auto;width:100%}
+.top{display:flex;flex-wrap:wrap;align-items:flex-start;justify-content:space-between;gap:14px;padding-top:32px;margin-bottom:32px}
+.top__l{display:flex;gap:12px;align-items:flex-start}
+.top h1{font-size:clamp(1.65rem,3vw,2.1rem);font-weight:800;letter-spacing:-.035em}
+.top p{color:var(--ink2);font-size:.92rem;margin-top:5px;max-width:56ch;font-weight:500}
+.hamb{display:none}
+.topbtns{display:flex;gap:8px;flex:none}
+.icbtn{width:38px;height:38px;border-radius:11px;border:1px solid var(--line);background:var(--card);display:grid;place-items:center;position:relative;transition:background .2s,border-color .2s,color .2s}
+.icbtn:hover{background:var(--card2);border-color:var(--az);color:var(--az)}
+.icbtn svg{width:17px;height:17px}
+.icbtn .dot{position:absolute;top:7px;right:7px;width:7px;height:7px;border-radius:99px;background:var(--rojo);border:1.5px solid var(--card)}
+.notifpanel{position:absolute;right:0;top:calc(100% + 10px);width:326px;background:var(--card);border:1px solid var(--line);border-radius:16px;box-shadow:var(--shadow-lg);padding:8px;z-index:75;display:none}
+.notifpanel.on{display:block}
+.notifpanel__h{font-size:.66rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;color:var(--ink3);padding:9px 9px 5px}
+.notifi{display:flex;gap:10px;padding:10px 9px;border-radius:11px;transition:background .15s}
+.notifi:hover{background:var(--card2)}
+.notifi__i{width:27px;height:27px;border-radius:8px;background:var(--az-soft);color:var(--az);display:grid;place-items:center;flex:none}
+.notifi__i svg{width:13px;height:13px}
+.notifi b{font-size:.82rem;font-weight:700;display:block}
+.notifi span{font-size:.76rem;color:var(--ink2);line-height:1.4}
+.notifi small{font-size:.68rem;color:var(--ink3);font-weight:600}
+.notifi__cta{margin-top:8px;font-size:.73rem;font-weight:700;color:var(--az);background:var(--az-soft);padding:5px 10px;border-radius:999px;display:inline-flex}
+.notifi__cta:hover{background:var(--az);color:#fff}
+.notifpanel__empty{padding:22px 10px;text-align:center;color:var(--ink3);font-size:.82rem}
+
+.vista{display:none}
+.vista.on{display:block;animation:fade .35s var(--e)}
+@keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+/* ===== primitivas ===== */
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:24px;margin-bottom:20px;position:relative;box-shadow:var(--shadow-sm)}
+.card--accent-top::before{content:"";position:absolute;top:0;left:26px;right:26px;height:3px;border-radius:0 0 4px 4px;background:var(--az)}
+.card__h{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;margin-bottom:16px;flex-wrap:wrap}
+.card__h b{font-size:1.02rem;font-weight:700}
+.card__h small{color:var(--ink3);font-size:.79rem;display:block;margin-top:3px;font-weight:500}
+.grid2{display:grid;gap:20px}
+@media(min-width:820px){.grid2{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}}
+.grid3{display:grid;gap:16px}
+@media(min-width:900px){.grid3{grid-template-columns:repeat(3,minmax(0,1fr))}}
+.grid4{display:grid;gap:14px;grid-template-columns:repeat(2,minmax(0,1fr))}
+@media(min-width:820px){.grid4{grid-template-columns:repeat(4,minmax(0,1fr))}}
+
+.btn{display:inline-flex;align-items:center;gap:8px;background:var(--az);color:#fff;border-radius:12px;padding:12px 19px;font-weight:700;font-size:.87rem;white-space:nowrap;transition:background .2s ease,transform .2s ease;box-shadow:0 1px 2px rgba(0,0,0,.05)}
+.btn:hover{background:var(--az-h)}
+.btn:active{transform:scale(.98)}
+.btn--gh{background:var(--card2);color:var(--ink);border:1px solid var(--line);box-shadow:none}
+.btn--gh:hover{background:var(--card3)}
+.btn--sm{padding:8px 13px;font-size:.8rem;border-radius:10px}
+.btn--rojo{background:transparent;color:var(--rojo);border:1px solid rgba(214,57,74,.3);box-shadow:none}
+.btn[disabled]{opacity:.5;pointer-events:none}
+.pill{display:inline-flex;align-items:center;gap:6px;font-size:.72rem;font-weight:700;padding:5px 11px;border-radius:999px;border:1px solid var(--line);color:var(--ink2)}
+.pill--ok{color:var(--verde);background:var(--verde-soft);border-color:transparent}
+.pill--az{color:var(--az);background:var(--az-soft);border-color:transparent}
+.pill--amb{color:var(--ambar);background:var(--ambar-soft);border-color:transparent}
+.pill--rojo{color:var(--rojo);background:var(--rojo-soft);border-color:transparent}
+.pill--morado{color:var(--morado);background:var(--morado-soft);border-color:transparent}
+
+.stat{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px;box-shadow:var(--shadow-sm)}
+.stat__k{font-size:.65rem;font-weight:800;letter-spacing:.07em;text-transform:uppercase;color:var(--ink3)}
+.stat__v{margin-top:11px;font-size:1.85rem;font-weight:800;letter-spacing:-.035em}
+.stat__v small{font-size:.88rem;font-weight:600;color:var(--ink3)}
+.stat__d{margin-top:6px;font-size:.79rem;color:var(--ink2);font-weight:500}
+.trend{display:inline-flex;align-items:center;gap:3px;font-weight:700;font-size:.78rem;padding:2px 8px;border-radius:999px}
+.trend--up{color:var(--verde);background:var(--verde-soft)}
+.trend--down{color:var(--rojo);background:var(--rojo-soft)}
+.trend--flat{color:var(--ink3);background:var(--card2)}
+
+/* live pulse dot */
+.pulse{position:relative;display:inline-flex;width:8px;height:8px;border-radius:99px;background:var(--verde);vertical-align:middle}
+.pulse::after{content:"";position:absolute;inset:-4px;border-radius:99px;background:var(--verde);opacity:.35;animation:pulseR 1.8s ease-out infinite}
+@keyframes pulseR{0%{transform:scale(.6);opacity:.45}100%{transform:scale(2.1);opacity:0}}
+
+/* franja de las "4 cosas" */
+.four{display:grid;gap:14px;grid-template-columns:repeat(2,minmax(0,1fr));margin-bottom:22px}
+@media(min-width:900px){.four{grid-template-columns:repeat(4,minmax(0,1fr))}}
+.fourc{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:20px;text-align:left;width:100%;transition:border-color .2s,transform .2s,box-shadow .2s;box-shadow:var(--shadow-sm)}
+.fourc:hover{border-color:var(--az);transform:translateY(-3px);box-shadow:var(--shadow-md)}
+.fourc__i{width:34px;height:34px;border-radius:10px;background:var(--az-soft);color:var(--az);display:grid;place-items:center;margin-bottom:13px}
+.fourc__i svg{width:16px;height:16px}
+.fourc b{display:block;font-weight:700;font-size:.92rem}
+.fourc p{color:var(--ink2);font-size:.8rem;margin-top:5px;line-height:1.45}
+.fourc__big{margin-top:13px;font-size:1.55rem;font-weight:800;letter-spacing:-.035em}
+.fourc__big small{font-size:.71rem;font-weight:600;color:var(--ink3);display:block;margin-top:3px}
+
+/* resumen: bloque hero, numeros como protagonistas, azul como acento puntual */
+.hero-summary{background:var(--card);border:1px solid var(--line);border-radius:var(--r-lg);padding:clamp(26px,3vw,38px);margin-bottom:22px;box-shadow:var(--shadow-md)}
+.hero-summary__top{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;align-items:center}
+.hero-summary__k{font-size:.72rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--ink3)}
+.hero-summary__g{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(18px,3vw,32px);margin-top:30px}
+@media(max-width:820px){.hero-summary__g{grid-template-columns:repeat(2,minmax(0,1fr))}}
+.hero-summary__n{font-size:clamp(1.9rem,3.6vw,2.65rem);font-weight:800;letter-spacing:-.04em;color:var(--ink)}
+.hero-summary__n.accent{color:var(--az)}
+.hero-summary__l{font-size:.86rem;color:var(--ink2);font-weight:500;margin-top:7px;line-height:1.4}
+.hero-summary__p{margin-top:26px;padding-top:24px;border-top:1px solid var(--line);font-size:.94rem;color:var(--ink2);font-weight:500;line-height:1.55}
+.hero-summary__p b{color:var(--ink)}
+
+/* ===== nudge de upsell — discreto, honesto, con CTA a Planes ===== */
+.nudge{display:flex;align-items:center;gap:16px;background:var(--card);border:1px solid var(--line);border-left:3px solid var(--ambar);border-radius:6px var(--r) var(--r) 6px;padding:19px clamp(18px,2.6vw,24px);margin-bottom:20px;box-shadow:var(--shadow-sm)}
+.nudge__ic{width:38px;height:38px;border-radius:11px;background:var(--ambar-soft);color:var(--ambar);display:grid;place-items:center;flex:none}
+.nudge__ic svg{width:17px;height:17px}
+.nudge__body{flex:1;min-width:240px}
+.nudge__body b{font-weight:700;font-size:.93rem;display:block;letter-spacing:-.01em}
+.nudge__body span{font-size:.83rem;color:var(--ink2);display:block;margin-top:4px;line-height:1.5}
+.nudge__body small{font-size:.74rem;color:var(--ink3);display:block;margin-top:7px;font-weight:500}
+.nudge__cta{flex:none}
+@media(max-width:680px){.nudge{flex-wrap:wrap}.nudge__cta{width:100%}.nudge__cta .btn{width:100%;justify-content:center}}
+
+/* ===== resumen del día 1 — preview del correo, tal cual llega ===== */
+.mailcard{background:var(--card);border:1px solid var(--line);border-radius:var(--r-lg);overflow:hidden;margin-bottom:20px;box-shadow:var(--shadow-md)}
+.mailcard__top{display:flex;align-items:center;gap:10px;padding:13px 20px;background:var(--card2);border-bottom:1px solid var(--line);flex-wrap:wrap}
+.mailcard__top .ic{width:26px;height:26px;border-radius:8px;background:var(--az-soft);color:var(--az);display:grid;place-items:center;flex:none}
+.mailcard__top .ic svg{width:13px;height:13px}
+.mailcard__top b{font-size:.78rem;font-weight:700}
+.mailcard__top span{font-size:.73rem;color:var(--ink3);font-weight:500}
+.mailcard__top .pill{margin-left:auto}
+.mailcard__body{padding:24px clamp(20px,3vw,30px)}
+.mailcard__meta{font-size:.71rem;color:var(--ink3);font-weight:600;margin-bottom:12px}
+.mailcard__meta b{color:var(--ink2)}
+.mailcard__subject{font-size:1.12rem;font-weight:800;letter-spacing:-.025em;margin-bottom:10px}
+.mailcard__text{font-size:.93rem;color:var(--ink2);line-height:1.65}
+.mailcard__text b{color:var(--ink)}
+.mailcard__foot{padding:16px 20px;border-top:1px solid var(--line);display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;background:var(--card2)}
+.mailcard__foot small{color:var(--ink3);font-size:.76rem;font-weight:500}
+
+/* guard / regla */
+.guard{border:1px solid var(--line);background:var(--card2);border-radius:16px;padding:18px 20px;margin-bottom:16px}
+.guard__h{font-size:.67rem;font-weight:800;letter-spacing:.07em;text-transform:uppercase;color:var(--ink3)}
+.guard p{margin-top:7px;font-size:.87rem;color:var(--ink2);line-height:1.55}
+.guard b{color:var(--ink)}
+.guard--az{background:var(--az-soft2);border-color:transparent;border-left:3px solid var(--az);border-radius:6px 16px 16px 6px}
+
+/* ===== bloqueo por plan (gating) ===== */
+.gated{position:relative;border-radius:16px;overflow:hidden}
+.gated__body{transition:filter .25s}
+.gated--locked .gated__body{filter:blur(7px);pointer-events:none;user-select:none}
+.gated__overlay{display:none;position:absolute;inset:0;z-index:2;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:10px;padding:20px;background:color-mix(in srgb, var(--card) 72%, transparent);backdrop-filter:blur(1px);border-radius:inherit}
+.gated--locked .gated__overlay{display:flex}
+.gated__lock{width:38px;height:38px;border-radius:11px;background:var(--az-soft);color:var(--az);display:grid;place-items:center}
+.gated__lock svg{width:16px;height:16px}
+.gated__msg{font-weight:600;font-size:.87rem;max-width:34ch;color:var(--ink)}
+.gated__cta{background:var(--az);color:#fff;padding:9px 16px;border-radius:999px;font-weight:700;font-size:.79rem}
+
+/* listas simples */
+.rows{display:flex;flex-direction:column}
+.rowi{display:flex;align-items:center;gap:12px;padding:13px 2px;border-bottom:1px solid var(--line);flex-wrap:wrap}
+.rowi:last-child{border-bottom:0}
+.rowi__t{min-width:0;flex:1}
+.rowi__t b{font-weight:700;font-size:.9rem;display:block}
+.rowi__t small{color:var(--ink2);font-size:.79rem}
+.rowi__n{font-weight:800;font-size:1.15rem;flex:none}
+.rowi__n small{font-size:.7rem;font-weight:600;color:var(--ink3);display:block;text-align:right}
+
+/* barra progreso */
+.bar{height:8px;border-radius:99px;background:var(--card3);overflow:hidden;margin-top:12px}
+.bar i{display:block;height:100%;background:var(--az);border-radius:99px;transition:width .5s var(--e)}
+
+/* tablas */
+table{width:100%;border-collapse:collapse}
+th{text-align:left;padding:10px 11px;border-bottom:1px solid var(--line);color:var(--ink3);font-size:.63rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;white-space:nowrap}
+th.r,td.r{text-align:right}
+th.c,td.c{text-align:center}
+td{padding:12px 11px;border-bottom:1px solid var(--line);font-size:.87rem;color:var(--ink2)}
+tr:last-child td{border-bottom:0}
+tbody tr{transition:background .15s}
+tbody tr:hover{background:var(--card2)}
+td b{color:var(--ink);font-weight:700}
+.tablewrap{overflow-x:auto;margin:0 -2px}
+.tablewrap table{min-width:560px}
+.cmp td.ok{color:var(--az);font-weight:800}
+.cmp td.no{color:var(--ink3)}
+
+/* forms */
+.field label{display:block;font-size:.7rem;font-weight:700;letter-spacing:.03em;text-transform:uppercase;color:var(--ink2);margin-bottom:7px}
+.field input,.field select,.field textarea{width:100%;border:1.5px solid transparent;border-radius:12px;padding:12px 14px;font-size:.92rem;font-weight:600;background:var(--card3);color:var(--ink);font-family:inherit;transition:border-color .2s,background .2s}
+.field textarea{min-height:72px;resize:vertical}
+.field input:focus,.field select:focus,.field textarea:focus{outline:none;border-color:var(--az);background:var(--card)}
+.form{display:grid;gap:14px}
+.f2{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:12px}
+@media(max-width:560px){.f2{grid-template-columns:1fr}}
+.toggle{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:13px 2px;border-bottom:1px solid var(--line)}
+.toggle:last-child{border-bottom:0}
+.toggle__t b{font-size:.87rem;font-weight:700;display:block}
+.toggle__t small{font-size:.79rem;color:var(--ink2)}
+.sw{position:relative;width:42px;height:24px;border-radius:99px;background:var(--card3);border:1.5px solid var(--line);flex:none;transition:background .18s,border-color .18s}
+.sw i{position:absolute;top:2px;left:2px;width:17px;height:17px;border-radius:99px;background:var(--ink3);transition:transform .2s var(--e),background .18s}
+.sw.on{background:var(--az-soft);border-color:var(--az)}
+.sw.on i{transform:translateX(18px);background:var(--az)}
+.sw[disabled]{opacity:.5;pointer-events:none}
+
+/* stepper */
+.stepper{display:inline-flex;align-items:center;gap:0;border:1px solid var(--line);border-radius:12px;overflow:hidden}
+.stepper button{width:40px;height:40px;font-size:1.1rem;font-weight:700;background:var(--card2);transition:background .15s,color .15s}
+.stepper button:hover{background:var(--az-soft);color:var(--az)}
+.stepper span{width:52px;text-align:center;font-weight:800;font-size:1.05rem}
+
+/* planes comparativa */
+.plans{display:grid;gap:16px;grid-template-columns:repeat(2,minmax(0,1fr))}
+@media(min-width:900px){.plans{grid-template-columns:repeat(5,minmax(0,1fr))}}
+.plan{min-width:0;border:1px solid var(--line);border-radius:18px;padding:20px 17px;background:var(--card);display:flex;flex-direction:column;position:relative;box-shadow:var(--shadow-sm);transition:box-shadow .2s,transform .2s}
+.plan:hover{box-shadow:var(--shadow-md);transform:translateY(-2px)}
+.plan.reco{border-color:var(--az);box-shadow:0 0 0 1.5px var(--az)}
+.plan.actual{border-color:var(--az);background:var(--card)}
+.plan__tag{position:absolute;top:-11px;left:15px;background:var(--az);color:#fff;font-size:.6rem;font-weight:800;letter-spacing:.04em;text-transform:uppercase;padding:5px 11px;border-radius:999px}
+.plan__big{font-size:2.15rem;font-weight:800;letter-spacing:-.045em;margin-top:10px}
+.plan__big small{font-size:.65rem;font-weight:700;color:var(--ink3);display:block;text-transform:uppercase;letter-spacing:.04em;margin-top:3px}
+.plan__price{font-size:.98rem;font-weight:700;margin-top:10px;color:var(--ink2)}
+.plan__price b{color:var(--ink)}
+.plan__multi{font-size:.78rem;color:var(--verde);font-weight:700;margin-top:4px}
+.plan ul{list-style:none;margin:14px 0;display:grid;gap:7px}
+.plan li{font-size:.78rem;color:var(--ink2);padding-left:16px;position:relative}
+.plan li::before{content:"";position:absolute;left:1px;top:6px;width:6px;height:6px;border-radius:2px;background:var(--az);transform:rotate(45deg)}
+.plan__btn{margin-top:auto;padding-top:6px}
+
+/* simulador de planes */
+.simcard{background:var(--card);border:1px solid var(--line);border-radius:var(--r-lg);padding:clamp(20px,2.6vw,28px);margin-bottom:18px;box-shadow:var(--shadow-md);position:relative;overflow:hidden}
+.simcard::before{content:"";position:absolute;top:0;left:0;right:0;height:3px;background:var(--az)}
+.simcard__row{display:flex;align-items:center;gap:16px;flex-wrap:wrap;margin-top:16px}
+.simrange{flex:1;min-width:180px}
+.simrange input[type=range]{width:100%;accent-color:var(--az)}
+.simout{display:grid;gap:14px;grid-template-columns:repeat(2,minmax(0,1fr));margin-top:18px}
+@media(min-width:720px){.simout{grid-template-columns:repeat(4,minmax(0,1fr))}}
+.simout .stat{background:var(--card2)}
+
+/* mini calendario semanal */
+.weekstrip{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:8px;margin:16px 0}
+.wk{border:1px solid var(--line);border-radius:13px;padding:11px 4px;text-align:center;background:var(--card2)}
+.wk.today{border-color:var(--az);background:var(--az-soft)}
+.wk.has{border-color:rgba(47,102,255,.3)}
+.wk__d{font-size:.6rem;font-weight:700;text-transform:uppercase;color:var(--ink3);letter-spacing:.03em}
+.wk__n{font-size:1.25rem;font-weight:800;margin-top:6px;letter-spacing:-.03em}
+.wk__n small{font-size:.58rem;color:var(--ink3);font-weight:600;display:block;text-transform:uppercase;margin-top:1px}
+
+/* gráficos */
+.chartcard .legend{display:flex;gap:16px;flex-wrap:wrap;font-size:.78rem;font-weight:700;color:var(--ink2);margin-bottom:8px}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:6px;vertical-align:-1px}
+.charthint{font-size:.74rem;color:var(--ink3);margin-top:8px}
+
+/* modal simple */
+.mod{position:fixed;inset:0;z-index:70;background:rgba(10,12,17,.5);backdrop-filter:blur(3px);display:none;place-items:center;padding:20px}
+.mod.on{display:grid}
+.mod__c{background:var(--card);border:1px solid var(--line);border-radius:24px;max-width:460px;width:100%;padding:28px;text-align:left;animation:pop .3s var(--e);max-height:88vh;overflow-y:auto;box-shadow:var(--shadow-lg)}
+@keyframes pop{from{opacity:0;transform:scale(.96)}to{opacity:1;transform:none}}
+.mod__k{font-size:.66rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--az)}
+.mod__t{margin:11px 0 9px;font-size:1.3rem;font-weight:800;letter-spacing:-.03em}
+.mod__p{color:var(--ink2);margin-bottom:18px;font-size:.9rem;line-height:1.55}
+.mod__acc{display:flex;flex-direction:column;gap:9px;margin-top:6px}
+
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(20px);background:var(--ink);color:var(--paper);font-weight:700;font-size:.87rem;padding:13px 21px;border-radius:999px;z-index:90;opacity:0;pointer-events:none;transition:opacity .3s,transform .3s;max-width:88vw;text-align:center;box-shadow:var(--shadow-lg)}
+.toast.on{opacity:1;transform:translateX(-50%) translateY(0)}
+
+.foot{margin-top:26px;padding-top:18px;border-top:1px dashed var(--line);color:var(--ink3);font-size:.78rem;text-align:center}
+
+/* ===== TU PÁGINA — pagemaker ===== */
+.pm-callout{display:flex;gap:14px;align-items:flex-start;background:var(--az-soft2);border:1px solid var(--line);border-radius:16px;padding:17px 19px;margin-bottom:24px}
+.pm-callout__ic{width:36px;height:36px;border-radius:10px;background:var(--az-soft);color:var(--az);display:grid;place-items:center;flex:none}
+.pm-callout__ic svg{width:17px;height:17px}
+.pm-callout p{font-size:.87rem;color:var(--ink2);line-height:1.55}
+.pm-callout b{color:var(--ink)}
+
+.pm-wrap{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,420px);gap:24px;align-items:start}
+@media(max-width:1080px){.pm-wrap{grid-template-columns:1fr}}
+.pm-form{display:flex;flex-direction:column;gap:16px;min-width:0}
+.pm-section{background:var(--card);border:1px solid var(--line);border-radius:var(--r);padding:22px;box-shadow:var(--shadow-sm)}
+.pm-section__t{font-size:.67rem;font-weight:800;letter-spacing:.07em;text-transform:uppercase;color:var(--ink3);margin-bottom:14px}
+
+.tpl-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.tpl-card{border:2px solid var(--line);border-radius:14px;overflow:hidden;cursor:pointer;transition:border-color .2s,transform .2s,box-shadow .2s;background:var(--card2);text-align:left;display:block;width:100%}
+.tpl-card:hover{transform:translateY(-2px);box-shadow:var(--shadow-sm)}
+.tpl-card.on{border-color:var(--az);box-shadow:0 0 0 3px var(--az-soft)}
+.tpl-card__prev{height:80px;position:relative;overflow:hidden;display:block}
+.tpl-card__meta{padding:10px 12px}
+.tpl-card__meta b{font-size:.78rem;font-weight:700;display:block}
+.tpl-card__meta span{font-size:.68rem;color:var(--ink3)}
+.tpl-card--soon{border-style:dashed;cursor:default}
+.tpl-card--soon:hover{transform:none;box-shadow:none}
+
+.tpl-mini--minimal{background:#fff;position:relative}
+.tpl-mini--minimal::before{content:"";position:absolute;left:50%;top:16px;width:16px;height:16px;border-radius:5px;background:var(--pm-color);transform:translateX(-50%)}
+.tpl-mini--minimal::after{content:"";position:absolute;left:50%;bottom:16px;width:40px;height:6px;border-radius:3px;background:var(--pm-color);opacity:.3;transform:translateX(-50%)}
+.tpl-mini--foto{background:linear-gradient(150deg,var(--pm-color),#15161a)}
+.tpl-mini--tarjeta{background:linear-gradient(160deg,var(--pm-color),#fff 68%);position:relative}
+.tpl-mini--tarjeta::before{content:"";position:absolute;left:50%;top:50%;width:58%;height:58%;border-radius:9px;background:#fff;box-shadow:0 6px 16px rgba(0,0,0,.18);transform:translate(-50%,-50%)}
+.tpl-mini--vibrante{background:linear-gradient(150deg,var(--pm-color),#0a0a0d)}
+
+.dz{cursor:pointer;border:1.5px dashed var(--line);border-radius:14px;background:var(--card3);background-size:cover;background-position:center;transition:border-color .2s,background .2s;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;position:relative}
+.dz:hover{border-color:var(--az)}
+.dz--logo{width:66px;height:66px;border-radius:17px}
+.dz--cover{height:112px;width:100%;padding:10px}
+.dz__ic{width:18px;height:18px;color:var(--ink3);transition:opacity .2s}
+.dz__label{font-size:.68rem;color:var(--ink3);font-weight:700;text-align:center;transition:opacity .2s}
+.dz.has-img .dz__ic,.dz.has-img .dz__label{opacity:0}
+.dz__caption{margin-top:8px;font-size:.72rem;color:var(--ink3);font-weight:700;text-align:center}
+
+.pal{display:flex;gap:10px;flex-wrap:wrap}
+.pal button{width:34px;height:34px;border-radius:10px;border:2px solid transparent;position:relative;transition:transform .15s}
+.pal button.on{transform:scale(1.1);box-shadow:0 0 0 2px var(--card),0 0 0 4px var(--ink)}
+
+.pm-link{display:flex;align-items:center;gap:10px;background:var(--card3);border-radius:12px;padding:13px 15px}
+.pm-link__ic{width:16px;height:16px;color:var(--ink3);flex:none}
+.pm-link__ic svg{width:100%;height:100%}
+.pm-link__text{font-family:ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;font-size:.85rem;font-weight:600;color:var(--ink);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+
+.pm-preview{position:sticky;top:24px}
+@media(max-width:1080px){.pm-preview{position:static}}
+.device{background:var(--card2);border-radius:26px;padding:14px;border:1px solid var(--line);box-shadow:var(--shadow-lg)}
+.device__bar{display:flex;align-items:center;gap:9px;padding:2px 6px 12px}
+.device__dots{display:flex;gap:5px}
+.device__dots i{width:8px;height:8px;border-radius:99px;background:var(--ink3);opacity:.35}
+.device__url{flex:1;background:var(--card);border-radius:8px;padding:6px 12px;font-size:.71rem;color:var(--ink3);font-weight:600;text-align:center;font-family:ui-monospace,monospace;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.device__screen{background:#fff;border-radius:18px;overflow:hidden;min-height:520px}
+
+@media(max-width:900px){
+  .app{grid-template-columns:minmax(0,1fr)}
+  .side{position:fixed;left:0;top:0;bottom:0;width:272px;z-index:60;transform:translateX(-100%);transition:transform .28s var(--e)}
+  .side.abierta{transform:none}
+  .hamb{display:grid;place-items:center;width:38px;height:38px;border:1px solid var(--line);border-radius:11px;flex:none}
+  .plans{grid-template-columns:1fr}
+  .weekstrip{grid-template-columns:repeat(4,minmax(0,1fr))}
+}
+@media(max-width:480px){
+  /* la campana se abre como panel fijo, no absoluto — a 326px se salía de pantalla */
+  .notifpanel{position:fixed;left:12px;right:12px;top:70px;width:auto}
+}
+
+/* ===== GATE (entrada por magic link) ===== */
+.gate{position:fixed;inset:0;z-index:200;display:flex;align-items:center;justify-content:center;
+  padding:24px;background:var(--paper)}
+.gate__card{width:100%;max-width:400px;background:var(--card);border:1px solid var(--line);
+  border-radius:var(--r-lg);box-shadow:var(--shadow-lg);padding:34px 28px;text-align:center}
+.gate__logo{font-weight:900;font-size:1.05rem;letter-spacing:-.02em;margin-bottom:22px;display:inline-flex;align-items:center}
+.gate__logo .x{display:inline-flex;width:15px;height:15px;margin:0 1px}
+.gate__logo .x svg{width:100%;height:100%}
+.gate h1{font-size:1.5rem;font-weight:800;letter-spacing:-.02em;margin-bottom:8px}
+.gate__sub,.gate p{color:var(--ink2);font-size:.92rem;margin-bottom:20px}
+.gate input{width:100%;padding:14px 16px;border-radius:var(--r-sm);border:1px solid var(--line);
+  background:var(--card2);color:var(--ink);font-size:1rem;margin-bottom:12px}
+.gate input:focus{outline:none;border-color:var(--az);background:var(--card)}
+.gate__btn{width:100%;padding:14px;border-radius:var(--r-sm);background:var(--az);color:#fff;
+  font-weight:800;font-size:1rem;transition:background .15s}
+.gate__btn:hover{background:var(--az-h)}
+.gate__btn:disabled{opacity:.6;cursor:default}
+.gate__msg{margin-top:14px;font-size:.88rem;color:var(--verde);display:block}
+.gate__msg.err{color:var(--rojo)}
+.gate__alt{margin-top:18px;font-size:.84rem;color:var(--ink2);text-decoration:underline;opacity:.85}
+</style>
+</head>
+<body>
+
+<!-- ===================== GATE: entrada por MAGIC LINK (sin contraseña) ===================== -->
+<div class="gate" id="gate">
+  <div class="gate__card">
+    <div class="gate__logo">NY<span class="x" aria-hidden="true"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><line x1="2" y1="18" x2="18" y2="2"/><line x1="18" y1="18" x2="2" y2="2"/></svg></span>A&nbsp;Empresas</div>
+    <h1 id="gateTit">Entra a tu panel</h1>
+    <p id="gateSub">Te enviamos un enlace de un solo uso a tu correo. Sin contraseñas.</p>
+    <input type="email" id="gateEmail" placeholder="El correo de tu negocio" autocomplete="email" inputmode="email">
+    <button type="button" class="gate__btn" id="gateBtn">Enviar el enlace de acceso</button>
+    <p class="gate__msg" id="gateMsg" hidden></p>
+    <button type="button" class="gate__alt" id="gateToggle">¿Aún no tienes cuenta? Crea la de tu negocio</button>
+  </div>
+</div>
+
+<div class="app" id="app" hidden aria-hidden="true">
+
+<!-- Marcador de posición para futuras herramientas de maqueta (simulador retirado en producción) -->
+  <!-- ===================== SIDEBAR ===================== -->
+  <aside class="side" id="side">
+    <div class="side__logo">NY<span class="x" aria-hidden="true"><svg viewBox="0 0 20 20"><line x1="2" y1="18" x2="18" y2="2"/><line x1="18" y1="18" x2="2" y2="2"/></svg></span>A&nbsp;Empresas</div>
+
+    <button class="biz" title="Sputnik">
+      <div class="biz__a">S</div>
+      <div class="biz__i"><b>Sputnik</b><small>Rocódromo · Ruzafa, Valencia</small></div>
+    </button>
+    <span class="planbadge" id="planBadge">Plan · 99 €/mes</span>
+
+    <p class="grp">Tu negocio</p>
+    <button class="navi on" data-v="resumen">
+      <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg></span>
+      Resumen
+    </button>
+    <button class="navi" data-v="quien-viene">
+      <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg></span>
+      Quién viene
+    </button>
+    <button class="navi" data-v="demanda">
+      <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 19h16M8 19V9M13 19V5M18 19v12"/></svg></span>
+      El aviso de demanda
+    </button>
+    <button class="navi" data-v="repeticion" data-min-nav="2">
+      <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4v6h6M20 20v-6h-6"/><path d="M5.3 14a7 7 0 0 0 12.7 2.6M18.7 10A7 7 0 0 0 6 7.4"/></svg></span>
+      Repetición
+      <span class="lock"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></span>
+    </button>
+
+    <p class="grp">Tu marca</p>
+    <button class="navi" data-v="pagina" data-min-nav="1">
+      <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18"/></svg></span>
+      Tu página
+      <span class="lock"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></span>
+    </button>
+    <button class="navi" data-v="exclusividad" data-min-nav="3">
+      <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M12 3.5l2.6 5.3 5.9.8-4.3 4.1 1 5.8L12 16.9 6.8 19.6l1-5.8-4.3-4.1 5.9-.8z"/></svg></span>
+      Exclusividad
+      <span class="lock"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></span>
+    </button>
+    <button class="navi" data-v="buzon" data-min-nav="3">
+      <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></span>
+      Buzón
+      <span class="lock"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></span>
+    </button>
+
+    <p class="grp">Cuenta</p>
+    <button class="navi" data-v="facturacion">
+      <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 10h18"/></svg></span>
+      Facturación
+    </button>
+    <button class="navi" data-v="planes">
+      <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 20h3v-6H4v6zM10.5 20h3V9h-3v11zM17 20h3V4h-3v16z"/></svg></span>
+      Planes
+    </button>
+    <button class="navi" data-v="ajustes">
+      <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="3"/><path d="M12 2.5v3M12 18.5v3M2.5 12h3M18.5 12h3M5.2 5.2l2 2M16.8 16.8l2 2M18.8 5.2l-2 2M7.2 16.8l-2 2"/></svg></span>
+      Ajustes
+    </button>
+
+    <div class="side__foot">
+      <button class="themebtn" id="temaBtn">
+        <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="8"/><path d="M12 4a8 8 0 0 0 0 16z" fill="currentColor" stroke="none"/></svg></span>
+        Modo claro / oscuro
+      </button>
+    </div>
+  </aside>
+  <div class="velo" id="velo"></div>
+
+  <!-- ===================== MAIN ===================== -->
+  <main class="main">
+    <div class="top">
+      <div class="top__l">
+        <button class="hamb" id="hamb" aria-label="Menú"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" width="20" height="20"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+        <div><h1 id="tTit">Resumen</h1><p id="tSub">Lo que NYXA te ha traído — no ajustes, resultados.</p></div>
+      </div>
+      <div class="topbtns" style="position:relative">
+        <button class="icbtn" id="notifBtn" title="Notificaciones" aria-label="Notificaciones">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 9a6 6 0 0 1 12 0c0 5 2 6 2 6H4s2-1 2-6z"/><path d="M10 20a2 2 0 0 0 4 0"/></svg>
+          <span class="dot" id="notifDot"></span>
+        </button>
+        <div class="notifpanel" id="notifPanel">
+          <p class="notifpanel__h">Avisos</p>
+          <div id="notifList"></div>
+        </div>
+        <button class="icbtn" id="temaBtn2" title="Modo claro/oscuro" aria-label="Modo claro/oscuro">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="8"/><path d="M12 4a8 8 0 0 0 0 16z" fill="currentColor" stroke="none"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- ============================================================ -->
+    <!-- ============ 1 · RESUMEN ============ -->
+    <!-- ============================================================ -->
+    <section class="vista on" data-vista="resumen">
+
+      <div class="hero-summary">
+        <div class="hero-summary__top">
+          <p class="hero-summary__k">Octubre, mes en curso · plan de 99 €/mes</p>
+          <span class="pill pill--ok">▲ septiembre cerró con el cupo lleno (18 de 18)</span>
+        </div>
+        <div class="hero-summary__g">
+          <div><div class="hero-summary__n tab">13<small style="font-size:.52em;font-weight:700;color:var(--ink3)">&nbsp;/ 18</small></div><div class="hero-summary__l">clientes que han entrado ya este mes</div></div>
+          <div><div class="hero-summary__n tab accent">≈650 €</div><div class="hero-summary__l">le han entrado ya a tu caja</div></div>
+          <div><div class="hero-summary__n tab">9,1×</div><div class="hero-summary__l">lo que pagas de cuota, si llenas el cupo</div></div>
+          <div><div class="hero-summary__n tab">5,50 €</div><div class="hero-summary__l">te sale cada cliente en tu plan</div></div>
+        </div>
+        <p class="hero-summary__p">Ningún plan de NYXA baja de 6 veces lo que cuesta — y mejora cuanto más subes. <b>Quedan 5 plazas de tu cupo antes de fin de mes.</b></p>
+      </div>
+
+      <div class="nudge" id="nudgeResumen" data-nudge-hide-min="3">
+        <div class="nudge__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/></svg></div>
+        <div class="nudge__body">
+          <b>Este mes se quedaron fuera 43 personas (≈2.150 €).</b>
+          <span>Con el plan de 199 € te caben 45, a 4,42 € cada uno en vez de 5,50 €.</span>
+          <small>También te lo mandamos por correo el día 1 — lo veas o no aquí.</small>
+        </div>
+        <div class="nudge__cta"><button class="btn btn--sm" data-go="planes">Ver si te compensa subir</button></div>
+      </div>
+
+      <p class="grp" style="padding-left:0">Las 4 cosas que ves aquí — nada más</p>
+      <div class="four">
+        <button class="fourc" data-go="quien-viene">
+          <div class="fourc__i"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg></div>
+          <b>Quién viene esta semana</b>
+          <p>Número y hora, en tiempo real. Nunca datos privados de nadie.</p>
+          <div class="fourc__big">13<small>de 18 este mes</small></div>
+        </button>
+        <button class="fourc" data-go="demanda">
+          <div class="fourc__i"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 19h16M8 19V9M13 19V5M18 19v12"/></svg></div>
+          <b>El aviso de demanda</b>
+          <p>Cuántos quisieron entrar y cuánto ganarías con más plazas.</p>
+          <div class="fourc__big">43<small>se quedaron fuera en septiembre</small></div>
+        </button>
+        <button class="fourc" data-go="facturacion">
+          <div class="fourc__i"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 10h18"/></svg></div>
+          <b>La factura, antes del cargo</b>
+          <p>Siempre la ves primero. Nada de sorpresas el día 1.</p>
+          <div class="fourc__big">129 €<small>se te cargará el 1 de noviembre</small></div>
+        </button>
+        <button class="fourc gated" data-go="exclusividad" data-min="3" data-msg="Se activa en el plan de 199 €: un solo referente por zona y categoría.">
+          <div class="gated__body">
+            <div class="fourc__i"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M12 3.5l2.6 5.3 5.9.8-4.3 4.1 1 5.8L12 16.9 6.8 19.6l1-5.8-4.3-4.1 5.9-.8z"/></svg></div>
+            <b>Exclusiva en tu categoría</b>
+            <p>Un solo referente por zona y tipo de negocio, revisable cada año.</p>
+            <div class="fourc__big">Sí<small>único rocódromo en Ruzafa</small></div>
+          </div>
+        </button>
+      </div>
+
+      <div class="grid2">
+        <div class="card chartcard">
+          <div class="card__h"><b>Cómo ha ido, mes a mes</b><small>clientes que entraron y qué parte de tu demanda pudiste atender</small></div>
+          <div class="legend"><span><i style="background:var(--az)"></i>Clientes que entraron</span><span><i style="background:var(--verde);border-radius:99px"></i>% de tu demanda que cupo</span></div>
+          <div id="evoChart"></div>
+          <p class="charthint">Pasa el ratón por una barra para ver el detalle del mes.</p>
+        </div>
+
+        <div class="card">
+          <div class="card__h"><b>Tu plan ahora mismo</b><small>sin permanencia, se queda solo si te trae clientes</small></div>
+          <div class="rows">
+            <div class="rowi"><div class="rowi__t"><b>Plan</b><small>desde el 1 de agosto</small></div><span class="pill pill--az">99 €/mes</span></div>
+            <div class="rowi"><div class="rowi__t"><b>Próximo cargo</b><small>1 de noviembre, se ve antes de cobrarse</small></div><span class="tab" style="font-weight:800">129,00 €</span></div>
+            <div class="rowi"><div class="rowi__t"><b>Estado</b></div><span class="pill pill--ok">Activo</span></div>
+            <div class="rowi"><div class="rowi__t"><b>Se te queda corto el cupo</b><small>43 se quedaron fuera en septiembre</small></div><span class="pill pill--amb">Sí</span></div>
+          </div>
+          <button class="btn" style="width:100%;justify-content:center;margin-top:16px" data-go="planes">Ver si te compensa subir de plan</button>
+        </div>
+      </div>
+
+      <div class="guard">
+        <p class="guard__h">Lo que nunca vas a poder hacer aquí</p>
+        <p><b>El dinero nunca compra encaje.</b> No pagas por aparecer antes, no pujas por posición y no eliges a quién se le propone tu plan — pagar te da más clientes afines, nunca coloca tu negocio delante de alguien a quien no le encaja. Y las personas no se dan nunca: ni nombre, ni correo, ni teléfono, en ningún plan.</p>
+      </div>
+
+      <p style="color:var(--ink3);font-size:.8rem;text-align:center;margin-top:6px">
+        El mes que no te llevemos a nadie, no se te cobra la cuota. Solo se activa cuando fallamos nosotros.
+      </p>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- ============ 2 · QUIÉN VIENE ============ -->
+    <!-- ============================================================ -->
+    <section class="vista" data-vista="quien-viene">
+      <div class="card">
+        <div class="card__h"><b>Entradas de este mes</b><small>cupo usado sobre lo incluido en tu plan</small></div>
+        <div style="display:flex;align-items:baseline;gap:8px"><span style="font-size:2rem;font-weight:800;letter-spacing:-.035em" class="tab">13</span><span style="color:var(--ink3);font-weight:600">de 18 incluidos</span></div>
+        <div class="bar"><i style="width:72%"></i></div>
+        <p style="color:var(--ink2);font-size:.82rem;margin-top:12px">Ya usaste tus 5 gratis al empezar. Quedan 5 plazas de tu cuota antes de fin de mes.</p>
+      </div>
+
+      <div class="gated" data-min="2" data-msg="El contador en vivo de gente esperando se activa en el plan de 99 €.">
+        <div class="gated__body card card--accent-top">
+          <div class="card__h"><b><span class="pulse" style="margin-right:8px"></span>En directo, ahora mismo</b><small>tu plan del martes</small></div>
+          <p style="font-size:1.12rem;font-weight:700;line-height:1.5">Hay <span class="tab" style="color:var(--az);font-weight:800">22</span> personas esperando plaza para el martes.</p>
+          <p style="color:var(--ink2);font-size:.85rem;margin-top:6px">Le ha interesado a 40 personas. Entraron 18, los que incluye tu plan.</p>
+        </div>
+      </div>
+
+      <div class="nudge" id="nudgeQuienViene" data-nudge-hide-min="3">
+        <div class="nudge__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/></svg></div>
+        <div class="nudge__body">
+          <b>22 personas están esperando tu plan del martes, ahora mismo.</b>
+          <span>Y en septiembre se quedaron fuera 43 (≈2.150 €). Con el plan de 199 € entrarían las 45, a 4,42 € cada uno.</span>
+        </div>
+        <div class="nudge__cta"><button class="btn btn--sm" data-go="planes">Ver si te compensa subir</button></div>
+      </div>
+
+      <div class="card">
+        <div class="card__h"><b>Esta semana</b><small>número y hora — nunca nombres ni contactos</small></div>
+        <div class="weekstrip">
+          <div class="wk"><div class="wk__d">Lun 6</div><div class="wk__n" style="color:var(--ink3)">—</div></div>
+          <div class="wk today has"><div class="wk__d">Mar 7</div><div class="wk__n tab">8<small>conf.</small></div></div>
+          <div class="wk"><div class="wk__d">Mié 8</div><div class="wk__n" style="color:var(--ink3)">—</div></div>
+          <div class="wk has"><div class="wk__d">Jue 9</div><div class="wk__n tab">5<small>conf.</small></div></div>
+          <div class="wk"><div class="wk__d">Vie 10</div><div class="wk__n" style="color:var(--ink3)">—</div></div>
+          <div class="wk"><div class="wk__d">Sáb 11</div><div class="wk__n" style="color:var(--ink3)">—</div></div>
+          <div class="wk"><div class="wk__d">Dom 12</div><div class="wk__n" style="color:var(--ink3)">—</div></div>
+        </div>
+        <div class="rows">
+          <div class="rowi">
+            <div class="rowi__t"><b>Escalada + cañas para novatos</b><small>Martes 7 oct · 18:00 · Ruzafa</small></div>
+            <div class="rowi__n tab">8<small>confirmados</small></div>
+          </div>
+          <div class="rowi">
+            <div class="rowi__t"><b>Sesión libre + tabla de bloque</b><small>Jueves 9 oct · 20:00 · todos los niveles</small></div>
+            <div class="rowi__n tab">5<small>confirmados</small></div>
+          </div>
+          <div class="rowi">
+            <div class="rowi__t"><b>Escalada + cañas para novatos</b><small>Martes 14 oct · 18:00 · aún se apuntan personas</small></div>
+            <div class="rowi__n tab">3<small>apuntados</small></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid2">
+        <div class="stat">
+          <p class="stat__k">Total esta semana</p>
+          <p class="stat__v tab">13<small>personas</small></p>
+        </div>
+        <div class="stat">
+          <p class="stat__k">Total este mes</p>
+          <p class="stat__v tab">13<small>de 18 incluidos</small></p>
+        </div>
+      </div>
+
+      <div class="guard">
+        <p class="guard__h">Cómo lo sabemos</p>
+        <p>Verificamos que <b>la gente del plan se juntó</b>, no que un móvil estuvo cerca: cuando varios móviles del mismo plan coinciden en sitio y hora, el encuentro se confirma solo. No instalas ni gestionas nada — tu equipo solo reconoce a quien llega.</p>
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- ============ 3 · EL AVISO DE DEMANDA ============ -->
+    <!-- ============================================================ -->
+    <section class="vista" data-vista="demanda">
+
+      <div class="mailcard">
+        <div class="mailcard__top">
+          <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg></span>
+          <b>Esto te llega por correo el día 1</b>
+          <span>· aunque no entres al panel</span>
+          <span class="pill pill--az">Preview del correo</span>
+        </div>
+        <div class="mailcard__body">
+          <p class="mailcard__meta">De: <b>NYXA</b> &lt;hola@holanyxa.com&gt; · Para: <b>Sputnik</b> · 1 de octubre de 2026</p>
+          <p class="mailcard__subject">Tu resumen de septiembre</p>
+          <p class="mailcard__text">
+            En septiembre le interesaste a <b class="tab">61</b> personas.
+            Entraron <b class="tab">18</b>. Se quedaron fuera <b class="tab">43</b> ≈ <b>2.150 €</b>.
+            Con el plan de 199 € habrían entrado <b class="tab">45</b>.
+          </p>
+        </div>
+        <div class="mailcard__foot">
+          <small>El mismo dato que ves en este panel — nunca se recalcula aparte.</small>
+          <button class="btn btn--sm" data-go="planes">Ver si te compensa subir</button>
+        </div>
+      </div>
+
+      <div class="card chartcard">
+        <div class="card__h"><b>Interesados, entraron y se quedaron fuera</b><small>últimos 6 meses — el mismo dato que ves abajo en el histórico</small></div>
+        <div class="legend"><span><i style="background:var(--az)"></i>Entraron (tu cupo)</span><span><i style="background:var(--ambar)"></i>Se quedaron fuera</span></div>
+        <div id="demandaChart"></div>
+        <p class="charthint">La barra entera es cuánta gente pidió entrar. Solo cuenta quien pidió entrar y no pudo — nunca a quién se le enseñó el plan.</p>
+      </div>
+
+      <div class="gated" data-min="2" data-msg="Se activa en el plan de 99 €: la demanda en tiempo real, no solo el resumen del día 1.">
+        <div class="gated__body card">
+          <div class="card__h"><b><span class="pulse" style="margin-right:8px"></span>En directo, ahora mismo</b><small>octubre, mes en curso</small></div>
+          <p style="font-size:1.02rem;font-weight:600;line-height:1.5">
+            Tu plan del martes le ha interesado a <b class="tab">40</b> personas.
+            Han entrado <b class="tab">18</b>, los que incluye tu plan.
+            Hay <b class="tab">22</b> esperando.
+          </p>
+          <p class="pill pill--az" style="margin-top:12px">Con el plan de 199 € te caben 45 — cada cliente a 4,42 € en vez de 5,50 €</p>
+        </div>
+      </div>
+
+      <div class="gated" data-min="1" data-msg="Se activa en el plan de 49 €: dónde vive la gente que se te queda fuera.">
+        <div class="gated__body card">
+          <div class="card__h"><b>Por zona</b><small>de los 43 que se quedaron fuera en septiembre</small></div>
+          <div class="rows">
+            <div class="rowi"><div class="rowi__t"><b>Ruzafa</b></div><div class="rowi__n tab">21</div></div>
+            <div class="rowi"><div class="rowi__t"><b>Camins al Grau</b></div><div class="rowi__n tab">11</div></div>
+            <div class="rowi"><div class="rowi__t"><b>Benimaclet</b></div><div class="rowi__n tab">6</div></div>
+            <div class="rowi"><div class="rowi__t"><b>Otros barrios</b></div><div class="rowi__n tab">5</div></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid2">
+        <div class="gated" data-min="2" data-msg="Se activa en el plan de 99 €: cuántos vuelven por su cuenta.">
+          <div class="gated__body card">
+            <div class="card__h"><b>Vuelven por su cuenta</b><small>sin que NYXA te los vuelva a traer</small></div>
+            <div class="stat__v" style="font-size:2.2rem">34%<small style="display:inline;margin-left:8px;color:var(--verde)">▲ 6 pts vs. agosto</small></div>
+            <p style="color:var(--ink2);font-size:.84rem;margin-top:8px">De cada 100 clientes que te trae NYXA, 34 repiten sin que vuelvas a pagar por ellos.</p>
+            <button class="btn btn--gh btn--sm" style="margin-top:12px" data-go="repeticion">Ver la evolución completa →</button>
+          </div>
+        </div>
+
+        <div class="gated" data-min="2" data-msg="Se activa en el plan de 99 €: abrir hueco extra cuando te sobra demanda.">
+          <div class="gated__body card">
+            <div class="card__h"><b>Abrir hueco extra este mes</b><small>7,50 € por cliente — siempre más caro que subir de plan</small></div>
+            <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap">
+              <div class="stepper">
+                <button id="extraMinus" aria-label="Quitar uno">−</button>
+                <span id="extraVal" class="tab">4</span>
+                <button id="extraPlus" aria-label="Añadir uno">+</button>
+              </div>
+              <div style="font-size:.86rem;color:var(--ink2)">
+                <b style="color:var(--ink)"><span id="extraClientes" class="tab">22</span> clientes</b> este mes ·
+                total de la cuota: <b id="extraTotal" class="tab" style="color:var(--ink)">129,00 €</b>
+              </div>
+            </div>
+            <p id="extraNota" class="pill pill--az" style="margin-top:14px" hidden>Con esta demanda, te compensa más subir al plan de 199 € que seguir pidiendo extras.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="gated" data-min="2" data-msg="Se activa en el plan de 99 €: histórico completo y exportación.">
+        <div class="gated__body card">
+          <div class="card__h"><b>Histórico</b><small>últimos 6 meses</small><button class="btn btn--gh btn--sm" id="btnExportCsv">↓ Exportar (.csv)</button></div>
+          <div class="tablewrap">
+            <table id="histTabla"></table>
+          </div>
+        </div>
+      </div>
+
+      <div class="guard">
+        <p class="guard__h">La regla que no se rompe</p>
+        <p>Solo cuenta quien <b>pidió entrar</b> en tu plan y no pudo. Nunca contamos a quién se le enseñó tu plan, ni a quién le podría haber gustado. <b>Mostrar no es querer.</b></p>
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- ============ 4 · REPETICIÓN (99 €+) ============ -->
+    <!-- ============================================================ -->
+    <section class="vista" data-vista="repeticion">
+      <div class="gated" data-min="2" data-msg="La repetición se activa en el plan de 99 €: cuántos clientes vuelven sin que vuelvas a pagar por ellos.">
+        <div class="gated__body">
+
+          <div class="card">
+            <div class="card__h"><b>Vuelven por su cuenta</b><small>de cada 100 clientes que te trae NYXA, cuántos repiten sin que te los volvamos a traer</small></div>
+            <div style="display:flex;align-items:baseline;gap:12px;flex-wrap:wrap">
+              <span style="font-size:2.6rem;font-weight:800;letter-spacing:-.035em" class="tab">34%</span>
+              <span class="trend trend--up">▲ 6 pts vs. agosto</span>
+            </div>
+            <p style="color:var(--ink2);font-size:.87rem;margin-top:10px">Es el dato que más importa a largo plazo: cada cliente que repite solo lo vuelve a facturar tu plan si tú vuelves a llevarlo, pero él ya no cuenta contra tu cupo — vuelve porque le gustó, no porque NYXA se lo proponga otra vez.</p>
+          </div>
+
+          <div class="card chartcard">
+            <div class="card__h"><b>Evolución</b><small>últimos 6 meses</small></div>
+            <div id="repChart"></div>
+            <p class="charthint">Pasa el ratón por un punto para ver el mes exacto.</p>
+          </div>
+
+          <div class="guard">
+            <p class="guard__h">Qué cuenta como "repetir"</p>
+            <p>Un cliente que vuelve a tu plan <b>sin que NYXA se lo haya vuelto a proponer</b> — es decir, te buscó él. No cuenta si vuelve porque otra vez le apareció tu plan por afinidad: eso es NYXA trabajando, no fidelidad suya. Mismo criterio en todos los meses, sin recalcular.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- ============ 5 · TU PÁGINA (escaparate, 49 €+) — reconstruida ============ -->
+    <!-- ============================================================ -->
+    <section class="vista" data-vista="pagina">
+      <div class="gated" data-min="1" data-msg="Tu propia página dentro de NYXA se activa en el plan de 49 €.">
+        <div class="gated__body">
+
+          <p class="pill pill--amb" style="margin-bottom:16px">Fase 0 · plantilla manual, sin IA — la generación automática desde tu web llega más adelante, solo si el piloto demuestra que hace falta</p>
+
+          <div class="pm-callout">
+            <div class="pm-callout__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3v4M12 17v4M3 12h4M17 12h4M5.6 5.6l2.8 2.8M15.6 15.6l2.8 2.8M18.4 5.6l-2.8 2.8M8.4 15.6l-2.8 2.8"/></svg></div>
+            <p><b>Se arma sola mientras escribes.</b> Sube una foto, pon tu nombre y elige un color — no hay que publicar nada a mano ni tocar código. La ves lista a la derecha, en directo.</p>
+          </div>
+
+          <div class="pm-wrap">
+            <div class="pm-form">
+
+              <div class="pm-section">
+                <p class="pm-section__t">1 · Elige tu plantilla</p>
+                <div class="tpl-grid">
+                  <button type="button" class="tpl-card on" data-tpl="minimal">
+                    <span class="tpl-card__prev tpl-mini--minimal"></span>
+                    <span class="tpl-card__meta"><b>Minimal</b><span>Limpia y directa</span></span>
+                  </button>
+                  <button type="button" class="tpl-card" data-tpl="foto">
+                    <span class="tpl-card__prev tpl-mini--foto"></span>
+                    <span class="tpl-card__meta"><b>Foto grande</b><span>La imagen manda</span></span>
+                  </button>
+                  <button type="button" class="tpl-card" data-tpl="tarjeta">
+                    <span class="tpl-card__prev tpl-mini--tarjeta"></span>
+                    <span class="tpl-card__meta"><b>Tarjeta elegante</b><span>Cercana y cuidada</span></span>
+                  </button>
+                  <button type="button" class="tpl-card" data-tpl="vibrante">
+                    <span class="tpl-card__prev tpl-mini--vibrante"></span>
+                    <span class="tpl-card__meta"><b>Vibrante</b><span>Color y energía</span></span>
+                  </button>
+                </div>
+                <div class="tpl-card tpl-card--soon" style="margin-top:10px;display:flex;align-items:center;gap:12px;padding:12px 14px">
+                  <span style="width:42px;height:42px;border-radius:10px;flex:none;background:var(--card3);display:grid;place-items:center;color:var(--ink3)"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M10 14a5 5 0 0 0 7.07 0l2.83-2.83a5 5 0 0 0-7.07-7.07L11.5 5.5"/><path d="M14 10a5 5 0 0 0-7.07 0L4.1 12.83a5 5 0 0 0 7.07 7.07L12.5 18.5"/></svg></span>
+                  <span style="flex:1;min-width:0"><b style="font-size:.82rem;font-weight:700;display:block">Generar desde tu web, con IA</b><span style="font-size:.74rem;color:var(--ink3)">Pega tu URL y la creamos sola</span></span>
+                  <span class="pill" style="flex:none">Próximamente</span>
+                </div>
+              </div>
+
+              <div class="pm-section">
+                <p class="pm-section__t">2 · Sube tus fotos</p>
+                <div style="display:flex;gap:16px;align-items:flex-start;flex-wrap:wrap">
+                  <div>
+                    <label class="dz dz--logo" id="pmLogoDz" for="pmLogoInput">
+                      <span class="dz__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="3" width="18" height="18" rx="4"/><circle cx="8.5" cy="9" r="1.6"/><path d="M21 15.5l-5.2-5.2a2 2 0 0 0-2.8 0L5 18.5"/></svg></span>
+                    </label>
+                    <input type="file" accept="image/*" id="pmLogoInput" hidden>
+                    <p class="dz__caption">Logo</p>
+                  </div>
+                  <div style="flex:1;min-width:180px">
+                    <label class="dz dz--cover" id="pmCoverDz" for="pmCoverInput">
+                      <span class="dz__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="3" width="18" height="18" rx="4"/><circle cx="8.5" cy="9" r="1.6"/><path d="M21 15.5l-5.2-5.2a2 2 0 0 0-2.8 0L5 18.5"/></svg></span>
+                      <span class="dz__label">Foto de portada (opcional)</span>
+                    </label>
+                    <input type="file" accept="image/*" id="pmCoverInput" hidden>
+                  </div>
+                </div>
+                <p style="margin-top:12px;font-size:.78rem;color:var(--ink3);line-height:1.5">Si no subes nada, usamos tu color de marca — tu página nunca se queda vacía.</p>
+              </div>
+
+              <div class="pm-section">
+                <p class="pm-section__t">3 · Cuéntanos quién eres</p>
+                <div class="form">
+                  <div class="field"><label>Nombre</label><input id="pmName" value="Sputnik" maxlength="30"></div>
+                  <div class="field"><label>Categoría y zona</label><input id="pmCat" value="Rocódromo · Ruzafa, Valencia" maxlength="48"></div>
+                  <div class="field"><label>Qué vive la gente contigo (1-2 líneas)</label><textarea id="pmDesc" maxlength="140">Un rocódromo donde se hace comunidad. Escalar, cañas y conocer gente nueva — sobre todo los jueves.</textarea></div>
+                </div>
+              </div>
+
+              <div class="pm-section">
+                <p class="pm-section__t">4 · Color de marca</p>
+                <div class="pal" id="pmPalette">
+                  <button type="button" class="on" data-color="#2f66ff" style="background:#2f66ff" aria-label="Azul NYXA"></button>
+                  <button type="button" data-color="#7a3cff" style="background:#7a3cff" aria-label="Morado"></button>
+                  <button type="button" data-color="#0f9d58" style="background:#0f9d58" aria-label="Verde"></button>
+                  <button type="button" data-color="#e8590c" style="background:#e8590c" aria-label="Naranja"></button>
+                  <button type="button" data-color="#d6394a" style="background:#d6394a" aria-label="Rojo"></button>
+                  <button type="button" data-color="#0a5f47" style="background:#0a5f47" aria-label="Verde oscuro"></button>
+                </div>
+              </div>
+
+              <div class="pm-section">
+                <p class="pm-section__t">Tu enlace, solo tuyo</p>
+                <div class="pm-link">
+                  <span class="pm-link__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M10 14a5 5 0 0 0 7.07 0l2.83-2.83a5 5 0 0 0-7.07-7.07L11.5 5.5"/><path d="M14 10a5 5 0 0 0-7.07 0L4.1 12.83a5 5 0 0 0 7.07 7.07L12.5 18.5"/></svg></span>
+                  <span class="pm-link__text pmLinkText">nyxa.app/e/sputnik</span>
+                </div>
+                <div style="display:flex;gap:10px;margin-top:12px">
+                  <button class="btn btn--gh" id="pmCopyLink" style="flex:1;justify-content:center">Copiar enlace</button>
+                  <button class="btn btn--gh" id="pmShareLink" style="flex:1;justify-content:center">Compartir</button>
+                </div>
+                <p style="margin-top:14px;font-size:.83rem;color:var(--ink2);line-height:1.55">Compártelo donde quieras: trae a tu propia gente y <b style="color:var(--ink)">te la convierte NYXA</b>, sin que te cueste captación.</p>
+                <div class="toggle" style="margin-top:14px;padding-top:14px;border-top:1px solid var(--line)">
+                  <div class="toggle__t"><b>Simular: sin plazas este mes</b><small>así se ve tu página cuando se llena el cupo</small></div>
+                  <button class="sw" id="pmSoldOut" role="switch" aria-checked="false"><i></i></button>
+                </div>
+              </div>
+
+            </div>
+
+            <div class="pm-preview">
+              <div class="device">
+                <div class="device__bar">
+                  <span class="device__dots"><i></i><i></i><i></i></span>
+                  <span class="device__url" id="pmUrlBar">nyxa.app/e/sputnik</span>
+                </div>
+                <div class="device__screen" id="pmScreen"></div>
+              </div>
+              <p style="text-align:center;margin-top:14px;font-size:.78rem;color:var(--ink3)">Vista previa en vivo — se actualiza mientras escribes</p>
+            </div>
+          </div>
+
+          <div class="card" style="margin-top:4px">
+            <div class="card__h"><b>Tu página, en cifras</b><small>agregado — informativo, no es un contador nuevo de demanda</small></div>
+            <div class="grid3">
+              <div class="stat"><p class="stat__k">Visitas esta semana</p><p class="stat__v tab">84</p></div>
+              <div class="stat"><p class="stat__k">Pidieron una plaza desde aquí</p><p class="stat__v tab">9</p></div>
+              <div class="stat"><p class="stat__k">De ellas, entraron</p><p class="stat__v tab">6</p></div>
+            </div>
+            <p style="color:var(--ink2);font-size:.82rem;margin-top:12px">Quien pide plaza desde tu página cae en la <b>misma cola</b> que cualquier solicitud del matching normal — no hay orden preferente. Y ya está contado dentro de «El aviso de demanda»: nunca se cuenta dos veces.</p>
+          </div>
+
+          <div class="guard">
+            <p class="guard__h">Cuando te quedes sin plazas este mes</p>
+            <p>La página deja de decir «apúntate» y pasa a mostrar el aviso honesto: cuántos lo pidieron y no cupieron. <b>Nunca cuenta a quien solo mira</b> — el mismo dato, el mismo sitio, en todas partes.</p>
+          </div>
+          <div class="guard guard--az">
+            <p class="guard__h">Lo que tu página no compra</p>
+            <p>Tu plan se le propone a quien encaja con él, no a todo el mundo. <b>No vendemos posiciones</b> — ni siquiera pagando aquí.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- ============ 6 · EXCLUSIVIDAD (199 €) ============ -->
+    <!-- ============================================================ -->
+    <section class="vista" data-vista="exclusividad">
+      <div class="gated" data-min="3" data-msg="La exclusividad de categoría y zona es del plan de 199 €.">
+        <div class="gated__body">
+          <div class="card card--accent-top" style="border-color:var(--line)">
+            <div style="width:38px;height:38px;border-radius:11px;background:var(--morado-soft);color:var(--morado);display:grid;place-items:center;margin-bottom:14px"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M12 3.5l2.6 5.3 5.9.8-4.3 4.1 1 5.8L12 16.9 6.8 19.6l1-5.8-4.3-4.1 5.9-.8z"/></svg></div>
+            <div class="card__h"><b>Exclusiva en tu categoría</b><small>revisable cada año</small></div>
+            <p style="font-size:1.4rem;font-weight:800;letter-spacing:-.03em">Eres el único rocódromo con planes patrocinados en Ruzafa</p>
+            <div class="rows" style="margin-top:8px">
+              <div class="rowi"><div class="rowi__t"><b>Categoría</b></div><span>Rocódromo</span></div>
+              <div class="rowi"><div class="rowi__t"><b>Zona</b></div><span>Ruzafa, Valencia</span></div>
+              <div class="rowi"><div class="rowi__t"><b>Desde</b></div><span>1 de agosto de 2026</span></div>
+              <div class="rowi"><div class="rowi__t"><b>Próxima revisión</b></div><span>agosto de 2027</span></div>
+            </div>
+          </div>
+
+          <div class="guard">
+            <p class="guard__h">Lo que la exclusividad no hace</p>
+            <p>Solo aplica a <b>planes patrocinados</b>: los negocios gratuitos de tu categoría siguen apareciendo si encajan, para no tocar el emparejamiento. Y <b>nada es para siempre</b> — se revisa cada año, no se firma hoy nada que cueste caro cuando tengamos la fuerza.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- ============ 7 · BUZÓN (199 €) ============ -->
+    <!-- ============================================================ -->
+    <section class="vista" data-vista="buzon">
+      <div class="gated" data-min="3" data-msg="El buzón para escribir a quien ya fue es del plan de 199 €.">
+        <div class="gated__body">
+
+          <div class="card">
+            <div class="card__h"><b>Buzón</b><small>escribir a quien ya fue, a través de NYXA — nunca una lista</small></div>
+            <p style="color:var(--ink2);font-size:.87rem;margin-bottom:12px">Elige una asistencia confirmada. Le pediremos permiso, para ese caso, antes de compartir nada.</p>
+            <div class="rows" id="buzonLista">
+              <div class="rowi">
+                <div class="rowi__t"><b>Martes 24 sep · 18:00</b><small>una de las 8 plazas de "Escalada + cañas"</small></div>
+                <button class="btn btn--gh btn--sm" data-buzon-btn>Pedir permiso para contactar</button>
+              </div>
+              <div class="rowi">
+                <div class="rowi__t"><b>Sábado 21 sep · 11:00</b><small>una de las 5 plazas de "Sesión libre"</small></div>
+                <button class="btn btn--gh btn--sm" data-buzon-btn>Pedir permiso para contactar</button>
+              </div>
+              <div class="rowi">
+                <div class="rowi__t"><b>Jueves 19 sep · 20:00</b><small>una de las 6 plazas de "Sesión libre"</small></div>
+                <button class="btn btn--gh btn--sm" data-buzon-btn>Pedir permiso para contactar</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <div class="card__h"><b>Historial de peticiones</b><small>registro auditable — quién, cuándo, para qué caso y si sigue vigente</small></div>
+            <div class="tablewrap">
+              <table>
+                <thead><tr><th>Caso</th><th>Pedido</th><th>Estado</th><th>Vigente</th></tr></thead>
+                <tbody>
+                  <tr><td>Sábado 7 sep · "Sesión libre"</td><td>08 sep 2026</td><td><span class="pill pill--ok">Autorizado</span></td><td>Sí</td></tr>
+                  <tr><td>Martes 3 sep · "Escalada + cañas"</td><td>04 sep 2026</td><td><span class="pill pill--rojo">Rechazado</span></td><td>No aplica</td></tr>
+                  <tr><td>Jueves 21 ago · "Sesión libre"</td><td>22 ago 2026</td><td><span class="pill pill--ok">Autorizado</span></td><td class="tab" id="buzonRevocado">Revocado el 2 oct</td></tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="guard">
+            <p class="guard__h">Cómo funciona, de verdad</p>
+            <p>Le preguntamos, para este caso: <b>«¿Autorizas a compartir tu nombre y teléfono con Sputnik para gestionar tu plan?»</b>. Puede decir que no. Nunca es retroactivo a asistencias pasadas sin volver a pedirlo, y si borra su cuenta o revoca, pierdes el acceso al dato. <b>Nunca en bloque, nunca una lista</b> — un caso, un permiso.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- ============ 8 · FACTURACIÓN ============ -->
+    <!-- ============================================================ -->
+    <section class="vista" data-vista="facturacion">
+      <div class="card card--accent-top">
+        <div class="card__h"><b>Tu próxima factura</b><small>la ves antes del cargo — siempre</small></div>
+        <table>
+          <tbody>
+            <tr><td>Cuota · plan de 99 € (18 clientes incluidos)</td><td class="r tab">99,00 €</td></tr>
+            <tr><td id="facExtraLinea">4 clientes extra pedidos este mes · a 7,50 €</td><td class="r tab" id="facExtraImporte">30,00 €</td></tr>
+            <tr><td><b>Total, se te cargará el 1 de noviembre</b></td><td class="r tab" id="facTotal"><b>129,00 €</b></td></tr>
+          </tbody>
+        </table>
+        <p style="color:var(--ink2);font-size:.82rem;margin-top:12px">El importe de arriba está en directo con lo que pidas en «El aviso de demanda». El correo con el detalle te llega antes que el cargo, nunca al revés.</p>
+      </div>
+
+      <div class="grid2">
+        <div class="card">
+          <div class="card__h"><b>Método de pago</b></div>
+          <div class="rowi" style="border-bottom:0;padding:6px 2px">
+            <div style="width:40px;height:28px;border-radius:6px;background:#1A1F71;color:#fff;display:grid;place-items:center;font-size:.62rem;font-weight:800;letter-spacing:.02em;flex:none">VISA</div>
+            <div class="rowi__t"><b>Visa •••• 6411</b><small>caduca 04/29</small></div>
+            <button class="btn btn--gh btn--sm" id="btnCambiarTarjeta">Cambiar tarjeta</button>
+          </div>
+          <p style="color:var(--ink2);font-size:.8rem;margin-top:12px">Gestionado por Stripe. NYXA nunca guarda el número completo de tu tarjeta.</p>
+        </div>
+        <div class="guard" style="margin:0">
+          <p class="guard__h">La garantía</p>
+          <p>El mes que no te llevemos a nadie, <b>no se te cobra la cuota</b>. Solo se activa cuando fallamos nosotros. Así empezaste, además: sin tarjeta, con tus primeros 5 clientes gratis. Hoy pagas porque decidiste seguir, y puedes irte cuando quieras — sin permanencia.</p>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top:16px">
+        <div class="card__h"><b>Facturas</b><small>histórico completo de cobros</small><button class="btn btn--gh btn--sm" id="btnExportFacturas">↓ Exportar todo (.csv)</button></div>
+        <div class="tablewrap">
+          <table id="facturasTabla"></table>
+        </div>
+      </div>
+
+      <div class="card" style="margin-top:16px;text-align:center">
+        <p style="font-weight:700">¿Te compensa subir de plan?</p>
+        <p style="color:var(--ink2);font-size:.87rem;margin-top:5px">Compara los 4 planes, el gating completo y el simulador de clientes.</p>
+        <button class="btn" style="margin-top:14px" data-go="planes">Ver planes y comparar →</button>
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- ============ 9 · PLANES / SUBIR DE PLAN ============ -->
+    <!-- ============================================================ -->
+    <section class="vista" data-vista="planes">
+
+      <p class="grp" style="padding-left:0">Primero lo que recibes, después lo que cuesta</p>
+      <p style="color:var(--ink2);font-size:.9rem;margin:-4px 0 18px;max-width:60ch">Nadie compara 49 € contra 99 €: compara 7 clientes contra 18. Ningún plan baja de 6 veces lo que cuesta, y mejora cuanto más subes.</p>
+      <div class="plans" id="plansGrid"></div>
+
+      <!-- SIMULADOR -->
+      <div class="simcard">
+        <div class="card__h" style="margin-bottom:0"><b>Simulador: ¿cuántos clientes quieres al mes?</b><small>te decimos qué plan te compensa y cuánto te sale cada cliente</small></div>
+        <div class="simcard__row">
+          <div class="simrange">
+            <input type="range" id="simRange" min="1" max="60" value="22" step="1">
+          </div>
+          <div class="stepper">
+            <button id="simMinus" aria-label="Menos">−</button>
+            <span id="simVal" class="tab">22</span>
+            <button id="simPlus" aria-label="Más">+</button>
+          </div>
+        </div>
+        <div class="simout">
+          <div class="stat"><p class="stat__k">Plan recomendado</p><p class="stat__v" id="simPlan">199 €</p></div>
+          <div class="stat"><p class="stat__k">Coste por cliente</p><p class="stat__v tab" id="simCoste">4,42 €</p></div>
+          <div class="stat"><p class="stat__k">Si te quedas en tu plan + extras</p><p class="stat__v tab" id="simActual">129,00 €</p></div>
+          <div class="stat"><p class="stat__k">Ahorras subiendo</p><p class="stat__v tab" id="simAhorro" style="color:var(--verde)">70,00 €</p></div>
+        </div>
+        <p class="charthint" id="simTexto" style="margin-top:14px;font-size:.86rem;color:var(--ink2)"></p>
+        <button class="btn" style="margin-top:16px" id="simCta">Subir al plan recomendado</button>
+      </div>
+
+      <!-- EL MISMO NEGOCIO, EN MESES DISTINTOS -->
+      <div class="card">
+        <div class="card__h"><b>El mismo negocio, en meses distintos</b><small>ejemplo con el plan de 99 € (18 clientes incluidos)</small></div>
+        <div class="tablewrap">
+          <table>
+            <thead><tr><th>Ese mes</th><th class="r">Clientes</th><th class="r">Paga</th><th>Por qué</th></tr></thead>
+            <tbody>
+              <tr><td>No te llevamos a nadie</td><td class="r tab">0</td><td class="r tab">0,00 €</td><td>No se cobra la cuota</td></tr>
+              <tr><td>Va flojo</td><td class="r tab">6</td><td class="r tab">99,00 €</td><td>Dentro de tu plan</td></tr>
+              <tr><td>Lo llena</td><td class="r tab">18</td><td class="r tab">99,00 €</td><td>Justo lo que incluye</td></tr>
+              <tr><td>Pides cuatro más</td><td class="r tab">22</td><td class="r tab">129,00 €</td><td>4 extras que pediste, a 7,50 €</td></tr>
+              <tr><td><b>Te sobra demanda</b></td><td class="r tab"><b>30</b></td><td class="r tab"><b>199,00 €</b></td><td><b>Te sale mejor subir de plan</b></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- TABLA DE GATING COMPLETA -->
+      <div class="card">
+        <div class="card__h"><b>Qué incluye cada plan</b><small>lo que no tienes se ve bloqueado en el panel, nunca oculto — para que sepas qué te estás perdiendo</small></div>
+        <div class="tablewrap">
+          <table class="cmp" id="gatingTabla"></table>
+        </div>
+      </div>
+
+      <div class="grid2">
+        <div class="card">
+          <div class="card__h"><b>Empezar no cuesta nada, y quedarse tampoco obliga</b></div>
+          <div class="rows">
+            <div class="rowi"><div class="rowi__t"><b>Sus primeros clientes, gratis</b><small>1 · 3 · 6 · 10 según el plan que elijas</small></div></div>
+            <div class="rowi"><div class="rowi__t"><b>Sin tarjeta para empezar</b><small>no se piden datos de pago para el piloto</small></div></div>
+            <div class="rowi"><div class="rowi__t"><b>Sin permanencia</b><small>te quedas solo si te trae clientes</small></div></div>
+            <div class="rowi"><div class="rowi__t"><b>Cliente extra, si te hace falta</b><small>7,50 € — siempre más caro que subir de plan</small></div></div>
+          </div>
+        </div>
+        <div class="guard" style="margin:0">
+          <p class="guard__h">Las reglas que no cambian, pagues lo que pagues</p>
+          <p><b>El dinero nunca compra encaje.</b> Pagar da más clientes afines, jamás coloca tu negocio ante alguien a quien no le encaja. <b>Solo vendemos donde podemos entregar.</b> <b>Como mucho 1 de cada 5 planes</b> que ve una persona puede ser de un negocio. <b>Las personas no se dan nunca</b>, ni en el plan más caro. Y <b>nada es perpetuo</b>: la exclusividad se revisa cada año.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- ============ 10 · AJUSTES ============ -->
+    <!-- ============================================================ -->
+    <section class="vista" data-vista="ajustes">
+      <div class="grid2">
+        <div class="card">
+          <div class="card__h"><b>Datos de empresa</b></div>
+          <div class="rows">
+            <div class="rowi"><div class="rowi__t"><b>Nombre</b></div><span>Sputnik</span></div>
+            <div class="rowi"><div class="rowi__t"><b>Categoría</b></div><span>Rocódromo</span></div>
+            <div class="rowi"><div class="rowi__t"><b>Ciudad / zona</b></div><span>Valencia · Ruzafa</span></div>
+            <div class="rowi"><div class="rowi__t"><b>CIF</b></div><span>B-12345678</span></div>
+            <div class="rowi"><div class="rowi__t"><b>Dirección fiscal</b></div><span>C/ Cádiz 24, 46006 València</span></div>
+            <div class="rowi"><div class="rowi__t"><b>Email</b></div><span>hola@sputnik.es</span></div>
+          </div>
+          <button class="btn btn--gh" data-go="pagina" style="margin-top:16px;width:100%;justify-content:center">Editar en «Tu página»</button>
+        </div>
+
+        <div class="card">
+          <div class="card__h"><b>Notificaciones</b></div>
+          <div class="toggle">
+            <div class="toggle__t"><b>Aviso de demanda, cada día 1</b><small>tu factura y el resumen del mes — siempre activo</small></div>
+            <div class="sw on" disabled><i></i></div>
+          </div>
+          <div class="toggle">
+            <div class="toggle__t"><b>Aviso por WhatsApp además de correo</b><small>opcional, apagado por defecto</small></div>
+            <button class="sw" id="swWhatsapp" role="switch" aria-checked="false"><i></i></button>
+          </div>
+          <div class="toggle">
+            <div class="toggle__t"><b>Avisarme cuando se acaben las plazas del mes</b><small>opcional, apagado por defecto</small></div>
+            <button class="sw" id="swSinPlazas" role="switch" aria-checked="false"><i></i></button>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid2" style="margin-top:16px">
+        <div class="card">
+          <div class="card__h"><b>Privacidad y datos (RGPD)</b></div>
+          <p style="color:var(--ink2);font-size:.87rem">Nunca vemos tu lista de clientes ni tú la nuestra. Puedes descargar lo que hay o borrar tu cuenta cuando quieras.</p>
+          <button class="btn btn--gh" id="btnRgpdExport" style="margin-top:16px;width:100%;justify-content:center">Descargar mis datos</button>
+          <button class="btn btn--rojo" id="btnRgpdDelete" style="margin-top:10px;width:100%;justify-content:center">Eliminar mi cuenta</button>
+        </div>
+        <div class="card">
+          <div class="card__h"><b>Cuenta</b></div>
+          <div class="rows">
+            <div class="rowi"><div class="rowi__t"><b>Acceso</b><small>enlace único, sin contraseña</small></div></div>
+            <div class="rowi"><div class="rowi__t"><b>Cliente desde</b></div><span>15 de julio de 2026</span></div>
+          </div>
+          <button class="btn btn--gh" style="margin-top:16px;width:100%;justify-content:center" id="btnCerrarSesion">Cerrar sesión</button>
+        </div>
+      </div>
+
+      <p class="foot">NYXA Empresas · Valencia · Panel de resultados, no de configuración.</p>
+    </section>
+
+  </main>
+</div>
+
+<!-- MODAL: buzón -->
+<div class="mod" id="modBuzon"><div class="mod__c">
+  <p class="mod__k">Consentimiento, no lista</p>
+  <p class="mod__t">Así se lo preguntamos a esa persona</p>
+  <p class="mod__p">«¿Autorizas a compartir tu nombre y teléfono con <b>Sputnik</b> para gestionar tu plan?»<br><br>Se lo mandamos ahora mismo, solo para este caso. Puede decir que no, y si algún día borra su cuenta o revoca el permiso, tú pierdes el acceso al dato.</p>
+  <div class="mod__acc">
+    <button class="btn" data-cerrar-modal>Entendido, mandar la petición</button>
+  </div>
+</div></div>
+
+<!-- MODAL: upgrade -->
+<div class="mod" id="modPlanes"><div class="mod__c">
+  <p class="mod__k">Cambiar de plan</p>
+  <p class="mod__t" id="modPlanesT">Ver los planes</p>
+  <p class="mod__p" id="modPlanesP">En producción, esto abre el checkout de Stripe con tu tarjeta guardada. En esta maqueta no cobra nada.</p>
+  <div class="mod__acc"><button class="btn" data-go="planes" data-cerrar-modal>Ver la comparativa completa</button><button class="btn btn--gh" data-cerrar-modal>Cerrar</button></div>
+</div></div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+/* ==========================================================================
+   MAQUETA v3 — JS de demostración, sin backend real. Hereda el JS de v2 casi
+   sin tocar (mismo modelo, mismas fuentes de datos) y añade el bloque
+   PAGEMAKER para la vista "Tu página" (plantillas + preview en vivo).
+   Todo lo que hay bajo DATA_EJEMPLO es ficticio (negocio "Sputnik"). La
+   conexión a datos reales de producción es tarea del CTO en fase posterior —
+   hoy 0 clientes B2B están cobrando de verdad. Un mismo hecho (p. ej. "43 se
+   quedaron fuera en septiembre, ≈2.150 €") aparece siempre con el mismo
+   número en todas las vistas: se lee siempre de HIST/LIVE/REPETICION/PLANES,
+   nunca se recalcula.
+   ========================================================================== */
+
+// ---- DATA_EJEMPLO: planes (fuente: PRECIOS-NYXA.md, cerrado 28-sep-2026) ----
+const PLANES = [
+  {rank:0, label:"15 €",  precio:15,  clientes:2,  gratis:1,  cadaUno:"7,50 €", cadaUnoN:7.50,  entran:"≈100 €",   multi:"6,7×",  bullets:["Perfil y panel propio","Aviso de demanda (resumen del día 1)","Recomendación de plan"]},
+  {rank:1, label:"49 €",  precio:49,  clientes:7,  gratis:3,  cadaUno:"7,00 €", cadaUnoN:7.00,  entran:"≈350 €",   multi:"7,1×",  bullets:["Se te propone en tu zona","Tu página de venta con tu estilo","Desglose de demanda por zona"]},
+  {rank:2, label:"99 €",  precio:99,  clientes:18, gratis:5,  cadaUno:"5,50 €", cadaUnoN:5.50,  entran:"≈900 €",   multi:"9,1×",  bullets:["Alcance a toda la ciudad","Contador de demanda en vivo","Cuántos vuelven, histórico y exportar"], reco:true},
+  {rank:3, label:"199 €", precio:199, clientes:45, gratis:10, cadaUno:"4,42 €", cadaUnoN:4.42,  entran:"≈2.250 €", multi:"11,3×", bullets:["Exclusiva en tu categoría","Buzón para escribir a quien ya fue"]},
+  {rank:4, label:"A medida", precio:null, clientes:null, bullets:["Varias sedes, API","Patrocinios, ciudad entera"]}
+];
+const PRECIO_EXTRA = 7.5;
+
+// ---- DATA_EJEMPLO: histórico de demanda, 6 meses. Un hecho, un número. ----
+const HIST = [
+  {mes:"Abril",     plan:0, interesados:15, entraron:2,  fuera:13, subio:false},
+  {mes:"Mayo",      plan:0, interesados:19, entraron:2,  fuera:17, subio:false},
+  {mes:"Junio",     plan:1, interesados:26, entraron:7,  fuera:19, subio:true},
+  {mes:"Julio",     plan:1, interesados:34, entraron:7,  fuera:27, subio:false},
+  {mes:"Agosto",    plan:2, interesados:48, entraron:18, fuera:30, subio:true},
+  {mes:"Septiembre",plan:2, interesados:61, entraron:18, fuera:43, subio:false}
+];
+HIST.forEach(h=>{ h.estimado = h.fuera*50; h.euros = h.entraron*50; });
+
+// ---- DATA_EJEMPLO: repetición (%), mismo orden de meses que HIST ----
+const REPETICION = [22,24,27,29,28,34];
+
+// ---- DATA_EJEMPLO: contador en vivo del plan de martes, octubre en curso ----
+const LIVE = {dia:"martes", hora:"18:00", interesados:40, entraron:18, esperando:22};
+
+// ---- DATA_EJEMPLO: facturas ----
+const FACTURAS = [
+  {fecha:"01 oct 2026", concepto:"Plan 99 € + 4 extras · octubre (próxima)", importe:129.00, futura:true},
+  {fecha:"01 sep 2026", concepto:"Plan 99 € · septiembre", importe:99.00},
+  {fecha:"01 ago 2026", concepto:"Plan 99 € · agosto (subiste desde 49 €)", importe:49.00},
+  {fecha:"01 jul 2026", concepto:"Plan 49 € · julio", importe:49.00},
+  {fecha:"01 jun 2026", concepto:"Plan 49 € · junio (subiste desde 15 €)", importe:15.00},
+  {fecha:"01 may 2026", concepto:"Plan 15 € · mayo", importe:15.00}
+];
+
+let rankActual = 2; // ejemplo: Sputnik está en el plan de 99 €
+const RANK_ACTUAL_REAL = 2; // el plan REAL contratado (el simulador de arriba solo cambia la vista)
+
+function money(n){ return (+n).toLocaleString("es-ES",{minimumFractionDigits:2,maximumFractionDigits:2})+" €"; }
+function esc(s){return String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));}
+const $=(s,r)=> (r||document).querySelector(s);
+const $$=(s,r)=> Array.from((r||document).querySelectorAll(s));
+
+// ---- navegación entre vistas ----
+const TIT = {
+  "resumen":["Resumen","Lo que NYXA te ha traído — no ajustes, resultados."],
+  "quien-viene":["Quién viene","Número y hora, en tiempo real. Nunca datos privados."],
+  "demanda":["El aviso de demanda","Cuántos quisieron entrar y cuánto ganarías con más plazas."],
+  "repeticion":["Repetición","Cuántos clientes vuelven por su cuenta, sin que te los volvamos a traer."],
+  "pagina":["Tu página","Tu propia página dentro de NYXA, con tu estilo."],
+  "exclusividad":["Exclusividad","Un solo referente por zona y categoría."],
+  "buzon":["Buzón","Escribir a quien ya fue, a través de NYXA — nunca una lista."],
+  "facturacion":["Facturación","Tu plan, tu factura y tu método de pago."],
+  "planes":["Planes","Compara, simula y sube cuando te compense."],
+  "ajustes":["Ajustes","Datos de tu empresa, notificaciones y privacidad."]
+};
+function irA(v){
+  document.querySelectorAll(".navi").forEach(n=>n.classList.toggle("on", n.dataset.v===v));
+  document.querySelectorAll(".vista").forEach(s=>s.classList.toggle("on", s.dataset.vista===v));
+  if(TIT[v]){document.getElementById("tTit").textContent=TIT[v][0];document.getElementById("tSub").textContent=TIT[v][1];}
+  document.getElementById("side").classList.remove("abierta");
+  document.getElementById("velo").classList.remove("on");
+  document.getElementById("notifPanel").classList.remove("on");
+  window.scrollTo({top:0,behavior:"smooth"});
+  // los gráficos SVG necesitan repintarse al hacerse visibles (viewBox 0 si estaban en display:none)
+  if(v==="resumen") pintarEvoChart();
+  if(v==="demanda") pintarDemandaChart();
+  if(v==="repeticion") pintarRepChart();
+  if(v==="pagina") renderPM();
+}
+document.querySelectorAll(".navi[data-v]").forEach(n=>n.addEventListener("click",()=>irA(n.dataset.v)));
+document.querySelectorAll("[data-go]").forEach(n=>n.addEventListener("click",()=>irA(n.dataset.go)));
+
+// ---- menú móvil ----
+document.getElementById("hamb").addEventListener("click",()=>{
+  document.getElementById("side").classList.add("abierta");
+  document.getElementById("velo").classList.add("on");
+});
+document.getElementById("velo").addEventListener("click",()=>{
+  document.getElementById("side").classList.remove("abierta");
+  document.getElementById("velo").classList.remove("on");
+});
+
+// ---- tema claro/oscuro ----
+function toggleTema(){ document.body.classList.toggle("dark"); pintarEvoChart(); pintarDemandaChart(); pintarRepChart(); }
+document.getElementById("temaBtn").addEventListener("click",toggleTema);
+document.getElementById("temaBtn2").addEventListener("click",toggleTema);
+
+// ---- notificaciones: avisos de conversión, siempre sobre demanda REAL ----
+// Mismos números que el resto del panel (HIST, LIVE, PLANES) — nunca se recalculan aparte.
+const NOTIFS = [
+  {
+    ic:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>',
+    tit:"Tu cupo se llenó el día 20",
+    txt:"43 personas se quedaron fuera este mes",
+    cuando:"hace 9 días",
+    cta:"Ver el aviso de demanda", go:"demanda"
+  },
+  {
+    ic:'<span class="pulse"></span>',
+    tit:"Ahora mismo hay 22 esperando",
+    txt:"tu plan del martes",
+    cuando:"hace unos minutos",
+    cta:"Ver en directo", go:"quien-viene"
+  },
+  {
+    ic:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/></svg>',
+    tit:"Con el plan de 199 € habrían entrado 45",
+    txt:"a 4,42 € cada uno, en vez de 5,50 €",
+    cuando:"este mes",
+    cta:"Ver planes", go:"planes"
+  },
+  {
+    ic:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>',
+    tit:"Tu resumen de septiembre ya está",
+    txt:"61 interesados, 18 entraron, 43 se quedaron fuera",
+    cuando:"1 de octubre",
+    cta:"Ver el resumen completo", go:"demanda"
+  }
+];
+let notifUnread = true;
+function pintarNotifs(){
+  const list = document.getElementById("notifList");
+  if(!list) return;
+  if(!NOTIFS.length){
+    list.innerHTML = '<p class="notifpanel__empty">Sin avisos nuevos.</p>';
+    return;
+  }
+  list.innerHTML = NOTIFS.map(n=>`
+    <div class="notifi">
+      <div class="notifi__i">${n.ic}</div>
+      <div>
+        <b>${n.tit}</b><span>${n.txt}</span><small>${n.cuando}</small>
+        <button type="button" class="notifi__cta" data-go="${n.go}">${n.cta} →</button>
+      </div>
+    </div>`).join("");
+  // los botones dentro del panel también navegan y cierran el panel (delegado más abajo)
+}
+function refrescarNotifDot(){
+  const dot = document.getElementById("notifDot");
+  if(dot) dot.hidden = !notifUnread;
+}
+pintarNotifs();
+refrescarNotifDot();
+document.getElementById("notifBtn").addEventListener("click",(e)=>{
+  e.stopPropagation();
+  const panel = document.getElementById("notifPanel");
+  const abriendo = !panel.classList.contains("on");
+  panel.classList.toggle("on");
+  if(abriendo && notifUnread){ notifUnread = false; refrescarNotifDot(); }
+});
+document.addEventListener("click",()=>document.getElementById("notifPanel").classList.remove("on"));
+document.getElementById("notifPanel").addEventListener("click",e=>{
+  e.stopPropagation();
+  const go = e.target.closest("[data-go]");
+  if(go){ irA(go.dataset.go); }
+});
+
+// ---- toast ----
+let toastT;
+function toast(msg){
+  const t=document.getElementById("toast");
+  t.textContent=msg; t.classList.add("on");
+  clearTimeout(toastT);
+  toastT=setTimeout(()=>t.classList.remove("on"),2600);
+}
+
+// ---- modales ----
+function abrirModal(id){ document.getElementById(id).classList.add("on"); }
+function cerrarModales(){ document.querySelectorAll(".mod").forEach(m=>m.classList.remove("on")); }
+document.querySelectorAll("[data-cerrar-modal]").forEach(b=>b.addEventListener("click",cerrarModales));
+document.querySelectorAll(".mod").forEach(m=>m.addEventListener("click",e=>{ if(e.target===m) cerrarModales(); }));
+
+document.querySelectorAll("[data-buzon-btn]").forEach(b=>{
+  b.addEventListener("click",()=>{
+    abrirModal("modBuzon");
+    b.textContent="Pendiente de respuesta";
+    b.disabled=true;
+    b.classList.add("pill--amb");
+  });
+});
+
+// ---- switches simples (ajustes) ----
+$$(".sw[role=switch]").forEach(b=>{
+  if(b.id==="pmSoldOut") return; // tiene su propio listener (afecta al preview)
+  b.addEventListener("click",()=>{
+    const on=b.classList.toggle("on");
+    b.setAttribute("aria-checked", on?"true":"false");
+    toast(on?"Activado.":"Desactivado.");
+  });
+});
+
+// ---- gating por plan ----
+function refrescarGating(){
+  document.querySelectorAll(".gated").forEach(el=>{
+    const min = +el.dataset.min;
+    el.classList.toggle("gated--locked", rankActual < min);
+    if(!el.querySelector(".gated__overlay")){
+      const ov=document.createElement("div");
+      ov.className="gated__overlay";
+      ov.innerHTML=`<div class="gated__lock"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></div>
+        <p class="gated__msg">${el.dataset.msg||"Disponible en un plan superior."}</p>
+        <button class="gated__cta" type="button">Ver planes</button>`;
+      ov.querySelector(".gated__cta").addEventListener("click",()=>irA("planes"));
+      el.appendChild(ov);
+    }
+  });
+  document.querySelectorAll(".navi[data-min-nav]").forEach(n=>{
+    const min=+n.dataset.minNav;
+    n.classList.toggle("locked", rankActual<min);
+    const lock=n.querySelector(".lock");
+    if(lock) lock.hidden = rankActual>=min;
+  });
+  const p = PLANES[rankActual];
+  document.getElementById("planBadge").textContent = "Viendo como · " + (p.precio? p.label+"/mes" : "A medida");
+  // nudges de upsell: se ocultan solos en cuanto el plan ya cubre toda la demanda conocida (199 €+)
+  document.querySelectorAll(".nudge[data-nudge-hide-min]").forEach(el=>{
+    el.hidden = rankActual >= +el.dataset.nudgeHideMin;
+  });
+}
+
+document.querySelectorAll("#simPills button").forEach(b=>{
+  b.addEventListener("click",()=>{
+    document.querySelectorAll("#simPills button").forEach(x=>x.classList.remove("on"));
+    b.classList.add("on");
+    rankActual = +b.dataset.rank;
+    refrescarGating();
+    toast("Viendo el panel como si tu plan fuera "+PLANES[rankActual].label);
+  });
+});
+
+// ---- stepper "abrir hueco extra" (ejemplo: base 99 € + extras a 7,50 €) ----
+(function(){
+  const BASE=99, INCLUIDOS=18;
+  let extra=4;
+  const val=document.getElementById("extraVal");
+  const clientes=document.getElementById("extraClientes");
+  const total=document.getElementById("extraTotal");
+  const nota=document.getElementById("extraNota");
+  function pintar(){
+    val.textContent=extra;
+    clientes.textContent=INCLUIDOS+extra;
+    total.textContent=money(BASE+extra*PRECIO_EXTRA);
+    nota.hidden = (extra*PRECIO_EXTRA) < (199-BASE);
+    // se refleja también en Facturación — un hecho, un número
+    const facLinea=document.getElementById("facExtraLinea");
+    const facImporte=document.getElementById("facExtraImporte");
+    const facTotal=document.getElementById("facTotal");
+    if(facLinea){
+      facLinea.textContent = extra+" cliente"+(extra===1?"":"s")+" extra pedido"+(extra===1?"":"s")+" este mes · a 7,50 €";
+      facImporte.textContent = money(extra*PRECIO_EXTRA);
+      facTotal.innerHTML = "<b>"+money(BASE+extra*PRECIO_EXTRA)+"</b>";
+    }
+  }
+  document.getElementById("extraPlus").addEventListener("click",()=>{ extra=Math.min(27,extra+1); pintar(); });
+  document.getElementById("extraMinus").addEventListener("click",()=>{ extra=Math.max(0,extra-1); pintar(); });
+  pintar();
+})();
+
+// ---- exportar CSV del histórico (mismos números que la tabla — un hecho, un número) ----
+document.getElementById("btnExportCsv").addEventListener("click",()=>{
+  const filas=[["Mes","Plan","Interesados","Entraron","Se quedaron fuera","Estimado (€)"]]
+    .concat(HIST.map(h=>[h.mes, PLANES[h.plan].label, h.interesados, h.entraron, h.fuera, h.estimado]));
+  const csv = filas.map(r=>r.join(";")).join("\n");
+  const blob = new Blob([csv],{type:"text/csv;charset=utf-8"});
+  const a=document.createElement("a");
+  a.href=URL.createObjectURL(blob); a.download="sputnik-aviso-de-demanda.csv"; a.click();
+  toast("Descargado. En producción sale de la misma tabla que ves arriba — nunca de un cálculo aparte.");
+});
+document.getElementById("btnExportFacturas").addEventListener("click",()=>{
+  const filas=[["Fecha","Concepto","Importe (€)"]].concat(FACTURAS.map(f=>[f.fecha,f.concepto,f.importe.toFixed(2)]));
+  const csv = filas.map(r=>r.join(";")).join("\n");
+  const blob = new Blob([csv],{type:"text/csv;charset=utf-8"});
+  const a=document.createElement("a");
+  a.href=URL.createObjectURL(blob); a.download="sputnik-facturas.csv"; a.click();
+  toast("Descargado.");
+});
+
+document.getElementById("btnCambiarTarjeta").addEventListener("click",()=>toast("En producción, esto abre el formulario seguro de Stripe. Simulado."));
+document.getElementById("btnCerrarSesion").addEventListener("click",()=>toast("Esto cerraría tu sesión. Simulado."));
+document.getElementById("btnRgpdExport").addEventListener("click",()=>toast("En producción, descarga un .zip con tus datos. Aquí no hay nada que descargar todavía."));
+document.getElementById("btnRgpdDelete").addEventListener("click",()=>toast("Esto pediría confirmación antes de borrar nada. Simulado."));
+
+// ---- histórico: tabla (desde HIST, una sola fuente) ----
+function pintarHistTabla(){
+  const el=document.getElementById("histTabla");
+  const filasHtml = HIST.map((h,i)=>{
+    const subioTag = h.subio? ' <span class="pill pill--ok" style="margin-left:6px">↑ subiste a '+PLANES[h.plan].label+'</span>' : '';
+    const destacar = i===HIST.length-1;
+    return '<tr><td>'+h.mes+subioTag+'</td><td><span class="pill">'+PLANES[h.plan].label+'</span></td>'
+      +'<td class="r tab">'+(destacar?'<b>'+h.interesados+'</b>':h.interesados)+'</td>'
+      +'<td class="r tab">'+(destacar?'<b>'+h.entraron+'</b>':h.entraron)+'</td>'
+      +'<td class="r tab">'+(destacar?'<b>'+h.fuera+'</b>':h.fuera)+'</td>'
+      +'<td class="r tab">'+(destacar?'<b>≈'+h.estimado.toLocaleString('es-ES')+' €</b>':'≈'+h.estimado.toLocaleString('es-ES')+' €')+'</td></tr>';
+  }).join("");
+  el.innerHTML='<thead><tr><th>Mes</th><th>Tu plan</th><th class="r">Interesados</th><th class="r">Entraron</th><th class="r">Se quedaron fuera</th><th class="r">Estimado</th></tr></thead><tbody>'+filasHtml+'</tbody>';
+}
+pintarHistTabla();
+
+// ---- facturas: tabla ----
+function pintarFacturasTabla(){
+  const el=document.getElementById("facturasTabla");
+  el.innerHTML='<thead><tr><th>Fecha</th><th>Concepto</th><th class="r">Importe</th><th></th></tr></thead><tbody>'+
+    FACTURAS.map(f=>'<tr><td>'+esc(f.fecha)+(f.futura?' <span class="pill pill--az" style="margin-left:6px">próxima</span>':'')+'</td><td>'+esc(f.concepto)+'</td><td class="r tab">'+money(f.importe)+'</td><td class="r">'+(f.futura?'<span class="pill">Aún no</span>':'<button class="btn btn--gh btn--sm">PDF</button>')+'</td></tr>').join("")+
+    '</tbody>';
+}
+pintarFacturasTabla();
+
+// ---- grid de planes (comparativa, "primero lo que recibe") ----
+(function(){
+  const cont=document.getElementById("plansGrid");
+  cont.innerHTML = PLANES.map(p=>{
+    const esActual = p.rank===RANK_ACTUAL_REAL;
+    return `<div class="plan ${p.reco?"reco":""} ${esActual?"actual":""}">
+      ${p.reco&&!esActual?'<span class="plan__tag">El que eligen 7 de 10</span>':''}
+      ${esActual?'<span class="plan__tag" style="background:var(--ink)">Tu plan actual</span>':''}
+      <div class="plan__big">${p.clientes ?? "+"}<small>clientes ${p.clientes? "al mes":"a negociar"}</small></div>
+      <div class="plan__price">${p.precio? money(p.precio)+"/mes · cada uno a <b>"+p.cadaUno+"</b>" : "<b>A medida</b>"}</div>
+      ${p.entran?`<div class="plan__multi">Le entran ${p.entran} · ${p.multi} lo que pagas</div>`:""}
+      <ul>${p.bullets.map(b=>`<li>${b}</li>`).join("")}${p.gratis?`<li><b>${p.gratis}</b> gratis al empezar</li>`:""}</ul>
+      <div class="plan__btn"><button class="btn ${esActual?'btn--gh':''}" style="width:100%;justify-content:center" data-plan="${p.rank}">${esActual? "Tu plan":"Cambiar a este plan"}</button></div>
+    </div>`;
+  }).join("");
+  cont.querySelectorAll("[data-plan]").forEach(b=>b.addEventListener("click",()=>{
+    const p = PLANES[+b.dataset.plan];
+    if(+b.dataset.plan===RANK_ACTUAL_REAL){ toast("Ya estás en el plan de "+p.label+"."); return; }
+    document.getElementById("modPlanesT").textContent = "Cambiar al plan de " + p.label;
+    abrirModal("modPlanes");
+  }));
+})();
+
+// ---- tabla de gating completa (Planes) ----
+(function(){
+  const FILAS = [
+    ["Clientes que te llevamos","2","7","18","45","+"],
+    ["Gratis al empezar","1","3","6","10","—"],
+    ["Perfil y panel propio","ok","ok","ok","ok","ok"],
+    ["Aviso de demanda (resumen del día 1)","ok","ok","ok","ok","ok"],
+    ["Recomendación de plan","ok","ok","ok","ok","no"],
+    ["Se te propone en tu zona","no","ok","ok","ok","ok"],
+    ["Tu página de venta con tu estilo","no","ok","ok","ok","ok"],
+    ["Desglose de demanda por zona/barrio","no","ok","ok","ok","ok"],
+    ["Alcance a toda la ciudad","no","no","ok","ok","ok"],
+    ["Contador de demanda en vivo","no","no","ok","ok","ok"],
+    ["Cuántos vuelven por su cuenta","no","no","ok","ok","ok"],
+    ["Histórico y exportar","no","no","ok","ok","ok"],
+    ["Abrir hueco extra el mismo mes","no","no","ok","ok","ok"],
+    ["Exclusiva en tu categoría","no","no","no","ok","ok"],
+    ["Buzón — consentimiento por caso, nunca lista","no","no","no","ok","ok"],
+    ["Varias sedes y API","no","no","no","no","ok"]
+  ];
+  const cell = v => v==="ok" ? '<td class="c ok">✓</td>' : v==="no" ? '<td class="c no">—</td>' : '<td class="c">'+v+'</td>';
+  const head = '<thead><tr><th></th><th class="c">15 €</th><th class="c">49 €</th><th class="c">99 €</th><th class="c">199 €</th><th class="c">A medida</th></tr></thead>';
+  const body = '<tbody>'+FILAS.map(f=>'<tr><td>'+f[0]+'</td>'+f.slice(1).map(cell).join("")+'</tr>').join("")+'</tbody>';
+  document.getElementById("gatingTabla").innerHTML = head+body;
+})();
+
+// ---- SIMULADOR: ¿cuántos clientes quieres al mes? ----
+(function(){
+  const range=document.getElementById("simRange"), val=document.getElementById("simVal");
+  const out={
+    plan:document.getElementById("simPlan"), coste:document.getElementById("simCoste"),
+    actual:document.getElementById("simActual"), ahorro:document.getElementById("simAhorro"),
+    texto:document.getElementById("simTexto"), cta:document.getElementById("simCta")
+  };
+  function planQueCubre(n){
+    for(const p of PLANES){ if(p.clientes!=null && p.clientes>=n) return p; }
+    return PLANES[4]; // a medida
+  }
+  function calcular(n){
+    const rec = planQueCubre(n);
+    const actual = PLANES[RANK_ACTUAL_REAL];
+    val.textContent=n;
+    if(rec.rank===4){
+      out.plan.textContent="A medida";
+      out.coste.textContent="a negociar";
+      out.actual.textContent = money(actual.precio + Math.max(0,n-actual.clientes)*PRECIO_EXTRA);
+      out.ahorro.textContent="—";
+      out.texto.textContent="Para "+n+" clientes al mes hablamos de un acuerdo a medida: varias sedes, API o ciudad entera. No es autoservicio — se negocia.";
+      out.cta.textContent="Hablar de un plan a medida";
+      out.cta.disabled=false;
+      return;
+    }
+    out.plan.textContent=rec.label;
+    out.coste.textContent=rec.cadaUno;
+    const extrasNecesarios = Math.max(0, n-actual.clientes);
+    const costeActualMasExtras = actual.precio + extrasNecesarios*PRECIO_EXTRA;
+    out.actual.textContent = money(costeActualMasExtras);
+    if(rec.rank===actual.rank){
+      out.ahorro.textContent="—";
+      out.texto.textContent = "Tu plan de "+actual.label+" ya te cubre "+n+" clientes al mes. No hace falta cambiar nada.";
+      out.cta.textContent="Ya estás en el plan que te conviene";
+      out.cta.disabled=true;
+    }else{
+      const ahorro = costeActualMasExtras - rec.precio;
+      out.cta.disabled=false;
+      if(ahorro>0){
+        out.ahorro.textContent = money(ahorro);
+        out.texto.textContent = "Quedándote en "+actual.label+" y pidiendo "+extrasNecesarios+" extra"+(extrasNecesarios===1?"":"s")+" pagarías "+money(costeActualMasExtras)+". Subiendo al plan de "+rec.label+" pagas "+money(rec.precio)+" — ahorras "+money(ahorro)+" al mes y cada cliente te sale a "+rec.cadaUno+" en vez de "+((costeActualMasExtras/n).toFixed(2)+" €").replace(".",",")+".";
+        out.cta.textContent = "Subir al plan de "+rec.label;
+      }else{
+        out.ahorro.textContent = "—";
+        out.texto.textContent = "Con "+n+" clientes, seguir en "+actual.label+" y pedir "+extrasNecesarios+" extra"+(extrasNecesarios===1?"":"s")+" sale más barato este mes ("+money(costeActualMasExtras)+" frente a "+money(rec.precio)+"). Pero si tu demanda sigue subiendo, en el plan de "+rec.label+" no pagas ni un euro más hasta los "+rec.clientes+" clientes.";
+        out.cta.textContent = "Subir al plan de "+rec.label+" de todas formas";
+      }
+    }
+  }
+  function actualizar(){ calcular(+range.value); }
+  range.addEventListener("input",actualizar);
+  document.getElementById("simPlus").addEventListener("click",()=>{ range.value=Math.min(60,+range.value+1); actualizar(); });
+  document.getElementById("simMinus").addEventListener("click",()=>{ range.value=Math.max(1,+range.value-1); actualizar(); });
+  document.getElementById("simCta").addEventListener("click",()=>{
+    if(out.cta.disabled) return;
+    toast("En producción, esto abre el checkout de Stripe con tu tarjeta guardada. Simulado.");
+  });
+  actualizar();
+})();
+
+/* ==========================================================================
+   PAGEMAKER — "Tu página": 4 plantillas fijas rellenas con datos, sin IA.
+   Preview en vivo dentro del "device", en HTML/CSS inline (una página web
+   propia, siempre clara, independiente del tema del panel).
+   ========================================================================== */
+const PM = {
+  tpl:"minimal",
+  color:"#2f66ff",
+  name:"Sputnik",
+  cat:"Rocódromo · Ruzafa, Valencia",
+  desc:"Un rocódromo donde se hace comunidad. Escalar, cañas y conocer gente nueva — sobre todo los jueves.",
+  logo:null,
+  cover:null,
+  soldOut:false
+};
+
+function pmSlug(){
+  return (PM.name||"").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"")
+    .replace(/[^a-z0-9]+/g,"-").replace(/(^-|-$)/g,"") || "tu-negocio";
+}
+function pmInitial(){ return (PM.name||"?").trim().charAt(0).toUpperCase() || "?"; }
+function pmShade(hex, pct){
+  hex = (hex||"#2f66ff").replace('#','');
+  if(hex.length===3) hex = hex.split('').map(c=>c+c).join('');
+  const num = parseInt(hex,16);
+  let r=(num>>16)&255, g=(num>>8)&255, b=num&255;
+  r = Math.min(255,Math.max(0, r + Math.round(255*pct/100)));
+  g = Math.min(255,Math.max(0, g + Math.round(255*pct/100)));
+  b = Math.min(255,Math.max(0, b + Math.round(255*pct/100)));
+  return '#' + [r,g,b].map(v=>v.toString(16).padStart(2,'0')).join('');
+}
+function pmLogo(size, ring){
+  const r = Math.round(size*0.28);
+  const ringStyle = ring? `border:4px solid #fff;box-shadow:0 6px 18px rgba(0,0,0,.18);` : '';
+  if(PM.logo) return `<img src="${PM.logo}" style="width:${size}px;height:${size}px;border-radius:${r}px;object-fit:cover;${ringStyle}">`;
+  return `<div style="width:${size}px;height:${size}px;border-radius:${r}px;background:${PM.color};display:inline-grid;place-items:center;color:#fff;font-weight:800;font-size:${Math.round(size*0.38)}px;font-family:'Plus Jakarta Sans',sans-serif;${ringStyle}">${esc(pmInitial())}</div>`;
+}
+function pmCoverPattern(h){
+  if(PM.cover){
+    return `height:${h}px;background-image:url('${PM.cover}');background-size:cover;background-position:center;position:relative;`;
+  }
+  return `height:${h}px;position:relative;background-repeat:no-repeat;background:
+      radial-gradient(circle at 18% 26%, rgba(255,255,255,.28) 0 4px, transparent 5px),
+      radial-gradient(circle at 78% 20%, rgba(255,255,255,.22) 0 5px, transparent 6px),
+      radial-gradient(circle at 55% 66%, rgba(255,255,255,.18) 0 6px, transparent 7px),
+      radial-gradient(circle at 30% 76%, rgba(255,255,255,.24) 0 3px, transparent 4px),
+      radial-gradient(circle at 88% 68%, rgba(255,255,255,.2) 0 4px, transparent 5px),
+      radial-gradient(circle at 42% 40%, rgba(255,255,255,.16) 0 3px, transparent 4px),
+      linear-gradient(135deg, ${PM.color}, ${pmShade(PM.color,-24)});`;
+}
+function pmCta(){
+  if(PM.soldOut){
+    return `<div style="border:1.5px solid #E5E5EA;color:#8E8E93;font-weight:700;font-size:.82rem;padding:13px;border-radius:12px;text-align:center;font-family:'Plus Jakarta Sans',sans-serif">No quedan plazas este mes</div>
+      <p style="margin-top:9px;font-size:.72rem;color:#AEAEB2;font-family:'Plus Jakarta Sans',sans-serif">43 lo intentaron en septiembre</p>`;
+  }
+  return `<button style="width:100%;background:${PM.color};color:#fff;font-weight:700;font-size:.86rem;padding:14px;border-radius:12px;border:0;font-family:'Plus Jakarta Sans',sans-serif;cursor:pointer">Quiero una plaza</button>`;
+}
+function pmCtaLight(){
+  if(PM.soldOut){
+    return `<div style="border:1.5px solid rgba(255,255,255,.4);color:#fff;font-weight:700;font-size:.82rem;padding:13px;border-radius:12px;text-align:center;opacity:.85;font-family:'Plus Jakarta Sans',sans-serif">No quedan plazas este mes</div>
+      <p style="margin-top:9px;font-size:.72rem;color:rgba(255,255,255,.7);font-family:'Plus Jakarta Sans',sans-serif">43 lo intentaron en septiembre</p>`;
+  }
+  return `<button style="width:100%;background:#fff;color:${PM.color};font-weight:700;font-size:.86rem;padding:14px;border-radius:12px;border:0;font-family:'Plus Jakarta Sans',sans-serif;cursor:pointer">Quiero una plaza</button>`;
+}
+
+function tplMinimal(){
+  return `<div style="font-family:'Plus Jakarta Sans',-apple-system,sans-serif;background:#fff;min-height:520px;padding:56px 30px;text-align:center;display:flex;flex-direction:column;align-items:center">
+    ${pmLogo(60)}
+    <p style="margin-top:22px;font-size:1.45rem;font-weight:800;letter-spacing:-.03em;color:#1D1D1F">${esc(PM.name)}</p>
+    <p style="margin-top:7px;font-size:.7rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:#A1A1A6">${esc(PM.cat)}</p>
+    <p style="margin-top:18px;font-size:.87rem;line-height:1.6;color:#6E6E73;max-width:28ch">${esc(PM.desc)}</p>
+    <div style="margin-top:26px;width:100%;max-width:220px">${pmCta()}</div>
+    <p style="margin-top:36px;font-size:.66rem;color:#C7C7CC;font-family:ui-monospace,monospace">nyxa.app/e/${pmSlug()}</p>
+  </div>`;
+}
+function tplFoto(){
+  return `<div style="font-family:'Plus Jakarta Sans',sans-serif;background:#fff;min-height:520px">
+    <div style="${pmCoverPattern(226)}">
+      <div style="position:absolute;inset:0;background:linear-gradient(0deg, rgba(0,0,0,.6), rgba(0,0,0,0) 58%)"></div>
+      <div style="position:absolute;left:22px;bottom:18px;right:22px;color:#fff">
+        <p style="font-size:1.55rem;font-weight:800;letter-spacing:-.03em">${esc(PM.name)}</p>
+        <p style="font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;opacity:.92;margin-top:5px">${esc(PM.cat)}</p>
+      </div>
+    </div>
+    <div style="padding:22px">
+      <p style="font-size:.87rem;line-height:1.6;color:#3C3C43">${esc(PM.desc)}</p>
+      <div style="margin-top:20px">${pmCta()}</div>
+      <p style="margin-top:16px;font-size:.66rem;color:#C7C7CC;font-family:ui-monospace,monospace">nyxa.app/e/${pmSlug()}</p>
+    </div>
+  </div>`;
+}
+function tplTarjeta(){
+  return `<div style="font-family:'Plus Jakarta Sans',sans-serif;min-height:520px;background:linear-gradient(160deg, ${PM.color}22, #ffffff 55%);padding:46px 20px;display:flex;justify-content:center;align-items:flex-start">
+    <div style="background:#fff;border-radius:22px;box-shadow:0 26px 60px -20px rgba(0,0,0,.24);padding:28px 22px;max-width:250px;width:100%;text-align:center">
+      <div style="margin-top:-58px;display:flex;justify-content:center">${pmLogo(72,true)}</div>
+      <p style="margin-top:16px;font-size:1.25rem;font-weight:800;letter-spacing:-.03em;color:#1D1D1F">${esc(PM.name)}</p>
+      <p style="display:inline-block;margin-top:9px;font-size:.64rem;font-weight:800;letter-spacing:.05em;text-transform:uppercase;color:${PM.color};background:${PM.color}14;padding:6px 12px;border-radius:999px">${esc(PM.cat)}</p>
+      <p style="margin-top:14px;font-size:.84rem;line-height:1.55;color:#6E6E73">${esc(PM.desc)}</p>
+      <div style="margin-top:20px">${pmCta()}</div>
+      <p style="margin-top:14px;font-size:.64rem;color:#C7C7CC;font-family:ui-monospace,monospace">nyxa.app/e/${pmSlug()}</p>
+    </div>
+  </div>`;
+}
+function tplVibrante(){
+  const logoBox = PM.logo
+    ? `<img src="${PM.logo}" style="width:46px;height:46px;border-radius:13px;object-fit:cover;border:2px solid rgba(255,255,255,.5)">`
+    : `<div style="width:46px;height:46px;border-radius:13px;background:rgba(255,255,255,.18);backdrop-filter:blur(4px);display:grid;place-items:center;color:#fff;font-weight:800;font-size:1.05rem;border:1px solid rgba(255,255,255,.32)">${esc(pmInitial())}</div>`;
+  return `<div style="font-family:'Plus Jakarta Sans',sans-serif;min-height:520px;background:linear-gradient(150deg, ${PM.color}, ${pmShade(PM.color,-32)});padding:34px 26px;position:relative;overflow:hidden;color:#fff">
+    <div style="position:absolute;width:190px;height:190px;border-radius:99px;background:rgba(255,255,255,.08);top:-64px;right:-64px"></div>
+    <div style="position:absolute;width:130px;height:130px;border-radius:99px;background:rgba(255,255,255,.06);bottom:14px;left:-44px"></div>
+    <div style="position:relative">
+      ${logoBox}
+      <p style="margin-top:34px;font-size:1.95rem;font-weight:800;letter-spacing:-.035em;line-height:1.08">${esc(PM.name)}</p>
+      <p style="display:inline-block;margin-top:11px;font-size:.66rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;background:rgba(255,255,255,.18);padding:6px 13px;border-radius:999px">${esc(PM.cat)}</p>
+      <p style="margin-top:16px;font-size:.85rem;line-height:1.6;color:rgba(255,255,255,.9);max-width:28ch">${esc(PM.desc)}</p>
+      <div style="margin-top:26px;max-width:220px">${pmCtaLight()}</div>
+      <p style="margin-top:22px;font-size:.64rem;color:rgba(255,255,255,.55);font-family:ui-monospace,monospace">nyxa.app/e/${pmSlug()}</p>
+    </div>
+  </div>`;
+}
+
+function renderPM(){
+  const screen = document.getElementById('pmScreen');
+  if(!screen) return;
+  const fns = {minimal:tplMinimal, foto:tplFoto, tarjeta:tplTarjeta, vibrante:tplVibrante};
+  screen.innerHTML = (fns[PM.tpl]||tplMinimal)();
+  const linkText = 'nyxa.app/e/'+pmSlug();
+  document.querySelectorAll('.pmLinkText').forEach(n=>n.textContent=linkText);
+  const urlbar = document.getElementById('pmUrlBar'); if(urlbar) urlbar.textContent = linkText;
+  document.documentElement.style.setProperty('--pm-color', PM.color);
+}
+
+// plantillas: selección
+document.querySelectorAll('.tpl-card[data-tpl]').forEach(c=>{
+  c.addEventListener('click',()=>{
+    document.querySelectorAll('.tpl-card[data-tpl]').forEach(x=>x.classList.remove('on'));
+    c.classList.add('on');
+    PM.tpl = c.dataset.tpl;
+    renderPM();
+  });
+});
+
+// paleta de color cerrada
+document.querySelectorAll('#pmPalette button[data-color]').forEach(b=>{
+  b.addEventListener('click',()=>{
+    document.querySelectorAll('#pmPalette button').forEach(x=>x.classList.remove('on'));
+    b.classList.add('on');
+    PM.color = b.dataset.color;
+    renderPM();
+  });
+});
+
+// campos: nombre, categoría, descripción — en vivo
+const pmName=document.getElementById('pmName'), pmCat=document.getElementById('pmCat'), pmDesc=document.getElementById('pmDesc');
+if(pmName) pmName.addEventListener('input', ()=>{ PM.name=pmName.value; renderPM(); });
+if(pmCat) pmCat.addEventListener('input', ()=>{ PM.cat=pmCat.value; renderPM(); });
+if(pmDesc) pmDesc.addEventListener('input', ()=>{ PM.desc=pmDesc.value; renderPM(); });
+
+// subir logo / portada (FileReader, local — no sale de este documento)
+function pmWireUpload(inputId, dzId, key){
+  const input=document.getElementById(inputId), dz=document.getElementById(dzId);
+  if(!input||!dz) return;
+  input.addEventListener('change', ()=>{
+    const file=input.files && input.files[0]; if(!file) return;
+    const reader=new FileReader();
+    reader.onload=()=>{
+      PM[key]=reader.result;
+      dz.style.backgroundImage=`url(${reader.result})`;
+      dz.classList.add('has-img');
+      renderPM();
+      toast(key==='logo'? "Logo actualizado." : "Foto de portada actualizada.");
+    };
+    reader.readAsDataURL(file);
+  });
+}
+pmWireUpload('pmLogoInput','pmLogoDz','logo');
+pmWireUpload('pmCoverInput','pmCoverDz','cover');
+
+// simular sin plazas
+const pmSoldOutBtn = document.getElementById('pmSoldOut');
+if(pmSoldOutBtn){
+  pmSoldOutBtn.addEventListener('click', function(){
+    const on = this.classList.toggle('on');
+    this.setAttribute('aria-checked', on?'true':'false');
+    PM.soldOut = on;
+    renderPM();
+  });
+}
+
+// enlace: copiar / compartir
+const pmCopyBtn=document.getElementById('pmCopyLink'), pmShareBtn=document.getElementById('pmShareLink');
+if(pmCopyBtn) pmCopyBtn.addEventListener('click', ()=>{
+  const link='nyxa.app/e/'+pmSlug();
+  if(navigator.clipboard && navigator.clipboard.writeText){ navigator.clipboard.writeText(link).catch(()=>{}); }
+  toast('Enlace copiado: '+link);
+});
+if(pmShareBtn) pmShareBtn.addEventListener('click', ()=> toast('Compartir (simulado) — en producción abre el panel nativo del sistema.'));
+
+renderPM();
+
+/* ==========================================================================
+   GRÁFICOS — SVG puro, sin librerías (eje "bonito" 1/2/5×10^k, tooltip al
+   pasar el ratón). Toman el color de acento y las líneas de rejilla de las
+   variables CSS actuales — heredan el tono "hairline" del nuevo sistema.
+   ========================================================================== */
+function cssvar(name){ return getComputedStyle(document.body).getPropertyValue(name).trim(); }
+function niceMax(m){ if(m<=0) return 1; const p=Math.pow(10,Math.floor(Math.log10(m))); const r=m/p; const nice=r<=1?1:r<=2?2:r<=5?5:10; return nice*p; }
+
+// Barras (clientes que entraron) + línea (% de la demanda que cupo) — vista Resumen
+function pintarEvoChart(){
+  const el=document.getElementById("evoChart"); if(!el) return;
+  const n=HIST.length;
+  const entraron=HIST.map(h=>h.entraron);
+  const cobertura=HIST.map(h=>Math.round(h.entraron/h.interesados*100));
+  const maxE=Math.max(1,...entraron), yMax=niceMax(maxE);
+  const W=Math.max(380,n*74), H=224, padL=32, padR=38, padT=16, padB=30;
+  const plotW=W-padL-padR, plotH=H-padT-padB, x0=padL, y0=padT, colW=plotW/n, bw=Math.min(32,colW*0.44);
+  const yE=v=>y0+plotH*(1-v/yMax), yP=v=>y0+plotH*(1-Math.max(0,Math.min(100,v))/100), cx=i=>x0+colW*i+colW/2;
+  const az=cssvar('--az'), verde=cssvar('--verde'), line=cssvar('--line'), ink3=cssvar('--ink3');
+  let grid="";
+  for(let g=0; g<=4; g++){
+    const yy=y0+plotH*g/4, ev=Math.round(yMax*(1-g/4)), pv=Math.round(100*(1-g/4));
+    grid+=`<line x1="${x0}" y1="${yy}" x2="${x0+plotW}" y2="${yy}" stroke="${line}" stroke-width="1"></line>`;
+    grid+=`<text x="${x0-6}" y="${yy+3}" text-anchor="end" font-size="10" fill="${ink3}">${ev}</text>`;
+    grid+=`<text x="${x0+plotW+6}" y="${yy+3}" text-anchor="start" font-size="10" fill="${verde}">${pv}%</text>`;
+  }
+  let bars="", hits="", pts=[];
+  HIST.forEach((h,i)=>{
+    const bx=cx(i)-bw/2, by=yE(entraron[i]), bh=Math.max(2,y0+plotH-by);
+    pts.push(cx(i)+","+yP(cobertura[i]));
+    bars+=`<rect x="${bx}" y="${by}" width="${bw}" height="${bh}" rx="6" fill="${az}"></rect>`;
+    bars+=`<text x="${cx(i)}" y="${y0+plotH+16}" text-anchor="middle" font-size="10" fill="${ink3}">${h.mes.slice(0,3)}</text>`;
+    hits+=`<rect class="hit" x="${x0+colW*i}" y="${y0}" width="${colW}" height="${plotH}" fill="transparent" data-i="${i}" data-cx="${cx(i)}" data-by="${by}"></rect>`;
+  });
+  const poly = pts.length>1? `<polyline points="${pts.join(" ")}" fill="none" stroke="${verde}" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></polyline>`+pts.map(p=>{const c=p.split(",");return `<circle cx="${c[0]}" cy="${c[1]}" r="3" fill="${verde}"></circle>`;}).join(""):"";
+  el.innerHTML=`<svg viewBox="0 0 ${W} ${H}" width="100%" style="max-height:250px;overflow:visible" preserveAspectRatio="xMidYMid meet">${grid}${bars}${poly}${hits}<g id="evoTip" style="opacity:0;transition:opacity .1s"></g></svg>`;
+  const tip=el.querySelector("#evoTip"), card=cssvar('--card'), ink=cssvar('--ink');
+  function show(h){
+    const i=+h.getAttribute("data-i"), d=HIST[i], cxv=+h.getAttribute("data-cx"), byv=+h.getAttribute("data-by");
+    const tw=150, th=64; let tx=cxv-tw/2; tx=Math.max(2,Math.min(W-tw-2,tx)); let ty=byv-th-10; if(ty<2)ty=byv+10;
+    tip.innerHTML=`<rect x="${tx}" y="${ty}" width="${tw}" height="${th}" rx="10" fill="${card}" stroke="${line}"></rect>
+      <text x="${tx+11}" y="${ty+17}" font-size="11" font-weight="800" fill="${ink}">${d.mes} · plan ${PLANES[d.plan].label}</text>
+      <text x="${tx+11}" y="${ty+32}" font-size="10.5" fill="${az}">Entraron: ${d.entraron} de ${d.interesados}</text>
+      <text x="${tx+11}" y="${ty+46}" font-size="10.5" fill="${verde}">Cubriste: ${Math.round(d.entraron/d.interesados*100)}% de la demanda</text>
+      <text x="${tx+11}" y="${ty+60}" font-size="10.5" fill="${ink3}">≈${d.estimado.toLocaleString('es-ES')} € se quedaron fuera</text>`;
+    tip.style.opacity="1";
+  }
+  $$(".hit",el).forEach(h=>{ h.addEventListener("mouseenter",()=>show(h)); h.addEventListener("mousemove",()=>show(h)); h.addEventListener("mouseleave",()=>tip.style.opacity="0"); });
+}
+
+// Barras apiladas (entraron + fuera = interesados) — vista Aviso de demanda
+function pintarDemandaChart(){
+  const el=document.getElementById("demandaChart"); if(!el) return;
+  const n=HIST.length;
+  const maxI=Math.max(1,...HIST.map(h=>h.interesados)), yMax=niceMax(maxI);
+  const W=Math.max(380,n*74), H=240, padL=32, padR=14, padT=26, padB=30;
+  const plotW=W-padL-padR, plotH=H-padT-padB, x0=padL, y0=padT, colW=plotW/n, bw=Math.min(36,colW*0.5);
+  const yV=v=>y0+plotH*(1-v/yMax), cx=i=>x0+colW*i+colW/2;
+  const az=cssvar('--az'), ambar=cssvar('--ambar'), line=cssvar('--line'), ink3=cssvar('--ink3'), ink=cssvar('--ink');
+  let grid="";
+  for(let g=0; g<=4; g++){
+    const yy=y0+plotH*g/4, v=Math.round(yMax*(1-g/4));
+    grid+=`<line x1="${x0}" y1="${yy}" x2="${x0+plotW}" y2="${yy}" stroke="${line}" stroke-width="1"></line>`;
+    grid+=`<text x="${x0-6}" y="${yy+3}" text-anchor="end" font-size="10" fill="${ink3}">${v}</text>`;
+  }
+  let bars="", hits="";
+  HIST.forEach((h,i)=>{
+    const bx=cx(i)-bw/2;
+    const yEnt=yV(h.entraron), hEnt=Math.max(1,y0+plotH-yEnt);
+    const yFuera=yV(h.interesados), hFuera=Math.max(1,yEnt-yFuera);
+    bars+=`<rect x="${bx}" y="${yEnt}" width="${bw}" height="${hEnt}" fill="${az}" rx="4"></rect>`;
+    bars+=`<rect x="${bx}" y="${yFuera}" width="${bw}" height="${hFuera}" fill="${ambar}" rx="4"></rect>`;
+    bars+=`<text x="${cx(i)}" y="${yFuera-6}" text-anchor="middle" font-size="10.5" font-weight="800" fill="${ink}">${h.interesados}</text>`;
+    bars+=`<text x="${cx(i)}" y="${y0+plotH+16}" text-anchor="middle" font-size="10" fill="${ink3}">${h.mes.slice(0,3)}</text>`;
+    hits+=`<rect class="hit" x="${x0+colW*i}" y="${y0}" width="${colW}" height="${plotH}" fill="transparent" data-i="${i}" data-cx="${cx(i)}" data-by="${yFuera}"></rect>`;
+  });
+  el.innerHTML=`<svg viewBox="0 0 ${W} ${H}" width="100%" style="max-height:266px;overflow:visible" preserveAspectRatio="xMidYMid meet">${grid}${bars}${hits}<g id="demTip" style="opacity:0;transition:opacity .1s"></g></svg>`;
+  const tip=el.querySelector("#demTip"), card=cssvar('--card');
+  function show(h){
+    const i=+h.getAttribute("data-i"), d=HIST[i], cxv=+h.getAttribute("data-cx"), byv=+h.getAttribute("data-by");
+    const tw=168, th=78; let tx=cxv-tw/2; tx=Math.max(2,Math.min(W-tw-2,tx)); let ty=byv-th-10; if(ty<2)ty=byv+10;
+    tip.innerHTML=`<rect x="${tx}" y="${ty}" width="${tw}" height="${th}" rx="10" fill="${card}" stroke="${line}"></rect>
+      <text x="${tx+11}" y="${ty+17}" font-size="11" font-weight="800" fill="${ink}">${d.mes} · plan ${PLANES[d.plan].label}</text>
+      <text x="${tx+11}" y="${ty+32}" font-size="10.5" fill="${ink3}">Interesados: ${d.interesados}</text>
+      <text x="${tx+11}" y="${ty+46}" font-size="10.5" fill="${az}">Entraron: ${d.entraron}</text>
+      <text x="${tx+11}" y="${ty+60}" font-size="10.5" fill="${ambar}">Fuera: ${d.fuera}</text>
+      <text x="${tx+11}" y="${ty+74}" font-size="10.5" fill="${ink3}">≈${d.estimado.toLocaleString('es-ES')} € que no entraron</text>`;
+    tip.style.opacity="1";
+  }
+  $$(".hit",el).forEach(h=>{ h.addEventListener("mouseenter",()=>show(h)); h.addEventListener("mousemove",()=>show(h)); h.addEventListener("mouseleave",()=>tip.style.opacity="0"); });
+}
+
+// Línea de repetición (%) — vista Repetición
+function pintarRepChart(){
+  const el=document.getElementById("repChart"); if(!el) return;
+  const n=REPETICION.length;
+  const yMax=50; // zoom razonable: la serie va de 22% a 34%
+  const W=Math.max(380,n*74), H=210, padL=30, padR=14, padT=16, padB=30;
+  const plotW=W-padL-padR, plotH=H-padT-padB, x0=padL, y0=padT, colW=plotW/n;
+  const yV=v=>y0+plotH*(1-Math.min(v,yMax)/yMax), cx=i=>x0+colW*i+colW/2;
+  const az=cssvar('--az'), line=cssvar('--line'), ink3=cssvar('--ink3'), ink=cssvar('--ink'), azsoft=cssvar('--az-soft');
+  let grid="";
+  for(let g=0; g<=4; g++){
+    const yy=y0+plotH*g/4, v=Math.round(yMax*(1-g/4));
+    grid+=`<line x1="${x0}" y1="${yy}" x2="${x0+plotW}" y2="${yy}" stroke="${line}" stroke-width="1"></line>`;
+    grid+=`<text x="${x0-6}" y="${yy+3}" text-anchor="end" font-size="10" fill="${ink3}">${v}%</text>`;
+  }
+  let pts=[], labels="", hits="";
+  REPETICION.forEach((v,i)=>{
+    pts.push(cx(i)+","+yV(v));
+    labels+=`<text x="${cx(i)}" y="${y0+plotH+16}" text-anchor="middle" font-size="10" fill="${ink3}">${HIST[i].mes.slice(0,3)}</text>`;
+    hits+=`<rect class="hit" x="${x0+colW*i}" y="${y0}" width="${colW}" height="${plotH}" fill="transparent" data-i="${i}" data-cx="${cx(i)}" data-cy="${yV(v)}"></rect>`;
+  });
+  const area = `M${x0},${y0+plotH} L`+pts.join(" L")+` L${x0+plotW},${y0+plotH} Z`;
+  const poly = `<polyline points="${pts.join(" ")}" fill="none" stroke="${az}" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"></polyline>`;
+  const dots = pts.map(p=>{const c=p.split(",");return `<circle cx="${c[0]}" cy="${c[1]}" r="3.4" fill="${az}"></circle>`;}).join("");
+  el.innerHTML=`<svg viewBox="0 0 ${W} ${H}" width="100%" style="max-height:236px;overflow:visible" preserveAspectRatio="xMidYMid meet">${grid}<path d="${area}" fill="${azsoft}"></path>${poly}${dots}${labels}${hits}<g id="repTip" style="opacity:0;transition:opacity .1s"></g></svg>`;
+  const tip=el.querySelector("#repTip"), card=cssvar('--card');
+  function show(h){
+    const i=+h.getAttribute("data-i"), v=REPETICION[i], cxv=+h.getAttribute("data-cx"), cyv=+h.getAttribute("data-cy");
+    const tw=128, th=44; let tx=cxv-tw/2; tx=Math.max(2,Math.min(W-tw-2,tx)); let ty=cyv-th-10; if(ty<2)ty=cyv+10;
+    tip.innerHTML=`<rect x="${tx}" y="${ty}" width="${tw}" height="${th}" rx="10" fill="${card}" stroke="${line}"></rect>
+      <text x="${tx+11}" y="${ty+18}" font-size="11" font-weight="800" fill="${ink}">${HIST[i].mes}</text>
+      <text x="${tx+11}" y="${ty+33}" font-size="10.5" fill="${az}">Repetición: ${v}%</text>`;
+    tip.style.opacity="1";
+  }
+  $$(".hit",el).forEach(h=>{ h.addEventListener("mouseenter",()=>show(h)); h.addEventListener("mousemove",()=>show(h)); h.addEventListener("mouseleave",()=>tip.style.opacity="0"); });
+}
+
+// ---- estado inicial ----
+refrescarGating();
+pintarEvoChart();
+window.addEventListener("resize", ()=>{ pintarEvoChart(); pintarDemandaChart(); pintarRepChart(); });
+
+/* ==========================================================================
+   PRODUCCIÓN — conexión al backend real (nexa-empresas.js).
+   Sin simulador: el plan del negocio (rankActual) lo decide el SERVIDOR vía
+   panel_datos() (gating en servidor). Estado vacío honesto: hoy 0 negocios de
+   pago y demanda 0 → se avisa de que los números de abajo son un ejemplo hasta
+   que NYXA le traiga clientes de verdad. Nunca se le presentan como suyos.
+   ========================================================================== */
+function _gateEl(id){ return document.getElementById(id); }
+function mostrarGate(modo){
+  const g=_gateEl("gate"), app=_gateEl("app");
+  if(g){ g.hidden=false; } if(app){ app.hidden=true; app.setAttribute("aria-hidden","true"); }
+}
+function ocultarGate(){
+  const g=_gateEl("gate"), app=_gateEl("app");
+  if(g){ g.hidden=true; } if(app){ app.hidden=false; app.setAttribute("aria-hidden","false"); }
+}
+function gateMsg(txt, err){
+  const m=_gateEl("gateMsg"); if(!m) return;
+  m.hidden=!txt; m.textContent=txt||""; m.classList.toggle("err", !!err);
+}
+let _gateModo="entrar"; // "entrar" | "alta"
+(function initGate(){
+  const t=_gateEl("gateToggle"); if(!t) return;
+  t.addEventListener("click",()=>{
+    _gateModo = _gateModo==="entrar" ? "alta" : "entrar";
+    _gateEl("gateTit").textContent = _gateModo==="alta" ? "Crea la cuenta de tu negocio" : "Entra a tu panel";
+    _gateEl("gateSub").textContent = _gateModo==="alta"
+      ? "Te enviamos un enlace para activar tu cuenta. Sin contraseñas."
+      : "Te enviamos un enlace de un solo uso a tu correo. Sin contraseñas.";
+    _gateEl("gateBtn").textContent = _gateModo==="alta" ? "Crear cuenta y enviar enlace" : "Enviar el enlace de acceso";
+    t.textContent = _gateModo==="alta" ? "¿Ya tienes cuenta? Entra con tu correo" : "¿Aún no tienes cuenta? Crea la de tu negocio";
+    gateMsg("");
+  });
+  const b=_gateEl("gateBtn"); if(!b) return;
+  b.addEventListener("click", async ()=>{
+    const email=(_gateEl("gateEmail").value||"").trim();
+    if(!/.+@.+\..+/.test(email)){ gateMsg("Escribe un correo válido.", true); return; }
+    const api=window.NEXAEmpresas;
+    if(!api || !api.real){ gateMsg("Conectando con el servidor… inténtalo en unos segundos.", true); return; }
+    b.disabled=true; b.textContent="Enviando…";
+    try{
+      const r = _gateModo==="alta"
+        ? await api.altaMagicLink({ email })
+        : await api.enviarMagicLink(email);
+      if(r && r.ok){ gateMsg("Te hemos enviado un enlace a "+email+". Ábrelo desde este dispositivo. Mira también el spam."); }
+      else { gateMsg((r&&r.error) || "No se pudo enviar el enlace. Inténtalo de nuevo.", true); }
+    }catch(e){ gateMsg("Error de red. Inténtalo de nuevo.", true); }
+    b.disabled=false; b.textContent = _gateModo==="alta" ? "Crear cuenta y enviar enlace" : "Enviar el enlace de acceso";
+  });
+})();
+
+// Estado vacío honesto: aviso claro cuando el negocio aún no tiene actividad real.
+function mostrarVacioHonesto(){
+  if(document.getElementById("emptyBanner")) return;
+  const main=document.querySelector(".main"); if(!main) return;
+  const top=main.querySelector(".top");
+  const el=document.createElement("div");
+  el.id="emptyBanner";
+  el.style.cssText="margin:16px 0;padding:14px 18px;border:1px solid var(--line);border-left:4px solid var(--az);"
+    +"border-radius:var(--r-sm);background:var(--az-soft2);color:var(--ink);font-size:.9rem";
+  el.innerHTML="<b>Aún no hay actividad de tu negocio.</b> Los números que ves debajo son un <b>ejemplo</b> "
+    +"de lo que aparecerá aquí en cuanto NYXA te traiga clientes. En cuanto haya demanda real, este panel "
+    +"la mostrará sola — nada de esto se calcula por tu cuenta.";
+  if(top && top.parentNode){ top.parentNode.insertBefore(el, top.nextSibling); } else { main.prepend(el); }
+}
+
+// Interfaz que consume nexa-empresas.js (boot) — misma forma que el panel viejo.
+window.NEXA_PANEL = {
+  showGate: ()=>mostrarGate("entrar"),
+  hideGate: ()=>ocultarGate(),
+  setCuenta: (acc)=>{
+    ocultarGate();
+    // nombre del negocio en la barra lateral
+    try{
+      const bz=document.querySelector(".biz__i b"); if(bz && acc && acc.nombre) bz.textContent=acc.nombre;
+      const av=document.querySelector(".biz__a"); if(av && acc && acc.nombre) av.textContent=(acc.nombre[0]||"N").toUpperCase();
+    }catch(e){}
+    aplicarPanelDatos();
+  },
+  aplicarDatos: ()=>{ /* el panel nuevo lee de panel_datos(); metrics() viejo no se usa */ },
+};
+
+async function aplicarPanelDatos(){
+  const api=window.NEXAEmpresas;
+  if(!api || !api.real || !api.panelDatos){ return; }  // mock/sin backend → queda el diseño con ejemplo
+  let d=null;
+  try{ d=await api.panelDatos(); }catch(e){ d=null; }
+  if(!d || d.error || d.sin_negocio){
+    // sin ficha o sin migraciones aplicadas: no rompemos, dejamos el diseño y avisamos honesto
+    mostrarVacioHonesto();
+    return;
+  }
+  // Nivel REAL del servidor → gating (no simulador).
+  const niv=(d.negocio && typeof d.negocio.nivel==="number") ? d.negocio.nivel : 0;
+  rankActual=niv;
+  const pb=document.getElementById("planBadge");
+  if(pb && d.plan){ pb.textContent = "Plan · " + (d.plan.precio ? d.plan.precio+" €/mes" : "A medida"); }
+  refrescarGating();
+  // ¿Hay demanda real? Si todo a 0 → estado vacío honesto.
+  const mes=d.mes||{};
+  const hay=(+mes.interesados>0)||(+mes.usado>0)||(+mes.entraron>0);
+  if(!hay) mostrarVacioHonesto();
+}
+
+// Cerrar sesión de verdad (deja de ser "Simulado").
+(function(){
+  const b=document.getElementById("btnCerrarSesion");
+  if(b) b.addEventListener("click", async ()=>{
+    try{ if(window.NEXAEmpresas && window.NEXAEmpresas.logout) await window.NEXAEmpresas.logout(); }catch(e){}
+    location.reload();
+  });
+})();
+
+// Si NO hay backend configurado (abriendo el fichero suelto), enseña el gate igual.
+window.addEventListener("nexa-empresas-ready",(ev)=>{
+  if(!ev.detail || !ev.detail.real){ mostrarGate("entrar"); }
+});
+// Fallback: si en 1,5 s nadie ha decidido, muestra el gate (evita panel abierto sin sesión).
+setTimeout(()=>{ const g=_gateEl("gate"); if(g && g.hidden && (_gateEl("app")||{}).hidden!==false){ /* boot decidirá */ } }, 10);
+</script>
+<!-- Backend real: config público (URL + anon key) y SDK del panel. Cargados DESPUÉS de
+     definir window.NEXA_PANEL para que el boot de nexa-empresas.js pueda hidratar el panel. -->
+<script src="backend/client/config.js"></script>
+<script src="backend/client/nexa-empresas.js"></script>
+</body>
+</html>
