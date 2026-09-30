@@ -67,7 +67,7 @@ a{color:inherit}
 .xs__k{font-size:13px;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--blue);margin:0}
 .xs__t{font-size:clamp(28px,4.6vw,48px);font-weight:800;letter-spacing:-.035em;line-height:1.05;margin:14px 0 0;color:var(--ink);text-wrap:balance;max-width:20ch}
 .xs--center .xs__t,.xs--center .xs__s{margin-left:auto;margin-right:auto}
-.xs__s{font-size:clamp(16px,2vw,19px);color:var(--ink2);max-width:56ch;margin:16px 0 0;text-wrap:pretty}
+.xs__s{font-size:clamp(16px,2vw,19px);color:var(--ink2);max-width:56ch;margin:16px 0 0;text-wrap:balance}
 .xs__grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px;margin-top:40px}
 .xs__c{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:26px}
 .xs__n{display:inline-flex;width:32px;height:32px;align-items:center;justify-content:center;border-radius:50%;background:var(--soft);color:var(--blueink);font-weight:800;font-size:14px}
@@ -272,6 +272,9 @@ a:focus-visible,button:focus-visible,summary:focus-visible,[role=button]:focus-v
 .phero .kick{color:#cfe0ff}.phero h1{color:#fff}.phero h1 .b{color:#8fb0ff}.phero p{color:rgba(255,255,255,.92)}
 .photocred{position:absolute;right:12px;bottom:9px;z-index:3;font-size:10px;color:rgba(255,255,255,.55);text-decoration:none}
 .photocred:hover{color:#fff}
+.hlive{display:inline-flex;align-items:center;gap:8px;margin-top:22px;padding:8px 16px;border-radius:999px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.24);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);font-size:13.5px;font-weight:700;color:rgba(255,255,255,.95)}
+.hlive i{width:7px;height:7px;border-radius:50%;background:#8fb0ff;box-shadow:0 0 0 3px rgba(143,176,255,.28)}
+.hlive b{font-variant-numeric:tabular-nums;color:#fff;font-weight:800}
 </style>
 <style>/*VLOG*/
 .vlog{display:grid;gap:clamp(44px,7vw,88px);margin-top:52px}
@@ -337,6 +340,7 @@ body{padding-bottom:64px}
       <p class="kick">Guía · Barcelona</p>
       <h1>Cómo hacer <span class="b">amigos en Barcelona</span> si acabas de llegar.</h1>
       <p class="lead2">Llegar a Barcelona y no conocer a nadie es normal. Estas son las mejores formas de hacer amigos.</p>
+      <p class="hlive"><i></i><b data-cnt="barcelona">0</b>&nbsp;personas de Barcelona ya están en NYXA</p>
     </div>
       <a class="photocred" href="https://commons.wikimedia.org/wiki/File:Barcelona_skyline_2007.jpg" target="_blank" rel="noopener">Foto: Diliff · CC BY 2.5 · Wikimedia</a>
 </section>
@@ -543,8 +547,13 @@ window.addEventListener('resize',function(){if(window.innerWidth>860)set(false);
 (function(){
   var SB="https://vjpgyxwhobshwaotmwzf.supabase.co";
   var KEY="sb_publishable_rmJ7LK0fhSZTJsOUUzOZ3A_bnY-bQ9-";
-  var FALLBACK={total:966,valencia:442}; /* último dato real conocido (14-sep); la cifra viva lo pisa */
-  var state={total:null,valencia:null};
+  /* Fallback SOLO si falla la llamada en vivo. `barcelona` no existe como
+     clave raíz en nyxa_stats_publico (solo `total`, `valencia` y el array
+     `cities`) -- por eso el dato real de Barcelona se lee más abajo del
+     array `cities` (city==="Barcelona"). Si la llamada falla del todo, se
+     deja en 0 a propósito -- NO inventar cifra. */
+  var FALLBACK={total:966,barcelona:0};
+  var state={total:null,barcelona:null};
   var nf=new Intl.NumberFormat('es-ES');
   function els(k){return [].slice.call(document.querySelectorAll('[data-cnt="'+k+'"]'));}
   function tween(el,from,to){
@@ -556,19 +565,26 @@ window.addEventListener('resize',function(){if(window.innerWidth>860)set(false);
     /* garantía: si rAF está congelado (pestaña oculta / reduce-motion), fija el valor final */
     setTimeout(function(){el.textContent=nf.format(to);},dur+60);
   }
+  function bumpCounter(k,n){
+    var prev=state[k];state[k]=n;
+    var from=prev==null?Math.max(0,n-40):prev;
+    els(k).forEach(function(el){tween(el,from,n);});
+  }
   function render(data){
-    ['total','valencia'].forEach(function(k){
+    ['total'].forEach(function(k){
       if(typeof data[k]!=='number')return;
-      var prev=state[k];state[k]=data[k];
-      var from=prev==null?Math.max(0,data[k]-40):prev;
-      els(k).forEach(function(el){tween(el,from,data[k]);});
+      bumpCounter(k,data[k]);
     });
-    /* desglose por ciudad (cuando la función lo devuelve): rellena Barcelona/Madrid */
+    /* desglose por ciudad: Barcelona no tiene clave raíz -- se busca aquí
+       dentro (dato real de la BD) y también rellena otras ciudades */
     if(Array.isArray(data.cities)){
+      var bcn=null;
       data.cities.forEach(function(c){
         if(!c||typeof c.n!=='number')return;
+        if(c.city==='Barcelona')bcn=c.n;
         els('city:'+c.city).forEach(function(el){el.textContent=nf.format(c.n)+' usuarios';});
       });
+      if(bcn!==null)bumpCounter('barcelona',bcn);
     }
   }
   function fetchStats(){
