@@ -14,8 +14,11 @@
   "use strict";
   const CFG = window.NEXA_EMPRESAS_CONFIG || null;
   const LS = "nexa_empresa";
+  const LS_ALTA = "nexa_empresa_alta_pendiente";   // ficha a crear al volver del magic link
   const readLS = () => { try { return JSON.parse(localStorage.getItem(LS) || "null"); } catch { return null; } };
   const writeLS = (o) => { try { localStorage.setItem(LS, JSON.stringify(o)); } catch {} };
+  const readAlta = () => { try { return JSON.parse(localStorage.getItem(LS_ALTA) || "null"); } catch { return null; } };
+  const writeAlta = (o) => { try { o ? localStorage.setItem(LS_ALTA, JSON.stringify(o)) : localStorage.removeItem(LS_ALTA); } catch {} };
 
   /* ── MOCK ── */
   const Mock = {
@@ -26,7 +29,11 @@
     async setNewPassword() { return { ok: true }; },
     async signup(data) { const c = { ...data, plan: "verificada", creada: Date.now() }; writeLS(c); return { ok: true, account: c }; },
     async signupPending(data) { return this.signup(data); },
+    async enviarMagicLink(email) { return { ok: !!email, mock: true }; },
+    async altaMagicLink(data) { writeAlta(data); return { ok: true, mock: true }; },
     async metrics() { return null; },
+    // Datos del panel (maqueta v3). En mock no hay backend → estado vacío honesto.
+    async panelDatos() { return null; },
     async upgrade(plan) { const c = readLS() || {}; c.plan = plan; writeLS(c); return { ok: true, mock: true, plan }; },
     async listExperiences() { const c = readLS() || {}; return c.experiencias || []; },
     async addExperience(e) { const c = readLS() || {}; c.experiencias = c.experiencias || []; c.experiencias.unshift({ id: Date.now(), titulo: e.titulo, cat: e.cat, franja: e.franja, estado: "publicada" }); writeLS(c); return { ok: true }; },
@@ -85,6 +92,30 @@
         const { error } = await sb.auth.updateUser({ password });
         return error ? { ok: false, error: error.message } : { ok: true };
       },
+      // ── ALTA / ENTRADA por MAGIC LINK (sin contraseña) ──
+      // Entrar: envía un enlace de un solo uso al correo. Al pulsarlo, Supabase crea la
+      // sesión y vuelve a /panel.html. NO crea ficha por sí solo (eso lo hace altaMagicLink).
+      async enviarMagicLink(email) {
+        const { error } = await sb.auth.signInWithOtp({
+          email: norm(email),
+          options: { emailRedirectTo: location.origin + "/panel.html", shouldCreateUser: false },
+        });
+        // shouldCreateUser:false → si el correo no tiene cuenta, Supabase da error: es "entrar".
+        return error ? { ok: false, error: error.message } : { ok: true };
+      },
+      // Alta: guarda la ficha pendiente EN LOCAL y envía el enlace (creando el usuario si
+      // hace falta). Al volver autenticado, completeSignupIfPending() materializa la ficha
+      // en `businesses` (siempre plan 'verificada'/'alta', lo congela la RLS + trigger).
+      async altaMagicLink(data) {
+        if (!data || !data.email) return { ok: false, error: "Falta el correo." };
+        writeAlta({ ...data, email: norm(data.email) });
+        const { error } = await sb.auth.signInWithOtp({
+          email: norm(data.email),
+          options: { emailRedirectTo: location.origin + "/panel.html", shouldCreateUser: true },
+        });
+        if (error) { writeAlta(null); return { ok: false, error: error.message }; }
+        return { ok: true };
+      },
       // Registro: crea el usuario (sesión inmediata) y su ficha en `businesses`.
       // Siempre nace plan 'verificada' y sin verificar (lo fuerza la RLS + trigger).
       async signup(data) {
@@ -120,10 +151,29 @@
         return { ok: true, account: await this.account() };
       },
       async signupPending(data) { return this.signup(data); },
-      // Compat con el boot: si hay sesión, devuelve la cuenta.
+      // Compat con el boot: si hay sesión, devuelve la cuenta. Y si venimos de un alta por
+      // magic link (hay ficha pendiente en local y aún no existe negocio), la MATERIALIZA
+      // ahora en `businesses` — plan 'verificada' y sin verificar, como en signup().
       async completeSignupIfPending() {
         const email = await miEmail(); if (!email) return null;
-        return aCuenta(await miNegocio(), email);
+        let biz = await miNegocio();
+        if (!biz) {
+          const alta = readAlta();
+          if (alta && norm(alta.email) === email) {
+            const meta = {};
+            if (alta.frase) meta.frase = alta.frase;
+            if (alta.aforo) meta.aforo = alta.aforo;
+            const tipo = (alta.tipo === "marca" || alta.tipo === "local") ? alta.tipo : null;
+            const { error } = await sb.from("businesses").insert({
+              owner_email: email, name: alta.nombre || "Tu empresa", category: alta.categoria || null,
+              type: tipo, city_id: norm(alta.ciudad) || "valencia",
+              descripcion: alta.descripcion || null, web: alta.web || null, instagram: alta.ig || null,
+              plan: "verificada", verified: false, meta,
+            });
+            if (!error || error.code === "23505") { writeAlta(null); biz = await miNegocio(); }
+          }
+        }
+        return aCuenta(biz, email);
       },
       // Guarda perfil + colecciones (todo en `businesses`/`meta`). No toca plan/verified.
       async saveProfile(c) {
@@ -205,9 +255,18 @@
         const { error } = await sb.from("businesses").update({ meta }).eq("id", biz.id);
         return { ok: !error, error: error && error.message };
       },
-      // Métricas: aún no hay backend de atribución para el panel → el panel muestra
-      // sus datos de EJEMPLO (marcados) hasta que se instrumente la atribución real.
+      // Métricas viejas (panel viejo): sin backend de atribución → null.
       async metrics() { return null; },
+      // Datos del panel NUEVO (maqueta v3), GATEADOS EN SERVIDOR: la RPC `panel_datos()`
+      // devuelve SOLO lo que el tramo del negocio ha pagado (las secciones no pagadas ni
+      // salen del servidor). Un hecho = un número: la demanda sale de panel_cifras_negocio.
+      // Hoy, sin negocios de pago ni plans.business_id, la demanda viene a 0 (estado vacío
+      // honesto). Migraciones 20260930120000 / 20260930130000 (NEXA-APP).
+      async panelDatos() {
+        const { data, error } = await sb.rpc("panel_datos");
+        if (error) return { error: error.message };
+        return data || null;
+      },
       // Pago REAL (SOLO web): abre Stripe Checkout vía la Edge Function `crear-checkout`.
       // El plan NO se toca desde el cliente (lo congela el trigger); lo activa el
       // webhook de Stripe tras el pago. Aquí solo redirigimos a la pasarela.
