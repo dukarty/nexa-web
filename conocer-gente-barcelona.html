@@ -599,9 +599,11 @@ window.addEventListener('resize',function(){if(window.innerWidth>860)set(false);
 (function(){
   var SB="https://vjpgyxwhobshwaotmwzf.supabase.co";
   var KEY="sb_publishable_rmJ7LK0fhSZTJsOUUzOZ3A_bnY-bQ9-";
-  /* Fallback SOLO si falla la llamada en vivo. Barcelona es incipiente: sin
-     dato real confirmado, se deja en 0 a propósito -- NO inventar cifra.
-     AJUSTAR con el número real (nyxa_stats_publico) antes de publicar. */
+  /* Fallback SOLO si falla la llamada en vivo. `barcelona` no existe como
+     clave raíz en nyxa_stats_publico (solo `total`, `valencia` y el array
+     `cities`) -- por eso el dato real de Barcelona se lee más abajo del
+     array `cities` (city==="Barcelona"). Si la llamada falla del todo, se
+     deja en 0 a propósito -- NO inventar cifra. */
   var FALLBACK={total:966,barcelona:0};
   var state={total:null,barcelona:null};
   var nf=new Intl.NumberFormat('es-ES');
@@ -615,19 +617,26 @@ window.addEventListener('resize',function(){if(window.innerWidth>860)set(false);
     /* garantía: si rAF está congelado (pestaña oculta / reduce-motion), fija el valor final */
     setTimeout(function(){el.textContent=nf.format(to);},dur+60);
   }
+  function bumpCounter(k,n){
+    var prev=state[k];state[k]=n;
+    var from=prev==null?Math.max(0,n-40):prev;
+    els(k).forEach(function(el){tween(el,from,n);});
+  }
   function render(data){
-    ['total','barcelona'].forEach(function(k){
+    ['total'].forEach(function(k){
       if(typeof data[k]!=='number')return;
-      var prev=state[k];state[k]=data[k];
-      var from=prev==null?Math.max(0,data[k]-40):prev;
-      els(k).forEach(function(el){tween(el,from,data[k]);});
+      bumpCounter(k,data[k]);
     });
-    /* desglose por ciudad (cuando la función lo devuelve): rellena otras ciudades */
+    /* desglose por ciudad: Barcelona no tiene clave raíz -- se busca aquí
+       dentro (dato real de la BD) y también rellena otras ciudades */
     if(Array.isArray(data.cities)){
+      var bcn=null;
       data.cities.forEach(function(c){
         if(!c||typeof c.n!=='number')return;
+        if(c.city==='Barcelona')bcn=c.n;
         els('city:'+c.city).forEach(function(el){el.textContent=nf.format(c.n)+' usuarios';});
       });
+      if(bcn!==null)bumpCounter('barcelona',bcn);
     }
   }
   function fetchStats(){
