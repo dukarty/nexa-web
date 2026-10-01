@@ -34,6 +34,7 @@
     async metrics() { return null; },
     // Datos del panel (maqueta v3). En mock no hay backend → estado vacío honesto.
     async panelDatos() { return null; },
+    async guardarPagina(cfg) { const c = readLS() || {}; c.escaparate = (cfg && cfg.escaparate) || {}; if (cfg && cfg.nombre) c.nombre = cfg.nombre; writeLS(c); return { ok: true, mock: true }; },
     async upgrade(plan) { const c = readLS() || {}; c.plan = plan; writeLS(c); return { ok: true, mock: true, plan }; },
     async listExperiences() { const c = readLS() || {}; return c.experiencias || []; },
     async addExperience(e) { const c = readLS() || {}; c.experiencias = c.experiencias || []; c.experiencias.unshift({ id: Date.now(), titulo: e.titulo, cat: e.cat, franja: e.franja, estado: "publicada" }); writeLS(c); return { ok: true }; },
@@ -69,6 +70,7 @@
         persona: email, email, business_id: biz.id,
         verified: !!biz.verified, verif_pendiente: !!m.verif_pendiente,
         experiencias: m.experiencias || [], objetivo: m.objetivo || null, sedes: m.sedes || [],
+        escaparate: m.escaparate || null, slug: m.slug || null,
         equipo: [],
       };
     }
@@ -186,6 +188,21 @@
           name: c.nombre, category: c.categoria, descripcion: c.descripcion,
           web: c.web, instagram: c.ig, meta,
         }).eq("id", biz.id);
+        return { ok: !error, error: error && error.message };
+      },
+      // Guarda "Tu página" (escaparate Fase 0) SIN pisar el resto del meta. Persiste
+      // nombre y descripción en columnas, y el estilo (plantilla, color, logo, portada)
+      // + el slug en meta.escaparate/meta.slug. No toca plan/verified (los congela el trigger).
+      async guardarPagina(cfg) {
+        if (!cfg) return { ok: false };
+        const biz = await miNegocio(); if (!biz) return { ok: false, error: "sin_empresa" };
+        const meta = Object.assign({}, biz.meta || {}, { escaparate: cfg.escaparate || {} });
+        if (cfg.slug) meta.slug = String(cfg.slug).slice(0, 60);
+        const upd = { meta };
+        if (cfg.nombre) upd.name = String(cfg.nombre).slice(0, 60);
+        if (cfg.descripcion != null) upd.descripcion = String(cfg.descripcion).slice(0, 280);
+        if (cfg.categoria != null) upd.category = String(cfg.categoria).slice(0, 80);
+        const { error } = await sb.from("businesses").update(upd).eq("id", biz.id);
         return { ok: !error, error: error && error.message };
       },
       // ── Experiencias del negocio = filas REALES en `experiences` con business_id
