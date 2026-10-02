@@ -266,15 +266,34 @@
       // Equipo y roles: fase posterior (necesita su propia tabla). De momento, aviso.
       async inviteMember() { return { ok: false, error: "El equipo llega en la próxima fase." }; },
       async removeMember() { return { ok: false, error: "El equipo llega en la próxima fase." }; },
-      // Verificación: la empresa SOLICITA (marca pendiente). NUNCA se auto-verifica
-      // (el trigger congela `verified`); la aprueba una persona desde el servidor.
-      async requestVerification() {
+      // Verificación: la empresa PIDE (crea un caso real en cola, estado pendiente).
+      // NUNCA se auto-verifica: `verified` solo lo mueve el servidor al aprobar (David).
+      // A2: nombre fiscal + CIF/NIF + enlace a presencia pública (Google/Instagram).
+      // Reemplaza la banderita falsa `meta.verif_pendiente` por la RPC real
+      // `solicitar_verificacion_negocio` (business_id lo pone el servidor desde la sesión).
+      async requestVerification(fields) {
         const email = await miEmail(); const biz = await miNegocio();
         if (!email || !biz) return { ok: false, error: "sin_empresa" };
         if (biz.verified) return { ok: true, already: true };
-        const meta = Object.assign({}, biz.meta, { verif_pendiente: true, verif_fecha: new Date().toISOString() });
-        const { error } = await sb.from("businesses").update({ meta }).eq("id", biz.id);
-        return { ok: !error, error: error && error.message };
+        const f = fields || {};
+        const nombre_fiscal = String(f.nombre_fiscal || "").trim();
+        const cif = String(f.cif || "").trim();
+        const enlace = String(f.enlace || "").trim();
+        if (!nombre_fiscal || !cif || !enlace) {
+          return { ok: false, error: "Completa el nombre fiscal, el CIF y un enlace público." };
+        }
+        const { data, error } = await sb.rpc("solicitar_verificacion_negocio", {
+          p_nombre_fiscal: nombre_fiscal, p_cif: cif, p_enlace: enlace,
+        });
+        if (error) return { ok: false, error: error.message || "No se pudo pedir la verificación." };
+        return { ok: true, estado: (data && data.estado) || "pendiente" };
+      },
+      // Estado REAL de verificación del negocio de la sesión, fuente única para el panel:
+      // 'verificado' | 'pendiente' | 'rechazada' | 'sin_verificar' | 'sin_negocio'.
+      async estadoVerificacion() {
+        const { data, error } = await sb.rpc("estado_verificacion_negocio");
+        if (error) return null;
+        return data || null;
       },
       // Métricas viejas (panel viejo): sin backend de atribución → null.
       async metrics() { return null; },

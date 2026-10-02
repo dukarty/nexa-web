@@ -1326,14 +1326,25 @@ td b{color:var(--ink);font-weight:700}
         <p style="color:var(--ink2);font-size:.9rem;line-height:1.6">Te avisamos en cuanto esté listo — normalmente el mismo día. Mientras tanto puedes preparar tu ficha y tu escaparate: solo bloqueamos <b style="color:var(--ink)">publicar un plan en vivo</b>, no el resto del panel.</p>
       </div>
 
+      <!-- Pedir verificación (self-service, A2). Solo visible si NO estás verificado ni pendiente. -->
+      <div class="card" id="verifPedirBlock" hidden>
+        <div class="card__h"><b>Pide la verificación de tu negocio</b><small>3 datos · la revisamos a mano, normalmente el mismo día</small></div>
+        <p style="color:var(--ink2);font-size:.9rem;line-height:1.6;margin-bottom:14px">Con esto confirmamos que el negocio que publica es el tuyo, no una suplantación. No pedimos documentos: el nombre fiscal, el CIF y un enlace a algo tuyo que ya exista en internet.</p>
+        <div class="field"><label>Nombre fiscal</label><input id="verifNombreFiscal" maxlength="120" placeholder="Bar Tal, S.L."></div>
+        <div class="field"><label>CIF / NIF</label><input id="verifCif" maxlength="20" placeholder="B12345678"></div>
+        <div class="field"><label>Enlace público</label><input id="verifEnlace" maxlength="300" placeholder="https://instagram.com/tunegocio  ·  o tu ficha de Google"></div>
+        <p id="verifPedirMsg" style="font-size:.85rem;line-height:1.5;margin:4px 0 12px" hidden></p>
+        <button class="btn" id="verifPedirBtn" style="width:100%;justify-content:center">Pedir verificación</button>
+      </div>
+
       <div class="guard">
         <p class="guard__h">Cómo funciona hoy (piloto)</p>
-        <p>Te verificamos nosotros al darte de alta — no tienes que rellenar nada. Lo vemos en la propia visita y lo marcamos en el mismo acto de darte de alta.</p>
+        <p>Si te dimos de alta en persona, ya te verificamos nosotros en la visita. Si no, pídelo aquí con 3 datos y lo revisamos a mano — normalmente el mismo día.</p>
       </div>
 
       <div class="guard">
         <p class="guard__h">Lo que no es</p>
-        <p>No es una medalla que se compre ni se suba de plan por tenerla — es binaria y previa a todo lo demás. Si algún día hace falta, podrás subir tú mismo el CIF y una prueba desde aquí, con revisión humana. <span style="color:var(--ink3)">Próximamente.</span></p>
+        <p>No es una medalla que se compre ni se suba de plan por tenerla — es binaria y previa a todo lo demás. Comprobamos identidad, no opinión: que el negocio que publica es el tuyo.</p>
       </div>
 
     </section>
@@ -2526,8 +2537,8 @@ function tpMostrar(modo){
 function iniciarPublicarPlan(){
   // Gate de verificación en el FRONT (UX) — el servidor lo vuelve a exigir igualmente.
   if(!(ACC && ACC.verified)){
-    irA("verificacion");
-    toast("Tu negocio está pendiente de verificación — te avisamos en cuanto esté listo.");
+    irA("verificacion"); // el cambio de vista llama a pintarVerificacion → form o estado pendiente
+    toast("Para publicar un plan en vivo, tu negocio tiene que estar verificado.");
     return;
   }
   tpMostrar("crear");
@@ -2635,25 +2646,54 @@ if(_btnTpPub) _btnTpPub.addEventListener("click", async ()=>{
   toast("Tu plan está vivo. Se propone a quien encaja con él, no a todo el mundo.");
 });
 
-// ---- VERIFICACIÓN (estado real: businesses.verified vía ACC) ----
-function pintarVerificacion(){
+// ---- VERIFICACIÓN (3 estados REALES vía RPC estado_verificacion_negocio) ----
+// verificado | pendiente | sin_verificar | rechazada. ACC.verified es la verdad del
+// sello; el resto del estado (pendiente vs sin pedir) lo da el servidor, no `meta`.
+let _ultimoEstadoVerif = null;
+async function pintarVerificacion(){
   const ic=document.getElementById("verifIcon"), estado=document.getElementById("verifEstado"), sub=document.getElementById("verifSub");
-  const pend=document.getElementById("verifPendBlock"), ok=document.getElementById("verifOkBlock");
+  const pend=document.getElementById("verifPendBlock"), ok=document.getElementById("verifOkBlock"), pedir=document.getElementById("verifPedirBlock");
   if(!ic) return;
-  const verified = !!(ACC && ACC.verified);
+
+  // Estado real del servidor. Si ACC ya dice verificado, no hace falta ni preguntar.
+  let est = (ACC && ACC.verified) ? "verificado" : null;
+  if(!est){
+    try{
+      if(window.NEXAEmpresas && window.NEXAEmpresas.real && window.NEXAEmpresas.estadoVerificacion){
+        est = await window.NEXAEmpresas.estadoVerificacion();
+      }
+    }catch(e){}
+    if(!est) est = "sin_verificar";
+  }
+  _ultimoEstadoVerif = est;
+
+  const verified = est==="verificado";
+  const pendiente = est==="pendiente";
+  const rechazada = est==="rechazada";
+
   if(verified){
     ic.className="verif-ic ok";
     ic.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg>';
     estado.textContent="Verificado ✓"; estado.className="pill pill--ok";
     sub.textContent="Tu negocio está verificado — ya puedes publicar planes en vivo.";
-    if(ok) ok.hidden=false; if(pend) pend.hidden=true;
-  } else {
+  } else if(pendiente){
     ic.className="verif-ic pend";
     ic.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg>';
     estado.textContent="Pendiente de verificación"; estado.className="pill pill--amb";
     sub.textContent="Estamos verificando tu negocio. Te avisamos en cuanto esté listo — normalmente el mismo día.";
-    if(ok) ok.hidden=true; if(pend) pend.hidden=false;
+  } else {
+    ic.className="verif-ic pend";
+    ic.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg>';
+    estado.textContent= rechazada ? "Sin verificar" : "Sin verificar"; estado.className="pill pill--amb";
+    sub.textContent= rechazada
+      ? "No pudimos verificar tu negocio con lo anterior. Revisa los datos y vuelve a pedirlo."
+      : "Tu negocio aún no está verificado. Pídelo abajo: 3 datos y lo revisamos a mano.";
   }
+
+  if(ok)    ok.hidden    = !verified;
+  if(pend)  pend.hidden  = !pendiente;
+  if(pedir) pedir.hidden = !(est==="sin_verificar" || rechazada);
+
   const naviIc=document.getElementById("naviVerifStatus");
   if(naviIc){
     naviIc.innerHTML = verified
@@ -2661,6 +2701,27 @@ function pintarVerificacion(){
       : '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" style="color:var(--ambar)"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg>';
   }
 }
+
+// Pedir verificación: manda los 3 datos (A2) a solicitar_verificacion_negocio.
+(function(){
+  const b=document.getElementById("verifPedirBtn");
+  if(!b) return;
+  b.addEventListener("click", async ()=>{
+    const msg=document.getElementById("verifPedirMsg");
+    const nombre_fiscal=(document.getElementById("verifNombreFiscal")||{}).value||"";
+    const cif=(document.getElementById("verifCif")||{}).value||"";
+    const enlace=(document.getElementById("verifEnlace")||{}).value||"";
+    const pinta=(txt,malo)=>{ if(!msg)return; msg.hidden=false; msg.textContent=txt; msg.style.color=malo?"var(--rojo)":"var(--verde)"; };
+    if(!nombre_fiscal.trim()||!cif.trim()||!enlace.trim()){ return pinta("Completa el nombre fiscal, el CIF y un enlace público.", true); }
+    if(!(window.NEXAEmpresas && window.NEXAEmpresas.real && window.NEXAEmpresas.requestVerification)){ return pinta("Entra con tu cuenta de empresa para pedir la verificación.", true); }
+    b.disabled=true; const o=b.textContent; b.textContent="Enviando…";
+    const r=await window.NEXAEmpresas.requestVerification({ nombre_fiscal, cif, enlace });
+    b.disabled=false; b.textContent=o;
+    if(!r||!r.ok){ return pinta((r&&r.error)||"No se pudo pedir la verificación.", true); }
+    pinta("Solicitud enviada. Te verificamos a mano, normalmente el mismo día.", false);
+    pintarVerificacion(); // re-pinta: ya debería salir en estado 'pendiente'
+  });
+})();
 
 // Cerrar sesión de verdad (deja de ser "Simulado").
 (function(){
