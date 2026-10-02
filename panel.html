@@ -151,6 +151,12 @@ body.dark .simpills button.on{background:#E8C863;color:#241D04}
 .themebtn .ic{width:15px;height:15px}
 
 .main{padding:0 clamp(20px,3.2vw,48px) 88px;max-width:1320px;margin-inline:auto;width:100%}
+/* Pantallas grandes: el contenedor crece con el monitor (mismo patrón 1500/1920/2500 del resto
+   de la web) para que no quede un hueco desequilibrado tras el sidebar. margin-inline:auto de
+   arriba ya centra siempre; esto solo sube el techo de 1320px en monitores anchos. */
+@media(min-width:1600px){.main{max-width:1520px}}
+@media(min-width:1920px){.main{max-width:1720px}}
+@media(min-width:2560px){.main{max-width:1960px}}
 .top{display:flex;flex-wrap:wrap;align-items:flex-start;justify-content:space-between;gap:14px;padding-top:32px;margin-bottom:32px}
 .top__l{display:flex;gap:12px;align-items:flex-start}
 .top h1{font-size:clamp(1.65rem,3vw,2.1rem);font-weight:800;letter-spacing:-.035em}
@@ -181,7 +187,6 @@ body.dark .simpills button.on{background:#E8C863;color:#241D04}
 .howbtn svg{width:16px;height:16px;flex:none}
 
 /* ===== guía "¿Cómo funciona?" — 4 pasos, estado real del negocio ===== */
-.mod__c--how{max-width:600px}
 .howto__sub{color:var(--ink2);font-size:.88rem;margin:-6px 0 22px;font-weight:500;max-width:48ch}
 .howto{display:flex;flex-direction:column}
 .howto__step{display:flex;gap:14px;padding-bottom:22px;position:relative}
@@ -413,7 +418,13 @@ td b{color:var(--ink);font-weight:700}
 /* modal simple */
 .mod{position:fixed;inset:0;z-index:70;background:rgba(10,12,17,.5);backdrop-filter:blur(3px);display:none;place-items:center;padding:20px}
 .mod.on{display:grid}
-.mod__c{background:var(--card);border:1px solid var(--line);border-radius:24px;max-width:460px;width:100%;padding:28px;text-align:left;animation:pop .3s var(--e);max-height:88vh;overflow-y:auto;box-shadow:var(--shadow-lg)}
+/* margin-inline:auto + overflow-x:hidden son cinturón-y-tirantes: place-items:center del .mod ya
+   centra, pero así el modal nunca se desborda ni aunque algo de dentro mida de más (clipa, no sangra). */
+.mod__c{background:var(--card);border:1px solid var(--line);border-radius:24px;max-width:460px;width:100%;margin-inline:auto;padding:28px;text-align:left;animation:pop .3s var(--e);max-height:88vh;overflow-y:auto;overflow-x:hidden;box-shadow:var(--shadow-lg)}
+/* variante ancha (guía "¿Cómo funciona?"): min() en vez de un max-width fijo — nunca puede
+   superar el 92% del viewport, así que jamás se desborda en ningún tamaño (móvil/tablet/grande).
+   Va DESPUÉS de .mod__c a propósito: mismo peso de selector, y en CSS gana el que va después. */
+.mod__c--how{max-width:min(620px,92vw)}
 @keyframes pop{from{opacity:0;transform:scale(.96)}to{opacity:1;transform:none}}
 .mod__k{font-size:.66rem;font-weight:800;letter-spacing:.12em;text-transform:uppercase;color:var(--az)}
 .mod__t{margin:11px 0 9px;font-size:1.3rem;font-weight:800;letter-spacing:-.03em}
