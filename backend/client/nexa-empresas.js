@@ -34,6 +34,10 @@
     async metrics() { return null; },
     // Datos del panel (maqueta v3). En mock no hay backend → estado vacío honesto.
     async panelDatos() { return null; },
+    async panelCifras() { return null; },
+    async panelPlanesVivos() { return null; },
+    async listCategorias() { return []; },
+    async crearPlanNegocio() { return { ok: false, error: "Publicar un plan solo funciona con el backend real." }; },
     async guardarPagina(cfg) { const c = readLS() || {}; c.escaparate = (cfg && cfg.escaparate) || {}; if (cfg && cfg.nombre) c.nombre = cfg.nombre; writeLS(c); return { ok: true, mock: true }; },
     async upgrade(plan) { const c = readLS() || {}; c.plan = plan; writeLS(c); return { ok: true, mock: true, plan }; },
     async listExperiences() { const c = readLS() || {}; return c.experiencias || []; },
@@ -283,6 +287,57 @@
         const { data, error } = await sb.rpc("panel_datos");
         if (error) return { error: error.message };
         return data || null;
+      },
+      // Cifra única de demanda del mes (misma fuente que usa panel_datos().mes por dentro).
+      // TABLE(incluido, usado, interesados, entraron, fuera, euros_fuera). SECURITY DEFINER,
+      // acotada al negocio de la sesión. Hoy la demanda viene a 0 (estado vacío honesto hasta
+      // que nexa-datos enchufe la definición real). Migración 20260930120000 (NEXA-APP).
+      async panelCifras() {
+        const { data, error } = await sb.rpc("panel_cifras_negocio");
+        if (error) return { error: error.message };
+        return Array.isArray(data) ? (data[0] || null) : (data || null);
+      },
+      // "Tus planes": lista REAL de planes del negocio con aforo y nº de apuntados (agregado,
+      // NUNCA la lista — candado Fase 1). Devuelve { tier, max, vivos, planes:[...] } de una
+      // sola llamada, el cupo lo da el servidor (max), no el front. Migración Fase 2 (NEXA-APP).
+      async panelPlanesVivos() {
+        const { data, error } = await sb.rpc("panel_planes_vivos");
+        if (error) return { error: error.message };
+        return data || null;
+      },
+      // Catálogo de actividades (categorías reales de la app) para el selector de "Publicar".
+      // El id de la categoría es lo que exige crear_plan_negocio (p_category_id), NO la etiqueta.
+      async listCategorias() { return this.listActividades(); },
+      // Publicar un plan de negocio. business_id/creator_email los pone el SERVIDOR desde la
+      // sesión; aquí solo mandamos los campos del formulario. Los GATES (gratis→"necesitas
+      // plan de pago", sin verificar→"pendiente de verificación", aforo obligatorio, tope por
+      // tramo, categoría válida) viven en la RPC y vuelven en error.message — los mostramos tal
+      // cual. Si viene una foto (File), la subimos antes al bucket 'nexa' y pasamos su URL.
+      async crearPlanNegocio(p) {
+        if (!p) return { ok: false, error: "Faltan los datos del plan." };
+        const email = await miEmail(); const biz = await miNegocio();
+        if (!email || !biz) return { ok: false, error: "Entra con tu cuenta de empresa para publicar." };
+        let cover_url = p.cover_url || null;
+        if (p.foto) {
+          try { cover_url = await this._subirFotoExp(p.foto); }
+          catch (err) { return { ok: false, error: "No se pudo subir la foto: " + (err && err.message ? err.message : err) }; }
+        }
+        const args = {
+          p_title: p.title,
+          p_starts_at: p.starts_at,            // ISO 8601 (timestamptz)
+          p_capacity: p.capacity != null ? parseInt(p.capacity, 10) : null,
+          p_category_id: p.category_id || null,
+          p_place: p.place || null,
+          p_city: p.city || null,
+          p_cover_url: cover_url,
+          p_description: p.description || null,
+          p_access: p.access || "Abierto a todos",
+          p_lat: p.lat != null ? p.lat : null,
+          p_lng: p.lng != null ? p.lng : null,
+        };
+        const { data, error } = await sb.rpc("crear_plan_negocio", args);
+        if (error) return { ok: false, error: error.message || "No se pudo publicar el plan." };
+        return { ok: true, plan: data };
       },
       // Pago REAL (SOLO web): abre Stripe Checkout vía la Edge Function `crear-checkout`.
       // El plan NO se toca desde el cliente (lo congela el trigger); lo activa el
