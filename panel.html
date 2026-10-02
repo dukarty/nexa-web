@@ -594,9 +594,9 @@ td b{color:var(--ink);font-weight:700}
   <aside class="side" id="side">
     <div class="side__logo">NY<span class="x" aria-hidden="true"><svg viewBox="0 0 20 20"><line x1="2" y1="18" x2="18" y2="2"/><line x1="18" y1="18" x2="2" y2="2"/></svg></span>A&nbsp;Empresas</div>
 
-    <button class="biz" title="Sputnik">
-      <div class="biz__a">S</div>
-      <div class="biz__i"><b>Sputnik</b><small>Rocódromo · Ruzafa, Valencia</small></div>
+    <button class="biz" title="Tu negocio">
+      <div class="biz__a">N</div>
+      <div class="biz__i"><b>Tu negocio</b><small id="bizSub">—</small></div>
     </button>
     <span class="planbadge" id="planBadge">Plan · 99 €/mes</span>
 
@@ -701,16 +701,16 @@ td b{color:var(--ink);font-weight:700}
 
       <div class="hero-summary">
         <div class="hero-summary__top">
-          <p class="hero-summary__k">Octubre, mes en curso · plan de 99 €/mes</p>
-          <span class="pill pill--ok">▲ septiembre cerró con el cupo lleno (18 de 18)</span>
+          <p class="hero-summary__k" id="heroMesK">Octubre, mes en curso · plan de 99 €/mes</p>
+          <span class="pill pill--ok" id="heroPill">▲ septiembre cerró con el cupo lleno (18 de 18)</span>
         </div>
-        <div class="hero-summary__g">
+        <div class="hero-summary__g" id="heroGrid">
           <div><div class="hero-summary__n tab"><span id="resEntraron">13</span><small style="font-size:.52em;font-weight:700;color:var(--ink3)">&nbsp;/ <span id="resIncluido">18</span></small></div><div class="hero-summary__l">clientes que han entrado ya este mes</div></div>
           <div><div class="hero-summary__n tab accent">≈650 €</div><div class="hero-summary__l">le han entrado ya a tu caja</div></div>
           <div><div class="hero-summary__n tab">9,1×</div><div class="hero-summary__l">lo que pagas de cuota, si llenas el cupo</div></div>
           <div><div class="hero-summary__n tab">5,50 €</div><div class="hero-summary__l">te sale cada cliente en tu plan</div></div>
         </div>
-        <p class="hero-summary__p">Ningún plan de NYXA baja de 6 veces lo que cuesta — y mejora cuanto más subes. <b>Quedan 5 plazas de tu cupo antes de fin de mes.</b></p>
+        <p class="hero-summary__p" id="heroP">Ningún plan de NYXA baja de 6 veces lo que cuesta — y mejora cuanto más subes. <b>Quedan 5 plazas de tu cupo antes de fin de mes.</b></p>
       </div>
 
       <div class="nudge" id="nudgeResumen" data-nudge-hide-min="3">
@@ -729,32 +729,32 @@ td b{color:var(--ink);font-weight:700}
           <div class="fourc__i"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg></div>
           <b>Quién viene esta semana</b>
           <p>Número y hora, en tiempo real. Nunca datos privados de nadie.</p>
-          <div class="fourc__big">13<small>de 18 este mes</small></div>
+          <div class="fourc__big" id="fourQuienViene">13<small>de 18 este mes</small></div>
         </button>
         <button class="fourc" data-go="demanda">
           <div class="fourc__i"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 19h16M8 19V9M13 19V5M18 19v12"/></svg></div>
           <b>El aviso de demanda</b>
           <p>Cuántos quisieron entrar y cuánto ganarías con más plazas.</p>
-          <div class="fourc__big">43<small>se quedaron fuera en septiembre</small></div>
+          <div class="fourc__big" id="fourDemanda">43<small>se quedaron fuera en septiembre</small></div>
         </button>
         <button class="fourc" data-go="facturacion">
           <div class="fourc__i"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 10h18"/></svg></div>
           <b>La factura, antes del cargo</b>
           <p>Siempre la ves primero. Nada de sorpresas el día 1.</p>
-          <div class="fourc__big">129 €<small>se te cargará el 1 de noviembre</small></div>
+          <div class="fourc__big" id="fourFactura">129 €<small>se te cargará el 1 de noviembre</small></div>
         </button>
         <button class="fourc gated" data-go="exclusividad" data-min="3" data-msg="Se activa en el plan de 199 €: un solo referente por zona y categoría.">
           <div class="gated__body">
             <div class="fourc__i"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M12 3.5l2.6 5.3 5.9.8-4.3 4.1 1 5.8L12 16.9 6.8 19.6l1-5.8-4.3-4.1 5.9-.8z"/></svg></div>
             <b>Exclusiva en tu categoría</b>
             <p>Un solo referente por zona y tipo de negocio, revisable cada año.</p>
-            <div class="fourc__big">Sí<small>único rocódromo en Ruzafa</small></div>
+            <div class="fourc__big" id="fourExcl">Sí<small>único rocódromo en Ruzafa</small></div>
           </div>
         </button>
       </div>
 
       <div class="grid2">
-        <div class="card chartcard">
+        <div class="card chartcard" id="evoCard">
           <div class="card__h"><b>Cómo ha ido, mes a mes</b><small>clientes que entraron y qué parte de tu demanda pudiste atender</small></div>
           <div class="legend"><span><i style="background:var(--az)"></i>Clientes que entraron</span><span><i style="background:var(--verde);border-radius:99px"></i>% de tu demanda que cupo</span></div>
           <div id="evoChart"></div>
@@ -764,10 +764,10 @@ td b{color:var(--ink);font-weight:700}
         <div class="card">
           <div class="card__h"><b>Tu plan ahora mismo</b><small>sin permanencia, se queda solo si te trae clientes</small></div>
           <div class="rows">
-            <div class="rowi"><div class="rowi__t"><b>Plan</b><small>desde el 1 de agosto</small></div><span class="pill pill--az">99 €/mes</span></div>
-            <div class="rowi"><div class="rowi__t"><b>Próximo cargo</b><small>1 de noviembre, se ve antes de cobrarse</small></div><span class="tab" style="font-weight:800">129,00 €</span></div>
-            <div class="rowi"><div class="rowi__t"><b>Estado</b></div><span class="pill pill--ok">Activo</span></div>
-            <div class="rowi"><div class="rowi__t"><b>Se te queda corto el cupo</b><small>43 se quedaron fuera en septiembre</small></div><span class="pill pill--amb">Sí</span></div>
+            <div class="rowi"><div class="rowi__t"><b>Plan</b></div><span class="pill pill--az" id="planAhoraPrecio">99 €/mes</span></div>
+            <div class="rowi"><div class="rowi__t"><b>Próximo cargo</b><small>se ve antes de cobrarse</small></div><span class="tab" style="font-weight:800" id="planAhoraCargo">129,00 €</span></div>
+            <div class="rowi"><div class="rowi__t"><b>Estado</b></div><span class="pill pill--ok" id="planAhoraEstado">Activo</span></div>
+            <div class="rowi" id="planAhoraCupoRow"><div class="rowi__t"><b>Se te queda corto el cupo</b><small id="planAhoraCupoSub">43 se quedaron fuera en septiembre</small></div><span class="pill pill--amb" id="planAhoraCupo">Sí</span></div>
           </div>
           <button class="btn" style="width:100%;justify-content:center;margin-top:16px" data-go="planes">Ver si te compensa subir de plan</button>
         </div>
@@ -879,16 +879,16 @@ td b{color:var(--ink);font-weight:700}
     <section class="vista" data-vista="quien-viene">
       <div class="card">
         <div class="card__h"><b>Entradas de este mes</b><small>cupo usado sobre lo incluido en tu plan</small></div>
-        <div style="display:flex;align-items:baseline;gap:8px"><span style="font-size:2rem;font-weight:800;letter-spacing:-.035em" class="tab">13</span><span style="color:var(--ink3);font-weight:600">de 18 incluidos</span></div>
-        <div class="bar"><i style="width:72%"></i></div>
-        <p style="color:var(--ink2);font-size:.82rem;margin-top:12px">Ya usaste tus 5 gratis al empezar. Quedan 5 plazas de tu cuota antes de fin de mes.</p>
+        <div style="display:flex;align-items:baseline;gap:8px"><span style="font-size:2rem;font-weight:800;letter-spacing:-.035em" class="tab" id="qvMesUsado">13</span><span style="color:var(--ink3);font-weight:600" id="qvMesIncluido">de 18 incluidos</span></div>
+        <div class="bar"><i id="qvMesBar" style="width:72%"></i></div>
+        <p style="color:var(--ink2);font-size:.82rem;margin-top:12px" id="qvMesNota">Ya usaste tus 5 gratis al empezar. Quedan 5 plazas de tu cuota antes de fin de mes.</p>
       </div>
 
       <div class="gated" data-min="2" data-msg="El contador en vivo de gente esperando se activa en el plan de 99 €.">
         <div class="gated__body card card--accent-top">
-          <div class="card__h"><b><span class="pulse" style="margin-right:8px"></span>En directo, ahora mismo</b><small>tu plan del martes</small></div>
-          <p style="font-size:1.12rem;font-weight:700;line-height:1.5">Hay <span class="tab" style="color:var(--az);font-weight:800">22</span> personas esperando plaza para el martes.</p>
-          <p style="color:var(--ink2);font-size:.85rem;margin-top:6px">Le ha interesado a 40 personas. Entraron 18, los que incluye tu plan.</p>
+          <div class="card__h"><b><span class="pulse" style="margin-right:8px"></span>En directo, ahora mismo</b><small id="qvLiveWhen">tu plan del martes</small></div>
+          <p id="qvLiveMain" style="font-size:1.12rem;font-weight:700;line-height:1.5">Hay <span id="qvEsperando" class="tab" style="color:var(--az);font-weight:800">22</span> personas esperando plaza para el martes.</p>
+          <p id="qvLiveSub" style="color:var(--ink2);font-size:.85rem;margin-top:6px">Le ha interesado a 40 personas. Entraron 18, los que incluye tu plan.</p>
         </div>
       </div>
 
@@ -901,41 +901,19 @@ td b{color:var(--ink);font-weight:700}
         <div class="nudge__cta"><button class="btn btn--sm" data-go="planes">Ver si te compensa subir</button></div>
       </div>
 
-      <div class="card">
-        <div class="card__h"><b>Esta semana</b><small>número y hora — nunca nombres ni contactos</small></div>
-        <div class="weekstrip">
-          <div class="wk"><div class="wk__d">Lun 6</div><div class="wk__n" style="color:var(--ink3)">—</div></div>
-          <div class="wk today has"><div class="wk__d">Mar 7</div><div class="wk__n tab">8<small>conf.</small></div></div>
-          <div class="wk"><div class="wk__d">Mié 8</div><div class="wk__n" style="color:var(--ink3)">—</div></div>
-          <div class="wk has"><div class="wk__d">Jue 9</div><div class="wk__n tab">5<small>conf.</small></div></div>
-          <div class="wk"><div class="wk__d">Vie 10</div><div class="wk__n" style="color:var(--ink3)">—</div></div>
-          <div class="wk"><div class="wk__d">Sáb 11</div><div class="wk__n" style="color:var(--ink3)">—</div></div>
-          <div class="wk"><div class="wk__d">Dom 12</div><div class="wk__n" style="color:var(--ink3)">—</div></div>
-        </div>
-        <div class="rows">
-          <div class="rowi">
-            <div class="rowi__t"><b>Escalada + cañas para novatos</b><small>Martes 7 oct · 18:00 · Ruzafa</small></div>
-            <div class="rowi__n tab">8<small>confirmados</small></div>
-          </div>
-          <div class="rowi">
-            <div class="rowi__t"><b>Sesión libre + tabla de bloque</b><small>Jueves 9 oct · 20:00 · todos los niveles</small></div>
-            <div class="rowi__n tab">5<small>confirmados</small></div>
-          </div>
-          <div class="rowi">
-            <div class="rowi__t"><b>Escalada + cañas para novatos</b><small>Martes 14 oct · 18:00 · aún se apuntan personas</small></div>
-            <div class="rowi__n tab">3<small>apuntados</small></div>
-          </div>
-        </div>
+      <div class="card" id="qvSemanaCard">
+        <div class="card__h"><b>Tus próximos planes</b><small>número de apuntados — nunca nombres ni contactos</small></div>
+        <div class="rows" id="qvPlanesRows"></div>
       </div>
 
       <div class="grid2">
         <div class="stat">
-          <p class="stat__k">Total esta semana</p>
-          <p class="stat__v tab">13<small>personas</small></p>
+          <p class="stat__k">Con plaza confirmada en tus próximos planes</p>
+          <p class="stat__v tab"><span id="qvStatEsperando">13</span><small>personas</small></p>
         </div>
         <div class="stat">
           <p class="stat__k">Total este mes</p>
-          <p class="stat__v tab">13<small>de 18 incluidos</small></p>
+          <p class="stat__v tab"><span id="qvStatMes">13</span><small id="qvStatMesSub">de 18 incluidos</small></p>
         </div>
       </div>
 
@@ -958,9 +936,9 @@ td b{color:var(--ink);font-weight:700}
           <span class="pill pill--az">Preview del correo</span>
         </div>
         <div class="mailcard__body">
-          <p class="mailcard__meta">De: <b>NYXA</b> &lt;hola@holanyxa.com&gt; · Para: <b>Sputnik</b> · 1 de octubre de 2026</p>
-          <p class="mailcard__subject">Tu resumen de septiembre</p>
-          <p class="mailcard__text">
+          <p class="mailcard__meta" id="mailMeta">De: <b>NYXA</b> &lt;hola@holanyxa.com&gt; · Para: <b>tu negocio</b></p>
+          <p class="mailcard__subject">Tu resumen del mes</p>
+          <p class="mailcard__text" id="mailTexto">
             En septiembre le interesaste a <b class="tab">61</b> personas.
             Entraron <b class="tab">18</b>. Se quedaron fuera <b class="tab">43</b> ≈ <b>2.150 €</b>.
             Con el plan de 199 € habrían entrado <b class="tab">45</b>.
@@ -972,7 +950,7 @@ td b{color:var(--ink);font-weight:700}
         </div>
       </div>
 
-      <div class="card chartcard">
+      <div class="card chartcard" id="demandaCard">
         <div class="card__h"><b>Interesados, entraron y se quedaron fuera</b><small>últimos 6 meses — el mismo dato que ves abajo en el histórico</small></div>
         <div class="legend"><span><i style="background:var(--az)"></i>Entraron (tu cupo)</span><span><i style="background:var(--ambar)"></i>Se quedaron fuera</span></div>
         <div id="demandaChart"></div>
@@ -981,20 +959,20 @@ td b{color:var(--ink);font-weight:700}
 
       <div class="gated" data-min="2" data-msg="Se activa en el plan de 99 €: la demanda en tiempo real, no solo el resumen del día 1.">
         <div class="gated__body card">
-          <div class="card__h"><b><span class="pulse" style="margin-right:8px"></span>En directo, ahora mismo</b><small>octubre, mes en curso</small></div>
-          <p style="font-size:1.02rem;font-weight:600;line-height:1.5">
+          <div class="card__h"><b><span class="pulse" style="margin-right:8px"></span>En directo, ahora mismo</b><small>mes en curso</small></div>
+          <p id="demandaLive" style="font-size:1.02rem;font-weight:600;line-height:1.5">
             Tu plan del martes le ha interesado a <b class="tab">40</b> personas.
             Han entrado <b class="tab">18</b>, los que incluye tu plan.
             Hay <b class="tab">22</b> esperando.
           </p>
-          <p class="pill pill--az" style="margin-top:12px">Con el plan de 199 € te caben 45 — cada cliente a 4,42 € en vez de 5,50 €</p>
+          <p class="pill pill--az" style="margin-top:12px" id="demandaLivePill">Con el plan de 199 € te caben 45 — cada cliente a 4,42 € en vez de 5,50 €</p>
         </div>
       </div>
 
       <div class="gated" data-min="1" data-msg="Se activa en el plan de 49 €: dónde vive la gente que se te queda fuera.">
-        <div class="gated__body card">
-          <div class="card__h"><b>Por zona</b><small>de los 43 que se quedaron fuera en septiembre</small></div>
-          <div class="rows">
+        <div class="gated__body card" id="zonaCard">
+          <div class="card__h"><b>Por zona</b><small>dónde vive la gente que se te queda fuera</small></div>
+          <div class="rows" id="zonaRows">
             <div class="rowi"><div class="rowi__t"><b>Ruzafa</b></div><div class="rowi__n tab">21</div></div>
             <div class="rowi"><div class="rowi__t"><b>Camins al Grau</b></div><div class="rowi__n tab">11</div></div>
             <div class="rowi"><div class="rowi__t"><b>Benimaclet</b></div><div class="rowi__n tab">6</div></div>
@@ -1007,8 +985,8 @@ td b{color:var(--ink);font-weight:700}
         <div class="gated" data-min="2" data-msg="Se activa en el plan de 99 €: cuántos vuelven por su cuenta.">
           <div class="gated__body card">
             <div class="card__h"><b>Vuelven por su cuenta</b><small>sin que NYXA te los vuelva a traer</small></div>
-            <div class="stat__v" style="font-size:2.2rem">34%<small style="display:inline;margin-left:8px;color:var(--verde)">▲ 6 pts vs. agosto</small></div>
-            <p style="color:var(--ink2);font-size:.84rem;margin-top:8px">De cada 100 clientes que te trae NYXA, 34 repiten sin que vuelvas a pagar por ellos.</p>
+            <div class="stat__v" style="font-size:2.2rem"><span id="demandaRepPct">34%</span><small id="demandaRepTrend" style="display:inline;margin-left:8px;color:var(--verde)">▲ 6 pts vs. agosto</small></div>
+            <p style="color:var(--ink2);font-size:.84rem;margin-top:8px" id="demandaRepDesc">De cada 100 clientes que te trae NYXA, 34 repiten sin que vuelvas a pagar por ellos.</p>
             <button class="btn btn--gh btn--sm" style="margin-top:12px" data-go="repeticion">Ver la evolución completa →</button>
           </div>
         </div>
@@ -1057,13 +1035,13 @@ td b{color:var(--ink);font-weight:700}
           <div class="card">
             <div class="card__h"><b>Vuelven por su cuenta</b><small>de cada 100 clientes que te trae NYXA, cuántos repiten sin que te los volvamos a traer</small></div>
             <div style="display:flex;align-items:baseline;gap:12px;flex-wrap:wrap">
-              <span style="font-size:2.6rem;font-weight:800;letter-spacing:-.035em" class="tab">34%</span>
-              <span class="trend trend--up">▲ 6 pts vs. agosto</span>
+              <span id="repPct" style="font-size:2.6rem;font-weight:800;letter-spacing:-.035em" class="tab">34%</span>
+              <span id="repTrend" class="trend trend--up">▲ 6 pts vs. agosto</span>
             </div>
-            <p style="color:var(--ink2);font-size:.87rem;margin-top:10px">Es el dato que más importa a largo plazo: cada cliente que repite solo lo vuelve a facturar tu plan si tú vuelves a llevarlo, pero él ya no cuenta contra tu cupo — vuelve porque le gustó, no porque NYXA se lo proponga otra vez.</p>
+            <p id="repDesc" style="color:var(--ink2);font-size:.87rem;margin-top:10px">Es el dato que más importa a largo plazo: cada cliente que repite solo lo vuelve a facturar tu plan si tú vuelves a llevarlo, pero él ya no cuenta contra tu cupo — vuelve porque le gustó, no porque NYXA se lo proponga otra vez.</p>
           </div>
 
-          <div class="card chartcard">
+          <div class="card chartcard" id="repChartCard">
             <div class="card__h"><b>Evolución</b><small>últimos 6 meses</small></div>
             <div id="repChart"></div>
             <p class="charthint">Pasa el ratón por un punto para ver el mes exacto.</p>
@@ -1199,7 +1177,7 @@ td b{color:var(--ink);font-weight:700}
             </div>
           </div>
 
-          <div class="card" style="margin-top:4px">
+          <div class="card" style="margin-top:4px" id="paginaCifrasCard">
             <div class="card__h"><b>Tu página, en cifras</b><small>agregado — informativo, no es un contador nuevo de demanda</small></div>
             <div class="grid3">
               <div class="stat"><p class="stat__k">Visitas esta semana</p><p class="stat__v tab">84</p></div>
@@ -1227,7 +1205,7 @@ td b{color:var(--ink);font-weight:700}
     <section class="vista" data-vista="exclusividad">
       <div class="gated" data-min="3" data-msg="La exclusividad de categoría y zona es del plan de 199 €.">
         <div class="gated__body">
-          <div class="card card--accent-top" style="border-color:var(--line)">
+          <div class="card card--accent-top" style="border-color:var(--line)" id="exclCard">
             <div style="width:38px;height:38px;border-radius:11px;background:var(--morado-soft);color:var(--morado);display:grid;place-items:center;margin-bottom:14px"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M12 3.5l2.6 5.3 5.9.8-4.3 4.1 1 5.8L12 16.9 6.8 19.6l1-5.8-4.3-4.1 5.9-.8z"/></svg></div>
             <div class="card__h"><b>Exclusiva en tu categoría</b><small>revisable cada año</small></div>
             <p style="font-size:1.4rem;font-weight:800;letter-spacing:-.03em">Eres el único rocódromo con planes patrocinados en Ruzafa</p>
@@ -1254,7 +1232,7 @@ td b{color:var(--ink);font-weight:700}
       <div class="gated" data-min="3" data-msg="El buzón para escribir a quien ya fue es del plan de 199 €.">
         <div class="gated__body">
 
-          <div class="card">
+          <div class="card" id="buzonCard">
             <div class="card__h"><b>Buzón</b><small>escribir a quien ya fue, a través de NYXA — nunca una lista</small></div>
             <p style="color:var(--ink2);font-size:.87rem;margin-bottom:12px">Elige una asistencia confirmada. Le pediremos permiso, para ese caso, antes de compartir nada.</p>
             <div class="rows" id="buzonLista">
@@ -1273,7 +1251,7 @@ td b{color:var(--ink);font-weight:700}
             </div>
           </div>
 
-          <div class="card">
+          <div class="card" id="buzonHistCard">
             <div class="card__h"><b>Historial de peticiones</b><small>registro auditable — quién, cuándo, para qué caso y si sigue vigente</small></div>
             <div class="tablewrap">
               <table>
@@ -1303,16 +1281,16 @@ td b{color:var(--ink);font-weight:700}
         <div class="card__h"><b>Tu próxima factura</b><small>la ves antes del cargo — siempre</small></div>
         <table>
           <tbody>
-            <tr><td>Cuota · plan de 99 € (18 clientes incluidos)</td><td class="r tab">99,00 €</td></tr>
+            <tr><td id="facCuotaLinea">Cuota · plan de 99 € (18 clientes incluidos)</td><td class="r tab" id="facCuotaImporte">99,00 €</td></tr>
             <tr><td id="facExtraLinea">4 clientes extra pedidos este mes · a 7,50 €</td><td class="r tab" id="facExtraImporte">30,00 €</td></tr>
-            <tr><td><b>Total, se te cargará el 1 de noviembre</b></td><td class="r tab" id="facTotal"><b>129,00 €</b></td></tr>
+            <tr><td><b>Total de tu cuota</b></td><td class="r tab" id="facTotal"><b>129,00 €</b></td></tr>
           </tbody>
         </table>
         <p style="color:var(--ink2);font-size:.82rem;margin-top:12px">El importe de arriba está en directo con lo que pidas en «El aviso de demanda». El correo con el detalle te llega antes que el cargo, nunca al revés.</p>
       </div>
 
       <div class="grid2">
-        <div class="card">
+        <div class="card" id="metodoPagoCard">
           <div class="card__h"><b>Método de pago</b></div>
           <div class="rowi" style="border-bottom:0;padding:6px 2px">
             <div style="width:40px;height:28px;border-radius:6px;background:#1A1F71;color:#fff;display:grid;place-items:center;font-size:.62rem;font-weight:800;letter-spacing:.02em;flex:none">VISA</div>
@@ -1393,12 +1371,13 @@ td b{color:var(--ink);font-weight:700}
     <section class="vista" data-vista="planes">
 
       <p class="grp" style="padding-left:0">Primero lo que recibes, después lo que cuesta</p>
-      <p style="color:var(--ink2);font-size:.9rem;margin:-4px 0 18px;max-width:60ch">Nadie compara 49 € contra 99 €: compara 7 clientes contra 18. Ningún plan baja de 6 veces lo que cuesta, y mejora cuanto más subes.</p>
+      <p style="color:var(--ink2);font-size:.9rem;margin:-4px 0 6px;max-width:60ch">Nadie compara 49 € contra 99 €: compara 7 clientes contra 18. Ningún plan baja de 6 veces lo que cuesta, y mejora cuanto más subes.</p>
+      <p style="color:var(--ink3);font-size:.8rem;margin:0 0 18px;max-width:60ch"><b>Es el modelo de precios publicado</b> (igual para todos), no tus cifras reales. Las tuyas están en «Resumen» y «El aviso de demanda».</p>
       <div class="plans" id="plansGrid"></div>
 
-      <!-- SIMULADOR -->
+      <!-- SIMULADOR (herramienta hipotética, no datos del negocio) -->
       <div class="simcard">
-        <div class="card__h" style="margin-bottom:0"><b>Simulador: ¿cuántos clientes quieres al mes?</b><small>te decimos qué plan te compensa y cuánto te sale cada cliente</small></div>
+        <div class="card__h" style="margin-bottom:0"><b>Simulador: ¿cuántos clientes quieres al mes?</b><small>ejemplo ilustrativo — mueve tú el número; no son tus cifras reales</small></div>
         <div class="simcard__row">
           <div class="simrange">
             <input type="range" id="simRange" min="1" max="60" value="22" step="1">
@@ -1469,12 +1448,12 @@ td b{color:var(--ink);font-weight:700}
         <div class="card">
           <div class="card__h"><b>Datos de empresa</b></div>
           <div class="rows">
-            <div class="rowi"><div class="rowi__t"><b>Nombre</b></div><span>Sputnik</span></div>
-            <div class="rowi"><div class="rowi__t"><b>Categoría</b></div><span>Rocódromo</span></div>
-            <div class="rowi"><div class="rowi__t"><b>Ciudad / zona</b></div><span>Valencia · Ruzafa</span></div>
-            <div class="rowi"><div class="rowi__t"><b>CIF</b></div><span>B-12345678</span></div>
-            <div class="rowi"><div class="rowi__t"><b>Dirección fiscal</b></div><span>C/ Cádiz 24, 46006 València</span></div>
-            <div class="rowi"><div class="rowi__t"><b>Email</b></div><span>hola@sputnik.es</span></div>
+            <div class="rowi"><div class="rowi__t"><b>Nombre</b></div><span id="ajusteNombre">Sputnik</span></div>
+            <div class="rowi"><div class="rowi__t"><b>Categoría</b></div><span id="ajusteCategoria">Rocódromo</span></div>
+            <div class="rowi"><div class="rowi__t"><b>Ciudad / zona</b></div><span id="ajusteCiudad">Valencia · Ruzafa</span></div>
+            <div class="rowi"><div class="rowi__t"><b>CIF</b></div><span id="ajusteCif">B-12345678</span></div>
+            <div class="rowi"><div class="rowi__t"><b>Dirección fiscal</b></div><span id="ajusteDir">C/ Cádiz 24, 46006 València</span></div>
+            <div class="rowi"><div class="rowi__t"><b>Email</b></div><span id="ajusteEmail">hola@sputnik.es</span></div>
           </div>
           <button class="btn btn--gh" data-go="pagina" style="margin-top:16px;width:100%;justify-content:center">Editar en «Tu página»</button>
         </div>
@@ -1507,7 +1486,7 @@ td b{color:var(--ink);font-weight:700}
           <div class="card__h"><b>Cuenta</b></div>
           <div class="rows">
             <div class="rowi"><div class="rowi__t"><b>Acceso</b><small>enlace único, sin contraseña</small></div></div>
-            <div class="rowi"><div class="rowi__t"><b>Cliente desde</b></div><span>15 de julio de 2026</span></div>
+            <div class="rowi"><div class="rowi__t"><b>Cliente desde</b></div><span id="ajusteClienteDesde">—</span></div>
           </div>
           <button class="btn btn--gh" style="margin-top:16px;width:100%;justify-content:center" id="btnCerrarSesion">Cerrar sesión</button>
         </div>
@@ -1924,32 +1903,38 @@ document.querySelectorAll("#simPills button").forEach(b=>{
   });
 });
 
-// ---- stepper "abrir hueco extra" (ejemplo: base 99 € + extras a 7,50 €) ----
+// ---- stepper "abrir hueco extra" (base y cupo = plan REAL del negocio) ----
+// HUECO.base/incluidos arrancan con el ejemplo y los sobrescribe aplicarDatosRealesAlPanel()
+// con plan.precio y mes.incluido reales. extra arranca en 0 (nadie ha pedido extras).
+const HUECO = { base:99, incluidos:18, extra:0 };
+let pintarHueco = function(){};
 (function(){
-  const BASE=99, INCLUIDOS=18;
-  let extra=4;
   const val=document.getElementById("extraVal");
   const clientes=document.getElementById("extraClientes");
   const total=document.getElementById("extraTotal");
   const nota=document.getElementById("extraNota");
-  function pintar(){
-    val.textContent=extra;
-    clientes.textContent=INCLUIDOS+extra;
-    total.textContent=money(BASE+extra*PRECIO_EXTRA);
-    nota.hidden = (extra*PRECIO_EXTRA) < (199-BASE);
+  pintarHueco = function(){
+    if(val) val.textContent=HUECO.extra;
+    if(clientes) clientes.textContent=HUECO.incluidos+HUECO.extra;
+    if(total) total.textContent=money(HUECO.base+HUECO.extra*PRECIO_EXTRA);
+    if(nota) nota.hidden = (HUECO.extra*PRECIO_EXTRA) < (199-HUECO.base);
     // se refleja también en Facturación — un hecho, un número
     const facLinea=document.getElementById("facExtraLinea");
     const facImporte=document.getElementById("facExtraImporte");
     const facTotal=document.getElementById("facTotal");
+    const facCuota=document.getElementById("facCuotaImporte");
     if(facLinea){
-      facLinea.textContent = extra+" cliente"+(extra===1?"":"s")+" extra pedido"+(extra===1?"":"s")+" este mes · a 7,50 €";
-      facImporte.textContent = money(extra*PRECIO_EXTRA);
-      facTotal.innerHTML = "<b>"+money(BASE+extra*PRECIO_EXTRA)+"</b>";
+      facLinea.textContent = HUECO.extra+" cliente"+(HUECO.extra===1?"":"s")+" extra pedido"+(HUECO.extra===1?"":"s")+" este mes · a 7,50 €";
+      facImporte.textContent = money(HUECO.extra*PRECIO_EXTRA);
+      facTotal.innerHTML = "<b>"+money(HUECO.base+HUECO.extra*PRECIO_EXTRA)+"</b>";
+      if(facCuota) facCuota.textContent = money(HUECO.base);
     }
-  }
-  document.getElementById("extraPlus").addEventListener("click",()=>{ extra=Math.min(27,extra+1); pintar(); });
-  document.getElementById("extraMinus").addEventListener("click",()=>{ extra=Math.max(0,extra-1); pintar(); });
-  pintar();
+  };
+  const plus=document.getElementById("extraPlus"), minus=document.getElementById("extraMinus");
+  if(plus) plus.addEventListener("click",()=>{ HUECO.extra=Math.min(27,HUECO.extra+1); pintarHueco(); });
+  if(minus) minus.addEventListener("click",()=>{ HUECO.extra=Math.max(0,HUECO.extra-1); pintarHueco(); });
+  HUECO.extra=4; // ejemplo inicial (maqueta); real mode lo pone a 0
+  pintarHueco();
 })();
 
 // ---- exportar CSV del histórico (mismos números que la tabla — un hecho, un número) ----
@@ -1979,6 +1964,11 @@ document.getElementById("btnRgpdDelete").addEventListener("click",()=>toast("Est
 // ---- histórico: tabla (desde HIST, una sola fuente) ----
 function pintarHistTabla(){
   const el=document.getElementById("histTabla");
+  if(!el) return;
+  if(!HIST.length){
+    el.innerHTML='<tbody><tr><td style="color:var(--ink3);padding:14px 2px">Aún no hay histórico. Se construye solo con cada mes que pase — aquí verás interesados, entraron y quién se quedó fuera.</td></tr></tbody>';
+    return;
+  }
   const filasHtml = HIST.map((h,i)=>{
     const subioTag = h.subio? ' <span class="pill pill--ok" style="margin-left:6px">↑ subiste a '+PLANES[h.plan].label+'</span>' : '';
     const destacar = i===HIST.length-1;
@@ -1995,6 +1985,11 @@ pintarHistTabla();
 // ---- facturas: tabla ----
 function pintarFacturasTabla(){
   const el=document.getElementById("facturasTabla");
+  if(!el) return;
+  if(!FACTURAS.length){
+    el.innerHTML='<tbody><tr><td style="color:var(--ink3);padding:14px 2px">Aún no tienes facturas. Aparecerán aquí cuando contrates un plan de pago y se genere el primer cobro.</td></tr></tbody>';
+    return;
+  }
   el.innerHTML='<thead><tr><th>Fecha</th><th>Concepto</th><th class="r">Importe</th><th></th></tr></thead><tbody>'+
     FACTURAS.map(f=>'<tr><td>'+esc(f.fecha)+(f.futura?' <span class="pill pill--az" style="margin-left:6px">próxima</span>':'')+'</td><td>'+esc(f.concepto)+'</td><td class="r tab">'+money(f.importe)+'</td><td class="r">'+(f.futura?'<span class="pill">Aún no</span>':'<button class="btn btn--gh btn--sm">PDF</button>')+'</td></tr>').join("")+
     '</tbody>';
@@ -2357,6 +2352,7 @@ function niceMax(m){ if(m<=0) return 1; const p=Math.pow(10,Math.floor(Math.log1
 // Barras (clientes que entraron) + línea (% de la demanda que cupo) — vista Resumen
 function pintarEvoChart(){
   const el=document.getElementById("evoChart"); if(!el) return;
+  if(!HIST.length){ el.innerHTML='<p style="color:var(--ink3);font-size:.88rem;padding:20px 2px;text-align:center">Aún no hay meses que mostrar. En cuanto NYXA te traiga clientes, aquí verás tu evolución mes a mes.</p>'; return; }
   const n=HIST.length;
   const entraron=HIST.map(h=>h.entraron);
   const cobertura=HIST.map(h=>Math.round(h.entraron/h.interesados*100));
@@ -2399,6 +2395,7 @@ function pintarEvoChart(){
 // Barras apiladas (entraron + fuera = interesados) — vista Aviso de demanda
 function pintarDemandaChart(){
   const el=document.getElementById("demandaChart"); if(!el) return;
+  if(!HIST.length){ el.innerHTML='<p style="color:var(--ink3);font-size:.88rem;padding:20px 2px;text-align:center">Aún no hay demanda registrada. Cuando alguien pida entrar en un plan tuyo, empezará a contarse aquí.</p>'; return; }
   const n=HIST.length;
   const maxI=Math.max(1,...HIST.map(h=>h.interesados)), yMax=niceMax(maxI);
   const W=Math.max(380,n*74), H=240, padL=32, padR=14, padT=26, padB=30;
@@ -2441,6 +2438,7 @@ function pintarDemandaChart(){
 // Línea de repetición (%) — vista Repetición
 function pintarRepChart(){
   const el=document.getElementById("repChart"); if(!el) return;
+  if(!REPETICION.length){ el.innerHTML='<p style="color:var(--ink3);font-size:.88rem;padding:20px 2px;text-align:center">La evolución de la repetición aparece cuando tengas varios meses de clientes.</p>'; return; }
   const n=REPETICION.length;
   const yMax=50; // zoom razonable: la serie va de 22% a 34%
   const W=Math.max(380,n*74), H=210, padL=30, padR=14, padT=16, padB=30;
@@ -2590,10 +2588,269 @@ async function aplicarPanelDatos(){
   const setNum=(id,v)=>{ const el=document.getElementById(id); if(el && v!=null && !isNaN(+v)) el.textContent=(+v); };
   setNum("resEntraron", mes.usado);
   setNum("resIncluido", mes.incluido);
+  // BARRIDO COMPLETO: un negocio real NUNCA ve cifras de maqueta. Todo lo que se
+  // presenta como "la realidad de ESTE negocio" se rellena con datos reales o estado
+  // vacío honesto. (Material de VENTA genérico —precio-lista, comparativa de planes—
+  // no se toca: es el modelo publicado, no un dato del negocio.)
+  aplicarDatosRealesAlPanel(d);
   // ¿Hay actividad real? Si todo a 0 → estado vacío honesto.
   const hay=(+mes.interesados>0)||(+mes.usado>0)||(+mes.entraron>0);
   if(!hay) mostrarVacioHonesto();
 }
+
+// Nombres de mes en español (para los copys "mes en curso").
+const MESES_ES=["enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre"];
+// Helpers de barrido.
+function _setTxt(id,txt){ const el=document.getElementById(id); if(el) el.textContent=txt; }
+function _hide(id){ const el=document.getElementById(id); if(el) el.hidden=true; }
+function _cardVacia(id,titulo,msg){
+  const el=document.getElementById(id); if(!el) return;
+  el.innerHTML='<div class="card__h"><b>'+titulo+'</b></div>'
+    +'<p style="color:var(--ink3);font-size:.9rem;line-height:1.6">'+msg+'</p>';
+}
+
+// EL BARRIDO: convierte TODO el panel a los datos reales del negocio de la sesión,
+// o a estado vacío honesto donde no hay fuente real todavía (negocio recién dado de alta).
+function aplicarDatosRealesAlPanel(d){
+  const mes=d.mes||{}, plan=d.plan||{}, niv=(d.negocio&&+d.negocio.nivel)||0;
+  const nombre=(d.negocio&&d.negocio.nombre)||"tu negocio";
+  const usado=+mes.usado||0, incluido=+mes.incluido||0, fuera=+mes.fuera||0;
+  const interesados=+mes.interesados||0, entraron=+mes.entraron||0, euros=+mes.euros_fuera||0;
+  const precio=(plan.precio!=null && !isNaN(+plan.precio))?+plan.precio:null;
+  const esperando=(d.en_vivo&&typeof d.en_vivo.esperando!=="undefined")?Math.max(0,+d.en_vivo.esperando||0):null;
+  const rep=(d.repeticion&&typeof d.repeticion==="object")?d.repeticion:null;
+  const mesNom=MESES_ES[new Date().getMonth()];
+  const eur=n=>Math.round(n).toLocaleString('es-ES')+" €";
+
+  // 1 · Neutralizar las fuentes de ejemplo (alimentan gráficos, tablas y avisos).
+  //    Un negocio real no tiene histórico de "Sputnik": se vacía y se repinta en vacío.
+  HIST.length=0; REPETICION.length=0; FACTURAS.length=0;
+  LIVE.interesados=0; LIVE.entraron=0; LIVE.esperando=0;
+  if(typeof NOTIFS!=="undefined"){ NOTIFS.length=0; try{ pintarNotifs(); }catch(e){} }
+  try{ pintarHistTabla(); }catch(e){}
+  try{ pintarFacturasTabla(); }catch(e){}
+  try{ pintarEvoChart(); pintarDemandaChart(); pintarRepChart(); }catch(e){}
+
+  // 2 · RESUMEN
+  _setTxt("heroMesK", mesNom.charAt(0).toUpperCase()+mesNom.slice(1)+", mes en curso"+(precio?(" · plan de "+precio+" €/mes"):""));
+  _hide("heroPill");  // sin histórico del mes anterior para un negocio nuevo
+  const heroGrid=document.getElementById("heroGrid");
+  if(heroGrid){
+    const tileEsperando = (niv>=2 && esperando!=null)
+      ? '<div><div class="hero-summary__n tab">'+esperando+'</div><div class="hero-summary__l">con plaza confirmada en tus próximos planes</div></div>'
+      : '';
+    heroGrid.innerHTML =
+      '<div><div class="hero-summary__n tab"><span id="resEntraron">'+usado+'</span>'
+        +'<small style="font-size:.52em;font-weight:700;color:var(--ink3)">&nbsp;/ <span id="resIncluido">'+incluido+'</span></small></div>'
+        +'<div class="hero-summary__l">clientes que han entrado ya este mes</div></div>'
+      + tileEsperando
+      + '<div><div class="hero-summary__n tab">'+fuera+'</div><div class="hero-summary__l">pidieron entrar y no pudieron este mes</div></div>'
+      + '<div><div class="hero-summary__n tab accent">'+(precio!=null?(precio+" €"):"—")+'</div><div class="hero-summary__l">'+(precio!=null?"tu cuota mensual":"sin plan de pago")+'</div></div>';
+  }
+  _setTxt("heroP", incluido>0
+    ? ("Quedan "+Math.max(0,incluido-usado)+" plazas de tu cupo este mes.")
+    : "Publica un plan y, en cuanto NYXA te traiga clientes, verás aquí tus números reales.");
+
+  // Nudges de upsell: solo si hay demanda insatisfecha REAL. Si no, se ocultan.
+  if(fuera>0){
+    const n1=document.querySelector("#nudgeResumen .nudge__body b");
+    if(n1) n1.textContent="Este mes "+fuera+(fuera===1?" persona se quedó":" personas se quedaron")+" fuera (≈"+eur(euros)+").";
+    const n2=document.querySelector("#nudgeQuienViene .nudge__body b");
+    if(n2) n2.textContent=(esperando!=null?esperando:0)+(esperando===1?" persona espera":" personas esperan")+" plaza en tus próximos planes.";
+  } else {
+    _hide("nudgeResumen"); _hide("nudgeQuienViene");
+  }
+
+  // Las 4 tarjetas
+  _setTxt("fourQuienViene", usado); { const e=document.getElementById("fourQuienViene"); if(e) e.innerHTML=usado+'<small>de '+incluido+' este mes</small>'; }
+  { const e=document.getElementById("fourDemanda"); if(e) e.innerHTML=fuera+'<small>pidieron entrar y no pudieron este mes</small>'; }
+  { const e=document.getElementById("fourFactura"); if(e) e.innerHTML=(precio!=null?(precio+' €'):'—')+'<small>'+(precio!=null?'tu cuota mensual':'sin plan de pago')+'</small>'; }
+  { const e=document.getElementById("fourExcl"); if(e) e.innerHTML='—<small>según tu zona y categoría</small>'; }
+
+  // "Tu plan ahora mismo"
+  _setTxt("planAhoraPrecio", precio!=null?(precio+" €/mes"):"Sin plan de pago");
+  _setTxt("planAhoraCargo", precio!=null?eur(precio):"—");
+  { const e=document.getElementById("planAhoraEstado"); if(e){ const ok=!!(d.negocio&&d.negocio.verified); e.textContent=ok?"Activo":"Pendiente"; e.className="pill "+(ok?"pill--ok":"pill--amb"); } }
+  if(fuera>0){ _setTxt("planAhoraCupo","Sí"); _setTxt("planAhoraCupoSub", fuera+" se quedaron fuera este mes"); }
+  else { const r=document.getElementById("planAhoraCupoRow"); if(r) r.hidden=true; }
+
+  // 3 · QUIÉN VIENE
+  _setTxt("qvMesUsado", usado);
+  _setTxt("qvMesIncluido", "de "+incluido+" incluidos");
+  { const b=document.getElementById("qvMesBar"); if(b) b.style.width=(incluido>0?Math.min(100,Math.round(usado/incluido*100)):0)+"%"; }
+  _setTxt("qvMesNota", incluido>0
+    ? ("Quedan "+Math.max(0,incluido-usado)+" plazas de tu cuota antes de fin de mes.")
+    : "Aún no has usado cupo este mes.");
+  _setTxt("qvStatEsperando", (esperando!=null?esperando:0));
+  _setTxt("qvStatMes", usado);
+  _setTxt("qvStatMesSub", "de "+incluido+" incluidos");
+  rellenarQvPlanes();   // lista real de próximos planes (panel_planes_vivos), solo números
+
+  // "Quién viene en vivo" (99 €+): número real o estado honesto
+  if(niv>=2 && esperando!=null){
+    const main=document.getElementById("qvLiveMain"), sub=document.getElementById("qvLiveSub"), when=document.getElementById("qvLiveWhen");
+    if(main) main.innerHTML='Hay <span class="tab" style="color:var(--az);font-weight:800">'+esperando+'</span> '
+      +(esperando===1?'persona':'personas')+' con plaza confirmada en tus próximos planes.';
+    if(sub) sub.hidden=true;
+    if(when) when.textContent="planes que aún no han empezado";
+  }
+
+  // 4 · DEMANDA
+  const mailTexto=document.getElementById("mailTexto");
+  if(mailTexto){
+    mailTexto.innerHTML = (interesados>0||fuera>0)
+      ? ('En '+mesNom+' le interesaste a <b class="tab">'+interesados+'</b> personas. Entraron <b class="tab">'+entraron+'</b>. Se quedaron fuera <b class="tab">'+fuera+'</b> ≈ <b>'+eur(euros)+'</b>.')
+      : 'Aún no hay demanda este mes. Cuando alguien pida entrar en un plan tuyo y no quepa, aquí verás el resumen — y te llegará por correo el día 1.';
+  }
+  _setTxt("mailMeta","De: NYXA <hola@holanyxa.com> · Para: "+nombre);
+  const demLive=document.getElementById("demandaLive");
+  if(demLive){
+    demLive.innerHTML = (interesados>0||esperando)
+      ? ('Este mes le has interesado a <b class="tab">'+interesados+'</b> personas. Han entrado <b class="tab">'+entraron+'</b>'+(esperando!=null?(', y hay <b class="tab">'+esperando+'</b> con plaza confirmada en tus próximos planes'):'')+'.')
+      : 'Aún no hay demanda en directo. En cuanto alguien pida entrar en un plan tuyo, lo verás aquí al momento.';
+  }
+  if(fuera<=0) _hide("demandaLivePill");
+  // Por zona: desglose_zona hoy viene vacío → estado honesto
+  const zona=Array.isArray(d.desglose_zona)?d.desglose_zona:[];
+  if(!zona.length) _cardVacia("zonaCard","Por zona","Aún no hay suficientes solicitudes para repartir por barrio. Cuando la haya, verás dónde vive la gente que se te queda fuera — en agregado, nunca direcciones.");
+  // "Vuelven por su cuenta" (espejo de Repetición)
+  _aplicarRepeticion(rep, "demandaRepPct","demandaRepTrend","demandaRepDesc", null);
+
+  // 5 · REPETICIÓN
+  _aplicarRepeticion(rep, "repPct","repTrend","repDesc","repChartCard");
+
+  // 6 · TU PÁGINA — cifras sin fuente real todavía
+  _cardVacia("paginaCifrasCard","Tu página, en cifras","Aún no hay visitas registradas en tu página. Cuando la compartas y empiece a recibir gente, verás aquí las cifras — siempre en agregado.");
+
+  // 7 · EXCLUSIVIDAD / BUZÓN (199 €): sin datos reales → honesto
+  _cardVacia("exclCard","Exclusiva en tu categoría","Cuando actives el plan de 199 €, aquí verás tu exclusividad real por zona y categoría, con su fecha de revisión.");
+  _cardVacia("buzonCard","Buzón","Aún no tienes asistencias confirmadas a las que escribir. Cuando las haya, podrás pedir permiso caso por caso — nunca una lista.");
+  _cardVacia("buzonHistCard","Historial de peticiones","Aún no has pedido contactar con nadie.");
+
+  // 8 · FACTURACIÓN
+  _setTxt("facCuotaLinea", precio!=null?("Cuota · plan de "+precio+" € ("+incluido+" clientes incluidos)"):"Aún no tienes plan de pago");
+  HUECO.base=(precio!=null?precio:0); HUECO.incluidos=incluido; HUECO.extra=0; try{ pintarHueco(); }catch(e){}
+  _cardVacia("metodoPagoCard","Método de pago","Aún no has añadido un método de pago. Se te pedirá cuando contrates un plan de pago — gestionado por Stripe, NYXA nunca guarda tu número de tarjeta.");
+
+  // Barra lateral: subtítulo del negocio (categoría · ciudad) con datos reales
+  { const cat=(d.negocio&&d.negocio.categoria)||"", ciu=(d.negocio&&d.negocio.ciudad)||"";
+    const sub=[cat,ciu].filter(Boolean).join(" · ");
+    _setTxt("bizSub", sub||"—"); }
+
+  // 9 · AJUSTES — datos de empresa (solo lo que el servidor confirma; el resto, honesto)
+  _setTxt("ajusteNombre", nombre);
+  _setTxt("ajusteCategoria", (d.negocio&&d.negocio.categoria)||"—");
+  _setTxt("ajusteCiudad", (d.negocio&&d.negocio.ciudad)||"—");
+  const _acc=(typeof ACC!=="undefined"&&ACC)?ACC:null;
+  _setTxt("ajusteCif", (_acc&&_acc.cif)||"—");
+  _setTxt("ajusteDir", (_acc&&_acc.direccion)||"—");
+  _setTxt("ajusteEmail", (_acc&&(_acc.email||_acc.owner_email))||"—");
+}
+
+// Pinta la repetición real (o estado honesto) en el par de ids dado. chartId opcional a ocultar.
+function _aplicarRepeticion(rep, pctId, trendId, descId, chartId){
+  const pctEl=document.getElementById(pctId), trend=document.getElementById(trendId),
+        desc=document.getElementById(descId), chart=chartId?document.getElementById(chartId):null;
+  if(trend) trend.hidden=true;              // sin comparación mes a mes real todavía
+  if(chart) chart.hidden=true;              // sin serie histórica real (fuera de alcance hoy)
+  if(rep && rep.suficiente && rep.pct!=null){
+    if(pctEl){ pctEl.textContent=(+rep.pct)+"%"; }
+    if(desc) desc.textContent="De cada 100 clientes con recorrido, "+Math.round(+rep.pct)
+      +" repiten reserva por su cuenta — se vuelven a apuntar a otro plan tuyo sin que NYXA se lo proponga otra vez.";
+  } else {
+    if(pctEl){ pctEl.textContent="Aún no hay datos suficientes"; pctEl.style.fontSize="1.2rem"; }
+    if(desc) desc.textContent="Necesitamos al menos 5 clientes con recorrido suficiente "
+      +"(su primera reserva hace 30 días o más) para darte un porcentaje honesto. En cuanto los haya, aparece aquí solo.";
+  }
+}
+
+// Lista real de tus próximos planes en "Quién viene" (solo número de apuntados, nunca quién).
+async function rellenarQvPlanes(){
+  const cont=document.getElementById("qvPlanesRows"); if(!cont) return;
+  const api=window.NEXAEmpresas;
+  if(!api||!api.real||!api.panelPlanesVivos){ cont.innerHTML='<div class="tp-empty">Entra con tu cuenta de empresa para ver tus planes.</div>'; return; }
+  let d=null; try{ d=await api.panelPlanesVivos(); }catch(e){ d=null; }
+  const planes=(d&&Array.isArray(d.planes))?d.planes:[];
+  if(!planes.length){ cont.innerHTML='<div class="tp-empty">Aún no has publicado ningún plan. Publícalo en «Tus planes» y aquí verás cuánta gente viene.</div>'; return; }
+  cont.innerHTML=planes.map(p=>{
+    const n=(p.apuntados!=null?+p.apuntados:0);
+    return '<div class="rowi"><div class="rowi__t"><b>'+esc(p.title||p.titulo||"Plan")+'</b><small>'+esc(fechaTextoISO(p.starts_at||p.fecha))+'</small></div>'
+      +'<div class="rowi__n tab">'+n+'<small>'+(n===1?"apuntado":"apuntados")+'</small></div></div>';
+  }).join("");
+}
+
+// ARRANQUE HONESTO POR DEFECTO: el panel nace VACÍO en toda cifra de "realidad del negocio",
+// pase lo que pase (demo sin login, magic link que no cargó, backend que falla). La app arranca
+// oculta tras el gate y solo el JS la revela — así que neutralizar aquí garantiza que en NINGÚN
+// estado se vea un número ficticio que parezca tuyo. Si luego llega backend real con datos,
+// aplicarDatosRealesAlPanel() rellena; si no, se queda este estado neutro. El material de VENTA
+// (comparativa de planes = precio de lista; simulador, rotulados como ejemplo) NO se toca.
+function vaciarPanelPorDefecto(){
+  const SIN="—", NODATA="aún sin datos";
+  // Fuentes de ejemplo que alimentan gráficos/tablas/avisos del negocio → a cero y repintar.
+  HIST.length=0; REPETICION.length=0; FACTURAS.length=0;
+  if(typeof LIVE!=="undefined"){ LIVE.interesados=0; LIVE.entraron=0; LIVE.esperando=0; }
+  if(typeof NOTIFS!=="undefined"){ NOTIFS.length=0; try{ pintarNotifs(); }catch(e){} }
+  try{ pintarHistTabla(); pintarFacturasTabla(); }catch(e){}
+  try{ pintarEvoChart(); pintarDemandaChart(); pintarRepChart(); }catch(e){}
+
+  // Resumen
+  _setTxt("heroMesK","Tu mes en curso");
+  _hide("heroPill");
+  { const hg=document.getElementById("heroGrid"); if(hg) hg.innerHTML=
+      '<div><div class="hero-summary__n tab"><span id="resEntraron">—</span></div><div class="hero-summary__l">clientes que han entrado este mes</div></div>'
+     +'<div><div class="hero-summary__n tab">—</div><div class="hero-summary__l">pidieron entrar y no pudieron</div></div>'
+     +'<div><div class="hero-summary__n tab accent">—</div><div class="hero-summary__l">sin plan de pago</div></div>'; }
+  _setTxt("heroP","Aún no hay datos de tu negocio. Publica un plan y, en cuanto NYXA te traiga clientes, verás aquí tus números reales — nunca cifras de ejemplo.");
+  _hide("nudgeResumen"); _hide("nudgeQuienViene");
+  { const e=document.getElementById("fourQuienViene"); if(e) e.innerHTML='—<small>'+NODATA+'</small>'; }
+  { const e=document.getElementById("fourDemanda"); if(e) e.innerHTML='—<small>'+NODATA+'</small>'; }
+  { const e=document.getElementById("fourFactura"); if(e) e.innerHTML='—<small>sin plan de pago</small>'; }
+  { const e=document.getElementById("fourExcl"); if(e) e.innerHTML='—<small>según tu zona y categoría</small>'; }
+  _setTxt("planAhoraPrecio", SIN); _setTxt("planAhoraCargo", SIN);
+  { const e=document.getElementById("planAhoraEstado"); if(e){ e.textContent=SIN; e.className="pill"; } }
+  { const r=document.getElementById("planAhoraCupoRow"); if(r) r.hidden=true; }
+
+  // Quién viene
+  _setTxt("qvMesUsado", SIN); _setTxt("qvMesIncluido","");
+  { const b=document.getElementById("qvMesBar"); if(b) b.style.width="0%"; }
+  _setTxt("qvMesNota","Aún no hay entradas este mes.");
+  _setTxt("qvStatEsperando", SIN); _setTxt("qvStatMes", SIN); _setTxt("qvStatMesSub","");
+  { const c=document.getElementById("qvPlanesRows"); if(c) c.innerHTML='<div class="tp-empty">Aún no has publicado ningún plan. Publícalo en «Tus planes» y aquí verás cuánta gente viene.</div>'; }
+  { const m=document.getElementById("qvLiveMain"); if(m) m.innerHTML='Aquí verás cuántas personas tienen plaza confirmada en tus próximos planes.'; }
+  _hide("qvLiveSub"); _setTxt("qvLiveWhen","");
+
+  // Demanda
+  { const t=document.getElementById("mailTexto"); if(t) t.textContent='Aquí verás tu resumen del mes en cuanto haya demanda: a cuánta gente le interesaste, cuántos entraron y cuántos se quedaron fuera.'; }
+  _setTxt("mailMeta","De: NYXA <hola@holanyxa.com> · Para: tu negocio");
+  { const l=document.getElementById("demandaLive"); if(l) l.textContent='Aún no hay demanda en directo. En cuanto alguien pida entrar en un plan tuyo, lo verás aquí al momento.'; }
+  _hide("demandaLivePill");
+  _cardVacia("zonaCard","Por zona","Aún no hay solicitudes que repartir por barrio. Cuando las haya, verás dónde vive la gente que se te queda fuera — en agregado, nunca direcciones.");
+  _aplicarRepeticion(null,"demandaRepPct","demandaRepTrend","demandaRepDesc",null);
+
+  // Repetición
+  _aplicarRepeticion(null,"repPct","repTrend","repDesc","repChartCard");
+
+  // Página / Exclusividad / Buzón
+  _cardVacia("paginaCifrasCard","Tu página, en cifras","Aún no hay visitas registradas en tu página. Cuando la compartas y reciba gente, verás aquí las cifras — siempre en agregado.");
+  _cardVacia("exclCard","Exclusiva en tu categoría","Cuando actives el plan de 199 €, aquí verás tu exclusividad real por zona y categoría, con su fecha de revisión.");
+  _cardVacia("buzonCard","Buzón","Aún no tienes asistencias confirmadas a las que escribir. Cuando las haya, podrás pedir permiso caso por caso — nunca una lista.");
+  _cardVacia("buzonHistCard","Historial de peticiones","Aún no has pedido contactar con nadie.");
+
+  // Facturación
+  _setTxt("facCuotaLinea","Aún no tienes plan de pago");
+  if(typeof HUECO!=="undefined"){ HUECO.base=0; HUECO.incluidos=0; HUECO.extra=0; try{ pintarHueco(); }catch(e){} }
+  _cardVacia("metodoPagoCard","Método de pago","Aún no has añadido un método de pago. Se te pedirá cuando contrates un plan de pago — gestionado por Stripe, NYXA nunca guarda tu número de tarjeta.");
+
+  // Ajustes + barra lateral
+  _setTxt("ajusteNombre", SIN); _setTxt("ajusteCategoria", SIN); _setTxt("ajusteCiudad", SIN);
+  _setTxt("ajusteCif", SIN); _setTxt("ajusteDir", SIN); _setTxt("ajusteEmail", SIN);
+  _setTxt("ajusteClienteDesde", SIN); _setTxt("bizSub", SIN);
+  { const bz=document.querySelector(".biz__i b"); if(bz) bz.textContent="Tu negocio"; }
+  { const av=document.querySelector(".biz__a"); if(av) av.textContent="N"; }
+}
+// Deja el panel neutro desde el primer pintado (antes de cualquier login o backend).
+try{ vaciarPanelPorDefecto(); }catch(e){}
 
 /* ==========================================================================
    FASE 4 — TUS PLANES · PUBLICAR · VERIFICACIÓN (datos reales, sin maqueta)

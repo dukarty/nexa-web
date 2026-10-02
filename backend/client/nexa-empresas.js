@@ -361,11 +361,14 @@
       // Pago REAL (SOLO web): abre Stripe Checkout vía la Edge Function `crear-checkout`.
       // El plan NO se toca desde el cliente (lo congela el trigger); lo activa el
       // webhook de Stripe tras el pago. Aquí solo redirigimos a la pasarela.
-      //   plan: "activacion" (Pro) | "ciudad" (Referente)   periodo: "mes" | "anio"
-      async _checkout(producto) {
+      //   producto: p15 | p49 | p99 | p199 (suscripción) | extra (pago único, con cantidad).
+      //   El set de ids lo MANDA el servidor (crear-checkout). Aquí solo lo reenviamos.
+      async _checkout(producto, cantidad) {
         const biz = await miNegocio();
         if (!biz) return { ok: false, error: "Entra con tu cuenta de empresa para pagar." };
         const email = await miEmail();
+        const body = { producto, business_id: biz.id, email };
+        if (cantidad != null) body.cantidad = cantidad;   // solo lo usa el producto "extra"
         try {
           const r = await fetch(CFG.supabaseUrl + "/functions/v1/crear-checkout", {
             method: "POST",
@@ -374,7 +377,7 @@
               "apikey": CFG.supabaseAnonKey,
               "authorization": "Bearer " + CFG.supabaseAnonKey,
             },
-            body: JSON.stringify({ producto, business_id: biz.id, email }),
+            body: JSON.stringify(body),
           });
           const j = await r.json().catch(() => ({}));
           if (r.ok && j && j.url) { window.location.href = j.url; return { ok: true, redirect: true }; }
@@ -383,20 +386,29 @@
           return { ok: false, error: (e && e.message) || "Error de red al abrir el pago." };
         }
       },
-      async upgrade(plan, periodo) {
-        const PROD = {
-          activacion: { mes: "pro_mensual", anio: "pro_anual" },
-          ciudad: { mes: "referente_mensual", anio: "referente_anual" },
-        };
-        const producto = (PROD[plan] || {})[periodo === "anio" ? "anio" : "mes"];
-        if (!producto) return { ok: false, error: "Ese plan no está disponible." };
-        return this._checkout(producto);
+      // Suscripción mensual al tramo elegido. El servidor `crear-checkout` SOLO acepta los
+      // ids del modelo NUEVO de 5 tramos: p15 / p49 / p99 / p199 (Secrets STRIPE_PRICE_P15…
+      // P199). En el modelo nuevo NO hay plan anual. El plan real NO se toca aquí (lo congela
+      // el trigger); lo activa el webhook de Stripe tras el pago.
+      async upgrade(tramo) {
+        const VALIDOS = { p15: 1, p49: 1, p99: 1, p199: 1 };
+        // Puente con el panel VIEJO (Pro/Max): traduce SOLO lo que tiene equivalencia exacta
+        // por precio — Max/Referente 99 € → p99. "Pro" (29 € del modelo viejo) no existe en
+        // los 5 tramos: decisión de David (qué tramo le corresponde), aquí no se adivina.
+        const ALIAS = { max: "p99", ciudad: "p99", referente: "p99" };
+        let t = String(tramo || "").toLowerCase().trim();
+        if (!(t in VALIDOS)) t = ALIAS[t] || "";
+        if (!(t in VALIDOS)) return { ok: false, error: "Ese plan no está disponible." };
+        return this._checkout(t);
       },
-      // Packs Impulsar (pago único): "impulsar_120" (~25 personas) | "impulsar_55" (~10).
-      async comprarImpulsar(pack) {
-        const producto = pack === "55" || pack === "impulsar_55" ? "impulsar_55" : "impulsar_120";
-        return this._checkout(producto);
+      // Cliente extra (pago único, 7,50 €/cliente). Se puede pedir en lotes con `cantidad`.
+      // Producto Stripe "extra" (Secret STRIPE_PRICE_EXTRA), modo payment con cantidad.
+      async comprarExtra(cantidad) {
+        return this._checkout("extra", Math.max(1, Math.min(50, parseInt(String(cantidad ?? 1), 10) || 1)));
       },
+      // Compat: el nombre viejo apuntaba a packs "Impulsar" que ya no existen en el modelo.
+      // Lo redirigimos al producto nuevo de cliente extra para no dejar una llamada muerta.
+      async comprarImpulsar(cantidad) { return this.comprarExtra(cantidad); },
       async logout() { try { await sb.auth.signOut(); } catch (e) {} },
     };
   }
