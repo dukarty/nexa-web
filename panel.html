@@ -175,6 +175,29 @@ body.dark .simpills button.on{background:#E8C863;color:#241D04}
 .notifi__cta:hover{background:var(--az);color:#fff}
 .notifpanel__empty{padding:22px 10px;text-align:center;color:var(--ink3);font-size:.82rem}
 
+/* ===== botón "¿Cómo funciona?" (guía de onboarding) ===== */
+.howbtn{display:inline-flex;align-items:center;gap:7px;height:38px;border-radius:999px;border:1px solid var(--line);background:var(--card);color:var(--az);padding:0 15px 0 12px;font-weight:700;font-size:.82rem;white-space:nowrap;transition:background .2s,border-color .2s}
+.howbtn:hover{background:var(--az-soft);border-color:var(--az)}
+.howbtn svg{width:16px;height:16px;flex:none}
+
+/* ===== guía "¿Cómo funciona?" — 4 pasos, estado real del negocio ===== */
+.mod__c--how{max-width:600px}
+.howto__sub{color:var(--ink2);font-size:.88rem;margin:-6px 0 22px;font-weight:500;max-width:48ch}
+.howto{display:flex;flex-direction:column}
+.howto__step{display:flex;gap:14px;padding-bottom:22px;position:relative}
+.howto__step:not(:last-child)::before{content:"";position:absolute;left:19px;top:40px;bottom:0;width:2px;background:var(--line)}
+.howto__n{width:40px;height:40px;border-radius:12px;background:var(--az-soft);color:var(--az);display:grid;place-items:center;flex:none;position:relative;z-index:1;transition:background .2s,color .2s}
+.howto__n svg{width:17px;height:17px}
+.howto__n.ok{background:var(--verde-soft);color:var(--verde)}
+.howto__n.amb{background:var(--ambar-soft);color:var(--ambar)}
+.howto__b{padding-top:3px;min-width:0}
+.howto__b__tit{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
+.howto__b b{font-size:.92rem;font-weight:800;letter-spacing:-.005em;text-transform:uppercase}
+.howto__b p{margin-top:4px;font-size:.84rem;color:var(--ink2);line-height:1.5;font-weight:500}
+.howto__b .btn{margin-top:11px}
+.howto__foot{margin-top:2px;padding-top:18px;border-top:1px solid var(--line);display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center}
+.howto__hint{font-size:.74rem;color:var(--ink3);font-weight:600}
+
 .vista{display:none}
 .vista.on{display:block;animation:fade .35s var(--e)}
 @keyframes fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
@@ -642,6 +665,10 @@ td b{color:var(--ink);font-weight:700}
         <div><h1 id="tTit">Resumen</h1><p id="tSub">Lo que NYXA te ha traído — no ajustes, resultados.</p></div>
       </div>
       <div class="topbtns" style="position:relative">
+        <button class="howbtn" id="btnHow" title="Cómo funciona NYXA Empresas" aria-label="¿Cómo funciona?">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M9.1 9a3 3 0 1 1 4.9 2.3c-1 .7-1.5 1.1-1.5 2.4"/><circle cx="12" cy="17" r=".25" fill="currentColor" stroke="none"/></svg>
+          ¿Cómo funciona?
+        </button>
         <button class="icbtn" id="notifBtn" title="Notificaciones" aria-label="Notificaciones">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M6 9a6 6 0 0 1 12 0c0 5 2 6 2 6H4s2-1 2-6z"/><path d="M10 20a2 2 0 0 0 4 0"/></svg>
           <span class="dot" id="notifDot"></span>
@@ -1499,6 +1526,59 @@ td b{color:var(--ink);font-weight:700}
   <div class="mod__acc"><button class="btn" data-go="planes" data-cerrar-modal>Ver la comparativa completa</button><button class="btn btn--gh" data-cerrar-modal>Cerrar</button></div>
 </div></div>
 
+<!-- MODAL: guía "¿Cómo funciona?" — 4 pasos, personalizada con el estado real del negocio -->
+<div class="mod" id="modHow"><div class="mod__c mod__c--how">
+  <p class="mod__k">Así funciona</p>
+  <p class="mod__t" id="howHola">NYXA Empresas, en cuatro pasos</p>
+  <p class="howto__sub">Completa tu página, verifícate, publica un plan. Nada más que esto — y cada paso ya refleja dónde estás.</p>
+
+  <div class="howto">
+    <div class="howto__step">
+      <div class="howto__n" id="howN1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18"/></svg></div>
+      <div class="howto__b">
+        <div class="howto__b__tit"><b>1 · Tu página</b><span id="howTag1"></span></div>
+        <p id="howSub1">Tu escaparate en NYXA: quién eres y qué ofreces, en una pantalla.</p>
+        <button class="btn btn--sm btn--gh" data-go="pagina" data-cerrar-modal>Ir a Tu página</button>
+      </div>
+    </div>
+
+    <div class="howto__step">
+      <div class="howto__n" id="howN2"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.5l7.5 3v5.5c0 4.6-3.2 8-7.5 9-4.3-1-7.5-4.4-7.5-9V5.5z"/><path d="M9 12l2 2 4-4"/></svg></div>
+      <div class="howto__b">
+        <div class="howto__b__tit"><b>2 · Verifícate</b><span id="howTag2"></span></div>
+        <p id="howSub2">Nombre fiscal, CIF y un enlace. Lo revisamos nosotros — es el candado que da confianza antes de publicar.</p>
+        <button class="btn btn--sm btn--gh" data-go="verificacion" data-cerrar-modal>Ir a Verificación</button>
+      </div>
+    </div>
+
+    <div class="howto__step">
+      <div class="howto__n" id="howN3"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg></div>
+      <div class="howto__b">
+        <div class="howto__b__tit"><b>3 · Publica tu plan</b><span id="howTag3"></span></div>
+        <p id="howSub3">Pones fecha y aforo. Nosotros nos encargamos de proponerlo a quien encaja.</p>
+        <button class="btn btn--sm btn--gh" id="btnHowPublicar">Publicar un plan</button>
+      </div>
+    </div>
+
+    <div class="howto__step">
+      <div class="howto__n" id="howN4"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg></div>
+      <div class="howto__b">
+        <div class="howto__b__tit"><b>4 · Mira cuánta gente viene</b></div>
+        <p id="howSub4">El número de apuntados, en vivo.</p>
+        <div class="guard guard--az" style="margin-top:10px;margin-bottom:0;padding:12px 14px">
+          <p>Ves <b>cuántos</b> vienen. Nunca <b>quién</b> — esa promesa no se toca.</p>
+        </div>
+        <button class="btn btn--sm btn--gh" data-go="quien-viene" data-cerrar-modal>Ver quién viene</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="howto__foot">
+    <button class="btn" data-cerrar-modal>Entendido, vamos</button>
+    <span class="howto__hint">Vuelve a abrirse cuando quieras desde "¿Cómo funciona?", arriba</span>
+  </div>
+</div></div>
+
 <div class="toast" id="toast"></div>
 
 <script>
@@ -1692,6 +1772,88 @@ function abrirModal(id){ document.getElementById(id).classList.add("on"); }
 function cerrarModales(){ document.querySelectorAll(".mod").forEach(m=>m.classList.remove("on")); }
 document.querySelectorAll("[data-cerrar-modal]").forEach(b=>b.addEventListener("click",cerrarModales));
 document.querySelectorAll(".mod").forEach(m=>m.addEventListener("click",e=>{ if(e.target===m) cerrarModales(); }));
+
+/* ==========================================================================
+   GUÍA "¿CÓMO FUNCIONA?" — 4 pasos, personalizada con el estado REAL del
+   negocio (ACC, estado_verificacion_negocio, panel_planes_vivos — las mismas
+   fuentes que ya usan Verificación y Tus planes, nunca un cálculo aparte).
+   Se abre sola la primera vez que carga la cuenta (flag en localStorage,
+   igual que cualquier preferencia del panel) y siempre desde el botón de
+   arriba. ========================================================================== */
+const LS_HOW_VISTO = "nexa_onboarding_visto";
+function howTag(estado){
+  // estado: "ok" (hecho) | "amb" (en revisión) | null (pendiente)
+  return estado==="ok" ? '<span class="pill pill--ok">Hecho</span>'
+       : estado==="amb" ? '<span class="pill pill--amb">En revisión</span>'
+       : '<span class="pill">Pendiente</span>';
+}
+function howSetStep(n, estado, sub){
+  const ic=document.getElementById("howN"+n); if(ic){ ic.classList.remove("ok","amb"); if(estado) ic.classList.add(estado); }
+  const tag=document.getElementById("howTag"+n); if(tag) tag.innerHTML=howTag(estado);
+  if(sub){ const p=document.getElementById("howSub"+n); if(p) p.textContent=sub; }
+}
+async function pintarGuiaComoFunciona(){
+  const h=document.getElementById("howHola");
+  if(h) h.textContent = (ACC && ACC.nombre) ? ("Hola, "+ACC.nombre+" — así estás tú ahora mismo") : "NYXA Empresas, en cuatro pasos";
+
+  // 1 · Tu página — "hecha" si ya hay nombre, categoría y descripción reales (lo mínimo para publicarla)
+  const pagHecha = !!(ACC && ACC.nombre && ACC.categoria && ACC.descripcion);
+  howSetStep(1, pagHecha?"ok":null, pagHecha
+    ? "Tu página ya tiene lo esencial — nombre, categoría y descripción."
+    : "Tu escaparate en NYXA: quién eres y qué ofreces, en una pantalla.");
+
+  // 2 · Verifícate — mismo estado real que pinta la vista Verificación (nunca uno aparte)
+  let est = (ACC && ACC.verified) ? "verificado" : null;
+  if(!est){
+    try{
+      if(window.NEXAEmpresas && window.NEXAEmpresas.real && window.NEXAEmpresas.estadoVerificacion){
+        est = await window.NEXAEmpresas.estadoVerificacion();
+      }
+    }catch(e){}
+    if(!est) est="sin_verificar";
+  }
+  howSetStep(2, est==="verificado"?"ok":(est==="pendiente"?"amb":null),
+    est==="verificado" ? "Verificado — ya puedes publicar planes en vivo."
+    : est==="pendiente" ? "Pedida. La estamos revisando — normalmente el mismo día."
+    : est==="rechazada" ? "No pudimos verificarte con lo anterior. Vuelve a pedirlo."
+    : "Nombre fiscal, CIF y un enlace. Lo revisamos nosotros.");
+
+  // 3 y 4 · Publica tu plan / Mira cuánta gente viene — mismo agregado real que usa Tus planes
+  let nPlanes=0, apuntados=0;
+  try{
+    const api=window.NEXAEmpresas;
+    if(api && api.real && api.panelPlanesVivos){
+      const d=await api.panelPlanesVivos();
+      if(d && !d.error){
+        const planes=Array.isArray(d.planes)?d.planes:[];
+        nPlanes=planes.length;
+        apuntados=planes.reduce((s,p)=>s+(+p.apuntados||0),0);
+      }
+    }
+  }catch(e){}
+  howSetStep(3, nPlanes>0?"ok":null, nPlanes>0
+    ? (nPlanes===1 ? "Tienes 1 plan vivo." : "Tienes "+nPlanes+" planes vivos.")
+    : "Pones fecha y aforo. Nosotros nos encargamos de proponerlo a quien encaja.");
+  howSetStep(4, null, nPlanes>0
+    ? (apuntados===1 ? "1 persona apuntada ahora mismo." : apuntados+" personas apuntadas ahora mismo.")
+    : "En cuanto publiques tu primer plan, aquí verás el número — nunca quién.");
+}
+document.getElementById("btnHow").addEventListener("click", ()=>{ abrirModal("modHow"); pintarGuiaComoFunciona(); });
+// "Publicar un plan" desde la guía: cierra el modal, va a Tus planes y abre el formulario de
+// verdad (iniciarPublicarPlan ya aplica el candado real de verificación si hiciera falta).
+document.getElementById("btnHowPublicar").addEventListener("click", ()=>{
+  cerrarModales();
+  irA("tus-planes");
+  iniciarPublicarPlan();
+});
+function tryAutoAbrirGuia(){
+  try{
+    if(localStorage.getItem(LS_HOW_VISTO)) return;
+    localStorage.setItem(LS_HOW_VISTO, "1");
+  }catch(e){}
+  abrirModal("modHow");
+  pintarGuiaComoFunciona();
+}
 
 document.querySelectorAll("[data-buzon-btn]").forEach(b=>{
   b.addEventListener("click",()=>{
@@ -2390,6 +2552,7 @@ window.NEXA_PANEL = {
     try{ poblarCategorias(); }catch(e){}
     try{ pintarTusPlanes(); }catch(e){}
     aplicarPanelDatos();
+    try{ tryAutoAbrirGuia(); }catch(e){}
   },
   aplicarDatos: ()=>{ /* el panel nuevo lee de panel_datos(); metrics() viejo no se usa */ },
 };
