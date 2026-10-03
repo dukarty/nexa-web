@@ -1062,7 +1062,7 @@ td b{color:var(--ink);font-weight:700}
       <div class="gated" data-min="1" data-msg="Tu propia página dentro de NYXA se activa en el plan de 49 €.">
         <div class="gated__body">
 
-          <p class="pill pill--amb" style="margin-bottom:16px">Fase 0 · plantilla manual, sin IA — la generación automática desde tu web llega más adelante, solo si el piloto demuestra que hace falta</p>
+          <p class="pill pill--amb" style="margin-bottom:16px">Plantillas listas para usar, sin IA — generarla sola desde tu web llega más adelante</p>
 
           <div class="pm-callout">
             <div class="pm-callout__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 3v4M12 17v4M3 12h4M17 12h4M5.6 5.6l2.8 2.8M15.6 15.6l2.8 2.8M18.4 5.6l-2.8 2.8M8.4 15.6l-2.8 2.8"/></svg></div>
@@ -1370,14 +1370,13 @@ td b{color:var(--ink);font-weight:700}
     <!-- ============================================================ -->
     <section class="vista" data-vista="planes">
 
-      <p class="grp" style="padding-left:0">Primero lo que recibes, después lo que cuesta</p>
-      <p style="color:var(--ink2);font-size:.9rem;margin:-4px 0 6px;max-width:60ch">Nadie compara 49 € contra 99 €: compara 7 clientes contra 18. Ningún plan baja de 6 veces lo que cuesta, y mejora cuanto más subes.</p>
-      <p style="color:var(--ink3);font-size:.8rem;margin:0 0 18px;max-width:60ch"><b>Es el modelo de precios publicado</b> (igual para todos), no tus cifras reales. Las tuyas están en «Resumen» y «El aviso de demanda».</p>
+      <p class="grp" style="padding-left:0">Planes y precios</p>
+      <p style="color:var(--ink2);font-size:.9rem;margin:-4px 0 20px;max-width:60ch">Nadie compara 49 € contra 99 €: compara 7 clientes contra 18. Ningún plan baja de 6 veces lo que cuesta, y mejora cuanto más subes.</p>
       <div class="plans" id="plansGrid"></div>
 
       <!-- SIMULADOR (herramienta hipotética, no datos del negocio) -->
       <div class="simcard">
-        <div class="card__h" style="margin-bottom:0"><b>Simulador: ¿cuántos clientes quieres al mes?</b><small>ejemplo ilustrativo — mueve tú el número; no son tus cifras reales</small></div>
+        <div class="card__h" style="margin-bottom:0"><b>Simulador: ¿cuántos clientes quieres al mes?</b><small>Mueve el número y mira cuánto te sale cada cliente</small></div>
         <div class="simcard__row">
           <div class="simrange">
             <input type="range" id="simRange" min="1" max="60" value="22" step="1">
@@ -1400,7 +1399,7 @@ td b{color:var(--ink);font-weight:700}
 
       <!-- EL MISMO NEGOCIO, EN MESES DISTINTOS -->
       <div class="card">
-        <div class="card__h"><b>El mismo negocio, en meses distintos</b><small>ejemplo con el plan de 99 € (18 clientes incluidos)</small></div>
+        <div class="card__h"><b>El mismo negocio, en meses distintos</b><small>con el plan de 99 € (18 clientes incluidos)</small></div>
         <div class="tablewrap">
           <table>
             <thead><tr><th>Ese mes</th><th class="r">Clientes</th><th class="r">Paga</th><th>Por qué</th></tr></thead>
@@ -1502,7 +1501,7 @@ td b{color:var(--ink);font-weight:700}
 <div class="mod" id="modBuzon"><div class="mod__c">
   <p class="mod__k">Consentimiento, no lista</p>
   <p class="mod__t">Así se lo preguntamos a esa persona</p>
-  <p class="mod__p">«¿Autorizas a compartir tu nombre y teléfono con <b>Sputnik</b> para gestionar tu plan?»<br><br>Se lo mandamos ahora mismo, solo para este caso. Puede decir que no, y si algún día borra su cuenta o revoca el permiso, tú pierdes el acceso al dato.</p>
+  <p class="mod__p">«¿Autorizas a compartir tu nombre y teléfono con <b>este negocio</b> para gestionar tu plan?»<br><br>Se lo mandamos ahora mismo, solo para este caso. Puede decir que no, y si algún día borra su cuenta o revoca el permiso, tú pierdes el acceso al dato.</p>
   <div class="mod__acc">
     <button class="btn" data-cerrar-modal>Entendido, mandar la petición</button>
   </div>
@@ -1512,7 +1511,7 @@ td b{color:var(--ink);font-weight:700}
 <div class="mod" id="modPlanes"><div class="mod__c">
   <p class="mod__k">Cambiar de plan</p>
   <p class="mod__t" id="modPlanesT">Ver los planes</p>
-  <p class="mod__p" id="modPlanesP">En producción, esto abre el checkout de Stripe con tu tarjeta guardada. En esta maqueta no cobra nada.</p>
+  <p class="mod__p" id="modPlanesP">Esto abre el checkout de Stripe con tu tarjeta guardada.</p>
   <div class="mod__acc"><button class="btn" data-go="planes" data-cerrar-modal>Ver la comparativa completa</button><button class="btn btn--gh" data-cerrar-modal>Cerrar</button></div>
 </div></div>
 
@@ -1886,7 +1885,7 @@ function refrescarGating(){
     if(lock) lock.hidden = rankActual>=min;
   });
   const p = PLANES[rankActual];
-  document.getElementById("planBadge").textContent = "Viendo como · " + (p.precio? p.label+"/mes" : "A medida");
+  document.getElementById("planBadge").textContent = "Plan · " + (p.precio? p.label+"/mes" : "A medida");
   // nudges de upsell: se ocultan solos en cuanto el plan ya cubre toda la demanda conocida (199 €+)
   document.querySelectorAll(".nudge[data-nudge-hide-min]").forEach(el=>{
     el.hidden = rankActual >= +el.dataset.nudgeHideMin;
@@ -1956,10 +1955,11 @@ document.getElementById("btnExportFacturas").addEventListener("click",()=>{
   toast("Descargado.");
 });
 
-document.getElementById("btnCambiarTarjeta").addEventListener("click",()=>toast("En producción, esto abre el formulario seguro de Stripe. Simulado."));
-document.getElementById("btnCerrarSesion").addEventListener("click",()=>toast("Esto cerraría tu sesión. Simulado."));
-document.getElementById("btnRgpdExport").addEventListener("click",()=>toast("En producción, descarga un .zip con tus datos. Aquí no hay nada que descargar todavía."));
-document.getElementById("btnRgpdDelete").addEventListener("click",()=>toast("Esto pediría confirmación antes de borrar nada. Simulado."));
+document.getElementById("btnCambiarTarjeta").addEventListener("click",()=>toast("Esto abrirá el formulario seguro de Stripe para cambiar tu tarjeta."));
+// (El logout real de #btnCerrarSesion vive abajo: logout() + reload. Antes había aquí un
+//  segundo listener que solo lanzaba un toast "Cerrando sesión…" y se disparaba a la vez — muerto, retirado.)
+document.getElementById("btnRgpdExport").addEventListener("click",()=>toast("Aún no tienes datos que descargar."));
+document.getElementById("btnRgpdDelete").addEventListener("click",()=>toast("Te pediremos que confirmes antes de borrar nada."));
 
 // ---- histórico: tabla (desde HIST, una sola fuente) ----
 function pintarHistTabla(){
@@ -2002,7 +2002,7 @@ pintarFacturasTabla();
   cont.innerHTML = PLANES.map(p=>{
     const esActual = p.rank===RANK_ACTUAL_REAL;
     return `<div class="plan ${p.reco?"reco":""} ${esActual?"actual":""}">
-      ${p.reco&&!esActual?'<span class="plan__tag">El que eligen 7 de 10</span>':''}
+      ${p.reco&&!esActual?'<span class="plan__tag">Recomendado</span>':''}
       ${esActual?'<span class="plan__tag" style="background:var(--ink)">Tu plan actual</span>':''}
       <div class="plan__big">${p.clientes ?? "+"}<small>clientes ${p.clientes? "al mes":"a negociar"}</small></div>
       <div class="plan__price">${p.precio? money(p.precio)+"/mes · cada uno a <b>"+p.cadaUno+"</b>" : "<b>A medida</b>"}</div>
@@ -2101,7 +2101,7 @@ pintarFacturasTabla();
   document.getElementById("simMinus").addEventListener("click",()=>{ range.value=Math.max(1,+range.value-1); actualizar(); });
   document.getElementById("simCta").addEventListener("click",()=>{
     if(out.cta.disabled) return;
-    toast("En producción, esto abre el checkout de Stripe con tu tarjeta guardada. Simulado.");
+    toast("Esto abre el checkout de Stripe con tu tarjeta guardada.");
   });
   actualizar();
 })();
@@ -2686,13 +2686,21 @@ function aplicarDatosRealesAlPanel(d){
   _setTxt("qvStatMesSub", "de "+incluido+" incluidos");
   rellenarQvPlanes();   // lista real de próximos planes (panel_planes_vivos), solo números
 
-  // "Quién viene en vivo" (99 €+): número real o estado honesto
-  if(niv>=2 && esperando!=null){
-    const main=document.getElementById("qvLiveMain"), sub=document.getElementById("qvLiveSub"), when=document.getElementById("qvLiveWhen");
-    if(main) main.innerHTML='Hay <span class="tab" style="color:var(--az);font-weight:800">'+esperando+'</span> '
-      +(esperando===1?'persona':'personas')+' con plaza confirmada en tus próximos planes.';
-    if(sub) sub.hidden=true;
-    if(when) when.textContent="planes que aún no han empezado";
+  // "Quién viene en vivo" (99 €+): número real o estado honesto.
+  // SIN rama muerta: si no hay en_vivo real (niv<2 o esperando==null) se reescribe al MISMO
+  // vacío honesto de vaciarPanelPorDefecto. Así nunca sobrevive la cifra de ejemplo (22/40/18),
+  // ni aunque aplicar() corra sin que vaciar() lo haya limpiado antes.
+  { const main=document.getElementById("qvLiveMain"), sub=document.getElementById("qvLiveSub"), when=document.getElementById("qvLiveWhen");
+    if(niv>=2 && esperando!=null){
+      if(main) main.innerHTML='Hay <span class="tab" style="color:var(--az);font-weight:800">'+esperando+'</span> '
+        +(esperando===1?'persona':'personas')+' con plaza confirmada en tus próximos planes.';
+      if(sub) sub.hidden=true;
+      if(when) when.textContent="planes que aún no han empezado";
+    } else {
+      if(main) main.innerHTML='Aquí verás cuántas personas tienen plaza confirmada en tus próximos planes.';
+      if(sub) sub.hidden=true;
+      if(when) when.textContent="";
+    }
   }
 
   // 4 · DEMANDA
