@@ -26,28 +26,151 @@
 
 <script type="application/ld+json">
 {
-  "@context":"https://schema.org",
-  "@graph":[
-    {"@type":"Organization","@id":"https://holanyxa.com/#org","name":"NYXA",
-     "url":"https://holanyxa.com/","logo":"https://holanyxa.com/favicon.svg",
-     "slogan":"Que no se te escape la vida",
-     "sameAs":["https://instagram.com/nyxa.app"],
-     "areaServed":[{"@type":"City","name":"Valencia"},{"@type":"City","name":"Barcelona"},{"@type":"City","name":"Madrid"}]},
-    {"@type":"WebSite","@id":"https://holanyxa.com/#web","url":"https://holanyxa.com/",
-     "name":"NYXA","inLanguage":"es-ES","publisher":{"@id":"https://holanyxa.com/#org"}},
-    {"@type":"SoftwareApplication","name":"NYXA","applicationCategory":"SocialNetworkingApplication",
-     "operatingSystem":"iOS",
-     "description":"App para vivir experiencias reales con gente que quiere vivir lo mismo que tú. Dices qué quieres vivir y NYXA te dice con quién. Sobre todo en Valencia; también en Barcelona y Madrid.",
-     "offers":{"@type":"Offer","price":"0","priceCurrency":"EUR"}},
-    {"@type":"FAQPage","mainEntity":[
-      {"@type":"Question","name":"¿Qué es NYXA?","acceptedAnswer":{"@type":"Answer","text":"Una app para vivir experiencias reales con gente que quiere vivir lo mismo que tú. Dices qué quieres vivir y NYXA te dice con quién — y quedáis en persona."}},
-      {"@type":"Question","name":"¿NYXA es una app de citas?","acceptedAnswer":{"@type":"Answer","text":"No. Aquí no se escribe a desconocidos: propones vivir algo concreto y solo si aceptan se abre la conversación."}},
-      {"@type":"Question","name":"¿Cuánto cuesta NYXA?","acceptedAnswer":{"@type":"Answer","text":"Es gratis. Se descarga sin coste en la App Store."}},
-      {"@type":"Question","name":"¿En qué ciudades está NYXA?","acceptedAnswer":{"@type":"Answer","text":"Sobre todo en Valencia, y también en Barcelona y Madrid. Crecemos por lo que contamos en redes, así que vamos sumando ciudades."}}
-    ]}
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": "https://holanyxa.com/#org",
+      "name": "NYXA",
+      "url": "https://holanyxa.com/",
+      "logo": "https://holanyxa.com/favicon.svg",
+      "slogan": "Que no se te escape la vida",
+      "sameAs": [
+        "https://instagram.com/nyxa.app"
+      ],
+      "areaServed": [
+        {
+          "@type": "City",
+          "name": "Valencia"
+        },
+        {
+          "@type": "City",
+          "name": "Barcelona"
+        },
+        {
+          "@type": "City",
+          "name": "Madrid"
+        }
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "https://holanyxa.com/#web",
+      "url": "https://holanyxa.com/",
+      "name": "NYXA",
+      "inLanguage": "es-ES",
+      "publisher": {
+        "@id": "https://holanyxa.com/#org"
+      }
+    },
+    {
+      "@type": "SoftwareApplication",
+      "name": "NYXA",
+      "applicationCategory": "SocialNetworkingApplication",
+      "operatingSystem": "iOS",
+      "description": "App para vivir experiencias reales con gente que quiere vivir lo mismo que tú. Dices qué quieres vivir y NYXA te dice con quién. Sobre todo en Valencia; también en Barcelona y Madrid.",
+      "offers": {
+        "@type": "Offer",
+        "price": "0",
+        "priceCurrency": "EUR"
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "¿Es gratis de verdad?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sí. Bajar la app y quedar no cuesta nada: 0 €. Las personas nunca pagan por conocerse — ese es el trato. NYXA se sostiene con las empresas que publican planes, no con los usuarios."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Qué es NYXA exactamente y cómo funciona?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "NYXA es una app gratuita para conocer gente y hacer planes reales en persona. Funciona al revés que una red social: dices qué te apetece vivir (un café, una ruta en bici, un concierto), la app te dice con quién podrías vivirlo, y le llega la propuesta. Si esa persona acepta, se abre la conversación y quedáis. Si no acepta, no pasa nada y nadie escribe a nadie."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Es una app de citas tipo Tinder?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. En NYXA no se liga ni se desliza, y no se puede escribir a un desconocido: lo que se propone es un plan concreto, y la conversación solo se abre si la otra persona dice que sí. La mayoría de la gente la usa para hacer amigos y llenar el finde, no para ligar."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿En qué se diferencia de Meetup o de Bumble BFF?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Meetup te lleva a un evento de desconocidos y Bumble BFF te da un match y te deja solo en lo difícil: poner fecha. NYXA pone las dos cosas juntas — una persona concreta y un plan concreto, con día y hora. No tienes que ser tú quien proponga y se exponga al no."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Me acabo de mudar a Valencia y no conozco a nadie, ¿qué hago?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Es justo el caso para el que se hizo. No hace falta que tengas un grupo ni que conozcas a nadie: eliges un plan que te apetezca en Valencia y la app te cruza con gente de aquí con las mismas ganas. El primer plan es el que cuesta; a partir de ahí va solo."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Está en Android?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Todavía no. Ahora mismo NYXA está solo en iOS, en la App Store, y es gratis. La versión de Android está en camino; lo contamos en Instagram, en @nyxa.app."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿En qué ciudades funciona?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Sobre todo en Valencia, que es donde hay más gente y donde salen más planes. También en Barcelona y Madrid. Vamos ciudad a ciudad a propósito: preferimos que en una haya planes de verdad cada semana a estar en cincuenta y que no pase nada."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Tengo que ir solo a un plan raro?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Nada de citas a ciegas incómodas. Vas a un plan concreto (un café, una ruta, un concierto) con gente que quiere exactamente lo mismo que tú."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Es seguro quedar con alguien que no conozco?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Perfiles verificados con cara real, no avatares. Nadie te escribe sin que tú aceptes antes el plan, así que no hay mensajes de desconocidos. Bloquear y reportar está siempre a un toque y lo revisa el equipo. Los planes son en sitios públicos."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Y si no aparece nadie?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "El plan solo se cierra si los dos decís que sí. Nada de plantones: si no hay match, no hay quedada."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Qué tipo de planes se hacen?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Cosas normales que ya harías: un café, cañas, una ruta en bici, ir a un concierto, la playa un domingo por la mañana. Están ordenados por mundos (deporte, naturaleza, noche, cultura) para que encuentres rápido lo tuyo."
+          }
+        }
+      ]
+    }
   ]
 }
-</script>
+  </script>
 
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -480,12 +603,17 @@ a:focus-visible,button:focus-visible,[role=button]:focus-visible{outline:2.5px s
       <h2>Lo que todo el mundo pregunta.</h2>
     </div>
     <div class="faqlist">
-      <div class="fitem open"><button class="fq">¿Es gratis de verdad?</button><div class="fa"><p>Sí. Bajar la app y quedar no cuesta nada. Las personas nunca pagan por conocerse — ese es el trato.</p></div></div>
+      <div class="fitem open"><button class="fq">¿Es gratis de verdad?</button><div class="fa"><p>Sí. Bajar la app y quedar no cuesta nada: 0 €. Las personas nunca pagan por conocerse — ese es el trato. NYXA se sostiene con las empresas que publican planes, no con los usuarios.</p></div></div>
+      <div class="fitem"><button class="fq">¿Qué es NYXA exactamente y cómo funciona?</button><div class="fa"><p>NYXA es una app gratuita para conocer gente y hacer planes reales en persona. Funciona al revés que una red social: dices qué te apetece vivir (un café, una ruta en bici, un concierto), la app te dice con quién podrías vivirlo, y le llega la propuesta. Si esa persona acepta, se abre la conversación y quedáis. Si no acepta, no pasa nada y nadie escribe a nadie.</p></div></div>
+      <div class="fitem"><button class="fq">¿Es una app de citas tipo Tinder?</button><div class="fa"><p>No. En NYXA no se liga ni se desliza, y no se puede escribir a un desconocido: lo que se propone es un plan concreto, y la conversación solo se abre si la otra persona dice que sí. La mayoría de la gente la usa para hacer amigos y llenar el finde, no para ligar.</p></div></div>
+      <div class="fitem"><button class="fq">¿En qué se diferencia de Meetup o de Bumble BFF?</button><div class="fa"><p>Meetup te lleva a un evento de desconocidos y Bumble BFF te da un match y te deja solo en lo difícil: poner fecha. NYXA pone las dos cosas juntas — una persona concreta y un plan concreto, con día y hora. No tienes que ser tú quien proponga y se exponga al no.</p></div></div>
+      <div class="fitem"><button class="fq">Me acabo de mudar a Valencia y no conozco a nadie, ¿qué hago?</button><div class="fa"><p>Es justo el caso para el que se hizo. No hace falta que tengas un grupo ni que conozcas a nadie: eliges un plan que te apetezca en Valencia y la app te cruza con gente de aquí con las mismas ganas. El primer plan es el que cuesta; a partir de ahí va solo.</p></div></div>
+      <div class="fitem"><button class="fq">¿Está en Android?</button><div class="fa"><p>Todavía no. Ahora mismo NYXA está solo en iOS, en la App Store, y es gratis. La versión de Android está en camino; lo contamos en Instagram, en @nyxa.app.</p></div></div>
+      <div class="fitem"><button class="fq">¿En qué ciudades funciona?</button><div class="fa"><p>Sobre todo en Valencia, que es donde hay más gente y donde salen más planes. También en Barcelona y Madrid. Vamos ciudad a ciudad a propósito: preferimos que en una haya planes de verdad cada semana a estar en cincuenta y que no pase nada.</p></div></div>
       <div class="fitem"><button class="fq">¿Tengo que ir solo a un plan raro?</button><div class="fa"><p>Nada de citas a ciegas incómodas. Vas a un plan concreto (un café, una ruta, un concierto) con gente que quiere exactamente lo mismo que tú.</p></div></div>
-      <div class="fitem"><button class="fq">¿Es seguro?</button><div class="fa"><p>Perfiles verificados, sin mensajes de desconocidos, y tú aceptas cada plan. Bloquear y reportar está siempre a un toque, y lo revisa el equipo.</p></div></div>
-      <div class="fitem"><button class="fq">¿Con quién voy a quedar?</button><div class="fa"><p>Con gente real y verificada, cerca de ti, con tus mismas ganas. Cara real, no avatar.</p></div></div>
+      <div class="fitem"><button class="fq">¿Es seguro quedar con alguien que no conozco?</button><div class="fa"><p>Perfiles verificados con cara real, no avatares. Nadie te escribe sin que tú aceptes antes el plan, así que no hay mensajes de desconocidos. Bloquear y reportar está siempre a un toque y lo revisa el equipo. Los planes son en sitios públicos.</p></div></div>
       <div class="fitem"><button class="fq">¿Y si no aparece nadie?</button><div class="fa"><p>El plan solo se cierra si los dos decís que sí. Nada de plantones: si no hay match, no hay quedada.</p></div></div>
-      <div class="fitem"><button class="fq">¿Está en mi ciudad?</button><div class="fa"><p>Ahora mismo estamos a fondo en Valencia. Vamos ciudad a ciudad, con densidad de verdad — tu ciudad, muy pronto.</p></div></div>
+      <div class="fitem"><button class="fq">¿Qué tipo de planes se hacen?</button><div class="fa"><p>Cosas normales que ya harías: un café, cañas, una ruta en bici, ir a un concierto, la playa un domingo por la mañana. Están ordenados por mundos (deporte, naturaleza, noche, cultura) para que encuentres rápido lo tuyo.</p></div></div>
     </div>
   </div>
 </section>
