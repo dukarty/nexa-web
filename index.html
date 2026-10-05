@@ -375,8 +375,8 @@ section{position:relative}
 .fq{width:100%;text-align:left;background:none;border:0;font-family:var(--f);font-size:clamp(16px,2vw,19px);font-weight:800;color:var(--ink);padding:22px 44px 22px 0;cursor:pointer;position:relative;letter-spacing:-.02em}
 .fq:after{content:"+";position:absolute;right:4px;top:50%;transform:translateY(-50%);font-size:var(--t-3xl, 26px);font-weight:400;color:var(--az);transition:.25s}
 .fitem.open .fq:after{transform:translateY(-50%) rotate(45deg)}
-.fa{max-height:0;overflow:hidden;transition:max-height .3s ease}
-.fitem.open .fa{max-height:240px}
+.fa{display:grid;grid-template-rows:0fr;transition:grid-template-rows .34s cubic-bezier(.2,.8,.25,1)}.fa>*{overflow:hidden;min-height:0}
+.fitem.open .fa{grid-template-rows:1fr}
 .fa p{color:var(--gris);font-size:var(--t-base, 15px);line-height:1.6;padding:0 44px 24px 0;text-wrap:balance}
 
 /* ===== CIERRE ===== */

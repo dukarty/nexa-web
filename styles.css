@@ -230,3 +230,47 @@ section{position:relative;overflow:hidden}
 @media (min-width:1500px){ .wrap,.nav__in,.nf__in{max-width:1320px} }
 @media (min-width:1920px){ .wrap,.nav__in,.nf__in{max-width:1500px} }
 @media (min-width:2500px){ .wrap,.nav__in,.nf__in{max-width:1720px} }
+
+
+/* ── Micro-interacciones ──────────────────────────────────────────────
+   Tres reglas: solo se anima transform y opacity (no provocan layout),
+   las duraciones son cortas, y todo se apaga con prefers-reduced-motion.
+   El feedback al pulsar es lo que mas se nota en movil, y solo habia dos. */
+:root{
+  --e-salida:cubic-bezier(.2,.8,.25,1);   /* entradas: arranca rapido, posa suave */
+  --e-press:cubic-bezier(.3,0,.2,1);      /* pulsacion: inmediata */
+}
+
+/* Pulsar: hundir un poco. Rapido al bajar, elastico al soltar. */
+.pill,.appstore,.fq,.world,.ghost{transition:transform .22s var(--e-salida),box-shadow .22s var(--e-salida),opacity .22s var(--e-salida)}
+.pill:active,.appstore:active{transform:scale(.97);transition-duration:.08s;transition-timing-function:var(--e-press)}
+.world:active{transform:scale(.985);transition-duration:.08s}
+
+/* Hover: elevar, no desplazar. Solo donde hay raton. */
+@media (hover:hover){
+  .pill:hover{transform:translateY(-2px)}
+  .appstore:hover{transform:translateY(-2px);box-shadow:0 18px 32px -16px rgba(10,12,17,.5)}
+  .world:hover{transform:translateY(-3px);box-shadow:var(--sh-sm)}
+  .fq:hover{opacity:.72}
+}
+
+/* Teclado: el foco tiene que verse igual de bien que el raton. */
+.pill:focus-visible,.appstore:focus-visible,.fq:focus-visible,.world:focus-visible{
+  outline:2px solid var(--az);outline-offset:3px;border-radius:10px}
+
+/* Entrada escalonada: los hermanos no aparecen todos a la vez, van cayendo.
+   60ms entre uno y otro es suficiente para que se lea como secuencia. */
+.reveal.on .world,.reveal.on .fitem,.reveal.on .k{animation:subir .5s var(--e-salida) backwards}
+.reveal.on .world:nth-child(2),.reveal.on .fitem:nth-child(2){animation-delay:.06s}
+.reveal.on .world:nth-child(3),.reveal.on .fitem:nth-child(3){animation-delay:.12s}
+.reveal.on .world:nth-child(4),.reveal.on .fitem:nth-child(4){animation-delay:.18s}
+.reveal.on .world:nth-child(5),.reveal.on .fitem:nth-child(5){animation-delay:.24s}
+.reveal.on .world:nth-child(6),.reveal.on .fitem:nth-child(6){animation-delay:.3s}
+@keyframes subir{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+
+@media (prefers-reduced-motion:reduce){
+  .pill,.appstore,.fq,.world,.ghost,.fa{transition:none!important}
+  .reveal.on .world,.reveal.on .fitem,.reveal.on .k{animation:none!important}
+  .pill:hover,.appstore:hover,.world:hover,.pill:active,.appstore:active,.world:active{transform:none!important}
+}
+/* ─────────────────────────────────────────────────────────────────── */
