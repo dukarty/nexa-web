@@ -421,6 +421,51 @@ a:focus-visible,button:focus-visible,[role=button]:focus-visible{outline:2.5px s
 @media (min-width:1500px){.wrap,.nav__in,.nf__in{max-width:1320px}.hhero h1{font-size:90px}.live h2,.worlds h2,.how h2,.forwho h2{font-size:60px}.trust h2{font-size:52px}.hclose h2{font-size:92px}}
 @media (min-width:1920px){.wrap,.nav__in,.nf__in{max-width:1500px}.hhero h1{font-size:106px}.live h2,.worlds h2,.how h2,.forwho h2{font-size:70px}.trust h2{font-size:58px}.hclose h2{font-size:112px}}
 @media (min-width:2500px){.wrap,.nav__in,.nf__in{max-width:1720px}.hhero h1{font-size:126px}.live h2,.worlds h2,.how h2,.forwho h2{font-size:78px}.trust h2{font-size:64px}.hclose h2{font-size:128px}}
+
+/* ── El móvil del hero es jugable ────────────────────────────────────
+   Tocas un plan y la app responde, en vez de mirar una rotación.
+   Es la diferencia entre enseñar la app y dejar que la prueben. */
+.hpcard{cursor:pointer;-webkit-tap-highlight-color:transparent;
+  transition:transform .18s cubic-bezier(.2,.8,.25,1),border-color .18s,box-shadow .18s}
+@media (hover:hover){.hpcard:hover{transform:translateY(-2px);border-color:#C9D8FF}}
+.hpcard:active{transform:scale(.975);transition-duration:.07s}
+.hpcard:focus-visible{outline:2px solid var(--az);outline-offset:2px}
+.hpcard .go{transition:transform .18s cubic-bezier(.2,.8,.25,1)}
+.hpcard:active .go{transform:scale(.94)}
+
+/* el teléfono acusa el toque: un pulso de un fotograma, nada de temblores */
+.hphone.tap{animation:tap .26s cubic-bezier(.2,.8,.25,1)}
+@keyframes tap{40%{transform:scale(.993)}100%{transform:none}}
+
+/* buscando: las tres tarjetas se apagan menos la elegida */
+.pfeed.buscando .hpcard:not(.sel){opacity:.35;transform:scale(.98)}
+.pfeed.buscando .hpcard.sel{border-color:var(--az);box-shadow:var(--shc)}
+.plupa{position:absolute;left:0;right:0;bottom:22px;text-align:center;
+  font-size:var(--t-sm,13px);font-weight:700;color:var(--az);opacity:0;transition:opacity .25s}
+.pfeed.buscando~.plupa,.plupa.on{opacity:1}
+.plupa i{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--az);
+  margin-right:5px;animation:latir 1s infinite}
+@keyframes latir{0%,100%{opacity:.25;transform:scale(.8)}50%{opacity:1;transform:scale(1.15)}}
+
+/* el match entra, no aparece de golpe */
+.pscreen[data-ps="1"].on .av{animation:entrar .42s cubic-bezier(.2,.8,.25,1) backwards}
+.pscreen[data-ps="1"].on .vf{animation:entrar .42s cubic-bezier(.2,.8,.25,1) .12s backwards}
+.pscreen[data-ps="1"].on .pmatch b{animation:entrar .42s cubic-bezier(.2,.8,.25,1) .2s backwards}
+.pscreen[data-ps="2"].on .big{animation:sello .5s cubic-bezier(.2,.8,.25,1) backwards}
+@keyframes entrar{from{opacity:0;transform:translateY(8px) scale(.96)}to{opacity:1;transform:none}}
+@keyframes sello{0%{opacity:0;transform:scale(.6)}60%{transform:scale(1.06)}100%{opacity:1;transform:none}}
+
+/* pista discreta: que se vea que se puede tocar */
+.ptoca{text-align:center;font-size:var(--t-xs,12px);font-weight:700;color:var(--gris);
+  margin-top:10px;transition:opacity .3s}
+.ptoca.off{opacity:0}
+
+@media (prefers-reduced-motion:reduce){
+  .hphone.tap,.pscreen .av,.pscreen .vf,.pscreen .pmatch b,.pscreen .big{animation:none!important}
+  .hpcard,.hpcard .go{transition:none!important}
+  .hpcard:active,.hpcard:hover{transform:none!important}
+  .plupa i{animation:none!important}
+}
 </style>
 </head>
 <body>
@@ -472,12 +517,13 @@ a:focus-visible,button:focus-visible,[role=button]:focus-visible{outline:2.5px s
               <div class="ptop"><span>9:41</span><span>NYXA</span></div>
               <div class="phead"><div class="k">Hoy en tu ciudad</div><h4>Elige un plan</h4></div>
               <div class="pfeed">
-                <div class="hpcard sel"><div class="r1"><div class="pe" data-icon="amanecer"></div><div class="ti"><b>Amanecer en la Albufera</b><span>sáb · 7:00</span></div></div><div class="r2"><span class="who">te apetece</span><span class="go">Quiero ir</span></div></div>
-                <div class="hpcard"><div class="r1"><div class="pe" data-icon="fuego"></div><div class="ti"><b>Hoguera en El Saler</b><span>sáb · 21:00</span></div></div><div class="r2"><span class="who">plan de noche</span><span class="go">Quiero ir</span></div></div>
-                <div class="hpcard"><div class="r1"><div class="pe" data-icon="cafe"></div><div class="ti"><b>Café y charla</b><span>dom · 11:00</span></div></div><div class="r2"><span class="who">sin prisa</span><span class="go">Quiero ir</span></div></div>
+                <div class="hpcard sel" role="button" tabindex="0" data-plan="0"><div class="r1"><div class="pe" data-icon="amanecer"></div><div class="ti"><b>Amanecer en la Albufera</b><span>sáb · 7:00</span></div></div><div class="r2"><span class="who">te apetece</span><span class="go">Quiero ir</span></div></div>
+                <div class="hpcard" role="button" tabindex="0" data-plan="1"><div class="r1"><div class="pe" data-icon="fuego"></div><div class="ti"><b>Hoguera en El Saler</b><span>sáb · 21:00</span></div></div><div class="r2"><span class="who">plan de noche</span><span class="go">Quiero ir</span></div></div>
+                <div class="hpcard" role="button" tabindex="0" data-plan="2"><div class="r1"><div class="pe" data-icon="cafe"></div><div class="ti"><b>Café y charla</b><span>dom · 11:00</span></div></div><div class="r2"><span class="who">sin prisa</span><span class="go">Quiero ir</span></div></div>
               </div>
             </div>
-            <div class="pscreen" data-ps="1">
+            <div class="plupa"><i></i><span>Buscando a alguien…</span></div>
+        <div class="pscreen" data-ps="1">
               <div class="ptop"><span>9:41</span><span>NYXA</span></div>
               <div class="phead"><div class="k">Te decimos con quién</div><h4>Alguien encaja</h4></div>
               <div class="pmatch">
@@ -498,6 +544,7 @@ a:focus-visible,button:focus-visible,[role=button]:focus-visible{outline:2.5px s
             </div>
           </div>
         </div>
+        <p class="ptoca">Toca un plan y mira qué pasa 👆</p>
         <div class="pdots">
           <div class="pdot on" data-d="0"><i></i>Eliges</div>
           <div class="pdot" data-d="1"><i></i>Con quién</div>
@@ -732,7 +779,73 @@ a:focus-visible,button:focus-visible,[role=button]:focus-visible{outline:2.5px s
   // mockup del hero: rota sola por las 3 pantallas, sincronizado con el texto
   var screens=[].slice.call(document.querySelectorAll('.pscreen')),dots=[].slice.call(document.querySelectorAll('.pdot')),subs=[].slice.call(document.querySelectorAll('.flowsub .fs')),cur=0;
   function goTo(i){screens.forEach(function(s){s.classList.toggle('on',+s.dataset.ps===i);});dots.forEach(function(d){d.classList.toggle('on',+d.dataset.d===i);});subs.forEach(function(s){s.classList.toggle('active',+s.dataset.s===i);});}
-  if(screens.length&&!rm){setInterval(function(){cur=(cur+1)%screens.length;goTo(cur);},2600);}
+  
+  // ── El móvil es jugable ───────────────────────────────────────────
+  // Rota solo hasta que alguien toca un plan. A partir de ahí manda él:
+  // la app responde a SU plan, que es lo que convierte mirar en probar.
+  var rota=null, jugando=false;
+  function arrancaRotacion(){ if(rm||rota) return;
+    rota=setInterval(function(){ if(jugando) return; cur=(cur+1)%screens.length; goTo(cur); },2600); }
+  function paraRotacion(){ if(rota){ clearInterval(rota); rota=null; } }
+
+  var PLANES=[
+    {i:0, quiere:'También quiere ir al amanecer', ini:'A', nombre:'Amanecer en la Albufera', cuando:'sábado · 7:00 · en persona', icono:'amanecer'},
+    {i:1, quiere:'También quiere ir a la hoguera', ini:'M', nombre:'Hoguera en El Saler',     cuando:'sábado · 21:00 · en persona', icono:'fuego'},
+    {i:2, quiere:'También le apetece ese café',    ini:'L', nombre:'Café y charla',           cuando:'domingo · 11:00 · en persona', icono:'cafe'}
+  ];
+  var tarjetas=[].slice.call(document.querySelectorAll('.hpcard')),
+      feed=document.querySelector('.pfeed'),
+      lupa=document.querySelector('.plupa'),
+      pista=document.querySelector('.ptoca'),
+      phone=document.querySelector('.hphone'),
+      relojes=[];
+
+  function limpia(){ relojes.forEach(clearTimeout); relojes=[];
+    if(feed) feed.classList.remove('buscando');
+    if(lupa) lupa.classList.remove('on'); }
+
+  function pinta(p){
+    var m=document.querySelector('.pscreen[data-ps="1"]');
+    if(m){ var av=m.querySelector('.av'), b=m.querySelector('.pmatch b');
+      if(av) av.textContent=p.ini; if(b) b.textContent=p.quiere; }
+    var d=document.querySelector('.pscreen[data-ps="2"] .chip');
+    if(d){
+      // el icono se clona de la tarjeta elegida: ya está pintado, así no
+      // dependemos de volver a llamar al pintor de SVG
+      var orig=document.querySelector('.hpcard[data-plan="'+p.i+'"] .pe'),
+          svg=orig?orig.innerHTML:'';
+      d.innerHTML='<span class="chipi" data-icon="'+p.icono+'">'+svg+'</span>'+
+                  p.nombre+'<br><span>'+p.cuando+'</span>';
+    }
+  }
+
+  function juega(i){
+    var p=PLANES[i]; if(!p) return;
+    jugando=true; paraRotacion(); limpia();
+    tarjetas.forEach(function(c,j){ c.classList.toggle('sel', j===i); });
+    if(pista) pista.classList.add('off');
+    if(phone){ phone.classList.remove('tap'); void phone.offsetWidth; phone.classList.add('tap'); }
+    pinta(p);
+    if(rm){ cur=1; goTo(1); relojes.push(setTimeout(function(){ cur=2; goTo(2); jugando=false; },1200)); return; }
+    // 1) buscando, sin salir de la pantalla de planes
+    if(feed) feed.classList.add('buscando');
+    if(lupa) lupa.classList.add('on');
+    cur=0; goTo(0);
+    // 2) alguien encaja
+    relojes.push(setTimeout(function(){ limpia(); cur=1; goTo(1); },1100));
+    // 3) quedáis
+    relojes.push(setTimeout(function(){ cur=2; goTo(2); },2900));
+    // 4) devuelve el mando: vuelve a planes y reanuda
+    relojes.push(setTimeout(function(){ cur=0; goTo(0); jugando=false; arrancaRotacion(); },5600));
+  }
+
+  tarjetas.forEach(function(c,i){
+    c.addEventListener('click',function(){ juega(i); });
+    c.addEventListener('keydown',function(e){
+      if(e.key==='Enter'||e.key===' '){ e.preventDefault(); juega(i); } });
+  });
+  if(screens.length) arrancaRotacion();
+
 
   // FAQ acordeón
   [].slice.call(document.querySelectorAll('.fq')).forEach(function(b){b.addEventListener('click',function(){b.parentElement.classList.toggle('open');});});
