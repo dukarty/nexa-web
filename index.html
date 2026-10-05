@@ -503,9 +503,31 @@ a:focus-visible,button:focus-visible,[role=button]:focus-visible{outline:2.5px s
    como texto encima de texto. Ahora la que sale desaparece en seco y solo
    la que entra se anima: nunca hay dos pantallas visibles. */
 .pscreen{background:linear-gradient(180deg,#fff,var(--soft2));
-  transition:opacity .16s linear,transform .16s linear}
-.pscreen.on{z-index:2;transition:opacity .3s cubic-bezier(.2,.8,.25,1) .04s,transform .3s cubic-bezier(.2,.8,.25,1) .04s}
+  transition:opacity .15s linear,transform .15s linear}
+/* la que entra espera a que la anterior se haya ido del todo (0,15s):
+   así no hay ningún instante con dos pantallas visibles */
+.pscreen.on{z-index:2;transition:opacity .3s cubic-bezier(.2,.8,.25,1) .17s,transform .3s cubic-bezier(.2,.8,.25,1) .17s}
 @media (prefers-reduced-motion:reduce){.pscreen,.pscreen.on{transition:none}}
+
+/* ── Lo primero que se ve en el móvil ────────────────────────────────
+   Había un order:-1 que colocaba el teléfono ANTES del titular: entrabas
+   y lo primero era un mockup, sin saber todavía qué es NYXA. En el móvil
+   el orden tiene que ser el de siempre: qué es -> pruébalo. */
+@media (max-width:860px){
+  .hero-r{order:0!important}
+  .phonewrap{margin-top:8px}
+}
+
+/* ── Las FAQs, cerradas ──────────────────────────────────────────────
+   Abiertas son 297 palabras por pantalla; solo las preguntas, 41. En el
+   móvil se entra con todas cerradas: se ve una lista, no un muro. */
+
+
+/* el contador se partía en tres líneas con el número suelto en medio */
+@media (max-width:640px){
+  .hstat{flex-wrap:wrap;justify-content:center;gap:8px;text-align:center;line-height:1.35}
+  .hstat b{white-space:nowrap}
+}
 </style>
 </head>
 <body>
@@ -915,6 +937,15 @@ a:focus-visible,button:focus-visible,[role=button]:focus-visible{outline:2.5px s
     var b=document.querySelector('.vermas'), l=document.querySelector('.faqlist');
     if(b&&l) b.addEventListener('click',function(){ l.classList.add('todas'); b.remove(); });
   })();
+</script>
+<script>
+/* En el móvil se entra con todas las preguntas cerradas: abiertas son 297
+   palabras en una pantalla; solo los títulos, 41. El texto no se toca. */
+(function(){
+  if(!window.matchMedia('(max-width:640px)').matches) return;
+  var l=document.querySelector('.faqlist'); if(!l) return;
+  [].slice.call(l.querySelectorAll('.fitem')).forEach(function(it){ it.classList.remove('open'); });
+})();
 </script>
 </body>
 </html>
