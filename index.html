@@ -466,6 +466,18 @@ a:focus-visible,button:focus-visible,[role=button]:focus-visible{outline:2.5px s
   .hpcard:active,.hpcard:hover{transform:none!important}
   .plupa i{animation:none!important}
 }
+
+/* ficha de la persona dentro del móvil */
+.pmatch .pnom{font-size:var(--t-lg,19px);font-weight:800;letter-spacing:-.02em;margin-top:12px}
+.pmatch .pzona{font-size:var(--t-xs,12px);color:var(--gris);margin-top:1px}
+.pmatch .pquiere{font-size:var(--t-base,15px);font-weight:700;margin-top:12px;line-height:1.25}
+.ptags{display:flex;flex-wrap:wrap;gap:5px;justify-content:center;margin-top:10px}
+.ptags span{font-size:11px;font-weight:700;color:var(--az);background:var(--soft);
+  padding:4px 9px;border-radius:999px;white-space:nowrap}
+.pscreen[data-ps="1"].on .pnom,.pscreen[data-ps="1"].on .pzona{animation:entrar .42s cubic-bezier(.2,.8,.25,1) .08s backwards}
+.pscreen[data-ps="1"].on .ptags{animation:entrar .42s cubic-bezier(.2,.8,.25,1) .26s backwards}
+@media (prefers-reduced-motion:reduce){
+  .pscreen .pnom,.pscreen .pzona,.pscreen .ptags{animation:none!important}}
 </style>
 </head>
 <body>
@@ -527,11 +539,13 @@ a:focus-visible,button:focus-visible,[role=button]:focus-visible{outline:2.5px s
               <div class="ptop"><span>9:41</span><span>NYXA</span></div>
               <div class="phead"><div class="k">Te decimos con quién</div><h4>Alguien encaja</h4></div>
               <div class="pmatch">
-                <div class="av">A</div>
-                <span class="vf"><span class="vfi" data-icon="verificado"></span>Perfil verificado</span>
-                <b>También quiere ir al amanecer</b>
-                <span>Gente cerca con tus mismas ganas. Sin escribir a desconocidos.</span>
-              </div>
+          <div class="av">M</div>
+          <b class="pnom">Marta, 30</b>
+          <span class="pzona">El Cabañal · Valencia</span>
+          <span class="vf"><span class="vfi" data-icon="verificado"></span>Perfil verificado</span>
+          <b class="pquiere">También quiere ver el amanecer</b>
+          <div class="ptags"><span>madrugar</span><span>naturaleza</span><span>fotos</span></div>
+        </div>
             </div>
             <div class="pscreen" data-ps="2">
               <div class="ptop"><span>9:41</span><span>NYXA</span></div>
@@ -754,7 +768,7 @@ a:focus-visible,button:focus-visible,[role=button]:focus-visible{outline:2.5px s
   var rm=matchMedia('(prefers-reduced-motion:reduce)').matches;
 
   // set de iconos SVG (line, stroke=currentColor) usados en esta página — sustituyen los emojis de la UI
-  var ICONS={"amanecer":"<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.9\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M12 2v6M5.6 10.6 4.2 9.2M18.4 10.6l1.4-1.4M2 18h2M20 18h2M3 22h18M16 18a4 4 0 0 0-8 0M9 5l3-3 3 3\"/></svg>","fuego":"<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.9\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.4-.5-2-1-3-1-2.1-.2-4 2-6 .5 2.5 2 4.9 4 6.5s3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.2.4-2.3 1-3a2.5 2.5 0 0 0 2.5 2.5Z\"/></svg>","cafe":"<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.9\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M17 8h1a4 4 0 1 1 0 8h-1\"/><path d=\"M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z\"/><path d=\"M6 2v2M10 2v2M14 2v2\"/></svg>","musica":"<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.9\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M9 18V5l12-2v13\"/><circle cx=\"6\" cy=\"18\" r=\"3\"/><circle cx=\"18\" cy=\"16\" r=\"3\"/></svg>","ruta":"<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.9\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M8 3 4 7l4 4M4 7h11a4 4 0 0 1 4 4v6M20 21l-4-4-4 4\"/></svg>","cena":"<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.9\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M3 2v7a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2V2M5 2v20M21 15V2a5 5 0 0 0-5 5v6a2 2 0 0 0 2 2h3Zm0 0v7\"/></svg>","comida":"<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.9\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M3 2v7a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2V2M5 2v20M21 15V2a5 5 0 0 0-5 5v6a2 2 0 0 0 2 2h3Zm0 0v7\"/></svg>","vino":"<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.9\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M8 22h8M12 15v7M7 3h10l-1 7a4 4 0 0 1-8 0z\"/></svg>","arte":"<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.9\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"13.5\" cy=\"6.5\" r=\"1.5\"/><circle cx=\"17.5\" cy=\"10.5\" r=\"1.5\"/><circle cx=\"8.5\" cy=\"7.5\" r=\"1.5\"/><circle cx=\"6.5\" cy=\"12.5\" r=\"1.5\"/><path d=\"M12 2a10 10 0 0 0 0 20c1.1 0 2-.9 2-2 0-.5-.2-1-.5-1.3-.3-.4-.5-.8-.5-1.2a2 2 0 0 1 2-2h2.3A4.2 4.2 0 0 0 22 11c0-5-4.5-9-10-9Z\"/></svg>","correr":"<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.9\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"17\" cy=\"5\" r=\"2\"/><path d=\"M14 8l-2 3 3 2v6M12 11 8 9l-3 3M8 9l2-3\"/></svg>","escalada":"<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.9\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"13\" cy=\"5\" r=\"2\"/><path d=\"M12 8v6l-3 6M12 12l4 2 3-2M9 14l-4 1\"/></svg>","cine":"<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.9\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><rect x=\"2\" y=\"6\" width=\"20\" height=\"12\" rx=\"2\"/><path d=\"M2 10h20M7 6v12M17 6v12M4 6l2-3M20 6l-2-3M12 6l-2-3M12 6l2-3\"/></svg>","montana":"<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.9\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"m8 3 4 8 5-5 5 14H2L8 3z\"/></svg>","idea":"<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.9\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.3 1 2.1V17h6v-.2c0-.8.4-1.6 1-2.1A7 7 0 0 0 12 2Z\"/></svg>","brujula":"<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.9\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"12\" cy=\"12\" r=\"9\"/><path d=\"m16 8-2 6-6 2 2-6z\"/></svg>","manos":"<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.9\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M11 12 8 9a2 2 0 0 0-3 3l4 4a4 4 0 0 0 6 0M13 12l3-3a2 2 0 0 1 3 3l-4 4M8 6l2 2M16 6l-2 2\"/></svg>","caja":"<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.9\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"m21 8-9-5-9 5 9 5 9-5zM3 8v8l9 5 9-5V8M12 13v8\"/></svg>","movil":"<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.9\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><rect x=\"7\" y=\"2\" width=\"10\" height=\"20\" rx=\"2\"/><path d=\"M11 18h2\"/></svg>","sofa":"<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.9\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M4 11V8a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v3M2 13a2 2 0 0 1 2-2 2 2 0 0 1 2 2v3h12v-3a2 2 0 0 1 4 0v5a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1zM6 19v2M18 19v2\"/></svg>","persona":"<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.9\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"12\" cy=\"8\" r=\"4\"/><path d=\"M4 21a8 8 0 0 1 16 0\"/></svg>","mano":"<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.9\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M18 11V6a2 2 0 0 0-4 0M14 10V4a2 2 0 0 0-4 0v2M10 10.5V6a2 2 0 0 0-4 0v8a8 8 0 0 0 8 8h1a8 8 0 0 0 8-8v-1a2 2 0 0 0-4 0\"/></svg>","puerta":"<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.9\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M13 4h3a2 2 0 0 1 2 2v14M2 20h20M13 20V4l-6 2v14M9 12v.01\"/></svg>","verificado":"<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.9\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M9 12l2 2 4-4\"/><path d=\"M12 2 4 5v6c0 5 8 11 8 11s8-6 8-11V5z\"/></svg>","check":"<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.9\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M20 6 9 17l-5-5\"/></svg>","luna":"<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.9\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M12 3a9 9 0 1 0 9 9c0-.5 0-.9-.1-1.4A6 6 0 0 1 12.4 3H12Z\"/></svg>","balon":"<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.9\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"12\" cy=\"12\" r=\"9\"/><path d=\"m12 7 3 2.2-1.1 3.5h-3.8L9 9.2 12 7zM12 7V3M15 9.2l3.6-1.2M13.9 12.7l2.2 3.1M10.1 12.7l-2.2 3.1M9 9.2 5.4 8\"/></svg>"};
+  var ICONS={"canas":"<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.9\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M17 11h1a3 3 0 0 1 0 6h-1\"/><path d=\"M9 12v6M13 12v6\"/><path d=\"M5 8h10v10a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2Z\"/><path d=\"M5 8a2.5 2.5 0 0 1 0-5c.7 0 1.5.5 2.5.5S9.3 3 10 3s1.3.5 2.5.5S14.3 3 15 3a2.5 2.5 0 0 1 0 5\"/></svg>","bici":"<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.9\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"5.5\" cy=\"17.5\" r=\"3.5\"/><circle cx=\"18.5\" cy=\"17.5\" r=\"3.5\"/><path d=\"M15 6a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z\"/><path d=\"m12 17.5-2.5-6 4-2.5 1.5 3h3\"/></svg>","playa":"<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.9\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M2 6c.6.5 1.2 1 2.5 1C7 7 7 5 9.5 5s2.5 2 5 2 2.5-2 5-2c1.3 0 1.9.5 2.5 1M2 12c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2s2.5 2 5 2 2.5-2 5-2c1.3 0 1.9.5 2.5 1M2 18c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2s2.5 2 5 2 2.5-2 5-2c1.3 0 1.9.5 2.5 1\"/></svg>","brunch":"<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.9\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M3 2v7a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2V2M5 2v20M21 15V2a5 5 0 0 0-5 5v6a2 2 0 0 0 2 2h3Zm0 0v7\"/></svg>","amanecer":"<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.9\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M12 2v6M5.6 10.6 4.2 9.2M18.4 10.6l1.4-1.4M2 18h2M20 18h2M3 22h18M16 18a4 4 0 0 0-8 0M9 5l3-3 3 3\"/></svg>","fuego":"<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.9\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.4-.5-2-1-3-1-2.1-.2-4 2-6 .5 2.5 2 4.9 4 6.5s3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.2.4-2.3 1-3a2.5 2.5 0 0 0 2.5 2.5Z\"/></svg>","cafe":"<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.9\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M17 8h1a4 4 0 1 1 0 8h-1\"/><path d=\"M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z\"/><path d=\"M6 2v2M10 2v2M14 2v2\"/></svg>","musica":"<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.9\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M9 18V5l12-2v13\"/><circle cx=\"6\" cy=\"18\" r=\"3\"/><circle cx=\"18\" cy=\"16\" r=\"3\"/></svg>","ruta":"<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.9\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M8 3 4 7l4 4M4 7h11a4 4 0 0 1 4 4v6M20 21l-4-4-4 4\"/></svg>","cena":"<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.9\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M3 2v7a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2V2M5 2v20M21 15V2a5 5 0 0 0-5 5v6a2 2 0 0 0 2 2h3Zm0 0v7\"/></svg>","comida":"<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.9\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M3 2v7a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2V2M5 2v20M21 15V2a5 5 0 0 0-5 5v6a2 2 0 0 0 2 2h3Zm0 0v7\"/></svg>","vino":"<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.9\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M8 22h8M12 15v7M7 3h10l-1 7a4 4 0 0 1-8 0z\"/></svg>","arte":"<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.9\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"13.5\" cy=\"6.5\" r=\"1.5\"/><circle cx=\"17.5\" cy=\"10.5\" r=\"1.5\"/><circle cx=\"8.5\" cy=\"7.5\" r=\"1.5\"/><circle cx=\"6.5\" cy=\"12.5\" r=\"1.5\"/><path d=\"M12 2a10 10 0 0 0 0 20c1.1 0 2-.9 2-2 0-.5-.2-1-.5-1.3-.3-.4-.5-.8-.5-1.2a2 2 0 0 1 2-2h2.3A4.2 4.2 0 0 0 22 11c0-5-4.5-9-10-9Z\"/></svg>","correr":"<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.9\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"17\" cy=\"5\" r=\"2\"/><path d=\"M14 8l-2 3 3 2v6M12 11 8 9l-3 3M8 9l2-3\"/></svg>","escalada":"<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.9\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"13\" cy=\"5\" r=\"2\"/><path d=\"M12 8v6l-3 6M12 12l4 2 3-2M9 14l-4 1\"/></svg>","cine":"<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.9\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><rect x=\"2\" y=\"6\" width=\"20\" height=\"12\" rx=\"2\"/><path d=\"M2 10h20M7 6v12M17 6v12M4 6l2-3M20 6l-2-3M12 6l-2-3M12 6l2-3\"/></svg>","montana":"<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.9\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"m8 3 4 8 5-5 5 14H2L8 3z\"/></svg>","idea":"<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.9\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.3 1 2.1V17h6v-.2c0-.8.4-1.6 1-2.1A7 7 0 0 0 12 2Z\"/></svg>","brujula":"<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.9\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"12\" cy=\"12\" r=\"9\"/><path d=\"m16 8-2 6-6 2 2-6z\"/></svg>","manos":"<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.9\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M11 12 8 9a2 2 0 0 0-3 3l4 4a4 4 0 0 0 6 0M13 12l3-3a2 2 0 0 1 3 3l-4 4M8 6l2 2M16 6l-2 2\"/></svg>","caja":"<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.9\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"m21 8-9-5-9 5 9 5 9-5zM3 8v8l9 5 9-5V8M12 13v8\"/></svg>","movil":"<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.9\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><rect x=\"7\" y=\"2\" width=\"10\" height=\"20\" rx=\"2\"/><path d=\"M11 18h2\"/></svg>","sofa":"<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.9\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M4 11V8a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v3M2 13a2 2 0 0 1 2-2 2 2 0 0 1 2 2v3h12v-3a2 2 0 0 1 4 0v5a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1zM6 19v2M18 19v2\"/></svg>","persona":"<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.9\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"12\" cy=\"8\" r=\"4\"/><path d=\"M4 21a8 8 0 0 1 16 0\"/></svg>","mano":"<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.9\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M18 11V6a2 2 0 0 0-4 0M14 10V4a2 2 0 0 0-4 0v2M10 10.5V6a2 2 0 0 0-4 0v8a8 8 0 0 0 8 8h1a8 8 0 0 0 8-8v-1a2 2 0 0 0-4 0\"/></svg>","puerta":"<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.9\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M13 4h3a2 2 0 0 1 2 2v14M2 20h20M13 20V4l-6 2v14M9 12v.01\"/></svg>","verificado":"<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.9\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M9 12l2 2 4-4\"/><path d=\"M12 2 4 5v6c0 5 8 11 8 11s8-6 8-11V5z\"/></svg>","check":"<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.9\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M20 6 9 17l-5-5\"/></svg>","luna":"<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.9\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M12 3a9 9 0 1 0 9 9c0-.5 0-.9-.1-1.4A6 6 0 0 1 12.4 3H12Z\"/></svg>","balon":"<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.9\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"12\" cy=\"12\" r=\"9\"/><path d=\"m12 7 3 2.2-1.1 3.5h-3.8L9 9.2 12 7zM12 7V3M15 9.2l3.6-1.2M13.9 12.7l2.2 3.1M10.1 12.7l-2.2 3.1M9 9.2 5.4 8\"/></svg>"};
   function fillIcons(){document.querySelectorAll('[data-icon]').forEach(function(el){var k=el.getAttribute('data-icon');if(ICONS[k])el.innerHTML=ICONS[k];});}
   fillIcons();
   // burger (nav real del sitio)
@@ -789,11 +803,35 @@ a:focus-visible,button:focus-visible,[role=button]:focus-visible{outline:2.5px s
   function paraRotacion(){ if(rota){ clearInterval(rota); rota=null; } }
 
   var PLANES=[
-    {i:0, quiere:'También quiere ir al amanecer', ini:'A', nombre:'Amanecer en la Albufera', cuando:'sábado · 7:00 · en persona', icono:'amanecer'},
-    {i:1, quiere:'También quiere ir a la hoguera', ini:'M', nombre:'Hoguera en El Saler',     cuando:'sábado · 21:00 · en persona', icono:'fuego'},
-    {i:2, quiere:'También le apetece ese café',    ini:'L', nombre:'Café y charla',           cuando:'domingo · 11:00 · en persona', icono:'cafe'}
+    {ic:'amanecer', nombre:'Amanecer en la Albufera', cuando:'sáb · 7:00',  cuandoL:'sábado · 7:00 · en persona',  nota:'te apetece',   quiere:'También quiere ver el amanecer', p:{n:'Marta, 30', z:'El Cabañal', t:['madrugar','naturaleza','fotos']}},
+    {ic:'canas',    nombre:'Cañas en Ruzafa',         cuando:'vie · 20:00', cuandoL:'viernes · 20:00 · en persona',nota:'plan de tarde',quiere:'También quiere ir de cañas',     p:{n:'Laura, 27', z:'Ruzafa',    t:['música','terraceo','running']}},
+    {ic:'cafe',     nombre:'Café y charla',           cuando:'dom · 11:00', cuandoL:'domingo · 11:00 · en persona',nota:'sin prisa',    quiere:'También le apetece ese café',     p:{n:'Nuria, 26', z:'Russafa',   t:['charlas largas','cine','planes tranqui']}},
+    {ic:'bici',     nombre:'Ruta por el Turia',       cuando:'sáb · 9:00',  cuandoL:'sábado · 9:00 · en persona',  nota:'al aire libre',quiere:'También quiere salir en bici',    p:{n:'David, 29', z:'Benimaclet',t:['bici','montaña','café']}},
+    {ic:'playa',    nombre:'Playa en la Malvarrosa',  cuando:'dom · 12:00', cuandoL:'domingo · 12:00 · en persona',nota:'plan de sol',  quiere:'También quiere ir a la playa',    p:{n:'Pablo, 25', z:'Malvarrosa',t:['surf','voley','sol']}},
+    {ic:'musica',   nombre:'Un concierto',            cuando:'jue · 21:30', cuandoL:'jueves · 21:30 · en persona', nota:'plan de noche',quiere:'También quiere ir al concierto',  p:{n:'Sara, 24',  z:'El Carmen', t:['indie','arte','noche']}},
+    {ic:'brunch',   nombre:'Brunch de domingo',       cuando:'dom · 11:30', cuandoL:'domingo · 11:30 · en persona',nota:'sin prisa',    quiere:'También quiere ir a un brunch',   p:{n:'Elena, 28', z:'Colón',     t:['brunch','mercadillos','domingos lentos']}}
   ];
-  var tarjetas=[].slice.call(document.querySelectorAll('.hpcard')),
+  // de los 7 planes se enseñan 3 cada vez; al terminar un ciclo entran otros.
+  // Así se ve Valencia entera sin amontonar nada en la pantalla.
+  var ventana=0;
+  function pintaTarjetas(){
+    var feed=document.querySelector('.pfeed'); if(!feed) return;
+    feed.innerHTML='';
+    for(var k=0;k<3;k++){
+      var p=PLANES[(ventana+k)%PLANES.length], idx=(ventana+k)%PLANES.length;
+      var c=document.createElement('div');
+      c.className='hpcard'+(k===0?' sel':''); c.setAttribute('role','button');
+      c.setAttribute('tabindex','0'); c.setAttribute('data-plan',idx);
+      c.innerHTML='<div class="r1"><div class="pe" data-icon="'+p.ic+'"></div>'+
+        '<div class="ti"><b>'+p.nombre+'</b><span>'+p.cuando+'</span></div></div>'+
+        '<div class="r2"><span class="who">'+p.nota+'</span><span class="go">Quiero ir</span></div>';
+      feed.appendChild(c);
+    }
+    if(typeof fillIcons==='function') fillIcons();
+    enlaza();
+  }
+
+  var tarjetas=[],
       feed=document.querySelector('.pfeed'),
       lupa=document.querySelector('.plupa'),
       pista=document.querySelector('.ptoca'),
@@ -806,23 +844,29 @@ a:focus-visible,button:focus-visible,[role=button]:focus-visible{outline:2.5px s
 
   function pinta(p){
     var m=document.querySelector('.pscreen[data-ps="1"]');
-    if(m){ var av=m.querySelector('.av'), b=m.querySelector('.pmatch b');
-      if(av) av.textContent=p.ini; if(b) b.textContent=p.quiere; }
+    if(m){
+      var av=m.querySelector('.av'), nom=m.querySelector('.pnom'),
+          zona=m.querySelector('.pzona'), q=m.querySelector('.pquiere'),
+          tags=m.querySelector('.ptags');
+      if(av)   av.textContent=p.p.n.charAt(0);
+      if(nom)  nom.textContent=p.p.n;
+      if(zona) zona.textContent=p.p.z+' · Valencia';
+      if(q)    q.textContent=p.quiere;
+      if(tags) tags.innerHTML=p.p.t.map(function(x){return '<span>'+x+'</span>';}).join('');
+    }
     var d=document.querySelector('.pscreen[data-ps="2"] .chip');
     if(d){
-      // el icono se clona de la tarjeta elegida: ya está pintado, así no
-      // dependemos de volver a llamar al pintor de SVG
-      var orig=document.querySelector('.hpcard[data-plan="'+p.i+'"] .pe'),
+      var orig=document.querySelector('.hpcard[data-plan="'+p.idx+'"] .pe'),
           svg=orig?orig.innerHTML:'';
-      d.innerHTML='<span class="chipi" data-icon="'+p.icono+'">'+svg+'</span>'+
-                  p.nombre+'<br><span>'+p.cuando+'</span>';
+      d.innerHTML='<span class="chipi" data-icon="'+p.ic+'">'+svg+'</span>'+
+                  p.nombre+'<br><span>'+p.cuandoL+'</span>';
     }
   }
 
   function juega(i){
-    var p=PLANES[i]; if(!p) return;
+    var p=PLANES[i]; if(!p) return; p.idx=i;
     jugando=true; paraRotacion(); limpia();
-    tarjetas.forEach(function(c,j){ c.classList.toggle('sel', j===i); });
+    tarjetas.forEach(function(c){ c.classList.toggle('sel', +c.dataset.plan===i); });
     if(pista) pista.classList.add('off');
     if(phone){ phone.classList.remove('tap'); void phone.offsetWidth; phone.classList.add('tap'); }
     pinta(p);
@@ -836,14 +880,21 @@ a:focus-visible,button:focus-visible,[role=button]:focus-visible{outline:2.5px s
     // 3) quedáis
     relojes.push(setTimeout(function(){ cur=2; goTo(2); },2900));
     // 4) devuelve el mando: vuelve a planes y reanuda
-    relojes.push(setTimeout(function(){ cur=0; goTo(0); jugando=false; arrancaRotacion(); },5600));
+    relojes.push(setTimeout(function(){
+      ventana=(ventana+3)%PLANES.length; pintaTarjetas();
+      cur=0; goTo(0); jugando=false; arrancaRotacion(); },5600));
   }
 
-  tarjetas.forEach(function(c,i){
-    c.addEventListener('click',function(){ juega(i); });
-    c.addEventListener('keydown',function(e){
-      if(e.key==='Enter'||e.key===' '){ e.preventDefault(); juega(i); } });
-  });
+  function enlaza(){
+    tarjetas=[].slice.call(document.querySelectorAll('.hpcard'));
+    tarjetas.forEach(function(c){
+      var i=+c.dataset.plan;
+      c.addEventListener('click',function(){ juega(i); });
+      c.addEventListener('keydown',function(e){
+        if(e.key==='Enter'||e.key===' '){ e.preventDefault(); juega(i); } });
+    });
+  }
+  pintaTarjetas();
   if(screens.length) arrancaRotacion();
 
 
