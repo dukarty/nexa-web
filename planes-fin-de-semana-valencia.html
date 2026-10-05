@@ -264,12 +264,36 @@ a:focus-visible,button:focus-visible,summary:focus-visible,[role=button]:focus-v
             "@type": "Answer",
             "text": "De todo: mercados y playa de día, cañas y conciertos de noche, y escapadas si el finde da para más. Con NYXA eliges el momento y te empareja según lo que te apetezca."
           }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Qué se puede hacer un fin de semana en Valencia?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "De sábado por la mañana a domingo por la tarde da para mucho: Ruzafa, El Carmen, el Jardín del Turia, la Malvarrosa, El Saler y la Albufera. La diferencia entre un finde bueno y uno perdido casi nunca es el plan — es tener con quién."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Qué apps hay para conocer gente en Valencia que no sean de citas?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "NYXA es una de ellas. A diferencia de Tinder o Bumble aquí no se liga ni se desliza, y a diferencia de Meetup no vas a un evento de desconocidos: propones un plan concreto a una persona concreta, y la conversación solo se abre si acepta. Es gratis."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cuánto cuesta?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Nada. Descargar y usar NYXA es gratis, 0 €. Las personas nunca pagan por conocerse. Por ahora está solo en iOS, en la App Store."
+          }
         }
       ]
     }
   ]
 }
-</script>
+  </script>
 <style>/*VLOG*/
 .vlog{display:grid;gap:clamp(44px,7vw,88px);margin-top:52px}
 .vblock{display:grid;grid-template-columns:1.02fr .98fr;gap:clamp(24px,4vw,56px);align-items:center}
@@ -396,7 +420,22 @@ body{padding-bottom:64px}
     </div>
   </section>
 
-  <section class="cta-sec">
+  
+  <section class="xs xs--faq">
+    <div class="in">
+      <p class="xs__k">Dudas</p>
+      <h2 class="xs__t">Lo que todo el mundo pregunta sobre Valencia.</h2>
+      <div class="fqlist">
+        <div class="fqi"><h3>¿Qué hacer este finde en Valencia con poco dinero?</h3><p>Muchos de los mejores planes son gratis: playa o río, parques, miradores al atardecer, mercadillos y rutas de senderismo cerca de Valencia. La compañía es lo que los hace especiales, no el precio.</p></div>
+        <div class="fqi"><h3>¿Y si no tengo con quién hacer planes el finde?</h3><p>Para eso está NYXA: dices qué te apetece hacer este finde en Valencia y la app te dice con quién —gente con las mismas ganas—. Le llega el plan ya hecho; si dice que sí, quedáis. Gratis en la App Store.</p></div>
+        <div class="fqi"><h3>¿Planes de finde de día o de noche?</h3><p>De todo: mercados y playa de día, cañas y conciertos de noche, y escapadas si el finde da para más. Con NYXA eliges el momento y te empareja según lo que te apetezca.</p></div>
+        <div class="fqi"><h3>¿Qué se puede hacer un fin de semana en Valencia?</h3><p>De sábado por la mañana a domingo por la tarde da para mucho: Ruzafa, El Carmen, el Jardín del Turia, la Malvarrosa, El Saler y la Albufera. La diferencia entre un finde bueno y uno perdido casi nunca es el plan — es tener con quién.</p></div>
+        <div class="fqi"><h3>¿Qué apps hay para conocer gente en Valencia que no sean de citas?</h3><p>NYXA es una de ellas. A diferencia de Tinder o Bumble aquí no se liga ni se desliza, y a diferencia de Meetup no vas a un evento de desconocidos: propones un plan concreto a una persona concreta, y la conversación solo se abre si acepta. Es gratis.</p></div>
+        <div class="fqi"><h3>¿Cuánto cuesta?</h3><p>Nada. Descargar y usar NYXA es gratis, 0 €. Las personas nunca pagan por conocerse. Por ahora está solo en iOS, en la App Store.</p></div>
+      </div>
+    </div>
+  </section>
+<section class="cta-sec">
     <div class="in">
       <p class="xs__k">Empieza hoy</p>
       <h2>Que este finde en Valencia pase algo.</h2>
@@ -477,6 +516,15 @@ body{padding-bottom:64px}
 @media (min-width:1500px){.phero h1{font-size:92px}.xs__t{font-size:52px}.cta-sec h2{font-size:46px}.dl__t{font-size:52px}.in,.nf__in,.dl__in{max-width:1320px}}
 @media (min-width:1920px){.phero h1{font-size:106px}.xs__t{font-size:60px}.cta-sec h2{font-size:52px}.dl__t{font-size:60px}.in,.nf__in,.dl__in{max-width:1500px}}
 @media (min-width:2500px){.phero h1{font-size:126px}.xs__t{font-size:68px}.cta-sec h2{font-size:60px}.dl__t{font-size:68px}.in,.nf__in,.dl__in{max-width:1720px}}
+
+/* FAQs visibles: en texto plano a proposito. Google exige que lo que se
+   marca con FAQPage este visible, y las IA leen antes el texto que un
+   acordeon que depende de JS. */
+.xs--faq .fqlist{max-width:760px;margin:28px auto 0}
+.xs--faq .fqi{padding:20px 0;border-bottom:1px solid var(--line,#E9E5DD)}
+.xs--faq .fqi:last-child{border-bottom:0}
+.xs--faq .fqi h3{font-size:var(--t-md,17px);margin:0 0 8px;line-height:1.35}
+.xs--faq .fqi p{font-size:var(--t-base,15px);color:var(--ink2,#3A4152);margin:0;max-width:68ch;text-wrap:pretty}
 </style>
 <footer class="nf">
   <div class="nf__in">

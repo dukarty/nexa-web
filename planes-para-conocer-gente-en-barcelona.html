@@ -265,12 +265,36 @@ a:focus-visible,button:focus-visible,summary:focus-visible,[role=button]:focus-v
             "@type": "Answer",
             "text": "Los grupos suelen morir sin que nadie dé el paso. Una app como NYXA da el primer paso por ti: propone el plan y a la persona que encaja, sin tener que escribir a desconocidos."
           }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Dónde se queda en Barcelona?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Donde ya queda la gente de aquí: Gràcia, El Born, la Barceloneta, Montjuïc, el Poble-sec y la Ciutadella. Siempre en sitios públicos."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Qué apps hay para conocer gente en Barcelona que no sean de citas?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "NYXA es una de ellas. A diferencia de Tinder o Bumble aquí no se liga ni se desliza, y a diferencia de Meetup no vas a un evento de desconocidos: propones un plan concreto a una persona concreta, y la conversación solo se abre si acepta. Es gratis."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "¿Cuánto cuesta?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Nada. Descargar y usar NYXA es gratis, 0 €. Las personas nunca pagan por conocerse. Por ahora está solo en iOS, en la App Store."
+          }
         }
       ]
     }
   ]
 }
-</script>
+  </script>
 <style>/*HEROLIVE*/
 .hlive{display:inline-flex;align-items:center;gap:8px;margin-top:22px;padding:7px 15px;border-radius:999px;border:1px solid var(--line);background:#fff;font-size:var(--t-sm, 13px);font-weight:800;color:var(--ink2);box-shadow:0 1px 2px rgba(11,13,20,.05)}
 .hlive i{width:8px;height:8px;border-radius:50%;background:#0FB981;box-shadow:0 0 0 3px rgba(15,185,129,.18)}
@@ -401,7 +425,22 @@ body{padding-bottom:64px}
     </div>
   </section>
 
-  <section class="cta-sec">
+  
+  <section class="xs xs--faq">
+    <div class="in">
+      <p class="xs__k">Dudas</p>
+      <h2 class="xs__t">Lo que todo el mundo pregunta sobre Barcelona.</h2>
+      <div class="fqlist">
+        <div class="fqi"><h3>¿Dónde se conoce gente en Barcelona?</h3><p>En planes donde la gente ya está abierta a hablar: grupos de senderismo o running, clases, mercados, conciertos pequeños y quedadas de barrio. La clave no es el sitio, es ir con la actitud —y con un plan concreto—.</p></div>
+        <div class="fqi"><h3>¿Y si quiero hacer estos planes pero no tengo con quién?</h3><p>Para eso está NYXA: dices qué te apetece vivir en Barcelona y la app te dice con quién —gente de Barcelona con las mismas ganas—. Le llega el plan ya hecho; si dice que sí, quedáis en persona. Gratis en la App Store.</p></div>
+        <div class="fqi"><h3>¿Es mejor una app o un grupo de WhatsApp?</h3><p>Los grupos suelen morir sin que nadie dé el paso. Una app como NYXA da el primer paso por ti: propone el plan y a la persona que encaja, sin tener que escribir a desconocidos.</p></div>
+        <div class="fqi"><h3>¿Dónde se queda en Barcelona?</h3><p>Donde ya queda la gente de aquí: Gràcia, El Born, la Barceloneta, Montjuïc, el Poble-sec y la Ciutadella. Siempre en sitios públicos.</p></div>
+        <div class="fqi"><h3>¿Qué apps hay para conocer gente en Barcelona que no sean de citas?</h3><p>NYXA es una de ellas. A diferencia de Tinder o Bumble aquí no se liga ni se desliza, y a diferencia de Meetup no vas a un evento de desconocidos: propones un plan concreto a una persona concreta, y la conversación solo se abre si acepta. Es gratis.</p></div>
+        <div class="fqi"><h3>¿Cuánto cuesta?</h3><p>Nada. Descargar y usar NYXA es gratis, 0 €. Las personas nunca pagan por conocerse. Por ahora está solo en iOS, en la App Store.</p></div>
+      </div>
+    </div>
+  </section>
+<section class="cta-sec">
     <div class="in">
       <p class="xs__k">Empieza hoy</p>
       <h2>Que esta semana pase algo en Barcelona.</h2>
@@ -482,6 +521,15 @@ body{padding-bottom:64px}
 @media (min-width:1500px){.phero h1{font-size:92px}.xs__t{font-size:52px}.cta-sec h2{font-size:46px}.dl__t{font-size:52px}.in,.nf__in,.dl__in{max-width:1320px}}
 @media (min-width:1920px){.phero h1{font-size:106px}.xs__t{font-size:60px}.cta-sec h2{font-size:52px}.dl__t{font-size:60px}.in,.nf__in,.dl__in{max-width:1500px}}
 @media (min-width:2500px){.phero h1{font-size:126px}.xs__t{font-size:68px}.cta-sec h2{font-size:60px}.dl__t{font-size:68px}.in,.nf__in,.dl__in{max-width:1720px}}
+
+/* FAQs visibles: en texto plano a proposito. Google exige que lo que se
+   marca con FAQPage este visible, y las IA leen antes el texto que un
+   acordeon que depende de JS. */
+.xs--faq .fqlist{max-width:760px;margin:28px auto 0}
+.xs--faq .fqi{padding:20px 0;border-bottom:1px solid var(--line,#E9E5DD)}
+.xs--faq .fqi:last-child{border-bottom:0}
+.xs--faq .fqi h3{font-size:var(--t-md,17px);margin:0 0 8px;line-height:1.35}
+.xs--faq .fqi p{font-size:var(--t-base,15px);color:var(--ink2,#3A4152);margin:0;max-width:68ch;text-wrap:pretty}
 </style>
 <footer class="nf">
   <div class="nf__in">
