@@ -466,6 +466,46 @@ a:focus-visible,button:focus-visible,[role=button]:focus-visible{outline:2.5px s
   .hpcard:active,.hpcard:hover{transform:none!important}
   .plupa i{animation:none!important}
 }
+
+/* ── Que el móvil respire ─────────────────────────────────────────────
+   Medido en un iPhone (375x812) sobre la home publicada: 12,7 pantallas
+   de scroll. Dos causas, ninguna de contenido:
+
+   1. El relleno vertical era de escritorio: 92px arriba y abajo en cada
+      sección. En una pantalla de 812px eso es casi un cuarto de pantalla
+      de aire por sección, y hay nueve. Solo en relleno se iban ~2
+      pantallas enteras.
+   2. Las FAQs pasaron de 6 a 11 preguntas al escribirlas para las IA.
+      En escritorio no se nota; en móvil son 541 palabras — el 40% del
+      texto de toda la home — y 1,8 pantallas seguidas.
+
+   Esto no quita ni una palabra: el texto sigue entero en el HTML para
+   Google y para las IA. Solo deja de caer todo de golpe. */
+@media (max-width:640px){
+  section{padding-top:56px!important;padding-bottom:56px!important}
+  .hclose{padding-top:64px!important;padding-bottom:64px!important}
+  .band{padding-top:40px!important;padding-bottom:40px!important}
+
+  /* FAQs: se ven 5, el resto a un toque */
+  .faqlist .fitem:nth-child(n+6){display:none}
+  .faqlist.todas .fitem{display:block}
+  .vermas{display:block;width:100%;margin:18px auto 0;padding:13px 18px;
+    border:1px solid var(--linea);border-radius:999px;background:#fff;
+    font:inherit;font-size:var(--t-sm,13px);font-weight:800;color:var(--ink);
+    cursor:pointer;transition:transform .18s cubic-bezier(.2,.8,.25,1)}
+  .vermas:active{transform:scale(.98)}
+  .faqlist.todas+.vermas{display:none}
+}
+@media (min-width:641px){.vermas{display:none}}
+
+/* El cambio de pantalla del móvil se cruzaba: durante medio segundo se
+   veían dos a la vez (una al 30% y otra al 70%), y en móvil eso se lee
+   como texto encima de texto. Ahora la que sale desaparece en seco y solo
+   la que entra se anima: nunca hay dos pantallas visibles. */
+.pscreen{background:linear-gradient(180deg,#fff,var(--soft2));
+  transition:opacity .16s linear,transform .16s linear}
+.pscreen.on{z-index:2;transition:opacity .3s cubic-bezier(.2,.8,.25,1) .04s,transform .3s cubic-bezier(.2,.8,.25,1) .04s}
+@media (prefers-reduced-motion:reduce){.pscreen,.pscreen.on{transition:none}}
 </style>
 </head>
 <body>
@@ -582,6 +622,7 @@ a:focus-visible,button:focus-visible,[role=button]:focus-visible{outline:2.5px s
       <div class="world w5 reveal d1"><div class="e" data-icon="luna"></div><b>Noche</b><span>copas, música, baile</span></div>
       <div class="world w6 reveal d2"><div class="e" data-icon="cafe"></div><b>Tranqui</b><span>café, charla, juegos</span></div>
     </div>
+      <button class="vermas" type="button">Ver las 6 preguntas que faltan</button>
   </div>
 </section>
 
@@ -868,6 +909,12 @@ a:focus-visible,button:focus-visible,[role=button]:focus-visible{outline:2.5px s
   function tick(){fetchStats().then(render).catch(function(){if(state.total===null)render(FALLBACK);});}
   if(document.querySelector('[data-cnt]')){tick();setInterval(tick,20000);}
 })();
+
+  // "ver todas" solo existe en móvil; el texto nunca se quita del HTML
+  (function(){
+    var b=document.querySelector('.vermas'), l=document.querySelector('.faqlist');
+    if(b&&l) b.addEventListener('click',function(){ l.classList.add('todas'); b.remove(); });
+  })();
 </script>
 </body>
 </html>
