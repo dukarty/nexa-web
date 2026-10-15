@@ -24,11 +24,14 @@
     caso, nunca lista): features-panel-y-pagina-venta.md.
 
   QUÉ ES DE EJEMPLO AQUÍ DENTRO:
-  Todos los números (negocio "Sputnik", rocódromo en Ruzafa, Valencia — plan
-  de 99 €) son un EJEMPLO ficticio y plausible. Hoy NYXA tiene 0 clientes B2B
-  cobrando de verdad (Stripe live bloqueado por SL+IBAN, piloto Ruzafa sin
-  empezar). Conectar esto a datos reales (Supabase / API del panel) es tarea
-  del CTO, en fase posterior — buscar "EJEMPLO" en el JS.
+  Los números de la serie histórica (HIST, REPETICION, FACTURAS) son un EJEMPLO
+  ficticio. Para un negocio REAL, NADA que identifique al negocio (nombre,
+  categoría, zona, página, ajustes, consentimiento) sale con un valor de ejemplo:
+  o se puebla con sus datos reales (panel_datos / setCuenta), o queda en VACÍO
+  HONESTO / placeholder genérico ("Tu negocio", "Tu categoría · tu zona",
+  "nyxa.app/e/tu-negocio"). Hoy NYXA tiene 0 clientes B2B cobrando de verdad
+  (Stripe live bloqueado por SL+IBAN). Conectar esto a datos reales es tarea del
+  CTO, en fase posterior — buscar "EJEMPLO" en el JS.
 
   UN HECHO = UN NÚMERO: los datos de septiembre y el resto de la serie
   histórica se leen SIEMPRE del mismo array (HIST, más abajo) en cada vista
@@ -600,25 +603,45 @@ td b{color:var(--ink);font-weight:700}
     </button>
     <span class="planbadge" id="planBadge">Publicas gratis · comisión</span>
 
-    <p class="grp">Tu negocio</p>
     <button class="navi on" data-v="resumen">
       <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg></span>
       Resumen
     </button>
+
+    <p class="grp">Reservas</p>
+    <button class="navi" data-v="quien-viene">
+      <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><circle cx="17" cy="9" r="2.2"/><path d="M15.5 14.3c2.3.5 4 2.5 4 4.9"/></svg></span>
+      Quién viene
+    </button>
+
+    <p class="grp">Rendimiento</p>
+    <button class="navi" data-v="demanda">
+      <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/></svg></span>
+      Demanda
+    </button>
+    <button class="navi" data-v="repeticion" data-min-nav="2">
+      <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12a8 8 0 0 1 13.9-5.4M20 4.5V9h-4.5"/><path d="M20 12a8 8 0 0 1-13.9 5.4M4 19.5V15h4.5"/></svg></span>
+      Repetición
+      <span class="lock"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></span>
+    </button>
+
+    <p class="grp">Planes</p>
     <button class="navi" data-v="tus-planes">
       <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M8 2v4M16 2v4M3 10h18M12 14v4M10 16h4"/></svg></span>
       Tus planes
     </button>
 
-    <p class="grp">Cuenta</p>
+    <p class="grp">Finanzas</p>
+    <button class="navi" data-v="facturacion">
+      <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 10h18"/></svg></span>
+      Liquidaciones
+    </button>
+
+    <p class="grp">Tu negocio</p>
     <button class="navi" data-v="pagina" data-min-nav="1">
       <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18"/></svg></span>
       Tu página
       <span class="lock"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></span>
-    </button>
-    <button class="navi" data-v="facturacion">
-      <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 10h18"/></svg></span>
-      Liquidaciones
     </button>
     <button class="navi" data-v="verificacion">
       <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.5l7.5 3v5.5c0 4.6-3.2 8-7.5 9-4.3-1-7.5-4.4-7.5-9V5.5z"/><path d="M9 12l2 2 4-4"/></svg></span>
@@ -683,6 +706,25 @@ td b{color:var(--ink);font-weight:700}
         <p class="hero-summary__p" id="heroP">Aún no hay datos de tu negocio. Publica un plan con su precio y, en cuanto alguien reserve, verás aquí tus plazas vendidas. El dinero y la liquidación llegan cuando se active el cobro.</p>
       </div>
 
+      <div style="display:flex;gap:10px;flex-wrap:wrap;margin:-2px 0 20px">
+        <button class="btn btn--gh btn--sm" data-go="quien-viene">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><circle cx="17" cy="9" r="2.2"/><path d="M15.5 14.3c2.3.5 4 2.5 4 4.9"/></svg>
+          Quién viene
+        </button>
+        <button class="btn btn--gh btn--sm" data-go="demanda">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/></svg>
+          La demanda que se escapa
+        </button>
+        <button class="btn btn--gh btn--sm" data-go="repeticion">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12a8 8 0 0 1 13.9-5.4M20 4.5V9h-4.5"/><path d="M20 12a8 8 0 0 1-13.9 5.4M4 19.5V15h4.5"/></svg>
+          Repetición
+        </button>
+        <button class="btn btn--gh btn--sm" data-go="tus-planes">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M8 2v4M16 2v4M3 10h18M12 14v4M10 16h4"/></svg>
+          Tus planes
+        </button>
+      </div>
+
       <div class="card" id="resProximasCard">
         <div class="card__h"><b>Tus próximas fechas</b><small>cuánta gente viene y a qué hora — nunca quién</small></div>
         <div class="rows" id="resProximasRows"></div>
@@ -720,12 +762,12 @@ td b{color:var(--ink);font-weight:700}
             <div class="pm-section">
               <p class="pm-section__t">Qué plan es</p>
               <div class="form">
-                <div class="field"><label>Título del plan</label><input id="tpTitulo" maxlength="80" placeholder="Escalada + cañas para novatos"></div>
+                <div class="field"><label>Título del plan</label><input id="tpTitulo" maxlength="80" placeholder="El título de tu plan"></div>
                 <div class="f2">
                   <div class="field"><label>Categoría</label>
                     <select id="tpCategoria"><option value="">Cargando…</option></select>
                   </div>
-                  <div class="field"><label>Dónde</label><input id="tpLugar" maxlength="60" placeholder="Ruzafa, Valencia"></div>
+                  <div class="field"><label>Dónde</label><input id="tpLugar" maxlength="60" placeholder="Tu zona y ciudad"></div>
                 </div>
                 <div class="f2">
                   <div class="field"><label>Fecha y hora</label><input id="tpFecha" type="datetime-local"></div>
@@ -887,12 +929,7 @@ td b{color:var(--ink);font-weight:700}
       <div class="gated" data-min="1" data-msg="Disponible con Premium: dónde vive la gente que se te queda fuera, en agregado.">
         <div class="gated__body card" id="zonaCard">
           <div class="card__h"><b>Por zona</b><small>dónde vive la gente que se te queda fuera</small></div>
-          <div class="rows" id="zonaRows">
-            <div class="rowi"><div class="rowi__t"><b>Ruzafa</b></div><div class="rowi__n tab">21</div></div>
-            <div class="rowi"><div class="rowi__t"><b>Camins al Grau</b></div><div class="rowi__n tab">11</div></div>
-            <div class="rowi"><div class="rowi__t"><b>Benimaclet</b></div><div class="rowi__n tab">6</div></div>
-            <div class="rowi"><div class="rowi__t"><b>Otros barrios</b></div><div class="rowi__n tab">5</div></div>
-          </div>
+          <div class="rows" id="zonaRows"></div>
         </div>
       </div>
 
@@ -1026,9 +1063,9 @@ td b{color:var(--ink);font-weight:700}
               <div class="pm-section">
                 <p class="pm-section__t">3 · Cuéntanos quién eres</p>
                 <div class="form">
-                  <div class="field"><label>Nombre</label><input id="pmName" value="Sputnik" maxlength="30"></div>
-                  <div class="field"><label>Categoría y zona</label><input id="pmCat" value="Rocódromo · Ruzafa, Valencia" maxlength="48"></div>
-                  <div class="field"><label>Qué vive la gente contigo (1-2 líneas)</label><textarea id="pmDesc" maxlength="140">Un rocódromo donde se hace comunidad. Escalar, cañas y conocer gente nueva — sobre todo los jueves.</textarea></div>
+                  <div class="field"><label>Nombre</label><input id="pmName" value="" placeholder="Tu negocio" maxlength="30"></div>
+                  <div class="field"><label>Categoría y zona</label><input id="pmCat" value="" placeholder="Tu categoría · tu zona" maxlength="48"></div>
+                  <div class="field"><label>Qué vive la gente contigo (1-2 líneas)</label><textarea id="pmDesc" maxlength="140" placeholder="Cuéntale a la gente qué vive contigo — 1 o 2 líneas"></textarea></div>
                 </div>
               </div>
 
@@ -1048,7 +1085,7 @@ td b{color:var(--ink);font-weight:700}
                 <p class="pm-section__t">Tu enlace, solo tuyo</p>
                 <div class="pm-link">
                   <span class="pm-link__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M10 14a5 5 0 0 0 7.07 0l2.83-2.83a5 5 0 0 0-7.07-7.07L11.5 5.5"/><path d="M14 10a5 5 0 0 0-7.07 0L4.1 12.83a5 5 0 0 0 7.07 7.07L12.5 18.5"/></svg></span>
-                  <span class="pm-link__text pmLinkText">nyxa.app/e/sputnik</span>
+                  <span class="pm-link__text pmLinkText">nyxa.app/e/tu-negocio</span>
                 </div>
                 <div style="display:flex;gap:10px;margin-top:12px">
                   <button class="btn btn--gh" id="pmCopyLink" style="flex:1;justify-content:center">Copiar enlace</button>
@@ -1072,7 +1109,7 @@ td b{color:var(--ink);font-weight:700}
               <div class="device">
                 <div class="device__bar">
                   <span class="device__dots"><i></i><i></i><i></i></span>
-                  <span class="device__url" id="pmUrlBar">nyxa.app/e/sputnik</span>
+                  <span class="device__url" id="pmUrlBar">nyxa.app/e/tu-negocio</span>
                 </div>
                 <div class="device__screen" id="pmScreen"></div>
               </div>
@@ -1111,10 +1148,10 @@ td b{color:var(--ink);font-weight:700}
           <div class="card card--accent-top" style="border-color:var(--line)" id="exclCard">
             <div style="width:38px;height:38px;border-radius:11px;background:var(--morado-soft);color:var(--morado);display:grid;place-items:center;margin-bottom:14px"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M12 3.5l2.6 5.3 5.9.8-4.3 4.1 1 5.8L12 16.9 6.8 19.6l1-5.8-4.3-4.1 5.9-.8z"/></svg></div>
             <div class="card__h"><b>Exclusiva en tu categoría</b><small>revisable cada año</small></div>
-            <p style="font-size:1.4rem;font-weight:800;letter-spacing:-.03em">Eres el único rocódromo con planes patrocinados en Ruzafa</p>
+            <p style="font-size:1.4rem;font-weight:800;letter-spacing:-.03em">Eres el único de tu categoría con planes patrocinados en tu zona</p>
             <div class="rows" style="margin-top:8px">
-              <div class="rowi"><div class="rowi__t"><b>Categoría</b></div><span>Rocódromo</span></div>
-              <div class="rowi"><div class="rowi__t"><b>Zona</b></div><span>Ruzafa, Valencia</span></div>
+              <div class="rowi"><div class="rowi__t"><b>Categoría</b></div><span id="exclCategoria">Tu categoría</span></div>
+              <div class="rowi"><div class="rowi__t"><b>Zona</b></div><span id="exclZona">Tu zona</span></div>
               <div class="rowi"><div class="rowi__t"><b>Desde</b></div><span>1 de agosto de 2026</span></div>
               <div class="rowi"><div class="rowi__t"><b>Próxima revisión</b></div><span>agosto de 2027</span></div>
             </div>
@@ -1140,7 +1177,7 @@ td b{color:var(--ink);font-weight:700}
             <p style="color:var(--ink2);font-size:.87rem;margin-bottom:12px">Elige una asistencia confirmada. Le pediremos permiso, para ese caso, antes de compartir nada.</p>
             <div class="rows" id="buzonLista">
               <div class="rowi">
-                <div class="rowi__t"><b>Martes 24 sep · 18:00</b><small>una de las 8 plazas de "Escalada + cañas"</small></div>
+                <div class="rowi__t"><b>Martes 24 sep · 18:00</b><small>una de las 8 plazas de ese plan</small></div>
                 <button class="btn btn--gh btn--sm" data-buzon-btn>Pedir permiso para contactar</button>
               </div>
               <div class="rowi">
@@ -1161,7 +1198,7 @@ td b{color:var(--ink);font-weight:700}
                 <thead><tr><th>Caso</th><th>Pedido</th><th>Estado</th><th>Vigente</th></tr></thead>
                 <tbody>
                   <tr><td>Sábado 7 sep · "Sesión libre"</td><td>08 sep 2026</td><td><span class="pill pill--ok">Autorizado</span></td><td>Sí</td></tr>
-                  <tr><td>Martes 3 sep · "Escalada + cañas"</td><td>04 sep 2026</td><td><span class="pill pill--rojo">Rechazado</span></td><td>No aplica</td></tr>
+                  <tr><td>Martes 3 sep · un plan tuyo</td><td>04 sep 2026</td><td><span class="pill pill--rojo">Rechazado</span></td><td>No aplica</td></tr>
                   <tr><td>Jueves 21 ago · "Sesión libre"</td><td>22 ago 2026</td><td><span class="pill pill--ok">Autorizado</span></td><td class="tab" id="buzonRevocado">Revocado el 2 oct</td></tr>
                 </tbody>
               </table>
@@ -1170,7 +1207,7 @@ td b{color:var(--ink);font-weight:700}
 
           <div class="guard">
             <p class="guard__h">Cómo funciona, de verdad</p>
-            <p>Le preguntamos, para este caso: <b>«¿Autorizas a compartir tu nombre y teléfono con Sputnik para gestionar tu plan?»</b>. Puede decir que no. Nunca es retroactivo a asistencias pasadas sin volver a pedirlo, y si borra su cuenta o revoca, pierdes el acceso al dato. <b>Nunca en bloque, nunca una lista</b> — un caso, un permiso.</p>
+            <p>Le preguntamos, para este caso: <b>«¿Autorizas a compartir tu nombre y teléfono con <span id="buzonNegName">tu negocio</span> para gestionar tu plan?»</b>. Puede decir que no. Nunca es retroactivo a asistencias pasadas sin volver a pedirlo, y si borra su cuenta o revoca, pierdes el acceso al dato. <b>Nunca en bloque, nunca una lista</b> — un caso, un permiso.</p>
           </div>
         </div>
       </div>
@@ -1356,12 +1393,12 @@ td b{color:var(--ink);font-weight:700}
         <div class="card">
           <div class="card__h"><b>Datos de empresa</b></div>
           <div class="rows">
-            <div class="rowi"><div class="rowi__t"><b>Nombre</b></div><span id="ajusteNombre">Sputnik</span></div>
-            <div class="rowi"><div class="rowi__t"><b>Categoría</b></div><span id="ajusteCategoria">Rocódromo</span></div>
-            <div class="rowi"><div class="rowi__t"><b>Ciudad / zona</b></div><span id="ajusteCiudad">Valencia · Ruzafa</span></div>
-            <div class="rowi"><div class="rowi__t"><b>CIF</b></div><span id="ajusteCif">B-12345678</span></div>
-            <div class="rowi"><div class="rowi__t"><b>Dirección fiscal</b></div><span id="ajusteDir">C/ Cádiz 24, 46006 València</span></div>
-            <div class="rowi"><div class="rowi__t"><b>Email</b></div><span id="ajusteEmail">hola@sputnik.es</span></div>
+            <div class="rowi"><div class="rowi__t"><b>Nombre</b></div><span id="ajusteNombre">—</span></div>
+            <div class="rowi"><div class="rowi__t"><b>Categoría</b></div><span id="ajusteCategoria">—</span></div>
+            <div class="rowi"><div class="rowi__t"><b>Ciudad / zona</b></div><span id="ajusteCiudad">—</span></div>
+            <div class="rowi"><div class="rowi__t"><b>CIF</b></div><span id="ajusteCif">—</span></div>
+            <div class="rowi"><div class="rowi__t"><b>Dirección fiscal</b></div><span id="ajusteDir">—</span></div>
+            <div class="rowi"><div class="rowi__t"><b>Email</b></div><span id="ajusteEmail">—</span></div>
           </div>
           <button class="btn btn--gh" data-go="pagina" style="margin-top:16px;width:100%;justify-content:center">Editar en «Tu página»</button>
         </div>
@@ -1484,7 +1521,8 @@ td b{color:var(--ink);font-weight:700}
    MAQUETA v3 — JS de demostración, sin backend real. Hereda el JS de v2 casi
    sin tocar (mismo modelo, mismas fuentes de datos) y añade el bloque
    PAGEMAKER para la vista "Tu página" (plantillas + preview en vivo).
-   Todo lo que hay bajo DATA_EJEMPLO es ficticio (negocio "Sputnik"). La
+   Para un negocio real estos campos se pueblan con sus datos (setCuenta →
+   poblarPagina) o quedan con placeholder genérico — nunca un negocio de ejemplo. La
    conexión a datos reales de producción es tarea del CTO en fase posterior —
    hoy 0 clientes B2B están cobrando de verdad. Un mismo hecho (p. ej. "43 se
    quedaron fuera en septiembre, ≈2.150 €") aparece siempre con el mismo
@@ -1529,7 +1567,7 @@ const FACTURAS = [
   {fecha:"01 may 2026", concepto:"Plan 15 € · mayo", importe:15.00}
 ];
 
-let rankActual = 2; // ejemplo: Sputnik está en el plan de 99 €
+let rankActual = 2; // nivel por defecto; lo fija el servidor en aplicarPanelDatos()
 const RANK_ACTUAL_REAL = 2; // el plan REAL contratado (el simulador de arriba solo cambia la vista)
 
 function money(n){ return (+n).toLocaleString("es-ES",{minimumFractionDigits:2,maximumFractionDigits:2})+" €"; }
@@ -1852,7 +1890,7 @@ document.getElementById("btnExportCsv").addEventListener("click",()=>{
   const csv = filas.map(r=>r.join(";")).join("\n");
   const blob = new Blob([csv],{type:"text/csv;charset=utf-8"});
   const a=document.createElement("a");
-  a.href=URL.createObjectURL(blob); a.download="sputnik-aviso-de-demanda.csv"; a.click();
+  a.href=URL.createObjectURL(blob); a.download=((typeof pmSlug==="function"&&pmSlug())||"tu-negocio")+"-aviso-de-demanda.csv"; a.click();
   toast("Descargado. En producción sale de la misma tabla que ves arriba — nunca de un cálculo aparte.");
 });
 // Export de facturas y cambio de tarjeta: RETIRADOS en FASE A (no hay cuota ni tarjeta en
@@ -2032,9 +2070,9 @@ pintarFacturasTabla();
 const PM = {
   tpl:"minimal",
   color:"#2f66ff",
-  name:"Sputnik",
-  cat:"Rocódromo · Ruzafa, Valencia",
-  desc:"Un rocódromo donde se hace comunidad. Escalar, cañas y conocer gente nueva — sobre todo los jueves.",
+  name:"Tu negocio",
+  cat:"Tu categoría · tu zona",
+  desc:"",
   logo:null,
   cover:null,
   soldOut:false
@@ -2246,7 +2284,8 @@ if(pmGuardarBtn) pmGuardarBtn.addEventListener('click', async ()=>{
 // Rellenar "Tu página" con los datos reales del negocio (se llama desde setCuenta).
 function poblarPagina(acc){
   if(!acc) return;
-  if(acc.nombre){ PM.name=acc.nombre; const i=document.getElementById('pmName'); if(i) i.value=acc.nombre; }
+  if(acc.nombre){ PM.name=acc.nombre; const i=document.getElementById('pmName'); if(i) i.value=acc.nombre;
+    const bn=document.getElementById('buzonNegName'); if(bn) bn.textContent=acc.nombre; }
   if(acc.categoria){ PM.cat=acc.categoria; const i=document.getElementById('pmCat'); if(i) i.value=acc.categoria; }
   if(acc.descripcion){ PM.desc=acc.descripcion; const i=document.getElementById('pmDesc'); if(i) i.value=acc.descripcion; }
   const e=acc.escaparate||{};
@@ -2541,7 +2580,7 @@ function aplicarDatosRealesAlPanel(d){
   const eur=n=>Math.round(n).toLocaleString('es-ES')+" €";
 
   // 1 · Neutralizar las fuentes de ejemplo (alimentan gráficos, tablas y avisos).
-  //    Un negocio real no tiene histórico de "Sputnik": se vacía y se repinta en vacío.
+  //    Un negocio real no hereda el histórico de ejemplo: se vacía y se repinta en vacío.
   HIST.length=0; REPETICION.length=0; FACTURAS.length=0;
   LIVE.interesados=0; LIVE.entraron=0; LIVE.esperando=0;
   if(typeof NOTIFS!=="undefined"){ NOTIFS.length=0; try{ pintarNotifs(); }catch(e){} }
@@ -2664,6 +2703,7 @@ function aplicarDatosRealesAlPanel(d){
 
   // 9 · AJUSTES — datos de empresa (solo lo que el servidor confirma; el resto, honesto)
   _setTxt("ajusteNombre", nombre);
+  _setTxt("buzonNegName", nombre);   // consentimiento del buzón, con el nombre real (o "tu negocio")
   _setTxt("ajusteCategoria", (d.negocio&&d.negocio.categoria)||"—");
   _setTxt("ajusteCiudad", (d.negocio&&d.negocio.ciudad)||"—");
   const _acc=(typeof ACC!=="undefined"&&ACC)?ACC:null;
@@ -2773,6 +2813,7 @@ function vaciarPanelPorDefecto(){
   _setTxt("ajusteNombre", SIN); _setTxt("ajusteCategoria", SIN); _setTxt("ajusteCiudad", SIN);
   _setTxt("ajusteCif", SIN); _setTxt("ajusteDir", SIN); _setTxt("ajusteEmail", SIN);
   _setTxt("ajusteClienteDesde", SIN); _setTxt("bizSub", SIN);
+  _setTxt("buzonNegName", "tu negocio");   // sin sesión: consentimiento con placeholder genérico
   { const bz=document.querySelector(".biz__i b"); if(bz) bz.textContent="Tu negocio"; }
   { const av=document.querySelector(".biz__a"); if(av) av.textContent="N"; }
 }
