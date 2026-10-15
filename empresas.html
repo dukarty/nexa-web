@@ -259,6 +259,9 @@ footer{background:#080A12;color:#98A0B4;padding:64px 0 40px}
 .tnav__l a:hover,.tnav__l a[aria-current="page"]{color:#0A0C11}
 .tnav__r{display:flex;align-items:center;gap:12px}
 .tnav__cta{background:#2f66ff;color:#fff;border:0;cursor:pointer;font-family:inherit;font-size:14px;font-weight:700;padding:9px 18px;border-radius:999px;white-space:nowrap}
+.tnav__login{font-size:14px;font-weight:700;color:#0A0C11;white-space:nowrap;text-decoration:none}
+.tnav__login:hover{color:#2f66ff}
+@media(max-width:860px){.tnav__login{display:none}}
 .tnav__burger{display:none;width:42px;height:42px;border:1px solid #E7E4DC;border-radius:12px;background:#fff;cursor:pointer;position:relative;padding:0}
 .tnav__burger span{position:absolute;left:11px;right:11px;height:2px;background:#0A0C11;border-radius:2px;transition:transform .2s,opacity .2s,background .2s}
 .tnav__burger span:nth-child(1){top:14px}.tnav__burger span:nth-child(2){top:20px}.tnav__burger span:nth-child(3){top:26px}
@@ -285,7 +288,8 @@ footer{background:#080A12;color:#98A0B4;padding:64px 0 40px}
     <a href="momentos.html">Momentos</a>
   </nav>
   <div class="tnav__r">
-    <a class="tnav__cta" href="panel.html">Entrar</a>
+    <a class="tnav__login" href="panel.html">Iniciar sesión</a>
+    <a class="tnav__cta" href="#publicar">Registrar mi negocio</a>
     <button class="tnav__burger" aria-label="Abrir menú" aria-expanded="false" aria-controls="tmenu"><span></span><span></span><span></span></button>
   </div>
 </div></header>
@@ -296,8 +300,8 @@ footer{background:#080A12;color:#98A0B4;padding:64px 0 40px}
   <a href="manifiesto.html">Quiénes somos</a>
   <a href="empresas.html" aria-current="page">Empresas</a>
   <a href="momentos.html">Momentos</a>
-  <a class="tmenu__cta" href="panel.html" style="background:#fff;color:#0A0C11;border:1px solid #E7E4DC">Entrar</a>
-  <a class="tmenu__cta" href="#publicar">Solicita una llamada</a>
+  <a class="tmenu__cta" href="panel.html" style="background:#fff;color:#0A0C11;border:1px solid #E7E4DC">Iniciar sesión</a>
+  <a class="tmenu__cta" href="#publicar">Registrar mi negocio</a>
 </div>
 <script>
 (function(){var b=document.querySelector(".tnav__burger"),m=document.getElementById("tmenu"),nav=document.querySelector(".tnav");

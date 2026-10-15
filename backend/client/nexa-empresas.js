@@ -353,6 +353,10 @@
           p_access: p.access || "Abierto a todos",
           p_lat: p.lat != null ? p.lat : null,
           p_lng: p.lng != null ? p.lng : null,
+          // Precio por plaza en CÉNTIMOS (modelo de comisión). Opcional: si no se manda,
+          // la RPC lo deja NULL (plan sin precio, como antes). El servidor valida el rango.
+          p_price_cents: p.price_cents != null ? parseInt(p.price_cents, 10) : null,
+          p_currency: p.currency || "EUR",
         };
         const { data, error } = await sb.rpc("crear_plan_negocio", args);
         if (error) return { ok: false, error: error.message || "No se pudo publicar el plan." };

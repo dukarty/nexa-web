@@ -598,7 +598,7 @@ td b{color:var(--ink);font-weight:700}
       <div class="biz__a">N</div>
       <div class="biz__i"><b>Tu negocio</b><small id="bizSub">—</small></div>
     </button>
-    <span class="planbadge" id="planBadge">Plan · 99 €/mes</span>
+    <span class="planbadge" id="planBadge">Publicas gratis · comisión</span>
 
     <p class="grp">Tu negocio</p>
     <button class="navi on" data-v="resumen">
@@ -648,7 +648,7 @@ td b{color:var(--ink);font-weight:700}
     </button>
     <button class="navi" data-v="facturacion">
       <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 10h18"/></svg></span>
-      Facturación
+      Liquidaciones
     </button>
     <button class="navi" data-v="planes">
       <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 20h3v-6H4v6zM10.5 20h3V9h-3v11zM17 20h3V4h-3v16z"/></svg></span>
@@ -701,26 +701,26 @@ td b{color:var(--ink);font-weight:700}
 
       <div class="hero-summary">
         <div class="hero-summary__top">
-          <p class="hero-summary__k" id="heroMesK">Octubre, mes en curso · plan de 99 €/mes</p>
-          <span class="pill pill--ok" id="heroPill">▲ septiembre cerró con el cupo lleno (18 de 18)</span>
+          <p class="hero-summary__k" id="heroMesK">Octubre, mes en curso · publicas gratis · comisión 20%</p>
+          <span class="pill pill--ok" id="heroPill">▲ septiembre: 48 plazas vendidas, 1.840 € ingresados</span>
         </div>
         <div class="hero-summary__g" id="heroGrid">
-          <div><div class="hero-summary__n tab"><span id="resEntraron">13</span><small style="font-size:.52em;font-weight:700;color:var(--ink3)">&nbsp;/ <span id="resIncluido">18</span></small></div><div class="hero-summary__l">clientes que han entrado ya este mes</div></div>
-          <div><div class="hero-summary__n tab accent">≈650 €</div><div class="hero-summary__l">le han entrado ya a tu caja</div></div>
-          <div><div class="hero-summary__n tab">9,1×</div><div class="hero-summary__l">lo que pagas de cuota, si llenas el cupo</div></div>
-          <div><div class="hero-summary__n tab">5,50 €</div><div class="hero-summary__l">te sale cada cliente en tu plan</div></div>
+          <div><div class="hero-summary__n tab"><span id="resEntraron">42</span><small style="font-size:.52em;font-weight:700;color:var(--ink3)">&nbsp;/ <span id="resIncluido">48</span></small></div><div class="hero-summary__l">plazas vendidas este mes</div></div>
+          <div><div class="hero-summary__n tab accent">1.840 €</div><div class="hero-summary__l">ingresado en plazas vendidas</div></div>
+          <div><div class="hero-summary__n tab">1.564 €</div><div class="hero-summary__l">tu próxima liquidación</div></div>
+          <div><div class="hero-summary__n tab">28</div><div class="hero-summary__l">pidieron entrar y no cupieron</div></div>
         </div>
-        <p class="hero-summary__p" id="heroP">Ningún plan de NYXA baja de 6 veces lo que cuesta — y mejora cuanto más subes. <b>Quedan 5 plazas de tu cupo antes de fin de mes.</b></p>
+        <p class="hero-summary__p" id="heroP">Publicar es gratis. Solo cobramos comisión sobre lo que se reserva. <b>Te quedan 6 plazas por vender este mes.</b></p>
       </div>
 
-      <div class="nudge" id="nudgeResumen" data-nudge-hide-min="3">
+      <div class="nudge" id="nudgeResumen" data-nudge-hide-min="99">
         <div class="nudge__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/></svg></div>
         <div class="nudge__body">
-          <b>Este mes se quedaron fuera 43 personas (≈2.150 €).</b>
-          <span>Con el plan de 199 € te caben 45, a 4,42 € cada uno en vez de 5,50 €.</span>
+          <b>Este mes 28 personas pidieron entrar y no cupieron.</b>
+          <span>Abre más plazas o pon otra fecha: tienes demanda para otra convocatoria.</span>
           <small>También te lo mandamos por correo el día 1 — lo veas o no aquí.</small>
         </div>
-        <div class="nudge__cta"><button class="btn btn--sm" data-go="planes">Ver si te compensa subir</button></div>
+        <div class="nudge__cta"><button class="btn btn--sm" data-go="demanda">Ver el aviso de demanda</button></div>
       </div>
 
       <p class="grp" style="padding-left:0">Las 4 cosas que ves aquí — nada más</p>
@@ -729,21 +729,21 @@ td b{color:var(--ink);font-weight:700}
           <div class="fourc__i"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg></div>
           <b>Quién viene esta semana</b>
           <p>Número y hora, en tiempo real. Nunca datos privados de nadie.</p>
-          <div class="fourc__big" id="fourQuienViene">13<small>de 18 este mes</small></div>
+          <div class="fourc__big" id="fourQuienViene">42<small>plazas vendidas este mes</small></div>
         </button>
         <button class="fourc" data-go="demanda">
           <div class="fourc__i"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 19h16M8 19V9M13 19V5M18 19v12"/></svg></div>
           <b>El aviso de demanda</b>
           <p>Cuántos quisieron entrar y cuánto ganarías con más plazas.</p>
-          <div class="fourc__big" id="fourDemanda">43<small>se quedaron fuera en septiembre</small></div>
+          <div class="fourc__big" id="fourDemanda">28<small>pidieron entrar y no cupieron</small></div>
         </button>
         <button class="fourc" data-go="facturacion">
           <div class="fourc__i"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 10h18"/></svg></div>
-          <b>La factura, antes del cargo</b>
-          <p>Siempre la ves primero. Nada de sorpresas el día 1.</p>
-          <div class="fourc__big" id="fourFactura">129 €<small>se te cargará el 1 de noviembre</small></div>
+          <b>Tu liquidación</b>
+          <p>Lo cobrado, nuestra comisión, lo que te transferimos y cuándo.</p>
+          <div class="fourc__big" id="fourFactura">1.564 €<small>tu próxima liquidación</small></div>
         </button>
-        <button class="fourc gated" data-go="exclusividad" data-min="3" data-msg="Se activa en el plan de 199 €: un solo referente por zona y categoría.">
+        <button class="fourc gated" data-go="exclusividad" data-min="3" data-msg="La exclusividad de categoría y zona es a medida, desde 490 €/mes.">
           <div class="gated__body">
             <div class="fourc__i"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M12 3.5l2.6 5.3 5.9.8-4.3 4.1 1 5.8L12 16.9 6.8 19.6l1-5.8-4.3-4.1 5.9-.8z"/></svg></div>
             <b>Exclusiva en tu categoría</b>
@@ -755,31 +755,31 @@ td b{color:var(--ink);font-weight:700}
 
       <div class="grid2">
         <div class="card chartcard" id="evoCard">
-          <div class="card__h"><b>Cómo ha ido, mes a mes</b><small>clientes que entraron y qué parte de tu demanda pudiste atender</small></div>
-          <div class="legend"><span><i style="background:var(--az)"></i>Clientes que entraron</span><span><i style="background:var(--verde);border-radius:99px"></i>% de tu demanda que cupo</span></div>
+          <div class="card__h"><b>Cómo ha ido, mes a mes</b><small>plazas vendidas y qué parte de tu demanda pudiste atender</small></div>
+          <div class="legend"><span><i style="background:var(--az)"></i>Plazas vendidas</span><span><i style="background:var(--verde);border-radius:99px"></i>% de tu demanda que cupo</span></div>
           <div id="evoChart"></div>
           <p class="charthint">Pasa el ratón por una barra para ver el detalle del mes.</p>
         </div>
 
         <div class="card">
-          <div class="card__h"><b>Tu plan ahora mismo</b><small>sin permanencia, se queda solo si te trae clientes</small></div>
+          <div class="card__h"><b>Tu cuenta ahora mismo</b><small>publicas gratis, solo pagas comisión cuando se reserva</small></div>
           <div class="rows">
-            <div class="rowi"><div class="rowi__t"><b>Plan</b></div><span class="pill pill--az" id="planAhoraPrecio">99 €/mes</span></div>
-            <div class="rowi"><div class="rowi__t"><b>Próximo cargo</b><small>se ve antes de cobrarse</small></div><span class="tab" style="font-weight:800" id="planAhoraCargo">129,00 €</span></div>
+            <div class="rowi"><div class="rowi__t"><b>Cómo cobramos</b></div><span class="pill pill--az" id="planAhoraPrecio">Gratis · comisión 20%</span></div>
+            <div class="rowi"><div class="rowi__t"><b>Tu próxima liquidación</b><small>lo tuyo tras descontar comisión</small></div><span class="tab" style="font-weight:800" id="planAhoraCargo">1.564,00 €</span></div>
             <div class="rowi"><div class="rowi__t"><b>Estado</b></div><span class="pill pill--ok" id="planAhoraEstado">Activo</span></div>
-            <div class="rowi" id="planAhoraCupoRow"><div class="rowi__t"><b>Se te queda corto el cupo</b><small id="planAhoraCupoSub">43 se quedaron fuera en septiembre</small></div><span class="pill pill--amb" id="planAhoraCupo">Sí</span></div>
+            <div class="rowi" id="planAhoraCupoRow"><div class="rowi__t"><b>Se te queda corta la oferta</b><small id="planAhoraCupoSub">28 se quedaron fuera este mes</small></div><span class="pill pill--amb" id="planAhoraCupo">Sí</span></div>
           </div>
-          <button class="btn" style="width:100%;justify-content:center;margin-top:16px" data-go="planes">Ver si te compensa subir de plan</button>
+          <button class="btn" style="width:100%;justify-content:center;margin-top:16px" data-go="demanda">Ver la demanda que se escapa</button>
         </div>
       </div>
 
       <div class="guard">
         <p class="guard__h">Lo que nunca vas a poder hacer aquí</p>
-        <p><b>El dinero nunca compra encaje.</b> No pagas por aparecer antes, no pujas por posición y no eliges a quién se le propone tu plan — pagar te da más clientes afines, nunca coloca tu negocio delante de alguien a quien no le encaja. Y las personas no se dan nunca: ni nombre, ni correo, ni teléfono, en ningún plan.</p>
+        <p><b>El dinero nunca compra encaje.</b> No pagas por aparecer antes, no pujas por posición y no eliges a quién se le propone tu plan — pagar te da más presencia entre quienes ya encajan, nunca coloca tu negocio delante de alguien a quien no le encaja. Y las personas no se dan nunca: ni nombre, ni correo, ni teléfono, en ningún plan.</p>
       </div>
 
       <p style="color:var(--ink3);font-size:.8rem;text-align:center;margin-top:6px">
-        El mes que no te llevemos a nadie, no se te cobra la cuota. Solo se activa cuando fallamos nosotros.
+        Publicar es gratis y no hay cuota obligatoria. Solo cobramos comisión sobre lo que se reserva: si no se llena, no pagas nada.
       </p>
     </section>
 
@@ -825,7 +825,16 @@ td b{color:var(--ink);font-weight:700}
                   <div class="field"><label>Fecha y hora</label><input id="tpFecha" type="datetime-local"></div>
                   <div class="field"><label>Aforo <span style="color:var(--rojo)">· obligatorio</span></label><input id="tpAforo" type="number" min="1" max="200" required></div>
                 </div>
-                <div class="field"><label>Ciudad</label><input id="tpCiudad" maxlength="40" placeholder="Valencia"></div>
+                <div class="f2">
+                  <div class="field"><label>Ciudad</label><input id="tpCiudad" maxlength="40" placeholder="Valencia"></div>
+                  <div class="field"><label>Precio por plaza <span style="color:var(--ink3)">· opcional</span></label>
+                    <div style="position:relative">
+                      <input id="tpPrecio" type="number" min="0" max="10000" step="0.01" inputmode="decimal" placeholder="25" style="padding-right:30px">
+                      <span aria-hidden="true" style="position:absolute;right:14px;top:50%;transform:translateY(-50%);color:var(--ink3);font-weight:700;pointer-events:none">€</span>
+                    </div>
+                  </div>
+                </div>
+                <p style="margin:-4px 0 4px;font-size:.76rem;color:var(--ink3);line-height:1.5">El precio que paga cada persona por su plaza. Déjalo vacío si tu plan es gratis. Sobre esto se calcula la comisión del 15 al 20% — <b style="color:var(--ink2)">cobrar y liquidar llegará cuando se active el pago</b>, aún no se cobra nada.</p>
                 <div class="field"><label>Descripción corta</label><textarea id="tpDesc" maxlength="200" placeholder="1-2 líneas, lo que se vive, no lo que se vende"></textarea></div>
                 <div class="field"><label>Apertura</label>
                   <select id="tpApertura">
@@ -878,27 +887,27 @@ td b{color:var(--ink);font-weight:700}
     <!-- ============================================================ -->
     <section class="vista" data-vista="quien-viene">
       <div class="card">
-        <div class="card__h"><b>Entradas de este mes</b><small>cupo usado sobre lo incluido en tu plan</small></div>
-        <div style="display:flex;align-items:baseline;gap:8px"><span style="font-size:2rem;font-weight:800;letter-spacing:-.035em" class="tab" id="qvMesUsado">13</span><span style="color:var(--ink3);font-weight:600" id="qvMesIncluido">de 18 incluidos</span></div>
+        <div class="card__h"><b>Plazas vendidas este mes</b><small>sobre el aforo que has abierto en tus planes</small></div>
+        <div style="display:flex;align-items:baseline;gap:8px"><span style="font-size:2rem;font-weight:800;letter-spacing:-.035em" class="tab" id="qvMesUsado">13</span><span style="color:var(--ink3);font-weight:600" id="qvMesIncluido">de 18 plazas abiertas</span></div>
         <div class="bar"><i id="qvMesBar" style="width:72%"></i></div>
-        <p style="color:var(--ink2);font-size:.82rem;margin-top:12px" id="qvMesNota">Ya usaste tus 5 gratis al empezar. Quedan 5 plazas de tu cuota antes de fin de mes.</p>
+        <p style="color:var(--ink2);font-size:.82rem;margin-top:12px" id="qvMesNota">Te quedan 5 plazas por vender de las que has abierto este mes. Tú decides cuántas abres: no hay cupo.</p>
       </div>
 
-      <div class="gated" data-min="2" data-msg="El contador en vivo de gente esperando se activa en el plan de 99 €.">
+      <div class="gated" data-min="2" data-msg="Disponible con Premium: el contador en vivo de gente esperando plaza.">
         <div class="gated__body card card--accent-top">
           <div class="card__h"><b><span class="pulse" style="margin-right:8px"></span>En directo, ahora mismo</b><small id="qvLiveWhen">tu plan del martes</small></div>
           <p id="qvLiveMain" style="font-size:1.12rem;font-weight:700;line-height:1.5">Hay <span id="qvEsperando" class="tab" style="color:var(--az);font-weight:800">22</span> personas esperando plaza para el martes.</p>
-          <p id="qvLiveSub" style="color:var(--ink2);font-size:.85rem;margin-top:6px">Le ha interesado a 40 personas. Entraron 18, los que incluye tu plan.</p>
+          <p id="qvLiveSub" style="color:var(--ink2);font-size:.85rem;margin-top:6px">Le ha interesado a 40 personas. Vendiste las 18 plazas que abriste.</p>
         </div>
       </div>
 
-      <div class="nudge" id="nudgeQuienViene" data-nudge-hide-min="3">
+      <div class="nudge" id="nudgeQuienViene" data-nudge-hide-min="99">
         <div class="nudge__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/></svg></div>
         <div class="nudge__body">
           <b>22 personas están esperando tu plan del martes, ahora mismo.</b>
-          <span>Y en septiembre se quedaron fuera 43 (≈2.150 €). Con el plan de 199 € entrarían las 45, a 4,42 € cada uno.</span>
+          <span>Y este mes 28 pidieron entrar y no cupieron. Abre más plazas o pon otra fecha: tienes demanda para otra convocatoria.</span>
         </div>
-        <div class="nudge__cta"><button class="btn btn--sm" data-go="planes">Ver si te compensa subir</button></div>
+        <div class="nudge__cta"><button class="btn btn--sm" data-go="demanda">Ver el aviso de demanda</button></div>
       </div>
 
       <div class="card" id="qvSemanaCard">
@@ -912,8 +921,8 @@ td b{color:var(--ink);font-weight:700}
           <p class="stat__v tab"><span id="qvStatEsperando">13</span><small>personas</small></p>
         </div>
         <div class="stat">
-          <p class="stat__k">Total este mes</p>
-          <p class="stat__v tab"><span id="qvStatMes">13</span><small id="qvStatMesSub">de 18 incluidos</small></p>
+          <p class="stat__k">Plazas vendidas este mes</p>
+          <p class="stat__v tab"><span id="qvStatMes">13</span><small id="qvStatMesSub">de 18 abiertas</small></p>
         </div>
       </div>
 
@@ -940,36 +949,36 @@ td b{color:var(--ink);font-weight:700}
           <p class="mailcard__subject">Tu resumen del mes</p>
           <p class="mailcard__text" id="mailTexto">
             En septiembre le interesaste a <b class="tab">61</b> personas.
-            Entraron <b class="tab">18</b>. Se quedaron fuera <b class="tab">43</b> ≈ <b>2.150 €</b>.
-            Con el plan de 199 € habrían entrado <b class="tab">45</b>.
+            Entraron <b class="tab">18</b>. Se quedaron fuera <b class="tab">43</b> ≈ <b>2.150 €</b>
+            que no pasaron por tu caja. Abre más plazas o pon otra fecha.
           </p>
         </div>
         <div class="mailcard__foot">
           <small>El mismo dato que ves en este panel — nunca se recalcula aparte.</small>
-          <button class="btn btn--sm" data-go="planes">Ver si te compensa subir</button>
+          <button class="btn btn--sm" data-go="tus-planes">Abrir más plazas</button>
         </div>
       </div>
 
       <div class="card chartcard" id="demandaCard">
         <div class="card__h"><b>Interesados, entraron y se quedaron fuera</b><small>últimos 6 meses — el mismo dato que ves abajo en el histórico</small></div>
-        <div class="legend"><span><i style="background:var(--az)"></i>Entraron (tu cupo)</span><span><i style="background:var(--ambar)"></i>Se quedaron fuera</span></div>
+        <div class="legend"><span><i style="background:var(--az)"></i>Entraron (plazas vendidas)</span><span><i style="background:var(--ambar)"></i>Se quedaron fuera</span></div>
         <div id="demandaChart"></div>
         <p class="charthint">La barra entera es cuánta gente pidió entrar. Solo cuenta quien pidió entrar y no pudo — nunca a quién se le enseñó el plan.</p>
       </div>
 
-      <div class="gated" data-min="2" data-msg="Se activa en el plan de 99 €: la demanda en tiempo real, no solo el resumen del día 1.">
+      <div class="gated" data-min="2" data-msg="Disponible con Premium: la demanda en tiempo real, no solo el resumen del día 1.">
         <div class="gated__body card">
           <div class="card__h"><b><span class="pulse" style="margin-right:8px"></span>En directo, ahora mismo</b><small>mes en curso</small></div>
           <p id="demandaLive" style="font-size:1.02rem;font-weight:600;line-height:1.5">
             Tu plan del martes le ha interesado a <b class="tab">40</b> personas.
-            Han entrado <b class="tab">18</b>, los que incluye tu plan.
+            Vendiste las <b class="tab">18</b> plazas que abriste.
             Hay <b class="tab">22</b> esperando.
           </p>
-          <p class="pill pill--az" style="margin-top:12px" id="demandaLivePill">Con el plan de 199 € te caben 45 — cada cliente a 4,42 € en vez de 5,50 €</p>
+          <p class="pill pill--az" style="margin-top:12px" id="demandaLivePill">Abre más plazas o pon otra fecha: tienes demanda para otra convocatoria.</p>
         </div>
       </div>
 
-      <div class="gated" data-min="1" data-msg="Se activa en el plan de 49 €: dónde vive la gente que se te queda fuera.">
+      <div class="gated" data-min="1" data-msg="Disponible con Premium: dónde vive la gente que se te queda fuera, en agregado.">
         <div class="gated__body card" id="zonaCard">
           <div class="card__h"><b>Por zona</b><small>dónde vive la gente que se te queda fuera</small></div>
           <div class="rows" id="zonaRows">
@@ -982,35 +991,23 @@ td b{color:var(--ink);font-weight:700}
       </div>
 
       <div class="grid2">
-        <div class="gated" data-min="2" data-msg="Se activa en el plan de 99 €: cuántos vuelven por su cuenta.">
+        <div class="gated" data-min="2" data-msg="Disponible con Premium: cuántos vuelven por su cuenta.">
           <div class="gated__body card">
-            <div class="card__h"><b>Vuelven por su cuenta</b><small>sin que NYXA te los vuelva a traer</small></div>
+            <div class="card__h"><b>Vuelven por su cuenta</b><small>repiten reserva sin que NYXA se lo proponga otra vez</small></div>
             <div class="stat__v" style="font-size:2.2rem"><span id="demandaRepPct">34%</span><small id="demandaRepTrend" style="display:inline;margin-left:8px;color:var(--verde)">▲ 6 pts vs. agosto</small></div>
-            <p style="color:var(--ink2);font-size:.84rem;margin-top:8px" id="demandaRepDesc">De cada 100 clientes que te trae NYXA, 34 repiten sin que vuelvas a pagar por ellos.</p>
+            <p style="color:var(--ink2);font-size:.84rem;margin-top:8px" id="demandaRepDesc">De cada 100 personas que vinieron a tus planes, 34 vuelven a reservar por su cuenta.</p>
             <button class="btn btn--gh btn--sm" style="margin-top:12px" data-go="repeticion">Ver la evolución completa →</button>
           </div>
         </div>
 
-        <div class="gated" data-min="2" data-msg="Se activa en el plan de 99 €: abrir hueco extra cuando te sobra demanda.">
-          <div class="gated__body card">
-            <div class="card__h"><b>Abrir hueco extra este mes</b><small>7,50 € por cliente — siempre más caro que subir de plan</small></div>
-            <div style="display:flex;align-items:center;gap:14px;flex-wrap:wrap">
-              <div class="stepper">
-                <button id="extraMinus" aria-label="Quitar uno">−</button>
-                <span id="extraVal" class="tab">4</span>
-                <button id="extraPlus" aria-label="Añadir uno">+</button>
-              </div>
-              <div style="font-size:.86rem;color:var(--ink2)">
-                <b style="color:var(--ink)"><span id="extraClientes" class="tab">22</span> clientes</b> este mes ·
-                total de la cuota: <b id="extraTotal" class="tab" style="color:var(--ink)">129,00 €</b>
-              </div>
-            </div>
-            <p id="extraNota" class="pill pill--az" style="margin-top:14px" hidden>Con esta demanda, te compensa más subir al plan de 199 € que seguir pidiendo extras.</p>
-          </div>
+        <div class="card">
+          <div class="card__h"><b>¿Más demanda que plazas?</b><small>abrir plazas no cuesta nada</small></div>
+          <p style="color:var(--ink2);font-size:.9rem;line-height:1.6">Tú fijas el aforo: no hay cupo ni coste por abrir plazas. Si se te queda gente fuera, <b style="color:var(--ink)">abre más plazas en ese plan o pon otra fecha</b>. Solo pagas comisión cuando una plaza se reserva — abrir más no te cuesta nada.</p>
+          <button class="btn btn--gh btn--sm" style="margin-top:14px" data-go="tus-planes">Abrir más plazas o publicar otra fecha →</button>
         </div>
       </div>
 
-      <div class="gated" data-min="2" data-msg="Se activa en el plan de 99 €: histórico completo y exportación.">
+      <div class="gated" data-min="2" data-msg="Disponible con Premium: histórico completo y exportación.">
         <div class="gated__body card">
           <div class="card__h"><b>Histórico</b><small>últimos 6 meses</small><button class="btn btn--gh btn--sm" id="btnExportCsv">↓ Exportar (.csv)</button></div>
           <div class="tablewrap">
@@ -1029,16 +1026,16 @@ td b{color:var(--ink);font-weight:700}
     <!-- ============ 4 · REPETICIÓN (99 €+) ============ -->
     <!-- ============================================================ -->
     <section class="vista" data-vista="repeticion">
-      <div class="gated" data-min="2" data-msg="La repetición se activa en el plan de 99 €: cuántos clientes vuelven sin que vuelvas a pagar por ellos.">
+      <div class="gated" data-min="2" data-msg="Disponible con Premium: cuántas personas vuelven a reservar por su cuenta.">
         <div class="gated__body">
 
           <div class="card">
-            <div class="card__h"><b>Vuelven por su cuenta</b><small>de cada 100 clientes que te trae NYXA, cuántos repiten sin que te los volvamos a traer</small></div>
+            <div class="card__h"><b>Vuelven por su cuenta</b><small>de cada 100 personas que vinieron, cuántas vuelven a reservar sin que NYXA se lo proponga otra vez</small></div>
             <div style="display:flex;align-items:baseline;gap:12px;flex-wrap:wrap">
               <span id="repPct" style="font-size:2.6rem;font-weight:800;letter-spacing:-.035em" class="tab">34%</span>
               <span id="repTrend" class="trend trend--up">▲ 6 pts vs. agosto</span>
             </div>
-            <p id="repDesc" style="color:var(--ink2);font-size:.87rem;margin-top:10px">Es el dato que más importa a largo plazo: cada cliente que repite solo lo vuelve a facturar tu plan si tú vuelves a llevarlo, pero él ya no cuenta contra tu cupo — vuelve porque le gustó, no porque NYXA se lo proponga otra vez.</p>
+            <p id="repDesc" style="color:var(--ink2);font-size:.87rem;margin-top:10px">Es el dato que más importa a largo plazo: una persona que vuelve a reservar por su cuenta lo hace porque le gustó, no porque NYXA se lo proponga otra vez. Es fidelidad real, no alcance.</p>
           </div>
 
           <div class="card chartcard" id="repChartCard">
@@ -1059,7 +1056,7 @@ td b{color:var(--ink);font-weight:700}
     <!-- ============ 5 · TU PÁGINA (escaparate, 49 €+) — reconstruida ============ -->
     <!-- ============================================================ -->
     <section class="vista" data-vista="pagina">
-      <div class="gated" data-min="1" data-msg="Tu propia página dentro de NYXA se activa en el plan de 49 €.">
+      <div class="gated" data-min="1" data-msg="Disponible con Premium: tu propia página dentro de NYXA, con tu estilo.">
         <div class="gated__body">
 
           <p class="pill pill--amb" style="margin-bottom:16px">Plantillas listas para usar, sin IA — generarla sola desde tu web llega más adelante</p>
@@ -1153,7 +1150,7 @@ td b{color:var(--ink);font-weight:700}
                 </div>
                 <p style="margin-top:14px;font-size:.83rem;color:var(--ink2);line-height:1.55">Compártelo donde quieras: trae a tu propia gente y <b style="color:var(--ink)">te la convierte NYXA</b>, sin que te cueste captación.</p>
                 <div class="toggle" style="margin-top:14px;padding-top:14px;border-top:1px solid var(--line)">
-                  <div class="toggle__t"><b>Simular: sin plazas este mes</b><small>así se ve tu página cuando se llena el cupo</small></div>
+                  <div class="toggle__t"><b>Simular: sin plazas este mes</b><small>así se ve tu página cuando se agotan las plazas</small></div>
                   <button class="sw" id="pmSoldOut" role="switch" aria-checked="false"><i></i></button>
                 </div>
               </div>
@@ -1200,10 +1197,10 @@ td b{color:var(--ink);font-weight:700}
     </section>
 
     <!-- ============================================================ -->
-    <!-- ============ 6 · EXCLUSIVIDAD (199 €) ============ -->
+    <!-- ============ 6 · EXCLUSIVIDAD (a medida, desde 490 €/mes) ============ -->
     <!-- ============================================================ -->
     <section class="vista" data-vista="exclusividad">
-      <div class="gated" data-min="3" data-msg="La exclusividad de categoría y zona es del plan de 199 €.">
+      <div class="gated" data-min="3" data-msg="La exclusividad de categoría y zona es a medida, desde 490 €/mes.">
         <div class="gated__body">
           <div class="card card--accent-top" style="border-color:var(--line)" id="exclCard">
             <div style="width:38px;height:38px;border-radius:11px;background:var(--morado-soft);color:var(--morado);display:grid;place-items:center;margin-bottom:14px"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"><path d="M12 3.5l2.6 5.3 5.9.8-4.3 4.1 1 5.8L12 16.9 6.8 19.6l1-5.8-4.3-4.1 5.9-.8z"/></svg></div>
@@ -1226,10 +1223,10 @@ td b{color:var(--ink);font-weight:700}
     </section>
 
     <!-- ============================================================ -->
-    <!-- ============ 7 · BUZÓN (199 €) ============ -->
+    <!-- ============ 7 · BUZÓN (consentimiento, caso por caso) ============ -->
     <!-- ============================================================ -->
     <section class="vista" data-vista="buzon">
-      <div class="gated" data-min="3" data-msg="El buzón para escribir a quien ya fue es del plan de 199 €.">
+      <div class="gated" data-min="3" data-msg="El buzón para escribir a quien ya fue — con consentimiento, caso por caso, nunca una lista.">
         <div class="gated__body">
 
           <div class="card" id="buzonCard">
@@ -1278,44 +1275,43 @@ td b{color:var(--ink);font-weight:700}
     <!-- ============================================================ -->
     <section class="vista" data-vista="facturacion">
       <div class="card card--accent-top">
-        <div class="card__h"><b>Tu próxima factura</b><small>la ves antes del cargo — siempre</small></div>
+        <div class="card__h"><b>Tus liquidaciones</b><small>lo cobrado, nuestra comisión, lo transferido y cuándo</small></div>
         <table>
           <tbody>
-            <tr><td id="facCuotaLinea">Cuota · plan de 99 € (18 clientes incluidos)</td><td class="r tab" id="facCuotaImporte">99,00 €</td></tr>
-            <tr><td id="facExtraLinea">4 clientes extra pedidos este mes · a 7,50 €</td><td class="r tab" id="facExtraImporte">30,00 €</td></tr>
-            <tr><td><b>Total de tu cuota</b></td><td class="r tab" id="facTotal"><b>129,00 €</b></td></tr>
+            <tr><td id="facCuotaLinea">Cobrado a clientes este periodo</td><td class="r tab">—</td></tr>
+            <tr><td>Comisión de NYXA (15–20%)</td><td class="r tab">—</td></tr>
+            <tr><td><b>Transferido a tu cuenta</b></td><td class="r tab"><b>—</b></td></tr>
           </tbody>
         </table>
-        <p style="color:var(--ink2);font-size:.82rem;margin-top:12px">El importe de arriba está en directo con lo que pidas en «El aviso de demanda». El correo con el detalle te llega antes que el cargo, nunca al revés.</p>
+        <p style="color:var(--ink2);font-size:.82rem;margin-top:12px"><b>Aún no tienes liquidaciones.</b> Una vez al mes te liquidamos lo reservado: cobramos nosotros la reserva, descontamos la comisión y te transferimos el resto. Aquí no verás nunca una cifra inventada — aparecerá sola en cuanto haya reservas cobradas.</p>
       </div>
 
       <div class="grid2">
         <div class="card" id="metodoPagoCard">
-          <div class="card__h"><b>Método de pago</b></div>
+          <div class="card__h"><b>Estado del cobro</b><small>cómo recibes el dinero</small></div>
           <div class="rowi" style="border-bottom:0;padding:6px 2px">
-            <div style="width:40px;height:28px;border-radius:6px;background:#1A1F71;color:#fff;display:grid;place-items:center;font-size:.62rem;font-weight:800;letter-spacing:.02em;flex:none">VISA</div>
-            <div class="rowi__t"><b>Visa •••• 6411</b><small>caduca 04/29</small></div>
-            <button class="btn btn--gh btn--sm" id="btnCambiarTarjeta">Cambiar tarjeta</button>
+            <div class="rowi__t"><b>Cuenta de cobro</b><small>para recibir tus liquidaciones</small></div>
+            <span class="pill pill--amb">Pendiente de activar</span>
           </div>
-          <p style="color:var(--ink2);font-size:.8rem;margin-top:12px">Gestionado por Stripe. NYXA nunca guarda el número completo de tu tarjeta.</p>
+          <p style="color:var(--ink2);font-size:.8rem;margin-top:12px">El cobro al cliente y la transferencia a tu cuenta se activan en cuanto encendamos el pago (Stripe Connect). No se te pide ninguna tarjeta: en este modelo <b>tú recibes dinero, no lo pagas</b>.</p>
         </div>
         <div class="guard" style="margin:0">
           <p class="guard__h">La garantía</p>
-          <p>El mes que no te llevemos a nadie, <b>no se te cobra la cuota</b>. Solo se activa cuando fallamos nosotros. Así empezaste, además: sin tarjeta, con tus primeros 5 clientes gratis. Hoy pagas porque decidiste seguir, y puedes irte cuando quieras — sin permanencia.</p>
+          <p>Nadie paga por lo que no ocurre: cobramos comisión <b>solo sobre reservas cumplidas</b>. Si no se llena, no pagas nada. Y <b>las personas no pagan nunca</b> a NYXA por aparecer — pagan su reserva, y tú recibes tu parte.</p>
         </div>
       </div>
 
       <div class="card" style="margin-top:16px">
-        <div class="card__h"><b>Facturas</b><small>histórico completo de cobros</small><button class="btn btn--gh btn--sm" id="btnExportFacturas">↓ Exportar todo (.csv)</button></div>
+        <div class="card__h"><b>Historial de liquidaciones</b><small>cada transferencia, con su comisión</small></div>
         <div class="tablewrap">
           <table id="facturasTabla"></table>
         </div>
       </div>
 
       <div class="card" style="margin-top:16px;text-align:center">
-        <p style="font-weight:700">¿Te compensa subir de plan?</p>
-        <p style="color:var(--ink2);font-size:.87rem;margin-top:5px">Compara los 4 planes, el gating completo y el simulador de clientes.</p>
-        <button class="btn" style="margin-top:14px" data-go="planes">Ver planes y comparar →</button>
+        <p style="font-weight:700">¿Tienes demanda que se te escapa?</p>
+        <p style="color:var(--ink2);font-size:.87rem;margin-top:5px">Abre más plazas o pon otra fecha: así llenas lo que organizas y crece lo que te liquidamos.</p>
+        <button class="btn" style="margin-top:14px" data-go="demanda">Ver el aviso de demanda →</button>
       </div>
     </section>
 
@@ -1370,71 +1366,78 @@ td b{color:var(--ink);font-weight:700}
     <!-- ============================================================ -->
     <section class="vista" data-vista="planes">
 
-      <p class="grp" style="padding-left:0">Planes y precios</p>
-      <p style="color:var(--ink2);font-size:.9rem;margin:-4px 0 20px;max-width:60ch">Nadie compara 49 € contra 99 €: compara 7 clientes contra 18. Ningún plan baja de 6 veces lo que cuesta, y mejora cuanto más subes.</p>
-      <div class="plans" id="plansGrid"></div>
+      <p class="grp" style="padding-left:0">Precios y comisión</p>
+      <p style="color:var(--ink2);font-size:.9rem;margin:-4px 0 20px;max-width:60ch">Estar en NYXA es gratis. Solo cobramos comisión sobre lo que se reserva: entre el 15% y el 20%, según tu margen. Sin cuota obligatoria, sin permanencia. <b>Si no se llena, no pagas nada.</b></p>
 
-      <!-- SIMULADOR (herramienta hipotética, no datos del negocio) -->
-      <div class="simcard">
-        <div class="card__h" style="margin-bottom:0"><b>Simulador: ¿cuántos clientes quieres al mes?</b><small>Mueve el número y mira cuánto te sale cada cliente</small></div>
-        <div class="simcard__row">
-          <div class="simrange">
-            <input type="range" id="simRange" min="1" max="60" value="22" step="1">
-          </div>
-          <div class="stepper">
-            <button id="simMinus" aria-label="Menos">−</button>
-            <span id="simVal" class="tab">22</span>
-            <button id="simPlus" aria-label="Más">+</button>
-          </div>
+      <div class="plans">
+        <div class="plan actual">
+          <span class="plan__tag" style="background:var(--ink)">Lo tuyo hoy</span>
+          <div class="plan__big">Gratis<small>para publicar</small></div>
+          <div class="plan__price">Comisión <b>15–20%</b> sobre lo reservado</div>
+          <div class="plan__multi">Mínimo 2 € por reserva · sin techo · sin permanencia</div>
+          <ul>
+            <li>Publicas planes con su precio y aforo</li>
+            <li>Se propone a quien encaja, en tu ciudad</li>
+            <li>Aviso de demanda y quién viene</li>
+            <li>Una liquidación al mes de lo reservado</li>
+          </ul>
+          <div class="plan__btn"><button class="btn btn--gh" style="width:100%;justify-content:center" disabled>Ya lo tienes</button></div>
         </div>
-        <div class="simout">
-          <div class="stat"><p class="stat__k">Plan recomendado</p><p class="stat__v" id="simPlan">199 €</p></div>
-          <div class="stat"><p class="stat__k">Coste por cliente</p><p class="stat__v tab" id="simCoste">4,42 €</p></div>
-          <div class="stat"><p class="stat__k">Si te quedas en tu plan + extras</p><p class="stat__v tab" id="simActual">129,00 €</p></div>
-          <div class="stat"><p class="stat__k">Ahorras subiendo</p><p class="stat__v tab" id="simAhorro" style="color:var(--verde)">70,00 €</p></div>
+        <div class="plan reco">
+          <span class="plan__tag">Opcional</span>
+          <div class="plan__big">99 €<small>al mes</small></div>
+          <div class="plan__price">Premium · <b>más presencia entre quienes ya encajan</b></div>
+          <div class="plan__multi">Único ingreso fijo. Lo firma quien quiere destacar.</div>
+          <ul>
+            <li>Más alcance entre los que ya encajan contigo</li>
+            <li>Sales primero cuando dos planes encajan igual</li>
+            <li>Ficha destacada: más fotos y vídeo</li>
+            <li>Planes ilimitados a la vez</li>
+          </ul>
+          <div class="plan__btn"><button class="btn" style="width:100%;justify-content:center" data-go="facturacion">Hablar de Premium</button></div>
         </div>
-        <p class="charthint" id="simTexto" style="margin-top:14px;font-size:.86rem;color:var(--ink2)"></p>
-        <button class="btn" style="margin-top:16px" id="simCta">Subir al plan recomendado</button>
+        <div class="plan">
+          <div class="plan__big">490 €+<small>al mes · a medida</small></div>
+          <div class="plan__price">Exclusividad de tu categoría en tu zona</div>
+          <div class="plan__multi">Revisable cada año. Nada perpetuo.</div>
+          <ul>
+            <li>Un solo referente por zona y categoría</li>
+            <li>Los negocios gratuitos siguen apareciendo si encajan</li>
+            <li>Se negocia, no es autoservicio</li>
+          </ul>
+          <div class="plan__btn"><button class="btn btn--gh" style="width:100%;justify-content:center" data-go="exclusividad">Ver exclusividad</button></div>
+        </div>
       </div>
 
-      <!-- EL MISMO NEGOCIO, EN MESES DISTINTOS -->
+      <!-- LA COMISIÓN, SEGÚN EL MARGEN -->
       <div class="card">
-        <div class="card__h"><b>El mismo negocio, en meses distintos</b><small>con el plan de 99 € (18 clientes incluidos)</small></div>
+        <div class="card__h"><b>Tu comisión, según lo que organizas</b><small>cuanto menos margen operativo, menos comisión pagas</small></div>
         <div class="tablewrap">
           <table>
-            <thead><tr><th>Ese mes</th><th class="r">Clientes</th><th class="r">Paga</th><th>Por qué</th></tr></thead>
+            <thead><tr><th>Qué organizas</th><th class="r">Comisión</th><th>Por qué</th></tr></thead>
             <tbody>
-              <tr><td>No te llevamos a nadie</td><td class="r tab">0</td><td class="r tab">0,00 €</td><td>No se cobra la cuota</td></tr>
-              <tr><td>Va flojo</td><td class="r tab">6</td><td class="r tab">99,00 €</td><td>Dentro de tu plan</td></tr>
-              <tr><td>Lo llena</td><td class="r tab">18</td><td class="r tab">99,00 €</td><td>Justo lo que incluye</td></tr>
-              <tr><td>Pides cuatro más</td><td class="r tab">22</td><td class="r tab">129,00 €</td><td>4 extras que pediste, a 7,50 €</td></tr>
-              <tr><td><b>Te sobra demanda</b></td><td class="r tab"><b>30</b></td><td class="r tab"><b>199,00 €</b></td><td><b>Te sale mejor subir de plan</b></td></tr>
+              <tr><td>Catas, talleres, clases, rutas</td><td class="r tab"><b>20%</b></td><td>casi sin coste: el margen es tuyo</td></tr>
+              <tr><td>Cursos, salidas con material</td><td class="r tab"><b>18%</b></td><td>tienes monitor y equipo que pagar</td></tr>
+              <tr><td>Escapadas y viajes</td><td class="r tab"><b>15%</b></td><td>pagas hotel y transporte; margen estrecho</td></tr>
             </tbody>
           </table>
         </div>
-      </div>
-
-      <!-- TABLA DE GATING COMPLETA -->
-      <div class="card">
-        <div class="card__h"><b>Qué incluye cada plan</b><small>lo que no tienes se ve bloqueado en el panel, nunca oculto — para que sepas qué te estás perdiendo</small></div>
-        <div class="tablewrap">
-          <table class="cmp" id="gatingTabla"></table>
-        </div>
+        <p style="color:var(--ink2);font-size:.82rem;margin-top:12px">Mínimo 2 € por reserva, para que una plaza barata no deje céntimos. Sin techo por arriba. <b>El cobro y la liquidación se activan cuando encendamos el pago</b> — aún no se cobra nada.</p>
       </div>
 
       <div class="grid2">
         <div class="card">
           <div class="card__h"><b>Empezar no cuesta nada, y quedarse tampoco obliga</b></div>
           <div class="rows">
-            <div class="rowi"><div class="rowi__t"><b>Sus primeros clientes, gratis</b><small>1 · 3 · 6 · 10 según el plan que elijas</small></div></div>
-            <div class="rowi"><div class="rowi__t"><b>Sin tarjeta para empezar</b><small>no se piden datos de pago para el piloto</small></div></div>
-            <div class="rowi"><div class="rowi__t"><b>Sin permanencia</b><small>te quedas solo si te trae clientes</small></div></div>
-            <div class="rowi"><div class="rowi__t"><b>Cliente extra, si te hace falta</b><small>7,50 € — siempre más caro que subir de plan</small></div></div>
+            <div class="rowi"><div class="rowi__t"><b>Publicar es gratis</b><small>para todos, sin excepción</small></div></div>
+            <div class="rowi"><div class="rowi__t"><b>Si no se llena, no pagas</b><small>la comisión es solo sobre reservas cumplidas</small></div></div>
+            <div class="rowi"><div class="rowi__t"><b>Sin permanencia</b><small>te vas cuando quieras</small></div></div>
+            <div class="rowi"><div class="rowi__t"><b>Premium es opcional</b><small>99 €/mes, solo si quieres más presencia</small></div></div>
           </div>
         </div>
         <div class="guard" style="margin:0">
           <p class="guard__h">Las reglas que no cambian, pagues lo que pagues</p>
-          <p><b>El dinero nunca compra encaje.</b> Pagar da más clientes afines, jamás coloca tu negocio ante alguien a quien no le encaja. <b>Solo vendemos donde podemos entregar.</b> <b>Como mucho 1 de cada 5 planes</b> que ve una persona puede ser de un negocio. <b>Las personas no se dan nunca</b>, ni en el plan más caro. Y <b>nada es perpetuo</b>: la exclusividad se revisa cada año.</p>
+          <p><b>El dinero nunca compra encaje.</b> Premium da más presencia entre quienes ya encajan, jamás coloca tu negocio ante alguien a quien no le encaja. <b>Solo vendemos donde podemos entregar.</b> <b>Como mucho 1 de cada 5 planes</b> que ve una persona puede ser de pago. <b>Las personas no se dan nunca</b>, ni con Premium. Y <b>nada es perpetuo</b>: la exclusividad se revisa cada año.</p>
         </div>
       </div>
     </section>
@@ -1639,8 +1642,8 @@ const TIT = {
   "pagina":["Tu página","Tu propia página dentro de NYXA, con tu estilo."],
   "exclusividad":["Exclusividad","Un solo referente por zona y categoría."],
   "buzon":["Buzón","Escribir a quien ya fue, a través de NYXA — nunca una lista."],
-  "facturacion":["Facturación","Tu plan, tu factura y tu método de pago."],
-  "planes":["Planes","Compara, simula y sube cuando te compense."],
+  "facturacion":["Liquidaciones","Lo cobrado, nuestra comisión, lo transferido y cuándo."],
+  "planes":["Precios y comisión","Publicar es gratis. Solo pagas comisión sobre lo reservado."],
   "ajustes":["Ajustes","Datos de tu empresa, notificaciones y privacidad."]
 };
 function irA(v){
@@ -1682,8 +1685,8 @@ document.getElementById("temaBtn2").addEventListener("click",toggleTema);
 const NOTIFS = [
   {
     ic:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg>',
-    tit:"Tu cupo se llenó el día 20",
-    txt:"43 personas se quedaron fuera este mes",
+    tit:"Vendiste todas las plazas el día 20",
+    txt:"43 personas pidieron entrar y no cupieron",
     cuando:"hace 9 días",
     cta:"Ver el aviso de demanda", go:"demanda"
   },
@@ -1696,10 +1699,10 @@ const NOTIFS = [
   },
   {
     ic:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 7h6v6"/></svg>',
-    tit:"Con el plan de 199 € habrían entrado 45",
-    txt:"a 4,42 € cada uno, en vez de 5,50 €",
+    tit:"Tienes demanda para otra convocatoria",
+    txt:"abre más plazas o pon otra fecha",
     cuando:"este mes",
-    cta:"Ver planes", go:"planes"
+    cta:"Abrir más plazas", go:"tus-planes"
   },
   {
     ic:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>',
@@ -1884,9 +1887,9 @@ function refrescarGating(){
     const lock=n.querySelector(".lock");
     if(lock) lock.hidden = rankActual>=min;
   });
-  const p = PLANES[rankActual];
-  document.getElementById("planBadge").textContent = "Plan · " + (p.precio? p.label+"/mes" : "A medida");
-  // nudges de upsell: se ocultan solos en cuanto el plan ya cubre toda la demanda conocida (199 €+)
+  { const pbg=document.getElementById("planBadge");
+    if(pbg) pbg.textContent = rankActual>0 ? "Premium · más presencia" : "Publicas gratis · comisión"; }
+  // nudges: en comisión no hay "subir de tramo"; solo se ocultan por plan si se marca explícito (99+)
   document.querySelectorAll(".nudge[data-nudge-hide-min]").forEach(el=>{
     el.hidden = rankActual >= +el.dataset.nudgeHideMin;
   });
@@ -1946,16 +1949,20 @@ document.getElementById("btnExportCsv").addEventListener("click",()=>{
   a.href=URL.createObjectURL(blob); a.download="sputnik-aviso-de-demanda.csv"; a.click();
   toast("Descargado. En producción sale de la misma tabla que ves arriba — nunca de un cálculo aparte.");
 });
-document.getElementById("btnExportFacturas").addEventListener("click",()=>{
-  const filas=[["Fecha","Concepto","Importe (€)"]].concat(FACTURAS.map(f=>[f.fecha,f.concepto,f.importe.toFixed(2)]));
-  const csv = filas.map(r=>r.join(";")).join("\n");
-  const blob = new Blob([csv],{type:"text/csv;charset=utf-8"});
-  const a=document.createElement("a");
-  a.href=URL.createObjectURL(blob); a.download="sputnik-facturas.csv"; a.click();
-  toast("Descargado.");
-});
+// Export de facturas y cambio de tarjeta: RETIRADOS en FASE A (no hay cuota ni tarjeta en
+// el modelo de comisión). Guardas por si el botón ya no existe en el DOM.
+{ const _bef=document.getElementById("btnExportFacturas");
+  if(_bef) _bef.addEventListener("click",()=>{
+    const filas=[["Fecha","Concepto","Importe (€)"]].concat(FACTURAS.map(f=>[f.fecha,f.concepto,f.importe.toFixed(2)]));
+    const csv = filas.map(r=>r.join(";")).join("\n");
+    const blob = new Blob([csv],{type:"text/csv;charset=utf-8"});
+    const a=document.createElement("a");
+    a.href=URL.createObjectURL(blob); a.download="liquidaciones.csv"; a.click();
+    toast("Descargado.");
+  }); }
 
-document.getElementById("btnCambiarTarjeta").addEventListener("click",()=>toast("Esto abrirá el formulario seguro de Stripe para cambiar tu tarjeta."));
+{ const _bct=document.getElementById("btnCambiarTarjeta");
+  if(_bct) _bct.addEventListener("click",()=>toast("Esto abrirá el formulario seguro de Stripe para cambiar tu tarjeta.")); }
 // (El logout real de #btnCerrarSesion vive abajo: logout() + reload. Antes había aquí un
 //  segundo listener que solo lanzaba un toast "Cerrando sesión…" y se disparaba a la vez — muerto, retirado.)
 document.getElementById("btnRgpdExport").addEventListener("click",()=>toast("Aún no tienes datos que descargar."));
@@ -1987,7 +1994,7 @@ function pintarFacturasTabla(){
   const el=document.getElementById("facturasTabla");
   if(!el) return;
   if(!FACTURAS.length){
-    el.innerHTML='<tbody><tr><td style="color:var(--ink3);padding:14px 2px">Aún no tienes facturas. Aparecerán aquí cuando contrates un plan de pago y se genere el primer cobro.</td></tr></tbody>';
+    el.innerHTML='<tbody><tr><td style="color:var(--ink3);padding:14px 2px">Aún no tienes liquidaciones. Aparecerán aquí en cuanto haya reservas cobradas — con lo cobrado, nuestra comisión y lo que te transferimos.</td></tr></tbody>';
     return;
   }
   el.innerHTML='<thead><tr><th>Fecha</th><th>Concepto</th><th class="r">Importe</th><th></th></tr></thead><tbody>'+
@@ -1996,9 +2003,12 @@ function pintarFacturasTabla(){
 }
 pintarFacturasTabla();
 
-// ---- grid de planes (comparativa, "primero lo que recibe") ----
+// ---- grid de planes (modelo VIEJO de escalera) — RETIRADO en FASE A (comisión).
+// La vista Planes es ahora estática (gratis + comisión + premium + exclusividad). Este
+// bloque queda inerte: si no existe el contenedor, no hace nada. ----
 (function(){
   const cont=document.getElementById("plansGrid");
+  if(!cont) return;
   cont.innerHTML = PLANES.map(p=>{
     const esActual = p.rank===RANK_ACTUAL_REAL;
     return `<div class="plan ${p.reco?"reco":""} ${esActual?"actual":""}">
@@ -2019,8 +2029,9 @@ pintarFacturasTabla();
   }));
 })();
 
-// ---- tabla de gating completa (Planes) ----
+// ---- tabla de gating completa (escalera VIEJA) — RETIRADA en FASE A. Inerte si no hay tabla. ----
 (function(){
+  if(!document.getElementById("gatingTabla")) return;
   const FILAS = [
     ["Clientes que te llevamos","2","7","18","45","+"],
     ["Gratis al empezar","1","3","6","10","—"],
@@ -2045,9 +2056,10 @@ pintarFacturasTabla();
   document.getElementById("gatingTabla").innerHTML = head+body;
 })();
 
-// ---- SIMULADOR: ¿cuántos clientes quieres al mes? ----
+// ---- SIMULADOR de coste/cliente (modelo VIEJO de cuota) — RETIRADO en FASE A. Inerte si no hay range. ----
 (function(){
   const range=document.getElementById("simRange"), val=document.getElementById("simVal");
+  if(!range || !val) return;
   const out={
     plan:document.getElementById("simPlan"), coste:document.getElementById("simCoste"),
     actual:document.getElementById("simActual"), ahorro:document.getElementById("simAhorro"),
@@ -2580,7 +2592,7 @@ async function aplicarPanelDatos(){
   const niv=(d.negocio && typeof d.negocio.nivel==="number") ? d.negocio.nivel : 0;
   rankActual=niv;
   const pb=document.getElementById("planBadge");
-  if(pb && d.plan){ pb.textContent = "Plan · " + (d.plan.precio ? d.plan.precio+" €/mes" : "A medida"); }
+  if(pb){ pb.textContent = (d.plan && d.plan.precio) ? ("Premium · "+d.plan.precio+" €/mes") : "Publicas gratis · comisión"; }
   refrescarGating();
   // Número del mes (panel_cifras_negocio, vía panel_datos().mes). Cupo = dato real siempre
   // mostrable (atribución; 0 hoy = honesto). La demanda fina la enchufa nexa-datos.
@@ -2631,30 +2643,29 @@ function aplicarDatosRealesAlPanel(d){
   try{ pintarFacturasTabla(); }catch(e){}
   try{ pintarEvoChart(); pintarDemandaChart(); pintarRepChart(); }catch(e){}
 
-  // 2 · RESUMEN
-  _setTxt("heroMesK", mesNom.charAt(0).toUpperCase()+mesNom.slice(1)+", mes en curso"+(precio?(" · plan de "+precio+" €/mes"):""));
+  // 2 · RESUMEN (modelo comisión) — plazas vendidas / dinero / liquidación / demanda fuera.
+  // Dinero ingresado y liquidación NO tienen fuente real todavía (el cobro es Fase C, Stripe
+  // Connect bloqueado por SL+CIF+IBAN): se muestran en VACÍO HONESTO, nunca una cifra inventada.
+  _setTxt("heroMesK", mesNom.charAt(0).toUpperCase()+mesNom.slice(1)+", mes en curso · publicas gratis · comisión sobre lo reservado");
   _hide("heroPill");  // sin histórico del mes anterior para un negocio nuevo
   const heroGrid=document.getElementById("heroGrid");
   if(heroGrid){
-    const tileEsperando = (niv>=2 && esperando!=null)
-      ? '<div><div class="hero-summary__n tab">'+esperando+'</div><div class="hero-summary__l">con plaza confirmada en tus próximos planes</div></div>'
-      : '';
     heroGrid.innerHTML =
       '<div><div class="hero-summary__n tab"><span id="resEntraron">'+usado+'</span>'
         +'<small style="font-size:.52em;font-weight:700;color:var(--ink3)">&nbsp;/ <span id="resIncluido">'+incluido+'</span></small></div>'
-        +'<div class="hero-summary__l">clientes que han entrado ya este mes</div></div>'
-      + tileEsperando
-      + '<div><div class="hero-summary__n tab">'+fuera+'</div><div class="hero-summary__l">pidieron entrar y no pudieron este mes</div></div>'
-      + '<div><div class="hero-summary__n tab accent">'+(precio!=null?(precio+" €"):"—")+'</div><div class="hero-summary__l">'+(precio!=null?"tu cuota mensual":"sin plan de pago")+'</div></div>';
+        +'<div class="hero-summary__l">plazas vendidas este mes</div></div>'
+      + '<div><div class="hero-summary__n tab accent">—</div><div class="hero-summary__l">ingresado · se activa con el cobro</div></div>'
+      + '<div><div class="hero-summary__n tab">—</div><div class="hero-summary__l">tu próxima liquidación · se activa con el cobro</div></div>'
+      + '<div><div class="hero-summary__n tab">'+fuera+'</div><div class="hero-summary__l">pidieron entrar y no cupieron</div></div>';
   }
   _setTxt("heroP", incluido>0
-    ? ("Quedan "+Math.max(0,incluido-usado)+" plazas de tu cupo este mes.")
-    : "Publica un plan y, en cuanto NYXA te traiga clientes, verás aquí tus números reales.");
+    ? ("Te quedan "+Math.max(0,incluido-usado)+" plazas por vender este mes. El dinero ingresado y tu liquidación aparecerán aquí en cuanto se active el cobro.")
+    : "Publica un plan con su precio y, en cuanto alguien reserve, verás aquí tus plazas vendidas. El dinero y la liquidación llegan cuando se active el cobro.");
 
-  // Nudges de upsell: solo si hay demanda insatisfecha REAL. Si no, se ocultan.
+  // Aviso: si hay demanda insatisfecha REAL, empuja a ABRIR PLAZAS / otra fecha (no a subir de cuota).
   if(fuera>0){
     const n1=document.querySelector("#nudgeResumen .nudge__body b");
-    if(n1) n1.textContent="Este mes "+fuera+(fuera===1?" persona se quedó":" personas se quedaron")+" fuera (≈"+eur(euros)+").";
+    if(n1) n1.textContent="Este mes "+fuera+(fuera===1?" persona pidió entrar y no cupo.":" personas pidieron entrar y no cupieron.");
     const n2=document.querySelector("#nudgeQuienViene .nudge__body b");
     if(n2) n2.textContent=(esperando!=null?esperando:0)+(esperando===1?" persona espera":" personas esperan")+" plaza en tus próximos planes.";
   } else {
@@ -2662,28 +2673,28 @@ function aplicarDatosRealesAlPanel(d){
   }
 
   // Las 4 tarjetas
-  _setTxt("fourQuienViene", usado); { const e=document.getElementById("fourQuienViene"); if(e) e.innerHTML=usado+'<small>de '+incluido+' este mes</small>'; }
-  { const e=document.getElementById("fourDemanda"); if(e) e.innerHTML=fuera+'<small>pidieron entrar y no pudieron este mes</small>'; }
-  { const e=document.getElementById("fourFactura"); if(e) e.innerHTML=(precio!=null?(precio+' €'):'—')+'<small>'+(precio!=null?'tu cuota mensual':'sin plan de pago')+'</small>'; }
+  _setTxt("fourQuienViene", usado); { const e=document.getElementById("fourQuienViene"); if(e) e.innerHTML=usado+'<small>plazas vendidas este mes</small>'; }
+  { const e=document.getElementById("fourDemanda"); if(e) e.innerHTML=fuera+'<small>pidieron entrar y no cupieron este mes</small>'; }
+  { const e=document.getElementById("fourFactura"); if(e) e.innerHTML='—<small>tu liquidación se activa con el cobro</small>'; }
   { const e=document.getElementById("fourExcl"); if(e) e.innerHTML='—<small>según tu zona y categoría</small>'; }
 
-  // "Tu plan ahora mismo"
-  _setTxt("planAhoraPrecio", precio!=null?(precio+" €/mes"):"Sin plan de pago");
-  _setTxt("planAhoraCargo", precio!=null?eur(precio):"—");
+  // "Tu cuenta ahora mismo" (modelo comisión: publicas gratis, pagas comisión por reserva)
+  _setTxt("planAhoraPrecio", "Gratis · comisión sobre reservas");
+  _setTxt("planAhoraCargo", "—");   // liquidación: vacío honesto hasta que haya cobro
   { const e=document.getElementById("planAhoraEstado"); if(e){ const ok=!!(d.negocio&&d.negocio.verified); e.textContent=ok?"Activo":"Pendiente"; e.className="pill "+(ok?"pill--ok":"pill--amb"); } }
   if(fuera>0){ _setTxt("planAhoraCupo","Sí"); _setTxt("planAhoraCupoSub", fuera+" se quedaron fuera este mes"); }
   else { const r=document.getElementById("planAhoraCupoRow"); if(r) r.hidden=true; }
 
-  // 3 · QUIÉN VIENE
+  // 3 · QUIÉN VIENE (modelo comisión: plazas vendidas sobre el aforo que el negocio abrió)
   _setTxt("qvMesUsado", usado);
-  _setTxt("qvMesIncluido", "de "+incluido+" incluidos");
+  _setTxt("qvMesIncluido", "de "+incluido+" plazas abiertas");
   { const b=document.getElementById("qvMesBar"); if(b) b.style.width=(incluido>0?Math.min(100,Math.round(usado/incluido*100)):0)+"%"; }
   _setTxt("qvMesNota", incluido>0
-    ? ("Quedan "+Math.max(0,incluido-usado)+" plazas de tu cuota antes de fin de mes.")
-    : "Aún no has usado cupo este mes.");
+    ? ("Te quedan "+Math.max(0,incluido-usado)+" plazas por vender de las que has abierto este mes. Tú decides cuántas abres: no hay cupo.")
+    : "Aún no has vendido plazas este mes.");
   _setTxt("qvStatEsperando", (esperando!=null?esperando:0));
   _setTxt("qvStatMes", usado);
-  _setTxt("qvStatMesSub", "de "+incluido+" incluidos");
+  _setTxt("qvStatMesSub", "de "+incluido+" abiertas");
   rellenarQvPlanes();   // lista real de próximos planes (panel_planes_vivos), solo números
 
   // "Quién viene en vivo" (99 €+): número real o estado honesto.
@@ -2714,7 +2725,7 @@ function aplicarDatosRealesAlPanel(d){
   const demLive=document.getElementById("demandaLive");
   if(demLive){
     demLive.innerHTML = (interesados>0||esperando)
-      ? ('Este mes le has interesado a <b class="tab">'+interesados+'</b> personas. Han entrado <b class="tab">'+entraron+'</b>'+(esperando!=null?(', y hay <b class="tab">'+esperando+'</b> con plaza confirmada en tus próximos planes'):'')+'.')
+      ? ('Este mes le has interesado a <b class="tab">'+interesados+'</b> personas. Has vendido <b class="tab">'+entraron+'</b> plazas'+(esperando!=null?(', y hay <b class="tab">'+esperando+'</b> con plaza confirmada en tus próximos planes'):'')+'.')
       : 'Aún no hay demanda en directo. En cuanto alguien pida entrar en un plan tuyo, lo verás aquí al momento.';
   }
   if(fuera<=0) _hide("demandaLivePill");
@@ -2730,15 +2741,15 @@ function aplicarDatosRealesAlPanel(d){
   // 6 · TU PÁGINA — cifras sin fuente real todavía
   _cardVacia("paginaCifrasCard","Tu página, en cifras","Aún no hay visitas registradas en tu página. Cuando la compartas y empiece a recibir gente, verás aquí las cifras — siempre en agregado.");
 
-  // 7 · EXCLUSIVIDAD / BUZÓN (199 €): sin datos reales → honesto
-  _cardVacia("exclCard","Exclusiva en tu categoría","Cuando actives el plan de 199 €, aquí verás tu exclusividad real por zona y categoría, con su fecha de revisión.");
+  // 7 · EXCLUSIVIDAD (desde 490 €/mes) / BUZÓN (consentimiento): sin datos reales → honesto
+  _cardVacia("exclCard","Exclusiva en tu categoría","La exclusividad de categoría y zona es a medida, desde 490 €/mes y revisable cada año. Cuando la actives, aquí verás la tuya con su fecha de revisión.");
   _cardVacia("buzonCard","Buzón","Aún no tienes asistencias confirmadas a las que escribir. Cuando las haya, podrás pedir permiso caso por caso — nunca una lista.");
   _cardVacia("buzonHistCard","Historial de peticiones","Aún no has pedido contactar con nadie.");
 
-  // 8 · FACTURACIÓN
-  _setTxt("facCuotaLinea", precio!=null?("Cuota · plan de "+precio+" € ("+incluido+" clientes incluidos)"):"Aún no tienes plan de pago");
-  HUECO.base=(precio!=null?precio:0); HUECO.incluidos=incluido; HUECO.extra=0; try{ pintarHueco(); }catch(e){}
-  _cardVacia("metodoPagoCard","Método de pago","Aún no has añadido un método de pago. Se te pedirá cuando contrates un plan de pago — gestionado por Stripe, NYXA nunca guarda tu número de tarjeta.");
+  // 8 · FACTURACIÓN → LIQUIDACIONES (vacío honesto: el cobro es Fase C, Stripe Connect)
+  _setTxt("facCuotaLinea", "Cobrado a clientes este periodo");
+  HUECO.base=0; HUECO.incluidos=incluido; HUECO.extra=0; try{ pintarHueco(); }catch(e){}
+  _cardVacia("metodoPagoCard","Estado del cobro","Aún no tienes liquidaciones. El cobro al cliente y la transferencia a tu cuenta se activan en cuanto encendamos el pago (Stripe Connect). En este modelo tú recibes dinero, no pagas: no se te pide ninguna tarjeta.");
 
   // Barra lateral: subtítulo del negocio (categoría · ciudad) con datos reales
   { const cat=(d.negocio&&d.negocio.categoria)||"", ciu=(d.negocio&&d.negocio.ciudad)||"";
@@ -2763,12 +2774,12 @@ function _aplicarRepeticion(rep, pctId, trendId, descId, chartId){
   if(chart) chart.hidden=true;              // sin serie histórica real (fuera de alcance hoy)
   if(rep && rep.suficiente && rep.pct!=null){
     if(pctEl){ pctEl.textContent=(+rep.pct)+"%"; }
-    if(desc) desc.textContent="De cada 100 clientes con recorrido, "+Math.round(+rep.pct)
-      +" repiten reserva por su cuenta — se vuelven a apuntar a otro plan tuyo sin que NYXA se lo proponga otra vez.";
+    if(desc) desc.textContent="De cada 100 personas con recorrido, "+Math.round(+rep.pct)
+      +" vuelven a reservar por su cuenta — se apuntan a otro plan tuyo sin que NYXA se lo proponga otra vez.";
   } else {
     if(pctEl){ pctEl.textContent="Aún no hay datos suficientes"; pctEl.style.fontSize="1.2rem"; }
-    if(desc) desc.textContent="Necesitamos al menos 5 clientes con recorrido suficiente "
-      +"(su primera reserva hace 30 días o más) para darte un porcentaje honesto. En cuanto los haya, aparece aquí solo.";
+    if(desc) desc.textContent="Necesitamos al menos 5 personas con recorrido suficiente "
+      +"(su primera reserva hace 30 días o más) para darte un porcentaje honesto. En cuanto las haya, aparece aquí solo.";
   }
 }
 
@@ -2806,23 +2817,24 @@ function vaciarPanelPorDefecto(){
   _setTxt("heroMesK","Tu mes en curso");
   _hide("heroPill");
   { const hg=document.getElementById("heroGrid"); if(hg) hg.innerHTML=
-      '<div><div class="hero-summary__n tab"><span id="resEntraron">—</span></div><div class="hero-summary__l">clientes que han entrado este mes</div></div>'
-     +'<div><div class="hero-summary__n tab">—</div><div class="hero-summary__l">pidieron entrar y no pudieron</div></div>'
-     +'<div><div class="hero-summary__n tab accent">—</div><div class="hero-summary__l">sin plan de pago</div></div>'; }
-  _setTxt("heroP","Aún no hay datos de tu negocio. Publica un plan y, en cuanto NYXA te traiga clientes, verás aquí tus números reales — nunca cifras de ejemplo.");
+      '<div><div class="hero-summary__n tab"><span id="resEntraron">—</span></div><div class="hero-summary__l">plazas vendidas este mes</div></div>'
+     +'<div><div class="hero-summary__n tab accent">—</div><div class="hero-summary__l">ingresado · se activa con el cobro</div></div>'
+     +'<div><div class="hero-summary__n tab">—</div><div class="hero-summary__l">tu próxima liquidación · se activa con el cobro</div></div>'
+     +'<div><div class="hero-summary__n tab">—</div><div class="hero-summary__l">pidieron entrar y no cupieron</div></div>'; }
+  _setTxt("heroP","Aún no hay datos de tu negocio. Publica un plan con su precio y, en cuanto alguien reserve, verás aquí tus plazas vendidas — nunca cifras de ejemplo. El dinero y la liquidación llegan cuando se active el cobro.");
   _hide("nudgeResumen"); _hide("nudgeQuienViene");
   { const e=document.getElementById("fourQuienViene"); if(e) e.innerHTML='—<small>'+NODATA+'</small>'; }
   { const e=document.getElementById("fourDemanda"); if(e) e.innerHTML='—<small>'+NODATA+'</small>'; }
-  { const e=document.getElementById("fourFactura"); if(e) e.innerHTML='—<small>sin plan de pago</small>'; }
+  { const e=document.getElementById("fourFactura"); if(e) e.innerHTML='—<small>tu liquidación, aún sin datos</small>'; }
   { const e=document.getElementById("fourExcl"); if(e) e.innerHTML='—<small>según tu zona y categoría</small>'; }
-  _setTxt("planAhoraPrecio", SIN); _setTxt("planAhoraCargo", SIN);
+  _setTxt("planAhoraPrecio", "Gratis · comisión sobre reservas"); _setTxt("planAhoraCargo", SIN);
   { const e=document.getElementById("planAhoraEstado"); if(e){ e.textContent=SIN; e.className="pill"; } }
   { const r=document.getElementById("planAhoraCupoRow"); if(r) r.hidden=true; }
 
   // Quién viene
   _setTxt("qvMesUsado", SIN); _setTxt("qvMesIncluido","");
   { const b=document.getElementById("qvMesBar"); if(b) b.style.width="0%"; }
-  _setTxt("qvMesNota","Aún no hay entradas este mes.");
+  _setTxt("qvMesNota","Aún no has vendido plazas este mes.");
   _setTxt("qvStatEsperando", SIN); _setTxt("qvStatMes", SIN); _setTxt("qvStatMesSub","");
   { const c=document.getElementById("qvPlanesRows"); if(c) c.innerHTML='<div class="tp-empty">Aún no has publicado ningún plan. Publícalo en «Tus planes» y aquí verás cuánta gente viene.</div>'; }
   { const m=document.getElementById("qvLiveMain"); if(m) m.innerHTML='Aquí verás cuántas personas tienen plaza confirmada en tus próximos planes.'; }
@@ -2841,14 +2853,14 @@ function vaciarPanelPorDefecto(){
 
   // Página / Exclusividad / Buzón
   _cardVacia("paginaCifrasCard","Tu página, en cifras","Aún no hay visitas registradas en tu página. Cuando la compartas y reciba gente, verás aquí las cifras — siempre en agregado.");
-  _cardVacia("exclCard","Exclusiva en tu categoría","Cuando actives el plan de 199 €, aquí verás tu exclusividad real por zona y categoría, con su fecha de revisión.");
+  _cardVacia("exclCard","Exclusiva en tu categoría","La exclusividad de categoría y zona es a medida, desde 490 €/mes y revisable cada año. Cuando la actives, aquí verás la tuya con su fecha de revisión.");
   _cardVacia("buzonCard","Buzón","Aún no tienes asistencias confirmadas a las que escribir. Cuando las haya, podrás pedir permiso caso por caso — nunca una lista.");
   _cardVacia("buzonHistCard","Historial de peticiones","Aún no has pedido contactar con nadie.");
 
   // Facturación
-  _setTxt("facCuotaLinea","Aún no tienes plan de pago");
+  _setTxt("facCuotaLinea","Cobrado a clientes este periodo");
   if(typeof HUECO!=="undefined"){ HUECO.base=0; HUECO.incluidos=0; HUECO.extra=0; try{ pintarHueco(); }catch(e){} }
-  _cardVacia("metodoPagoCard","Método de pago","Aún no has añadido un método de pago. Se te pedirá cuando contrates un plan de pago — gestionado por Stripe, NYXA nunca guarda tu número de tarjeta.");
+  _cardVacia("metodoPagoCard","Estado del cobro","Aún no tienes liquidaciones. El cobro al cliente y la transferencia a tu cuenta se activan en cuanto encendamos el pago (Stripe Connect). En este modelo tú recibes dinero, no pagas: no se te pide ninguna tarjeta.");
 
   // Ajustes + barra lateral
   _setTxt("ajusteNombre", SIN); _setTxt("ajusteCategoria", SIN); _setTxt("ajusteCiudad", SIN);
@@ -3001,6 +3013,10 @@ function renderPlanPreview(){
   const lugar=(document.getElementById("tpLugar").value||"").trim() || "Zona por confirmar";
   const aforo=+document.getElementById("tpAforo").value || 0;
   const desc=(document.getElementById("tpDesc").value||"").trim();
+  const precioRaw=parseFloat((document.getElementById("tpPrecio")||{}).value);
+  const precioTxt=(!isNaN(precioRaw) && precioRaw>0)
+    ? precioRaw.toLocaleString("es-ES",{minimumFractionDigits:0,maximumFractionDigits:2})+" € / plaza"
+    : "Gratis";
   const imgStyle = TPF.foto ? `background-image:url('${TPF.fotoURL}')` : planCoverPattern(PM.color||"#2f66ff",150);
   card.innerHTML=`
     <div class="plancard__img" style="${imgStyle}"><span class="plancard__tag">Patrocinado</span></div>
@@ -3011,11 +3027,11 @@ function renderPlanPreview(){
       ${desc? `<p class="plancard__desc">${esc(desc)}</p>`:""}
     </div>
     <div class="plancard__foot">
-      <span class="plancard__van">${tpIconPeople()} Se abre al publicar</span>
+      <span class="plancard__van">${esc(precioTxt)}</span>
       <span class="pill">Caben ${aforo||"—"}</span>
     </div>`;
 }
-["tpTitulo","tpCategoria","tpLugar","tpFecha","tpAforo","tpDesc"].forEach(id=>{
+["tpTitulo","tpCategoria","tpLugar","tpFecha","tpAforo","tpPrecio","tpDesc"].forEach(id=>{
   const el=document.getElementById(id); if(!el) return;
   el.addEventListener("input", renderPlanPreview);
   el.addEventListener("change", renderPlanPreview);
@@ -3057,6 +3073,13 @@ if(_btnTpPub) _btnTpPub.addEventListener("click", async ()=>{
   if(isNaN(startsAt) || startsAt<=new Date()){ showErr("La fecha y hora del plan deben estar en el futuro."); return; }
   if(!aforo || aforo<1){ showErr("El aforo es obligatorio — sin él no hay forma de medir quién se quedó fuera."); return; }
   if(!category_id){ showErr("Elige la actividad (categoría) de tu plan."); return; }
+  // Precio por plaza: opcional. Euros → céntimos. Vacío/0 = plan sin precio (gratis).
+  const precioEuros=parseFloat((document.getElementById("tpPrecio")||{}).value);
+  let price_cents=null;
+  if(!isNaN(precioEuros) && precioEuros>0){
+    if(precioEuros>10000){ showErr("El precio por plaza no puede pasar de 10.000 €."); return; }
+    price_cents=Math.round(precioEuros*100);
+  }
   _btnTpPub.disabled=true; _btnTpPub.textContent="Publicando…";
   const r = await api.crearPlanNegocio({
     title: titulo,
@@ -3067,6 +3090,7 @@ if(_btnTpPub) _btnTpPub.addEventListener("click", async ()=>{
     city: (document.getElementById("tpCiudad").value||"").trim() || null,
     description: (document.getElementById("tpDesc").value||"").trim() || null,
     access: (document.getElementById("tpApertura").value==="Con aprobación") ? "Con aprobación" : "Abierto a todos",
+    price_cents: price_cents,
     foto: TPF.foto || null,
   });
   _btnTpPub.disabled=false; _btnTpPub.textContent="Publicar plan";
@@ -3076,7 +3100,7 @@ if(_btnTpPub) _btnTpPub.addEventListener("click", async ()=>{
     return;
   }
   // Limpieza y vuelta a la lista real.
-  ["tpTitulo","tpLugar","tpCiudad","tpDesc","tpFecha"].forEach(id=>{ const el=document.getElementById(id); if(el) el.value=""; });
+  ["tpTitulo","tpLugar","tpCiudad","tpDesc","tpFecha","tpPrecio"].forEach(id=>{ const el=document.getElementById(id); if(el) el.value=""; });
   document.getElementById("tpAforo").value="";
   TPF.foto=null; TPF.fotoURL=null;
   const dz=document.getElementById("tpFotoDz"); if(dz){ dz.style.backgroundImage=""; dz.classList.remove("has-img"); }
