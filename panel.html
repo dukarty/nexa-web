@@ -3147,8 +3147,14 @@ async function pintarVerificacion(){
 window.addEventListener("nexa-empresas-ready",(ev)=>{
   if(!ev.detail || !ev.detail.real){ mostrarGate("entrar"); }
 });
-// Fallback: si en 1,5 s nadie ha decidido, muestra el gate (evita panel abierto sin sesión).
-setTimeout(()=>{ const g=_gateEl("gate"); if(g && g.hidden && (_gateEl("app")||{}).hidden!==false){ /* boot decidirá */ } }, 10);
+// Candado fail-closed en el arranque: hasta que el boot CONFIRME (contra el servidor)
+// que hay sesión válida y llame a setCuenta/hideGate, el panel queda OCULTO y el gate
+// VISIBLE. Evita que el #app se asome un instante o que una sesión fantasma lo abra.
+(function(){
+  const g=_gateEl("gate"), app=_gateEl("app");
+  if(app){ app.hidden=true; app.setAttribute("aria-hidden","true"); }
+  if(g){ g.hidden=false; }
+})();
 </script>
 <!-- Backend real: config público (URL + anon key) y SDK del panel. Cargados DESPUÉS de
      definir window.NEXA_PANEL para que el boot de nexa-empresas.js pueda hidratar el panel. -->

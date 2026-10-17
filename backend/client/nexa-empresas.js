@@ -452,18 +452,42 @@
     }
     window.NEXAEmpresas = api;
 
-    // Hidratar el panel en modo real (el panel expone window.NEXA_PANEL)
+    // ── CANDADO DE ACCESO (fail-closed) ──────────────────────────────────────
+    // El panel arranca SIEMPRE con el gate puesto y NO se revela hasta confirmar
+    // CONTRA EL SERVIDOR que hay una sesión real. Regla dura: sin sesión válida →
+    // siempre el gate, nunca el panel.
+    //   · getUser() hace una llamada de red y valida el token en el servidor.
+    //     getSession() solo lee localStorage (se puede falsear / quedar "fantasma")
+    //     → NO sirve como candado.
+    //   · Si no hay usuario válido, PURGAMOS la sesión (signOut): así un refresh
+    //     token muerto o de un login viejo no reabre el panel en silencio en cada
+    //     recarga (era la causa de "entro sin autenticarme").
     const P = window.NEXA_PANEL;
+    if (P && P.showGate) P.showGate();   // gate puesto antes de cualquier decisión
+
     if (api.real && P) {
       try {
-        const acc = await api.completeSignupIfPending();
-        if (acc) {
-          P.setCuenta(acc); if (P.hideGate) P.hideGate();
-          const m = await api.metrics(30); if (m && P.aplicarDatos) P.aplicarDatos(m);
-          // Precarga en segundo plano: al pulsar 7d/90d ya estarán listos (instantáneo).
-          if (api.metrics) { setTimeout(() => { api.metrics(7); api.metrics(90); }, 400); }
-        } else if (P.showGate) { P.showGate(); }
-      } catch (e) { if (P.showGate) P.showGate(); }
+        if (!api.sb || !api.sb.auth) throw new Error("sin_cliente");
+        const { data: { user } = { user: null }, error } = await api.sb.auth.getUser();
+        if (error || !user) {
+          // Sin sesión válida → limpia cualquier rastro y quédate en el gate.
+          try { await api.sb.auth.signOut(); } catch (e) {}
+        } else {
+          // Sesión verificada por el servidor → materializa alta pendiente (si la
+          // hay) y abre el panel con la cuenta real.
+          const acc = await api.completeSignupIfPending();
+          if (acc) {
+            P.setCuenta(acc); if (P.hideGate) P.hideGate();
+            const m = await api.metrics(30); if (m && P.aplicarDatos) P.aplicarDatos(m);
+            // Precarga en segundo plano: al pulsar 7d/90d ya estarán listos.
+            if (api.metrics) { setTimeout(() => { api.metrics(7); api.metrics(90); }, 400); }
+          } else {
+            // Autenticado pero sin ficha recuperable: no abrimos el panel a medias;
+            // cerramos sesión y dejamos el gate.
+            try { await api.sb.auth.signOut(); } catch (e) {}
+          }
+        }
+      } catch (e) { /* cualquier fallo → nos quedamos en el gate (fail-closed) */ }
     }
     window.dispatchEvent(new CustomEvent("nexa-empresas-ready", { detail: { real: api.real } }));
   }

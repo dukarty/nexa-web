@@ -231,6 +231,10 @@ section[id]{scroll-margin-top:84px}
 .form label{display:block;font-size:13px;font-weight:700;margin:16px 0 7px;color:var(--ink)}
 .form input{width:100%;font:inherit;font-size:16px;padding:14px 16px;border:1px solid var(--linea);border-radius:12px;color:var(--ink)}.form input:focus{outline:none;border-color:var(--az);box-shadow:0 0 0 4px rgba(47,102,255,.12)}
 .form .btn{width:100%;margin-top:22px}.form .mini{text-align:center;color:var(--gris);font-size:13px;margin-top:14px}
+.form .tel-row{display:flex;gap:10px}
+.form .tel-row select{flex:0 0 auto;font:inherit;font-size:16px;padding:14px 12px;border:1px solid var(--linea);border-radius:12px;color:var(--ink);background:#fff;cursor:pointer}
+.form .tel-row select:focus{outline:none;border-color:var(--az);box-shadow:0 0 0 4px rgba(47,102,255,.12)}
+.form .tel-row input{flex:1 1 auto}
 
 /* cabecera de sección asimétrica */
 .shead{display:flex;justify-content:space-between;align-items:flex-end;gap:40px;text-align:left;flex-wrap:wrap}
@@ -553,16 +557,61 @@ window.addEventListener("resize",function(){if(window.innerWidth>860)set(false);
 <!-- 12. CIERRE: FORMULARIO DE TRES CAMPOS -->
 <section class="cierre" id="publicar"><div class="wrap center">
   <span class="eyer">Empieza hoy</span>
-  <h2 class="h2 mt">¿Qué organizas y cuándo?</h2>
+  <h2 class="h2 mt">¿Qué organizas?</h2>
   <p class="lead">Déjanos tres datos y te llamamos.</p>
 
   <form class="form" id="leadForm" novalidate>
+    <label for="leadNombre">Nombre de tu negocio</label>
+    <input type="text" id="leadNombre" name="nombre_negocio" placeholder="Bodega La Viña, Surf Club Valencia, Escuela de Cocina…" autocomplete="organization" required>
     <label for="leadQue">¿Qué organizas?</label>
-    <input type="text" id="leadQue" name="que_organiza" placeholder="Cata de vinos, escapada a Albufera, curso de buceo…" autocomplete="off" required>
+    <input type="text" id="leadQue" name="que_organiza" placeholder="Catas, escapadas, cursos de buceo…" autocomplete="off" list="leadQueOpciones" required>
+    <datalist id="leadQueOpciones">
+      <option value="Catas"></option>
+      <option value="Cursos"></option>
+      <option value="Talleres"></option>
+      <option value="Clases"></option>
+      <option value="Rutas"></option>
+      <option value="Rutas en bici"></option>
+      <option value="Senderismo"></option>
+      <option value="Escapadas"></option>
+      <option value="Viajes"></option>
+      <option value="Excursiones"></option>
+      <option value="Salidas de surf"></option>
+      <option value="Salidas de kayak"></option>
+      <option value="Salidas de escalada"></option>
+      <option value="Escalada"></option>
+      <option value="Buceo"></option>
+      <option value="Paddle surf"></option>
+      <option value="Yoga"></option>
+      <option value="Retiros"></option>
+      <option value="Degustaciones"></option>
+      <option value="Cenas con plazas"></option>
+      <option value="Eventos"></option>
+      <option value="Experiencias"></option>
+    </datalist>
     <label for="leadTel">Tu teléfono</label>
-    <input type="tel" id="leadTel" name="telefono" placeholder="600 000 000" autocomplete="tel" required>
-    <label for="leadCuando">¿Cuándo es?</label>
-    <input type="text" id="leadCuando" name="cuando_es" placeholder="Este sábado, en dos semanas, el 15 de noviembre…" autocomplete="off">
+    <div class="tel-row">
+      <select id="leadPref" name="prefijo" aria-label="Prefijo de país" autocomplete="tel-country-code">
+        <option value="+34" selected>🇪🇸 +34</option>
+        <option value="+351">🇵🇹 +351</option>
+        <option value="+33">🇫🇷 +33</option>
+        <option value="+39">🇮🇹 +39</option>
+        <option value="+49">🇩🇪 +49</option>
+        <option value="+44">🇬🇧 +44</option>
+        <option value="+41">🇨🇭 +41</option>
+        <option value="+31">🇳🇱 +31</option>
+        <option value="+32">🇧🇪 +32</option>
+        <option value="+353">🇮🇪 +353</option>
+        <option value="+212">🇲🇦 +212</option>
+        <option value="+1">🇺🇸 +1</option>
+        <option value="+52">🇲🇽 +52</option>
+        <option value="+54">🇦🇷 +54</option>
+        <option value="+57">🇨🇴 +57</option>
+        <option value="+56">🇨🇱 +56</option>
+        <option value="+58">🇻🇪 +58</option>
+      </select>
+      <input type="tel" id="leadTel" name="telefono" placeholder="600 000 000" autocomplete="tel-national" required>
+    </div>
     <button class="btn lg" id="leadBtn" type="submit"><span>Enviar</span></button>
     <p id="leadErr" class="mini" role="alert" hidden style="color:#C0372E"></p>
     <p class="mini">Nada más. Te llamamos nosotros.</p>
@@ -696,16 +745,19 @@ window.addEventListener("resize",function(){if(window.innerWidth>860)set(false);
   form.addEventListener("submit",function(e){
     e.preventDefault();
     err.hidden=true;
+    var nombre=form.nombre_negocio.value.trim();
     var que=form.que_organiza.value.trim();
-    var tel=form.telefono.value.trim();
-    var cuando=form.cuando_es.value.trim();
+    var pref=(form.prefijo&&form.prefijo.value)||"+34";
+    var num=form.telefono.value.trim();
+    var telFull=(pref+" "+num).trim();
+    if(!nombre)return fallar("Dinos el nombre de tu negocio.");
     if(!que)return fallar("Dinos qué organizas.");
-    if(tel.replace(/[^0-9]/g,"").length<9)return fallar("Ese teléfono no parece completo.");
+    if(num.replace(/[^0-9]/g,"").length<6)return fallar("Ese teléfono no parece completo.");
     btn.disabled=true;btn.querySelector("span").textContent="Enviando…";
     fetch(SB+"/rest/v1/leads_organizadores",{
       method:"POST",
       headers:{"Content-Type":"application/json",apikey:KEY,Authorization:"Bearer "+KEY,Prefer:"return=minimal"},
-      body:JSON.stringify({que_organiza:que,telefono:tel,cuando_es:cuando||null})
+      body:JSON.stringify({nombre_negocio:nombre,que_organiza:que,telefono:telFull})
     }).then(function(res){
       if(!res.ok)throw new Error("");
       form.hidden=true;ok.hidden=false;ok.setAttribute("tabindex","-1");ok.focus();
