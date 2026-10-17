@@ -574,9 +574,9 @@ window.addEventListener("resize",function(){if(window.innerWidth>860)set(false);
   <!-- Paso 2 · introducir el código de 6 cifras -->
   <form class="form" id="codeForm" hidden novalidate style="text-align:center">
     <p class="h2" style="font-size:24px" id="codeTit">Introduce tu código</p>
-    <p class="lead" style="margin:10px 0 4px" id="codeSub">Te hemos enviado un código de 6 cifras a <strong id="codeEmail"></strong>. Míralo también en spam.</p>
+    <p class="lead" style="margin:10px 0 4px" id="codeSub">Te hemos enviado un código a <strong id="codeEmail"></strong>. Míralo también en spam.</p>
     <label for="codeInput" style="margin-top:14px">Código de acceso</label>
-    <input type="text" id="codeInput" name="code" inputmode="numeric" autocomplete="one-time-code" maxlength="6" placeholder="______" style="letter-spacing:.5em;text-align:center;font-size:22px;font-weight:700" required>
+    <input type="text" id="codeInput" name="code" inputmode="numeric" autocomplete="one-time-code" maxlength="10" placeholder="________" style="letter-spacing:.35em;text-align:center;font-size:22px;font-weight:700" required>
     <button class="btn lg" id="codeBtn" type="submit"><span>Entrar a mi panel</span></button>
     <p id="codeErr" class="mini" role="alert" hidden style="color:#C0372E"></p>
     <button class="btn" id="codeResend" type="button" style="margin-top:8px">Reenviar el código</button>
