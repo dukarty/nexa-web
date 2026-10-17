@@ -41,6 +41,7 @@
     async listCategorias() { return []; },
     async crearPlanNegocio() { return { ok: false, error: "Publicar un plan solo funciona con el backend real." }; },
     async guardarPagina(cfg) { const c = readLS() || {}; c.escaparate = (cfg && cfg.escaparate) || {}; if (cfg && cfg.nombre) c.nombre = cfg.nombre; writeLS(c); return { ok: true, mock: true }; },
+    async guardarFicha(cfg) { const c = readLS() || {}; if (cfg && cfg.nombre) c.nombre = cfg.nombre; if (cfg && cfg.categoria != null) c.categoria = cfg.categoria; if (cfg && cfg.zona != null) c.zona = cfg.zona; if (cfg && cfg.descripcion != null) c.descripcion = cfg.descripcion; if (cfg && cfg.foto !== undefined) c.foto = cfg.foto; writeLS(c); return { ok: true, mock: true }; },
     async upgrade(plan) { const c = readLS() || {}; c.plan = plan; writeLS(c); return { ok: true, mock: true, plan }; },
     async listExperiences() { const c = readLS() || {}; return c.experiencias || []; },
     async addExperience(e) { const c = readLS() || {}; c.experiencias = c.experiencias || []; c.experiencias.unshift({ id: Date.now(), titulo: e.titulo, cat: e.cat, franja: e.franja, estado: "publicada" }); writeLS(c); return { ok: true }; },
@@ -77,6 +78,7 @@
         verified: !!biz.verified, verif_pendiente: !!m.verif_pendiente,
         experiencias: m.experiencias || [], objetivo: m.objetivo || null, sedes: m.sedes || [],
         escaparate: m.escaparate || null, slug: m.slug || null,
+        zona: m.zona || null, foto: m.foto || null,   // ficha (gratis): zona y foto principal
         equipo: [],
       };
     }
@@ -270,6 +272,23 @@
         const biz = await miNegocio(); if (!biz) return { ok: false, error: "sin_empresa" };
         const meta = Object.assign({}, biz.meta || {}, { escaparate: cfg.escaparate || {} });
         if (cfg.slug) meta.slug = String(cfg.slug).slice(0, 60);
+        const upd = { meta };
+        if (cfg.nombre) upd.name = String(cfg.nombre).slice(0, 60);
+        if (cfg.descripcion != null) upd.descripcion = String(cfg.descripcion).slice(0, 280);
+        if (cfg.categoria != null) upd.category = String(cfg.categoria).slice(0, 80);
+        const { error } = await sb.from("businesses").update(upd).eq("id", biz.id);
+        return { ok: !error, error: error && error.message };
+      },
+      // Guarda LA FICHA (GRATIS): nombre, categoría, zona, descripción y foto principal, SIN
+      // tocar meta.escaparate (eso es Premium y tiene su propio guardado). Es lo que permite a un
+      // negocio gratis existir en NYXA y completar el paso 1 del onboarding. No toca plan/verified
+      // (los congela el trigger). Zona y foto viven en meta (no hay columnas dedicadas).
+      async guardarFicha(cfg) {
+        if (!cfg) return { ok: false };
+        const biz = await miNegocio(); if (!biz) return { ok: false, error: "sin_empresa" };
+        const meta = Object.assign({}, biz.meta || {});   // conserva escaparate/slug/etc
+        if (cfg.zona != null) meta.zona = String(cfg.zona).slice(0, 60);
+        if (cfg.foto !== undefined) meta.foto = cfg.foto ? String(cfg.foto) : null;
         const upd = { meta };
         if (cfg.nombre) upd.name = String(cfg.nombre).slice(0, 60);
         if (cfg.descripcion != null) upd.descripcion = String(cfg.descripcion).slice(0, 280);

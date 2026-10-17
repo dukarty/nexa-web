@@ -647,10 +647,9 @@ td b{color:var(--ink);font-weight:700}
     </button>
 
     <p class="grp">Tu negocio</p>
-    <button class="navi" data-v="pagina" data-min-nav="1">
+    <button class="navi" data-v="pagina">
       <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18"/></svg></span>
       Tu página
-      <span class="lock"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></span>
     </button>
     <button class="navi" data-v="verificacion">
       <span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.5l7.5 3v5.5c0 4.6-3.2 8-7.5 9-4.3-1-7.5-4.4-7.5-9V5.5z"/><path d="M9 12l2 2 4-4"/></svg></span>
@@ -713,8 +712,10 @@ td b{color:var(--ink);font-weight:700}
           <div><div class="hero-summary__n tab">—</div><div class="hero-summary__l">pidieron entrar y no cupieron</div></div>
         </div>
         <p class="hero-summary__p" id="heroP">Aún no hay datos de tu negocio. Publica un plan con su precio y, en cuanto alguien reserve, verás aquí tus plazas vendidas. El dinero y la liquidación llegan cuando se active el cobro.</p>
+        <div id="heroCTA" style="margin-top:22px"></div>
       </div>
 
+      <!-- Accesos rápidos (secundarios, nunca compiten con la CTA primaria del hero) -->
       <div style="display:flex;gap:10px;flex-wrap:wrap;margin:-2px 0 20px">
         <button class="btn btn--gh btn--sm" data-go="quien-viene">
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><circle cx="17" cy="9" r="2.2"/><path d="M15.5 14.3c2.3.5 4 2.5 4 4.9"/></svg>
@@ -850,7 +851,7 @@ td b{color:var(--ink);font-weight:700}
         <p style="color:var(--ink2);font-size:.82rem;margin-top:12px" id="qvMesNota">Te quedan 5 plazas por vender de las que has abierto este mes. Tú decides cuántas abres: no hay cupo.</p>
       </div>
 
-      <div class="gated" data-min="2" data-msg="Disponible con Premium: el contador en vivo de gente esperando plaza.">
+      <div class="gated" data-min="2" data-msg="Con Premium lo ves en directo, no solo el resumen del día 1: cuánta gente está esperando plaza ahora mismo.">
         <div class="gated__body card card--accent-top">
           <div class="card__h"><b><span class="pulse" style="margin-right:8px"></span>En directo, ahora mismo</b><small id="qvLiveWhen">tu plan del martes</small></div>
           <p id="qvLiveMain" style="font-size:1.12rem;font-weight:700;line-height:1.5">Hay <span id="qvEsperando" class="tab" style="color:var(--az);font-weight:800">22</span> personas esperando plaza para el martes.</p>
@@ -923,7 +924,7 @@ td b{color:var(--ink);font-weight:700}
         <p class="charthint">La barra entera es cuánta gente pidió entrar. Solo cuenta quien pidió entrar y no pudo — nunca a quién se le enseñó el plan.</p>
       </div>
 
-      <div class="gated" data-min="2" data-msg="Disponible con Premium: la demanda en tiempo real, no solo el resumen del día 1.">
+      <div class="gated" data-min="2" data-msg="Con Premium ves la demanda en directo, no solo el resumen del día 1.">
         <div class="gated__body card">
           <div class="card__h"><b><span class="pulse" style="margin-right:8px"></span>En directo, ahora mismo</b><small>mes en curso</small></div>
           <p id="demandaLive" style="font-size:1.02rem;font-weight:600;line-height:1.5">
@@ -935,7 +936,7 @@ td b{color:var(--ink);font-weight:700}
         </div>
       </div>
 
-      <div class="gated" data-min="1" data-msg="Disponible con Premium: dónde vive la gente que se te queda fuera, en agregado.">
+      <div class="gated" data-min="2" data-msg="Con Premium ves dónde vive la gente que se te escapa, para decidir dónde abrir la próxima plaza.">
         <div class="gated__body card" id="zonaCard">
           <div class="card__h"><b>Por zona</b><small>dónde vive la gente que se te queda fuera</small></div>
           <div class="rows" id="zonaRows"></div>
@@ -943,7 +944,7 @@ td b{color:var(--ink);font-weight:700}
       </div>
 
       <div class="grid2">
-        <div class="gated" data-min="2" data-msg="Disponible con Premium: cuántos vuelven por su cuenta.">
+        <div class="gated" data-min="2" data-msg="Con Premium sabes cuántos vuelven por su cuenta — el dato que de verdad dice si tu plan funciona.">
           <div class="gated__body card">
             <div class="card__h"><b>Vuelven por su cuenta</b><small>repiten reserva sin que NYXA se lo proponga otra vez</small></div>
             <div class="stat__v" style="font-size:2.2rem"><span id="demandaRepPct">34%</span><small id="demandaRepTrend" style="display:inline;margin-left:8px;color:var(--verde)">▲ 6 pts vs. agosto</small></div>
@@ -959,7 +960,7 @@ td b{color:var(--ink);font-weight:700}
         </div>
       </div>
 
-      <div class="gated" data-min="2" data-msg="Disponible con Premium: histórico completo y exportación.">
+      <div class="gated" data-min="2" data-msg="Con Premium te llevas el histórico completo y lo exportas cuando quieras.">
         <div class="gated__body card">
           <div class="card__h"><b>Histórico</b><small>últimos 6 meses</small><button class="btn btn--gh btn--sm" id="btnExportCsv">↓ Exportar (.csv)</button></div>
           <div class="tablewrap">
@@ -978,7 +979,7 @@ td b{color:var(--ink);font-weight:700}
     <!-- ============ 4 · REPETICIÓN (99 €+) ============ -->
     <!-- ============================================================ -->
     <section class="vista" data-vista="repeticion">
-      <div class="gated" data-min="2" data-msg="Disponible con Premium: cuántas personas vuelven a reservar por su cuenta.">
+      <div class="gated" data-min="2" data-msg="Con Premium sabes cuántas personas vuelven a reservar por su cuenta — el dato que dice si tu plan funciona.">
         <div class="gated__body">
 
           <div class="card">
@@ -1005,12 +1006,54 @@ td b{color:var(--ink);font-weight:700}
     </section>
 
     <!-- ============================================================ -->
-    <!-- ============ 5 · TU PÁGINA (escaparate, 49 €+) — reconstruida ============ -->
+    <!-- ============ 5 · TU PÁGINA = Ficha (GRATIS) + Escaparate (Premium 99 €) ===== -->
     <!-- ============================================================ -->
     <section class="vista" data-vista="pagina">
-      <div class="gated" data-min="1" data-msg="Disponible con Premium: tu propia página dentro de NYXA, con tu estilo.">
+
+      <!-- ===== TU FICHA · GRATIS, SIN CANDADO — lo que te hace existir en NYXA ===== -->
+      <div class="card" id="fichaCard" style="margin-bottom:18px">
+        <div class="card__h"><b>Tu ficha</b><small>gratis, siempre — es lo que te hace existir en NYXA</small></div>
+        <p style="color:var(--ink2);font-size:.88rem;line-height:1.55;margin-bottom:18px">Lo mínimo para que NYXA pueda proponerte a quien de verdad encaja contigo. No cuesta nada y lo editas cuando quieras.</p>
+
+        <div class="pm-section">
+          <p class="pm-section__t">Foto principal</p>
+          <div style="display:flex;gap:16px;align-items:flex-start;flex-wrap:wrap">
+            <div>
+              <label class="dz dz--logo" id="pmLogoDz" for="pmLogoInput">
+                <span class="dz__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="3" width="18" height="18" rx="4"/><circle cx="8.5" cy="9" r="1.6"/><path d="M21 15.5l-5.2-5.2a2 2 0 0 0-2.8 0L5 18.5"/></svg></span>
+              </label>
+              <input type="file" accept="image/*" id="pmLogoInput" hidden>
+              <p class="dz__caption">Tu foto o logo</p>
+            </div>
+            <p style="flex:1;min-width:180px;font-size:.78rem;color:var(--ink3);line-height:1.5">Si no subes nada, usamos tu inicial sobre tu color de marca — tu ficha nunca se queda vacía.</p>
+          </div>
+        </div>
+
+        <div class="pm-section">
+          <div class="form">
+            <div class="field"><label>Nombre</label><input id="pmName" value="" placeholder="Tu negocio" maxlength="40"></div>
+            <div class="field"><label>Categoría</label><input id="pmCat" value="" placeholder="Tu categoría" maxlength="40"></div>
+            <div class="field"><label>Zona</label><input id="pmZona" value="" placeholder="Tu barrio o ciudad" maxlength="40"></div>
+            <div class="field"><label>Qué vive la gente contigo (1-2 líneas)</label><textarea id="pmDesc" maxlength="140" placeholder="Cuéntale a la gente qué vive contigo — 1 o 2 líneas"></textarea></div>
+          </div>
+        </div>
+
+        <div class="pm-section">
+          <button class="gate__btn" id="pmGuardarFicha" type="button" style="width:100%">Guardar ficha</button>
+          <p id="pmFichaGuardado" hidden style="margin-top:10px;font-size:.84rem;color:var(--verde)"></p>
+        </div>
+
+        <div class="guard guard--az" style="margin:4px 0 0">
+          <p class="guard__h">Lo que nunca sale de aquí</p>
+          <p>Tu ficha te hace visible; <b>las personas siguen siendo privadas</b>. Nunca vemos ni damos nombres, correos ni teléfonos de nadie — <b>ni con el plan de pago</b>.</p>
+        </div>
+      </div>
+
+      <!-- ===== TU ESCAPARATE · PREMIUM 99 €/mes — tu página pública, con tu estilo ===== -->
+      <div class="gated" data-min="2" data-msg="Con Premium: tu escaparate propio en NYXA — plantillas, portada y tu color, con un enlace para compartirlo fuera y traer a tu gente.">
         <div class="gated__body">
 
+          <div class="card__h" style="margin-bottom:4px"><b>Tu escaparate</b><small>Premium — tu página pública, con tu estilo</small></div>
           <p class="pill pill--amb" style="margin-bottom:16px">Plantillas listas para usar, sin IA — generarla sola desde tu web llega más adelante</p>
 
           <div class="pm-callout">
@@ -1049,37 +1092,17 @@ td b{color:var(--ink);font-weight:700}
               </div>
 
               <div class="pm-section">
-                <p class="pm-section__t">2 · Sube tus fotos</p>
-                <div style="display:flex;gap:16px;align-items:flex-start;flex-wrap:wrap">
-                  <div>
-                    <label class="dz dz--logo" id="pmLogoDz" for="pmLogoInput">
-                      <span class="dz__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="3" width="18" height="18" rx="4"/><circle cx="8.5" cy="9" r="1.6"/><path d="M21 15.5l-5.2-5.2a2 2 0 0 0-2.8 0L5 18.5"/></svg></span>
-                    </label>
-                    <input type="file" accept="image/*" id="pmLogoInput" hidden>
-                    <p class="dz__caption">Logo</p>
-                  </div>
-                  <div style="flex:1;min-width:180px">
-                    <label class="dz dz--cover" id="pmCoverDz" for="pmCoverInput">
-                      <span class="dz__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="3" width="18" height="18" rx="4"/><circle cx="8.5" cy="9" r="1.6"/><path d="M21 15.5l-5.2-5.2a2 2 0 0 0-2.8 0L5 18.5"/></svg></span>
-                      <span class="dz__label">Foto de portada (opcional)</span>
-                    </label>
-                    <input type="file" accept="image/*" id="pmCoverInput" hidden>
-                  </div>
-                </div>
-                <p style="margin-top:12px;font-size:.78rem;color:var(--ink3);line-height:1.5">Si no subes nada, usamos tu color de marca — tu página nunca se queda vacía.</p>
+                <p class="pm-section__t">2 · Sube tu portada</p>
+                <label class="dz dz--cover" id="pmCoverDz" for="pmCoverInput">
+                  <span class="dz__ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="3" width="18" height="18" rx="4"/><circle cx="8.5" cy="9" r="1.6"/><path d="M21 15.5l-5.2-5.2a2 2 0 0 0-2.8 0L5 18.5"/></svg></span>
+                  <span class="dz__label">Foto de portada (opcional)</span>
+                </label>
+                <input type="file" accept="image/*" id="pmCoverInput" hidden>
+                <p style="margin-top:12px;font-size:.78rem;color:var(--ink3);line-height:1.5">Si no subes portada, usamos tu color de marca — tu escaparate nunca se queda vacío. Tu nombre, categoría y foto principal salen de «Tu ficha».</p>
               </div>
 
               <div class="pm-section">
-                <p class="pm-section__t">3 · Cuéntanos quién eres</p>
-                <div class="form">
-                  <div class="field"><label>Nombre</label><input id="pmName" value="" placeholder="Tu negocio" maxlength="30"></div>
-                  <div class="field"><label>Categoría y zona</label><input id="pmCat" value="" placeholder="Tu categoría · tu zona" maxlength="48"></div>
-                  <div class="field"><label>Qué vive la gente contigo (1-2 líneas)</label><textarea id="pmDesc" maxlength="140" placeholder="Cuéntale a la gente qué vive contigo — 1 o 2 líneas"></textarea></div>
-                </div>
-              </div>
-
-              <div class="pm-section">
-                <p class="pm-section__t">4 · Color de marca</p>
+                <p class="pm-section__t">3 · Color de marca</p>
                 <div class="pal" id="pmPalette">
                   <button type="button" class="on" data-color="#2f66ff" style="background:#2f66ff" aria-label="Azul NYXA"></button>
                   <button type="button" data-color="#7a3cff" style="background:#7a3cff" aria-label="Morado"></button>
@@ -1108,7 +1131,7 @@ td b{color:var(--ink);font-weight:700}
               </div>
 
               <div class="pm-section">
-                <button class="gate__btn" id="pmGuardar" type="button" style="width:100%">Guardar cambios</button>
+                <button class="gate__btn" id="pmGuardar" type="button" style="width:100%">Guardar escaparate</button>
                 <p id="pmGuardado" hidden style="margin-top:10px;font-size:.84rem;color:var(--verde)"></p>
               </div>
 
@@ -1474,15 +1497,15 @@ td b{color:var(--ink);font-weight:700}
 <div class="mod" id="modHow"><div class="mod__c mod__c--how">
   <p class="mod__k">Así funciona</p>
   <p class="mod__t" id="howHola">NYXA Empresas, en cuatro pasos</p>
-  <p class="howto__sub">Completa tu página, verifícate, publica un plan. Nada más que esto — y cada paso ya refleja dónde estás.</p>
+  <p class="howto__sub">Completa tu ficha, verifícate, publica un plan. Nada más que esto — y cada paso ya refleja dónde estás.</p>
 
   <div class="howto">
     <div class="howto__step">
       <div class="howto__n" id="howN1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 9h18"/></svg></div>
       <div class="howto__b">
-        <div class="howto__b__tit"><b>1 · Tu página</b><span id="howTag1"></span></div>
-        <p id="howSub1">Tu escaparate en NYXA: quién eres y qué ofreces, en una pantalla.</p>
-        <button class="btn btn--sm btn--gh" data-go="pagina" data-cerrar-modal>Ir a Tu página</button>
+        <div class="howto__b__tit"><b>1 · Tu ficha</b><span id="howTag1"></span></div>
+        <p id="howSub1">Gratis: nombre, categoría, zona y una foto. Es lo que te hace existir en NYXA — sin esto no hay nada que proponer.</p>
+        <button class="btn btn--sm btn--gh" data-go="pagina" data-cerrar-modal>Ir a Tu ficha</button>
       </div>
     </div>
 
@@ -1539,48 +1562,36 @@ td b{color:var(--ink);font-weight:700}
    nunca se recalcula.
    ========================================================================== */
 
-// ---- DATA_EJEMPLO: planes (fuente: PRECIOS-NYXA.md, cerrado 28-sep-2026) ----
-const PLANES = [
-  {rank:0, label:"15 €",  precio:15,  clientes:2,  gratis:1,  cadaUno:"7,50 €", cadaUnoN:7.50,  entran:"≈100 €",   multi:"6,7×",  bullets:["Perfil y panel propio","Aviso de demanda (resumen del día 1)","Recomendación de plan"]},
-  {rank:1, label:"49 €",  precio:49,  clientes:7,  gratis:3,  cadaUno:"7,00 €", cadaUnoN:7.00,  entran:"≈350 €",   multi:"7,1×",  bullets:["Se te propone en tu zona","Tu página de venta con tu estilo","Desglose de demanda por zona"]},
-  {rank:2, label:"99 €",  precio:99,  clientes:18, gratis:5,  cadaUno:"5,50 €", cadaUnoN:5.50,  entran:"≈900 €",   multi:"9,1×",  bullets:["Alcance a toda la ciudad","Contador de demanda en vivo","Cuántos vuelven, histórico y exportar"], reco:true},
-  {rank:3, label:"199 €", precio:199, clientes:45, gratis:10, cadaUno:"4,42 €", cadaUnoN:4.42,  entran:"≈2.250 €", multi:"11,3×", bullets:["Exclusiva en tu categoría","Buzón para escribir a quien ya fue"]},
-  {rank:4, label:"A medida", precio:null, clientes:null, bullets:["Varias sedes, API","Patrocinios, ciudad entera"]}
-];
-const PRECIO_EXTRA = 7.5;
+// ---- MODELO VIEJO RETIRADO (FASE A, comisión): la escalera 15/49/99/199 € ya no existe.
+// `const PLANES` y el simulador de cuota se eliminaron de aquí: el modelo vivo es gratis +
+// comisión + Premium 99 € (+ exclusividad a medida), y vive en la comparativa estática de la
+// vista "Planes" (PRECIOS-NYXA.md). No queda ningún precio viejo en el JS. ----
+const PRECIO_EXTRA = 7.5;  // (legado inerte de HUECO; sin contenedores en el HTML, no pinta nada)
 
-// ---- DATA_EJEMPLO: histórico de demanda, 6 meses. Un hecho, un número. ----
-const HIST = [
-  {mes:"Abril",     plan:0, interesados:15, entraron:2,  fuera:13, subio:false},
-  {mes:"Mayo",      plan:0, interesados:19, entraron:2,  fuera:17, subio:false},
-  {mes:"Junio",     plan:1, interesados:26, entraron:7,  fuera:19, subio:true},
-  {mes:"Julio",     plan:1, interesados:34, entraron:7,  fuera:27, subio:false},
-  {mes:"Agosto",    plan:2, interesados:48, entraron:18, fuera:30, subio:true},
-  {mes:"Septiembre",plan:2, interesados:61, entraron:18, fuera:43, subio:false}
-];
+// ---- Histórico de demanda: VACÍO por defecto. Un negocio real nunca ve meses de ejemplo con
+// precios del modelo viejo; cuando nexa-datos enchufe la demanda real, se rellena aquí. ----
+const HIST = [];
 HIST.forEach(h=>{ h.estimado = h.fuera*50; h.euros = h.entraron*50; });
 
-// ---- DATA_EJEMPLO: repetición (%), mismo orden de meses que HIST ----
-const REPETICION = [22,24,27,29,28,34];
+// ---- Repetición (%): vacía por defecto (misma razón que HIST). ----
+const REPETICION = [];
 
-// ---- DATA_EJEMPLO: contador en vivo del plan de martes, octubre en curso ----
-const LIVE = {dia:"martes", hora:"18:00", interesados:40, entraron:18, esperando:22};
+// ---- Contador en vivo: a cero por defecto (estado vacío honesto). ----
+const LIVE = {dia:"martes", hora:"18:00", interesados:0, entraron:0, esperando:0};
 
-// ---- DATA_EJEMPLO: facturas ----
-const FACTURAS = [
-  {fecha:"01 oct 2026", concepto:"Plan 99 € + 4 extras · octubre (próxima)", importe:129.00, futura:true},
-  {fecha:"01 sep 2026", concepto:"Plan 99 € · septiembre", importe:99.00},
-  {fecha:"01 ago 2026", concepto:"Plan 99 € · agosto (subiste desde 49 €)", importe:49.00},
-  {fecha:"01 jul 2026", concepto:"Plan 49 € · julio", importe:49.00},
-  {fecha:"01 jun 2026", concepto:"Plan 49 € · junio (subiste desde 15 €)", importe:15.00},
-  {fecha:"01 may 2026", concepto:"Plan 15 € · mayo", importe:15.00}
-];
+// ---- Facturas: vacío por defecto. Las liquidaciones reales llegan con el cobro (Stripe
+// Connect). Nunca se muestra un histórico de ejemplo con precios del modelo viejo. ----
+const FACTURAS = [];
 
-let rankActual = 2; // nivel por defecto; lo fija el servidor en aplicarPanelDatos()
-const RANK_ACTUAL_REAL = 2; // el plan REAL contratado (el simulador de arriba solo cambia la vista)
+// Nivel del negocio. Arranca en 0 (GRATIS) para que un negocio real vea su estado honesto
+// —con candados— aunque el backend falle; el servidor lo sube a premium en aplicarPanelDatos().
+let rankActual = 0;
 
 function money(n){ return (+n).toLocaleString("es-ES",{minimumFractionDigits:2,maximumFractionDigits:2})+" €"; }
 function esc(s){return String(s==null?"":s).replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));}
+// Etiqueta de plan para el histórico. El modelo viejo (const PLANES) se eliminó; HIST hoy está
+// siempre vacío (lo rellena nexa-datos en el futuro), así que esto devuelve "" sin romper nada.
+function planLabel(i){ return (typeof PLANES!=="undefined" && PLANES[i] && PLANES[i].label) ? PLANES[i].label : ""; }
 const $=(s,r)=> (r||document).querySelector(s);
 const $$=(s,r)=> Array.from((r||document).querySelectorAll(s));
 
@@ -1592,7 +1603,7 @@ const TIT = {
   "quien-viene":["Quién viene","Número y hora, en tiempo real. Nunca datos privados."],
   "demanda":["El aviso de demanda","Cuántos quisieron entrar y cuánto ganarías con más plazas."],
   "repeticion":["Repetición","Cuántos clientes vuelven por su cuenta, sin que te los volvamos a traer."],
-  "pagina":["Tu página","Tu propia página dentro de NYXA, con tu estilo."],
+  "pagina":["Tu página","Tu ficha es gratis. Tu escaparate con tu estilo llega con Premium."],
   "exclusividad":["Exclusividad","Un solo referente por zona y categoría."],
   "buzon":["Buzón","Escribir a quien ya fue, a través de NYXA — nunca una lista."],
   "facturacion":["Liquidaciones","Lo cobrado, nuestra comisión, lo transferido y cuándo."],
@@ -1737,15 +1748,38 @@ function howSetStep(n, estado, sub){
   const tag=document.getElementById("howTag"+n); if(tag) tag.innerHTML=howTag(estado);
   if(sub){ const p=document.getElementById("howSub"+n); if(p) p.textContent=sub; }
 }
+// CTA ÚNICA del hero (§2.4): un solo botón grande que cambia según en qué paso REAL está el
+// negocio — el mismo estado que calcula pintarGuiaComoFunciona. Nunca dos CTAs compitiendo.
+async function pintarHeroCTA(){
+  const host=document.getElementById("heroCTA"); if(!host) return;
+  const fichaHecha = !!(ACC && ACC.nombre && ACC.categoria && ACC.descripcion);
+  let verificado = !!(ACC && ACC.verified);
+  if(!verificado){
+    try{ const api=window.NEXAEmpresas; if(api&&api.real&&api.estadoVerificacion){ verificado = (await api.estadoVerificacion())==="verificado"; } }catch(e){}
+  }
+  let nPlanes=0;
+  try{ const api=window.NEXAEmpresas; if(api&&api.real&&api.panelPlanesVivos){ const d=await api.panelPlanesVivos(); if(d&&!d.error&&Array.isArray(d.planes)) nPlanes=d.planes.length; } }catch(e){}
+  const premium = rankActual>=2;
+  let label, go, pub=false;
+  if(!fichaHecha){ label="Completa tu ficha"; go="pagina"; }
+  else if(!verificado){ label="Pide la verificación"; go="verificacion"; }
+  else if(nPlanes===0){ label="Publica tu primer plan"; go="tus-planes"; pub=true; }
+  else if(!premium){ label="Mira la demanda que se te escapa"; go="demanda"; }
+  else { label="Mira tus próximas fechas"; go="quien-viene"; }
+  host.innerHTML = '<button class="btn" id="heroCTABtn">'+esc(label)
+    +'<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>';
+  const btn=document.getElementById("heroCTABtn");
+  if(btn) btn.addEventListener("click", ()=>{ if(pub){ irA("tus-planes"); try{ iniciarPublicarPlan(); }catch(e){} } else { irA(go); } });
+}
 async function pintarGuiaComoFunciona(){
   const h=document.getElementById("howHola");
   if(h) h.textContent = (ACC && ACC.nombre) ? ("Hola, "+ACC.nombre+" — así estás tú ahora mismo") : "NYXA Empresas, en cuatro pasos";
 
-  // 1 · Tu página — "hecha" si ya hay nombre, categoría y descripción reales (lo mínimo para publicarla)
+  // 1 · Tu ficha (GRATIS) — "hecha" si ya hay nombre, categoría y descripción reales (lo mínimo para existir en NYXA)
   const pagHecha = !!(ACC && ACC.nombre && ACC.categoria && ACC.descripcion);
   howSetStep(1, pagHecha?"ok":null, pagHecha
-    ? "Tu página ya tiene lo esencial — nombre, categoría y descripción."
-    : "Tu escaparate en NYXA: quién eres y qué ofreces, en una pantalla.");
+    ? "Tu ficha ya tiene lo esencial — nombre, categoría y descripción."
+    : "Gratis: nombre, categoría, zona y una foto. Es lo que te hace existir en NYXA.");
 
   // 2 · Verifícate — mismo estado real que pinta la vista Verificación (nunca uno aparte)
   let est = (ACC && ACC.verified) ? "verificado" : null;
@@ -1848,15 +1882,7 @@ function refrescarGating(){
   });
 }
 
-document.querySelectorAll("#simPills button").forEach(b=>{
-  b.addEventListener("click",()=>{
-    document.querySelectorAll("#simPills button").forEach(x=>x.classList.remove("on"));
-    b.classList.add("on");
-    rankActual = +b.dataset.rank;
-    refrescarGating();
-    toast("Viendo el panel como si tu plan fuera "+PLANES[rankActual].label);
-  });
-});
+// (Simulador de plan #simPills retirado en producción: el nivel lo fija el servidor.)
 
 // ---- stepper "abrir hueco extra" (base y cupo = plan REAL del negocio) ----
 // HUECO.base/incluidos arrancan con el ejemplo y los sobrescribe aplicarDatosRealesAlPanel()
@@ -1895,7 +1921,7 @@ let pintarHueco = function(){};
 // ---- exportar CSV del histórico (mismos números que la tabla — un hecho, un número) ----
 document.getElementById("btnExportCsv").addEventListener("click",()=>{
   const filas=[["Mes","Plan","Interesados","Entraron","Se quedaron fuera","Estimado (€)"]]
-    .concat(HIST.map(h=>[h.mes, PLANES[h.plan].label, h.interesados, h.entraron, h.fuera, h.estimado]));
+    .concat(HIST.map(h=>[h.mes, planLabel(h.plan), h.interesados, h.entraron, h.fuera, h.estimado]));
   const csv = filas.map(r=>r.join(";")).join("\n");
   const blob = new Blob([csv],{type:"text/csv;charset=utf-8"});
   const a=document.createElement("a");
@@ -1930,9 +1956,9 @@ function pintarHistTabla(){
     return;
   }
   const filasHtml = HIST.map((h,i)=>{
-    const subioTag = h.subio? ' <span class="pill pill--ok" style="margin-left:6px">↑ subiste a '+PLANES[h.plan].label+'</span>' : '';
+    const subioTag = h.subio? ' <span class="pill pill--ok" style="margin-left:6px">↑ subiste a '+planLabel(h.plan)+'</span>' : '';
     const destacar = i===HIST.length-1;
-    return '<tr><td>'+h.mes+subioTag+'</td><td><span class="pill">'+PLANES[h.plan].label+'</span></td>'
+    return '<tr><td>'+h.mes+subioTag+'</td><td><span class="pill">'+planLabel(h.plan)+'</span></td>'
       +'<td class="r tab">'+(destacar?'<b>'+h.interesados+'</b>':h.interesados)+'</td>'
       +'<td class="r tab">'+(destacar?'<b>'+h.entraron+'</b>':h.entraron)+'</td>'
       +'<td class="r tab">'+(destacar?'<b>'+h.fuera+'</b>':h.fuera)+'</td>'
@@ -1956,120 +1982,12 @@ function pintarFacturasTabla(){
 }
 pintarFacturasTabla();
 
-// ---- grid de planes (modelo VIEJO de escalera) — RETIRADO en FASE A (comisión).
-// La vista Planes es ahora estática (gratis + comisión + premium + exclusividad). Este
-// bloque queda inerte: si no existe el contenedor, no hace nada. ----
-(function(){
-  const cont=document.getElementById("plansGrid");
-  if(!cont) return;
-  cont.innerHTML = PLANES.map(p=>{
-    const esActual = p.rank===RANK_ACTUAL_REAL;
-    return `<div class="plan ${p.reco?"reco":""} ${esActual?"actual":""}">
-      ${p.reco&&!esActual?'<span class="plan__tag">Recomendado</span>':''}
-      ${esActual?'<span class="plan__tag" style="background:var(--ink)">Tu plan actual</span>':''}
-      <div class="plan__big">${p.clientes ?? "+"}<small>clientes ${p.clientes? "al mes":"a negociar"}</small></div>
-      <div class="plan__price">${p.precio? money(p.precio)+"/mes · cada uno a <b>"+p.cadaUno+"</b>" : "<b>A medida</b>"}</div>
-      ${p.entran?`<div class="plan__multi">Le entran ${p.entran} · ${p.multi} lo que pagas</div>`:""}
-      <ul>${p.bullets.map(b=>`<li>${b}</li>`).join("")}${p.gratis?`<li><b>${p.gratis}</b> gratis al empezar</li>`:""}</ul>
-      <div class="plan__btn"><button class="btn ${esActual?'btn--gh':''}" style="width:100%;justify-content:center" data-plan="${p.rank}">${esActual? "Tu plan":"Cambiar a este plan"}</button></div>
-    </div>`;
-  }).join("");
-  cont.querySelectorAll("[data-plan]").forEach(b=>b.addEventListener("click",()=>{
-    const p = PLANES[+b.dataset.plan];
-    if(+b.dataset.plan===RANK_ACTUAL_REAL){ toast("Ya estás en el plan de "+p.label+"."); return; }
-    document.getElementById("modPlanesT").textContent = "Cambiar al plan de " + p.label;
-    abrirModal("modPlanes");
-  }));
-})();
-
-// ---- tabla de gating completa (escalera VIEJA) — RETIRADA en FASE A. Inerte si no hay tabla. ----
-(function(){
-  if(!document.getElementById("gatingTabla")) return;
-  const FILAS = [
-    ["Clientes que te llevamos","2","7","18","45","+"],
-    ["Gratis al empezar","1","3","6","10","—"],
-    ["Perfil y panel propio","ok","ok","ok","ok","ok"],
-    ["Aviso de demanda (resumen del día 1)","ok","ok","ok","ok","ok"],
-    ["Recomendación de plan","ok","ok","ok","ok","no"],
-    ["Se te propone en tu zona","no","ok","ok","ok","ok"],
-    ["Tu página de venta con tu estilo","no","ok","ok","ok","ok"],
-    ["Desglose de demanda por zona/barrio","no","ok","ok","ok","ok"],
-    ["Alcance a toda la ciudad","no","no","ok","ok","ok"],
-    ["Contador de demanda en vivo","no","no","ok","ok","ok"],
-    ["Cuántos vuelven por su cuenta","no","no","ok","ok","ok"],
-    ["Histórico y exportar","no","no","ok","ok","ok"],
-    ["Abrir hueco extra el mismo mes","no","no","ok","ok","ok"],
-    ["Exclusiva en tu categoría","no","no","no","ok","ok"],
-    ["Buzón — consentimiento por caso, nunca lista","no","no","no","ok","ok"],
-    ["Varias sedes y API","no","no","no","no","ok"]
-  ];
-  const cell = v => v==="ok" ? '<td class="c ok">✓</td>' : v==="no" ? '<td class="c no">—</td>' : '<td class="c">'+v+'</td>';
-  const head = '<thead><tr><th></th><th class="c">15 €</th><th class="c">49 €</th><th class="c">99 €</th><th class="c">199 €</th><th class="c">A medida</th></tr></thead>';
-  const body = '<tbody>'+FILAS.map(f=>'<tr><td>'+f[0]+'</td>'+f.slice(1).map(cell).join("")+'</tr>').join("")+'</tbody>';
-  document.getElementById("gatingTabla").innerHTML = head+body;
-})();
-
-// ---- SIMULADOR de coste/cliente (modelo VIEJO de cuota) — RETIRADO en FASE A. Inerte si no hay range. ----
-(function(){
-  const range=document.getElementById("simRange"), val=document.getElementById("simVal");
-  if(!range || !val) return;
-  const out={
-    plan:document.getElementById("simPlan"), coste:document.getElementById("simCoste"),
-    actual:document.getElementById("simActual"), ahorro:document.getElementById("simAhorro"),
-    texto:document.getElementById("simTexto"), cta:document.getElementById("simCta")
-  };
-  function planQueCubre(n){
-    for(const p of PLANES){ if(p.clientes!=null && p.clientes>=n) return p; }
-    return PLANES[4]; // a medida
-  }
-  function calcular(n){
-    const rec = planQueCubre(n);
-    const actual = PLANES[RANK_ACTUAL_REAL];
-    val.textContent=n;
-    if(rec.rank===4){
-      out.plan.textContent="A medida";
-      out.coste.textContent="a negociar";
-      out.actual.textContent = money(actual.precio + Math.max(0,n-actual.clientes)*PRECIO_EXTRA);
-      out.ahorro.textContent="—";
-      out.texto.textContent="Para "+n+" clientes al mes hablamos de un acuerdo a medida: varias sedes, API o ciudad entera. No es autoservicio — se negocia.";
-      out.cta.textContent="Hablar de un plan a medida";
-      out.cta.disabled=false;
-      return;
-    }
-    out.plan.textContent=rec.label;
-    out.coste.textContent=rec.cadaUno;
-    const extrasNecesarios = Math.max(0, n-actual.clientes);
-    const costeActualMasExtras = actual.precio + extrasNecesarios*PRECIO_EXTRA;
-    out.actual.textContent = money(costeActualMasExtras);
-    if(rec.rank===actual.rank){
-      out.ahorro.textContent="—";
-      out.texto.textContent = "Tu plan de "+actual.label+" ya te cubre "+n+" clientes al mes. No hace falta cambiar nada.";
-      out.cta.textContent="Ya estás en el plan que te conviene";
-      out.cta.disabled=true;
-    }else{
-      const ahorro = costeActualMasExtras - rec.precio;
-      out.cta.disabled=false;
-      if(ahorro>0){
-        out.ahorro.textContent = money(ahorro);
-        out.texto.textContent = "Quedándote en "+actual.label+" y pidiendo "+extrasNecesarios+" extra"+(extrasNecesarios===1?"":"s")+" pagarías "+money(costeActualMasExtras)+". Subiendo al plan de "+rec.label+" pagas "+money(rec.precio)+" — ahorras "+money(ahorro)+" al mes y cada cliente te sale a "+rec.cadaUno+" en vez de "+((costeActualMasExtras/n).toFixed(2)+" €").replace(".",",")+".";
-        out.cta.textContent = "Subir al plan de "+rec.label;
-      }else{
-        out.ahorro.textContent = "—";
-        out.texto.textContent = "Con "+n+" clientes, seguir en "+actual.label+" y pedir "+extrasNecesarios+" extra"+(extrasNecesarios===1?"":"s")+" sale más barato este mes ("+money(costeActualMasExtras)+" frente a "+money(rec.precio)+"). Pero si tu demanda sigue subiendo, en el plan de "+rec.label+" no pagas ni un euro más hasta los "+rec.clientes+" clientes.";
-        out.cta.textContent = "Subir al plan de "+rec.label+" de todas formas";
-      }
-    }
-  }
-  function actualizar(){ calcular(+range.value); }
-  range.addEventListener("input",actualizar);
-  document.getElementById("simPlus").addEventListener("click",()=>{ range.value=Math.min(60,+range.value+1); actualizar(); });
-  document.getElementById("simMinus").addEventListener("click",()=>{ range.value=Math.max(1,+range.value-1); actualizar(); });
-  document.getElementById("simCta").addEventListener("click",()=>{
-    if(out.cta.disabled) return;
-    toast("Esto abre el checkout de Stripe con tu tarjeta guardada.");
-  });
-  actualizar();
-})();
+// ---- MODELO VIEJO (escalera 15/49/99/199 €) — ELIMINADO en FASE A (comisión) ----
+// Se retiraron tres bloques inertes que narraban la escalera de cuotas: la rejilla de planes
+// (#plansGrid), la tabla de gating por tramo (#gatingTabla) y el simulador de coste/cliente
+// (#simRange). Ninguno tenía ya contenedor en el HTML, así que no pintaban nada, pero contenían
+// los precios viejos en texto. La vista "Planes" viva es estática y refleja PRECIOS-NYXA.md
+// (gratis + comisión 15-20% + Premium 99 € + exclusividad a medida). No queda residuo.
 
 /* ==========================================================================
    PAGEMAKER — "Tu página": 4 plantillas fijas rellenas con datos, sin IA.
@@ -2080,12 +1998,20 @@ const PM = {
   tpl:"minimal",
   color:"#2f66ff",
   name:"Tu negocio",
-  cat:"Tu categoría · tu zona",
+  categoria:"",                 // ficha (gratis)
+  zona:"",                      // ficha (gratis)
+  cat:"Tu categoría · tu zona", // etiqueta compuesta para el escaparate
   desc:"",
-  logo:null,
-  cover:null,
+  logo:null,                    // foto principal de la ficha (gratis)
+  cover:null,                   // portada del escaparate (Premium)
   soldOut:false
 };
+// Recompone la etiqueta "categoría · zona" que pinta el escaparate a partir de los dos
+// campos de la ficha. Si no hay nada, deja el placeholder genérico (nunca un dato inventado).
+function pmSyncCat(){
+  const partes=[PM.categoria, PM.zona].map(s=>(s||"").trim()).filter(Boolean);
+  PM.cat = partes.length ? partes.join(" · ") : "Tu categoría · tu zona";
+}
 
 function pmSlug(){
   return (PM.name||"").toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g,"")
@@ -2223,10 +2149,12 @@ document.querySelectorAll('#pmPalette button[data-color]').forEach(b=>{
   });
 });
 
-// campos: nombre, categoría, descripción — en vivo
-const pmName=document.getElementById('pmName'), pmCat=document.getElementById('pmCat'), pmDesc=document.getElementById('pmDesc');
+// campos de la FICHA (gratis): nombre, categoría, zona, descripción — en vivo
+const pmName=document.getElementById('pmName'), pmCat=document.getElementById('pmCat'),
+      pmZona=document.getElementById('pmZona'), pmDesc=document.getElementById('pmDesc');
 if(pmName) pmName.addEventListener('input', ()=>{ PM.name=pmName.value; renderPM(); });
-if(pmCat) pmCat.addEventListener('input', ()=>{ PM.cat=pmCat.value; renderPM(); });
+if(pmCat)  pmCat.addEventListener('input', ()=>{ PM.categoria=pmCat.value; pmSyncCat(); renderPM(); });
+if(pmZona) pmZona.addEventListener('input', ()=>{ PM.zona=pmZona.value; pmSyncCat(); renderPM(); });
 if(pmDesc) pmDesc.addEventListener('input', ()=>{ PM.desc=pmDesc.value; renderPM(); });
 
 // subir logo / portada (FileReader, local — no sale de este documento)
@@ -2273,34 +2201,63 @@ if(pmShareBtn) pmShareBtn.addEventListener('click', ()=>{
   else { if(navigator.clipboard) navigator.clipboard.writeText(link).catch(()=>{}); toast('Enlace copiado: '+link); }
 });
 
-// Guardar "Tu página" en el backend (perfil + escaparate). Real: guardarPagina();
-// sin backend (mock): queda local. Persiste nombre/descripción/categoría + estilo + slug.
+// Guardar LA FICHA (GRATIS): nombre, categoría, zona, descripción y foto principal. No toca el
+// escaparate (su propia meta). Es lo que desatasca el paso 1 del onboarding para un negocio gratis.
+const pmGuardarFichaBtn=document.getElementById('pmGuardarFicha');
+if(pmGuardarFichaBtn) pmGuardarFichaBtn.addEventListener('click', async ()=>{
+  const api=window.NEXAEmpresas;
+  if(pmName) PM.name=pmName.value;
+  if(pmCat){ PM.categoria=pmCat.value; } if(pmZona){ PM.zona=pmZona.value; } pmSyncCat();
+  if(pmDesc) PM.desc=pmDesc.value;
+  const cfg={ nombre:PM.name, categoria:PM.categoria, zona:PM.zona, descripcion:PM.desc, foto:PM.logo||null };
+  const ok=document.getElementById('pmFichaGuardado');
+  pmGuardarFichaBtn.disabled=true; const prev=pmGuardarFichaBtn.textContent; pmGuardarFichaBtn.textContent='Guardando…';
+  let r={ok:false};
+  try{
+    r = (api && api.guardarFicha) ? await api.guardarFicha(cfg)
+      : (api && api.guardarPagina) ? await api.guardarPagina(cfg)   // compat: guardarPagina acepta los mismos campos
+      : {ok:false,error:'sin backend'};
+  }catch(e){ r={ok:false,error:e&&e.message}; }
+  pmGuardarFichaBtn.disabled=false; pmGuardarFichaBtn.textContent=prev;
+  if(ok){ ok.hidden=!r.ok; ok.style.color = r.ok ? 'var(--verde)' : 'var(--rojo)';
+    ok.textContent = r.ok ? 'Ficha guardada. Ya existes en NYXA.' : ('No se pudo guardar: '+(r.error||'inténtalo de nuevo')); }
+  toast(r.ok ? 'Tu ficha se ha guardado.' : 'No se pudo guardar la ficha.');
+  // refrescar el estado del paso 1 del checklist (ya con datos reales)
+  try{ if(typeof ACC==='object' && ACC){ ACC.nombre=PM.name; ACC.categoria=PM.categoria; ACC.descripcion=PM.desc; } }catch(e){}
+  try{ pintarGuiaComoFunciona(); }catch(e){}
+  try{ pintarHeroCTA(); }catch(e){}
+});
+
+// Guardar EL ESCAPARATE (Premium): plantilla, color, portada + slug. No toca la ficha.
 const pmGuardarBtn=document.getElementById('pmGuardar');
 if(pmGuardarBtn) pmGuardarBtn.addEventListener('click', async ()=>{
   const api=window.NEXAEmpresas;
-  const cfg={ nombre:PM.name, descripcion:PM.desc, categoria:PM.cat, slug:pmSlug(),
-    escaparate:{ tpl:PM.tpl, color:PM.color, logo:PM.logo||null, cover:PM.cover||null } };
+  const cfg={ slug:pmSlug(),
+    escaparate:{ tpl:PM.tpl, color:PM.color, cover:PM.cover||null } };
   const ok=document.getElementById('pmGuardado');
   pmGuardarBtn.disabled=true; const prev=pmGuardarBtn.textContent; pmGuardarBtn.textContent='Guardando…';
   let r={ok:false};
   try{ r = (api && api.guardarPagina) ? await api.guardarPagina(cfg) : {ok:false,error:'sin backend'}; }catch(e){ r={ok:false,error:e&&e.message}; }
   pmGuardarBtn.disabled=false; pmGuardarBtn.textContent=prev;
   if(ok){ ok.hidden=!r.ok; ok.style.color = r.ok ? 'var(--verde)' : 'var(--rojo)';
-    ok.textContent = r.ok ? 'Guardado. Tu página está en nyxa.app/e/'+pmSlug() : ('No se pudo guardar: '+(r.error||'inténtalo de nuevo')); }
-  toast(r.ok ? 'Tu página se ha guardado.' : 'No se pudo guardar.');
+    ok.textContent = r.ok ? 'Guardado. Tu escaparate está en nyxa.app/e/'+pmSlug() : ('No se pudo guardar: '+(r.error||'inténtalo de nuevo')); }
+  toast(r.ok ? 'Tu escaparate se ha guardado.' : 'No se pudo guardar.');
 });
 
-// Rellenar "Tu página" con los datos reales del negocio (se llama desde setCuenta).
+// Rellenar la ficha y el escaparate con los datos reales del negocio (se llama desde setCuenta).
 function poblarPagina(acc){
   if(!acc) return;
   if(acc.nombre){ PM.name=acc.nombre; const i=document.getElementById('pmName'); if(i) i.value=acc.nombre;
     const bn=document.getElementById('buzonNegName'); if(bn) bn.textContent=acc.nombre; }
-  if(acc.categoria){ PM.cat=acc.categoria; const i=document.getElementById('pmCat'); if(i) i.value=acc.categoria; }
+  if(acc.categoria){ PM.categoria=acc.categoria; const i=document.getElementById('pmCat'); if(i) i.value=acc.categoria; }
+  if(acc.zona){ PM.zona=acc.zona; const i=document.getElementById('pmZona'); if(i) i.value=acc.zona; }
   if(acc.descripcion){ PM.desc=acc.descripcion; const i=document.getElementById('pmDesc'); if(i) i.value=acc.descripcion; }
+  pmSyncCat();
+  if(acc.foto){ PM.logo=acc.foto; const dz=document.getElementById('pmLogoDz'); if(dz){ dz.style.backgroundImage=`url(${acc.foto})`; dz.classList.add('has-img'); } }
   const e=acc.escaparate||{};
   if(e.tpl){ PM.tpl=e.tpl; document.querySelectorAll('.tpl-card[data-tpl]').forEach(c=>c.classList.toggle('on', c.dataset.tpl===e.tpl)); }
   if(e.color){ PM.color=e.color; document.querySelectorAll('#pmPalette button[data-color]').forEach(b=>b.classList.toggle('on', b.dataset.color===e.color)); }
-  if(e.logo) PM.logo=e.logo;
+  if(e.logo && !PM.logo) PM.logo=e.logo;   // compat con escaparates guardados antes de la ficha
   if(e.cover) PM.cover=e.cover;
   renderPM();
 }
@@ -2349,7 +2306,7 @@ function pintarEvoChart(){
     const i=+h.getAttribute("data-i"), d=HIST[i], cxv=+h.getAttribute("data-cx"), byv=+h.getAttribute("data-by");
     const tw=150, th=64; let tx=cxv-tw/2; tx=Math.max(2,Math.min(W-tw-2,tx)); let ty=byv-th-10; if(ty<2)ty=byv+10;
     tip.innerHTML=`<rect x="${tx}" y="${ty}" width="${tw}" height="${th}" rx="10" fill="${card}" stroke="${line}"></rect>
-      <text x="${tx+11}" y="${ty+17}" font-size="11" font-weight="800" fill="${ink}">${d.mes} · plan ${PLANES[d.plan].label}</text>
+      <text x="${tx+11}" y="${ty+17}" font-size="11" font-weight="800" fill="${ink}">${d.mes} · plan ${planLabel(d.plan)}</text>
       <text x="${tx+11}" y="${ty+32}" font-size="10.5" fill="${az}">Entraron: ${d.entraron} de ${d.interesados}</text>
       <text x="${tx+11}" y="${ty+46}" font-size="10.5" fill="${verde}">Cubriste: ${Math.round(d.entraron/d.interesados*100)}% de la demanda</text>
       <text x="${tx+11}" y="${ty+60}" font-size="10.5" fill="${ink3}">≈${d.estimado.toLocaleString('es-ES')} € se quedaron fuera</text>`;
@@ -2391,7 +2348,7 @@ function pintarDemandaChart(){
     const i=+h.getAttribute("data-i"), d=HIST[i], cxv=+h.getAttribute("data-cx"), byv=+h.getAttribute("data-by");
     const tw=168, th=78; let tx=cxv-tw/2; tx=Math.max(2,Math.min(W-tw-2,tx)); let ty=byv-th-10; if(ty<2)ty=byv+10;
     tip.innerHTML=`<rect x="${tx}" y="${ty}" width="${tw}" height="${th}" rx="10" fill="${card}" stroke="${line}"></rect>
-      <text x="${tx+11}" y="${ty+17}" font-size="11" font-weight="800" fill="${ink}">${d.mes} · plan ${PLANES[d.plan].label}</text>
+      <text x="${tx+11}" y="${ty+17}" font-size="11" font-weight="800" fill="${ink}">${d.mes} · plan ${planLabel(d.plan)}</text>
       <text x="${tx+11}" y="${ty+32}" font-size="10.5" fill="${ink3}">Interesados: ${d.interesados}</text>
       <text x="${tx+11}" y="${ty+46}" font-size="10.5" fill="${az}">Entraron: ${d.entraron}</text>
       <text x="${tx+11}" y="${ty+60}" font-size="10.5" fill="${ambar}">Fuera: ${d.fuera}</text>
@@ -2578,6 +2535,7 @@ window.NEXA_PANEL = {
     try{ pintarTusPlanes(); }catch(e){}
     aplicarPanelDatos();
     try{ tryAutoAbrirGuia(); }catch(e){}
+    try{ pintarHeroCTA(); }catch(e){}
   },
   aplicarDatos: ()=>{ /* el panel nuevo lee de panel_datos(); metrics() viejo no se usa */ },
 };
@@ -2612,6 +2570,8 @@ async function aplicarPanelDatos(){
   // ¿Hay actividad real? Si todo a 0 → estado vacío honesto.
   const hay=(+mes.interesados>0)||(+mes.usado>0)||(+mes.entraron>0);
   if(!hay) mostrarVacioHonesto();
+  // Ya tenemos el nivel REAL del servidor (rankActual): recalcular la CTA única del hero.
+  try{ pintarHeroCTA(); }catch(e){}
 }
 
 // Nombres de mes en español (para los copys "mes en curso").
@@ -2878,6 +2838,9 @@ function vaciarPanelPorDefecto(){
 }
 // Deja el panel neutro desde el primer pintado (antes de cualquier login o backend).
 try{ vaciarPanelPorDefecto(); }catch(e){}
+// Estado honesto desde el primer pintado: con rankActual=0 (gratis) los candados Premium se
+// muestran de inmediato; el servidor sube el nivel en aplicarPanelDatos() si el negocio paga.
+try{ refrescarGating(); }catch(e){}
 
 /* ==========================================================================
    FASE 4 — TUS PLANES · PUBLICAR · VERIFICACIÓN (datos reales, sin maqueta)
