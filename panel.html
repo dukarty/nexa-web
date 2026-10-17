@@ -1309,13 +1309,13 @@ td b{color:var(--ink);font-weight:700}
       </div>
 
       <div class="card" id="verifPendBlock" hidden style="border-left:3px solid var(--ambar);border-radius:6px var(--r) var(--r) 6px">
-        <div class="card__h"><b>Estamos verificando tu negocio</b><small>hasta entonces no puedes publicar un plan en vivo</small></div>
-        <p style="color:var(--ink2);font-size:.9rem;line-height:1.6">Te avisamos en cuanto esté listo — normalmente el mismo día. Mientras tanto puedes preparar tu ficha y tu escaparate: solo bloqueamos <b style="color:var(--ink)">publicar un plan en vivo</b>, no el resto del panel.</p>
+        <div class="card__h"><b>Nuestro equipo está revisando tu perfil</b><small>tu cuenta se verificará en un plazo de 24 horas</small></div>
+        <p style="color:var(--ink2);font-size:.9rem;line-height:1.6">Te avisamos en cuanto esté lista. Mientras tanto puedes preparar tu ficha y tu escaparate: solo bloqueamos <b style="color:var(--ink)">publicar un plan en vivo</b>, no el resto del panel.</p>
       </div>
 
       <!-- Pedir verificación (self-service, A2). Solo visible si NO estás verificado ni pendiente. -->
       <div class="card" id="verifPedirBlock" hidden>
-        <div class="card__h"><b>Pide la verificación de tu negocio</b><small>3 datos · la revisamos a mano, normalmente el mismo día</small></div>
+        <div class="card__h"><b>Pide la verificación de tu negocio</b><small>3 datos · la revisamos a mano, en un plazo de 24 horas</small></div>
         <p style="color:var(--ink2);font-size:.9rem;line-height:1.6;margin-bottom:14px">Con esto confirmamos que el negocio que publica es el tuyo, no una suplantación. No pedimos documentos: el nombre fiscal, el CIF y un enlace a algo tuyo que ya exista en internet.</p>
         <div class="field"><label>Nombre fiscal</label><input id="verifNombreFiscal" maxlength="120" placeholder="Bar Tal, S.L."></div>
         <div class="field"><label>CIF / NIF</label><input id="verifCif" maxlength="20" placeholder="B12345678"></div>
@@ -1326,7 +1326,7 @@ td b{color:var(--ink);font-weight:700}
 
       <div class="guard">
         <p class="guard__h">Cómo funciona hoy (piloto)</p>
-        <p>Si te dimos de alta en persona, ya te verificamos nosotros en la visita. Si no, pídelo aquí con 3 datos y lo revisamos a mano — normalmente el mismo día.</p>
+        <p>Si te dimos de alta en persona, ya te verificamos nosotros en la visita. Si no, pídelo aquí con 3 datos y lo revisamos a mano — en un plazo de 24 horas.</p>
       </div>
 
       <div class="guard">
@@ -1793,7 +1793,7 @@ async function pintarGuiaComoFunciona(){
   }
   howSetStep(2, est==="verificado"?"ok":(est==="pendiente"?"amb":null),
     est==="verificado" ? "Verificado — ya puedes publicar planes en vivo."
-    : est==="pendiente" ? "Pedida. La estamos revisando — normalmente el mismo día."
+    : est==="pendiente" ? "Pedida. La estamos revisando — en un plazo de 24 horas."
     : est==="rechazada" ? "No pudimos verificarte con lo anterior. Vuelve a pedirlo."
     : "Nombre fiscal, CIF y un enlace. Lo revisamos nosotros.");
 
@@ -3113,7 +3113,7 @@ async function pintarVerificacion(){
     ic.className="verif-ic pend";
     ic.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg>';
     estado.textContent="Pendiente de verificación"; estado.className="pill pill--amb";
-    sub.textContent="Estamos verificando tu negocio. Te avisamos en cuanto esté listo — normalmente el mismo día.";
+    sub.textContent="Estamos verificando tu negocio. Te avisamos en cuanto esté listo — en un plazo de 24 horas.";
   } else {
     ic.className="verif-ic pend";
     ic.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2"/></svg>';
@@ -3151,7 +3151,7 @@ async function pintarVerificacion(){
     const r=await window.NEXAEmpresas.requestVerification({ nombre_fiscal, cif, enlace });
     b.disabled=false; b.textContent=o;
     if(!r||!r.ok){ return pinta((r&&r.error)||"No se pudo pedir la verificación.", true); }
-    pinta("Solicitud enviada. Te verificamos a mano, normalmente el mismo día.", false);
+    pinta("Solicitud enviada. Te verificamos a mano, en un plazo de 24 horas.", false);
     pintarVerificacion(); // re-pinta: ya debería salir en estado 'pendiente'
   });
 })();
