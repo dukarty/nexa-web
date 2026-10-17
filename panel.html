@@ -511,7 +511,7 @@ td b{color:var(--ink);font-weight:700}
   .notifpanel{position:fixed;left:12px;right:12px;top:70px;width:auto}
 }
 
-/* ===== GATE (entrada por magic link) ===== */
+/* ===== GATE (entrada por código OTP de 6 cifras) ===== */
 .gate{position:fixed;inset:0;z-index:200;display:flex;align-items:center;justify-content:center;
   padding:24px;background:var(--paper)}
 .gate__card{width:100%;max-width:400px;background:var(--card);border:1px solid var(--line);
@@ -577,14 +577,23 @@ td b{color:var(--ink);font-weight:700}
 </head>
 <body>
 
-<!-- ===================== GATE: entrada por MAGIC LINK (sin contraseña) ===================== -->
+<!-- ===================== GATE: entrada por CÓDIGO OTP de 6 cifras (sin contraseña) ===================== -->
 <div class="gate" id="gate">
   <div class="gate__card">
     <div class="gate__logo">NY<span class="x" aria-hidden="true"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><line x1="2" y1="18" x2="18" y2="2"/><line x1="18" y1="18" x2="2" y2="2"/></svg></span>A&nbsp;Empresas</div>
     <h1 id="gateTit">Entra a tu panel</h1>
-    <p id="gateSub">Te enviamos un enlace de un solo uso a tu correo. Sin contraseñas.</p>
-    <input type="email" id="gateEmail" placeholder="El correo de tu negocio" autocomplete="email" inputmode="email">
-    <button type="button" class="gate__btn" id="gateBtn">Enviar el enlace de acceso</button>
+    <p id="gateSub">Te enviamos un código de un solo uso a tu correo. Sin contraseñas.</p>
+    <!-- Paso 1 · correo -->
+    <div id="gateStep1">
+      <input type="email" id="gateEmail" placeholder="El correo de tu negocio" autocomplete="email" inputmode="email">
+      <button type="button" class="gate__btn" id="gateBtn">Enviar el código de acceso</button>
+    </div>
+    <!-- Paso 2 · código de 6 cifras -->
+    <div id="gateStep2" hidden>
+      <input type="text" id="gateCode" inputmode="numeric" autocomplete="one-time-code" maxlength="6" placeholder="______" style="letter-spacing:.5em;text-align:center;font-weight:700">
+      <button type="button" class="gate__btn" id="gateCodeBtn">Entrar a mi panel</button>
+      <button type="button" class="gate__alt" id="gateCodeResend">Reenviar el código</button>
+    </div>
     <p class="gate__msg" id="gateMsg" hidden></p>
     <button type="button" class="gate__alt" id="gateToggle">¿Aún no tienes cuenta? Crea la de tu negocio</button>
   </div>
@@ -2456,34 +2465,84 @@ function gateMsg(txt, err){
   m.hidden=!txt; m.textContent=txt||""; m.classList.toggle("err", !!err);
 }
 let _gateModo="entrar"; // "entrar" | "alta"
+let _gateEmail="";       // correo al que se mandó el código (para verificar/reenviar)
 (function initGate(){
   const t=_gateEl("gateToggle"); if(!t) return;
+  const step1=_gateEl("gateStep1"), step2=_gateEl("gateStep2");
+  const b=_gateEl("gateBtn"); if(!b) return;
+  const bc=_gateEl("gateCodeBtn"), rc=_gateEl("gateCodeResend");
+  const labelBtn1 = ()=> _gateModo==="alta" ? "Crear cuenta y enviar código" : "Enviar el código de acceso";
+
+  // Volver al paso 1 (cambiar de modo, o reempezar).
+  function aPaso1(){
+    if(step2) step2.hidden=true;
+    if(step1) step1.hidden=false;
+    b.textContent=labelBtn1();
+    const ci=_gateEl("gateCode"); if(ci) ci.value="";
+  }
+
   t.addEventListener("click",()=>{
     _gateModo = _gateModo==="entrar" ? "alta" : "entrar";
     _gateEl("gateTit").textContent = _gateModo==="alta" ? "Crea la cuenta de tu negocio" : "Entra a tu panel";
     _gateEl("gateSub").textContent = _gateModo==="alta"
-      ? "Te enviamos un enlace para activar tu cuenta. Sin contraseñas."
-      : "Te enviamos un enlace de un solo uso a tu correo. Sin contraseñas.";
-    _gateEl("gateBtn").textContent = _gateModo==="alta" ? "Crear cuenta y enviar enlace" : "Enviar el enlace de acceso";
+      ? "Te enviamos un código para activar tu cuenta. Sin contraseñas."
+      : "Te enviamos un código de un solo uso a tu correo. Sin contraseñas.";
     t.textContent = _gateModo==="alta" ? "¿Ya tienes cuenta? Entra con tu correo" : "¿Aún no tienes cuenta? Crea la de tu negocio";
-    gateMsg("");
+    aPaso1(); gateMsg("");
   });
-  const b=_gateEl("gateBtn"); if(!b) return;
+
+  // Paso 1 · pedir el código (alta crea si es nuevo; entrar exige cuenta existente).
   b.addEventListener("click", async ()=>{
     const email=(_gateEl("gateEmail").value||"").trim();
     if(!/.+@.+\..+/.test(email)){ gateMsg("Escribe un correo válido.", true); return; }
     const api=window.NEXAEmpresas;
-    if(!api || !api.real){ gateMsg("Conectando con el servidor… inténtalo en unos segundos.", true); return; }
-    b.disabled=true; b.textContent="Enviando…";
+    if(!api || !api.real || typeof api.enviarCodigo!=="function"){ gateMsg("Conectando con el servidor… inténtalo en unos segundos.", true); return; }
+    b.disabled=true; b.textContent="Enviando…"; gateMsg("");
     try{
-      const r = _gateModo==="alta"
-        ? await api.altaMagicLink({ email })
-        : await api.enviarMagicLink(email);
-      if(r && r.ok){ gateMsg("Te hemos enviado un enlace a "+email+". Ábrelo desde este dispositivo. Mira también el spam."); }
-      else { gateMsg((r&&r.error) || "No se pudo enviar el enlace. Inténtalo de nuevo.", true); }
+      const r = await api.enviarCodigo({ email, modo: _gateModo });
+      if(r && r.ok){
+        _gateEmail=email;
+        if(step1) step1.hidden=true; if(step2) step2.hidden=false;
+        const ci=_gateEl("gateCode"); if(ci){ try{ci.focus();}catch(e){} }
+        if(_gateModo==="alta" && r.yaExiste) gateMsg("Ya tenías una cuenta con ese correo. Te mandamos el código para entrar.");
+        else gateMsg("Código enviado a "+email+". Míralo también en spam.");
+      } else { gateMsg((r&&r.error) || "No se pudo enviar el código. Inténtalo de nuevo.", true); }
     }catch(e){ gateMsg("Error de red. Inténtalo de nuevo.", true); }
-    b.disabled=false; b.textContent = _gateModo==="alta" ? "Crear cuenta y enviar enlace" : "Enviar el enlace de acceso";
+    b.disabled=false; b.textContent=labelBtn1();
   });
+
+  // Paso 2 · verificar el código → sesión → recargar (el boot abre el panel).
+  if(bc) bc.addEventListener("click", async ()=>{
+    const api=window.NEXAEmpresas;
+    const code=((_gateEl("gateCode")||{}).value||"").replace(/\D/g,"");
+    if(code.length<6){ gateMsg("El código son 6 cifras.", true); return; }
+    if(!api || !api.real || typeof api.verificarCodigo!=="function"){ gateMsg("Conectando con el servidor…", true); return; }
+    bc.disabled=true; bc.textContent="Entrando…"; gateMsg("");
+    try{
+      const r = await api.verificarCodigo(_gateEmail, code);
+      if(r && r.ok){ location.replace("panel.html"); return; }
+      gateMsg((r&&r.error) || "Código incorrecto. Inténtalo de nuevo.", true);
+    }catch(e){ gateMsg("Error de red. Inténtalo de nuevo.", true); }
+    bc.disabled=false; bc.textContent="Entrar a mi panel";
+  });
+
+  // Reenviar el código.
+  if(rc) rc.addEventListener("click", async ()=>{
+    const api=window.NEXAEmpresas;
+    if(!api || !api.real || !_gateEmail){ gateMsg("Inténtalo de nuevo en un momento.", true); return; }
+    rc.disabled=true; rc.textContent="Enviando…";
+    try{
+      const r = await api.enviarCodigo({ email:_gateEmail, modo:_gateModo });
+      gateMsg(r&&r.ok ? ("Código reenviado a "+_gateEmail+".") : ((r&&r.error)||"No se pudo reenviar."), !(r&&r.ok));
+    }catch(e){ gateMsg("Error de red. Inténtalo de nuevo.", true); }
+    rc.disabled=false; rc.textContent="Reenviar el código";
+  });
+
+  // Entrada directa en modo ALTA desde la web (/empresas enlaza a panel.html#alta como respaldo).
+  try{
+    const pideAlta = location.hash === "#alta" || /[?&]alta(?:[=&]|$)/.test(location.search);
+    if(pideAlta && _gateModo==="entrar") t.click();
+  }catch(e){}
 })();
 
 // Estado vacío honesto: aviso claro cuando el negocio aún no tiene actividad real.

@@ -549,17 +549,18 @@ window.addEventListener("resize",function(){if(window.innerWidth>860)set(false);
     <div class="fitem"><button class="fq">¿Cómo cobro lo que organizo?</button><div class="fa"><p>Cobramos nosotros la reserva al cliente, igual que Booking o Glovo. Nos quedamos la comisión acordada y te transferimos el resto a tu cuenta — tú no tienes que gestionar ningún cobro.</p></div></div>
     <div class="fitem"><button class="fq">¿Me quitáis mis propios clientes?</button><div class="fa"><p>No. No te pedimos tu lista de clientes ni te la gestionamos. Lo que hacemos es traerte personas nuevas que no tenías. Y a nadie —ni siquiera a quien paga por más presencia— le damos el contacto de quien reserva: si quieres volver a escribirle, tienes un buzón dentro de NYXA.</p></div></div>
     <div class="fitem"><button class="fq">¿Qué pasa si alguien cancela?</button><div class="fa"><p>El cliente puede cancelar gratis hasta 24 horas antes de tu plan; la plaza pasa automáticamente a quien estaba en lista de espera. Si no aparece sin cancelar, no te afecta a ti: pierde acceso a futuros planes con plaza limitada.</p></div></div>
-    <div class="fitem"><button class="fq">¿Qué datos me vais a pedir para el alta?</button><div class="fa"><p>Para crear tu cuenta, solo el nombre de tu negocio y un correo. Te mandamos un enlace de acceso y entras directo a tu panel — sin contraseñas y sin esperar a que nadie te llame. Ya dentro, cuando quieras publicar, te pediremos el nombre fiscal, el CIF y un enlace público para verificarte.</p></div></div>
+    <div class="fitem"><button class="fq">¿Qué datos me vais a pedir para el alta?</button><div class="fa"><p>Para crear tu cuenta, solo el nombre de tu negocio y un correo. Te mandamos un código de 6 cifras, lo pones en la misma web y entras directo a tu panel — sin contraseñas y sin esperar a que nadie te llame. Ya dentro, cuando quieras publicar, te pediremos el nombre fiscal, el CIF y un enlace público para verificarte.</p></div></div>
     <div class="fitem"><button class="fq">¿Por qué no lo hago yo mismo con un grupo de WhatsApp?</button><div class="fa"><p>Puedes. Lo que no puedes reproducir por tu cuenta es juntar a seis desconocidos de tu ciudad que quieren hacer justo tu plan el mismo día — eso es lo que hacemos nosotros. Y si alguien te descubre en NYXA, puede saltarse la plataforma la próxima vez, pero no puede reproducir el grupo concreto que te llenó la plaza esa semana.</p></div></div>
   </div>
 </div></section>
 
-<!-- 12. CIERRE: ALTA AUTOSERVICIO (crea la cuenta + enlace de acceso por correo) -->
+<!-- 12. CIERRE: ALTA AUTOSERVICIO POR CÓDIGO (crea la cuenta + código de 6 cifras por correo) -->
 <section class="cierre" id="publicar"><div class="wrap center">
   <span class="eyer">Empieza hoy</span>
   <h2 class="h2 mt">Registra tu negocio</h2>
-  <p class="lead">Crea tu cuenta y entra a tu panel. Sin llamadas ni esperas: te enviamos un enlace al correo y ya estás dentro.</p>
+  <p class="lead">Crea tu cuenta y entra a tu panel. Sin llamadas ni esperas: te enviamos un código al correo y entras aquí mismo.</p>
 
+  <!-- Paso 1 · nombre + email -->
   <form class="form" id="altaForm" novalidate>
     <label for="altaNombre">Nombre de tu negocio</label>
     <input type="text" id="altaNombre" name="nombre_negocio" placeholder="Bodega La Viña, Surf Club Valencia, Escuela de Cocina…" autocomplete="organization" required>
@@ -567,15 +568,20 @@ window.addEventListener("resize",function(){if(window.innerWidth>860)set(false);
     <input type="email" id="altaEmail" name="email" placeholder="hola@tunegocio.com" autocomplete="email" inputmode="email" required>
     <button class="btn lg" id="altaBtn" type="submit"><span>Crear mi cuenta</span></button>
     <p id="altaErr" class="mini" role="alert" hidden style="color:#C0372E"></p>
-    <p class="mini">Sin contraseñas. Te enviamos un enlace de acceso de un solo uso.</p>
+    <p class="mini">Sin contraseñas. Te enviamos un código de acceso de un solo uso.</p>
   </form>
 
-  <div class="form" id="altaOk" hidden style="text-align:center">
-    <p class="h2" style="font-size:24px">Revisa tu correo.</p>
-    <p class="lead" style="margin-top:10px">Te hemos enviado un enlace a <strong id="altaOkEmail"></strong>. Ábrelo <b>desde este mismo dispositivo</b> para entrar a tu panel. Si no lo ves, mira en spam.</p>
-    <button class="btn" id="altaResend" type="button" style="margin-top:16px">Reenviar el enlace</button>
-    <p id="altaResendMsg" class="mini" role="status" hidden style="margin-top:10px"></p>
-  </div>
+  <!-- Paso 2 · introducir el código de 6 cifras -->
+  <form class="form" id="codeForm" hidden novalidate style="text-align:center">
+    <p class="h2" style="font-size:24px" id="codeTit">Introduce tu código</p>
+    <p class="lead" style="margin:10px 0 4px" id="codeSub">Te hemos enviado un código de 6 cifras a <strong id="codeEmail"></strong>. Míralo también en spam.</p>
+    <label for="codeInput" style="margin-top:14px">Código de acceso</label>
+    <input type="text" id="codeInput" name="code" inputmode="numeric" autocomplete="one-time-code" maxlength="6" placeholder="______" style="letter-spacing:.5em;text-align:center;font-size:22px;font-weight:700" required>
+    <button class="btn lg" id="codeBtn" type="submit"><span>Entrar a mi panel</span></button>
+    <p id="codeErr" class="mini" role="alert" hidden style="color:#C0372E"></p>
+    <button class="btn" id="codeResend" type="button" style="margin-top:8px">Reenviar el código</button>
+    <p id="codeResendMsg" class="mini" role="status" hidden style="margin-top:10px"></p>
+  </form>
 </div></section>
 
 <style>
@@ -682,67 +688,71 @@ window.addEventListener("resize",function(){if(window.innerWidth>860)set(false);
 })();
 </script>
 
-<!-- ALTA AUTOSERVICIO: crea la cuenta del negocio y envía el enlace de acceso (magic
-     link) por el MISMO SDK que usa el panel (backend/client/nexa-empresas.js). No hay
-     "te llamamos": el negocio recibe un enlace, lo abre y entra directo a su panel.
-     · altaMagicLink({ email, nombre }) guarda el nombre del negocio en local y pide a
-       Supabase Auth el enlace (shouldCreateUser:true, emailRedirectTo → /panel.html).
-     · Al abrir el enlace, el panel materializa la ficha en `businesses` con ese nombre
-       (completeSignupIfPending). Dentro del panel completa el resto y pide verificación.
-     El SDK se carga abajo; aquí esperamos a "nexa-empresas-ready". -->
+<!-- ALTA AUTOSERVICIO POR CÓDIGO: crea la cuenta y envía un CÓDIGO de 6 cifras por el
+     MISMO SDK que usa el panel (backend/client/nexa-empresas.js). No hay enlace que abrir
+     ni "mismo dispositivo": el negocio teclea el código aquí y entra directo a su panel.
+     · Paso 1 (enviarCodigo modo 'alta'): guarda el nombre en local y manda el código. Si
+       el correo YA tenía cuenta, avisa ("ya tienes cuenta, te mandamos el código para
+       entrar") y NO crea un duplicado — entrará en su cuenta de siempre.
+     · Paso 2 (verificarCodigo): valida el código, crea la sesión y redirige a /panel.html,
+       donde se materializa la ficha con ese nombre (solo si la cuenta es nueva).
+     El SDK se carga abajo; window.NEXAEmpresas aparece tras "nexa-empresas-ready". -->
 <script>
 (function(){
-  var form=document.getElementById("altaForm");
-  if(!form)return;
-  var btn=document.getElementById("altaBtn");
-  var err=document.getElementById("altaErr");
-  var ok=document.getElementById("altaOk");
-  var okEmail=document.getElementById("altaOkEmail");
-  var resend=document.getElementById("altaResend");
-  var resendMsg=document.getElementById("altaResendMsg");
-  var ultimoEmail="", ultimoNombre="";
-  function fallar(msg){err.textContent=msg;err.hidden=false;}
-  function label(txt){var s=btn.querySelector("span");if(s)s.textContent=txt;else btn.textContent=txt;}
-  function sdk(){var a=window.NEXAEmpresas;return (a&&a.real&&typeof a.altaMagicLink==="function")?a:null;}
+  var f1=document.getElementById("altaForm");
+  var f2=document.getElementById("codeForm");
+  if(!f1||!f2)return;
+  var btn1=document.getElementById("altaBtn"), err1=document.getElementById("altaErr");
+  var codeEmail=document.getElementById("codeEmail"), codeSub=document.getElementById("codeSub");
+  var codeInput=document.getElementById("codeInput"), btn2=document.getElementById("codeBtn"), err2=document.getElementById("codeErr");
+  var resend=document.getElementById("codeResend"), resendMsg=document.getElementById("codeResendMsg");
+  var email="", nombre="";
+  function fallar(el,msg){el.textContent=msg;el.hidden=false;}
+  function label(btn,txt){var s=btn.querySelector("span");if(s)s.textContent=txt;else btn.textContent=txt;}
+  function sdk(){var a=window.NEXAEmpresas;return (a&&a.real&&typeof a.enviarCodigo==="function")?a:null;}
 
-  form.addEventListener("submit",function(e){
-    e.preventDefault();
-    err.hidden=true;
-    var nombre=form.nombre_negocio.value.trim();
-    var email=form.email.value.trim();
-    if(!nombre)return fallar("Dinos el nombre de tu negocio.");
-    if(!/.+@.+\..+/.test(email))return fallar("Escribe un correo válido.");
-    var api=sdk();
-    if(!api)return fallar("Conectando con el servidor… inténtalo en unos segundos.");
-    btn.disabled=true;label("Creando tu cuenta…");
-    api.altaMagicLink({email:email,nombre:nombre}).then(function(r){
-      btn.disabled=false;label("Crear mi cuenta");
+  // Paso 1 · pedir el código (crea la cuenta si el correo es nuevo)
+  f1.addEventListener("submit",function(e){
+    e.preventDefault(); err1.hidden=true;
+    nombre=f1.nombre_negocio.value.trim(); email=f1.email.value.trim();
+    if(!nombre)return fallar(err1,"Dinos el nombre de tu negocio.");
+    if(!/.+@.+\..+/.test(email))return fallar(err1,"Escribe un correo válido.");
+    var api=sdk(); if(!api)return fallar(err1,"Conectando con el servidor… inténtalo en unos segundos.");
+    btn1.disabled=true;label(btn1,"Enviando el código…");
+    api.enviarCodigo({email:email,nombre:nombre,modo:"alta"}).then(function(r){
+      btn1.disabled=false;label(btn1,"Crear mi cuenta");
       if(r&&r.ok){
-        ultimoEmail=email;ultimoNombre=nombre;
-        if(okEmail)okEmail.textContent=email;
-        form.hidden=true;ok.hidden=false;ok.setAttribute("tabindex","-1");ok.focus();
-      }else{
-        fallar((r&&r.error)||"No se pudo crear la cuenta. Inténtalo de nuevo.");
-      }
-    }).catch(function(){
-      btn.disabled=false;label("Crear mi cuenta");
-      fallar("Error de red. Inténtalo de nuevo.");
-    });
+        codeEmail.textContent=email;
+        if(r.yaExiste){ codeSub.innerHTML="Ya tienes una cuenta con <strong>"+email+"</strong>. Te hemos enviado un código para entrar. Míralo también en spam."; }
+        else { codeSub.innerHTML="Te hemos enviado un código de 6 cifras a <strong>"+email+"</strong>. Míralo también en spam."; }
+        f1.hidden=true; f2.hidden=false; f2.setAttribute("tabindex","-1"); try{codeInput.focus();}catch(_){}
+      }else{ fallar(err1,(r&&r.error)||"No se pudo enviar el código. Inténtalo de nuevo."); }
+    }).catch(function(){ btn1.disabled=false;label(btn1,"Crear mi cuenta");fallar(err1,"Error de red. Inténtalo de nuevo."); });
   });
 
+  // Paso 2 · verificar el código → sesión → panel
+  f2.addEventListener("submit",function(e){
+    e.preventDefault(); err2.hidden=true;
+    var code=(codeInput.value||"").replace(/\D/g,"");
+    if(code.length<6)return fallar(err2,"El código son 6 cifras.");
+    var api=sdk(); if(!api)return fallar(err2,"Conectando con el servidor… inténtalo en unos segundos.");
+    btn2.disabled=true;label(btn2,"Entrando…");
+    api.verificarCodigo(email,code).then(function(r){
+      if(r&&r.ok){ window.location.replace("panel.html"); }
+      else { btn2.disabled=false;label(btn2,"Entrar a mi panel");fallar(err2,(r&&r.error)||"Código incorrecto. Inténtalo de nuevo."); }
+    }).catch(function(){ btn2.disabled=false;label(btn2,"Entrar a mi panel");fallar(err2,"Error de red. Inténtalo de nuevo."); });
+  });
+
+  // Reenviar el código
   if(resend)resend.addEventListener("click",function(){
-    var api=sdk();
-    resendMsg.hidden=true;
-    if(!api||!ultimoEmail){resendMsg.textContent="Inténtalo de nuevo en un momento.";resendMsg.hidden=false;return;}
+    var api=sdk(); resendMsg.hidden=true;
+    if(!api||!email){resendMsg.textContent="Inténtalo de nuevo en un momento.";resendMsg.hidden=false;return;}
     resend.disabled=true;resend.textContent="Enviando…";
-    api.altaMagicLink({email:ultimoEmail,nombre:ultimoNombre}).then(function(r){
-      resend.disabled=false;resend.textContent="Reenviar el enlace";
-      resendMsg.textContent=(r&&r.ok)?("Enlace reenviado a "+ultimoEmail+"."):((r&&r.error)||"No se pudo reenviar.");
+    api.enviarCodigo({email:email,nombre:nombre,modo:"alta"}).then(function(r){
+      resend.disabled=false;resend.textContent="Reenviar el código";
+      resendMsg.textContent=(r&&r.ok)?("Código reenviado a "+email+"."):((r&&r.error)||"No se pudo reenviar.");
       resendMsg.hidden=false;
-    }).catch(function(){
-      resend.disabled=false;resend.textContent="Reenviar el enlace";
-      resendMsg.textContent="Error de red. Inténtalo de nuevo.";resendMsg.hidden=false;
-    });
+    }).catch(function(){ resend.disabled=false;resend.textContent="Reenviar el código";resendMsg.textContent="Error de red. Inténtalo de nuevo.";resendMsg.hidden=false; });
   });
 })();
 </script>

@@ -31,6 +31,8 @@
     async signupPending(data) { return this.signup(data); },
     async enviarMagicLink(email) { return { ok: !!email, mock: true }; },
     async altaMagicLink(data) { writeAlta(data); return { ok: true, mock: true }; },
+    async enviarCodigo(opts) { const o = opts || {}; if (o.modo !== "entrar") writeAlta({ email: o.email, nombre: o.nombre || null }); return { ok: !!o.email, mock: true, yaExiste: false }; },
+    async verificarCodigo() { return { ok: true, mock: true }; },
     async metrics() { return null; },
     // Datos del panel (maqueta v3). En mock no hay backend → estado vacío honesto.
     async panelDatos() { return null; },
@@ -122,6 +124,58 @@
         if (error) { writeAlta(null); return { ok: false, error: error.message }; }
         return { ok: true };
       },
+      // ── ENTRADA POR CÓDIGO OTP DE 6 DÍGITOS (sin enlace, sin "mismo dispositivo") ──
+      // La plantilla de Supabase muestra {{ .Token }} (el código), no el enlace. Dos pasos:
+      // 1) enviarCodigo() dispara el correo con el código (y guarda el nombre si es alta);
+      // 2) verificarCodigo() valida el código y crea la sesión EN ESTA MISMA PÁGINA.
+      //
+      // Email NUEVO vs EXISTENTE (coherencia que pidió David):
+      //   · modo 'entrar'  → shouldCreateUser:false. Si el correo no tiene cuenta, avisa
+      //     "regístrate primero" (no crea nada).
+      //   · modo 'alta'    → primero SONDA con shouldCreateUser:false. Si el correo YA
+      //     existe, ese mismo envío lleva el código y devolvemos yaExiste:true (para avisar
+      //     "ya tienes cuenta, te mandamos el código para entrar"). Solo si la sonda falla
+      //     (correo nuevo) creamos la cuenta con shouldCreateUser:true. Así NUNCA nace una
+      //     cuenta fantasma por reusar un email viejo, y no se apilan dos correos.
+      async enviarCodigo(opts) {
+        const o = opts || {};
+        const e = norm(o.email);
+        if (!/.+@.+\..+/.test(e)) return { ok: false, error: "Escribe un correo válido." };
+        const esOtpInexistente = (msg) =>
+          /not\s*found|no\s*user|user.*not|signups?\s*not\s*allowed|otp_disabled|not\s*allowed\s*for\s*otp/i.test(msg || "");
+
+        if (o.modo === "entrar") {
+          writeAlta(null); // entrar nunca materializa ficha nueva
+          const { error } = await sb.auth.signInWithOtp({ email: e, options: { shouldCreateUser: false } });
+          if (error) {
+            if (esOtpInexistente(error.message)) return { ok: false, error: "No encontramos una cuenta con ese correo. Regístrate primero.", sinCuenta: true };
+            return { ok: false, error: error.message };
+          }
+          return { ok: true, yaExiste: true };
+        }
+
+        // modo 'alta' (por defecto): guarda el nombre tecleado para materializar la ficha al
+        // entrar (solo si la cuenta es nueva; completeSignupIfPending respeta la existente).
+        writeAlta({ email: e, nombre: o.nombre || null });
+        const probe = await sb.auth.signInWithOtp({ email: e, options: { shouldCreateUser: false } });
+        if (!probe.error) return { ok: true, yaExiste: true };       // correo existente: código ya enviado
+        const crea = await sb.auth.signInWithOtp({ email: e, options: { shouldCreateUser: true } });
+        if (crea.error) { writeAlta(null); return { ok: false, error: crea.error.message }; }
+        return { ok: true, yaExiste: false };
+      },
+      // Valida el código de 6 dígitos y crea la sesión. type:'email' = OTP de correo
+      // (vale tanto para el alta nueva como para entrar en una cuenta existente).
+      async verificarCodigo(email, token) {
+        const e = norm(email);
+        const t = String(token || "").replace(/\D/g, "");
+        if (t.length < 6) return { ok: false, error: "El código son 6 cifras." };
+        const { data, error } = await sb.auth.verifyOtp({ email: e, token: t, type: "email" });
+        if (error) {
+          const expirado = /expired|invalid|token|otp/i.test(error.message || "");
+          return { ok: false, error: expirado ? "Código incorrecto o caducado. Pide uno nuevo." : error.message };
+        }
+        return { ok: true, session: data && data.session };
+      },
       // Registro: crea el usuario (sesión inmediata) y su ficha en `businesses`.
       // Siempre nace plan 'verificada' y sin verificar (lo fuerza la RLS + trigger).
       async signup(data) {
@@ -178,6 +232,12 @@
             });
             if (!error || error.code === "23505") { writeAlta(null); biz = await miNegocio(); }
           }
+        } else {
+          // La cuenta YA tenía negocio: entró en el suyo de siempre. Si quedó un nombre
+          // tecleado para este correo (p. ej. reusó un email viejo al "registrarse"), lo
+          // descartamos: respetamos el nombre existente y NO creamos un duplicado fantasma.
+          const alta = readAlta();
+          if (alta && norm(alta.email) === email) writeAlta(null);
         }
         return aCuenta(biz, email);
       },
