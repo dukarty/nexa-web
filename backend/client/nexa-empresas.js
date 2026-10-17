@@ -169,7 +169,15 @@
         const e = norm(email);
         const t = String(token || "").replace(/\D/g, "");
         if (t.length < 6) return { ok: false, error: "El código son 6 cifras." };
-        const { data, error } = await sb.auth.verifyOtp({ email: e, token: t, type: "email" });
+        let { data, error } = await sb.auth.verifyOtp({ email: e, token: t, type: "email" });
+        if (error) {
+          // Alta NUEVA con "Confirm email" activo: Supabase emite el código como token de
+          // tipo 'signup' (plantilla "Confirm signup"), no 'email' (plantilla "Magic Link").
+          // verifyOtp({type:'email'}) no casa ese token → reintentamos con 'signup'. Así un
+          // mismo verificarCodigo() vale tanto para entrar (email) como para el alta (signup).
+          const r2 = await sb.auth.verifyOtp({ email: e, token: t, type: "signup" });
+          data = r2.data; error = r2.error;
+        }
         if (error) {
           const expirado = /expired|invalid|token|otp/i.test(error.message || "");
           return { ok: false, error: expirado ? "Código incorrecto o caducado. Pide uno nuevo." : error.message };
