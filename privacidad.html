@@ -10,11 +10,11 @@
 <meta property="og:site_name" content="NYXA">
 <meta property="og:url" content="https://holanyxa.com/privacidad">
 <meta property="og:title" content="Política de Privacidad — NYXA">
-<meta property="og:description" content="Qué datos recoge NYXA, para qué, con qué base legal y cómo ejercer tus derechos (RGPD).">
+<meta property="og:description" content="Qué datos recoge NYXA, para qué, con qué base legal, con quién se comparten, cuánto se conservan y cómo ejercer tus derechos (RGPD).">
 <meta property="og:image" content="https://holanyxa.com/og.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Política de Privacidad — NYXA">
-<meta name="twitter:description" content="Qué datos recoge NYXA, para qué, con qué base legal y cómo ejercer tus derechos (RGPD).">
+<meta name="twitter:description" content="Qué datos recoge NYXA, para qué, con qué base legal, con quién se comparten, cuánto se conservan y cómo ejercer tus derechos (RGPD).">
 <meta name="twitter:image" content="https://holanyxa.com/og.jpg">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -99,6 +99,9 @@ html{scroll-padding-top:96px}                 /* anclajes del menú no quedan ba
 ::-moz-selection{background:var(--az);color:#fff}
 body{text-rendering:optimizeLegibility;-moz-osx-font-smoothing:grayscale}
 img{max-width:100%;height:auto}
+/* tablas de etiqueta/valor de los textos legales: la etiqueta puede partirse */
+table.t-def th{white-space:normal;width:34%;min-width:150px}
+@media(max-width:560px){table.t-def{min-width:420px}table.t-def th{width:38%}}
 </style>
 </head>
 <body>
@@ -112,171 +115,196 @@ img{max-width:100%;height:auto}
   <header class="doc">
     <p class="doc__k">NYXA · Valencia · 2026</p>
     <h1>Política de&nbsp;Privacidad.</h1>
-    <p class="fecha">Última actualización: 18 de agosto de&nbsp;2026</p>
+    <p class="fecha">Última actualización: 26 de octubre de&nbsp;2026</p>
   </header>
 
-  <div class="box">
-    <p>NYXA es una app para que personas de una misma ciudad queden a vivir experiencias reales, en persona. Para que eso funcione, la app necesita saber cosas de ti. Esta política explica <strong>qué datos recogemos, para qué, con qué base legal, con quién se comparten, cuánto los guardamos y qué puedes exigirnos</strong>. Está escrita para que se entienda, no para esconder&nbsp;nada.</p>
-  </div>
+  <div class="box"><p>NYXA es una app para que personas de una misma ciudad queden a vivir experiencias reales, en persona. Para que eso funcione, la app necesita saber cosas de ti. Esta política explica <strong>qué datos recogemos, para qué, con qué base legal, con quién se comparten, cuánto los guardamos y qué puedes exigirnos</strong>. Está escrita para que se entienda, no para esconder&nbsp;nada.</p></div>
 
-  <h2>1 · Quién es el responsable y cómo&nbsp;contactar</h2>
-  <p>NYXA es hoy un proyecto en fase piloto en Valencia (España, Unión Europea), <strong>todavía sin sociedad constituida</strong>. Mientras no exista la entidad, el responsable del tratamiento es la persona física que impulsa el&nbsp;proyecto.</p>
-  <div class="tabla">
-    <table>
-      <tbody>
-        <tr><th>Responsable</th><td>David Cid Cáceres (persona física)</td></tr>
-        <tr><th>Contacto y ejercicio de derechos</th><td><a class="enl" href="mailto:holanyxa@gmail.com">holanyxa@gmail.com</a></td></tr>
-        <tr><th>Delegado de Protección de Datos</th><td>No designado. NYXA no está obligada a designar DPD en su estado actual; se revisará si el tratamiento a gran escala lo exige (art. 37 RGPD).</td></tr>
-        <tr><th>Ámbito</th><td>Valencia, España (Unión Europea)</td></tr>
-      </tbody>
-    </table>
-  </div>
-  <p>En cuanto exista la entidad legal, actualizaremos esta página con su nombre, NIF y domicilio. Mientras tanto, tus derechos se ejercen igual de rápido por el correo de&nbsp;contacto.</p>
-
-  <h2>2 · Qué datos recogemos y para&nbsp;qué</h2>
-  <p>Preferimos listarlo entero, incluido lo incómodo. NYXA no es una red social de publicar por publicar: existe para que dos personas queden, y eso obliga a tratar datos que otras apps no&nbsp;necesitan.</p>
-  <div class="tabla">
-    <table>
-      <thead><tr><th>Dato</th><th>Qué es</th><th>Para qué lo usamos</th></tr></thead>
-      <tbody>
-        <tr><td><strong>Email</strong></td><td>Tu dirección de correo</td><td>Es tu identidad en la app, tu forma de iniciar sesión y la única vía para avisarte</td></tr>
-        <tr><td><strong>Nombre, foto de perfil, ciudad y descripción</strong></td><td>Lo que muestras de ti</td><td>Es lo que ve otra persona antes de decidir si queda contigo</td></tr>
-        <tr><td><strong>Fecha de nacimiento</strong></td><td>Tu día de nacimiento</td><td>Para comprobar que eres mayor de 18 y para mostrar tu <strong>edad</strong> (el número, p.&nbsp;ej. «24»). La <strong>fecha completa</strong> vive en una tabla aparte, no sale por la API, no se puede editar y ni siquiera te la devolvemos a ti</td></tr>
-        <tr><td><strong>Selfie de verificación</strong> (si te verificas)</td><td>Una foto en directo con una pose aleatoria</td><td>Comprobar que eres una persona real y quien dices. La revisa una persona del equipo y <strong>se borra en cuanto hay una decisión</strong>. No se guarda de forma permanente, no se compara automáticamente con nada, no se genera un patrón facial</td></tr>
-        <tr><td><strong>Tus experiencias y deseos</strong></td><td>Categorías, deseos, fotos de experiencias, lugar y fecha</td><td>Es el corazón del producto: sin esto no hay ningún plan que proponerte</td></tr>
-        <tr><td><strong>Con quién lo has vivido</strong></td><td>La confirmación de que quedaste con alguien</td><td>Dar sentido a los encuentros reales, que son la razón de ser de la app</td></tr>
-        <tr><td><strong>NYXAs y mensajes</strong></td><td>Tus conversaciones dentro de la app</td><td>Que puedas leer tus chats. Solo los veis las dos personas de la conversación</td></tr>
-        <tr><td><strong>A quién sigues y a quién bloqueas</strong></td><td>Tus relaciones dentro de la app</td><td>Que la app funcione y que puedas protegerte. <strong>Quién te ha bloqueado a ti no se lo enseñamos a nadie, ni a ti</strong></td></tr>
-        <tr><td><strong>Denuncias</strong></td><td>Una denuncia y una copia de lo denunciado en ese momento</td><td>Poder revisar la denuncia aunque el contenido original se borre después</td></tr>
-        <tr><td><strong>Ubicación aproximada</strong></td><td>Tu posición <strong>difuminada</strong> (aprox. 400 m)</td><td>Enseñarte planes y gente cerca. Nunca mostramos tu ubicación exacta a otras personas</td></tr>
-        <tr><td><strong>Token de notificaciones push</strong></td><td>Un identificador que da tu navegador o dispositivo</td><td>Poder enviarte avisos (un mensaje nuevo, una confirmación), a través del servicio de tu navegador o sistema (Google, Apple o Mozilla)</td></tr>
-        <tr><td><strong>Analítica de uso</strong> (solo si la aceptas)</td><td>Eventos de producto (qué pantallas, cuánto tarda un paso) en <strong>nuestra propia base de datos</strong>, identificados por un id interno anónimo — <strong>nunca por tu email</strong> ni por el contenido de tus mensajes</td><td>Entender si la app se entiende y funciona. <strong>Apagada por defecto</strong>; solo se activa si aceptas expresamente el aviso de analítica. No usamos proveedores externos de analítica</td></tr>
-        <tr><td><strong>Invitaciones</strong></td><td>Quién invita a quién, cuando alguien se registra a través de tu enlace personal de invitación</td><td>Entender el crecimiento boca a boca. <strong>No condiciona el registro</strong> (cualquiera puede registrarse sin invitación) y no se comparte con terceros</td></tr>
-      </tbody>
-    </table>
-  </div>
-
+  <h2>1 · Quién es el responsable y cómo contactar</h2>
+  <p>NYXA es hoy un proyecto en fase piloto en Valencia (España, Unión Europea). La sociedad de NYXA todavía no está constituida: mientras no exista la entidad, el responsable del tratamiento <strong>no es ninguna sociedad</strong>, sino la <strong>persona física</strong> que impulsa el proyecto.</p>
+  <div class="tabla"><table class="t-def">
+  <tbody>
+  <tr><th>Responsable</th><td><strong>David Cid Cáceres</strong>, persona física promotora de NYXA, titular de la marca &quot;NYXA&quot; (OEPM, solicitud M4406182, clases 9 y 45)</td></tr>
+  <tr><th>NIF</th><td>42265700A</td></tr>
+  <tr><th>Dirección</th><td>Valencia (46112), España</td></tr>
+  <tr><th>Correo de contacto y de ejercicio de derechos</th><td><strong>holanyxa@gmail.com</strong></td></tr>
+  <tr><th>Delegado de Protección de Datos</th><td>No designado</td></tr>
+  <tr><th>Ámbito</th><td>Valencia, España (UE). App para iPhone y web</td></tr>
+  </tbody></table></div>
+  <div class="box"><p><strong>Nota honesta y a la vista:</strong> que el responsable sea una persona física no es un tecnicismo. Hasta que exista la sociedad, quien responde ante ti y ante la autoridad es esa persona. El día que se constituya actualizaremos esta página con su nombre, NIF y domicilio, <strong>y te avisaremos del cambio de responsable</strong>.</p></div>
+  <h2>2 · Qué datos recogemos y para qué</h2>
+  <p>Preferimos listarlo entero, incluido lo incómodo.</p>
+  <div class="tabla"><table>
+  <thead><tr><th>Dato</th><th>Qué es</th><th>Para qué lo usamos</th></tr></thead>
+  <tbody>
+  <tr><td><strong>Email</strong></td><td>Tu dirección de correo</td><td>Es tu identidad en la app, tu forma de iniciar sesión y la única vía para avisarte</td></tr>
+  <tr><td><strong>Cómo entras</strong></td><td>Si entras con tu correo, con Google o con tu cuenta de Apple</td><td>Dejarte entrar. De Google y de Apple recibimos tu correo y, la primera vez, tu nombre. <strong>Nada más: ni tus contactos, ni tu agenda, ni tus fotos</strong></td></tr>
+  <tr><td><strong>Nombre, nombre de usuario, foto de perfil, ciudad y descripción</strong></td><td>Lo que muestras de ti</td><td>Es lo que ve otra persona antes de decidir si queda contigo</td></tr>
+  <tr><td><strong>Fecha de nacimiento</strong></td><td>Tu día de nacimiento</td><td><strong>Solo</strong> para comprobar que eres mayor de 18 (sección 11). Vive en una tabla aparte, no sale por la API, <strong>no se puede editar</strong> y ni siquiera te la devolvemos a ti</td></tr>
+  <tr><td><strong>Tus categorías, deseos y &quot;quiero vivirlo&quot;</strong></td><td>Lo que quieres vivir</td><td>Es el corazón del producto: sin esto no hay ningún plan que proponerte</td></tr>
+  <tr><td><strong>Tus experiencias</strong></td><td>Fotos, lugar, fecha y descripción de lo que has vivido</td><td>Es lo que se ve de ti en NYXA y lo que permite proponerte gente con gustos parecidos</td></tr>
+  <tr><td><strong>Tus fotos de presentación</strong></td><td>Hasta nueve fotos con su título, que subes para enseñar quién eres</td><td>Que alguien pueda hacerse una idea de ti. <strong>No son experiencias vividas, no llevan categoría y no cuentan en tu año</strong></td></tr>
+  <tr><td><strong>Tu línea de vida</strong></td><td>Tus experiencias ordenadas por año y por mes</td><td>Enseñar lo que has vivido, a ti y a quien visita tu perfil. <strong>Puedes ocultar cualquiera</strong></td></tr>
+  <tr><td><strong>Tus deseos por año</strong></td><td>Lo que quieres vivir este año y lo que ya tachaste</td><td>Proponerte planes y enseñar lo que tenéis en común dos personas</td></tr>
+  <tr><td><strong>Con quién lo has vivido</strong></td><td>La confirmación de que quedaste con alguien</td><td>Dar sentido a los encuentros reales, que son la razón de ser de la app</td></tr>
+  <tr><td><strong>Preferencias inferidas</strong></td><td>Gustos que el sistema deduce de tu uso</td><td>Afinar qué personas y planes te proponemos. Es elaboración de perfiles, y <strong>no decide nada sobre tu cuenta</strong></td></tr>
+  <tr><td><strong>Selfie de verificación</strong> (si te verificas)</td><td>Una foto en directo con una pose aleatoria</td><td>Comprobar que eres una persona real que coincide con su perfil. <strong>La revisa una persona</strong> y <strong>se borra en cuanto hay una decisión</strong>. No se compara automáticamente con nada y <strong>no se genera ningún patrón facial</strong></td></tr>
+  <tr><td><strong>NYXAs, planes y mensajes</strong></td><td>Tus propuestas, tus planes y tus conversaciones</td><td>Que la app funcione y que puedas leer tus chats. Los mensajes <strong>solo los veis las dos personas</strong></td></tr>
+  <tr><td><strong>Tu saldo y tu libro de NYXAs</strong></td><td>Cuántos NYXAs te quedan hoy y el apunte de cada uno que mandas o recibes</td><td>Que el límite diario funcione y poder resolver una reclamación («no me llegó», «me lo han descontado dos veces»). <strong>Es un apunte contable, no el contenido de lo que escribiste</strong></td></tr>
+  <tr><td><strong>A quién sigues y a quién bloqueas</strong></td><td>Tus relaciones dentro de la app</td><td>Que la app funcione y que puedas protegerte. <strong>Quién te ha bloqueado a ti no se lo enseñamos a nadie, ni a ti</strong></td></tr>
+  <tr><td><strong>Denuncias, avisos de moderación y registro de decisiones</strong></td><td>Una denuncia, una copia de lo denunciado en ese momento, y qué se decidió</td><td>Poder revisar el caso aunque el contenido original se borre, y aplicar los escalones de los Términos</td></tr>
+  <tr><td><strong>El estado de tu cuenta</strong></td><td>Si está activa, suspendida o cerrada, desde cuándo y por qué</td><td>Poder aplicar una suspensión, <strong>poder levantarla</strong> y poder explicártela si la discutes</td></tr>
+  <tr><td><strong>Ubicación</strong> (solo si la activas)</td><td>Tu posición, mostrada <strong>difuminada</strong> a otras personas</td><td>Enseñarte planes y gente cerca en el mapa. <strong>Apagada por defecto</strong> (sección 6)</td></tr>
+  <tr><td><strong>Verificación de estudiante</strong> (si la pides)</td><td>El <strong>hash</strong> de tu correo universitario (no el correo en claro) y la universidad</td><td>Darte el descuento de estudiante sin regalarlo a varias cuentas</td></tr>
+  <tr><td><strong>Token de notificaciones</strong></td><td>Un identificador de tu dispositivo</td><td>Enviarte avisos del servicio</td></tr>
+  <tr><td><strong>Analítica de uso</strong> (solo si la aceptas)</td><td>Eventos de producto</td><td>Entender si la app se entiende. <strong>Apagada por defecto</strong> (sección 9)</td></tr>
+  <tr><td><strong>Datos de negocio</strong> (si representas uno)</td><td>Email del responsable, nombre comercial, categoría, logo y, para verificarse, nombre fiscal, CIF y un enlace</td><td>Que un negocio pueda registrarse y publicar experiencias</td></tr>
+  </tbody></table></div>
+  <h3>Si entras con Google o con tu cuenta de Apple</h3>
+  <p>Puedes entrar en NYXA con tu correo, con Google o con tu cuenta de Apple. En los tres casos <strong>el correo es lo que nos llega y lo que usamos</strong>; no recibimos tu contraseña nunca.</p>
+  <ul>
+  <li><strong>Con Google</strong>: recibimos tu correo y, la primera vez, tu nombre y tu foto. Ni tus contactos, ni tu agenda, ni tu Drive, ni tus fotos.</li>
+  <li><strong>Con tu cuenta de Apple</strong>: recibimos tu correo y, <strong>solo la primera vez</strong>, tu nombre. Si eliges <strong>«Ocultar mi correo»</strong>, lo que nos llega es una dirección de reenvío de Apple (<code>algo@privaterelay.appleid.com</code>). <strong>Esa dirección es entonces tu identidad en NYXA</strong>: funciona igual, te llegan igual nuestros correos, y <strong>no vemos tu correo real</strong>. Si algún día retiras el permiso a NYXA desde los ajustes de tu Apple Account, esa dirección deja de funcionar y dejarás de recibir nuestros avisos; la cuenta sigue existiendo hasta que la borres.</li>
+  </ul>
+  <p>Entrar con Google o con Apple <strong>no los convierte en destinatarios de tus datos</strong>: no les contamos qué haces dentro de NYXA.</p>
+  <h3>Tu email es hoy tu identificador interno</h3>
+  <p>El email es la identidad interna de NYXA en todo el producto. <strong>A día de hoy puede formar parte de la dirección (URL) de un perfil y, por tanto, ser legible por otras personas y quedar en enlaces compartidos.</strong> Es una decisión de arquitectura documentada en el código, no un descuido, y hay una mejora planificada para pasar a un identificador opaco. <strong>Lo decimos claro porque callarlo sería peor.</strong> Si te preocupa, no compartas el enlace directo a tu perfil fuera de la app.</p>
   <h3>Lo que NO hacemos, y es deliberado</h3>
   <ul>
-    <li><strong>No medimos el tiempo que pasas en la app</strong>, ni cuánto haces scroll, ni cuántas sesiones haces. Medir eso nos empujaría a optimizarlo, y una app diseñada para retenerte dentro es lo contrario de lo que NYXA quiere ser.</li>
-    <li><strong>No hay publicidad.</strong></li>
-    <li><strong>No vendemos ni cedemos tus datos</strong> a terceros con fines comerciales.</li>
-    <li><strong>No te seguimos por otras webs ni por otras apps</strong> (sin tracking cruzado / cross-site).</li>
+  <li><strong>No medimos el tiempo que pasas en la app</strong>, ni cuánto haces scroll, ni cuántas sesiones haces. Medir eso nos empujaría a optimizarlo, y una app diseñada para retenerte dentro es lo contrario de lo que NYXA quiere ser.</li>
+  <li><strong>No hay publicidad.</strong></li>
+  <li><strong>No vendemos ni cedemos tus datos</strong> a terceros con fines comerciales.</li>
+  <li><strong>No te seguimos por otras webs ni por otras apps.</strong></li>
+  <li><strong>No analizamos tus conversaciones privadas.</strong></li>
+  <li><strong>No usamos reconocimiento facial</strong> ni generamos plantillas biométricas de nadie.</li>
   </ul>
-
-  <h2>3 · Base legal de cada tratamiento (art. 6&nbsp;RGPD)</h2>
-  <div class="tabla">
-    <table>
-      <thead><tr><th>Tratamiento</th><th>Base legal (RGPD)</th></tr></thead>
-      <tbody>
-        <tr><td>Tu perfil, tus experiencias, tus deseos, los NYXAs y los chats</td><td><strong>Ejecución del contrato</strong> — art. 6.1.b. Sin esto, sencillamente, no hay servicio</td></tr>
-        <tr><td>Comprobar la edad (mayor de 18), moderar contenido, atender denuncias y prevenir abusos</td><td><strong>Obligación legal</strong> (art. 6.1.c) e <strong>interés legítimo</strong> (art. 6.1.f) en mantener un entorno seguro</td></tr>
-        <tr><td>Selfie de verificación de identidad</td><td><strong>Consentimiento explícito</strong> (art. 6.1.a): eliges verificarte, con un clic, sin casillas premarcadas. Tratado con el mismo cuidado que un dato sensible aunque —en el MVP actual, sin comparación facial automática— no constituye dato biométrico del art. 9 RGPD</td></tr>
-        <tr><td>Analítica de uso (propia, en nuestra base de datos) y almacenamiento no esencial en el navegador</td><td><strong>Consentimiento</strong> (art. 6.1.a RGPD + ePrivacy). Puedes retirarlo cuando quieras</td></tr>
-        <tr><td>Invitaciones (atribución de quién invita a quién)</td><td><strong>Interés legítimo</strong> (art. 6.1.f) en entender el crecimiento boca a boca; no condiciona el registro</td></tr>
-        <tr><td>Notificaciones push</td><td><strong>Consentimiento</strong> (art. 6.1.a) al aceptar los avisos en tu navegador o dispositivo</td></tr>
-      </tbody>
-    </table>
-  </div>
-  <p>Cuando la base es el consentimiento, puedes retirarlo en cualquier momento sin que eso afecte a la licitud del tratamiento anterior a la&nbsp;retirada.</p>
-
-  <h2>4 · Con quién se comparten tus datos</h2>
-  <p>Nadie mira tus datos por curiosidad, y no los vendemos ni cedemos. Pero para funcionar, la app se apoya en proveedores que tratan datos <strong>por encargo nuestro</strong> (encargados de tratamiento, art. 28 RGPD). Los listamos todos, incluidos los que procesan fuera de la&nbsp;UE:</p>
-  <div class="tabla">
-    <table>
-      <thead><tr><th>Proveedor</th><th>Para qué</th><th>Dónde trata los datos</th></tr></thead>
-      <tbody>
-        <tr><td><strong>Supabase</strong></td><td>Base de datos, almacenamiento de fotos, autenticación</td><td>Servidores en Irlanda (<strong>UE</strong>)</td></tr>
-        <tr><td><strong>Vercel</strong></td><td>Sirve la aplicación</td><td>Estados Unidos / red global (con garantías adecuadas, ver transferencias)</td></tr>
-        <tr><td><strong>Anthropic</strong></td><td>La IA que revisa las pruebas de tus experiencias, sugiere planes y responde a Nyx. Recibe el texto y las fotos de cada consulta</td><td><strong>EE. UU.</strong> (fuera de la UE)</td></tr>
-        <tr><td><strong>Servicios de notificaciones push</strong></td><td>Entregar los avisos push</td><td>Google (Android/Chrome), Apple (iOS/Safari) o Mozilla, según tu dispositivo/navegador</td></tr>
-        <tr><td><strong>Apple</strong></td><td>Distribución de la app y notificaciones push, cuando exista la versión de App Store</td><td>Según los términos de Apple</td></tr>
-        <tr><td><strong>Twilio</strong></td><td>Envío de SMS <strong>si en el futuro</strong> activamos la verificación por SMS (hoy desactivado)</td><td><strong>EE. UU.</strong></td></tr>
-        <tr><td><strong>CARTO</strong></td><td>Teselas del mapa (proveedor de mapas base)</td><td>Red global (CDN). Recibe tu IP y la zona del mapa que ves</td></tr>
-        <tr><td><strong>OpenStreetMap / Nominatim</strong></td><td>Geocodificación: convertir coordenadas en el nombre de tu ciudad durante el onboarding</td><td>Fundación OpenStreetMap (UE/Reino Unido). <strong>IMPORTANTE:</strong> en el onboarding recibe tu ubicación GPS precisa para deducir tu ciudad</td></tr>
-        <tr><td><strong>Photon / Komoot</strong></td><td>Autocompletar lugares al crear un plan</td><td>Alemania (<strong>UE</strong>). Recibe el texto que buscas y un sesgo por tu zona</td></tr>
-        <tr><td><strong>Resend</strong></td><td>Envío del email de verificación de estudiante (cuando aplica)</td><td><strong>EE. UU.</strong> Recibe tu dirección de email</td></tr>
-      </tbody>
-    </table>
-  </div>
-
+  <h2>3 · Fotos en las que sale otra gente</h2>
+  <p>En NYXA esto no es un caso raro: es casi la norma, porque una experiencia compartida es la cara de más de una persona.</p>
+  <ul>
+  <li><strong>Si subes una foto en la que sale alguien más, eres tú quien tiene que tener su acuerdo</strong> (derecho a la propia imagen, art. 18.1 de la Constitución y Ley Orgánica 1/1982). Nosotros no podemos pedirlo por ti.</li>
+  <li><strong>Si sales en la foto de otra persona y no quieres salir, escríbenos a <a class="enl" href="mailto:holanyxa@gmail.com">holanyxa@gmail.com</a> y la retiramos.</strong> No te pediremos que lo negocies con nadie ni que expliques por qué.</li>
+  <li><strong>Si borras tu cuenta se borran las fotos que subiste tú.</strong> Las que subió otra persona y en las que sales tú <strong>no se borran solas</strong>, porque son suyas: tu etiqueta desaparece, pero la foto sigue siendo de quien la subió. <strong>Si quieres que esas también se retiren, pídenoslo y lo hacemos.</strong></li>
+  </ul>
+  <div class="box"><p>Es una asimetría real y preferimos decirla a que te la encuentres.</p></div>
+  <h2>4 · El asistente Nyx es una inteligencia artificial</h2>
+  <p><strong>Nyx es una IA, no una persona.</strong></p>
+  <ul>
+  <li><strong>Qué hace:</strong> responde a tus preguntas dentro de la app, sugiere planes y, cuando subes la prueba de una experiencia, una IA la revisa.</li>
+  <li><strong>Qué datos ve:</strong> el texto y, en su caso, las fotos que le mandas en cada consulta, más lo mínimo de tu contexto para poder responder. Este tratamiento lo realiza <strong>Anthropic</strong>, en <strong>Estados Unidos</strong> (sección 7).</li>
+  <li><strong>Qué NO hace: Nyx no decide nada sobre tu cuenta.</strong> Ni te suspende, ni te cierra, ni te retira contenido.</li>
+  </ul>
+  <h2>5 · Revisión automática del contenido público</h2>
+  <h3>Qué revisamos y para qué</h3>
+  <p><strong>Las fotos que publicas en espacios públicos de NYXA pueden analizarse de forma automática</strong> para detectar desnudos y contenido sexual explícito, violencia extrema y contenido ofensivo. La finalidad es <strong>proteger a las personas que usan NYXA</strong> en una app cuyo propósito es que desconocidos queden en persona, y cumplir nuestras obligaciones de moderación.</p>
+  <p><strong>No analizamos tus conversaciones privadas.</strong> Los mensajes entre dos personas no pasan por aquí.</p>
+  <h3>Con qué base jurídica</h3>
+  <p><strong>Interés legítimo</strong> (art. 6.1.f RGPD): el nuestro y el del resto de personas usuarias en que NYXA sea un sitio seguro. Hemos valorado que ese interés prevalece porque el análisis <strong>se limita a contenido que tú has decidido hacer público</strong>, no toca lo privado, y es difícil imaginar una forma menos invasiva de detectar a tiempo una foto sexual explícita. <strong>Puedes oponerte</strong> escribiendo a <a class="enl" href="mailto:holanyxa@gmail.com">holanyxa@gmail.com</a>, y valoraremos tu caso concreto; ten en cuenta que si el análisis no puede aplicarse a tu contenido público, puede que no podamos mantenerlo publicado.</p>
+  <p>Además, moderar el contenido y atender las denuncias es una <strong>obligación legal</strong> nuestra (art. 6.1.c RGPD, en relación con el Reglamento (UE) 2022/2065 de Servicios Digitales).</p>
+  <h3>Quién lo analiza</h3>
+  <p>El análisis de imágenes lo realiza <strong>Sightengine</strong> (Kozelo SAS, París, Francia) como <strong>encargado del tratamiento</strong> por cuenta nuestra. Recibe <strong>la imagen</strong> que has publicado y nos devuelve una puntuación por categoría. <strong>No recibe tu nombre, tu email, tu ubicación ni ningún otro dato de tu perfil.</strong></p>
+  <h3>Qué consecuencias puede tener, y qué no</h3>
+  <ul>
+  <li><strong>Una herramienta automática puede, por sí sola:</strong> ocultar un contenido concreto y anotar un aviso en tu cuenta.</li>
+  <li><strong>No puede, por sí sola, suspender ni cerrar tu cuenta. Eso lo decide siempre una persona.</strong></li>
+  <li><strong>Si retiramos u ocultamos algo tuyo, puedes pedirnos el motivo</strong> escribiendo a <a class="enl" href="mailto:holanyxa@gmail.com">holanyxa@gmail.com</a>, y te lo damos por escrito: qué hemos hecho, en qué hechos nos basamos, y si ha intervenido una herramienta automática en la detección.</li>
+  <li><strong>Puedes pedir que lo revise una persona</strong>, contar tu versión y oponerte. Respondemos en un máximo de 14 días naturales.</li>
+  </ul>
+  <p>Ninguna herramienta de este tipo acierta siempre. Por eso una decisión que te deje fuera de NYXA no se la dejamos a una herramienta.</p>
+  <h3>Los comentarios de una publicación</h3>
+  <p>Un comentario en la publicación de otra persona <strong>es público dentro de NYXA</strong>: lo ve cualquiera que vea esa publicación, con tu nombre y tu foto.</p>
+  <ul>
+  <li><strong>Lo puede borrar quien lo escribió y también quien publicó la foto.</strong> Es su espacio, igual que en cualquier red social. Nadie más puede borrarlo desde la app: la moderación lo hace por otra vía y deja su propio registro.</li>
+  <li><strong>Puedes denunciarlo desde la propia app</strong>, manteniendo el dedo sobre el comentario. Al denunciarlo <strong>guardamos una copia del comentario tal y como estaba en ese momento</strong>, porque si no, bastaría con borrarlo para que la denuncia se quedara sin pruebas. Esa copia se conserva mientras el caso esté abierto y, cerrado el caso, el tiempo que marca la sección 8.</li>
+  <li><strong>Quien escribió el comentario no sabe quién lo ha denunciado.</strong></li>
+  </ul>
+  <h2>6 · Ubicación: qué ve exactamente la otra gente</h2>
+  <ul>
+  <li><strong>Aparecer en el mapa está apagado por defecto.</strong></li>
+  <li><strong>Cuando lo enciendes, tu posición se difumina en nuestros servidores antes de que salga de ahí.</strong> La ajustamos a una zona de unos <strong>400 metros</strong> y lo que se envía a otras personas es el centro de esa zona, no tu punto. Es <strong>irreversible</strong>: nadie puede deducir tu posición exacta a partir de lo que recibe.</li>
+  <li><strong>La posición exacta no sale nunca de nuestros servidores</strong> hacia otra persona usuaria.</li>
+  <li>Solo apareces si has usado la app recientemente: una posición antigua no se pinta en el mapa.</li>
+  <li><strong>Puedes apagarlo cuando quieras: dejas de aparecer en el mapa al instante.</strong> También puedes retirar el permiso de ubicación en los ajustes de tu teléfono. <strong>Tu última posición conocida se conserva en nuestra base de datos hasta que borras la cuenta</strong> (sección 8).</li>
+  </ul>
+  <h2>7 · Con quién se comparten tus datos</h2>
+  <p>No vendemos ni cedemos tus datos. Pero para funcionar, la app se apoya en proveedores que los tratan <strong>por encargo nuestro</strong> (encargados del tratamiento, art. 28 RGPD). Los listamos todos, incluidos los que procesan fuera de la UE.</p>
+  <div class="tabla"><table>
+  <thead><tr><th>Proveedor</th><th>Para qué</th><th>Dónde trata los datos</th></tr></thead>
+  <tbody>
+  <tr><td><strong>Supabase</strong></td><td>Base de datos, autenticación, almacenamiento de fotos y funciones de servidor</td><td>Unión Europea (Irlanda)</td></tr>
+  <tr><td><strong>Vercel</strong></td><td>Sirve la aplicación y la web</td><td>Puede implicar tratamiento en EE. UU.</td></tr>
+  <tr><td><strong>Anthropic</strong></td><td>La IA &quot;Nyx&quot;: responde, sugiere planes y revisa las pruebas de experiencias</td><td><strong>EE. UU.</strong></td></tr>
+  <tr><td><strong>Sightengine</strong> (Kozelo SAS, Francia)</td><td>Análisis automático de las imágenes públicas (sección 5)</td><td>Unión Europea y, según el enrutamiento del proveedor, <strong>EE. UU. o Canadá</strong></td></tr>
+  <tr><td><strong>Resend</strong></td><td>Envío de correos (acceso, avisos y comunicaciones)</td><td>Puede implicar tratamiento en EE. UU.</td></tr>
+  <tr><td><strong>Apple</strong></td><td>Inicio de sesión con Apple, notificaciones en iPhone y distribución en App Store</td><td>Según los términos de Apple; puede implicar EE. UU.</td></tr>
+  <tr><td><strong>Google</strong></td><td>Inicio de sesión con Google</td><td>Según los términos de Google; puede implicar EE. UU.</td></tr>
+  </tbody></table></div>
   <h3>Transferencias internacionales</h3>
-  <p>La mayor parte de tus datos se guarda y trata <strong>dentro de la Unión Europea</strong> (Supabase, en Irlanda). Pero <strong>parte del tratamiento ocurre en Estados Unidos</strong>: la IA de Anthropic que revisa tus pruebas y sugiere planes. Decir «tus datos no salen de la UE» sería más bonito, pero no sería&nbsp;verdad.</p>
-  <p>Los mapas y el geocodificado se apoyan además en proveedores de <strong>OpenStreetMap</strong> (Nominatim, para deducir tu ciudad; Photon/Komoot, para autocompletar lugares) y en <strong>CARTO</strong> (las teselas del mapa). Aquí hay un punto que queremos decirte a la cara: <strong>durante el onboarding tu ubicación GPS <em>precisa</em> se envía a Nominatim con un único fin, deducir el nombre de tu ciudad</strong>. Esa ubicación precisa <strong>no se guarda</strong>: dentro de la app, a otras personas solo se les muestra tu posición <strong>difuminada</strong> (aprox. 400 m), nunca la exacta.</p>
-  <p>Para esas transferencias fuera del Espacio Económico Europeo, los proveedores aportan garantías adecuadas: <strong>cláusulas contractuales tipo (SCC)</strong> de la Comisión Europea y/o marcos de adecuación como el <strong>EU-US Data Privacy Framework</strong>.</p>
-
-  <h2>5 · Cuánto tiempo conservamos tus&nbsp;datos</h2>
-  <div class="tabla">
-    <table>
-      <thead><tr><th>Dato</th><th>Plazo de conservación</th></tr></thead>
-      <tbody>
-        <tr><td>Tu cuenta y todo tu contenido</td><td>Mientras tengas la cuenta activa</td></tr>
-        <tr><td>Si borras la cuenta</td><td>Desapareces al instante para los demás y tienes <strong>15 días para arrepentirte</strong>. Pasado ese plazo, se elimina de forma definitiva (derecho de supresión, art. 17 — ver sección 6)</td></tr>
-        <tr><td>Selfie de verificación</td><td>Se borra en cuanto hay una decisión de moderación, y en todo caso en un <strong>máximo de 30 días</strong> si nadie la revisa. Si borras la cuenta mientras está pendiente, se borra de inmediato</td></tr>
-        <tr><td>Denuncias y registro de moderación</td><td>Se conservan <strong>aunque borres la cuenta</strong>: son la prueba de por qué se tomó una decisión, y borrarlas dejaría indefensa a la persona a la que protegían</td></tr>
-        <tr><td>Analítica de uso</td><td>Solo si la aceptaste; se guarda en <strong>nuestra base de datos</strong>. Los eventos ligados a tu cuenta se borran cuando borras la cuenta (art. 17)</td></tr>
-      </tbody>
-    </table>
-  </div>
-
-  <h2>6 · Tus derechos y cómo&nbsp;ejercerlos</h2>
-  <p>Sobre tus datos tienes derecho&nbsp;a:</p>
+  <p>La mayor parte de tus datos se guarda y trata <strong>dentro de la Unión Europea</strong>. Pero <strong>parte del tratamiento ocurre fuera</strong>: la IA de Anthropic, y potencialmente Apple, Google, Vercel, Resend y el análisis de imágenes. Decir &quot;tus datos no salen de la UE&quot; no sería verdad, así que no lo decimos.</p>
+  <p>Para esas transferencias fuera del Espacio Económico Europeo, los proveedores aportan garantías previstas por el RGPD: <strong>cláusulas contractuales tipo</strong> de la Comisión Europea y/o marcos de adecuación como el <strong>EU-US Data Privacy Framework</strong>.</p>
+  <h3>Cuándo entregamos datos a una autoridad</h3>
+  <p>Entregamos datos a la policía, a un juzgado o a una autoridad <strong>cuando nos lo requieran con cobertura legal</strong>, y solo lo que el requerimiento pida. También podemos comunicar por iniciativa propia lo necesario <strong>si sospechamos un delito que amenaza la vida o la seguridad de alguien</strong> (art. 18 del Reglamento de Servicios Digitales). <strong>Fuera de esos casos, tus datos no salen de NYXA.</strong></p>
+  <h2>8 · Cuánto tiempo conservamos tus datos</h2>
+  <div class="tabla"><table>
+  <thead><tr><th>Dato</th><th>Plazo</th></tr></thead>
+  <tbody>
+  <tr><td>Tu cuenta y tu contenido</td><td>Mientras tengas la cuenta activa</td></tr>
+  <tr><td>Si borras la cuenta</td><td>Desapareces al instante para los demás y tienes <strong>15 días para arrepentirte</strong>. Pasado ese plazo se elimina de forma definitiva (sección 10)</td></tr>
+  <tr><td><strong>Selfie de verificación</strong></td><td>Se borra <strong>al resolver la revisión</strong>, y en todo caso en un <strong>máximo de 30 días</strong> si nadie la revisa. Inmediato si borras la cuenta antes</td></tr>
+  <tr><td><strong>Ubicación</strong></td><td>Tu última posición conocida se conserva mientras tengas la cuenta, y <strong>se borra al borrar la cuenta</strong></td></tr>
+  <tr><td><strong>Avisos de moderación, denuncias y registro de decisiones</strong></td><td>Se conservan <strong>aunque borres la cuenta</strong>, porque son la prueba de por qué se actuó y borrarlas dejaría indefensa a la persona a la que protegían. <strong>Revisamos periódicamente este registro y eliminamos lo que ya no es necesario</strong> para esa finalidad; si hay un procedimiento administrativo o judicial abierto, se conserva hasta que termine</td></tr>
+  <tr><td>Analítica de uso</td><td>Solo si la aceptaste</td></tr>
+  <tr><td>Comunicaciones comerciales</td><td>Hasta que pidas dejar de recibirlas, o un máximo de <strong>24 meses</strong> desde el alta</td></tr>
+  </tbody></table></div>
+  <h2>9 · Analítica y almacenamiento en tu dispositivo</h2>
+  <p>NYXA <strong>no usa cookies publicitarias ni de seguimiento de terceros</strong>, y no te perfila para anunciarte nada.</p>
   <ul>
-    <li><strong>Acceso</strong> — saber qué datos tenemos sobre ti y obtener una copia.</li>
-    <li><strong>Rectificación</strong> — corregir lo que esté mal o incompleto.</li>
-    <li><strong>Supresión («derecho al olvido», art. 17)</strong> — que borremos tus datos. Puedes iniciar el <strong>borrado total de tu cuenta desde dentro de la app</strong> (Ajustes), sin dar explicaciones y sin llamar a nadie. El borrado definitivo se completa en un <strong>plazo de 15 días</strong> (con ventana de arrepentimiento). Es un punto fuerte de NYXA: el borrado está construido y automatizado, no es una promesa vacía.</li>
-    <li><strong>Oposición</strong> — oponerte a un tratamiento basado en interés legítimo.</li>
-    <li><strong>Portabilidad</strong> — llevarte tus datos en un formato reutilizable.</li>
-    <li><strong>Limitación</strong> — pedir que congelemos un tratamiento mientras se resuelve una discrepancia.</li>
-    <li><strong>Retirar el consentimiento</strong> — en cualquier momento, para lo que dependa de tu consentimiento (analítica, notificaciones, verificación).</li>
+  <li>El almacenamiento estrictamente necesario para que la app funcione (mantener tu sesión) no requiere consentimiento y no se usa para perfilarte.</li>
+  <li>La <strong>analítica de producto está apagada por defecto</strong> y solo se activa si <strong>aceptas expresamente</strong> el aviso. Puedes rechazarla y seguir usando la app con normalidad, y retirar el consentimiento más tarde.</li>
+  <li><strong>Antes de que tengas cuenta</strong>, durante el registro, medimos el paso del alta en el que estás (por ejemplo, «ha llegado a elegir intereses», «ha abandonado en las fotos»). Lo hacemos para saber dónde se atasca la gente y arreglarlo. <strong>No va asociado a ningún nombre ni a ningún correo</strong>, porque en ese momento todavía no existe una cuenta a la que asociarlo.</li>
   </ul>
-  <p><strong>Cómo ejercerlos:</strong> escribiendo a <a class="enl" href="mailto:holanyxa@gmail.com">holanyxa@gmail.com</a>. Responderemos en el plazo máximo de <strong>un mes</strong> desde tu solicitud (art. 12 RGPD), ampliable en casos justificados. El ejercicio de tus derechos es&nbsp;gratuito.</p>
-
-  <h3>Reclamación ante la autoridad de control</h3>
-  <p>Si crees que tratamos mal tus datos, preferiríamos que nos lo dijeras primero a nosotros para arreglarlo cuanto antes. Pero es tu derecho, y está antes que nuestra preferencia: puedes presentar una reclamación ante la <strong>Agencia Española de Protección de Datos (AEPD)</strong>.</p>
+  <h2>10 · Tus derechos y cómo ejercerlos</h2>
   <ul>
-    <li>Web: <a class="enl" href="https://www.aepd.es" target="_blank" rel="noopener">www.aepd.es</a></li>
-    <li>Sede electrónica: <a class="enl" href="https://sedeagpd.gob.es" target="_blank" rel="noopener">sedeagpd.gob.es</a></li>
-    <li>Dirección: C/ Jorge Juan, 6, 28001 Madrid</li>
+  <li><strong>Acceso</strong> — saber qué datos tenemos y obtener una copia.</li>
+  <li><strong>Rectificación</strong> — corregir lo que esté mal, salvo la fecha de nacimiento, que es inmutable por protección de menores (sección 11).</li>
+  <li><strong>Supresión (&quot;derecho al olvido&quot;, art. 17)</strong> — puedes iniciar el <strong>borrado total desde dentro de la app</strong> (Ajustes), sin dar explicaciones. Se completa en <strong>15 días</strong>.</li>
+  <li><strong>Oposición</strong> — a lo que se base en interés legítimo, incluido el análisis automático (sección 5).</li>
+  <li><strong>Portabilidad</strong> — llevarte tus datos en un formato reutilizable.</li>
+  <li><strong>Limitación</strong> — congelar un tratamiento mientras se resuelve una discrepancia.</li>
+  <li><strong>Retirar el consentimiento</strong> — en cualquier momento (analítica, ubicación, verificación, comunicaciones comerciales).</li>
+  <li><strong>Revisión humana de una decisión de moderación</strong> — que una persona revise, contar tu versión y oponerte (Términos, sección 8.5).</li>
+  <li><strong>Saber qué avisos de moderación tienes</strong> anotados en tu cuenta, con su fecha y su motivo.</li>
+  <li><strong>Retirar una foto en la que sales</strong> aunque la haya subido otra persona (sección 3).</li>
   </ul>
-
-  <h2>7 · Cookies y analítica de&nbsp;uso</h2>
-  <p>NYXA <strong>no usa cookies publicitarias ni de seguimiento de terceros</strong>. El único almacenamiento no esencial en tu navegador es el que usa nuestra <strong>analítica de producto propia</strong> (en nuestra base de datos, sin proveedores externos), y solo se activa si <strong>aceptas expresamente</strong> el aviso de analítica.</p>
+  <p><strong>Cómo ejercerlos:</strong> escribiendo a <strong>holanyxa@gmail.com</strong>. Responderemos en el plazo máximo de <strong>un mes</strong> (art. 12.3 RGPD), ampliable en casos justificados. <strong>Es gratuito.</strong></p>
+  <h3>Qué pasa al borrar la cuenta</h3>
+  <p>Al pedir la baja, la cuenta entra en un periodo de gracia de <strong>15 días</strong> y después se borra: tus fotos (perfil, experiencias, portadas de planes y selfies de verificación), tus experiencias, tus NYXAs y chats, deseos, categorías, relaciones, ubicación, token de notificaciones, verificación, estado de estudiante, planes e inscripciones, y tu identidad de acceso.</p>
+  <p><strong>Se conservan:</strong> las denuncias y el registro de moderación (sección 8) y la analítica que no es atribuible a ti. Si representabas un negocio, <strong>la ficha del negocio se conserva y tu email se anonimiza</strong>, porque esa ficha la usan otras personas.</p>
+  <h2>11 · Edad mínima y menores</h2>
+  <p><strong>NYXA es solo para mayores de 18 años.</strong> Una app cuyo propósito es provocar encuentros presenciales con desconocidos exige garantías que reservamos a personas adultas.</p>
   <ul>
-    <li><strong>Apagada por defecto.</strong> Mientras no aceptes, no se manda ningún dato de analítica y ni siquiera se carga el módulo.</li>
-    <li><strong>Configuración sin seguimiento cruzado:</strong> la analítica se identifica por un <strong>id interno anónimo</strong>, nunca por tu email ni por el contenido que escribes, no captura clics automáticamente ni sigue tu actividad en otras webs o apps.</li>
-    <li><strong>Puedes rechazarla</strong> y seguir usando la app con normalidad, y <strong>puedes retirar el consentimiento</strong> más tarde.</li>
+  <li><strong>Comprobación:</strong> con la fecha de nacimiento del registro, que el servidor usa para calcular la edad. <strong>Es inmutable:</strong> no se puede editar, porque si se pudiera la comprobación no valdría nada.</li>
+  <li><strong>Si nos consta que una cuenta es de una persona menor de 18 años, la cerramos y eliminamos sus datos</strong> sin esperar a nada.</li>
+  <li><strong>Si crees que una cuenta es de un menor, dínoslo</strong> en holanyxa@gmail.com. Lo tratamos como prioritario.</li>
+  <li><strong>Si eres madre, padre o tutor</strong> de un menor que haya creado una cuenta falseando su edad, escríbenos: la cerramos y borramos sus datos de inmediato, sin pedirte más de lo imprescindible para poder actuar.</li>
   </ul>
-  <p>El almacenamiento estrictamente necesario para que la app funcione (mantener tu sesión, recordar tus preferencias) no requiere consentimiento y no se usa para&nbsp;perfilarte.</p>
+  <h2>12 · Seguridad y qué hacemos si hay una brecha</h2>
+  <ul>
+  <li>Las comunicaciones van cifradas, el acceso a cada dato está limitado en la propia base de datos, y el espacio donde viven las selfies de verificación <strong>no es público</strong>.</li>
+  <li><strong>Si ocurre una brecha de seguridad que afecte a tus datos:</strong> la valoramos de inmediato, la <strong>notificamos a la Agencia Española de Protección de Datos en un máximo de 72 horas</strong> cuando proceda (art. 33 RGPD) y, <strong>si supone un riesgo alto para ti, te lo comunicamos a ti</strong> sin dilación indebida y en lenguaje claro (art. 34 RGPD), diciéndote qué ha pasado, qué datos están afectados y qué puedes hacer.</li>
+  <li><strong>No nos la vamos a callar.</strong> Es la única parte de esta política que esperamos no tener que usar nunca, y la que más en serio nos tomamos.</li>
+  </ul>
+  <h2>13 · Reclamación ante la autoridad de control</h2>
+  <p>Puedes reclamar ante la <strong>Agencia Española de Protección de Datos (AEPD)</strong>:</p>
+  <ul>
+  <li>Web: <strong>www.aepd.es</strong> · Sede electrónica: <strong>sedeagpd.gob.es</strong></li>
+  <li>C/ Jorge Juan, 6, 28001 Madrid</li>
+  </ul>
+  <p>Preferiríamos que nos lo dijeras primero para arreglarlo, pero es tu derecho y está antes que nuestra preferencia.</p>
+  <h2>14 · Cambios en esta política</h2>
+  <p>Podemos actualizarla si cambia la app o la normativa. <strong>Cuando el cambio sea relevante te avisaremos por un medio visible antes de que surta efecto.</strong> La fecha de &quot;Última actualización&quot; indica la versión vigente, y <strong>cada consentimiento queda registrado junto a la versión de los textos que aceptaste</strong> (art. 7.1 RGPD).</p>
 
-  <h2>8 · Menores de&nbsp;edad</h2>
-  <p><strong>NYXA es solo para mayores de 18 años.</strong> No admitimos menores: una app que hace que dos personas queden en persona exige garantías que reservamos a personas adultas. Comprobamos la mayoría de edad con la fecha de nacimiento en el registro. Si detectamos una cuenta de un menor, la&nbsp;retiramos.</p>
-
-  <h2>9 · Cambios en esta&nbsp;política</h2>
-  <p>Podemos actualizar esta política si cambia la app o la normativa. Cuando el cambio sea relevante, te avisaremos por un medio visible (dentro de la app o por email) antes de que surta efecto. La fecha de <strong>«Última actualización»</strong> del encabezado indica la versión vigente, y cada consentimiento queda registrado junto a la versión de los textos que aceptaste (art. 7.1 RGPD).</p>
 </div>
 
-<style>
-.nf{background:var(--papel,#F9F7F3);color:var(--tinta,#0A0C11);padding:clamp(48px,7vw,64px) 24px 44px;font-family:"Plus Jakarta Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif;line-height:1.5;border-top:1px solid var(--linea-2,#EFEBE3)}
-.nf *{box-sizing:border-box}
-.nf__in{max-width:1120px;margin:0 auto}
-.nf__top{display:grid;grid-template-columns:1.2fr 2fr;gap:48px}
-@media(max-width:820px){.nf__top{grid-template-columns:1fr;gap:40px}}
-.nf__logo{font-size:22px;font-weight:800;letter-spacing:-.02em;color:var(--tinta,#0A0C11)}.nf__logo i{color:var(--az,#2f66ff);font-style:normal}
-.nf__tag{color:var(--gris,#6B7280);font-size:var(--t-base, 15px);margin-top:12px;max-width:28ch}
-.nf__as{display:inline-block;margin-top:20px;line-height:0}
-.nf__cols{display:grid;grid-template-columns:repeat(4,1fr);gap:28px}
-@media(max-width:560px){.nf__cols{grid-template-columns:repeat(2,1fr);gap:32px 20px}}
-.nf__col h4{font-size:var(--t-xs, 12px);font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--gris-2,#9099AB);margin:0 0 14px}
-.nf__col a{display:block;color:#3A3F4A;text-decoration:none;font-size:var(--t-base, 15px);font-weight:500;margin:10px 0;transition:color .15s}
-.nf__col a:hover{color:var(--az,#2f66ff)}
-.nf__bottom{margin-top:44px;padding-top:24px;border-top:1px solid var(--linea-2,#EFEBE3);display:flex;flex-wrap:wrap;gap:14px 24px;align-items:center;justify-content:space-between;color:var(--gris,#6B7280);font-size:var(--t-sm, 13px)}
-.nf__soc{display:flex;gap:20px;flex-wrap:wrap}
-.nf__soc a{color:var(--gris,#6B7280);text-decoration:none;font-weight:600}.nf__soc a:hover{color:var(--az,#2f66ff)}
-.nf__soc a,.nf__lang{display:inline-flex;align-items:center;gap:7px}
-.nf__soc a svg,.nf__lang svg{flex:none}
-.nf__lang{color:var(--gris,#6B7280);font-weight:600}
-</style>
 <footer class="nf">
   <div class="nf__in">
     <div class="nf__top">
@@ -313,6 +341,8 @@ img{max-width:100%;height:auto}
         <div class="nf__col"><h4>Legal</h4>
           <a href="privacidad.html">Privacidad</a>
           <a href="terminos.html">Términos</a>
+          <a href="normas.html">Normas</a>
+          <a href="aviso-legal.html">Aviso legal</a>
         </div>
       </nav>
     </div>

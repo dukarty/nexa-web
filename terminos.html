@@ -4,17 +4,17 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Términos y Condiciones — NYXA</title>
-<meta name="description" content="Condiciones de uso de NYXA: quién puede usarla, normas de conducta, moderación, responsabilidad, propiedad intelectual y ley aplicable.">
+<meta name="description" content="Las reglas de NYXA: quién puede usarla, qué se publica y qué no, cómo moderamos, qué pasa si incumples y de qué respondemos.">
 <link rel="canonical" href="https://holanyxa.com/terminos">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="NYXA">
 <meta property="og:url" content="https://holanyxa.com/terminos">
 <meta property="og:title" content="Términos y Condiciones — NYXA">
-<meta property="og:description" content="Condiciones de uso de NYXA: quién puede usarla, normas de conducta, moderación y responsabilidad.">
+<meta property="og:description" content="Las reglas de NYXA: quién puede usarla, qué se publica y qué no, cómo moderamos, qué pasa si incumples y de qué respondemos.">
 <meta property="og:image" content="https://holanyxa.com/og.jpg">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Términos y Condiciones — NYXA">
-<meta name="twitter:description" content="Condiciones de uso de NYXA: quién puede usarla, normas de conducta, moderación y responsabilidad.">
+<meta name="twitter:description" content="Las reglas de NYXA: quién puede usarla, qué se publica y qué no, cómo moderamos, qué pasa si incumples y de qué respondemos.">
 <meta name="twitter:image" content="https://holanyxa.com/og.jpg">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -55,28 +55,37 @@ a{color:inherit;text-decoration:none}
 /* CONTENIDO */
 .w{max-width:680px;margin:0 auto;padding:0 var(--pad) 120px}
 header.doc{padding:clamp(120px,16vw,180px) 0 40px}
-.doc__k{font-size:.7rem;font-weight:800;letter-spacing:.24em;text-transform:uppercase;color:var(--az);margin-bottom:18px}
-h1{font-size:clamp(2.2rem,7vw,4rem);font-weight:900;letter-spacing:-.05em;line-height:.98;text-transform:uppercase;font-variation-settings:"wdth" 88;text-wrap:balance}
+.doc__k{font-size:.7rem;font-weight:800;letter-spacing:.24em;text-transform:uppercase;color:var(--az-h);margin-bottom:18px}
+h1{font-size:clamp(2.2rem,7vw,4rem);font-weight:900;letter-spacing:-.05em;line-height:.98;text-transform:uppercase;font-variation-settings:normal;text-wrap:balance}
 .fecha{color:var(--gris);margin-top:16px;font-size:.9rem;font-weight:600}
 h2{font-size:clamp(1.2rem,2.4vw,1.5rem);font-weight:800;letter-spacing:-.03em;
   margin:44px 0 14px;padding-top:30px;border-top:1.5px solid var(--linea)}
+h3{font-size:1.02rem;font-weight:800;letter-spacing:-.02em;margin:26px 0 10px}
 p{margin-bottom:16px;color:#20242E;text-wrap:pretty}
 ul{margin:0 0 18px 20px}
 li{margin-bottom:9px;color:#20242E}
 strong{font-weight:800;color:var(--tinta)}
 code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.9em;background:var(--papel);padding:1px 6px;border-radius:6px}
-a.enl{color:var(--az);font-weight:700;border-bottom:1.5px solid rgba(47,102,255,.28)}
+a.enl{color:var(--az-h);font-weight:700;border-bottom:1.5px solid rgba(47,102,255,.28)}
 a.enl:hover{border-bottom-color:var(--az)}
 .box{background:var(--papel);border:1px solid var(--linea);border-left:3px solid var(--az);
   border-radius:0 14px 14px 0;padding:20px 22px;margin:24px 0}
 .box p:last-child{margin-bottom:0}
+/* Tablas legales — contenedor con scroll horizontal en móvil */
+.tabla{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:20px 0;border:1px solid var(--linea);border-radius:14px;background:var(--card)}
+table{border-collapse:collapse;width:100%;min-width:520px;font-size:.94rem}
+th,td{text-align:left;padding:12px 16px;border-bottom:1px solid var(--linea);vertical-align:top;color:#20242E}
+th{background:var(--blue-soft);font-weight:800;color:var(--tinta);white-space:nowrap}
+tr:last-child td{border-bottom:none}
 footer.doc{max-width:680px;margin:56px auto 0;padding:28px var(--pad) 80px;border-top:1.5px solid var(--linea);font-size:.9rem;color:var(--gris)}
 footer.doc a{color:var(--az);font-weight:700}
 footer.doc .otros{margin-top:12px;display:flex;gap:18px;flex-wrap:wrap}
+/* Pantallas grandes: el texto legal no se queda diminuto, pero mantiene
+   una medida de lectura cómoda (no se estira a lo ancho). */
 @media (min-width:1700px){  .w{max-width:720px} }
 @media (min-width:2600px){  .w{max-width:720px} }
 
-/* ═══ BARRA ESTILO APPLE ═══ */
+/* ═══ BARRA ESTILO APPLE: fina, translúcida y con desenfoque, legible sobre CUALQUIER sección ═══ */
 .nav{padding-top:11px;padding-bottom:11px;background:rgba(251,249,244,.72);-webkit-backdrop-filter:saturate(1.8) blur(20px);backdrop-filter:saturate(1.8) blur(20px);border-bottom:1px solid rgba(10,12,17,.07)}
 .nav .marca,.nav .marca__n{color:var(--tinta)!important;background:#fff!important;border-color:var(--tinta)!important}
 .nav__links a,.nav .empr{color:var(--tinta)!important}
@@ -84,131 +93,247 @@ footer.doc .otros{margin-top:12px;display:flex;gap:18px;flex-wrap:wrap}
 .burger{border-color:rgba(10,12,17,.28)!important;background:#fff!important}
 @media(max-width:840px){.nav__links{background:rgba(251,249,244,.98)!important}}
 
-/* ═══ PULIDO FINAL ═══ */
-html{scroll-padding-top:96px}
-::selection{background:var(--az);color:#fff}
+/* ═══ PULIDO FINAL (detalles Apple) ═══ */
+html{scroll-padding-top:96px}                 /* anclajes del menú no quedan bajo la barra fija */
+::selection{background:var(--az);color:#fff}  /* selección de texto en azul de marca */
 ::-moz-selection{background:var(--az);color:#fff}
 body{text-rendering:optimizeLegibility;-moz-osx-font-smoothing:grayscale}
 img{max-width:100%;height:auto}
+/* tablas de etiqueta/valor de los textos legales: la etiqueta puede partirse */
+table.t-def th{white-space:normal;width:34%;min-width:150px}
+@media(max-width:560px){table.t-def{min-width:420px}table.t-def th{width:38%}}
 </style>
 </head>
 <body>
 
-<header class="nav">
+<header class="nav" aria-label="Principal">
   <a class="marca" href="index.html" aria-label="NYXA, inicio">NY<span class="marca__x" aria-hidden="true"><svg viewBox="0 0 20 20"><line x1="2" y1="18" x2="18" y2="2"/><line x1="18" y1="18" x2="2" y2="2"/></svg></span>A</a>
   <a class="volver" href="index.html">Volver a NYXA</a>
 </header>
 
-<div class="w">
+<div class="w" role="main">
   <header class="doc">
     <p class="doc__k">NYXA · Valencia · 2026</p>
     <h1>Términos y&nbsp;Condiciones.</h1>
-    <p class="fecha">Última actualización: 11 de agosto de&nbsp;2026</p>
+    <p class="fecha">Última actualización: 26 de octubre de&nbsp;2026</p>
   </header>
 
-  <div class="box">
-    <p><strong>Lo importante, primero.</strong> NYXA sirve para quedar con gente de verdad. Cuando quedas con alguien, quedas bajo tu responsabilidad: NYXA no está delante. Sé quien dices ser, trata bien a la gente, y si algo va mal,&nbsp;cuéntanoslo.</p>
-  </div>
+  <div class="box"><p><strong>Lo importante, primero.</strong> NYXA sirve para quedar con gente de verdad. Cuando quedas con alguien, quedas bajo tu responsabilidad: NYXA no está delante. Sé quien dices ser, trata bien a la gente, y si algo va mal, cuéntanoslo — y si es grave, cuéntaselo también a quien tiene que&nbsp;saberlo.</p></div>
 
-  <h2>1 · Qué es NYXA (objeto)</h2>
-  <p>NYXA es una aplicación para que personas de una misma ciudad queden a hacer cosas reales, en persona. Hoy está en <strong>fase piloto en Valencia</strong>, es <strong>gratuita</strong>, y puede cambiar o pararse mientras aprendemos. Estos Términos regulan la relación entre tú (el usuario) y NYXA (el prestador del servicio; el responsable figura en la <a class="enl" href="privacidad.html">Política de Privacidad</a>).</p>
-  <p>Al registrarte y usar la app, aceptas estos Términos y la <a class="enl" href="privacidad.html">Política de Privacidad</a>.</p>
-
-  <h2>2 · Quién puede usarla (elegibilidad)</h2>
+  <h2>1 · Qué es NYXA y quién la presta</h2>
+  <p>NYXA es una aplicación para que personas de una misma ciudad queden a hacer cosas reales, en persona. Hoy está en <strong>fase piloto en Valencia</strong> y es <strong>gratuita</strong> para quien la usa.</p>
+  <p>El prestador del servicio es <strong>David Cid Cáceres</strong> (NIF 42265700A, Valencia, España), persona física promotora de NYXA y titular de la marca &quot;NYXA&quot; (OEPM, solicitud M4406182, clases 9 y 45). La sociedad de NYXA todavía no está constituida.</p>
+  <p><strong>Contacto para cualquier cosa, incluidas las comunicaciones de autoridades:</strong> <strong>holanyxa@gmail.com</strong></p>
+  <p>Al registrarte y usar la app aceptas estos Términos, las Normas de la Comunidad y la Política de Privacidad.</p>
+  <h2>2 · Quién puede usarla</h2>
   <ul>
-    <li><strong>Solo mayores de 18 años.</strong> Una cuenta por persona, con tu identidad real.</li>
-    <li>Si te suplantan o pierdes el acceso, escríbenos a <a class="enl" href="mailto:holanyxa@gmail.com">holanyxa@gmail.com</a>.</li>
+  <li><strong>Solo mayores de 18 años.</strong> NYXA existe para provocar encuentros presenciales con desconocidos: por su naturaleza, se reserva a personas adultas.</li>
+  <li><strong>Una cuenta por persona, con tu identidad real.</strong></li>
+  <li><strong>La fecha de nacimiento se usa para comprobar la edad y no se puede cambiar.</strong> No es un fallo de la app: si se pudiera editar, la comprobación no valdría nada.</li>
+  <li><strong>Si nos consta que una cuenta es de una persona menor de 18 años, la cerramos</strong> y eliminamos sus datos. No hay aviso previo ni escalones intermedios: en esto no hay margen.</li>
+  <li><strong>Declarar una edad falsa para entrar es un incumplimiento grave</strong> de estos Términos, y puede tener consecuencias legales para quien lo hace más allá del cierre de la cuenta.</li>
+  <li>Si te suplantan o pierdes el acceso, escríbenos a <strong>holanyxa@gmail.com</strong>.</li>
   </ul>
-
-  <h2>3 · Tu cuenta y su&nbsp;seguridad</h2>
+  <h2>3 · Tu cuenta</h2>
+  <p>Puedes entrar en NYXA <strong>con tu correo, con Google o con tu cuenta de Apple</strong>. Elijas la que elijas, <strong>tu correo es tu identidad dentro de NYXA</strong>.</p>
   <ul>
-    <li>Eres responsable de mantener el control de tu cuenta y de la actividad que ocurra en ella.</li>
-    <li>Los datos que nos das (empezando por tu email) deben ser veraces y estar actualizados.</li>
-    <li>Avísanos de inmediato si detectas un uso no autorizado de tu cuenta.</li>
+  <li>Si entras con tu cuenta de Apple y eliges <strong>«Ocultar mi correo»</strong>, tu identidad en NYXA pasa a ser la dirección de reenvío que Apple genera. Funciona igual. <strong>Si algún día le retiras el permiso a NYXA desde los ajustes de tu Apple Account, esa dirección deja de funcionar y dejarás de recibir nuestros avisos</strong>, incluidos los que tienen que ver con tu cuenta. Tu cuenta sigue existiendo hasta que la borres.</li>
+  <li><strong>Una persona, una cuenta.</strong> No abras varias cuentas para saltarte un límite, una suspensión o un bloqueo.</li>
   </ul>
-
+  <ul>
+  <li>Eres responsable de mantener el control de tu cuenta y de la actividad que ocurra en ella.</li>
+  <li>Los datos que nos das deben ser veraces y estar actualizados.</li>
+  <li>Avísanos de inmediato si detectas un uso no autorizado.</li>
+  <li><strong>No puedes ceder, vender ni compartir tu cuenta</strong>, ni usar la de otra persona.</li>
+  </ul>
   <h2>4 · Normas de conducta y contenido</h2>
-  <p>Al usar NYXA te comprometes&nbsp;a:</p>
+  <p>Las <strong>Normas de la Comunidad</strong> forman parte de estos Términos y son igual de vinculantes. En resumen, al usar NYXA te comprometes a:</p>
   <ul>
-    <li><strong>Subir solo lo que hayas vivido.</strong> Es la regla que sostiene NYXA entera: si se puede fingir, esto se convierte en otra app de postureo y deja de servir para nada.</li>
-    <li><strong>Usar fotos tuyas</strong>, y que quien salga en ellas esté de acuerdo.</li>
-    <li><strong>Tratar bien a la gente.</strong> Nada de acoso, amenazas, discurso de odio, spam ni contenido sexual. Aquí no hay tolerancia ni avisos infinitos.</li>
-    <li><strong>No usar NYXA para vender</strong> ni para captar clientes.</li>
+  <li><strong>Subir solo lo que hayas vivido.</strong> Es la regla que sostiene NYXA: si se puede fingir, deja de servir para nada.</li>
+  <li><strong>Usar fotos tuyas</strong>, y cumplir lo que dice la sección 6 cuando sale alguien más.</li>
+  <li><strong>Tratar bien a la gente.</strong> Nada de acoso, amenazas, discurso de odio, spam ni contenido sexual.</li>
+  <li><strong>No suplantar a nadie</strong>, ni hacerte pasar por otra persona, por un negocio o por NYXA.</li>
+  <li><strong>No usar NYXA para vender</strong> ni para captar clientes desde una cuenta personal. Para eso existen las cuentas de negocio (sección 14).</li>
   </ul>
-  <p><strong>Contenido del usuario:</strong> tus fotos y textos siguen siendo tuyos. Al publicarlos, nos concedes una licencia <strong>limitada, no exclusiva y gratuita</strong> para mostrarlos <strong>dentro de NYXA</strong> a quien corresponda, que es lo mínimo para que la app funcione. No los usamos en publicidad ni los cedemos a terceros. Si borras algo, dejamos de&nbsp;mostrarlo.</p>
-
-  <h2>5 · Moderación, suspensión y&nbsp;baneo</h2>
+  <p><strong>Tu contenido es tuyo.</strong> Al publicarlo nos concedes una licencia <strong>limitada, no exclusiva, gratuita y revocable</strong> para mostrarlo <strong>dentro de NYXA</strong> a quien corresponda, que es lo mínimo para que la app funcione. No lo usamos en publicidad ni lo cedemos a terceros. <strong>Si lo borras, dejamos de mostrarlo.</strong></p>
+  <h2>5 · Qué no se publica en los espacios públicos de NYXA</h2>
+  <p>En NYXA hay <strong>espacios públicos</strong> y <strong>conversaciones privadas</strong>, y las normas no son las mismas.</p>
+  <p>Son espacios públicos los comentarios, el título y la descripción de un plan, los deseos, tu nombre de usuario, tu nombre visible y la descripción de tu perfil: cualquier cosa que pueda leer gente que no has elegido.</p>
+  <h3>5.1 · Datos de contacto fuera de NYXA</h3>
+  <p><strong>En los espacios públicos no se publican datos de contacto externos.</strong> Ni usuarios de Instagram, TikTok, Telegram o Snapchat, ni números de teléfono o de WhatsApp, ni direcciones de correo, ni enlaces o códigos QR a grupos y canales — ni escritos de forma que esquive la norma (espacios de más, letras cambiadas, &quot;arroba&quot; en palabras, el dato dentro de una imagen).</p>
+  <p><strong>Por qué esta norma existe, en una frase:</strong> dentro de NYXA puedes bloquear a alguien al instante y denunciar lo que te ha hecho con la prueba guardada. Fuera no puedes hacer ninguna de las dos cosas. Cuando alguien te saca de aquí a los dos minutos de conocerte, te está quitando eso.</p>
+  <p><strong>En una conversación privada entre dos personas, los contactos que compartáis son asunto vuestro.</strong> NYXA no vigila los chats privados y no quiere hacerlo. Pero tampoco puede protegerte fuera: lo que pase en otra aplicación ocurre sin bloqueo, sin denuncia y sin nosotros.</p>
+  <h3>5.2 · Spam y captación</h3>
   <ul>
-    <li>Podemos <strong>suspender tu cuenta</strong>, temporal o permanentemente, si incumples estos Términos.</li>
-    <li>Cuando lo hacemos, <strong>lo decide una persona</strong>, con un motivo escrito, y ese motivo lo puedes leer.</li>
-    <li><strong>Ninguna acumulación de denuncias tira una cuenta sola.</strong> Tres personas coordinadas no pueden echar a nadie de NYXA: eso lo decide un humano mirando la evidencia. Es más lento, y es a propósito.</li>
-    <li>Si crees que nos hemos equivocado, escríbenos: queremos enterarnos y corregirlo.</li>
+  <li><strong>Spam.</strong> Mensajes repetidos o casi idénticos, publicados en cadena o en muchos sitios a la vez, y cualquier contenido cuyo propósito real sea aparecer mucho.</li>
+  <li><strong>Captación hacia otras plataformas.</strong> Pedir seguidores, suscriptores, votos o miembros para un grupo o canal, aquí o fuera; y usar NYXA como escaparate para llevarse a la gente a otro sitio.</li>
+  <li><strong>Promoción comercial desde una cuenta personal.</strong></li>
   </ul>
-
-  <h2>6 · Quedar en persona es responsabilidad&nbsp;tuya</h2>
-  <p>Esto es lo más importante de esta página. <strong>NYXA os presenta; el plan lo hacéis vosotros.</strong></p>
+  <p><strong>Esto no va contra organizar cosas.</strong> Montar un plan, invitar a quien quieras y quedar con gente es literalmente para lo que existe NYXA. Lo que no se hace es sacar a desconocidos del único sitio donde pueden protegerse.</p>
+  <h3>5.3 · Lo que lleva al cierre directo, sin escalones</h3>
   <ul>
-    <li><strong>No verificamos la identidad de nadie de forma garantizada</strong> ni estamos presentes cuando quedáis.</li>
-    <li>Usa la cabeza: primeras veces en sitios públicos, avisa a alguien de dónde vas, y si algo te da mala espina, no vayas — y bloquea sin pensártelo (es inmediato y esa persona no se entera).</li>
-    <li><strong>NYXA no responde de lo que pase en un encuentro</strong>, salvo en aquello a lo que la ley nos obligue.</li>
+  <li><strong>Contenido sexual de personas menores de edad</strong>, en cualquier forma.</li>
+  <li><strong>Contenido íntimo o sexual de una persona publicado sin su consentimiento</strong>, incluido el de una expareja. Se retira en cuanto nos consta, sin pedirte que lo demuestres primero.</li>
+  <li><strong>Amenazas creíbles</strong> contra la vida o la integridad de alguien.</li>
+  <li><strong>Suplantación</strong> de una persona real.</li>
+  <li><strong>Contenido que promueva la explotación o el tráfico de personas.</strong></li>
   </ul>
-
-  <h2>7 · Propiedad intelectual</h2>
+  <h2>6 · Fotos en las que sale otra gente</h2>
+  <p>En NYXA casi ninguna foto es solo tuya: una experiencia compartida es, literalmente, la cara de más gente.</p>
   <ul>
-    <li><strong>La marca NYXA, su nombre, su logotipo, su diseño y su software son nuestros</strong> (o de sus respectivos titulares) y están protegidos. No puedes copiarlos, reproducirlos ni usarlos sin autorización.</li>
-    <li>Tu contenido es tuyo (ver sección 4). Nuestra propiedad intelectual es nuestra.</li>
+  <li><strong>Si subes una foto en la que sale alguien más, necesitas que esa persona esté de acuerdo.</strong> No es una recomendación: es su derecho a la propia imagen (art. 18.1 de la Constitución y Ley Orgánica 1/1982), y quien publica responde de haberlo pedido.</li>
+  <li><strong>Puedes etiquetar a quien salió contigo, pero etiquetar no es dar por bueno.</strong> La otra persona tiene que <strong>confirmarlo</strong> para que aparezca como parte de esa experiencia. Si no confirma, no consta.</li>
+  <li><strong>Si sales en la foto de otra persona y no quieres salir, escríbenos a <a class="enl" href="mailto:holanyxa@gmail.com">holanyxa@gmail.com</a> y la retiramos.</strong> No te vamos a pedir que negocies con quien la subió, ni que expliques por qué.</li>
+  <li><strong>Si borras tu cuenta, se borran las fotos que subiste tú</strong> — incluidas las que compartiste con otras personas, que dejarán de verlas. <strong>Las fotos que subió otra persona y en las que sales tú no se borran solas</strong>, porque son suyas: tu etiqueta desaparece, pero la foto sigue siendo de quien la subió. Si quieres que esas también se retiren, pídenoslo y lo hacemos.</li>
   </ul>
-
-  <h2>8 · Precio</h2>
-  <p>Hoy NYXA es gratuita. Si algún día cobramos algo (por ejemplo, una suscripción premium), <strong>te avisaremos antes</strong>; no vamos a cobrarte por sorpresa. Cuando exista pago, publicaremos aquí las condiciones de contratación y el procedimiento de&nbsp;cobro.</p>
-
-  <h2>9 · Borrar tu&nbsp;cuenta</h2>
-  <p>Puedes borrar tu cuenta <strong>cuando quieras, desde Ajustes</strong>, sin dar explicaciones y sin llamar a nadie. Desapareces al instante para los demás y tienes <strong>15 días</strong> para volver antes de que sea definitivo (ver la <a class="enl" href="privacidad.html">Política de Privacidad</a>, sección de conservación y supresión).</p>
-
-  <h2>10 · Limitación de&nbsp;responsabilidad</h2>
-  <p>En la medida en que lo permita la&nbsp;ley:</p>
+  <div class="box"><p><strong>Nota honesta:</strong> esto último es una asimetría real y preferimos decirla a que te la encuentres. Borrar tu cuenta no borra la cara que sale en el recuerdo de otra persona, salvo que nos lo pidas.</p></div>
+  <h2>7 · Los NYXAs: qué son y cuántos tienes</h2>
+  <p>Un <strong>NYXA</strong> es la invitación que le mandas a alguien para quedar. Es la pieza central de la app y por eso <strong>no es ilimitada</strong>.</p>
   <ul>
-    <li>NYXA se presta <strong>«tal cual»</strong>, en fase piloto, y puede tener errores, interrupciones o cambios.</li>
-    <li>NYXA <strong>no garantiza</strong> resultados concretos de los encuentros ni la conducta de otros usuarios.</li>
-    <li>NYXA <strong>no responde</strong> de los daños derivados de un uso indebido de la app, de la conducta de otros usuarios o de lo que ocurra en un encuentro en persona.</li>
-    <li>Nada en estos Términos excluye responsabilidades que la ley no permita excluir (por ejemplo, por dolo o negligencia grave, o los derechos irrenunciables que la normativa de consumo reconoce a los usuarios).</li>
+  <li><strong>Tienes un número de NYXAs al día.</strong> Cuando se acaban, vuelves a tener al día siguiente. Lo decimos en la app antes de que mandes el último, y el contador se ve en todo momento.</li>
+  <li><strong>El límite existe para que recibir un NYXA signifique algo.</strong> Si pudieras mandar cien, recibir uno no diría nada de nadie. No es una barrera para venderte nada.</li>
+  <li><strong>Podemos cambiar ese número</strong> —subirlo o bajarlo— según cómo funcione la app, y también fijarlo en cero de forma temporal para una cuenta concreta si hay una investigación de moderación abierta. Si lo bajamos de forma permanente, te avisamos como dice la sección 19.</li>
+  <li><strong>Guardamos un apunte de cada NYXA que mandas y recibes</strong>: cuándo y a quién. Es contabilidad, para que el contador cuadre y para poder resolverlo si algo falla. <strong>No guardamos ese apunte para juzgarte</strong>, y el contenido de lo que escribas se rige por el resto de estos Términos.</li>
+  <li><strong>Los NYXAs no se compran, no se venden y no tienen valor económico.</strong> No son dinero, no son un saldo canjeable y no se devuelven. Si cierras tu cuenta, desaparecen.</li>
   </ul>
-
-  <h2>11 · Cambios en los&nbsp;Términos</h2>
-  <p>Podemos actualizar estos Términos. Cuando el cambio sea relevante, te avisaremos por un medio visible antes de que surta efecto. Seguir usando la app tras un cambio implica su&nbsp;aceptación.</p>
-
-  <h2>12 · Ley aplicable y&nbsp;jurisdicción</h2>
+  <h2>8 · Comentarios en las publicaciones</h2>
   <ul>
-    <li>Se aplica la <strong>ley española</strong>.</li>
-    <li>Para cualquier conflicto, los <strong>juzgados y tribunales de Valencia (España)</strong>, sin perjuicio de los derechos que la normativa de consumo reconozca al usuario para acudir a los tribunales de su propio domicilio.</li>
-    <li>Antes de todo eso: escríbenos a <a class="enl" href="mailto:holanyxa@gmail.com">holanyxa@gmail.com</a>, que casi todo se arregla hablando.</li>
+  <li>Un comentario en la publicación de otra persona <strong>es público dentro de NYXA</strong> y va con tu nombre y tu foto.</li>
+  <li><strong>Lo puede borrar quien lo escribió y también quien publicó la foto.</strong> Si publicas algo, ese espacio es tuyo y puedes limpiarlo. Nadie más puede borrarlo desde la app.</li>
+  <li>Que alguien borre tu comentario <strong>no es una sanción</strong> y no deja nada anotado en tu cuenta.</li>
+  <li>Todo lo que dicen las secciones 4 y 5 sobre lo que no se publica <strong>se aplica igual a los comentarios</strong>, incluido lo de no poner datos de contacto fuera de NYXA.</li>
   </ul>
+  <h2>9 · Qué se ve de ti en tu perfil</h2>
+  <p>Tu perfil tiene tres cosas, y conviene que sepas qué es pública y qué no:</p>
+  <ul>
+  <li><strong>Tus fotos de presentación.</strong> Hasta nueve, con su título. Son para enseñar quién eres. <strong>No son experiencias vividas</strong>, no llevan categoría y no cuentan en tu año.</li>
+  <li><strong>Tu línea de vida</strong>: lo que has vivido, ordenado por año. <strong>Puedes ocultar cualquier experiencia</strong> y deja de verse para los demás.</li>
+  <li><strong>Tus deseos</strong>: lo que quieres vivir. Quien visita tu perfil ve <strong>lo que tenéis en común</strong>.</li>
+  </ul>
+  <p>Todo eso lo ve cualquiera que entre a tu perfil dentro de NYXA. <strong>Sube solo lo que te parezca bien que vea un desconocido de tu ciudad</strong>, porque ésa es exactamente la gente para la que está hecha la app.</p>
+  <h2>10 · Quedar en persona: lo que NYXA hace y lo que no</h2>
+  <p><strong>Esto es lo más importante de esta página. NYXA os presenta; el plan lo hacéis vosotros.</strong></p>
+  <h3>10.1 · Lo que NO hacemos, dicho claro</h3>
+  <ul>
+  <li><strong>No verificamos la identidad de nadie de forma garantizada.</strong> La verificación por gesto (el tick) significa que <strong>una persona de nuestro equipo vio una selfie en directo y le pareció una persona real que coincide con su perfil</strong>. No es un control de identidad, no comprueba antecedentes y <strong>no es una garantía de que alguien sea de fiar</strong>.</li>
+  <li><strong>No comprobamos antecedentes penales</strong> de nadie. Ninguno.</li>
+  <li><strong>No estamos presentes cuando quedáis</strong>, ni sabemos qué pasa en un encuentro salvo que alguien nos lo cuente.</li>
+  <li><strong>No somos los organizadores del encuentro.</strong> Quien propone un plan y quien acepta deciden dónde, cuándo y con quién.</li>
+  </ul>
+  <h3>10.2 · Lo que te pedimos que hagas tú</h3>
+  <ul>
+  <li>Las primeras veces, <strong>en sitios públicos</strong>.</li>
+  <li><strong>Dile a alguien de confianza dónde vas y con quién.</strong></li>
+  <li>Si algo te da mala espina, <strong>no vayas</strong>. No le debes una explicación a nadie.</li>
+  <li><strong>Bloquea sin pensártelo.</strong> Es inmediato y esa persona no se entera.</li>
+  <li><strong>Si pasa algo grave, acude a la policía o llama al 112 primero.</strong> Nosotros no sustituimos a nadie en eso. Después cuéntanoslo para que podamos actuar sobre la cuenta y conservar la prueba.</li>
+  </ul>
+  <h3>10.3 · Si alguien te pide salir de NYXA el primer día</h3>
+  <p>No tienes que hacerlo, y es la señal más común de que algo no va bien. Pasarse a otra aplicación es tu decisión, pero ahí ya no hay bloqueo, ni denuncia, ni nosotros.</p>
+  <h2>11 · Moderación: cómo decidimos, qué te contamos y cómo lo discutes</h2>
+  <h3>11.1 · Puedes bloquear y puedes denunciar</h3>
+  <ul>
+  <li><strong>Bloquear es inmediato</strong> y la otra persona no se entera. Desde ese momento no puede enviarte NYXAs ni escribirte, no os proponemos el uno al otro, y no ves lo que publica.</li>
+  <li><strong>Denunciar:</strong> desde la app puedes denunciar <strong>un perfil, una experiencia, un NYXA, un mensaje y un comentario</strong>. Un comentario se denuncia manteniendo el dedo sobre él. <strong>Para cualquier otro contenido de NYXA, escríbenos a holanyxa@gmail.com</strong> diciendo dónde está y qué problema tiene: lo tratamos exactamente igual que una denuncia hecha desde la app.</li>
+  <li><strong>Al denunciar guardamos una copia de lo denunciado</strong> tal y como estaba en ese momento, para poder revisarlo aunque luego se borre. <strong>Quien escribió el contenido no sabe quién lo ha denunciado.</strong></li>
+  <li><strong>Denunciar, por sí solo, no retira el contenido ni bloquea a nadie.</strong> Si lo que necesitas ahora es dejar de ver a alguien, bloquea.</li>
+  </ul>
+  <h3>11.2 · Revisamos el contenido público</h3>
+  <p><strong>Las fotos que publicas en espacios públicos pueden revisarse de forma automática</strong>, con herramientas que detectan desnudos y contenido sexual explícito, violencia extrema y contenido ofensivo. Lo hacemos para que esto siga siendo un sitio al que se pueda venir. Ninguna herramienta de este tipo acierta siempre: puede equivocarse en los dos sentidos.</p>
+  <p><strong>Qué puede hacer una herramienta automática por sí sola:</strong> ocultar un contenido concreto y anotar un aviso en tu cuenta. <strong>Nada más.</strong></p>
+  <p><strong>Qué no puede hacer por sí sola: suspender ni cerrar tu cuenta.</strong> <strong>Una suspensión o un cierre los decide siempre una persona</strong>, mirando la evidencia. Es más lento, y es a propósito.</p>
+  <p><strong>Ninguna acumulación de denuncias tira una cuenta sola.</strong> Tres personas coordinadas no pueden echar a nadie de NYXA.</p>
+  <p><strong>No analizamos tus conversaciones privadas.</strong></p>
+  <h3>11.3 · Qué pasa si incumples: por este orden</h3>
+  <ol>
+  <li><strong>Se retira el contenido.</strong> Se oculta o se borra lo que incumple.</li>
+  <li><strong>Aviso.</strong> Si se repite, te avisamos de forma expresa: qué norma, qué contenido, y qué pasa si sigue.</li>
+  <li><strong>Suspensión temporal.</strong> Durante ese tiempo no puedes usar NYXA; <strong>tu perfil y todo lo que has vivido siguen guardados</strong>.</li>
+  <li><strong>Cierre de la cuenta.</strong> El último paso, y solo cuando los anteriores no han servido o la gravedad no admite escalones.</li>
+  </ol>
+  <p><strong>No todo empieza por el primer escalón.</strong> Lo de la sección 5.3, la suplantación y lo que ponga en peligro la seguridad de alguien pueden llevar directamente al cierre. <strong>El escalón se elige según la gravedad, la reincidencia, el daño causado y el tiempo que ha pasado desde avisos anteriores</strong>, y el motivo queda escrito.</p>
+  <h3>11.4 · Suspensión cautelar: cuando no podemos esperar</h3>
+  <p><strong>Podemos suspender tu cuenta de forma inmediata y sin avisarte antes</strong> cuando tengamos un indicio fundado de que su uso <strong>pone en riesgo la seguridad de otra persona</strong>: indicios de suplantación, de acoso dirigido a alguien concreto, de difusión de contenido íntimo sin consentimiento, o de captación de personas hacia fuera de NYXA con un patrón que no se explica de otra forma.</p>
+  <p>Y porque es una medida fuerte, va con límites:</p>
+  <ul>
+  <li><strong>Es una suspensión, no un cierre.</strong> Se levanta en cuanto una persona revisa el caso y concluye que no había motivo.</li>
+  <li><strong>No se borra nada.</strong> Tu perfil, tus fotos, tus conversaciones y tus planes siguen ahí. Si nos hemos equivocado, lo recuperas intacto.</li>
+  <li><strong>Es lo menos que podamos hacer.</strong> Si bastaba con retirar un contenido, hacemos eso y no esto.</li>
+  <li><strong>Puedes pedir la revisión desde el primer momento</strong> (sección 11.5), y el motivo te lo damos por escrito.</li>
+  </ul>
+  <h3>11.5 · Tu derecho a que lo revise una persona</h3>
+  <p>Si hemos retirado u ocultado algo tuyo, o hemos restringido tu cuenta, <strong>escríbenos a holanyxa@gmail.com</strong>. Tienes derecho a:</p>
+  <ul>
+  <li><strong>saber el motivo por escrito</strong>: qué hemos hecho, en qué hechos nos basamos, en qué norma de estos Términos nos apoyamos, y si ha intervenido una herramienta automática en la detección;</li>
+  <li>que <strong>una persona</strong> revise la decisión — no la herramienta que la detectó;</li>
+  <li><strong>contar tu versión</strong> antes de que la revisión se cierre;</li>
+  <li><strong>oponerte</strong> a la decisión y pedir que se deshaga.</li>
+  </ul>
+  <p><strong>Respondemos en un máximo de 14 días naturales.</strong> Si fue un error, se deshace y te lo decimos. Si no lo fue, te explicamos por qué. En los dos casos, por escrito.</p>
+  <p>Si sigues en desacuerdo, puedes acudir a las autoridades competentes; si el asunto es de protección de datos, a la Agencia Española de Protección de Datos.</p>
+  <h3>11.6 · Cuando hay un delito por medio</h3>
+  <p><strong>Si tenemos motivos para sospechar que se ha cometido, se está cometiendo o va a cometerse un delito que amenaza la vida o la seguridad de alguien, lo comunicamos a las autoridades.</strong> Lo decimos aquí para que nadie se sorprenda: no es una amenaza, es cómo funciona (art. 18 del Reglamento (UE) 2022/2065 de Servicios Digitales).</p>
+  <h2>12 · El asistente Nyx es una IA</h2>
+  <p>NYXA incluye un asistente, <strong>Nyx</strong>, que es una <strong>inteligencia artificial, no una persona</strong>. Sus respuestas y sugerencias de planes son generadas automáticamente y <strong>pueden contener errores</strong>: úsalas con criterio. <strong>Nyx no decide nada sobre tu cuenta.</strong> Qué datos ve y quién los procesa está en la Política de Privacidad.</p>
+  <h2>13 · Ubicación y mapa</h2>
+  <ul>
+  <li><strong>Aparecer en el mapa es opcional y está apagado por defecto.</strong> Si no lo enciendes, nadie te ve ahí.</li>
+  <li><strong>Cuando lo enciendes, otras personas ven tu posición difuminada, nunca la exacta.</strong> La difuminamos en nuestros servidores, a una zona de unos 400 metros, antes de que salga de ahí.</li>
+  <li><strong>Puedes apagarlo cuando quieras: dejas de aparecer en el mapa al instante.</strong> También puedes retirar el permiso de ubicación en los ajustes de tu teléfono.</li>
+  <li>Aparecer en el mapa <strong>no significa que estés disponible para nada</strong> ni que aceptes que te escriban.</li>
+  </ul>
+  <h2>14 · Cuentas de negocio</h2>
+  <p>Un negocio puede registrarse y publicar experiencias en NYXA.</p>
+  <ul>
+  <li>Quien registra un negocio <strong>acepta estos Términos en su nombre y declara estar autorizado para ello</strong>, y responde de que los datos que aporte sean veraces.</li>
+  <li><strong>La verificación de un negocio</strong> la revisa una persona y <strong>no implica que NYXA avale, recomiende ni responda</strong> de lo que ese negocio ofrece.</li>
+  <li><strong>Un negocio no obtiene datos personales de las personas usuarias por el hecho de publicar.</strong> Pagar no da acceso a personas, ni a sus datos, ni compra que la app recomiende a nadie.</li>
+  <li><strong>Las condiciones económicas, cuando existan, se pactan por separado</strong> con cada negocio y constan en el contrato correspondiente, que prevalece sobre esta sección en lo económico.</li>
+  <li>Si un negocio incumple estos Términos, se le aplican los mismos escalones de la sección 11.</li>
+  </ul>
+  <h2>15 · Precio</h2>
+  <p><strong>NYXA es gratis para quien la usa.</strong> No hay suscripción de pago para personas, no se puede contratar ninguna, y no hay nada que cancelar.</p>
+  <p>Si algún día existiera, te mostraríamos el precio y las condiciones completas <strong>antes</strong> de poder contratarla, con toda la información que exige la normativa de consumo. <strong>No cobramos por sorpresa.</strong></p>
+  <h2>16 · Qué pasa cuando alguien se va</h2>
+  <ul>
+  <li><strong>Puedes borrar tu cuenta cuando quieras, desde Ajustes</strong>, sin dar explicaciones y sin llamar a nadie. Desapareces al instante para los demás y tienes <strong>15 días</strong> para volver antes de que sea definitivo.</li>
+  <li><strong>Pasados los 15 días se borra de verdad:</strong> tu perfil, tus fotos, tus experiencias, tus conversaciones, tus planes y tu identidad de acceso. El detalle está en la Política de Privacidad.</li>
+  <li><strong>Se conservan las denuncias y el registro de moderación</strong>, también si te has ido: son la prueba de por qué se actuó, y borrarlas dejaría indefensa a la persona a la que protegían.</li>
+  <li><strong>Lo que viviste con otra persona:</strong> si una de las dos se borra, <strong>las fotos que subió esa persona desaparecen</strong> y la otra deja de verlas. Lo que subió quien se queda sigue ahí, sin la etiqueta de quien se fue. Un recuerdo compartido no es propiedad de uno solo, y la única forma honesta de resolverlo es que cada uno se lleve lo suyo.</li>
+  <li><strong>También podemos cerrar nosotros una cuenta</strong> por los motivos de la sección 11, o <strong>dejar de prestar el servicio</strong>: si NYXA se para, avisaremos con antelación razonable y daremos un plazo para que puedas llevarte tus datos.</li>
+  </ul>
+  <h2>17 · Responsabilidad</h2>
+  <p>Esta sección dice lo que podemos decir legalmente, no lo que nos gustaría poder decir. Hay responsabilidades que <strong>ninguna cláusula puede excluir</strong>, y no vamos a fingir lo contrario.</p>
+  <h3>17.1 · De qué no respondemos</h3>
+  <p>En la medida en que lo permita la ley:</p>
+  <ul>
+  <li>NYXA se presta <strong>&quot;tal cual&quot;</strong>, en fase piloto, y puede tener errores, interrupciones o cambios.</li>
+  <li><strong>No garantizamos resultados</strong> de los encuentros, ni que vayas a conocer a nadie, ni la conducta de otras personas.</li>
+  <li><strong>No respondemos de la conducta de otras personas usuarias</strong>, ni de la veracidad de lo que publiquen, ni de lo que ocurra en un encuentro en persona, porque no somos parte de ese encuentro y no tenemos control sobre él.</li>
+  <li>No respondemos de lo que pase <strong>en otras plataformas</strong> a las que alguien te lleve.</li>
+  </ul>
+  <h3>17.2 · De qué sí respondemos, y esto no se excluye</h3>
+  <ul>
+  <li><strong>De nuestros propios incumplimientos</strong> de estos Términos y de la ley.</li>
+  <li><strong>Del dolo y de la negligencia grave</strong>, que no se pueden excluir nunca.</li>
+  <li><strong>De los daños a las personas</strong> en lo que la ley nos atribuya.</li>
+  <li><strong>De cumplir nuestras obligaciones de moderación y seguridad</strong> una vez tenemos conocimiento de algo que va mal: si nos avisas de un riesgo y no hacemos nada, eso sí es nuestro.</li>
+  <li><strong>De todos los derechos irrenunciables que la normativa de consumo te reconoce.</strong> Si alguna parte de esta sección 17 fuera contraria a ellos, <strong>esa parte no se aplica y el resto sigue en vigor</strong>.</li>
+  </ul>
+  <div class="box"><p><strong>Dicho sin rodeos:</strong> &quot;NYXA no se responsabiliza de nada&quot; no es una cláusula válida y no la vas a leer aquí. Lo que sí es cierto es que no estamos en el encuentro y no podemos responder por lo que haga otra persona.</p></div>
+  <h2>18 · Reclamaciones, ley aplicable y jurisdicción</h2>
+  <ul>
+  <li><strong>Antes de todo:</strong> escríbenos a <strong>holanyxa@gmail.com</strong>, que casi todo se arregla hablando.</li>
+  <li>Se aplica la <strong>ley española</strong>.</li>
+  <li>Para cualquier conflicto, los <strong>juzgados y tribunales de Valencia (España)</strong>, <strong>sin perjuicio de que, si eres consumidor, puedas acudir a los tribunales de tu propio domicilio</strong>, derecho que no se te puede quitar por contrato.</li>
+  </ul>
+  <h2>19 · Cambios en estos Términos</h2>
+  <p>Podemos actualizar estos Términos. <strong>Cuando el cambio sea relevante te avisaremos por un medio visible (dentro de la app o por correo) antes de que surta efecto</strong>, y dejaremos un plazo razonable para que puedas leerlo y, si no te gusta, irte sin coste. Seguir usando la app tras ese plazo implica su aceptación. <strong>No aplicamos cambios relevantes con efecto retroactivo.</strong></p>
+  <h2>20 · Contacto</h2>
+  <p><strong>holanyxa@gmail.com</strong> · Responsable: David Cid Cáceres, NIF 42265700A, Valencia (España). Datos completos en la Política de Privacidad.</p>
 
-  <h2>13 · Contacto</h2>
-  <p><a class="enl" href="mailto:holanyxa@gmail.com">holanyxa@gmail.com</a> · Responsable: David Cid Cáceres (persona física; identidad legal a completar cuando se constituya la sociedad).</p>
 </div>
 
-<style>
-.nf{background:var(--papel,#F9F7F3);color:var(--tinta,#0A0C11);padding:clamp(48px,7vw,64px) 24px 44px;font-family:"Plus Jakarta Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,sans-serif;line-height:1.5;border-top:1px solid var(--linea-2,#EFEBE3)}
-.nf *{box-sizing:border-box}
-.nf__in{max-width:1120px;margin:0 auto}
-.nf__top{display:grid;grid-template-columns:1.2fr 2fr;gap:48px}
-@media(max-width:820px){.nf__top{grid-template-columns:1fr;gap:40px}}
-.nf__logo{font-size:22px;font-weight:800;letter-spacing:-.02em;color:var(--tinta,#0A0C11)}.nf__logo i{color:var(--az,#2f66ff);font-style:normal}
-.nf__tag{color:var(--gris,#6B7280);font-size:var(--t-base, 15px);margin-top:12px;max-width:28ch}
-.nf__as{display:inline-block;margin-top:20px;line-height:0}
-.nf__cols{display:grid;grid-template-columns:repeat(4,1fr);gap:28px}
-@media(max-width:560px){.nf__cols{grid-template-columns:repeat(2,1fr);gap:32px 20px}}
-.nf__col h4{font-size:var(--t-xs, 12px);font-weight:800;letter-spacing:.1em;text-transform:uppercase;color:var(--gris-2,#9099AB);margin:0 0 14px}
-.nf__col a{display:block;color:#3A3F4A;text-decoration:none;font-size:var(--t-base, 15px);font-weight:500;margin:10px 0;transition:color .15s}
-.nf__col a:hover{color:var(--az,#2f66ff)}
-.nf__bottom{margin-top:44px;padding-top:24px;border-top:1px solid var(--linea-2,#EFEBE3);display:flex;flex-wrap:wrap;gap:14px 24px;align-items:center;justify-content:space-between;color:var(--gris,#6B7280);font-size:var(--t-sm, 13px)}
-.nf__soc{display:flex;gap:20px;flex-wrap:wrap}
-.nf__soc a{color:var(--gris,#6B7280);text-decoration:none;font-weight:600}.nf__soc a:hover{color:var(--az,#2f66ff)}
-.nf__soc a,.nf__lang{display:inline-flex;align-items:center;gap:7px}
-.nf__soc a svg,.nf__lang svg{flex:none}
-.nf__lang{color:var(--gris,#6B7280);font-weight:600}
-</style>
 <footer class="nf">
   <div class="nf__in">
     <div class="nf__top">
@@ -245,6 +370,8 @@ img{max-width:100%;height:auto}
         <div class="nf__col"><h4>Legal</h4>
           <a href="privacidad.html">Privacidad</a>
           <a href="terminos.html">Términos</a>
+          <a href="normas.html">Normas</a>
+          <a href="aviso-legal.html">Aviso legal</a>
         </div>
       </nav>
     </div>
