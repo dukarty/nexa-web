@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Normas de la Comunidad — NYXA</title>
+<meta name="description" content="Las diez normas de NYXA: ser quien dices ser, respeto, nada de contenido sexual no consentido, seguridad en los encuentros, y cómo bloquear o denunciar.">
+<link rel="canonical" href="https://holanyxa.com/normas">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="NYXA">
+<meta property="og:url" content="https://holanyxa.com/normas">
+<meta property="og:title" content="Normas de la Comunidad — NYXA">
+<meta property="og:description" content="Las diez normas de NYXA: ser quien dices ser, respeto, nada de contenido sexual no consentido, seguridad en los encuentros, y cómo bloquear o denunciar.">
+<meta property="og:image" content="https://holanyxa.com/og.jpg">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Normas de la Comunidad — NYXA">
+<meta name="twitter:description" content="Las diez normas de NYXA: ser quien dices ser, respeto, nada de contenido sexual no consentido, seguridad en los encuentros, y cómo bloquear o denunciar.">
+<meta name="twitter:image" content="https://holanyxa.com/og.jpg">
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
+<style>
+:root{
+  /* Escala tipografica. 8 pasos en vez de los 29 que habia:
+     los medios pixeles (11.5, 14.5, 16.5...) eran ajustes a ojo y se leian
+     como acabado descuidado. Ningun texto se movio mas de 1.5px. */
+  --t-xs:12px; --t-sm:13px; --t-base:15px; --t-md:17px; --t-lg:19px; --t-xl:21px; --t-2xl:23px; --t-3xl:26px;
+
+  --az:#2f66ff;--az-h:#1f4fd6;--tinta:#0A0C11;--gris:#5D6779;--gris-2:#737B89;
+  --linea:#E4E7EC;--papel:#FBF9F4;--card:#ffffff;--blue-soft:#EDF3FF;
+  --f:"Plus Jakarta Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  --pad:clamp(20px,4vw,48px);--e:cubic-bezier(.16,1,.3,1);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%;scroll-behavior:smooth;overflow-x:clip;max-width:100%}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+body{font-family:var(--f);background:var(--papel);color:var(--tinta);font-size:var(--t-md, 17px);line-height:1.62;
+  letter-spacing:-.01em;-webkit-font-smoothing:antialiased;overflow-x:clip}
+svg{display:block}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:3px solid var(--az);outline-offset:3px;border-radius:6px}
+
+/* NAV — mismo shell que el resto de la web */
+.nav{position:fixed;top:0;left:0;right:0;z-index:80;padding:var(--pad);display:flex;align-items:center;justify-content:space-between;gap:16px}
+.marca{display:inline-flex;align-items:center;font-weight:900;font-size:1.28rem;letter-spacing:-.05em;
+  padding:7px 13px;border-radius:999px;border:1.5px solid var(--tinta);color:var(--tinta);background:#fff}
+.marca__x{display:inline-flex;width:.66em;height:.66em;margin:0 .03em}
+.marca__x svg{width:100%;height:100%;overflow:visible}
+.marca__x line{stroke:var(--az);stroke-width:3;stroke-linecap:round}
+.volver{display:inline-flex;align-items:center;gap:8px;padding:9px 16px;border-radius:999px;background:var(--az);color:#fff;
+  font-size:.72rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase;transition:background .2s}
+.volver:hover{background:var(--az-h)}
+
+/* CONTENIDO */
+.w{max-width:680px;margin:0 auto;padding:0 var(--pad) 120px}
+header.doc{padding:clamp(120px,16vw,180px) 0 40px}
+.doc__k{font-size:.7rem;font-weight:800;letter-spacing:.24em;text-transform:uppercase;color:var(--az-h);margin-bottom:18px}
+h1{font-size:clamp(2.2rem,7vw,4rem);font-weight:900;letter-spacing:-.05em;line-height:.98;text-transform:uppercase;font-variation-settings:normal;text-wrap:balance}
+.fecha{color:var(--gris);margin-top:16px;font-size:.9rem;font-weight:600}
+h2{font-size:clamp(1.2rem,2.4vw,1.5rem);font-weight:800;letter-spacing:-.03em;
+  margin:44px 0 14px;padding-top:30px;border-top:1.5px solid var(--linea)}
+h3{font-size:1.02rem;font-weight:800;letter-spacing:-.02em;margin:26px 0 10px}
+p{margin-bottom:16px;color:#20242E;text-wrap:pretty}
+ul{margin:0 0 18px 20px}
+li{margin-bottom:9px;color:#20242E}
+strong{font-weight:800;color:var(--tinta)}
+code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:.9em;background:var(--papel);padding:1px 6px;border-radius:6px}
+a.enl{color:var(--az-h);font-weight:700;border-bottom:1.5px solid rgba(47,102,255,.28)}
+a.enl:hover{border-bottom-color:var(--az)}
+.box{background:var(--papel);border:1px solid var(--linea);border-left:3px solid var(--az);
+  border-radius:0 14px 14px 0;padding:20px 22px;margin:24px 0}
+.box p:last-child{margin-bottom:0}
+/* Tablas legales — contenedor con scroll horizontal en móvil */
+.tabla{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:20px 0;border:1px solid var(--linea);border-radius:14px;background:var(--card)}
+table{border-collapse:collapse;width:100%;min-width:520px;font-size:.94rem}
+th,td{text-align:left;padding:12px 16px;border-bottom:1px solid var(--linea);vertical-align:top;color:#20242E}
+th{background:var(--blue-soft);font-weight:800;color:var(--tinta);white-space:nowrap}
+tr:last-child td{border-bottom:none}
+footer.doc{max-width:680px;margin:56px auto 0;padding:28px var(--pad) 80px;border-top:1.5px solid var(--linea);font-size:.9rem;color:var(--gris)}
+footer.doc a{color:var(--az);font-weight:700}
+footer.doc .otros{margin-top:12px;display:flex;gap:18px;flex-wrap:wrap}
+/* Pantallas grandes: el texto legal no se queda diminuto, pero mantiene
+   una medida de lectura cómoda (no se estira a lo ancho). */
+@media (min-width:1700px){  .w{max-width:720px} }
+@media (min-width:2600px){  .w{max-width:720px} }
+
+/* ═══ BARRA ESTILO APPLE: fina, translúcida y con desenfoque, legible sobre CUALQUIER sección ═══ */
+.nav{padding-top:11px;padding-bottom:11px;background:rgba(251,249,244,.72);-webkit-backdrop-filter:saturate(1.8) blur(20px);backdrop-filter:saturate(1.8) blur(20px);border-bottom:1px solid rgba(10,12,17,.07)}
+.nav .marca,.nav .marca__n{color:var(--tinta)!important;background:#fff!important;border-color:var(--tinta)!important}
+.nav__links a,.nav .empr{color:var(--tinta)!important}
+.nav .marca__x line{stroke:var(--az)!important}
+.burger{border-color:rgba(10,12,17,.28)!important;background:#fff!important}
+@media(max-width:840px){.nav__links{background:rgba(251,249,244,.98)!important}}
+
+/* ═══ PULIDO FINAL (detalles Apple) ═══ */
+html{scroll-padding-top:96px}                 /* anclajes del menú no quedan bajo la barra fija */
+::selection{background:var(--az);color:#fff}  /* selección de texto en azul de marca */
+::-moz-selection{background:var(--az);color:#fff}
+body{text-rendering:optimizeLegibility;-moz-osx-font-smoothing:grayscale}
+img{max-width:100%;height:auto}
+/* tablas de etiqueta/valor de los textos legales: la etiqueta puede partirse */
+table.t-def th{white-space:normal;width:34%;min-width:150px}
+@media(max-width:560px){table.t-def{min-width:420px}table.t-def th{width:38%}}
+</style>
+</head>
+<body>
+
+<header class="nav" aria-label="Principal">
+  <a class="marca" href="index.html" aria-label="NYXA, inicio">NY<span class="marca__x" aria-hidden="true"><svg viewBox="0 0 20 20"><line x1="2" y1="18" x2="18" y2="2"/><line x1="18" y1="18" x2="2" y2="2"/></svg></span>A</a>
+  <a class="volver" href="index.html">Volver a NYXA</a>
+</header>
+
+<div class="w" role="main">
+  <header class="doc">
+    <p class="doc__k">NYXA · Valencia · 2026</p>
+    <h1>Normas de la&nbsp;Comunidad.</h1>
+    <p class="fecha">Última actualización: 26 de octubre de&nbsp;2026</p>
+  </header>
+
+  <div class="box"><p>Estas normas valen para todo lo que haces en NYXA: tu perfil, tus fotos, tus planes, tus comentarios y tus mensajes. Forman parte de los <strong>Términos y Condiciones</strong>, así que incumplirlas tiene&nbsp;consecuencias.</p></div>
+
+  <h2>1 · Eres una persona real, y solo tú</h2>
+  <ul>
+  <li>Usa tu <strong>identidad real</strong>, tu nombre y <strong>fotos tuyas actuales</strong>. Nada de perfiles falsos, fotos de otra persona ni suplantar a nadie.</li>
+  <li><strong>Una persona, una cuenta.</strong> Nada de cuentas múltiples para saltarte un bloqueo o una suspensión.</li>
+  <li><strong>Sube solo lo que hayas vivido.</strong> Es la regla que sostiene NYXA entera: si se puede fingir, esto se convierte en otra app de postureo y deja de servir para nada.</li>
+  </ul>
+  <h2>2 · Solo mayores de 18 años</h2>
+  <ul>
+  <li>NYXA es <strong>solo para mayores de 18</strong>. Si eres menor, no puedes usarla.</li>
+  <li><strong>Tolerancia cero</strong> con cualquier contenido o conducta que involucre a menores de forma sexual o de riesgo. Se cierra la cuenta y <strong>se comunica a las autoridades</strong>.</li>
+  <li>Si crees que una cuenta es de un menor, <strong>dínoslo</strong>: holanyxa@gmail.com. Lo tratamos como prioritario.</li>
+  </ul>
+  <h2>3 · Respeto: nada de acoso ni de odio</h2>
+  <ul>
+  <li>No al <strong>acoso</strong>, los insultos, las amenazas, las humillaciones ni la persecución, dentro o fuera de la app.</li>
+  <li>No al <strong>discurso de odio</strong> por raza, origen, religión, sexo, orientación sexual, identidad de género, discapacidad o cualquier otra condición.</li>
+  <li><strong>Un &quot;no&quot; es un &quot;no&quot;.</strong> Si alguien no quiere quedar, no quiere seguir hablando o te bloquea, <strong>se acabó</strong>. Insistir es acoso.</li>
+  </ul>
+  <h2>4 · Nada de contenido sexual no consentido</h2>
+  <ul>
+  <li>No envíes <strong>imágenes sexuales o desnudos que nadie te ha pedido</strong>.</li>
+  <li><strong>No compartas imágenes íntimas de otra persona sin su consentimiento.</strong> Eso es un delito, y aquí lleva al cierre inmediato de la cuenta. Si te ha pasado, escríbenos y lo retiramos <strong>sin pedirte que lo demuestres primero</strong>.</li>
+  <li><strong>NYXA no es una app de sexo:</strong> no publiques contenido sexual explícito en tu perfil, tus experiencias ni tus planes.</li>
+  </ul>
+  <h2>5 · Nada de violencia ni de actividades peligrosas</h2>
+  <ul>
+  <li>Nada de amenazas, apología de la violencia, armas, drogas ilegales ni planes que pongan en peligro a la gente.</li>
+  </ul>
+  <h2>6 · Nada de estafas, spam ni dinero</h2>
+  <ul>
+  <li>No pidas dinero, no hagas negocios encubiertos desde una cuenta personal, no hagas <em>phishing</em> ni cadenas.</li>
+  <li><strong>Desconfía y dínoslo</strong> si alguien te pide dinero, un Bizum, tus datos bancarios, o te empuja a salir de la app enseguida. <strong>Es la señal número uno de estafa.</strong></li>
+  </ul>
+  <h2>7 · No saques a desconocidos fuera de NYXA</h2>
+  <p><strong>En los espacios públicos de NYXA — comentarios, títulos y descripciones de planes, deseos, tu nombre visible y tu perfil — no se publican datos de contacto externos.</strong> Ni Instagram, ni TikTok, ni Telegram, ni WhatsApp, ni teléfonos, ni correos, ni enlaces o QR a grupos y canales. Tampoco escritos de forma que esquive la norma.</p>
+  <p><strong>Por qué:</strong> aquí puedes bloquear a alguien al instante y denunciar lo que te ha hecho con la prueba guardada. Fuera no puedes hacer ninguna de las dos cosas. Quien te saca de aquí a los dos minutos de conocerte te está quitando eso.</p>
+  <p><strong>Tampoco se usa NYXA para captar gente</strong> hacia otro grupo, canal o plataforma, ni para pedir seguidores o miembros.</p>
+  <p><strong>En un chat privado entre dos personas, los contactos que compartáis son asunto vuestro.</strong> No vigilamos los chats privados. Pero fuera de NYXA no podemos protegerte.</p>
+  <p><strong>Esto no va contra organizar cosas.</strong> Montar un plan, invitar a quien quieras y quedar con gente es literalmente para lo que existe NYXA.</p>
+  <h2>8 · Seguridad en los encuentros (lo más importante de NYXA)</h2>
+  <p>Cuando quedes en persona:</p>
+  <ul>
+  <li><strong>Queda la primera vez en un sitio público</strong>, con gente alrededor.</li>
+  <li><strong>Avisa a alguien de confianza:</strong> dónde vas, con quién y a qué hora.</li>
+  <li><strong>Tú mandas sobre ti.</strong> Si algo te incomoda, vete. No tienes que dar explicaciones a nadie.</li>
+  <li><strong>No compartas datos sensibles</strong> (tu dirección, tu cuenta bancaria) hasta que confíes de verdad.</li>
+  <li><strong>Si pasa algo grave, llama al 112 o acude a la policía primero.</strong> Nosotros no sustituimos a nadie en eso. Después cuéntanoslo para que podamos actuar sobre la cuenta y conservar la prueba.</li>
+  </ul>
+  <p>Y recuerda lo que NYXA <strong>no</strong> hace: no verificamos la identidad de nadie de forma garantizada, no comprobamos antecedentes de nadie, y no estamos presentes cuando quedáis. El tick de verificación significa que una persona de nuestro equipo vio una selfie en directo y le pareció real — <strong>no es una garantía de que alguien sea de fiar</strong>.</p>
+  <h2>9 · Cuida los planes y la información de los demás</h2>
+  <ul>
+  <li>Los planes deben tener <strong>información clara y un lugar concreto</strong>. Nada de planes falsos, sin ubicación o para atraer a alguien con engaño.</li>
+  <li><strong>No publiques datos privados de otras personas</strong> sin su permiso.</li>
+  <li><strong>Si subes una foto en la que sale alguien más, necesitas que esté de acuerdo.</strong> Y si sales en la foto de otra persona y no quieres salir, escríbenos y la retiramos.</li>
+  </ul>
+  <h2>10 · Bloquear y denunciar: cómo protegerte</h2>
+  <ul>
+  <li><strong>Bloquear es inmediato</strong> y la otra persona no se entera.</li>
+  <li><strong>Denunciar:</strong> desde la app puedes denunciar un perfil, una experiencia, un NYXA, un mensaje y un comentario. Un comentario se denuncia <strong>manteniendo el dedo sobre él</strong>. <strong>Para cualquier otra cosa, escríbenos a holanyxa@gmail.com</strong> diciendo dónde está y qué problema tiene: lo tratamos exactamente igual.</li>
+  <li><strong>Si publicas una foto, los comentarios de esa publicación son tu espacio</strong>: puedes borrar cualquiera, igual que en cualquier red social. Que te borren un comentario no es una sanción y no queda anotado en tu cuenta.</li>
+  <li><strong>Nadie sabe quién ha denunciado qué.</strong></li>
+  <li>Denunciar no retira el contenido por sí solo. <strong>Si lo que necesitas ahora es dejar de ver a alguien, bloquea.</strong></li>
+  </ul>
+  <p><strong>Gracias por hacer de NYXA un sitio donde merece la pena aparecer.</strong></p>
+  <p>Dudas, avisos o reclamaciones: <strong>holanyxa@gmail.com</strong></p>
+
+</div>
+
+<footer class="nf">
+  <div class="nf__in">
+    <div class="nf__top">
+      <div>
+        <div class="nf__logo">NY<i aria-hidden="true">✕</i>A</div>
+        <p class="nf__tag">Que no se te escape la vida. Experiencias reales, en persona.</p>
+        <a class="nf__as" href="https://apps.apple.com/es/app/nyxa/id6800325033" target="_blank" rel="noopener" aria-label="Descargar NYXA en la App Store">
+          <svg width="132" height="44" viewBox="0 0 120 40" xmlns="http://www.w3.org/2000/svg" role="img" aria-hidden="true">
+            <rect width="120" height="40" rx="7" fill="#0A0C11"/>
+            <path fill="#fff" transform="translate(11,8.5) scale(0.95)" d="M17.05 20.28c-.98.95-2.05.8-3.08.35-1.09-.46-2.09-.48-3.24 0-1.44.62-2.2.44-3.06-.35C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.63 5.98.32 7.11-.61 1.35-1.46 2.7-2.31 3.99l-.06.11M12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25"/>
+            <text x="38" y="16" fill="#fff" font-family="-apple-system,'Plus Jakarta Sans',sans-serif" font-size="6.5" font-weight="400">Descárgalo en el</text>
+            <text x="37.5" y="30.5" fill="#fff" font-family="-apple-system,'Plus Jakarta Sans',sans-serif" font-size="14.5" font-weight="600" letter-spacing="-0.4">App Store</text>
+          </svg>
+        </a>
+      </div>
+      <nav class="nf__cols" aria-label="Enlaces del pie">
+        <div class="nf__col"><h4>Producto</h4>
+          <a href="index.html#gesto">Cómo funciona</a>
+          <a href="ciudades.html">Ciudades</a>
+          <a href="momentos.html">Momentos</a>
+          <a href="descargar.html">Descargar la app</a>
+          <a href="conocer-gente-valencia.html">Conocer gente en Valencia</a>
+          <a href="conocer-gente-barcelona.html">Conocer gente en Barcelona</a>
+          <a href="conocer-gente-madrid.html">Conocer gente en Madrid</a>
+        </div>
+        <div class="nf__col"><h4>Empresa</h4>
+          <a href="manifiesto.html">Quiénes somos</a>
+          <a href="empresas.html">NYXA para empresas</a>
+        </div>
+        <div class="nf__col"><h4>Confianza</h4>
+          <a href="seguridad.html">Seguridad</a>
+          <a href="soporte.html">Ayuda</a>
+        </div>
+        <div class="nf__col"><h4>Legal</h4>
+          <a href="privacidad.html">Privacidad</a>
+          <a href="terminos.html">Términos</a>
+          <a href="normas.html">Normas</a>
+          <a href="aviso-legal.html">Aviso legal</a>
+        </div>
+      </nav>
+    </div>
+    <div class="nf__bottom">
+      <span>NYXA · Valencia · © 2026</span>
+      <div class="nf__soc">
+        <a href="https://instagram.com/nyxa.app" target="_blank" rel="noopener" aria-label="Instagram"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="2.6" y="2.6" width="18.8" height="18.8" rx="5.4" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="4.1" stroke="currentColor" stroke-width="1.8"/><circle cx="17.4" cy="6.6" r="1.25" fill="currentColor"/></svg>Instagram</a>
+        <a href="mailto:holanyxa@gmail.com" aria-label="Escríbenos por email"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="2.6" y="4.8" width="18.8" height="14.4" rx="2.6" stroke="currentColor" stroke-width="1.8"/><path d="M3.4 6.6l8.6 6 8.6-6" stroke="currentColor" stroke-width="1.8" fill="none"/></svg>holanyxa@gmail.com</a>
+        <span class="nf__lang"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.7"/><path d="M3 12h18M12 3c2.6 2.5 2.6 15 0 18M12 3c-2.6 2.5-2.6 15 0 18" stroke="currentColor" stroke-width="1.7"/></svg>Español (España)</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
