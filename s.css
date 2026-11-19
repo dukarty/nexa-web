@@ -624,3 +624,19 @@ h1,h2,h3,h4,h5{text-wrap:balance}p{text-wrap:pretty}
    El azul de marca se queda igual en titulares, botones y logotipo. */
 :root{--blue-txt:#2558E0}   /* 5,1 sobre blanco · el de marca da 4,22 */
 .tg.s,.pl-tg{color:var(--blue-txt)}
+
+/* ─── BOTONES CLAROS SOBRE FONDO CLARO ───────────────────────────────────
+   El .pill.w era blanco sobre negro. Al aclarar las secciones quedó blanco
+   sobre claro: "Ver precios" daba 1,11 de contraste, o sea invisible.
+   Ahora lleva fondo blanco sólido, texto tinta y un borde que lo recorta. */
+.pill.w,.ph.dk .pill.w,.fin .pill.w,.h24 .pill.w{
+  background:#fff;
+  color:var(--ink);
+  box-shadow:inset 0 0 0 1px var(--line),0 2px 10px rgba(10,12,17,.06);
+}
+.pill.w:hover{background:var(--grey)}
+/* Lo mismo para el botón secundario de las secciones aclaradas. */
+.fin .btn.ln,.h24 .btn.ln,.ph.dk .btn.ln,.feat.k .btn.ln{
+  background:#fff;color:var(--ink);
+  box-shadow:inset 0 0 0 1px var(--line);
+}
