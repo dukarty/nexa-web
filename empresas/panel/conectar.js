@@ -149,6 +149,65 @@
     return { ok:true, creado:true };
   };
 
+  /* ── Pagar la cuota ───────────────────────────────────────────────────
+     Llama a la Edge Function crear-checkout, que devuelve la URL de Stripe
+     Checkout, y lleva allí. La clave secreta de Stripe vive solo en esa
+     función: aquí no hay ninguna.
+     Devuelve {ok:false, motivo} si algo falla; nunca lanza. */
+  API.suscribir = async function (plan) {
+    const PLANES = ['dentro', 'premium', 'ultra'];
+    if (!PLANES.includes(plan)) return { ok:false, motivo:'Plan desconocido: ' + plan };
+
+    const { data:{ session } } = await sb.auth.getSession();
+    if (!session) return { ok:false, motivo:'Entra con tu cuenta de empresa antes de contratar.' };
+
+    const d = await traer();
+    if (!d || !d.negocio || !d.negocio.id)
+      return { ok:false, motivo:'Primero da de alta tu negocio.' };
+
+    let r;
+    try {
+      r = await fetch(CFG.SUPABASE_URL + '/functions/v1/crear-checkout', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': 'Bearer ' + session.access_token,
+          'apikey': CFG.SUPABASE_ANON_KEY
+        },
+        body: JSON.stringify({
+          producto: plan,
+          business_id: d.negocio.id,
+          email: (session.user && session.user.email) || undefined
+        })
+      });
+    } catch (e) {
+      return { ok:false, motivo:'No se ha podido contactar con el servidor de pagos.' };
+    }
+
+    let j = null;
+    try { j = await r.json(); } catch (e) {}
+    if (!r.ok || !j || !j.url)
+      return { ok:false, motivo: (j && j.error) || ('El servidor de pagos respondió ' + r.status) };
+
+    location.href = j.url;      // a Stripe
+    return { ok:true, url:j.url };
+  };
+
+  /* Si se vuelve de Stripe, decirlo y refrescar el plan desde el servidor. */
+  async function volverDeStripe() {
+    const p = new URLSearchParams(location.search).get('pago');
+    if (!p) return;
+    const banda = document.querySelector('.demo');
+    if (p === 'ok') {
+      const d = await traer();
+      if (d) { volcar(d); avisar(); }
+      if (banda) banda.innerHTML = '<b>Pago hecho.</b> Tu plan se activa en cuanto Stripe nos lo confirme.';
+    } else if (p === 'cancelado' && banda) {
+      banda.innerHTML = '<b>Pago cancelado.</b> No se ha cobrado nada.';
+    }
+    history.replaceState({}, '', location.pathname);
+  }
+
   /* ── Arranque ────────────────────────────────────────────────────────── */
   async function arrancar() {
     const { data: { session } } = await sb.auth.getSession();
@@ -158,6 +217,7 @@
       if (d) volcar(d);
     }
     avisar();
+    await volverDeStripe();
     if (API.conectado) pintar();
   }
 
