@@ -640,3 +640,22 @@ h1,h2,h3,h4,h5{text-wrap:balance}p{text-wrap:pretty}
   background:#fff;color:var(--ink);
   box-shadow:inset 0 0 0 1px var(--line);
 }
+
+/* ─── TEXTOS QUE NO IBAN A LO LARGO ──────────────────────────────────────
+   Varios párrafos se partían en 3 líneas teniendo 1.000px libres al lado:
+   el subtítulo del hero ocupaba 520px de 1.571 disponibles.
+   Se ensanchan a un punto medio. No a todo el ancho a propósito: una línea
+   de más de ~95 caracteres se lee peor, no mejor. Con 'ch' el límite se
+   mide en caracteres de verdad, así que no depende del tamaño de pantalla. */
+.ph p{max-width:72ch}
+.bz-n{max-width:86ch}
+.feat p,.c3 p,.tc p,.sec2 p{max-width:68ch}
+/* En pantallas grandes se permite algo más de recorrido. */
+@media(min-width:1200px){
+  .ph p{max-width:78ch}
+  .feat p,.c3 p,.tc p,.sec2 p{max-width:74ch}
+}
+/* En móvil manda el ancho de la pantalla, no el límite de caracteres. */
+@media(max-width:700px){
+  .ph p,.bz-n,.feat p,.c3 p,.tc p,.sec2 p{max-width:none}
+}
