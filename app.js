@@ -9,7 +9,7 @@ window.NYXA_CONFIG={
   tiktok:'',                                // pendiente de confirmar la cuenta
   privacidad:'/privacidad',
   terminos:'/terminos',
-  cookies:'',                               // no existe todavia -> "En preparacion"
+  cookies:'',                               // esa pagina no existe todavia
   panel:'/empresas/panel/'
 };
 (()=>{const C=window.NYXA_CONFIG;
