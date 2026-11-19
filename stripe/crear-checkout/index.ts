@@ -19,6 +19,11 @@ const SITE = Deno.env.get("SITE_URL") ?? "https://holanyxa.com";
 // producto -> { price id (env var), modo }. Los price IDs los pone David en los
 // Secrets de Supabase (test ahora, live el día del IBAN). Ver ENCENDER-COBRO-EMPRESAS.md.
 const PRODUCTOS: Record<string, { price: string | undefined; mode: "subscription" | "payment" }> = {
+  // Los tres planes que vende la web desde el 19-nov.
+  dentro:  { price: Deno.env.get("STRIPE_PRICE_DENTRO"),  mode: "subscription" },  // 9,99 €/mes
+  premium: { price: Deno.env.get("STRIPE_PRICE_PREMIUM"), mode: "subscription" },  // 99 €/mes, primer mes gratis
+  ultra:   { price: Deno.env.get("STRIPE_PRICE_ULTRA"),   mode: "subscription" },  // 290 €/mes
+  // Modelo anterior al 19-nov. Se mantienen por si hay alguna suscripción viva.
   p15:   { price: Deno.env.get("STRIPE_PRICE_P15"),   mode: "subscription" },
   p49:   { price: Deno.env.get("STRIPE_PRICE_P49"),   mode: "subscription" },
   p99:   { price: Deno.env.get("STRIPE_PRICE_P99"),   mode: "subscription" },
@@ -56,8 +61,8 @@ Deno.serve(async (req) => {
       client_reference_id: business_id ?? undefined,
       customer_email: email ?? undefined,
       metadata: { business_id: business_id ?? "", producto },
-      success_url: `${SITE}/panel.html?pago=ok&producto=${encodeURIComponent(producto)}`,
-      cancel_url: `${SITE}/panel.html?pago=cancelado`,
+      success_url: `${SITE}/empresas/panel/?pago=ok&producto=${encodeURIComponent(producto)}`,
+      cancel_url: `${SITE}/empresas/panel/?pago=cancelado`,
       allow_promotion_codes: true,
       automatic_tax: { enabled: false },
     });
