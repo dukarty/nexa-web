@@ -106,6 +106,49 @@
     }
   }
 
+  /* ── Dar de alta el negocio de verdad ────────────────────────────────
+     El servidor ya lo permite desde el 23-jul: una cuenta autenticada puede
+     crear SU negocio si el email coincide. El plan y el "verificado" los
+     congela el servidor, no se mandan desde aquí.
+     Devuelve {ok:true} o {ok:false, motivo:'...'} — nunca lanza. */
+  API.altaNegocio = async function () {
+    const S = elEstado();
+    if (!S || !S.biz) return { ok:false, motivo:'El panel no está listo.' };
+    const { data:{ session } } = await sb.auth.getSession();
+    if (!session) return { ok:false, motivo:'Entra con tu cuenta de empresa antes de darte de alta.' };
+
+    const email = (session.user && session.user.email || '').toLowerCase();
+    if (!email) return { ok:false, motivo:'Esa sesión no tiene correo.' };
+
+    const nombre = (S.biz.n || '').trim();
+    if (!nombre) return { ok:false, motivo:'Falta el nombre del negocio.' };
+
+    // Si ya existe, no se duplica: se actualiza la ficha.
+    const d = await traer();
+    if (d && d.negocio && d.negocio.id) {
+      const { error } = await sb.from('businesses')
+        .update({ name: nombre, city_id: S.biz.c || null, category: S.biz.s || null })
+        .eq('id', d.negocio.id);
+      if (error) return { ok:false, motivo: error.message };
+      volcar(await traer()); avisar();
+      return { ok:true, actualizado:true };
+    }
+
+    const { error } = await sb.from('businesses').insert({
+      owner_email: email,
+      name: nombre,
+      city_id: S.biz.c || null,
+      category: S.biz.s || null,
+      plan: 'verificada',   // lo exige la política de alta
+      verified: false       // lo exige la política de alta
+    });
+    if (error) return { ok:false, motivo: error.message };
+
+    const nuevo = await traer();
+    if (nuevo) { volcar(nuevo); avisar(); }
+    return { ok:true, creado:true };
+  };
+
   /* ── Arranque ────────────────────────────────────────────────────────── */
   async function arrancar() {
     const { data: { session } } = await sb.auth.getSession();
