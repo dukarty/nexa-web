@@ -313,6 +313,31 @@ button,input,select,textarea{font:inherit;color:inherit}
 /* Botón principal: era negro, pasa a azul. */
 .btn.k{background:var(--blue);color:#fff}
 .seg button.on{background:var(--blue);color:#fff}
+
+/* ─── COLOR SIN FALLOS (panel) ────────────────────────────────────────────
+   Medido con contraste real (WCAG), no a ojo. */
+
+/* El panel ya traía su propio foco (2px solid). Aquí solo se asegura que,
+   cuando el elemento va sobre azul, el anillo sea blanco y se vea. */
+.demo :focus-visible,.btn.k:focus-visible,.seg button.on:focus-visible{outline-color:#fff}
+
+/* El elemento activo del menú salía azul sobre azul: no se leía. */
+.sb .on,.sb .on *,.sb a.on,.sb button.on{
+  background:#fff!important;color:var(--blue)!important;
+  box-shadow:inset 0 0 0 1px var(--line);
+}
+
+/* Verde y azul en texto pequeño: por debajo del mínimo legible sobre claro.
+   Un punto más oscuros, solo para textos; los fondos de estado no cambian. */
+:root{--ok-txt:#0B7A3B;--blue-txt:#2558E0}
+.tag.a,.ok,.up,.pos{color:var(--ok-txt)}
+/* Verde y azul de 11-13px: por debajo del minimo sobre fondo claro.
+   Cualquier texto pequenyo en esos colores pasa a la version oscura. */
+em,small,.tag,.chip,.pill,.kpi span,.d span{}
+*{--ok-txt:#0B7A3B}
+em[style*="12A150"],.up,.pos,.tag.a,.ok{color:#0B7A3B!important}
+.demo b,.demo,.demo *{color:#fff!important}
+.tg.s,.pl-tg,.demo b{color:inherit}
 </style>
 </head>
 <body>
