@@ -576,5 +576,22 @@ h1,h2,h3,h4,h5{text-wrap:balance}p{text-wrap:pretty}
 }
 /* Separación entre dos secciones claras seguidas. */
 .fin,.h24,.feat.k,.c3.k,.dk2.e{box-shadow:inset 0 1px 0 var(--line)}
-/* El bloque de vídeo se veía negro mientras carga. Ahora claro. */
-.vid{background:var(--grey)}
+
+/* El .vid lleva su texto en blanco ENCIMA del vídeo: si se aclara el fondo,
+   ese texto queda ilegible mientras el vídeo carga. Se queda oscuro, que es
+   lo que hace un reproductor. */
+
+/* Textos que seguían en blanco sobre las secciones ya claras. */
+.fin *,.h24 *,.feat.k *,.tc.c2 *,.c3.k *,.ph.dk *,.dk2.e *{
+  color:inherit;
+}
+.fin em,.h24 em,.feat.k h2 em,.c3.k em,.ph.dk em,.dk2.e em{color:var(--blue)}
+.fin .btn,.ph.dk .btn,.h24 .btn{background:var(--blue);color:#fff}
+.fin .btn.ln,.ph.dk .btn.ln{background:transparent;color:var(--ink)}
+/* Lo que va sobre azul sigue en blanco: ahí se lee perfecto. */
+.tc.c1,.tc.c1 *,.faq,.faq h2,.faq h3{color:#fff}
+.faq em{color:#fff}
+/* El pie seguía con el texto en blanco translúcido, heredado de cuando la
+   sección era negra. Sobre claro no se leía. */
+.fin .about,.fin .about *,.fin p,.fin li,.fin small,.fin a{color:var(--body)}
+.fin a:hover{color:var(--ink)}
