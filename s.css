@@ -659,3 +659,29 @@ h1,h2,h3,h4,h5{text-wrap:balance}p{text-wrap:pretty}
 @media(max-width:700px){
   .ph p,.bz-n,.feat p,.c3 p,.tc p,.sec2 p{max-width:none}
 }
+
+/* ─── NI DOS PALABRAS SUELTAS AL FINAL ───────────────────────────────────
+   "Si vendes una experiencia con plazas, encajas." salía en 3 líneas con
+   "plazas, encajas." colgando sola. Los párrafos ya llevan text-wrap:pretty,
+   pero pretty solo evita UNA palabra huérfana, no dos.
+   La causa real es la misma que en los párrafos: los títulos iban demasiado
+   estrechos (11-16ch). Con más sitio, balance reparte en menos líneas y la
+   última deja de quedarse coja. */
+.hero h1{max-width:16ch}
+.ph h1{max-width:18ch}
+.h24 h2,.pasa h2,.sob h2{max-width:20ch}
+.fin h2,.perf h2,.dk2 h3{max-width:17ch}
+.uni h2{max-width:18ch}
+.sec2 h2{max-width:22ch}
+.faq h2{max-width:24ch}
+.feat h2{max-width:20ch}
+/* En móvil manda la pantalla, no el límite de caracteres. */
+@media(max-width:700px){
+  .hero h1,.ph h1,.h24 h2,.pasa h2,.sob h2,.fin h2,.perf h2,
+  .dk2 h3,.uni h2,.sec2 h2,.faq h2,.feat h2{max-width:none}
+}
+/* El encabezado de sección de empresas iba a 64px dentro de 720px: tres
+   líneas, con "plazas, encajas." colgando. Se le da sitio. */
+.emp-h,.bz-hd{max-width:1000px}
+.bz-hd h2{max-width:22ch;margin-left:auto;margin-right:auto}
+@media(max-width:700px){.emp-h,.bz-hd,.bz-hd h2{max-width:none}}
