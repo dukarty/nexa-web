@@ -595,3 +595,5 @@ h1,h2,h3,h4,h5{text-wrap:balance}p{text-wrap:pretty}
    sección era negra. Sobre claro no se leía. */
 .fin .about,.fin .about *,.fin p,.fin li,.fin small,.fin a{color:var(--body)}
 .fin a:hover{color:var(--ink)}
+/* La etiqueta "Recomendado" salía azul sobre la tarjeta azul: no se veía. */
+.pl .tg,.bz-pl .tg{background:#fff;color:var(--blue)}
