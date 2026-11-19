@@ -284,6 +284,35 @@ button,input,select,textarea{font:inherit;color:inherit}
 @media(max-width:560px){.form,.drw .form{grid-template-columns:1fr}.stepper div{font-size:0}.g4{grid-template-columns:1fr 1fr}.kpi b{font-size:24px}.hb .r{grid-template-columns:90px minmax(0,1fr) 48px}.fn .st{grid-template-columns:90px minmax(0,1fr)}.prow{grid-template-columns:52px minmax(0,1fr)}.prow .th{width:52px;height:52px}.prow .tag{grid-column:2;justify-self:start}.hm{grid-template-columns:54px repeat(7,minmax(0,1fr))}}
 .mob{display:none}@media(max-width:560px){.mob{display:inline;font-size:12px;color:var(--muted)}.tbl.full th:nth-child(2),.tbl.full td:nth-child(2),.tbl.full th:nth-child(6),.tbl.full td:nth-child(6){display:none}.seg{border-radius:18px}}
 @media(prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+
+/* ─── PANEL EN CLARO ──────────────────────────────────────────────────────
+   La barra lateral y las franjas que iban en negro pasan a papel y azul muy
+   claro. Va al final del style a propósito: no toca ninguna regla anterior,
+   así que quitarlo devuelve el panel a como estaba.
+   El móvil de vista previa (.ph) se queda oscuro: es un teléfono. */
+/* El texto del menú iba en blanco porque la barra era negra. Al aclararla
+   hay que forzarlo entero, o los enlaces desaparecen. */
+.sb{background:var(--paper)!important;border-right:1px solid var(--line)}
+.sb,.sb *{color:var(--body)!important}
+.sb .logo,.sb .logo *,.sb h1,.sb h2,.sb h3,.sb b{color:var(--ink)!important}
+.sb .on,.sb .on *,.sb a.on,.sb button.on{color:var(--blue)!important;background:var(--soft)}
+.sb a:hover,.sb button:hover{background:var(--soft)}
+.sb i,.sb .logo i{color:var(--blue)!important}
+
+.hero2,.fn,.lock,.alert{background:var(--soft);color:var(--ink)}
+.hero2 *,.fn *,.lock *,.alert *{color:inherit}
+.hero2 p,.fn p,.lock p,.alert p,.hero2 small,.fn small{color:var(--body)}
+.hero2 em,.fn em,.lock em,.alert em{color:var(--blue)}
+.hero2 .btn,.fn .btn,.lock .btn,.alert .btn{background:var(--blue);color:#fff}
+
+/* La banda de aviso, en azul de marca: ahí el blanco se lee bien. */
+.demo{background:var(--blue);color:#fff}
+.demo b{color:#fff}
+.demo button{color:#fff}
+
+/* Botón principal: era negro, pasa a azul. */
+.btn.k{background:var(--blue);color:#fff}
+.seg button.on{background:var(--blue);color:#fff}
 </style>
 </head>
 <body>
