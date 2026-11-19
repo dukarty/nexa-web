@@ -1,4 +1,14 @@
 {
   "cleanUrls": true,
-  "trailingSlash": false
+  "trailingSlash": false,
+  "redirects": [
+    { "source": "/descargar",  "destination": "/descarga",        "permanent": true },
+    { "source": "/soporte",    "destination": "/ayuda",           "permanent": true },
+    { "source": "/panel",      "destination": "/empresas/panel/", "permanent": true },
+    { "source": "/panel-v3",   "destination": "/empresas/panel/", "permanent": true },
+    { "source": "/momentos",   "destination": "/nyxas",           "permanent": true },
+    { "source": "/manifiesto", "destination": "/producto",        "permanent": true },
+    { "source": "/normas",     "destination": "/seguridad",       "permanent": true },
+    { "source": "/ciudades",   "destination": "/",                "permanent": true }
+  ]
 }
