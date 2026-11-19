@@ -1,1003 +1,164 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-
-<title>NYXA — Conocer gente y hacer planes en Valencia</title>
-<meta name="description" content="Tienes 800 contactos y hablas con seis. NYXA es la app para conocer gente y hacer planes de verdad: dices qué te apetece vivir y te dice con quién. Gratis.">
-<link rel="canonical" href="https://holanyxa.com/">
-<meta name="theme-color" content="#F9F7F3">
-<meta name="robots" content="index,follow,max-image-preview:large">
-
-<meta property="og:type" content="website">
-<meta property="og:site_name" content="NYXA">
-<meta property="og:url" content="https://holanyxa.com/">
-<meta property="og:title" content="NYXA — Que no se te escape la vida">
-<meta property="og:description" content="Dices qué quieres vivir. NYXA te dice con quién. Experiencias reales en Valencia. Ya en la App Store.">
-<meta property="og:image" content="https://holanyxa.com/og.jpg">
-<meta property="og:image:width" content="1200">
-<meta property="og:image:height" content="630">
-<meta property="og:locale" content="es_ES">
-<meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:title" content="NYXA — Que no se te escape la vida">
-<meta name="twitter:description" content="Dices qué quieres vivir. NYXA te dice con quién.">
-<meta name="twitter:image" content="https://holanyxa.com/og.jpg">
-
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@graph": [
-    {
-      "@type": "Organization",
-      "@id": "https://holanyxa.com/#org",
-      "name": "NYXA",
-      "url": "https://holanyxa.com/",
-      "logo": "https://holanyxa.com/favicon.svg",
-      "slogan": "Que no se te escape la vida",
-      "sameAs": [
-        "https://instagram.com/nyxa.app"
-      ],
-      "areaServed": [
-        {
-          "@type": "City",
-          "name": "Valencia"
-        },
-        {
-          "@type": "City",
-          "name": "Barcelona"
-        },
-        {
-          "@type": "City",
-          "name": "Madrid"
-        }
-      ]
-    },
-    {
-      "@type": "WebSite",
-      "@id": "https://holanyxa.com/#web",
-      "url": "https://holanyxa.com/",
-      "name": "NYXA",
-      "inLanguage": "es-ES",
-      "publisher": {
-        "@id": "https://holanyxa.com/#org"
-      }
-    },
-    {
-      "@type": "SoftwareApplication",
-      "name": "NYXA",
-      "applicationCategory": "SocialNetworkingApplication",
-      "operatingSystem": "iOS",
-      "description": "App para vivir experiencias reales con gente que quiere vivir lo mismo que tú. Dices qué quieres vivir y NYXA te dice con quién. Sobre todo en Valencia; también en Barcelona y Madrid.",
-      "offers": {
-        "@type": "Offer",
-        "price": "0",
-        "priceCurrency": "EUR"
-      }
-    },
-    {
-      "@type": "FAQPage",
-      "mainEntity": [
-        {
-          "@type": "Question",
-          "name": "¿Es gratis de verdad?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Sí. Bajar la app y quedar no cuesta nada: 0 €. Las personas nunca pagan por conocerse — ese es el trato. NYXA se sostiene con las empresas que publican planes, no con los usuarios."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "¿Qué es NYXA exactamente y cómo funciona?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "NYXA es una app gratuita para conocer gente y hacer planes reales en persona. Funciona al revés que una red social: dices qué te apetece vivir (un café, una ruta en bici, un concierto), la app te dice con quién podrías vivirlo, y le llega la propuesta. Si esa persona acepta, se abre la conversación y quedáis. Si no acepta, no pasa nada y nadie escribe a nadie."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "¿Es una app de citas tipo Tinder?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "No. En NYXA no se liga ni se desliza, y no se puede escribir a un desconocido: lo que se propone es un plan concreto, y la conversación solo se abre si la otra persona dice que sí. La mayoría de la gente la usa para hacer amigos y llenar el finde, no para ligar."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "¿En qué se diferencia de Meetup o de Bumble BFF?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Meetup te lleva a un evento de desconocidos y Bumble BFF te da un match y te deja solo en lo difícil: poner fecha. NYXA pone las dos cosas juntas — una persona concreta y un plan concreto, con día y hora. No tienes que ser tú quien proponga y se exponga al no."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "Me acabo de mudar a Valencia y no conozco a nadie, ¿qué hago?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Es justo el caso para el que se hizo. No hace falta que tengas un grupo ni que conozcas a nadie: eliges un plan que te apetezca en Valencia y la app te cruza con gente de aquí con las mismas ganas. El primer plan es el que cuesta; a partir de ahí va solo."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "¿Está en Android?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Todavía no. Ahora mismo NYXA está solo en iOS, en la App Store, y es gratis. La versión de Android está en camino; lo contamos en Instagram, en @nyxa.app."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "¿En qué ciudades funciona?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Sobre todo en Valencia, que es donde hay más gente y donde salen más planes. También en Barcelona y Madrid. Vamos ciudad a ciudad a propósito: preferimos que en una haya planes de verdad cada semana a estar en cincuenta y que no pase nada."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "¿Tengo que ir solo a un plan raro?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Nada de citas a ciegas incómodas. Vas a un plan concreto (un café, una ruta, un concierto) con gente que quiere exactamente lo mismo que tú."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "¿Es seguro quedar con alguien que no conozco?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Perfiles verificados con cara real, no avatares. Nadie te escribe sin que tú aceptes antes el plan, así que no hay mensajes de desconocidos. Bloquear y reportar está siempre a un toque y lo revisa el equipo. Los planes son en sitios públicos."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "¿Y si no aparece nadie?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "El plan solo se cierra si los dos decís que sí. Nada de plantones: si no hay match, no hay quedada."
-          }
-        },
-        {
-          "@type": "Question",
-          "name": "¿Qué tipo de planes se hacen?",
-          "acceptedAnswer": {
-            "@type": "Answer",
-            "text": "Cosas normales que ya harías: un café, cañas, una ruta en bici, ir a un concierto, la playa un domingo por la mañana. Están ordenados por mundos (deporte, naturaleza, noche, cultura) para que encuentres rápido lo tuyo."
-          }
-        }
-      ]
-    }
-  ]
-}
-  </script>
-
-<link rel="icon" href="favicon.svg" type="image/svg+xml">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
-<link rel="stylesheet" href="styles.css?v=98">
-<style>
-*{margin:0;padding:0;box-sizing:border-box}
-:root{
-  /* Escala tipografica. 8 pasos en vez de los 29 que habia:
-     los medios pixeles (11.5, 14.5, 16.5...) eran ajustes a ojo y se leian
-     como acabado descuidado. Ningun texto se movio mas de 1.5px. */
-  --t-xs:12px; --t-sm:13px; --t-base:15px; --t-md:17px; --t-lg:19px; --t-xl:21px; --t-2xl:23px; --t-3xl:26px;
-
-  --bg:#F9F7F3;--bg2:#F1ECE4;--ink:#0A0C11;--ink2:#3A4152;--gris:#6B7280;--gris2:#9AA1B2;
-  --az:#2F66FF;--az-d:#1B4AE0;--soft:#EAF0FF;--soft2:#F2F6FF;--linea:#E8E1D6;--linea2:#EDE7DD;--verde:#0FB981;
-  --sh1:0 1px 2px rgba(11,13,20,.05);--sh2:0 6px 18px -8px rgba(11,13,20,.16);--sh3:0 26px 56px -30px rgba(11,13,20,.32);--shc:0 18px 44px -26px rgba(47,102,255,.5);
-  --f:"Plus Jakarta Sans",-apple-system,"Segoe UI",system-ui,Roboto,sans-serif}
-html{scroll-behavior:smooth}
-body{background:var(--bg);color:var(--ink);font-family:var(--f);line-height:1.5;-webkit-font-smoothing:antialiased;overflow-x:clip;font-feature-settings:"ss01"}
-a{color:inherit;text-decoration:none}
-.wrap{max-width:1200px;margin:0 auto;padding:0 26px}
-.eyer{display:inline-block;font-size:var(--t-xs, 12px);font-weight:800;letter-spacing:.09em;text-transform:uppercase;color:var(--az)}
-.x{color:var(--az)}
-h1,h2,h3,h4{text-wrap:balance}
-p{text-wrap:balance}
-section{position:relative}
-
-/* nav real del sitio: solo el efecto "pegado" al hacer scroll es local a esta página */
-#top.stuck{border-color:var(--linea);box-shadow:0 6px 26px -20px rgba(11,13,20,.6)}
-
-.frict{margin-top:12px;font-size:var(--t-sm, 13px);color:var(--gris2);font-weight:600}
-.frict b{color:var(--verde);font-weight:800}
-
-/* ===== HERO ===== */
-.hhero{overflow:hidden;padding:54px 0 74px}
-.hhero .wrap{display:grid;grid-template-columns:1.05fr .95fr;gap:54px;align-items:center}
-.hpill{display:inline-flex;align-items:center;gap:8px;padding:7px 15px;border-radius:999px;border:1px solid var(--linea);background:#fff;font-size:var(--t-sm, 13px);font-weight:700;color:var(--ink2);box-shadow:var(--sh1)}
-.hpill i{width:8px;height:8px;border-radius:50%;background:var(--verde);box-shadow:0 0 0 0 rgba(15,185,129,.5);animation:pulse 1.8s infinite}
-@keyframes pulse{0%{box-shadow:0 0 0 0 rgba(15,185,129,.5)}70%{box-shadow:0 0 0 8px rgba(15,185,129,0)}100%{box-shadow:0 0 0 0 rgba(15,185,129,0)}}
-.hhero h1{font-size:clamp(40px,5.6vw,82px);line-height:.96;letter-spacing:-.045em;font-weight:800;text-transform:uppercase;text-wrap:balance;margin:16px 0 0}
-.flowsub{margin:24px 0 0;font-size:clamp(18px,1.9vw,23px);line-height:1.5;font-weight:600}
-.flowsub .fs{display:block;white-space:nowrap;color:var(--gris2);transition:color .45s}
-.flowsub .fs.active{color:var(--ink)}
-.flowsub .fs.active b{color:var(--az)}
-.flowsub .fs b{font-weight:800}
-.hcta{margin-top:28px}
-.hstat{margin-top:22px;display:flex;align-items:center;gap:9px;font-size:var(--t-base, 15px);color:var(--ink2);font-weight:600}
-.hstat b{color:var(--az);font-weight:800}
-.hstat .av{display:inline-flex}
-.hstat .av span{width:26px;height:26px;border-radius:50%;border:2px solid var(--bg);background:linear-gradient(135deg,var(--az),#7FA5FF);margin-left:-8px;display:grid;place-items:center;color:#fff;font-size:var(--t-xs, 12px);font-weight:800}
-.hstat .av span:first-child{margin-left:0}
-@media(max-width:860px){.hhero .wrap{grid-template-columns:1fr;gap:18px;text-align:center}.flowsub{margin-inline:auto}.hcta,.hstat{justify-content:center;display:flex}.hero-r{order:-1}.phonewrap{margin-bottom:56px}}
-
-/* mockup del móvil — prefijo "h" en .hphone/.hpcard: styles.css ya define .phone y .pcard globales */
-.hero-r{justify-self:center}
-.phonewrap{position:relative}
-.hphone{width:300px;background:var(--ink);border-radius:44px;padding:11px;box-shadow:var(--sh3);position:relative}
-.phscr{background:linear-gradient(180deg,#fff,var(--soft2));border-radius:34px;overflow:hidden;height:600px;position:relative}
-.pnotch{position:absolute;top:20px;left:50%;transform:translateX(-50%);width:120px;height:26px;background:var(--ink);border-radius:0 0 16px 16px;z-index:5}
-.pscreen{position:absolute;inset:0;display:flex;flex-direction:column;opacity:0;transform:translateY(8px);transition:opacity .5s,transform .5s;pointer-events:none}
-.pscreen.on{opacity:1;transform:none}
-.ptop{padding:20px 20px 0;display:flex;justify-content:space-between;font-size:var(--t-xs, 12px);font-weight:700;color:var(--ink2)}
-.phead{padding:14px 20px 8px}
-.phead .k{font-size:var(--t-xs, 12px);font-weight:800;color:var(--az);text-transform:uppercase;letter-spacing:.05em}
-.phead h4{font-size:var(--t-xl, 21px);font-weight:800;letter-spacing:-.03em;margin-top:2px}
-.pfeed{flex:1;padding:6px 16px;display:flex;flex-direction:column;gap:11px}
-.hpcard{background:#fff;border:1px solid var(--linea);border-radius:16px;padding:13px;box-shadow:var(--sh1);transition:.3s}
-.hpcard.sel{border-color:var(--az);box-shadow:var(--shc)}
-.hpcard .r1{display:flex;align-items:center;gap:10px}
-.hpcard .pe{width:42px;height:42px;border-radius:12px;background:var(--soft);display:grid;place-items:center;color:var(--az);flex:none}
-.hpcard .pe svg{width:22px;height:22px}
-.hpcard .ti b{display:block;font-size:var(--t-base, 15px);font-weight:800;letter-spacing:-.02em;line-height:1.1}
-.hpcard .ti span{font-size:var(--t-xs, 12px);color:var(--gris)}
-.hpcard .r2{display:flex;align-items:center;justify-content:space-between;margin-top:11px}
-.hpcard .who{font-size:var(--t-xs, 12px);color:var(--gris);font-weight:600}
-.hpcard .go{background:var(--az);color:#fff;font-size:var(--t-xs, 12px);font-weight:800;padding:7px 13px;border-radius:999px}
-.pmatch{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px;text-align:center}
-.pmatch .av{width:92px;height:92px;border-radius:50%;background:linear-gradient(135deg,var(--az),#7FA5FF);display:grid;place-items:center;color:#fff;font-size:34px;font-weight:800;box-shadow:var(--shc)}
-.pmatch .vf{margin-top:14px;display:inline-flex;align-items:center;gap:6px;font-size:var(--t-xs, 12px);font-weight:800;color:var(--verde);background:#E4F6EE;padding:5px 12px;border-radius:999px}
-.pmatch .vf .vfi{display:inline-flex}.pmatch .vf .vfi svg{width:13px;height:13px;display:block}
-.pmatch b{display:block;margin-top:14px;font-size:var(--t-lg, 19px);font-weight:800;letter-spacing:-.02em}
-.pmatch span{display:block;margin-top:6px;font-size:var(--t-sm, 13px);color:var(--gris);max-width:22ch;line-height:1.4}
-.pdone{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:20px;text-align:center}
-.pdone .big{color:var(--az)}
-.pdone .big svg{width:46px;height:46px}
-.pdone b{display:block;margin-top:10px;font-size:var(--t-xl, 21px);font-weight:800;letter-spacing:-.02em}
-.pdone .chip{margin-top:14px;background:#fff;border:1px solid var(--linea);border-radius:14px;padding:12px 16px;box-shadow:var(--sh1);font-size:var(--t-sm, 13px);font-weight:700}
-.pdone .chip .chipi{display:inline-flex;vertical-align:-3px;color:var(--az);margin-right:5px}
-.pdone .chip .chipi svg{width:15px;height:15px;display:block}
-.pdone .chip span{color:var(--gris);font-weight:600}
-.pdots{position:absolute;bottom:-42px;left:0;right:0;display:flex;justify-content:center;gap:14px}
-.pdot{display:flex;align-items:center;gap:7px;font-size:var(--t-xs, 12px);font-weight:700;color:var(--gris2);transition:.3s}
-.pdot i{width:8px;height:8px;border-radius:50%;background:var(--linea);transition:.3s}
-.pdot.on{color:var(--ink)}
-.pdot.on i{background:var(--az);transform:scale(1.3)}
-@media(max-width:400px){.hphone{width:272px}}
-
-/* ===== QUÉ VAS A VIVIR ===== */
-.live{padding:90px 0;background:linear-gradient(180deg,var(--bg),var(--soft2));overflow:hidden}
-.live .top{text-align:center;max-width:680px;margin:0 auto}
-.live .top.split{display:flex;align-items:flex-end;justify-content:space-between;gap:44px;text-align:left;max-width:none;margin:0}
-.live .top.split .st-l{max-width:560px}
-.live .top.split .st-r{max-width:320px;padding-bottom:4px}
-.live .top.split .sub{margin-top:0}
-@media(max-width:820px){.live .top.split{flex-direction:column;align-items:flex-start;gap:14px}.live .top.split .st-r{max-width:none}}
-.live h2{font-size:clamp(30px,4.4vw,58px);letter-spacing:-.04em;font-weight:800;margin-top:8px;line-height:1.02}
-.live h2 .x{color:var(--az)}
-.live .sub{margin-top:14px;font-size:clamp(16px,1.8vw,20px);color:var(--gris);line-height:1.5}
-.ticker{margin-top:44px;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent);mask-image:linear-gradient(90deg,transparent,#000 6%,#000 94%,transparent)}
-.ticker+.ticker{margin-top:14px}
-.ticker-in{display:inline-flex;gap:14px;white-space:nowrap;animation:slide 40s linear infinite;will-change:transform}
-.ticker.rev .ticker-in{animation-direction:reverse;animation-duration:46s}
-.ticker:hover .ticker-in{animation-play-state:paused}
-@keyframes slide{from{transform:translateX(0)}to{transform:translateX(-50%)}}
-.tk{display:inline-flex;align-items:center;gap:9px;padding:13px 20px;border-radius:16px;border:1px solid var(--linea);background:#fff;font-size:var(--t-md, 17px);font-weight:700;box-shadow:var(--sh1);flex:none}
-.tk .e{display:inline-flex;color:var(--az)}.tk .e svg{width:19px;height:19px;display:block}.tk small{color:var(--gris);font-weight:600}
-.live .mid{text-align:center;margin-top:40px}
-.live .lk{font-weight:800;color:var(--az);font-size:var(--t-base, 15px)}
-
-/* ===== LOS MUNDOS ===== */
-.worlds{padding:92px 0}
-.worlds .top{text-align:center;max-width:680px;margin:0 auto}
-.worlds h2{font-size:clamp(30px,4.2vw,54px);letter-spacing:-.04em;font-weight:800;margin-top:8px;line-height:1.02}
-.worlds h2 .x{color:var(--az)}
-.worlds .sub{margin-top:12px;font-size:var(--t-md, 17px);color:var(--gris)}
-.wgrid{display:grid;grid-template-columns:repeat(6,1fr);gap:14px;margin-top:44px}
-.world{border-radius:20px;padding:26px 18px;text-align:center;border:1px solid var(--linea);transition:.2s}
-.world:hover{transform:translateY(-6px);box-shadow:var(--sh3)}
-.world .e{line-height:1;color:var(--az)}.world .e svg{width:36px;height:36px}
-.world b{display:block;margin-top:14px;font-size:var(--t-base, 15px);font-weight:800;letter-spacing:-.01em}
-.world span{display:block;margin-top:4px;font-size:var(--t-xs, 12px);color:var(--gris);line-height:1.35}
-.world.w1{background:#E4F6EE}.world.w2{background:#E9F5EC}.world.w3{background:#E9F0FF}.world.w4{background:#FFF1E4}.world.w5{background:#ECEAFB}.world.w6{background:#F2F6FF}
-@media(max-width:900px){.wgrid{grid-template-columns:repeat(3,1fr)}}
-@media(max-width:480px){.wgrid{grid-template-columns:1fr 1fr}}
-
-/* ===== ASÍ SE USA ===== */
-.how{padding:92px 0}
-.how .top{text-align:center;max-width:680px;margin:0 auto}
-.how .top.split{display:flex;align-items:flex-end;justify-content:space-between;gap:44px;text-align:left;max-width:none;margin:0}
-.how .top.split .st-l{max-width:560px}
-.how .top.split .st-r{max-width:320px;padding-bottom:4px}
-.how .top.split .sub{margin-top:0}
-@media(max-width:820px){.how .top.split{flex-direction:column;align-items:flex-start;gap:14px}.how .top.split .st-r{max-width:none}}
-.how h2{font-size:clamp(30px,4.2vw,54px);letter-spacing:-.04em;font-weight:800;margin-top:10px;line-height:1.02}
-.how .sub{margin-top:14px;font-size:clamp(16px,1.7vw,19px);color:var(--gris);line-height:1.5}
-.hsteps{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:52px}
-.hstep{background:#fff;border:1px solid var(--linea);border-radius:22px;padding:30px 26px;box-shadow:var(--sh1);position:relative;overflow:hidden}
-.hstep .n{width:44px;height:44px;border-radius:13px;background:var(--soft);color:var(--az);font-weight:800;font-size:var(--t-lg, 19px);display:grid;place-items:center}
-.hstep .em{position:absolute;top:22px;right:22px;color:var(--az)}.hstep .em svg{width:28px;height:28px}
-.hstep h3{font-size:var(--t-xl, 21px);font-weight:800;letter-spacing:-.02em;margin-top:18px}
-.hstep p{margin-top:9px;font-size:var(--t-base, 15px);color:var(--gris);line-height:1.5;text-wrap:balance}
-.how .mid{text-align:center;margin-top:44px}
-@media(max-width:820px){.hsteps{grid-template-columns:1fr}}
-
-/* ===== PARA QUIÉN ES ===== */
-.forwho{padding:92px 0;background:linear-gradient(180deg,var(--bg),var(--soft2))}
-.forwho .top{text-align:center;max-width:680px;margin:0 auto}
-.forwho h2{font-size:clamp(30px,4.2vw,54px);letter-spacing:-.04em;font-weight:800;margin-top:8px;line-height:1.02}
-.forwho h2 .x{color:var(--az)}
-.fwgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:46px}
-.fw{background:#fff;border:1px solid var(--linea);border-radius:20px;padding:26px 22px;box-shadow:var(--sh1);transition:.2s}
-.fw:hover{transform:translateY(-4px);box-shadow:var(--sh2)}
-.fw .ic{width:52px;height:52px;border-radius:15px;background:var(--soft);display:grid;place-items:center;color:var(--az)}
-.fw .ic svg{width:26px;height:26px}
-.fw b{display:block;margin-top:16px;font-size:var(--t-md, 17px);font-weight:800;letter-spacing:-.02em;line-height:1.15}
-.fw span{display:block;margin-top:8px;font-size:var(--t-base, 15px);color:var(--gris);line-height:1.45;text-wrap:balance}
-@media(max-width:900px){.fwgrid{grid-template-columns:1fr 1fr}}
-@media(max-width:460px){.fwgrid{grid-template-columns:1fr}}
-
-/* ===== CON QUIÉN / SEGURO ===== */
-.trust{padding:92px 0;background:var(--soft2)}
-.trust .wrap{display:grid;grid-template-columns:.92fr 1.08fr;gap:52px;align-items:center}
-.trust h2{font-size:clamp(28px,3.8vw,52px);letter-spacing:-.04em;font-weight:800;line-height:1.04;margin-top:10px}
-.trust h2 .x{color:var(--az)}
-.trust .lead{margin-top:16px;font-size:clamp(16px,1.7vw,19px);color:var(--gris);line-height:1.5;max-width:36ch;text-wrap:balance}
-.tgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-.tc{background:#fff;border:1px solid var(--linea);border-radius:18px;padding:22px;box-shadow:var(--sh1);transition:.2s}
-.tc:hover{transform:translateY(-4px);box-shadow:var(--sh2)}
-.tc .ic{width:46px;height:46px;border-radius:13px;background:var(--soft);display:grid;place-items:center;color:var(--az)}
-.tc .ic svg{width:22px;height:22px}
-.tc b{display:block;margin-top:14px;font-size:var(--t-md, 17px);font-weight:800;letter-spacing:-.02em}
-.tc span{display:block;margin-top:6px;font-size:var(--t-base, 15px);color:var(--gris);line-height:1.45}
-@media(max-width:820px){.trust .wrap{grid-template-columns:1fr;gap:30px}}
-@media(max-width:440px){.tgrid{grid-template-columns:1fr}}
-
-/* ===== FRANJA gratis/ciudad ===== */
-.band{padding:60px 0}
-.bandbox{display:flex;align-items:center;justify-content:center;gap:40px;flex-wrap:wrap;text-align:center}
-.bandbox .it b{display:block;font-size:clamp(22px,2.4vw,30px);font-weight:800;letter-spacing:-.02em}
-.bandbox .it b .x{color:var(--az)}
-.bandbox .it span{font-size:var(--t-base, 15px);color:var(--gris);font-weight:600}
-.bandbox .sep{width:1px;height:44px;background:var(--linea)}
-@media(max-width:640px){.bandbox .sep{display:none}}
-
-/* ===== FAQ ===== */
-.faq{padding:92px 0}
-.faq .top{text-align:center;max-width:680px;margin:0 auto}
-.faq h2{font-size:clamp(28px,4vw,50px);letter-spacing:-.04em;font-weight:800;margin-top:8px;line-height:1.02}
-.faqlist{max-width:760px;margin:44px auto 0}
-.fitem{border-bottom:1px solid var(--linea)}
-.fq{width:100%;text-align:left;background:none;border:0;font-family:var(--f);font-size:clamp(16px,2vw,19px);font-weight:800;color:var(--ink);padding:22px 44px 22px 0;cursor:pointer;position:relative;letter-spacing:-.02em}
-.fq:after{content:"+";position:absolute;right:4px;top:50%;transform:translateY(-50%);font-size:var(--t-3xl, 26px);font-weight:400;color:var(--az);transition:.25s}
-.fitem.open .fq:after{transform:translateY(-50%) rotate(45deg)}
-.fa{display:grid;grid-template-rows:0fr;transition:grid-template-rows .34s cubic-bezier(.2,.8,.25,1)}.fa>*{overflow:hidden;min-height:0}
-.fitem.open .fa{grid-template-rows:1fr}
-.fa p{color:var(--gris);font-size:var(--t-base, 15px);line-height:1.6;padding:0 44px 24px 0;text-wrap:balance}
-
-/* ===== CIERRE ===== */
-.hclose{padding:106px 0;text-align:center;overflow:hidden;background:linear-gradient(180deg,var(--soft2),var(--bg))}
-.hclose .xbg{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:min(52vw,620px);font-weight:800;color:var(--az);opacity:.05;line-height:1;pointer-events:none;letter-spacing:-.05em}
-.hclose .wrap{position:relative;z-index:1}
-.hclose h2{font-size:clamp(36px,5.4vw,84px);letter-spacing:-.045em;font-weight:800;text-transform:uppercase;line-height:.98;max-width:15ch;margin:12px auto 0}
-.hclose h2 .x{color:var(--az)}
-.hclose p{margin:18px auto 0;max-width:38ch;font-size:clamp(16px,1.8vw,20px);color:var(--gris);line-height:1.5;text-wrap:balance}
-.hclose .cta{margin-top:30px}
-
-/* ===== EMPRESAS (conversión B2B) ===== */
-.biz{padding:16px 0 76px}
-.bizbox{background:linear-gradient(145deg,var(--az) 0%,#1739ad 100%);border-radius:30px;padding:46px 50px;display:grid;grid-template-columns:1.35fr .65fr;align-items:center;gap:36px;position:relative;overflow:hidden}
-.bizbox:after{content:"✕";position:absolute;right:26px;bottom:-52px;font-size:210px;font-weight:800;color:#fff;opacity:.08;line-height:1;pointer-events:none}
-.bizbox .bt{position:relative;z-index:1}
-.bizbox .k{font-size:var(--t-xs, 12px);font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#BFD4FF}
-.bizbox h3{color:#fff;font-size:clamp(24px,3vw,40px);font-weight:800;letter-spacing:-.03em;margin-top:10px;line-height:1.04}
-.bizbox h3 .x{color:#BFE0FF}
-.bizbox p{color:#D6E1FF;font-size:var(--t-base, 15px);margin-top:13px;line-height:1.5;max-width:46ch}
-.bizcta{display:flex;gap:12px;margin-top:26px;flex-wrap:wrap}
-.bizbtn{display:inline-flex;align-items:center;gap:8px;background:#fff;color:var(--ink);font-weight:800;font-size:var(--t-base, 15px);padding:14px 24px;border-radius:999px;transition:.18s}
-.bizbtn:hover{transform:translateY(-2px)}
-.bizghost{display:inline-flex;align-items:center;gap:8px;color:#fff;font-weight:700;font-size:var(--t-base, 15px);padding:14px 20px;border:1px solid rgba(255,255,255,.25);border-radius:999px;transition:.15s}
-.bizghost:hover{background:rgba(255,255,255,.1)}
-.bizart{position:relative;z-index:1;justify-self:center}
-.bizmini{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.22);border-radius:18px;padding:18px 20px;width:230px;backdrop-filter:blur(4px)}
-.bizmini .row{display:flex;align-items:center;gap:11px;padding:9px 0}
-.bizmini .row+.row{border-top:1px solid rgba(255,255,255,.14)}
-.bizmini .av{width:32px;height:32px;border-radius:50%;background:linear-gradient(135deg,#fff,#CFE0FF);flex:none}
-.bizmini .tx b{display:block;color:#fff;font-size:var(--t-sm, 13px);font-weight:700;line-height:1.1}
-.bizmini .tx span{color:#C6D5F5;font-size:var(--t-xs, 12px)}
-.bizmini .tag{margin-left:auto;font-size:var(--t-xs, 12px);font-weight:800;color:#3ee0a6;background:rgba(15,185,129,.15);padding:4px 8px;border-radius:999px}
-@media(max-width:760px){.bizbox{grid-template-columns:1fr;gap:26px;padding:34px 28px}.bizart{justify-self:start}}
-
-a:focus-visible,button:focus-visible,[role=button]:focus-visible{outline:2.5px solid #2F66FF;outline-offset:3px;border-radius:8px}
-
-.reveal{opacity:0;transform:translateY(24px);transition:opacity .7s cubic-bezier(.16,1,.3,1),transform .7s cubic-bezier(.16,1,.3,1)}
-.reveal.on{opacity:1;transform:none}
-.d1{transition-delay:.08s}.d2{transition-delay:.16s}.d3{transition-delay:.24s}
-
-@media (min-width:1500px){.wrap,.nav__in,.nf__in{max-width:1320px}.hhero h1{font-size:90px}.live h2,.worlds h2,.how h2,.forwho h2{font-size:60px}.trust h2{font-size:52px}.hclose h2{font-size:92px}}
-@media (min-width:1920px){.wrap,.nav__in,.nf__in{max-width:1500px}.hhero h1{font-size:106px}.live h2,.worlds h2,.how h2,.forwho h2{font-size:70px}.trust h2{font-size:58px}.hclose h2{font-size:112px}}
-@media (min-width:2500px){.wrap,.nav__in,.nf__in{max-width:1720px}.hhero h1{font-size:126px}.live h2,.worlds h2,.how h2,.forwho h2{font-size:78px}.trust h2{font-size:64px}.hclose h2{font-size:128px}}
-
-/* ── El móvil del hero es jugable ────────────────────────────────────
-   Tocas un plan y la app responde, en vez de mirar una rotación.
-   Es la diferencia entre enseñar la app y dejar que la prueben. */
-.hpcard{cursor:pointer;-webkit-tap-highlight-color:transparent;
-  transition:transform .18s cubic-bezier(.2,.8,.25,1),border-color .18s,box-shadow .18s}
-@media (hover:hover){.hpcard:hover{transform:translateY(-2px);border-color:#C9D8FF}}
-.hpcard:active{transform:scale(.975);transition-duration:.07s}
-.hpcard:focus-visible{outline:2px solid var(--az);outline-offset:2px}
-.hpcard .go{transition:transform .18s cubic-bezier(.2,.8,.25,1)}
-.hpcard:active .go{transform:scale(.94)}
-
-/* el teléfono acusa el toque: un pulso de un fotograma, nada de temblores */
-.hphone.tap{animation:tap .26s cubic-bezier(.2,.8,.25,1)}
-@keyframes tap{40%{transform:scale(.993)}100%{transform:none}}
-
-/* buscando: las tres tarjetas se apagan menos la elegida */
-.pfeed.buscando .hpcard:not(.sel){opacity:.35;transform:scale(.98)}
-.pfeed.buscando .hpcard.sel{border-color:var(--az);box-shadow:var(--shc)}
-.plupa{position:absolute;left:0;right:0;bottom:22px;text-align:center;
-  font-size:var(--t-sm,13px);font-weight:700;color:var(--az);opacity:0;transition:opacity .25s}
-.pfeed.buscando~.plupa,.plupa.on{opacity:1}
-.plupa i{display:inline-block;width:6px;height:6px;border-radius:50%;background:var(--az);
-  margin-right:5px;animation:latir 1s infinite}
-@keyframes latir{0%,100%{opacity:.25;transform:scale(.8)}50%{opacity:1;transform:scale(1.15)}}
-
-/* el match entra, no aparece de golpe */
-.pscreen[data-ps="1"].on .av{animation:entrar .42s cubic-bezier(.2,.8,.25,1) backwards}
-.pscreen[data-ps="1"].on .vf{animation:entrar .42s cubic-bezier(.2,.8,.25,1) .12s backwards}
-.pscreen[data-ps="1"].on .pmatch b{animation:entrar .42s cubic-bezier(.2,.8,.25,1) .2s backwards}
-.pscreen[data-ps="2"].on .big{animation:sello .5s cubic-bezier(.2,.8,.25,1) backwards}
-@keyframes entrar{from{opacity:0;transform:translateY(8px) scale(.96)}to{opacity:1;transform:none}}
-@keyframes sello{0%{opacity:0;transform:scale(.6)}60%{transform:scale(1.06)}100%{opacity:1;transform:none}}
-
-/* pista discreta: que se vea que se puede tocar */
-.ptoca{text-align:center;font-size:var(--t-xs,12px);font-weight:700;color:var(--gris);
-  margin-top:10px;transition:opacity .3s}
-.ptoca.off{opacity:0}
-
-@media (prefers-reduced-motion:reduce){
-  .hphone.tap,.pscreen .av,.pscreen .vf,.pscreen .pmatch b,.pscreen .big{animation:none!important}
-  .hpcard,.hpcard .go{transition:none!important}
-  .hpcard:active,.hpcard:hover{transform:none!important}
-  .plupa i{animation:none!important}
-}
-
-/* ficha de la persona dentro del móvil */
-.pmatch .pnom{font-size:var(--t-lg,19px);font-weight:800;letter-spacing:-.02em;margin-top:12px}
-.pmatch .pzona{font-size:var(--t-xs,12px);color:var(--gris);margin-top:1px}
-.pmatch .pquiere{font-size:var(--t-base,15px);font-weight:700;margin-top:12px;line-height:1.25}
-.ptags{display:flex;flex-wrap:wrap;gap:5px;justify-content:center;margin-top:10px}
-.ptags span{font-size:11px;font-weight:700;color:var(--az);background:var(--soft);
-  padding:4px 9px;border-radius:999px;white-space:nowrap}
-.pscreen[data-ps="1"].on .pnom,.pscreen[data-ps="1"].on .pzona{animation:entrar .42s cubic-bezier(.2,.8,.25,1) .08s backwards}
-.pscreen[data-ps="1"].on .ptags{animation:entrar .42s cubic-bezier(.2,.8,.25,1) .26s backwards}
-@media (prefers-reduced-motion:reduce){
-  .pscreen .pnom,.pscreen .pzona,.pscreen .ptags{animation:none!important}}
-/* ── Que el móvil respire ─────────────────────────────────────────────
-   Medido en un iPhone (375x812) sobre la home publicada: 12,7 pantallas
-   de scroll. Dos causas, ninguna de contenido:
-
-   1. El relleno vertical era de escritorio: 92px arriba y abajo en cada
-      sección. En una pantalla de 812px eso es casi un cuarto de pantalla
-      de aire por sección, y hay nueve. Solo en relleno se iban ~2
-      pantallas enteras.
-   2. Las FAQs pasaron de 6 a 11 preguntas al escribirlas para las IA.
-      En escritorio no se nota; en móvil son 541 palabras — el 40% del
-      texto de toda la home — y 1,8 pantallas seguidas.
-
-   Esto no quita ni una palabra: el texto sigue entero en el HTML para
-   Google y para las IA. Solo deja de caer todo de golpe. */
-@media (max-width:640px){
-  section{padding-top:56px!important;padding-bottom:56px!important}
-  .hclose{padding-top:64px!important;padding-bottom:64px!important}
-  .band{padding-top:40px!important;padding-bottom:40px!important}
-
-  /* FAQs: se ven 5, el resto a un toque */
-  .faqlist .fitem:nth-child(n+6){display:none}
-  .faqlist.todas .fitem{display:block}
-  .vermas{display:block;width:100%;margin:18px auto 0;padding:13px 18px;
-    border:1px solid var(--linea);border-radius:999px;background:#fff;
-    font:inherit;font-size:var(--t-sm,13px);font-weight:800;color:var(--ink);
-    cursor:pointer;transition:transform .18s cubic-bezier(.2,.8,.25,1)}
-  .vermas:active{transform:scale(.98)}
-  .faqlist.todas+.vermas{display:none}
-}
-@media (min-width:641px){.vermas{display:none}}
-
-/* El cambio de pantalla del móvil se cruzaba: durante medio segundo se
-   veían dos a la vez (una al 30% y otra al 70%), y en móvil eso se lee
-   como texto encima de texto. Ahora la que sale desaparece en seco y solo
-   la que entra se anima: nunca hay dos pantallas visibles. */
-.pscreen{background:linear-gradient(180deg,#fff,var(--soft2));
-  transition:opacity .15s linear,transform .15s linear}
-/* la que entra espera a que la anterior se haya ido del todo (0,15s):
-   así no hay ningún instante con dos pantallas visibles */
-.pscreen.on{z-index:2;transition:opacity .3s cubic-bezier(.2,.8,.25,1) .17s,transform .3s cubic-bezier(.2,.8,.25,1) .17s}
-@media (prefers-reduced-motion:reduce){.pscreen,.pscreen.on{transition:none}}
-
-/* ── Lo primero que se ve en el móvil ────────────────────────────────
-   Había un order:-1 que colocaba el teléfono ANTES del titular: entrabas
-   y lo primero era un mockup, sin saber todavía qué es NYXA. En el móvil
-   el orden tiene que ser el de siempre: qué es -> pruébalo. */
-@media (max-width:860px){
-  .hero-r{order:0!important}
-  .phonewrap{margin-top:8px}
-}
-
-/* ── Las FAQs, cerradas ──────────────────────────────────────────────
-   Abiertas son 297 palabras por pantalla; solo las preguntas, 41. En el
-   móvil se entra con todas cerradas: se ve una lista, no un muro. */
-
-
-/* el contador se partía en tres líneas con el número suelto en medio */
-@media (max-width:640px){
-  .hstat{flex-wrap:wrap;justify-content:center;gap:8px;text-align:center;line-height:1.35}
-  .hstat b{white-space:nowrap}
-}
-</style>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>NYXA · Todo empieza con un plan</title>
+<meta name="description" content="NYXA es la app para conocer gente en persona: alguien propone un plan, tú te apuntas y quedáis. Ya en Valencia.">
+<meta name="theme-color" content="#FFFFFF">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/s.css">
 </head>
 <body>
-<a class="skip" href="#como">Saltar al contenido</a>
-
-<header class="nav" id="top">
-  <div class="nav__in">
-    <a class="marca" href="#top" aria-label="NYXA, inicio">NY<span class="marca__x" aria-hidden="true"><svg viewBox="0 0 20 20"><line x1="3" y1="17" x2="17" y2="3"/><line x1="17" y1="17" x2="3" y2="3"/></svg></span>A</a>
-    <nav class="nav__links" aria-label="Secciones">
-      <a href="#como">Cómo funciona</a>
-      <a href="ciudades.html">Ciudades</a>
-      <a href="seguridad.html">Seguridad</a>
-      <a href="manifiesto.html">Quiénes somos</a>
-      <a href="empresas.html">Empresas</a>
-      <a href="momentos.html">Momentos</a>
-    </nav>
-    <div style="display:flex;align-items:center;gap:10px">
-      <a class="pill" href="descargar.html">Descargar</a>
-      <button class="burger" aria-label="Abrir menú" aria-expanded="false"><span></span></button>
-    </div>
-  </div>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+ <symbol id="apple" viewBox="0 0 24 24"><path d="M16.4 12.6c0-2.6 2.1-3.8 2.2-3.9-1.2-1.8-3.1-2-3.7-2-1.6-.2-3.1.9-3.9.9-.8 0-2-.9-3.3-.9-1.7 0-3.3 1-4.2 2.5-1.8 3.1-.5 7.7 1.3 10.2.9 1.2 1.9 2.6 3.2 2.6 1.3-.1 1.8-.8 3.3-.8 1.6 0 2 .8 3.4.8 1.4 0 2.3-1.3 3.1-2.5 1-1.4 1.4-2.8 1.4-2.9-.1 0-2.8-1-2.8-4Zm-2.6-7.7c.7-.9 1.2-2 1-3.2-1 .1-2.2.7-2.9 1.6-.6.7-1.2 1.9-1 3.1 1.1.1 2.2-.6 2.9-1.5Z"/></symbol>
+ <symbol id="play" viewBox="0 0 24 24"><path d="M3.6 2.2c-.3.3-.4.7-.4 1.2v17.2c0 .5.1.9.4 1.2l.1.1 9.6-9.6v-.2L3.7 2.1l-.1.1Zm12.9 12.9-3.2-3.2v-.2l3.2-3.2.1.1 3.8 2.2c1.1.6 1.1 1.6 0 2.2l-3.8 2.2-.1-.1Zm-.1.1-3.3-3.3-9.7 9.7c.4.4 1 .4 1.6.1l11.4-6.5m0-6.6L5 2.1c-.7-.4-1.3-.3-1.6.1l9.7 9.6 3.3-3.3Z"/></symbol>
+</svg>
+<header class="nav" id="nav">
+ <div class="l"><a class="logo" href="/" aria-label="NYXA, inicio"><b>NY</b>✕<b>A</b></a><ul><li><a href="/producto/">Producto</a></li><li><a href="/nyxas/">NYXAs</a></li><li><a href="/seguridad/">Seguridad</a></li><li><a href="/empresas/">Empresas</a></li><li><a href="/universidades/">Universidades</a></li><li><a href="/ayuda/">Ayuda</a></li><li><a href="/descarga/">Descarga</a></li></ul></div>
+ <a class="login" href="/descarga/">Iniciar sesión</a>
+ <button class="burger" id="burger" aria-label="Abrir menú" aria-expanded="false">☰</button>
 </header>
+<nav class="mnav" id="mnav" aria-label="Menú"><button class="x2" id="mclose" aria-label="Cerrar menú">✕</button><a href="/producto/">Producto</a><a href="/nyxas/">NYXAs</a><a href="/seguridad/">Seguridad</a><a href="/empresas/">Empresas</a><a href="/universidades/">Universidades</a><a href="/ayuda/">Ayuda</a><a href="/descarga/">Descarga</a></nav>
+<main id="top">
+<section class="hero" aria-labelledby="h1">
+ <div class="hfl" aria-hidden="true"><div class="po" style="left:4%;top:18%;rotate:-9deg"><img src="/i/nat.webp" alt=""><span>Atardecer</span></div><div class="po" style="left:15%;top:62%;rotate:6deg"><img src="/i/com2.webp" alt=""><span>Tapeo</span></div><div class="po" style="left:80%;top:14%;rotate:8deg"><img src="/i/caf.webp" alt=""><span>Café</span></div><div class="po" style="left:86%;top:58%;rotate:-6deg"><img src="/i/dep.webp" alt=""><span>Running</span></div><div class="po" style="left:30%;top:6%;rotate:4deg"><img src="/i/noc.webp" alt=""><span>Concierto</span></div><div class="po" style="left:62%;top:70%;rotate:-4deg"><img src="/i/pic.webp" alt=""><span>Picnic</span></div></div>
+ <h1 id="h1" class="rise">Todo empieza con un plan.</h1>
+ <div class="bt rise r2"><a class="pill g" href="/descarga/" >¡Descarga la app!</a><a class="pill k" href="/descarga/" >Crear cuenta</a></div>
+ <div class="low rise r3"><p>Puede que alguien en Valencia quiera hacer lo mismo que tú hoy.</p><a href="#demo">Pruébalo ↓</a></div>
+</section>
 
-<main>
-
-<!-- HERO -->
-<header class="hhero">
-  <div class="wrap">
-    <div class="hero-l">
-      <span class="hpill"><i></i>Gratis · ya en la App Store</span>
-      <h1>Conoce gente y haz planes <span class="x">de verdad</span>.</h1>
-      <p class="flowsub">
-        <span class="fs active" data-s="0"><b>Eliges</b> el plan.</span>
-        <span class="fs" data-s="1"><b>Te decimos</b> con quién.</span>
-        <span class="fs" data-s="2"><b>Quedáis</b> de verdad.</span>
-      </p>
-      <div class="hcta">
-        <a class="appstore" href="https://apps.apple.com/es/app/nyxa/id6800325033" aria-label="Descargar NYXA en la App Store"><svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M16.5 1.6c.1 1-.3 2-.9 2.8-.7.8-1.7 1.4-2.7 1.3-.1-1 .4-2 1-2.7.6-.8 1.7-1.3 2.6-1.4zM19.3 17c-.5 1.1-.7 1.6-1.3 2.5-.9 1.4-2.1 3.1-3.6 3.1-1.4 0-1.7-.9-3.6-.9s-2.3.9-3.6.9C5.1 22.6 4 21 3 19.6.6 16.1.3 12 1.8 9.8 2.9 8.3 4.5 7.3 6 7.3c1.6 0 2.6 1 3.9 1 1.3 0 2-1 3.9-1 1.3 0 2.7.7 3.7 2-3.2 1.8-2.7 6.4.8 7.7z"/></svg><span><small>Descárgalo en</small><b>App Store</b></span></a>
-      </div>
-      <p class="frict"><b>Gratis</b> · sin tarjeta · listo en 60 segundos</p>
-      <div class="hstat"><span class="av"><span>A</span><span>M</span><span>J</span></span> Únete a <b data-cnt="total">0</b> personas que ya quedan en Valencia</div>
-    </div>
-    <div class="hero-r">
-      <div class="phonewrap">
-        <div class="hphone">
-          <div class="pnotch"></div>
-          <div class="phscr">
-            <div class="pscreen on" data-ps="0">
-              <div class="ptop"><span>9:41</span><span>NYXA</span></div>
-              <div class="phead"><div class="k">Hoy en tu ciudad</div><h4>Elige un plan</h4></div>
-              <div class="pfeed">
-                <div class="hpcard sel" role="button" tabindex="0" data-plan="0"><div class="r1"><div class="pe" data-icon="amanecer"></div><div class="ti"><b>Amanecer en la Albufera</b><span>sáb · 7:00</span></div></div><div class="r2"><span class="who">te apetece</span><span class="go">Quiero ir</span></div></div>
-                <div class="hpcard" role="button" tabindex="0" data-plan="1"><div class="r1"><div class="pe" data-icon="fuego"></div><div class="ti"><b>Hoguera en El Saler</b><span>sáb · 21:00</span></div></div><div class="r2"><span class="who">plan de noche</span><span class="go">Quiero ir</span></div></div>
-                <div class="hpcard" role="button" tabindex="0" data-plan="2"><div class="r1"><div class="pe" data-icon="cafe"></div><div class="ti"><b>Café y charla</b><span>dom · 11:00</span></div></div><div class="r2"><span class="who">sin prisa</span><span class="go">Quiero ir</span></div></div>
-              </div>
-            </div>
-            <div class="plupa"><i></i><span>Buscando a alguien…</span></div>
-        <div class="pscreen" data-ps="1">
-              <div class="ptop"><span>9:41</span><span>NYXA</span></div>
-              <div class="phead"><div class="k">Te decimos con quién</div><h4>Alguien encaja</h4></div>
-              <div class="pmatch">
-          <div class="av">M</div>
-          <b class="pnom">Marta, 30</b>
-          <span class="pzona">El Cabañal · Valencia</span>
-          <span class="vf"><span class="vfi" data-icon="verificado"></span>Perfil verificado</span>
-          <b class="pquiere">También quiere ver el amanecer</b>
-          <div class="ptags"><span>madrugar</span><span>naturaleza</span><span>fotos</span></div>
-        </div>
-            </div>
-            <div class="pscreen" data-ps="2">
-              <div class="ptop"><span>9:41</span><span>NYXA</span></div>
-              <div class="phead"><div class="k">Plan cerrado</div><h4>Quedáis</h4></div>
-              <div class="pdone">
-                <div class="big" data-icon="check"></div>
-                <b>Hecho: se abre el chat</b>
-                <div class="chip"><span class="chipi" data-icon="amanecer"></span>Amanecer en la Albufera<br><span>sábado · 7:00 · en persona</span></div>
-              </div>
-            </div>
-          </div>
-        </div>
-        <p class="ptoca">Toca un plan y mira qué pasa 👆</p>
-        <div class="pdots">
-          <div class="pdot on" data-d="0"><i></i>Eliges</div>
-          <div class="pdot" data-d="1"><i></i>Con quién</div>
-          <div class="pdot" data-d="2"><i></i>Quedáis</div>
-        </div>
-      </div>
-    </div>
+<section class="demo" id="demo" aria-labelledby="h-demo">
+ <div class="wrap">
+  <div>
+   <h2 id="h-demo" class="rv">Pruébalo<span>.</span></h2>
+   <span class="lbl hint rv">Desliza a la derecha o toca «Me apunto»</span>
+   <div class="steps" id="steps" aria-hidden="true">
+    <div class="st on"><i>01</i><b>Elige un plan</b></div>
+    <div class="st"><i>02</i><b>Te apuntas</b></div>
+    <div class="st"><i>03</i><b>Cerráis hora</b></div>
+    <div class="st"><i>04</i><b>Quedáis</b></div>
+   </div>
   </div>
-</header>
-
-<!-- QUÉ VAS A VIVIR -->
-<section class="live">
-  <div class="wrap"><div class="top split">
-    <div class="st-l"><span class="eyer">Tu semana con NYXA</span><h2>Esto es lo que vas a <span class="x">vivir</span>.</h2></div>
-    <div class="st-r"><p class="sub">Del café de la mañana a la hoguera en la playa. Tú eliges el plan; nosotros, con quién.</p></div>
+  <div class="dph" role="application" aria-label="Demo interactiva de NYXA"><div class="dsc"><span class="notch"></span>
+   <div class="dtop"><b><i>NY</i>✕<i>A</i></b><span>VALENCIA · HOY</span></div>
+   <div class="deck" id="deck"></div>
+   <div class="dbt"><button class="no" id="bNo" aria-label="Pasar">✕</button><button class="si" id="bSi">Me apunto</button></div>
+   <div class="lay j" id="lJ"><div class="ntf2" id="ntf"><i id="ntfA"></i><span id="ntfT"></span></div><span class="ck">✓</span><h5>Te has apuntado</h5><span class="lbl" id="jT" style="color:var(--muted)"></span></div>
+   <div class="lay c" id="lC"><div class="hd"><i id="cA"></i><span><b id="cN"></b><small id="cP"></small></span></div><span class="tmr2">⏳ <span id="cT">71:59:42</span> PARA CERRAR</span><span class="bb" id="b1"></span><span class="bb me" id="b2">¡Allí estoy! Voy con un amigo 🙌</span><span class="bb" id="b3">Perfecto, llevo chaqueta amarilla</span><span class="bb me" id="b4">Hecho 👋</span></div>
+   <div class="lay m" id="lM"><span class="xx">✕</span><h5>Os habéis visto.</h5><small id="mT"></small><span class="sello" id="mS"></span><button id="again">Probar otro plan</button></div>
   </div></div>
-  <div class="ticker"><div class="ticker-in" id="tk1"></div></div>
-  <div class="ticker rev"><div class="ticker-in" id="tk2"></div></div>
-  <div class="wrap"><div class="mid"><a class="lk" href="momentos.html">Ver todos los planes →</a></div></div>
+ </div>
 </section>
 
-<!-- LOS MUNDOS -->
-<section class="worlds">
-  <div class="wrap">
-    <div class="top">
-      <span class="eyer">Hay un plan para cada día</span>
-      <h2>Elige tu <span class="x">mundo</span>.</h2>
-      <p class="sub">Te apetezca lo que te apetezca, hay gente cerca para vivirlo.</p>
-    </div>
-    <div class="wgrid">
-      <div class="world w1 reveal"><div class="e" data-icon="correr"></div><b>Deporte</b><span>correr, pádel, escalada</span></div>
-      <div class="world w2 reveal d1"><div class="e" data-icon="montana"></div><b>Naturaleza</b><span>rutas, playa, montaña</span></div>
-      <div class="world w3 reveal d2"><div class="e" data-icon="arte"></div><b>Cultura</b><span>expos, conciertos, cine</span></div>
-      <div class="world w4 reveal d3"><div class="e" data-icon="comida"></div><b>Comida</b><span>cenas, tapas, brunch</span></div>
-      <div class="world w5 reveal d1"><div class="e" data-icon="luna"></div><b>Noche</b><span>copas, música, baile</span></div>
-      <div class="world w6 reveal d2"><div class="e" data-icon="cafe"></div><b>Tranqui</b><span>café, charla, juegos</span></div>
-    </div>
-      <button class="vermas" type="button">Ver las 6 preguntas que faltan</button>
+<section class="vid" aria-label="Menos pantalla, más esto">
+ <video data-src="/v/hero" autoplay muted loop playsinline preload="auto" poster="/v/hero.jpg" aria-hidden="true"></video>
+ <h2 class="rv">Menos pantalla.<br>Más esto<span>.</span></h2>
+</section>
+<section class="cambia" id="cambia" aria-labelledby="h-c">
+ <div class="wrap">
+  <h2 id="h-c" class="rv">Quedar con gente nueva nunca fue tan fácil.</h2>
+  <div class="trio">
+   <a class="tc c1 rv" href="/producto/#perfil"><span class="lbl">Tu perfil</span><h3>Más que una foto</h3><span class="more">Descubre más →</span><img class="ob" src="/o/camara.png" alt=""></a>
+   <a class="tc c2 rv" href="/producto/#h72"><span class="lbl">72 horas</span><h3>Esta semana, no algún día</h3><span class="more">Descubre más →</span><img class="ob" src="/o/reloj.png" alt=""></a>
+   <a class="tc c3 rv" href="/producto/#mas1"><span class="lbl">Plus uno</span><h3>Con amigos, mejor</h3><span class="more">Descubre más →</span><img class="ob" src="/o/abrazo.png" alt=""></a>
   </div>
+ </div>
 </section>
 
-<!-- ASÍ SE USA -->
-<section class="how" id="como">
-  <div class="wrap">
-    <div class="top split">
-      <div class="st-l"><span class="eyer">Así de fácil</span><h2>Quedar cuesta tres toques.</h2></div>
-      <div class="st-r"><p class="sub">Nada de escribir a desconocidos ni scroll infinito. Abres, eliges y quedas.</p></div>
-    </div>
-    <div class="hsteps">
-      <div class="hstep reveal"><div class="n">1</div><div class="em" data-icon="idea"></div><h3>Eliges un plan</h3><p>Un amanecer, una cena, deporte, un concierto. Lo que te apetezca hoy.</p></div>
-      <div class="hstep reveal d1"><div class="n">2</div><div class="em" data-icon="brujula"></div><h3>Te decimos con quién</h3><p>Gente cerca de ti, verificada, con las mismas ganas. Sin chats vacíos.</p></div>
-      <div class="hstep reveal d2"><div class="n">3</div><div class="em" data-icon="manos"></div><h3>Quedáis en persona</h3><p>Si los dos decís que sí, se abre el chat y quedáis. En la calle, de verdad.</p></div>
-    </div>
-    <div class="mid"><a class="appstore" href="https://apps.apple.com/es/app/nyxa/id6800325033" aria-label="Descargar NYXA en la App Store"><svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M16.5 1.6c.1 1-.3 2-.9 2.8-.7.8-1.7 1.4-2.7 1.3-.1-1 .4-2 1-2.7.6-.8 1.7-1.3 2.6-1.4zM19.3 17c-.5 1.1-.7 1.6-1.3 2.5-.9 1.4-2.1 3.1-3.6 3.1-1.4 0-1.7-.9-3.6-.9s-2.3.9-3.6.9C5.1 22.6 4 21 3 19.6.6 16.1.3 12 1.8 9.8 2.9 8.3 4.5 7.3 6 7.3c1.6 0 2.6 1 3.9 1 1.3 0 2-1 3.9-1 1.3 0 2.7.7 3.7 2-3.2 1.8-2.7 6.4.8 7.7z"/></svg><span><small>Descárgalo en</small><b>App Store</b></span></a></div>
-  </div>
+<section class="mani" aria-label="Te damos la bienvenida a NYXA">
+ <div class="wrap rv">
+  <p>Las mejores cosas que te han pasado empezaron con un «¿te vienes?».</p>
+    <div class="vs" aria-label="Mirar no, vivir sí"><div class="no">Mirar.</div><div class="si">Vivir.</div></div>
+  <div class="firma">– Te damos la bienvenida a NYXA</div>
+ </div>
 </section>
 
-<!-- PARA QUIÉN ES -->
-<section class="forwho">
-  <div class="wrap">
-    <div class="top">
-      <span class="eyer">¿Te suena?</span>
-      <h2>NYXA es <span class="x">para ti</span> si…</h2>
-    </div>
-    <div class="fwgrid">
-      <div class="fw reveal"><div class="ic" data-icon="caja"></div><b>Acabas de mudarte</b><span>Ciudad nueva, cero contactos. Empieza a quedar sin esperar meses.</span></div>
-      <div class="fw reveal d1"><div class="ic" data-icon="movil"></div><b>Estás harto del scroll</b><span>Demasiadas horas mirando pantallas. Te apetece vivir algo real.</span></div>
-      <div class="fw reveal d2"><div class="ic" data-icon="idea"></div><b>Tienes ganas y no plan</b><span>Te apetece salir, pero nunca hay nada cerrado. Aquí sí.</span></div>
-      <div class="fw reveal d3"><div class="ic" data-icon="sofa"></div><b>Tus amigos no se apuntan</b><span>Tú quieres; ellos, en el sofá. Encuentra a quien sí quiere.</span></div>
-    </div>
-  </div>
+<section class="duo" aria-label="NYXA para universidades y empresas">
+ <div class="wrap">
+  <a class="dk2 u rv" href="/universidades/"><img src="/o/birrete.png" alt=""><span class="lbl">Universidades</span><h3>Tu campus, con planes.</h3><span class="more">Descubre más →</span></a>
+  <a class="dk2 e rv" href="/empresas/"><img src="/o/trato.png" alt=""><span class="lbl">Empresas</span><h3>Llena tus plazas con gente nueva.</h3><ul class="dk2l"><li><img src="/o/moneda.png" alt="">Comisión solo por reserva confirmada</li><li><img src="/o/check.png" alt="">Sin permanencia</li><li><img src="/o/ticket.png" alt="">Reserva y pago en NYXA</li></ul><span class="more">Quiero publicar mis planes →</span></a>
+ </div>
 </section>
 
-<!-- CON QUIÉN / SEGURO -->
-<section class="trust">
-  <div class="wrap">
-    <div class="trust-l reveal">
-      <span class="eyer">Con quién quedas</span>
-      <h2>Gente real. Y aquí <span class="x">mandas tú</span>.</h2>
-      <p class="lead">Sin mensajes de desconocidos, sin postureo. Tú aceptas cada plan y cortas cuando quieras.</p>
-    </div>
-    <div class="tgrid">
-      <div class="tc reveal"><div class="ic" data-icon="verificado"></div><b>Gente verificada</b><span>Cada persona pasa un control. Sabes con quién quedas.</span></div>
-      <div class="tc reveal d1"><div class="ic" data-icon="persona"></div><b>Cara real, no avatar</b><span>Nada de perfiles fantasma. Quedas con personas de verdad.</span></div>
-      <div class="tc reveal d2"><div class="ic" data-icon="mano"></div><b>Nadie sin tu sí</b><span>No hay mensajes sueltos. Solo planes que aceptas tú.</span></div>
-      <div class="tc reveal d3"><div class="ic" data-icon="puerta"></div><b>Fuera en un toque</b><span>Bloquear y reportar siempre a mano. Lo revisa el equipo.</span></div>
-    </div>
+<section class="faq" id="faq" aria-labelledby="h-f">
+ <div class="wrap">
+  <h2 id="h-f" class="rv">¿Alguna pregunta? Todo el mundo tiene <em>al menos</em> una.</h2>
+  <button class="pill w rv" id="faqBtn" aria-expanded="false" aria-controls="acc">Ver las preguntas frecuentes</button> <a class="pill rv" style="background:var(--ink);color:#fff;margin-left:6px" href="/ayuda/">Centro de ayuda</a>
+  <div class="acc" id="acc">
+   <details><summary>¿Es una app de citas?<i>+</i></summary><p>No. En NYXA se queda por un plan, no por una foto. Lo que pase después es cosa vuestra.</p></details>
+   <details><summary>¿Y si me da corte?<i>+</i></summary><p>Apúntate con un amigo (+1). El plan rompe el hielo por ti.</p></details>
+   <details><summary>¿Qué son los NYXAs?<i>+</i></summary><p>La moneda para proponer planes. Tienes tres al día y, viviendo cosas, ganas más.</p></details>
+   <details><summary>¿Es solo para universitarios?<i>+</i></summary><p>No. Puedes elegir tu universidad para encontrar gente de tu campus, pero NYXA es para cualquiera que quiera hacer planes en Valencia.</p></details><details><summary>¿Dónde está NYXA?<i>+</i></summary><p>En Valencia. Cuando la ciudad funcione, iremos abriendo más.</p></details>
   </div>
-</section>
-
-<!-- FRANJA gratis/ciudad -->
-<section class="band">
-  <div class="wrap">
-    <div class="bandbox">
-      <div class="it"><b><span class="x">Gratis</span> de verdad</b><span>Las personas nunca pagan por conocerse.</span></div>
-      <div class="sep"></div>
-      <div class="it"><b>En <span class="x">Valencia</span> ya</b><span>Tu ciudad, muy pronto.</span></div>
-      <div class="sep"></div>
-      <div class="it"><b>En <span class="x">60 seg</span></b><span>Bajas la app y ya estás dentro.</span></div>
-    </div>
-  </div>
-</section>
-
-<!-- FAQ -->
-<section class="faq">
-  <div class="wrap">
-    <div class="top">
-      <span class="eyer">Antes de bajarla</span>
-      <h2>Lo que todo el mundo pregunta.</h2>
-    </div>
-    <div class="faqlist">
-      <div class="fitem open"><button class="fq">¿Es gratis de verdad?</button><div class="fa"><p>Sí. Bajar la app y quedar no cuesta nada: 0 €. Las personas nunca pagan por conocerse — ese es el trato. NYXA se sostiene con las empresas que publican planes, no con los usuarios.</p></div></div>
-      <div class="fitem"><button class="fq">¿Qué es NYXA exactamente y cómo funciona?</button><div class="fa"><p>NYXA es una app gratuita para conocer gente y hacer planes reales en persona. Funciona al revés que una red social: dices qué te apetece vivir (un café, una ruta en bici, un concierto), la app te dice con quién podrías vivirlo, y le llega la propuesta. Si esa persona acepta, se abre la conversación y quedáis. Si no acepta, no pasa nada y nadie escribe a nadie.</p></div></div>
-      <div class="fitem"><button class="fq">¿Es una app de citas tipo Tinder?</button><div class="fa"><p>No. En NYXA no se liga ni se desliza, y no se puede escribir a un desconocido: lo que se propone es un plan concreto, y la conversación solo se abre si la otra persona dice que sí. La mayoría de la gente la usa para hacer amigos y llenar el finde, no para ligar.</p></div></div>
-      <div class="fitem"><button class="fq">¿En qué se diferencia de Meetup o de Bumble BFF?</button><div class="fa"><p>Meetup te lleva a un evento de desconocidos y Bumble BFF te da un match y te deja solo en lo difícil: poner fecha. NYXA pone las dos cosas juntas — una persona concreta y un plan concreto, con día y hora. No tienes que ser tú quien proponga y se exponga al no.</p></div></div>
-      <div class="fitem"><button class="fq">Me acabo de mudar a Valencia y no conozco a nadie, ¿qué hago?</button><div class="fa"><p>Es justo el caso para el que se hizo. No hace falta que tengas un grupo ni que conozcas a nadie: eliges un plan que te apetezca en Valencia y la app te cruza con gente de aquí con las mismas ganas. El primer plan es el que cuesta; a partir de ahí va solo.</p></div></div>
-      <div class="fitem"><button class="fq">¿Está en Android?</button><div class="fa"><p>Todavía no. Ahora mismo NYXA está solo en iOS, en la App Store, y es gratis. La versión de Android está en camino; lo contamos en Instagram, en @nyxa.app.</p></div></div>
-      <div class="fitem"><button class="fq">¿En qué ciudades funciona?</button><div class="fa"><p>Sobre todo en Valencia, que es donde hay más gente y donde salen más planes. También en Barcelona y Madrid. Vamos ciudad a ciudad a propósito: preferimos que en una haya planes de verdad cada semana a estar en cincuenta y que no pase nada.</p></div></div>
-      <div class="fitem"><button class="fq">¿Tengo que ir solo a un plan raro?</button><div class="fa"><p>Nada de citas a ciegas incómodas. Vas a un plan concreto (un café, una ruta, un concierto) con gente que quiere exactamente lo mismo que tú.</p></div></div>
-      <div class="fitem"><button class="fq">¿Es seguro quedar con alguien que no conozco?</button><div class="fa"><p>Perfiles verificados con cara real, no avatares. Nadie te escribe sin que tú aceptes antes el plan, así que no hay mensajes de desconocidos. Bloquear y reportar está siempre a un toque y lo revisa el equipo. Los planes son en sitios públicos.</p></div></div>
-      <div class="fitem"><button class="fq">¿Y si no aparece nadie?</button><div class="fa"><p>El plan solo se cierra si los dos decís que sí. Nada de plantones: si no hay match, no hay quedada.</p></div></div>
-      <div class="fitem"><button class="fq">¿Qué tipo de planes se hacen?</button><div class="fa"><p>Cosas normales que ya harías: un café, cañas, una ruta en bici, ir a un concierto, la playa un domingo por la mañana. Están ordenados por mundos (deporte, naturaleza, noche, cultura) para que encuentres rápido lo tuyo.</p></div></div>
-    </div>
-  </div>
-</section>
-
-<!-- CIERRE -->
-<section class="hclose">
-  <div class="xbg">✕</div>
-  <div class="wrap">
-    <span class="eyer">¿Qué hacemos hoy?</span>
-    <h2>Que no se te <span class="x">escape</span> la vida.</h2>
-    <p>Bájala gratis, elige un plan y esta semana quedas con gente nueva.</p>
-    <div class="cta"><a class="appstore" href="https://apps.apple.com/es/app/nyxa/id6800325033" aria-label="Descargar NYXA en la App Store"><svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M16.5 1.6c.1 1-.3 2-.9 2.8-.7.8-1.7 1.4-2.7 1.3-.1-1 .4-2 1-2.7.6-.8 1.7-1.3 2.6-1.4zM19.3 17c-.5 1.1-.7 1.6-1.3 2.5-.9 1.4-2.1 3.1-3.6 3.1-1.4 0-1.7-.9-3.6-.9s-2.3.9-3.6.9C5.1 22.6 4 21 3 19.6.6 16.1.3 12 1.8 9.8 2.9 8.3 4.5 7.3 6 7.3c1.6 0 2.6 1 3.9 1 1.3 0 2-1 3.9-1 1.3 0 2.7.7 3.7 2-3.2 1.8-2.7 6.4.8 7.7z"/></svg><span><small>Descárgalo en</small><b>App Store</b></span></a></div>
-    <p class="frict"><b>Gratis</b> · sin tarjeta · en 60 segundos</p>
-  </div>
-</section>
-
-<!-- EMPRESAS -->
-<section class="biz">
-  <div class="wrap">
-    <div class="bizbox">
-      <div class="bt">
-        <div class="k">NYXA para negocios</div>
-        <h3>Clientes reales de tu zona. <span class="x">No anuncios.</span></h3>
-        <p>Un bar, una tienda, un gimnasio, un evento. NYXA te lleva gente que encaja contigo y que aparece de verdad. Pagas solo por quien entra, no por que te vean.</p>
-        <div class="bizcta">
-          <a class="bizbtn" href="empresas.html">Ver NYXA para empresas →</a>
-          <a class="bizghost" href="empresas.html">Crear cuenta gratis</a>
-        </div>
-      </div>
-      <div class="bizart">
-        <div class="bizmini">
-          <div class="row"><div class="av"></div><div class="tx"><b>Laura, 29</b><span>Quiere ir a tu sitio</span></div><span class="tag">Encaja</span></div>
-          <div class="row"><div class="av"></div><div class="tx"><b>Marc, 34</b><span>Plan de tarde</span></div><span class="tag">Encaja</span></div>
-          <div class="row"><div class="av"></div><div class="tx"><b>Sara, 26</b><span>Con dos amigas</span></div><span class="tag">Encaja</span></div>
-        </div>
-      </div>
-    </div>
-  </div>
+ </div>
 </section>
 
 </main>
-
-<footer class="nf"><div class="nf__in">
-  <div class="nf__top">
-    <div class="nf__brand">
-      <a class="marca" href="#top">NY<span class="marca__x" aria-hidden="true"><svg viewBox="0 0 20 20"><line x1="3" y1="17" x2="17" y2="3"/><line x1="17" y1="17" x2="3" y2="3"/></svg></span>A</a>
-      <p>Eliges qué vivir. Te decimos con quién. Quedáis de verdad.</p>
-      <a class="appstore" href="https://apps.apple.com/es/app/nyxa/id6800325033" aria-label="Descargar NYXA en la App Store"><svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M16.5 1.6c.1 1-.3 2-.9 2.8-.7.8-1.7 1.4-2.7 1.3-.1-1 .4-2 1-2.7.6-.8 1.7-1.3 2.6-1.4zM19.3 17c-.5 1.1-.7 1.6-1.3 2.5-.9 1.4-2.1 3.1-3.6 3.1-1.4 0-1.7-.9-3.6-.9s-2.3.9-3.6.9C5.1 22.6 4 21 3 19.6.6 16.1.3 12 1.8 9.8 2.9 8.3 4.5 7.3 6 7.3c1.6 0 2.6 1 3.9 1 1.3 0 2-1 3.9-1 1.3 0 2.7.7 3.7 2-3.2 1.8-2.7 6.4.8 7.7z"/></svg><span><small>Descárgalo en</small><b>App Store</b></span></a>
-    </div>
-    <nav class="nf__cols" aria-label="Enlaces del pie">
-      <div class="nf__col"><h4>Producto</h4>
-        <a href="#como">Cómo funciona</a>
-        <a href="ciudades.html">Ciudades</a>
-        <a href="momentos.html">Momentos</a>
-        <a href="descargar.html">Descargar la app</a>
-        <a href="conocer-gente-valencia.html">Conocer gente en Valencia</a>
-        <a href="conocer-gente-barcelona.html">Conocer gente en Barcelona</a>
-        <a href="conocer-gente-madrid.html">Conocer gente en Madrid</a>
-      </div>
-      <div class="nf__col"><h4>Empresa</h4>
-        <a href="manifiesto.html">Quiénes somos</a>
-        <a href="empresas.html">NYXA para empresas</a>
-      </div>
-      <div class="nf__col"><h4>Confianza</h4>
-        <a href="seguridad.html">Seguridad</a>
-        <a href="soporte.html">Ayuda</a>
-      </div>
-      <div class="nf__col"><h4>Legal</h4>
-        <a href="privacidad.html">Privacidad</a>
-        <a href="terminos.html">Términos</a>
-        <a href="normas.html">Normas</a>
-        <a href="aviso-legal.html">Aviso legal</a>
-      </div>
-    </nav>
+<footer class="fin" id="descargar">
+ <span class="circ" aria-hidden="true"></span>
+ <div class="wrap">
+  <div class="top">
+   <h2>Ya leíste suficiente. Ahora, sal.</h2>
+   <div class="dl"><div class="stores"><a class="store" data-store="ios" href="/descarga/"><svg aria-hidden="true"><use href="#apple"/></svg><span><small>Descárgala en el</small><b>App Store</b></span></a><a class="store" data-store="android" href="/descarga/"><svg aria-hidden="true"><use href="#play"/></svg><span><small>Disponible en</small><b>Google Play</b></span></a></div></div>
   </div>
-  <div class="nf__bottom">
-    <span>NYXA · Valencia · © <span id="y">2026</span></span>
-    <div class="nf__soc">
-      <a href="https://instagram.com/nyxa.app" target="_blank" rel="noopener" aria-label="Instagram"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="2.6" y="2.6" width="18.8" height="18.8" rx="5.4" stroke="currentColor" stroke-width="1.8"/><circle cx="12" cy="12" r="4.1" stroke="currentColor" stroke-width="1.8"/><circle cx="17.4" cy="6.6" r="1.25" fill="currentColor"/></svg>Instagram</a>
-      <a href="mailto:holanyxa@gmail.com" aria-label="Escríbenos por email"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="2.6" y="4.8" width="18.8" height="14.4" rx="2.6" stroke="currentColor" stroke-width="1.8"/><path d="M3.4 6.6l8.6 6 8.6-6" stroke="currentColor" stroke-width="1.8" fill="none"/></svg>holanyxa@gmail.com</a>
-      <span class="nf__lang"><svg width="15" height="15" viewBox="0 0 24 24" fill="none" aria-hidden="true"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.7"/><path d="M3 12h18M12 3c2.6 2.5 2.6 15 0 18M12 3c-2.6 2.5-2.6 15 0 18" stroke="currentColor" stroke-width="1.7"/></svg>Español (España)</span>
-    </div>
+  <div class="cols">
+   <p class="about">NYXA es la app para conocer gente en persona. Alguien propone un plan, tú te apuntas y quedáis. Hecha en Valencia.</p>
+   <div><h6>Producto</h6><a href="/producto/">Cómo funciona</a><a href="/nyxas/">NYXAs</a><a href="/seguridad/">Seguridad</a><a href="/descarga/">Descarga</a></div>
+   <div><h6>NYXA</h6><a href="/empresas/">Empresas</a><a href="/universidades/">Universidades</a><a href="/ayuda/">Ayuda</a><a href="#" data-link="contacto">Contacto</a></div>
+   <div><h6>Legal</h6><a href="#" data-link="privacidad">Privacidad</a><a href="#" data-link="terminos">Términos</a><a href="#" data-link="cookies">Cookies</a><a href="#" data-link="instagram">Instagram</a><a href="#" data-link="tiktok">TikTok</a></div>
   </div>
-</div></footer>
-
+ </div>
+ <div class="wm" aria-hidden="true"><i>NY</i><span style="color:var(--blue)">✕</span><i>A</i></div>
+</footer>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<script src="/app.js"></script>
 <script>
-(function(){
-  var rm=matchMedia('(prefers-reduced-motion:reduce)').matches;
+(()=>{
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const toast=t=>{const e=$('#toast');e.textContent=t;e.classList.add('on');clearTimeout(e._t);e._t=setTimeout(()=>e.classList.remove('on'),2600)};
+// reloj del chat (72 h)
+let left=72*3600-18;const two=n=>String(n).padStart(2,'0');setInterval(()=>{left=left>0?left-1:72*3600-1;const c=document.getElementById('cT');if(c)c.textContent=two(Math.floor(left/3600))+':'+two(Math.floor(left%3600/60))+':'+two(left%60)},1000);
 
-  // set de iconos SVG (line, stroke=currentColor) usados en esta página — sustituyen los emojis de la UI
-  var ICONS={"canas":"<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.9\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M17 11h1a3 3 0 0 1 0 6h-1\"/><path d=\"M9 12v6M13 12v6\"/><path d=\"M5 8h10v10a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2Z\"/><path d=\"M5 8a2.5 2.5 0 0 1 0-5c.7 0 1.5.5 2.5.5S9.3 3 10 3s1.3.5 2.5.5S14.3 3 15 3a2.5 2.5 0 0 1 0 5\"/></svg>","bici":"<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.9\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"5.5\" cy=\"17.5\" r=\"3.5\"/><circle cx=\"18.5\" cy=\"17.5\" r=\"3.5\"/><path d=\"M15 6a1 1 0 1 0 0-2 1 1 0 0 0 0 2Z\"/><path d=\"m12 17.5-2.5-6 4-2.5 1.5 3h3\"/></svg>","playa":"<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.9\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M2 6c.6.5 1.2 1 2.5 1C7 7 7 5 9.5 5s2.5 2 5 2 2.5-2 5-2c1.3 0 1.9.5 2.5 1M2 12c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2s2.5 2 5 2 2.5-2 5-2c1.3 0 1.9.5 2.5 1M2 18c.6.5 1.2 1 2.5 1 2.5 0 2.5-2 5-2s2.5 2 5 2 2.5-2 5-2c1.3 0 1.9.5 2.5 1\"/></svg>","brunch":"<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.9\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M3 2v7a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2V2M5 2v20M21 15V2a5 5 0 0 0-5 5v6a2 2 0 0 0 2 2h3Zm0 0v7\"/></svg>","amanecer":"<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.9\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M12 2v6M5.6 10.6 4.2 9.2M18.4 10.6l1.4-1.4M2 18h2M20 18h2M3 22h18M16 18a4 4 0 0 0-8 0M9 5l3-3 3 3\"/></svg>","fuego":"<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.9\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.4-.5-2-1-3-1-2.1-.2-4 2-6 .5 2.5 2 4.9 4 6.5s3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.2.4-2.3 1-3a2.5 2.5 0 0 0 2.5 2.5Z\"/></svg>","cafe":"<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.9\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M17 8h1a4 4 0 1 1 0 8h-1\"/><path d=\"M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4Z\"/><path d=\"M6 2v2M10 2v2M14 2v2\"/></svg>","musica":"<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.9\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M9 18V5l12-2v13\"/><circle cx=\"6\" cy=\"18\" r=\"3\"/><circle cx=\"18\" cy=\"16\" r=\"3\"/></svg>","ruta":"<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.9\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M8 3 4 7l4 4M4 7h11a4 4 0 0 1 4 4v6M20 21l-4-4-4 4\"/></svg>","cena":"<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.9\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M3 2v7a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2V2M5 2v20M21 15V2a5 5 0 0 0-5 5v6a2 2 0 0 0 2 2h3Zm0 0v7\"/></svg>","comida":"<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.9\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M3 2v7a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2V2M5 2v20M21 15V2a5 5 0 0 0-5 5v6a2 2 0 0 0 2 2h3Zm0 0v7\"/></svg>","vino":"<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.9\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M8 22h8M12 15v7M7 3h10l-1 7a4 4 0 0 1-8 0z\"/></svg>","arte":"<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.9\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"13.5\" cy=\"6.5\" r=\"1.5\"/><circle cx=\"17.5\" cy=\"10.5\" r=\"1.5\"/><circle cx=\"8.5\" cy=\"7.5\" r=\"1.5\"/><circle cx=\"6.5\" cy=\"12.5\" r=\"1.5\"/><path d=\"M12 2a10 10 0 0 0 0 20c1.1 0 2-.9 2-2 0-.5-.2-1-.5-1.3-.3-.4-.5-.8-.5-1.2a2 2 0 0 1 2-2h2.3A4.2 4.2 0 0 0 22 11c0-5-4.5-9-10-9Z\"/></svg>","correr":"<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.9\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"17\" cy=\"5\" r=\"2\"/><path d=\"M14 8l-2 3 3 2v6M12 11 8 9l-3 3M8 9l2-3\"/></svg>","escalada":"<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.9\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"13\" cy=\"5\" r=\"2\"/><path d=\"M12 8v6l-3 6M12 12l4 2 3-2M9 14l-4 1\"/></svg>","cine":"<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.9\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><rect x=\"2\" y=\"6\" width=\"20\" height=\"12\" rx=\"2\"/><path d=\"M2 10h20M7 6v12M17 6v12M4 6l2-3M20 6l-2-3M12 6l-2-3M12 6l2-3\"/></svg>","montana":"<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.9\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"m8 3 4 8 5-5 5 14H2L8 3z\"/></svg>","idea":"<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.9\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M9 18h6M10 22h4M12 2a7 7 0 0 0-4 12.7c.6.5 1 1.3 1 2.1V17h6v-.2c0-.8.4-1.6 1-2.1A7 7 0 0 0 12 2Z\"/></svg>","brujula":"<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.9\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"12\" cy=\"12\" r=\"9\"/><path d=\"m16 8-2 6-6 2 2-6z\"/></svg>","manos":"<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.9\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M11 12 8 9a2 2 0 0 0-3 3l4 4a4 4 0 0 0 6 0M13 12l3-3a2 2 0 0 1 3 3l-4 4M8 6l2 2M16 6l-2 2\"/></svg>","caja":"<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.9\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"m21 8-9-5-9 5 9 5 9-5zM3 8v8l9 5 9-5V8M12 13v8\"/></svg>","movil":"<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.9\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><rect x=\"7\" y=\"2\" width=\"10\" height=\"20\" rx=\"2\"/><path d=\"M11 18h2\"/></svg>","sofa":"<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.9\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M4 11V8a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v3M2 13a2 2 0 0 1 2-2 2 2 0 0 1 2 2v3h12v-3a2 2 0 0 1 4 0v5a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1zM6 19v2M18 19v2\"/></svg>","persona":"<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.9\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"12\" cy=\"8\" r=\"4\"/><path d=\"M4 21a8 8 0 0 1 16 0\"/></svg>","mano":"<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.9\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M18 11V6a2 2 0 0 0-4 0M14 10V4a2 2 0 0 0-4 0v2M10 10.5V6a2 2 0 0 0-4 0v8a8 8 0 0 0 8 8h1a8 8 0 0 0 8-8v-1a2 2 0 0 0-4 0\"/></svg>","puerta":"<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.9\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M13 4h3a2 2 0 0 1 2 2v14M2 20h20M13 20V4l-6 2v14M9 12v.01\"/></svg>","verificado":"<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.9\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M9 12l2 2 4-4\"/><path d=\"M12 2 4 5v6c0 5 8 11 8 11s8-6 8-11V5z\"/></svg>","check":"<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.9\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M20 6 9 17l-5-5\"/></svg>","luna":"<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.9\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M12 3a9 9 0 1 0 9 9c0-.5 0-.9-.1-1.4A6 6 0 0 1 12.4 3H12Z\"/></svg>","balon":"<svg viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"1.9\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><circle cx=\"12\" cy=\"12\" r=\"9\"/><path d=\"m12 7 3 2.2-1.1 3.5h-3.8L9 9.2 12 7zM12 7V3M15 9.2l3.6-1.2M13.9 12.7l2.2 3.1M10.1 12.7l-2.2 3.1M9 9.2 5.4 8\"/></svg>"};
-  function fillIcons(){document.querySelectorAll('[data-icon]').forEach(function(el){var k=el.getAttribute('data-icon');if(ICONS[k])el.innerHTML=ICONS[k];});}
-  fillIcons();
-  // burger (nav real del sitio)
-  document.addEventListener('click',function(e){var b=e.target.closest('.burger');if(!b)return;var n=b.closest('.nav');n.classList.toggle('open');b.setAttribute('aria-expanded',n.classList.contains('open'));});
-  document.querySelectorAll('.nav__links a').forEach(function(a){a.addEventListener('click',function(){var n=document.querySelector('.nav');n.classList.remove('open');});});
-  // año del footer
-  var y=document.getElementById('y');if(y)y.textContent=new Date().getFullYear();
-  // nav "pegado" al hacer scroll (id="top", header real del sitio)
-  var navtop=document.getElementById('top');if(navtop){addEventListener('scroll',function(){navtop.classList.toggle('stuck',(window.scrollY||0)>8);},{passive:true});}
-  // reveals
-  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('on');io.unobserve(e.target);}})},{threshold:.12});
-  document.querySelectorAll('.reveal').forEach(function(el){rm?el.classList.add('on'):io.observe(el);});
-  // salvavidas: nada queda invisible si el observer no dispara
-  addEventListener('load',function(){document.querySelectorAll('.reveal:not(.on)').forEach(function(el){var r=el.getBoundingClientRect();if(r.top<innerHeight+80&&r.bottom>-80)el.classList.add('on');});});
-  setTimeout(function(){document.querySelectorAll('.reveal:not(.on)').forEach(function(el){var r=el.getBoundingClientRect();if(r.top<innerHeight+80&&r.bottom>-80)el.classList.add('on');});},1600);
-
-  // cintas "qué vas a vivir"
-  var TK=[['amanecer','Amanecer','Albufera'],['musica','Concierto','entre semana'],['ruta','Ruta','con vistas'],['cafe','Café','y charla'],['fuego','Hoguera','El Saler'],['cena','Cena','de barrio'],['balon','Partido','en el parque'],['vino','Vermut','de domingo'],['arte','Expo','y caña'],['correr','Correr','al amanecer'],['escalada','Escalada','para novatos'],['cine','Cine','de verano']];
-  function fillTk(id,arr){var el=document.getElementById(id);if(!el)return;var h=arr.map(function(t){return '<span class="tk"><span class="e">'+(ICONS[t[0]]||'')+'</span>'+t[1]+' <small>'+t[2]+'</small></span>';}).join('');el.innerHTML=h+h;if(rm)el.style.animation='none';}
-  fillTk('tk1',TK); fillTk('tk2',TK.slice().reverse());
-
-  // mockup del hero: rota sola por las 3 pantallas, sincronizado con el texto
-  var screens=[].slice.call(document.querySelectorAll('.pscreen')),dots=[].slice.call(document.querySelectorAll('.pdot')),subs=[].slice.call(document.querySelectorAll('.flowsub .fs')),cur=0;
-  function goTo(i){screens.forEach(function(s){s.classList.toggle('on',+s.dataset.ps===i);});dots.forEach(function(d){d.classList.toggle('on',+d.dataset.d===i);});subs.forEach(function(s){s.classList.toggle('active',+s.dataset.s===i);});}
-  
-  // ── El móvil es jugable ───────────────────────────────────────────
-  // Rota solo hasta que alguien toca un plan. A partir de ahí manda él:
-  // la app responde a SU plan, que es lo que convierte mirar en probar.
-  var rota=null, jugando=false;
-  function arrancaRotacion(){ if(rm||rota) return;
-    rota=setInterval(function(){ if(jugando) return; cur=(cur+1)%screens.length; goTo(cur); },2600); }
-  function paraRotacion(){ if(rota){ clearInterval(rota); rota=null; } }
-
-  var PLANES=[
-    {ic:'amanecer', nombre:'Amanecer en la Albufera', cuando:'sáb · 7:00',  cuandoL:'sábado · 7:00 · en persona',  nota:'te apetece',   quiere:'También quiere ver el amanecer', p:{n:'Marta, 30', z:'El Cabañal', t:['madrugar','naturaleza','fotos']}},
-    {ic:'canas',    nombre:'Cañas en Ruzafa',         cuando:'vie · 20:00', cuandoL:'viernes · 20:00 · en persona',nota:'plan de tarde',quiere:'También quiere ir de cañas',     p:{n:'Laura, 27', z:'Ruzafa',    t:['música','terraceo','running']}},
-    {ic:'cafe',     nombre:'Café y charla',           cuando:'dom · 11:00', cuandoL:'domingo · 11:00 · en persona',nota:'sin prisa',    quiere:'También le apetece ese café',     p:{n:'Nuria, 26', z:'Russafa',   t:['charlas largas','cine','planes tranqui']}},
-    {ic:'bici',     nombre:'Ruta por el Turia',       cuando:'sáb · 9:00',  cuandoL:'sábado · 9:00 · en persona',  nota:'al aire libre',quiere:'También quiere salir en bici',    p:{n:'David, 29', z:'Benimaclet',t:['bici','montaña','café']}},
-    {ic:'playa',    nombre:'Playa en la Malvarrosa',  cuando:'dom · 12:00', cuandoL:'domingo · 12:00 · en persona',nota:'plan de sol',  quiere:'También quiere ir a la playa',    p:{n:'Pablo, 25', z:'Malvarrosa',t:['surf','voley','sol']}},
-    {ic:'musica',   nombre:'Un concierto',            cuando:'jue · 21:30', cuandoL:'jueves · 21:30 · en persona', nota:'plan de noche',quiere:'También quiere ir al concierto',  p:{n:'Sara, 24',  z:'El Carmen', t:['indie','arte','noche']}},
-    {ic:'brunch',   nombre:'Brunch de domingo',       cuando:'dom · 11:30', cuandoL:'domingo · 11:30 · en persona',nota:'sin prisa',    quiere:'También quiere ir a un brunch',   p:{n:'Elena, 28', z:'Colón',     t:['brunch','mercadillos','domingos lentos']}}
-  ];
-  // de los 7 planes se enseñan 3 cada vez; al terminar un ciclo entran otros.
-  // Así se ve Valencia entera sin amontonar nada en la pantalla.
-  var ventana=0;
-  function pintaTarjetas(){
-    var feed=document.querySelector('.pfeed'); if(!feed) return;
-    feed.innerHTML='';
-    for(var k=0;k<3;k++){
-      var p=PLANES[(ventana+k)%PLANES.length], idx=(ventana+k)%PLANES.length;
-      var c=document.createElement('div');
-      c.className='hpcard'+(k===0?' sel':''); c.setAttribute('role','button');
-      c.setAttribute('tabindex','0'); c.setAttribute('data-plan',idx);
-      c.innerHTML='<div class="r1"><div class="pe" data-icon="'+p.ic+'"></div>'+
-        '<div class="ti"><b>'+p.nombre+'</b><span>'+p.cuando+'</span></div></div>'+
-        '<div class="r2"><span class="who">'+p.nota+'</span><span class="go">Quiero ir</span></div>';
-      feed.appendChild(c);
-    }
-    if(typeof fillIcons==='function') fillIcons();
-    enlaza();
-  }
-
-  var tarjetas=[],
-      feed=document.querySelector('.pfeed'),
-      lupa=document.querySelector('.plupa'),
-      pista=document.querySelector('.ptoca'),
-      phone=document.querySelector('.hphone'),
-      relojes=[];
-
-  function limpia(){ relojes.forEach(clearTimeout); relojes=[];
-    if(feed) feed.classList.remove('buscando');
-    if(lupa) lupa.classList.remove('on'); }
-
-  function pinta(p){
-    var m=document.querySelector('.pscreen[data-ps="1"]');
-    if(m){
-      var av=m.querySelector('.av'), nom=m.querySelector('.pnom'),
-          zona=m.querySelector('.pzona'), q=m.querySelector('.pquiere'),
-          tags=m.querySelector('.ptags');
-      if(av)   av.textContent=p.p.n.charAt(0);
-      if(nom)  nom.textContent=p.p.n;
-      if(zona) zona.textContent=p.p.z+' · Valencia';
-      if(q)    q.textContent=p.quiere;
-      if(tags) tags.innerHTML=p.p.t.map(function(x){return '<span>'+x+'</span>';}).join('');
-    }
-    var d=document.querySelector('.pscreen[data-ps="2"] .chip');
-    if(d){
-      var orig=document.querySelector('.hpcard[data-plan="'+p.idx+'"] .pe'),
-          svg=orig?orig.innerHTML:'';
-      d.innerHTML='<span class="chipi" data-icon="'+p.ic+'">'+svg+'</span>'+
-                  p.nombre+'<br><span>'+p.cuandoL+'</span>';
-    }
-  }
-
-  function juega(i){
-    var p=PLANES[i]; if(!p) return; p.idx=i;
-    jugando=true; paraRotacion(); limpia();
-    tarjetas.forEach(function(c){ c.classList.toggle('sel', +c.dataset.plan===i); });
-    if(pista) pista.classList.add('off');
-    if(phone){ phone.classList.remove('tap'); void phone.offsetWidth; phone.classList.add('tap'); }
-    pinta(p);
-    if(rm){ cur=1; goTo(1); relojes.push(setTimeout(function(){ cur=2; goTo(2); jugando=false; },1200)); return; }
-    // 1) buscando, sin salir de la pantalla de planes
-    if(feed) feed.classList.add('buscando');
-    if(lupa) lupa.classList.add('on');
-    cur=0; goTo(0);
-    // 2) alguien encaja
-    relojes.push(setTimeout(function(){ limpia(); cur=1; goTo(1); },1100));
-    // 3) quedáis
-    relojes.push(setTimeout(function(){ cur=2; goTo(2); },2900));
-    // 4) devuelve el mando: vuelve a planes y reanuda
-    relojes.push(setTimeout(function(){
-      ventana=(ventana+3)%PLANES.length; pintaTarjetas();
-      cur=0; goTo(0); jugando=false; arrancaRotacion(); },5600));
-  }
-
-  function enlaza(){
-    tarjetas=[].slice.call(document.querySelectorAll('.hpcard'));
-    tarjetas.forEach(function(c){
-      var i=+c.dataset.plan;
-      c.addEventListener('click',function(){ juega(i); });
-      c.addEventListener('keydown',function(e){
-        if(e.key==='Enter'||e.key===' '){ e.preventDefault(); juega(i); } });
-    });
-  }
-  pintaTarjetas();
-  if(screens.length) arrancaRotacion();
+// vídeo
+document.querySelectorAll('video[data-src]').forEach(v=>{v.src=v.dataset.src+(innerWidth<760?'-m':'')+'.mp4';v.play().catch(()=>{})});
+// DEMO
+const P=[
+ {img:'/i/nat.webp',t:'Atardecer en la Malvarrosa',m:'Hoy · 17:30 · Pasarela',w:'Lucía',c:'#1FA15A',g:'Aire libre',q:'¿En la pasarela a las 17:30?',p:'Malvarrosa'},
+ {img:'/i/com2.webp',t:'Tapeo por el Cabanyal',m:'Hoy · 21:00 · 2 plazas',w:'Marc',c:'#E39A17',g:'Comer',q:'¿Nos vemos en la plaza a las 21:00?',p:'Cabanyal'},
+ {img:'/i/caf.webp',t:'Café en Ruzafa',m:'Mañana · 11:00',w:'Ana',c:'#1E9BB3',g:'Tranqui',q:'¿En la puerta de la cafetería a las 11?',p:'Ruzafa'},
+ {img:'/i/dep.webp',t:'Running por el Turia',m:'Hoy · 19:00 · 7 km',w:'Pablo',c:'#E24A2B',g:'Moverse',q:'¿Salimos del puente de las Flores a las 19?',p:'Turia'},
+ {img:'/i/noc.webp',t:'Concierto en Benimaclet',m:'Viernes · 22:00',w:'Sara',c:'#7C4DE0',g:'Noche',q:'¿Quedamos en la puerta a las 21:45?',p:'Benimaclet'}];
+let k=0,busy=false;const deck=$('#deck'),steps=$$('#steps .st');
+const step=n=>steps.forEach((e,i)=>{e.classList.toggle('on',i===n);e.classList.toggle('ok',i<n)});
+function card(i){const p=P[i%P.length];const d=document.createElement('div');d.className='dc';d.style.backgroundImage='url('+p.img+')';
+ d.innerHTML='<span class="tg">'+p.g+'</span><span class="stampL y">ME APUNTO</span><span class="stampL n">PASO</span><div class="ct"><h4>'+p.t+'</h4><small>'+p.m+'</small><span class="who"><i style="background:'+p.c+'">'+p.w[0]+'</i>Lo propone '+p.w+'</span></div>';return d}
+function render(){deck.innerHTML='';for(let j=2;j>=0;j--){const d=card(k+j);if(j)d.classList.add('n'+j);deck.appendChild(d)}bind(deck.lastChild)}
+function bind(d){let x0=0,dx=0,on=false;
+ d.onpointerdown=e=>{if(busy)return;on=true;x0=e.clientX;d.setPointerCapture(e.pointerId);d.classList.add('drag')};
+ d.onpointermove=e=>{if(!on)return;dx=e.clientX-x0;d.style.transform='translateX('+dx+'px) rotate('+dx/18+'deg)';d.querySelector('.y').style.opacity=Math.max(0,dx/90);d.querySelector('.n').style.opacity=Math.max(0,-dx/90)};
+ d.onpointerup=d.onpointercancel=()=>{if(!on)return;on=false;d.classList.remove('drag');if(dx>90)go(true);else if(dx<-90)go(false);else{d.style.transform='';d.querySelectorAll('.stampL').forEach(s=>s.style.opacity=0)}dx=0}}
+const T=[];const later=(f,ms)=>T.push(setTimeout(f,ms));
+function go(yes){if(busy)return;const d=deck.lastChild;d.style.transform='';d.classList.add(yes?'outR':'outL');
+ if(!yes){k++;setTimeout(render,380);return}
+ busy=true;const p=P[k%P.length];step(1);
+ later(()=>{$('#jT').textContent=p.t;$('#ntfA').style.background=p.c;$('#ntfA').textContent=p.w[0];$('#ntfT').innerHTML=p.w+' te ha aceptado<small>'+p.t+'</small>';$('#lJ').classList.add('on')},350);
+ later(()=>$('#ntf').classList.add('on'),1100);
+ later(()=>{step(2);$('#cA').style.background=p.c;$('#cA').textContent=p.w[0];$('#cN').textContent=p.w;$('#cP').textContent=p.t;$('#b1').textContent=p.q;$('#lC').classList.add('on');$('#lJ').classList.remove('on');$('#ntf').classList.remove('on')},2500);
+ ['#b1','#b2','#b3','#b4'].forEach((b,i)=>later(()=>$(b).classList.add('on'),2900+i*700));
+ later(()=>{step(3);$('#mT').textContent=p.p+' · sin pantallas de por medio';$('#mS').textContent='ENCUENTRO REAL · '+p.p.toUpperCase();$('#lM').classList.add('on');$('#lC').classList.remove('on')},6200)}
+$('#bSi').onclick=()=>go(true);$('#bNo').onclick=()=>go(false);
+$('#again').onclick=()=>{T.forEach(clearTimeout);T.length=0;$$('.lay').forEach(l=>l.classList.remove('on'));$$('.bb').forEach(b=>b.classList.remove('on'));k++;busy=false;step(0);render()};
+render();
 
 
-  // FAQ acordeón
-  [].slice.call(document.querySelectorAll('.fq')).forEach(function(b){b.addEventListener('click',function(){b.parentElement.classList.toggle('open');});});
-})();
-</script>
-<script>
-/* Contador VIVO de personas (dato real desde la BD; se refresca solo) */
-(function(){
-  var SB="https://vjpgyxwhobshwaotmwzf.supabase.co";
-  var KEY="sb_publishable_rmJ7LK0fhSZTJsOUUzOZ3A_bnY-bQ9-";
-  var FALLBACK={total:966,valencia:442};
-  var state={total:null,valencia:null};
-  var nf=new Intl.NumberFormat('es-ES');
-  function els(k){return [].slice.call(document.querySelectorAll('[data-cnt="'+k+'"]'));}
-  function tween(el,from,to){from=from||0;var start=null,dur=900;
-    function step(ts){if(start===null)start=ts;var p=Math.min(1,(ts-start)/dur);var e=1-Math.pow(1-p,3);el.textContent=nf.format(Math.round(from+(to-from)*e));if(p<1)requestAnimationFrame(step);}
-    requestAnimationFrame(step);setTimeout(function(){el.textContent=nf.format(to);},dur+60);}
-  function render(data){['total','valencia'].forEach(function(k){if(typeof data[k]!=='number')return;var prev=state[k];state[k]=data[k];var from=prev==null?Math.max(0,data[k]-40):prev;els(k).forEach(function(el){tween(el,from,data[k]);});});}
-  function fetchStats(){return fetch(SB+"/rest/v1/rpc/nyxa_stats_publico",{method:"POST",headers:{apikey:KEY,Authorization:"Bearer "+KEY,"Content-Type":"application/json"},body:"{}"}).then(function(r){if(!r.ok)throw 0;return r.json();});}
-  function tick(){fetchStats().then(render).catch(function(){if(state.total===null)render(FALLBACK);});}
-  if(document.querySelector('[data-cnt]')){tick();setInterval(tick,20000);}
+
+// faq
+$('#faqBtn').onclick=()=>{const a=$('#acc'),o=a.classList.toggle('on');$('#faqBtn').setAttribute('aria-expanded',o);$('#faqBtn').textContent=o?'Ocultar preguntas':'Ver las preguntas frecuentes'};
 })();
 
-  // "ver todas" solo existe en móvil; el texto nunca se quita del HTML
-  (function(){
-    var b=document.querySelector('.vermas'), l=document.querySelector('.faqlist');
-    if(b&&l) b.addEventListener('click',function(){ l.classList.add('todas'); b.remove(); });
-  })();
-</script>
-<script>
-/* En el móvil se entra con todas las preguntas cerradas: abiertas son 297
-   palabras en una pantalla; solo los títulos, 41. El texto no se toca. */
-(function(){
-  if(!window.matchMedia('(max-width:640px)').matches) return;
-  var l=document.querySelector('.faqlist'); if(!l) return;
-  [].slice.call(l.querySelectorAll('.fitem')).forEach(function(it){ it.classList.remove('open'); });
-})();
-</script>
+(()=>{const f=[...document.querySelectorAll('.hfl .po')];addEventListener('pointermove',e=>{const x=e.clientX/innerWidth-.5,y=e.clientY/innerHeight-.5;f.forEach((p,i)=>{const k=(i%3+1)*10;p.style.transform='translate('+(-x*k)+'px,'+(-y*k)+'px)'})},{passive:true})})();</script>
 </body>
 </html>
