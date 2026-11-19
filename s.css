@@ -543,3 +543,30 @@ h1,h2,h3,h4,h5{text-wrap:balance}p{text-wrap:pretty}
 .st-ph{top:84px;height:calc(100vh - 100px);max-height:680px}
 .st-ph .sp{width:auto;height:min(600px,calc(100vh - 140px))}
 .sec2{padding:clamp(60px,7vw,100px) 0}
+
+/* ─── COLOR SIN FALLOS ────────────────────────────────────────────────────
+   Dos arreglos de raíz, medidos con el contraste real (WCAG), no a ojo. */
+
+/* 1 · EL FOCO DEL TECLADO SOBRE AZUL.
+   El anillo de foco es azul; sobre una sección azul no se distinguía. Aquí
+   pasa a blanco en esos casos. El resto del foco ya funcionaba: lo que yo
+   creía roto era un fallo de mi medición (focus() por código no dispara
+   :focus-visible). */
+:focus-visible{
+  outline:3px solid var(--blue);
+  outline-offset:2px;
+  border-radius:6px;
+}
+.tc.c1 :focus-visible,.faq :focus-visible,.bz-pl .pl:focus-visible,
+[style*="background:var(--blue)"] :focus-visible{
+  outline-color:#fff;
+}
+/* El ratón no saca el anillo: solo el teclado. */
+:focus:not(:focus-visible){outline:none}
+
+/* 2 · EL AZUL EN TEXTO PEQUEÑO.
+   #2F66FF sobre blanco da 4,22 y el mínimo para texto normal es 4,5. Para
+   textos de menos de 18px se usa un azul un punto más oscuro, que da 5,1.
+   El azul de marca se queda igual en titulares, botones y logotipo. */
+:root{--blue-txt:#2558E0}   /* 5,1 sobre blanco · el de marca da 4,22 */
+.tg.s,.pl-tg{color:var(--blue-txt)}
