@@ -738,5 +738,11 @@ $('#reset').onclick=()=>{try{localStorage.removeItem(KEY)}catch(e){}location.rel
 let rt;addEventListener('resize',()=>{clearTimeout(rt);rt=setTimeout(()=>{if(S.stage=='db'&&['resumen','ingresos'].includes(S.view))renderDash()},200)});
 show();
 </script>
+
+<!-- Conexion con NYXA: entrar con la cuenta de empresa y traer los datos reales.
+     Si falta cualquiera de los tres, el panel sigue en modo ejemplo. -->
+<script src="/config.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+<script src="conectar.js"></script>
 </body>
 </html>
