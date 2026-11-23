@@ -487,7 +487,14 @@ $$('#ob input,#ob select,#ob textarea').forEach(i=>i.addEventListener('input',()
 $$('#opics button').forEach(x=>x.onclick=()=>{S.draft.img=x.dataset.p;save();setPF('o',S.draft);preview()});
 $('#stripe').onclick=()=>{const b=$('#stripe');b.textContent='Conectando…';b.disabled=true;setTimeout(()=>{S.stripe=true;save();b.hidden=true;$('#sok').classList.add('on');$('#e3').textContent='';preview()},900)};
 function newId(){return 'p'+Math.random().toString(36).slice(2,8)}
-function finishOB(){const p={...S.draft,id:newId(),status:'activo',views:0,created:iso(today)};S.plans=[p];S.book=[];S.stage='ok';save();show();$('#okt').textContent='"'+p.t+'" ya está publicado. En cuanto alguien reserve, lo verás en tu panel.'}
+async function finishOB(){const p={...S.draft,id:newId(),status:'activo',views:0,created:iso(today)};S.plans=[p];S.book=[];S.stage='ok';save();show();
+ $('#okt').textContent='"'+p.t+'" ya está publicado. En cuanto alguien reserve, lo verás en tu panel.';
+ /* Con sesion de empresa, el negocio se crea de verdad en NYXA. Sin sesion
+    el panel sigue siendo un prototipo, igual que antes. */
+ const API=window.NYXA_API;
+ if(API&&API.altaNegocio){const r=await API.altaNegocio();
+  if(r&&r.ok) $('#okt').textContent='"'+p.t+'" está publicado y tu negocio ya está dado de alta en NYXA.';
+  else if(r&&r.motivo&&!/Entra con tu cuenta/.test(r.motivo)) toast(r.motivo);}}
 $('#toDash').onclick=()=>{S.stage='db';save();show()};
 $('#seeDemo').onclick=()=>{readOB();if(!S.biz.n){S.biz.n='Viatges Jet Lag';S.biz.s='viajes';S.biz.d='Viajes en grupo para gente joven que quiere conocer el mundo y a otras personas.';S.biz.e='hola@ejemplo.es';S.biz.t='600000000'}if(!S.draft.t){S.draft={t:'Pirineos de aventura · 3 días',d:iso(+today+18*DAY),h:'08:00',l:'Salida desde Valencia',p:15,pr:290,c:'f',img:'/i/tra.webp',desc:'Transporte, alojamiento y actividades. Grupo reducido.'}}S.stripe=true;S.plans=[{...S.draft,id:newId(),status:'activo',views:0,created:iso(today)}];seedDemo();S.stage='db';save();show()};
 
@@ -627,7 +634,15 @@ function vCuenta(){const pl=planOf(S.plan);const Y='<span class="y">✓</span>',
  <div class="pls" id="pls2" style="max-width:none;margin-top:0"></div><div class="com" style="max-width:none"><b>${comLabel()}</b><p>${comText()}</p></div>
  ${cmp}${roi}<div class="grid g2" style="margin-top:14px"><div class="box"><div class="bh"><h2>Cobros</h2><span class="tag a">Conectado</span></div><p style="color:var(--body)">Stripe ingresa en tu cuenta lo que se confirma, con la comisión ya descontada. NYXA asume el coste de la pasarela.</p></div>
  <div class="box"><div class="bh"><h2>Facturas de tu cuota</h2></div><div class="tw"><table class="tbl"><tr><th>Mes</th><th class="r">Importe</th><th></th></tr>${inv.map(i=>`<tr><td>${fmtD(i.d,{month:'long',year:'numeric'})}</td><td class="r">${eur(i.v)}</td><td class="r"><button class="btn ln" data-inv>PDF</button></td></tr>`).join('')}</table></div></div></div>`}
-function afterCuenta(){$$('[data-setplan]').forEach(b=>b.onclick=()=>{if(b.dataset.setplan=='dentro'&&activeN()>3){toast('Tienes '+activeN()+' planes publicados. Con Estar dentro caben 3: pausa alguno antes de cambiar.');return}S.plan=b.dataset.setplan;save();renderDash();toast('Ya tienes '+planOf(S.plan)[1])});const ro=()=>{const pr=+$('#roiP').value,to=$('#roiT').value;$('#roiPv').textContent=eur(pr);const diff=planOf(to)[2]-planOf(S.plan)[2];const c=COM[S.biz.s];const net=pr*(1-(c.p||0));if(diff<=0){$('#roiO').innerHTML='<p>Ya tienes este plan o uno superior.</p>';return}const n=Math.ceil(diff/net);$('#roiO').innerHTML=`<p>Con ${n} reserva${n>1?'s':''} más al mes</p><b>se paga solo</b><p>${planOf(to)[1]} cuesta ${eur(diff)} más al mes. Cada reserva te deja unos ${eur(net)} con tu comisión actual.</p>`};$('#roiP').oninput=ro;$('#roiT').onchange=ro;ro();bindPlans($('#pls2'),()=>{renderNav();toast('Plan cambiado a '+planOf(S.plan)[1]);renderDash()});$$('[data-inv]').forEach(b=>b.onclick=()=>toast('En el panel real se descarga la factura en PDF'))}
+function afterCuenta(){$$('[data-setplan]').forEach(b=>b.onclick=async()=>{const pl=b.dataset.setplan;
+  if(pl=='dentro'&&activeN()>3){toast('Tienes '+activeN()+' planes publicados. Con Estar dentro caben 3: pausa alguno antes de cambiar.');return}
+  /* Con sesion de empresa se va a pagar de verdad; sin ella el panel sigue
+     cambiando el plan de mentira, como hasta ahora. */
+  const API=window.NYXA_API;
+  if(API&&API.conectado&&API.suscribir){toast('Te llevamos a pagar…');const r=await API.suscribir(pl);if(r&&!r.ok)toast(r.motivo);return}
+  S.plan=pl;save();renderDash();toast('Ya tienes '+planOf(S.plan)[1])});const ro=()=>{const pr=+$('#roiP').value,to=$('#roiT').value;$('#roiPv').textContent=eur(pr);const diff=planOf(to)[2]-planOf(S.plan)[2];const c=COM[S.biz.s];const net=pr*(1-(c.p||0));if(diff<=0){$('#roiO').innerHTML='<p>Ya tienes este plan o uno superior.</p>';return}const n=Math.ceil(diff/net);$('#roiO').innerHTML=`<p>Con ${n} reserva${n>1?'s':''} más al mes</p><b>se paga solo</b><p>${planOf(to)[1]} cuesta ${eur(diff)} más al mes. Cada reserva te deja unos ${eur(net)} con tu comisión actual.</p>`};$('#roiP').oninput=ro;$('#roiT').onchange=ro;ro();bindPlans($('#pls2'),async()=>{const API=window.NYXA_API;
+  if(API&&API.conectado&&API.suscribir){toast('Te llevamos a pagar…');const r=await API.suscribir(S.plan);if(r&&!r.ok)toast(r.motivo);return}
+  renderNav();toast('Plan cambiado a '+planOf(S.plan)[1]);renderDash()});$$('[data-inv]').forEach(b=>b.onclick=()=>toast('En el panel real se descarga la factura en PDF'))}
 
 function vAjustes(){const b=S.biz,n=S.notif;const tg=(k,t,d)=>`<div class="tgl"><div><b>${t}</b><p>${d}</p></div><button class="sw ${n[k]?'on':''}" data-sw="${k}" role="switch" aria-checked="${!!n[k]}" aria-label="${t}"></button></div>`;
  return `<div class="mh"><div><h1>Ajustes</h1><p>Tu perfil de empresa y tus avisos.</p></div></div>
