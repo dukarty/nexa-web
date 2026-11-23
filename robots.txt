@@ -1,7 +1,7 @@
-# NYXA · holanyxa.com
 User-agent: *
 Allow: /
-Disallow: /panel
-Disallow: /panel.html
+
+# El panel de empresas es una demo con datos de ejemplo.
+Disallow: /empresas/panel/
 
 Sitemap: https://holanyxa.com/sitemap.xml
