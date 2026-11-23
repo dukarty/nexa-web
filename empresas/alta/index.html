@@ -1,0 +1,266 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Entra en NYXA · Empresas</title>
+<meta name="description" content="Déjanos los datos de tu negocio y te escribimos para abrirte NYXA. Sin permanencia y sin pagar nada hasta que empieces.">
+<meta name="theme-color" content="#FFFFFF">
+<link rel="canonical" href="https://holanyxa.com/empresas/alta">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="NYXA">
+<meta property="og:locale" content="es_ES">
+<meta property="og:url" content="https://holanyxa.com/empresas/alta">
+<meta property="og:title" content="Entra en NYXA · Empresas">
+<meta property="og:description" content="Déjanos los datos de tu negocio y te escribimos para abrirte NYXA.">
+<meta property="og:image" content="https://holanyxa.com/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://holanyxa.com/og.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/s.css">
+<style>
+.alta{padding:clamp(90px,10vw,140px) 20px clamp(60px,8vw,100px);background:var(--grey);min-height:100vh}
+.alta .wrap{max-width:620px;margin:0 auto}
+.alta .eye{font:700 11px var(--h);letter-spacing:.16em;text-transform:uppercase;color:var(--blue);display:block;margin-bottom:14px}
+.alta h1{font:900 clamp(36px,5vw,58px)/1.05 var(--s);letter-spacing:-.03em;color:var(--ink);max-width:18ch}
+.alta .lead{margin-top:18px;color:var(--body);font-size:clamp(16px,1.3vw,18px);line-height:1.5;max-width:60ch}
+.card{margin-top:34px;background:#fff;border-radius:22px;padding:clamp(24px,3.4vw,38px);box-shadow:0 2px 10px rgba(10,12,17,.05),inset 0 0 0 1px var(--line)}
+.row{display:grid;gap:18px;grid-template-columns:1fr 1fr}
+@media(max-width:620px){.row{grid-template-columns:1fr}}
+.fld{display:flex;flex-direction:column;gap:7px;margin-bottom:18px}
+.fld label{font:700 13px var(--t);color:var(--ink)}
+.fld input,.fld select,.fld textarea{
+  font:500 15px var(--t);color:var(--ink);background:#fff;padding:13px 15px;
+  border:0;border-radius:12px;box-shadow:inset 0 0 0 1px var(--line);width:100%}
+.fld textarea{resize:vertical;min-height:84px}
+.fld input:focus-visible,.fld select:focus-visible,.fld textarea:focus-visible{
+  outline:3px solid var(--blue);outline-offset:2px}
+.fld small{color:var(--muted);font-size:12.5px}
+.fld .mal{color:var(--bad,#C0392B);font-size:12.5px;min-height:1px}
+.enviar{width:100%;margin-top:6px;justify-content:center}
+.enviar[disabled]{opacity:.55;pointer-events:none}
+.nota{margin-top:16px;color:var(--muted);font-size:13px;text-align:center;line-height:1.5}
+.nota a{color:var(--body)}
+.hecho{text-align:center;padding:clamp(20px,3vw,34px) 0}
+.hecho .tic{width:64px;height:64px;border-radius:50%;background:var(--blue);color:#fff;
+  display:grid;place-items:center;margin:0 auto 20px;font-size:30px}
+.hecho h2{font:900 clamp(26px,3vw,36px)/1.1 var(--s);letter-spacing:-.02em;color:var(--ink)}
+.hecho p{margin-top:14px;color:var(--body);line-height:1.55;max-width:46ch;margin-inline:auto}
+.pasos{margin-top:30px;display:grid;gap:14px;text-align:left}
+.paso{display:flex;gap:13px;align-items:flex-start}
+.paso b{flex:0 0 26px;height:26px;border-radius:50%;background:var(--grey);color:var(--blue);
+  display:grid;place-items:center;font:800 13px var(--t)}
+.paso span{color:var(--body);font-size:14.5px;line-height:1.5}
+</style>
+</head>
+<body>
+
+<nav id="nav"><div class="nw">
+  <a class="logo" href="/">NY<i>✕</i>A</a>
+  <a class="login" href="/empresas/">Volver a Empresas</a>
+</div></nav>
+
+<section class="alta">
+ <div class="wrap">
+
+  <div id="form-lado">
+    <span class="eye">NYXA para empresas</span>
+    <h1>Cuéntanos qué hacéis.</h1>
+    <p class="lead">Estamos abriendo NYXA a negocios de Valencia poco a poco, para que cada
+    experiencia llegue a la gente adecuada. Déjanos tus datos y te escribimos nosotros.</p>
+
+    <form class="card" id="f" novalidate>
+      <div class="fld">
+        <label for="negocio">Nombre del negocio</label>
+        <input id="negocio" name="negocio" autocomplete="organization" maxlength="80" required>
+        <div class="mal" id="e-negocio"></div>
+      </div>
+
+      <div class="row">
+        <div class="fld">
+          <label for="sector">Qué ofrecéis</label>
+          <select id="sector" name="sector" required>
+            <option value="">Elige…</option>
+            <option>Viajes y escapadas</option>
+            <option>Turismo activo</option>
+            <option>Catas y bodegas</option>
+            <option>Talleres</option>
+            <option>Clases y escuelas</option>
+            <option>Restaurantes y cenas</option>
+            <option>Ocio nocturno</option>
+            <option>Deporte social</option>
+            <option>Otra cosa</option>
+          </select>
+          <div class="mal" id="e-sector"></div>
+        </div>
+        <div class="fld">
+          <label for="ciudad">Ciudad</label>
+          <input id="ciudad" name="ciudad" value="Valencia" autocomplete="address-level2" maxlength="60" required>
+          <div class="mal" id="e-ciudad"></div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="fld">
+          <label for="email">Email de contacto</label>
+          <input id="email" name="email" type="email" inputmode="email" autocomplete="email" maxlength="120" required>
+          <div class="mal" id="e-email"></div>
+        </div>
+        <div class="fld">
+          <label for="tel">Teléfono</label>
+          <input id="tel" name="tel" type="tel" inputmode="tel" autocomplete="tel" maxlength="24" required>
+          <div class="mal" id="e-tel"></div>
+        </div>
+      </div>
+
+      <div class="fld">
+        <label for="que">Qué organizáis, en una línea</label>
+        <textarea id="que" name="que" maxlength="200" required
+          placeholder="Rutas en kayak por la Albufera, grupos de 8 personas, fines de semana."></textarea>
+        <small><span id="cnt">0</span>/200</small>
+        <div class="mal" id="e-que"></div>
+      </div>
+
+      <button class="btn enviar" id="enviar" type="submit">Quiero entrar</button>
+      <p class="nota">Te escribimos en 24-48 horas. No se paga nada hasta que empieces, y no hay
+      permanencia. Tus datos solo los usamos para hablar contigo — <a href="/privacidad">privacidad</a>.</p>
+    </form>
+  </div>
+
+  <div id="hecho-lado" class="card hecho" hidden>
+    <div class="tic" aria-hidden="true">✓</div>
+    <h2>Ya te tenemos.</h2>
+    <p id="hecho-txt">Te escribimos a tu correo en 24-48 horas para abrirte NYXA.</p>
+    <div class="pasos">
+      <div class="paso"><b>1</b><span>Te llamamos o te escribimos para entender qué organizáis.</span></div>
+      <div class="paso"><b>2</b><span>Montamos tu ficha y tu primer plan contigo, sin que tengas que pelearte con nada.</span></div>
+      <div class="paso"><b>3</b><span>Tu plan sale en NYXA y solo pagas comisión cuando alguien viene.</span></div>
+    </div>
+  </div>
+
+ </div>
+</section>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<script src="/config.js"></script>
+<script src="/app.js"></script>
+<script>
+/* Alta de empresa: escribe en leads_organizadores, que admite INSERT público
+   y no deja leer nada desde el navegador. Si no hay configuración, el
+   formulario lo dice en vez de tragarse los datos en silencio. */
+(() => {
+  const $ = s => document.querySelector(s);
+  const f = $('#f'), btn = $('#enviar');
+  const C = window.NEXA || {};
+
+  $('#que').addEventListener('input', e => $('#cnt').textContent = e.target.value.length);
+
+  const limpiar = () => document.querySelectorAll('.mal').forEach(e => e.textContent = '');
+  const fallo = (campo, texto) => { $('#e-' + campo).textContent = texto; return false; };
+
+  function valida(d) {
+    limpiar();
+    let ok = true;
+    if (d.negocio.length < 2)                 ok = fallo('negocio', 'Dinos cómo se llama.');
+    if (!d.sector)                            ok = fallo('sector', 'Elige una opción.');
+    if (d.ciudad.length < 2)                  ok = fallo('ciudad', 'Dinos la ciudad.');
+    if (!/^[^@\s]+@[^@\s]+\.[^@\s]{2,}$/.test(d.email)) ok = fallo('email', 'Ese correo no parece válido.');
+    if (d.tel.replace(/\D/g, '').length < 9)  ok = fallo('tel', 'Pon un teléfono con el que podamos llamarte.');
+    if (d.que.length < 10)                    ok = fallo('que', 'Cuéntanos un poco más, en una línea.');
+    return ok;
+  }
+
+  f.addEventListener('submit', async ev => {
+    ev.preventDefault();
+    const d = {
+      negocio: $('#negocio').value.trim(),
+      sector:  $('#sector').value,
+      ciudad:  $('#ciudad').value.trim(),
+      email:   $('#email').value.trim(),
+      tel:     $('#tel').value.trim(),
+      que:     $('#que').value.trim()
+    };
+    if (!valida(d)) { document.querySelector('.mal:not(:empty)')?.scrollIntoView({block:'center',behavior:'smooth'}); return; }
+
+    if (!C.SUPABASE_URL || !C.SUPABASE_ANON_KEY) {
+      window.NX && NX.toast
+        ? NX.toast('No podemos enviarlo ahora. Escríbenos a hola@holanyxa.com.')
+        : alert('No podemos enviarlo ahora. Escríbenos a hola@holanyxa.com.');
+      return;
+    }
+
+    btn.disabled = true;
+    const antes = btn.textContent;
+    btn.textContent = 'Enviando…';
+
+    /* que_organiza y telefono son obligatorios en la tabla; nombre_negocio
+       existe desde el 17-oct. La columna email es nueva: si todavía no está
+       en producción, el intento falla y abajo se reenvía con el correo
+       dentro del texto, antes que perder el contacto. */
+    const fila = {
+      que_organiza: d.sector + ' · ' + d.que,
+      nombre_negocio: d.negocio,
+      telefono: d.tel,
+      ciudad: d.ciudad,
+      origen: 'web_empresas',
+      email: d.email
+    };
+
+    let r;
+    try {
+      r = await fetch(C.SUPABASE_URL + '/rest/v1/leads_organizadores', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'apikey': C.SUPABASE_ANON_KEY,
+          'Authorization': 'Bearer ' + C.SUPABASE_ANON_KEY,
+          'Prefer': 'return=minimal'
+        },
+        body: JSON.stringify(fila)
+      });
+    } catch (e) {
+      btn.disabled = false; btn.textContent = antes;
+      NX && NX.toast && NX.toast('No hemos podido enviarlo. Inténtalo otra vez o escríbenos a hola@holanyxa.com.');
+      return;
+    }
+
+    if (!r.ok) {
+      /* Si falla por una columna que aún no existe, se reintenta con lo mínimo
+         seguro antes que perder el contacto. */
+      let segundo = null;
+      try {
+        segundo = await fetch(C.SUPABASE_URL + '/rest/v1/leads_organizadores', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'apikey': C.SUPABASE_ANON_KEY,
+            'Authorization': 'Bearer ' + C.SUPABASE_ANON_KEY,
+            'Prefer': 'return=minimal'
+          },
+          body: JSON.stringify({
+            que_organiza: d.sector + ' · ' + d.que + ' · Email: ' + d.email,
+            nombre_negocio: d.negocio,
+            telefono: d.tel, ciudad: d.ciudad, origen: 'web_empresas'
+          })
+        });
+      } catch (e) {}
+      if (!segundo || !segundo.ok) {
+        btn.disabled = false; btn.textContent = antes;
+        NX && NX.toast && NX.toast('No hemos podido enviarlo. Escríbenos a hola@holanyxa.com y lo hacemos a mano.');
+        return;
+      }
+    }
+
+    $('#hecho-txt').textContent = 'Te escribimos a ' + d.email + ' en 24-48 horas para abrirte NYXA.';
+    $('#form-lado').hidden = true;
+    $('#hecho-lado').hidden = false;
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+})();
+</script>
+</body>
+</html>
