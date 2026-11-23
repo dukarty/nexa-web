@@ -28,13 +28,13 @@
    Mismo sistema que el resto de la web: el papel, el azul de marca, Archivo
    para los titulares y las entradas .rv. Solo lo propio del formulario. */
 .alta{padding:clamp(120px,13vw,180px) 20px clamp(70px,8vw,110px);background:var(--grey)}
-.alta .wrap{max-width:1120px;margin:0 auto;display:grid;gap:clamp(34px,5vw,70px);
-  grid-template-columns:minmax(0,1fr) minmax(0,440px);align-items:start}
-@media(max-width:940px){.alta .wrap{grid-template-columns:1fr}}
+.alta .wrap{max-width:620px;margin:0 auto}
+.alta .intro{text-align:center;margin-bottom:clamp(26px,3.4vw,40px)}
+.alta .intro h1,.alta .intro .lead{margin-inline:auto}
 
-.alta h1{font:900 clamp(40px,5.4vw,72px)/1.04 var(--s);letter-spacing:-.03em;color:var(--ink);max-width:14ch}
+.alta h1{font:900 clamp(36px,4.6vw,58px)/1.05 var(--s);letter-spacing:-.03em;color:var(--ink);max-width:16ch}
 .alta h1 em{font-style:normal;color:var(--blue)}
-.alta .lead{margin-top:20px;color:var(--body);font-size:clamp(16px,1.3vw,18.5px);line-height:1.55;max-width:46ch}
+.alta .lead{margin-top:18px;color:var(--body);font-size:clamp(15.5px,1.2vw,17.5px);line-height:1.55;max-width:48ch}
 
 .gan{margin-top:clamp(28px,3.4vw,42px);display:grid;gap:16px}
 .gan li{display:flex;gap:13px;align-items:flex-start;list-style:none}
@@ -93,23 +93,16 @@
 <section class="alta">
  <div class="wrap">
 
-  <div class="rv">
+  <div class="rv intro">
    <span class="eye">NYXA para empresas</span>
    <h1>Cuéntanos <em>qué hacéis.</em></h1>
-   <p class="lead">Estamos abriendo NYXA a negocios de Valencia poco a poco, para que cada
-   experiencia llegue a la gente adecuada. Déjanos tus datos y te escribimos nosotros.</p>
-
-   <ul class="gan">
-    <li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 6 9 17l-5-5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>No pagas por estar</b>Solo comisión cuando alguien reserva y viene. Si no viene nadie, no pagas comisión.</span></li>
-    <li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 6 9 17l-5-5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>Sin permanencia</b>Te vas cuando quieras, sin llamadas ni letra pequeña.</span></li>
-    <li><svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M20 6 9 17l-5-5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg><span><b>Lo montamos contigo</b>Tu ficha y tu primer plan los preparamos nosotros. Tú solo dices que sí.</span></li>
-   </ul>
+   <p class="lead">Déjanos tus datos y te escribimos para abrirte NYXA.</p>
   </div>
 
   <div class="rv">
    <div class="card" id="form-lado">
     <h2>Tus datos</h2>
-    <p class="sb">Un minuto. Te escribimos en 24-48 horas.</p>
+    <p class="sb">Un minuto.</p>
 
     <form id="f" novalidate>
      <div class="fld" id="w-negocio">
@@ -163,8 +156,7 @@
      </div>
 
      <button class="btn enviar" id="enviar" type="submit">Quiero entrar</button>
-     <p class="nota">No se paga nada hasta que empieces y no hay permanencia.<br>
-     Usamos tus datos solo para hablar contigo — <a href="/privacidad">privacidad</a>.</p>
+     <p class="nota">Solo para hablar contigo — <a href="/privacidad">privacidad</a>.</p>
     </form>
    </div>
 
