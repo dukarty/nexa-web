@@ -78,10 +78,10 @@
     const motivo = API.error === 'sin-negocio'
       ? ' Esta cuenta no tiene ningún negocio dado de alta.'
       : API.error === 'sin-config' ? '' : '';
-    banda.innerHTML = '<b>Prototipo del panel</b> · los datos se quedan en este '
-      + 'navegador y no se envían a ningún sitio.' + motivo
-      + (API.error === 'sin-config' ? '' : ' <button id="entrarEmp">Entrar con mi cuenta de empresa</button>')
-      + ' <button id="reset">Empezar de cero</button>';
+    banda.innerHTML = '<b>Vista previa</b> · datos de ejemplo'
+      + '<a class="cta" href="/empresas/alta/">Quiero mi panel</a>'
+      + (API.error === 'sin-config' ? '' : '<button id="entrarEmp">Ya tengo cuenta</button>')
+      + '<button id="reset">Reiniciar</button>';
     const e = document.getElementById('entrarEmp');
     if (e) e.onclick = entrar;
     const r = document.getElementById('reset');

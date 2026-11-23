@@ -338,10 +338,18 @@ em,small,.tag,.chip,.pill,.kpi span,.d span{}
 em[style*="12A150"],.up,.pos,.tag.a,.ok{color:#0B7A3B!important}
 .demo b,.demo,.demo *{color:#fff!important}
 .tg.s,.pl-tg,.demo b{color:inherit}
+
+/* La banda de vista previa: una línea, con su llamada clara. */
+.demo{display:flex;align-items:center;justify-content:center;gap:14px;flex-wrap:wrap}
+.demo .cta{background:#fff;color:var(--blue)!important;font:800 12.5px var(--t);padding:6px 13px;
+  border-radius:99px;text-decoration:none;white-space:nowrap;line-height:1.6}
+.demo .cta:hover{background:var(--soft)}
+.demo button{all:unset;cursor:pointer;opacity:.75;font:600 12.5px var(--t);text-decoration:underline}
+.demo button:hover{opacity:1}
 </style>
 </head>
 <body>
-<div class="demo"><b>Prototipo del panel</b> · los datos se quedan en este navegador y no se envían a ningún sitio.<button id="reset">Empezar de cero</button></div>
+<div class="demo"><b>Vista previa</b> · datos de ejemplo<a class="cta" href="/empresas/alta/">Quiero mi panel</a><button id="reset">Reiniciar</button></div>
 
 <!-- ONBOARDING -->
 <section class="ob" id="ob" hidden>
@@ -638,8 +646,11 @@ function afterCuenta(){$$('[data-setplan]').forEach(b=>b.onclick=async()=>{const
   if(pl=='dentro'&&activeN()>3){toast('Tienes '+activeN()+' planes publicados. Con Estar dentro caben 3: pausa alguno antes de cambiar.');return}
   /* Con sesion de empresa se va a pagar de verdad; sin ella el panel sigue
      cambiando el plan de mentira, como hasta ahora. */
+  /* Mientras el alta la abrimos nosotros a mano, elegir plan aquí no cobra:
+     lleva a dejarnos los datos. */
   const API=window.NYXA_API;
-  if(API&&API.conectado&&API.suscribir){toast('Te llevamos a pagar…');const r=await API.suscribir(pl);if(r&&!r.ok)toast(r.motivo);return}
+  if(!(API&&API.conectado)){location.href='/empresas/alta/';return}
+  if(API.suscribir){toast('Te llevamos a pagar…');const r=await API.suscribir(pl);if(r&&!r.ok)toast(r.motivo);return}
   S.plan=pl;save();renderDash();toast('Ya tienes '+planOf(S.plan)[1])});const ro=()=>{const pr=+$('#roiP').value,to=$('#roiT').value;$('#roiPv').textContent=eur(pr);const diff=planOf(to)[2]-planOf(S.plan)[2];const c=COM[S.biz.s];const net=pr*(1-(c.p||0));if(diff<=0){$('#roiO').innerHTML='<p>Ya tienes este plan o uno superior.</p>';return}const n=Math.ceil(diff/net);$('#roiO').innerHTML=`<p>Con ${n} reserva${n>1?'s':''} más al mes</p><b>se paga solo</b><p>${planOf(to)[1]} cuesta ${eur(diff)} más al mes. Cada reserva te deja unos ${eur(net)} con tu comisión actual.</p>`};$('#roiP').oninput=ro;$('#roiT').onchange=ro;ro();bindPlans($('#pls2'),async()=>{const API=window.NYXA_API;
   if(API&&API.conectado&&API.suscribir){toast('Te llevamos a pagar…');const r=await API.suscribir(S.plan);if(r&&!r.ok)toast(r.motivo);return}
   renderNav();toast('Plan cambiado a '+planOf(S.plan)[1]);renderDash()});$$('[data-inv]').forEach(b=>b.onclick=()=>toast('En el panel real se descarga la factura en PDF'))}
@@ -812,6 +823,6 @@ show();
      Si falta cualquiera de los tres, el panel sigue en modo ejemplo. -->
 <script src="/config.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
-<script src="conectar.js"></script>
+<script src="conectar.js?v=2"></script>
 </body>
 </html>
