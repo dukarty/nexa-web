@@ -333,8 +333,6 @@ button,input,select,textarea{font:inherit;color:inherit}
 .tag.a,.ok,.up,.pos{color:var(--ok-txt)}
 /* Verde y azul de 11-13px: por debajo del minimo sobre fondo claro.
    Cualquier texto pequenyo en esos colores pasa a la version oscura. */
-em,small,.tag,.chip,.pill,.kpi span,.d span{}
-*{--ok-txt:#0B7A3B}
 em[style*="12A150"],.up,.pos,.tag.a,.ok{color:#0B7A3B!important}
 .demo b,.demo,.demo *{color:#fff!important}
 .tg.s,.pl-tg,.demo b{color:inherit}
@@ -346,6 +344,34 @@ em[style*="12A150"],.up,.pos,.tag.a,.ok{color:#0B7A3B!important}
 .demo .cta:hover{background:var(--soft)}
 .demo button{all:unset;cursor:pointer;opacity:.75;font:600 12.5px var(--t);text-decoration:underline}
 .demo button:hover{opacity:1}
+
+/* ── Legibilidad del panel · medido en las 17 pantallas (24-nov) ─────────────
+   Ocho textos quedaban por debajo del mínimo legible (4,5 el texto normal,
+   3,0 el grande). Se midió cada uno contra su fondo REAL, no contra el que
+   debería tener. Aquí se toca sólo el color del texto: ni un fondo, ni un
+   tamaño, ni un peso, así que no se mueve nada de sitio.
+   El ✕ del logo se queda como está: 22 px en peso 900 cuenta como texto
+   grande, le toca 3,0 y tiene 4,47. Ya pasaba. */
+
+/* Lo peor con diferencia: las estrellas daban 2,36. Mismo tono, más hondo. */
+.stars{color:#9F6C10}                      /* 2,36 → 4,55 */
+
+/* El verde de «+133 %» sobre blanco. No toca al rojo de las bajadas, que
+   ya pasa (5,44), ni al de la tarjeta azul, que es blanco a propósito. */
+.kpi:not(.bl) .dl em:not(.dn){color:#0F8743}   /* 3,37 → 4,58 */
+
+/* Tarjeta azul del resumen: el blanco al 78 % se quedaba en 3,48. Sobre este
+   azul hace falta blanco entero (hasta el 97 % no llega), así que la
+   jerarquía la llevan el tamaño y el peso, que es donde debe estar. */
+.kpi.bl small,.kpi.bl .dl{color:#fff}      /* 3,48 → 4,70 */
+
+/* El contador de avisos: tinta sobre azul. En blanco se lee. */
+.bell b{color:#fff}                        /* 4,16 → 4,70 */
+
+/* El azul de marca como texto pequeño no llega: 4,22 sobre crema y 4,47
+   sobre blanco. --blue-txt es el mismo azul un punto más oscuro, y ya
+   estaba definido para esto. */
+.pill2,.tag.c,#nav button.on,.qr button{color:var(--blue-txt)}  /* → 5,3-5,9 */
 </style>
 </head>
 <body>
