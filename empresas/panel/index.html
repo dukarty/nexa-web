@@ -129,7 +129,10 @@ button,input,select,textarea{font:inherit;color:inherit}
 .fn{display:grid;gap:8px}
 .fn .st{display:grid;grid-template-columns:130px minmax(0,1fr);gap:12px;align-items:center;font-size:13.5px}
 .fn .st div{height:36px;border-radius:10px;background:var(--blue);display:flex;align-items:center;padding:0 12px;color:#fff;font-weight:800;min-width:max-content;transition:width .7s var(--e)}
-.fn .st:nth-child(2) div{background:#1b46c2}.fn .st:nth-child(3) div{background:var(--ink)}
+.fn .st:nth-child(2) div{background:#1b46c2}.fn .st:nth-child(3) div{background:#103094}  /* era var(--ink): el embudo saltaba de azul a NEGRO en el último
+     paso. #103094 es el mismo salto de oscuridad que hay del primero
+     al segundo, aplicado otra vez, así que la rampa sigue siendo azul
+     y los tres escalones se distinguen. Blanco encima: 11,2. */
 .hm{display:grid;grid-template-columns:70px repeat(7,minmax(0,1fr));gap:4px;font-size:11.5px}
 .hm span{color:var(--muted);display:flex;align-items:center}.hm .hd{justify-content:center}
 .hm i{aspect-ratio:1.6;border-radius:6px;cursor:default;min-height:22px}
@@ -392,6 +395,25 @@ em[style*="12A150"],.up,.pos,.tag.a,.ok{color:#0B7A3B!important}
      15  fila de lista              era 16 en unas y 15 en otras
 
    Sólo cambian tamaños de título. Ni colores, ni espaciados, ni pesos. */
+
+/* ── Ritmo · los estados vacíos, que son lo que se ve el primer día ──────────
+   De las 17 pantallas, 10 salen vacías cuando una empresa acaba de entrar.
+   Estaban resueltas con una línea de gris claro a 26 px del borde, perdida en
+   mitad de una caja blanca ancha: no parecía un estado, parecía que la página
+   no había cargado.
+
+   Se les da el espacio de una sección y se sube el texto un tono. No se toca
+   ni una palabra ni se añade ningún botón: eso es decisión de producto. */
+.empty{
+  color:var(--body);            /* era --muted; sobre blanco pasa de 5,1 a 9,1 */
+  padding:52px 24px;            /* era 26px 4px */
+  max-width:46ch;               /* una línea de lectura, no todo el ancho */
+  margin-inline:auto;
+  text-wrap:pretty;             /* y que no se quede una palabra sola */
+}
+/* Si la caja no contiene más que el vacío, se queda sin fondo: así no hay una
+   tarjeta blanca enorme pidiendo un contenido que todavía no existe. */
+.box:has(> .empty:only-child){background:transparent;box-shadow:none}
 </style>
 </head>
 <body>
