@@ -48,7 +48,7 @@ button,input,select,textarea{font:inherit;color:inherit}
 .pls{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:28px;max-width:880px}
 .pl{position:relative;text-align:left;background:#fff;border:2px solid var(--line);border-radius:20px;padding:22px;cursor:pointer;transition:border-color .2s,transform .2s var(--e),box-shadow .2s}
 .pl:hover{transform:translateY(-2px)}.pl.on{border-color:var(--blue);box-shadow:0 14px 30px -16px rgba(47,102,255,.55)}
-.pl h3{font:800 18px/1.1 var(--s)}.pl .pr{font:900 34px/1 var(--s);letter-spacing:-.03em;margin-top:14px;white-space:nowrap}.pl .pr span{font:500 13px var(--t);color:var(--muted)}
+.pl h3{font:800 17px/1.2 var(--s)}.pl .pr{font:900 34px/1 var(--s);letter-spacing:-.03em;margin-top:14px;white-space:nowrap}.pl .pr span{font:500 13px var(--t);color:var(--muted)}
 .pl .tg{position:absolute;top:14px;right:14px;font:700 11px var(--t);padding:5px 9px;border-radius:99px;background:var(--blue);color:#fff}
 .pl .fr{margin-top:6px;font-weight:700;color:var(--blue);font-size:13.5px}
 .pl ul{list-style:none;margin-top:14px;display:grid;gap:6px;font-size:13.5px;color:var(--body)}
@@ -109,7 +109,7 @@ button,input,select,textarea{font:inherit;color:inherit}
 .grid{display:grid;gap:14px}
 .g4{grid-template-columns:repeat(4,minmax(0,1fr))}.g3{grid-template-columns:repeat(3,minmax(0,1fr))}.g2{grid-template-columns:repeat(2,minmax(0,1fr))}.g21{grid-template-columns:minmax(0,2fr) minmax(0,1fr)}
 .box{background:#fff;border-radius:24px;padding:22px 24px;box-shadow:0 1px 2px rgba(10,12,17,.04),0 12px 32px -18px rgba(10,12,17,.14);min-width:0}
-.box h2{font:800 17px/1.2 var(--s);letter-spacing:-.01em}.box .bh{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:14px;flex-wrap:wrap}
+.box h2{font:800 20px/1.25 var(--s);letter-spacing:-.015em}.box .bh{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:14px;flex-wrap:wrap}
 .box .bh p{font-size:13px;color:var(--muted)}
 .kpi small{font:700 10px var(--h);letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
 .kpi b{display:block;font:900 clamp(26px,2.4vw,34px)/1.1 var(--s);letter-spacing:-.02em;margin-top:10px;white-space:nowrap}
@@ -129,7 +129,10 @@ button,input,select,textarea{font:inherit;color:inherit}
 .fn{display:grid;gap:8px}
 .fn .st{display:grid;grid-template-columns:130px minmax(0,1fr);gap:12px;align-items:center;font-size:13.5px}
 .fn .st div{height:36px;border-radius:10px;background:var(--blue);display:flex;align-items:center;padding:0 12px;color:#fff;font-weight:800;min-width:max-content;transition:width .7s var(--e)}
-.fn .st:nth-child(2) div{background:#1b46c2}.fn .st:nth-child(3) div{background:var(--ink)}
+.fn .st:nth-child(2) div{background:#1b46c2}.fn .st:nth-child(3) div{background:#103094}  /* era var(--ink): el embudo saltaba de azul a NEGRO en el último
+     paso. #103094 es el mismo salto de oscuridad que hay del primero
+     al segundo, aplicado otra vez, así que la rampa sigue siendo azul
+     y los tres escalones se distinguen. Blanco encima: 11,2. */
 .hm{display:grid;grid-template-columns:70px repeat(7,minmax(0,1fr));gap:4px;font-size:11.5px}
 .hm span{color:var(--muted);display:flex;align-items:center}.hm .hd{justify-content:center}
 .hm i{aspect-ratio:1.6;border-radius:6px;cursor:default;min-height:22px}
@@ -140,7 +143,7 @@ button,input,select,textarea{font:inherit;color:inherit}
 .prow{display:grid;grid-template-columns:64px minmax(0,1fr) auto;gap:14px;align-items:center;padding:12px;border-radius:16px;transition:background .2s;cursor:pointer;text-align:left;background:none;border:0;width:100%}
 .prow:hover{background:#F7F8FA}
 .prow .th{width:64px;height:64px;border-radius:12px;background:#ccc center/cover}
-.prow h3{font:800 16px/1.2 var(--s)}.prow p{font-size:12.5px;color:var(--muted);margin-top:2px}
+.prow h3{font:800 15px/1.25 var(--s)}.prow p{font-size:12.5px;color:var(--muted);margin-top:2px}
 .bar{height:7px;border-radius:9px;background:var(--line);margin-top:8px;overflow:hidden;max-width:320px}.bar i{display:block;height:100%;background:var(--blue);border-radius:9px;transition:width .6s var(--e)}
 .tag{font:700 12px var(--t);padding:6px 10px;border-radius:99px;white-space:nowrap}
 .tag.a{background:var(--okbg);color:var(--ok)}.tag.c{background:var(--soft);color:var(--blue)}.tag.b{background:#F1F2F5;color:var(--body)}.tag.p{background:#FFF4E0;color:#8A5A00}.tag.xx{background:var(--badbg);color:var(--bad)}
@@ -149,7 +152,7 @@ button,input,select,textarea{font:inherit;color:inherit}
 .pc{background:#fff;border-radius:24px;overflow:hidden;box-shadow:0 1px 2px rgba(10,12,17,.04),0 12px 32px -18px rgba(10,12,17,.16);display:flex;flex-direction:column}
 .pc .im{aspect-ratio:16/10;height:auto;background:#ccc center/cover;position:relative}.pc .im .tag{position:absolute;left:12px;top:12px}
 .pc .bd{padding:16px 18px 18px;display:flex;flex-direction:column;gap:6px;flex:1}
-.pc h3{font:800 18px/1.15 var(--s)}.pc .mt{font-size:13px;color:var(--muted)}
+.pc h3{font:800 17px/1.2 var(--s)}.pc .mt{font-size:13px;color:var(--muted)}
 .pc .nums{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:10px;padding-top:12px;border-top:1px solid var(--line)}
 .pc .nums small{display:block;font:700 9.5px var(--h);letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}.pc .nums b{font:800 17px var(--s)}
 .pc .ac{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px}.pc .ac .btn{padding:9px 12px;font-size:13px}
@@ -165,7 +168,7 @@ button,input,select,textarea{font:inherit;color:inherit}
 .drw.on{opacity:1;pointer-events:auto}
 .drw .pn{width:min(560px,100%);height:100%;background:var(--paper);overflow-y:auto;padding:28px;transform:translateX(30px);transition:transform .3s var(--e)}
 .drw.on .pn{transform:none}
-.drw .pn h2{font:900 28px/1.1 var(--s);letter-spacing:-.02em}
+.drw .pn h2{font:900 26px/1.15 var(--s);letter-spacing:-.02em}
 .drw .x{all:unset;cursor:pointer;float:right;font:900 22px var(--s);width:40px;height:40px;display:grid;place-items:center;border-radius:50%;background:#fff;box-shadow:inset 0 0 0 1px var(--line)}
 .drw .form{grid-template-columns:1fr 1fr;max-width:none}
 .tgl{display:flex;justify-content:space-between;align-items:center;gap:16px;padding:14px 0;border-bottom:1px solid var(--line)}
@@ -262,7 +265,7 @@ button,input,select,textarea{font:inherit;color:inherit}
 .hero2{background:var(--ink);color:#fff;border-radius:24px;padding:26px 28px;display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;margin-bottom:14px}
 .hero2 small{font:700 10px var(--h);letter-spacing:.14em;text-transform:uppercase;color:rgba(255,255,255,.55)}.hero2 b{display:block;font:900 clamp(34px,4vw,52px)/1.05 var(--s);letter-spacing:-.03em;margin-top:6px}.hero2 p{color:rgba(255,255,255,.72);font-size:14px;margin-top:4px;max-width:520px}
 .prg{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
-.pgm{display:flex;flex-direction:column;gap:10px}.pgm .ph2{display:flex;gap:12px;align-items:center}.pgm .ph2 img{width:42px;height:42px}.pgm h3{font:800 18px/1.15 var(--s)}.pgm .sub2{font-size:13px;color:var(--muted)}
+.pgm{display:flex;flex-direction:column;gap:10px}.pgm .ph2{display:flex;gap:12px;align-items:center}.pgm .ph2 img{width:42px;height:42px}.pgm h3{font:800 17px/1.2 var(--s)}.pgm .sub2{font-size:13px;color:var(--muted)}
 .pgm .ben{list-style:none;display:grid;gap:6px;font-size:13.5px;color:var(--body)}.pgm .ben li{padding-left:20px;position:relative}.pgm .ben li:before{content:"✓";position:absolute;left:0;color:var(--blue);font-weight:800}
 .crit{display:grid;gap:12px}.crit .c{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:4px 12px;font-size:13.5px}.crit .c b{font-weight:700}.crit .c span{color:var(--muted)}.crit .c .bar{grid-column:1/-1;max-width:none;margin-top:2px}.crit .c.ok2 .bar i{background:var(--ok)}
 .badge2{display:inline-flex;align-items:center;gap:8px;font:800 13px var(--t);padding:8px 12px;border-radius:99px;background:var(--okbg);color:var(--ok)}.badge2.no{background:#F1F2F5;color:var(--body)}
@@ -275,7 +278,7 @@ button,input,select,textarea{font:inherit;color:inherit}
 .blurw>.lockc{position:absolute;inset:0;display:grid;place-items:center;padding:20px}.blurw .lockc>div{background:#fff;border-radius:22px;padding:26px;max-width:420px;text-align:center;box-shadow:0 30px 60px -20px rgba(10,12,17,.35)}
 .blurw .lockc h2{font:900 26px/1.1 var(--s);letter-spacing:-.02em}.blurw .lockc p{color:var(--body);margin:10px 0 18px}
 .qr{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}.qr button{all:unset;cursor:pointer;font:600 12.5px var(--t);padding:7px 11px;border-radius:99px;background:var(--soft);color:var(--blue)}
-.up{display:grid;gap:14px}.up .pp2{border-radius:20px;padding:20px;background:#fff;box-shadow:inset 0 0 0 2px var(--blue)}.up .pp2 h3{font:900 24px var(--s)}.up .pp2 .pr{font:900 30px var(--s);margin-top:6px}.up .pp2 .pr span{font:500 13px var(--t);color:var(--muted)}
+.up{display:grid;gap:14px}.up .pp2{border-radius:20px;padding:20px;background:#fff;box-shadow:inset 0 0 0 2px var(--blue)}.up .pp2 h3{font:900 26px/1.15 var(--s);letter-spacing:-.02em}.up .pp2 .pr{font:900 30px var(--s);margin-top:6px}.up .pp2 .pr span{font:500 13px var(--t);color:var(--muted)}
 @media(max-width:980px){.meter{display:none}.prg,.roi{grid-template-columns:1fr}.opp{grid-template-columns:40px minmax(0,1fr)}.opp .v{grid-column:2;text-align:left}.opp .btn{grid-column:2;justify-self:start}}
 @media(max-width:1180px){.g4{grid-template-columns:repeat(2,minmax(0,1fr))}.g21{grid-template-columns:1fr}}
 @media(max-width:980px){.sb nav button.on{background:var(--blue)}.ob{grid-template-columns:1fr}.ob-r{padding:40px 20px}.pls{grid-template-columns:1fr}
@@ -333,8 +336,6 @@ button,input,select,textarea{font:inherit;color:inherit}
 .tag.a,.ok,.up,.pos{color:var(--ok-txt)}
 /* Verde y azul de 11-13px: por debajo del minimo sobre fondo claro.
    Cualquier texto pequenyo en esos colores pasa a la version oscura. */
-em,small,.tag,.chip,.pill,.kpi span,.d span{}
-*{--ok-txt:#0B7A3B}
 em[style*="12A150"],.up,.pos,.tag.a,.ok{color:#0B7A3B!important}
 .demo b,.demo,.demo *{color:#fff!important}
 .tg.s,.pl-tg,.demo b{color:inherit}
@@ -346,6 +347,93 @@ em[style*="12A150"],.up,.pos,.tag.a,.ok{color:#0B7A3B!important}
 .demo .cta:hover{background:var(--soft)}
 .demo button{all:unset;cursor:pointer;opacity:.75;font:600 12.5px var(--t);text-decoration:underline}
 .demo button:hover{opacity:1}
+
+/* ── Legibilidad del panel · medido en las 17 pantallas (24-nov) ─────────────
+   Ocho textos quedaban por debajo del mínimo legible (4,5 el texto normal,
+   3,0 el grande). Se midió cada uno contra su fondo REAL, no contra el que
+   debería tener. Aquí se toca sólo el color del texto: ni un fondo, ni un
+   tamaño, ni un peso, así que no se mueve nada de sitio.
+   El ✕ del logo se queda como está: 22 px en peso 900 cuenta como texto
+   grande, le toca 3,0 y tiene 4,47. Ya pasaba. */
+
+/* Lo peor con diferencia: las estrellas daban 2,36. Mismo tono, más hondo. */
+.stars{color:#9F6C10}                      /* 2,36 → 4,55 */
+
+/* El verde de «+133 %» sobre blanco. No toca al rojo de las bajadas, que
+   ya pasa (5,44), ni al de la tarjeta azul, que es blanco a propósito. */
+.kpi:not(.bl) .dl em:not(.dn){color:#0F8743}   /* 3,37 → 4,58 */
+
+/* Tarjeta azul del resumen: el blanco al 78 % se quedaba en 3,48. Sobre este
+   azul hace falta blanco entero (hasta el 97 % no llega), así que la
+   jerarquía la llevan el tamaño y el peso, que es donde debe estar. */
+.kpi.bl small,.kpi.bl .dl{color:#fff}      /* 3,48 → 4,70 */
+
+/* El contador de avisos: tinta sobre azul, 4,16. Lleva !important porque la
+   barra lateral fuerza su propio color con `.sb,.sb *` y `.sb b` cuando se
+   aclaró el fondo; sin él, esta regla no gana nunca. Es la única burbuja de
+   la barra con relleno de color, así que la excepción es esa y sólo esa. */
+.sb .bell b{color:#fff!important}          /* 4,16 → 4,70 */
+
+/* El azul de marca como texto pequeño no llega: 4,22 sobre crema y 4,47
+   sobre blanco. --blue-txt es el mismo azul un punto más oscuro, y ya
+   estaba definido para esto. */
+.pill2,.tag.c,#nav button.on,.qr button,.btn.ln{color:var(--blue-txt)}  /* → 5,3-5,9 */
+/* `.btn.ln` («Ver todas», «Hacerlo») daba 4,70 sobre blanco, que pasa justo.
+   Al poner en crema la tarjeta de los estados vacíos, el mismo botón cayó a
+   4,47 y dejó de pasar. Con --blue-txt pasa en los dos fondos. */
+
+/* ── Ritmo · una escala de títulos, no ocho tamaños (24-nov) ─────────────────
+   El panel tenía 15, 16, 17, 18, 24, 26, 28 y 46 px de título. Cuatro de
+   ellos vivían en 3 px, así que no se distinguían: no era jerarquía, era
+   ruido. Y el título de una tarjeta (18) salía MÁS GRANDE que el título de
+   la sección que la contiene (17), o sea la jerarquía del revés.
+
+   Queda en cinco pasos, cada uno claramente distinto del siguiente:
+
+     46  título de pantalla        (sin tocar)
+     26  título de capa que se abre  cajón, bloqueo y subir de plan, que
+                                     iban a 28, 26 y 24 por su cuenta
+     20  título de sección          era 17; ahora manda sobre lo que agrupa
+     17  título de tarjeta          era 18; baja por debajo de su sección
+     15  fila de lista              era 16 en unas y 15 en otras
+
+   Sólo cambian tamaños de título. Ni colores, ni espaciados, ni pesos. */
+
+/* ── Ritmo · los estados vacíos, que son lo que se ve el primer día ──────────
+   De las 17 pantallas, 10 salen vacías cuando una empresa acaba de entrar.
+   Estaban resueltas con una línea de gris claro a 26 px del borde, perdida en
+   mitad de una caja blanca ancha: no parecía un estado, parecía que la página
+   no había cargado.
+
+   Se les da el espacio de una sección y se sube el texto un tono. No se toca
+   ni una palabra ni se añade ningún botón: eso es decisión de producto. */
+.empty{
+  color:var(--body);            /* era --muted; sobre blanco pasa de 5,1 a 9,1 */
+  padding:52px 24px;            /* era 26px 4px */
+  max-width:46ch;               /* una línea de lectura, no todo el ancho */
+  margin-inline:auto;
+  text-wrap:balance;            /* `pretty` sólo salva UNA palabra suelta, y
+                                   aquí quedaban colas de tres. `balance`
+                                   reparte las líneas: son textos cortos. */
+}
+/* Probé a quitarle el fondo a la caja cuando sólo contiene el vacío, y quedó
+   PEOR: el mensaje flotaba suelto en la página y parecía aún más que algo
+   había fallado. La tarjeta se queda: es lo que ancla el mensaje. Lo que
+   cambia es el aire de dentro y el tono del texto. */
+.box:has(> .vac){
+  display:grid;
+  place-items:center;
+  min-height:220px;             /* ocupa como ocuparía el contenido que falta */
+  background:var(--paper);      /* crema, no blanco: se distingue de una lista
+                                   llena sin dejar de ser una superficie */
+  box-shadow:inset 0 0 0 1px var(--line);
+}
+.box:has(> .vac) .empty{padding:0 24px}
+.vac{display:grid;place-items:center;gap:18px;width:100%}
+.vac-a{text-align:center}
+
+/* Las notas al pie de las secciones dejaban la última frase colgando. */
+.note{text-wrap:balance}
 </style>
 </head>
 <body>
@@ -569,7 +657,16 @@ function renderNav(){$('#nav').innerHTML=NAVG.map(g=>`<div class="grp">${g[0]}</
 const demoPill=()=>S.demo?'<span class="pill2" title="Estas cifras son de ejemplo para enseñar el panel">Datos de ejemplo</span>':'';
 const statusTag=s=>({activo:'<span class="tag a">Publicado</span>',pausado:'<span class="tag p">Pausado</span>',borrador:'<span class="tag b">Borrador</span>',pasado:'<span class="tag c">Terminado</span>',lleno:'<span class="tag c">Completo</span>'}[s]||'');
 function pStatus(p){if(p.status=='activo'&&seatsOf(p)>=p.p)return 'lleno';return p.status}
-function emptyBox(t,btn){return `<div class="box"><p class="empty">${t}</p>${btn?`<div style="text-align:center">${btn}</div>`:''}</div>`}
+// ── Qué se puede hacer cuando una pantalla está vacía ───────────────────────
+// Casi todo el panel cuelga de lo mismo: hasta que no hay un plan publicado no
+// hay reservas, ni asistentes, ni valoraciones, ni dinero. Así que la acción es
+// UNA y es la misma. Y cuando ya hay planes pero todavía no ha reservado nadie,
+// no hay nada que pulsar: entonces no se pone un botón que no lleva a ninguna
+// parte, se dice que toca esperar.
+const sinPlanes=()=>!S.plans.some(p=>p.status=='activo');
+const accPlan=()=>sinPlanes()?'<button class="btn sm" data-new>Publicar un plan</button>':'';
+const vacio=(t,btn)=>`<div class="vac"><p class="empty">${t}</p>${btn?`<div class="vac-a">${btn}</div>`:''}</div>`;
+function emptyBox(t,btn){return `<div class="box">${vacio(t,btn)}</div>`}
 
 function vResumen(){const R=S.range,cur=inRange(R),prev=inRange(R,1);const cs=cur.filter(conf).reduce((a,b)=>a+b.seats,0),ps=prev.filter(conf).reduce((a,b)=>a+b.seats,0);
  const gross=grossOf(cur),pg=grossOf(prev),com=comOfList(cur);const act=S.plans.filter(p=>p.status=='activo');const cap=act.reduce((a,p)=>a+p.p,0),occ=cap?act.reduce((a,p)=>a+seatsOf(p),0)/cap:0;
@@ -581,7 +678,7 @@ function vResumen(){const R=S.range,cur=inRange(R),prev=inRange(R,1);const cs=cu
  ${stepsBox()}${tipsBox()}<div class="grid g4"><div class="box kpi bl"><small>Plazas reservadas</small><b>${num(cs)}</b><p class="dl">${delta(cs,ps)}</p></div><div class="box kpi"><small>Te llega a ti</small><b>${eur(gross-com)}</b><p class="dl">${delta(gross,pg)}</p></div><div class="box kpi"><small>Ocupación</small><b>${pct(occ)}</b><p class="dl">de tus planes publicados</p></div><div class="box kpi"><small>Conversión</small><b>${views?(Math.round(conv*1000)/10).toLocaleString('es-ES')+' %':'—'}</b><p class="dl">de visitas a reserva</p></div></div>
  <div class="grid g21" style="margin-top:14px"><div class="box" id="bxLine"><div class="bh"><div><h2>Plazas reservadas por día</h2><p>Últimos ${R} días</p></div><button class="tvb">Ver como tabla</button></div><div class="chart" id="chLine"></div><div class="tvh"></div></div>
  <div class="box"><div class="bh"><div><h2>Del vistazo a la reserva</h2><p>Todos tus planes</p></div></div><div class="fn" id="fnl"></div></div></div>
- <div class="grid g2" style="margin-top:14px"><div class="box"><div class="bh"><h2>Próximos planes</h2><button class="btn ln" data-go="planes">Ver todos</button></div><div class="list">${next.length?next.map(prow).join(''):'<p class="empty">No tienes planes publicados.</p>'}</div></div>
+ <div class="grid g2" style="margin-top:14px"><div class="box"><div class="bh"><h2>Próximos planes</h2><button class="btn ln" data-go="planes">Ver todos</button></div><div class="list">${next.length?next.map(prow).join(''):vacio('Aquí verás los planes que tienes por delante.',accPlan())}</div></div>
  <div class="box"><div class="bh"><h2>Últimas reservas</h2><button class="btn ln" data-go="reservas">Ver todas</button></div>${bookTable(S.book.slice().sort((a,b)=>b.at-a.at).slice(0,6),true)}</div></div>`}
 function prow(p){const s=seatsOf(p);return `<button class="prow" data-open="${p.id}"><div class="th" style="background-image:url(${p.img})"></div><div><h3>${esc(p.t)}</h3><p>${fmtD(p.d)} · ${esc(p.h)} · ${eur(p.pr)}</p><div class="bar"><i style="width:${Math.min(100,s/p.p*100)}%"></i></div><p>${s} de ${p.p} plazas${waitOf(p)?' · '+waitOf(p)+' en lista de espera':''}</p></div>${statusTag(pStatus(p))}</button>`}
 function afterResumen(){const R=S.range;const vals=dailySeries(R);const labels=vals.map((v,i)=>fmtD(iso(+today-(R-1-i)*DAY),{day:'numeric',month:'short'}));lineChart($('#chLine'),labels,vals,v=>num(v)+' plazas','Plazas reservadas por día');withTable($('#bxLine'),['Día','Plazas'],labels.map((l,i)=>[l,vals[i]]).filter(r=>r[1]));
@@ -590,7 +687,7 @@ function afterResumen(){const R=S.range;const vals=dailySeries(R);const labels=v
  $('#fnl').innerHTML=st.map(s=>`<div class="st"><span>${s[0]}</span><div style="width:${Math.max(14,s[1]/mx*100)}%">${num(s[1])}</div></div>`).join('')+`<p class="note" style="margin-top:6px">${pastS?'De las '+num(pastS)+' plazas de planes ya terminados, '+pct(att/pastS)+' hizo check-in.':'"Fueron" se rellena con el check-in de tus planes terminados.'}</p>`;
  $$('#rng button').forEach(b=>b.onclick=()=>{S.range=+b.dataset.d;save();renderDash()})}
 
-function bookTable(list,mini){if(!list.length)return '<p class="empty">Todavía no hay reservas. En cuanto alguien reserve, aparece aquí.</p>';
+function bookTable(list,mini){if(!list.length)return vacio(sinPlanes()?'Todavía no hay reservas, porque aún no has publicado ningún plan.':'Todavía no hay reservas. En cuanto alguien coja plaza, aparece aquí.',mini?'':accPlan());
  const st={confirmada:'<span class="tag a">Confirmada</span>',cancelada:'<span class="tag xx">Cancelada</span>',espera:'<span class="tag p">Lista de espera</span>'};
  return `<div class="tw"><table class="tbl${mini?'':' full'}"><tr><th>Reserva</th>${mini?'':'<th>Plan</th>'}<th>Plazas</th><th class="r">Importe</th><th>Estado</th>${mini?'':'<th>Reservada</th>'}</tr>${list.map(b=>{const p=S.plans.find(x=>x.id==b.pid)||{t:'—'};return `<tr><td><b>${b.code}</b>${mini?`<br><span style="font-size:12px;color:var(--muted)">${esc(p.t)}</span>`:`<br><span class="mob">${esc(p.t)}</span>`}</td>${mini?'':`<td>${esc(p.t)}</td>`}<td>${b.seats}</td><td class="r">${eur(b.amount)}</td><td>${st[b.status]}</td>${mini?'':`<td>${new Date(b.at).toLocaleString('es-ES',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'})}</td>`}</tr>`}).join('')}</table></div>`}
 
@@ -598,7 +695,7 @@ let pTab='todos';
 function vPlanes(){const tabs=[['todos','Todos'],['activo','Publicados'],['borrador','Borradores'],['pausado','Pausados'],['pasado','Terminados']];const list=S.plans.filter(p=>pTab=='todos'||p.status==pTab);
  return `<div class="mh"><div><h1>Planes</h1><p>Todo lo que tienes en NYXA. ${demoPill()}</p></div><button class="btn sm" data-new>Nuevo plan</button></div>
  <div class="tabs seg" id="ptabs" style="display:inline-flex">${tabs.map(t=>`<button data-t="${t[0]}" class="${pTab==t[0]?'on':''}">${t[1]} · ${t[0]=='todos'?S.plans.length:S.plans.filter(p=>p.status==t[0]).length}</button>`).join('')}</div>
- ${list.length?`<div class="pcards">${list.map(p=>{const s=seatsOf(p),g=grossOf(S.book.filter(b=>b.pid==p.id));return `<div class="pc"><div class="im" style="background-image:url(${p.img})">${statusTag(pStatus(p))}</div><div class="bd"><h3>${esc(p.t)}</h3><p class="mt">${fmtD(p.d)} · ${esc(p.h)} · ${esc(p.l||'')}</p><div class="bar" style="max-width:none"><i style="width:${Math.min(100,s/p.p*100)}%"></i></div><p class="mt">${s} de ${p.p} plazas</p><div class="nums"><div><small>Visitas</small><b>${num(p.views)}</b></div><div><small>Precio</small><b>${eur(p.pr)}</b></div><div><small>Vendido</small><b>${eur(g)}</b></div></div><div class="ac"><button class="btn sm g" data-open="${p.id}">Ver detalle</button><button class="btn sm g" data-edit="${p.id}">Editar</button>${p.status=='activo'?`<button class="btn sm g" data-pause="${p.id}">Pausar</button>`:p.status=='pausado'||p.status=='borrador'?`<button class="btn sm" data-pub="${p.id}">Publicar</button>`:''}<button class="btn sm g" data-dup="${p.id}">Duplicar</button></div></div></div>`}).join('')}</div>`:emptyBox('No hay planes aquí.','<button class="btn sm" data-new>Crear un plan</button>')}`}
+ ${list.length?`<div class="pcards">${list.map(p=>{const s=seatsOf(p),g=grossOf(S.book.filter(b=>b.pid==p.id));return `<div class="pc"><div class="im" style="background-image:url(${p.img})">${statusTag(pStatus(p))}</div><div class="bd"><h3>${esc(p.t)}</h3><p class="mt">${fmtD(p.d)} · ${esc(p.h)} · ${esc(p.l||'')}</p><div class="bar" style="max-width:none"><i style="width:${Math.min(100,s/p.p*100)}%"></i></div><p class="mt">${s} de ${p.p} plazas</p><div class="nums"><div><small>Visitas</small><b>${num(p.views)}</b></div><div><small>Precio</small><b>${eur(p.pr)}</b></div><div><small>Vendido</small><b>${eur(g)}</b></div></div><div class="ac"><button class="btn sm g" data-open="${p.id}">Ver detalle</button><button class="btn sm g" data-edit="${p.id}">Editar</button>${p.status=='activo'?`<button class="btn sm g" data-pause="${p.id}">Pausar</button>`:p.status=='pausado'||p.status=='borrador'?`<button class="btn sm" data-pub="${p.id}">Publicar</button>`:''}<button class="btn sm g" data-dup="${p.id}">Duplicar</button></div></div></div>`}).join('')}</div>`:emptyBox(pTab=='todos'?'Todavía no has creado ningún plan.':'No tienes planes en esta pestaña.','<button class="btn sm" data-new>Publicar un plan</button>')}`}
 function afterPlanes(){$$('#ptabs button').forEach(b=>b.onclick=()=>{pTab=b.dataset.t;renderDash()})}
 
 let rQ='',rSt='todas';
@@ -610,7 +707,7 @@ function afterReservas(){const draw=()=>{$('#rbox').innerHTML=bookTable(rFiltere
  $('#csv').onclick=()=>{const rows=[['Reserva','Plan','Plazas','Importe','Estado','Reservada']].concat(rFiltered().map(b=>[b.code,(S.plans.find(p=>p.id==b.pid)||{t:''}).t,b.seats,b.amount,b.status,new Date(b.at).toISOString()]));const csv=rows.map(r=>r.map(c=>'"'+String(c).replace(/"/g,'""')+'"').join(';')).join('\n');const a=document.createElement('a');a.href=URL.createObjectURL(new Blob(['﻿'+csv],{type:'text/csv'}));a.download='reservas-nyxa.csv';a.click();toast('Descargando reservas')}}
 
 function vPublico(){if(!L().pub)return `<div class="mh"><div><h1>Público</h1><p>Quién reserva tus planes.</p></div></div><div class="blurw"><div class="inner">${vPublicoInner()}</div><div class="lockc"><div><img src="/o/abrazo.png" alt="" style="width:64px;margin:0 auto 10px"><h2>Conoce a tu público</h2><p>Edades, cuándo reservan, si repiten y qué quieren vivir. Disponible en Premium.</p><button class="btn" data-up="pub">Probar Premium un mes gratis</button></div></div></div>`;return vPublicoInner()}
-function vPublicoInner(){const c=S.book.filter(conf);if(!c.length)return `<div class="mh"><div><h1>Público</h1><p>Quién reserva tus planes, siempre en datos agregados.</p></div></div>`+emptyBox('Cuando tengas reservas, aquí verás edades, cuándo reservan y si repiten.');
+function vPublicoInner(){const c=S.book.filter(conf);if(!c.length)return `<div class="mh"><div><h1>Público</h1><p>Quién reserva tus planes, siempre en datos agregados.</p></div></div>`+emptyBox('Cuando alguien reserve, aquí verás edades, a qué hora reservan y cuántos repiten. Nunca nombres ni contactos.',accPlan());
  const nw=c.filter(b=>b.isNew).length/c.length;
  return `<div class="mh"><div><h1>Público</h1><p>Quién reserva tus planes. ${demoPill()}</p></div></div>
  <p class="note" style="margin-bottom:14px">🔒 Datos agregados y anónimos. Nunca verás nombres, fotos ni contactos de nadie.</p>
@@ -635,7 +732,7 @@ function vIngresos(){const gross=grossOf(S.book),com=comOfList(S.book);const mn=
 function afterIngresos(){const rb=$('#repBtn');rb&&(rb.onclick=()=>L().rep?toast('En el panel real se descarga el PDF'):openUp('rep'));const ms=[];for(let k=5;k>=0;k--){const a=new Date(today.getFullYear(),today.getMonth()-k,1),b=new Date(today.getFullYear(),today.getMonth()-k+1,1);const l=S.book.filter(x=>x.at>=+a&&x.at<+b);const g=grossOf(l),c=comOfList(l);ms.push({l:a.toLocaleDateString('es-ES',{month:'short'}),net:g-c,com:c})}
  barChart($('#chBar'),ms.map(m=>m.l),[{n:'Te llega a ti',c:'#2F66FF',v:ms.map(m=>m.net)},{n:'Comisión NYXA',c:'#E39A17',v:ms.map(m=>m.com)}],eur,'Ingresos por mes');withTable($('#bxBar'),['Mes','Te llega','Comisión'],ms.map(m=>[m.l,eur(m.net),eur(m.com)]));
  const wk=[];for(let k=0;k<6;k++){const end=+today-k*7*DAY,st=end-7*DAY;const l=S.book.filter(x=>x.at>=st&&x.at<end);const v=grossOf(l)-comOfList(l);if(v>0)wk.push({d:iso(end+2*DAY),v,st:k==0?'En camino':'Pagado'})}
- $('#liq').innerHTML=wk.length?`<div class="tw"><table class="tbl"><tr><th>Fecha</th><th class="r">Importe</th><th>Estado</th></tr>${wk.map(w=>`<tr><td>${fmtD(w.d,{day:'numeric',month:'long'})}</td><td class="r"><b>${eur(w.v)}</b></td><td>${w.st=='Pagado'?'<span class="tag a">Pagado</span>':'<span class="tag c">En camino</span>'}</td></tr>`).join('')}</table></div>`:'<p class="empty">Aún no hay liquidaciones.</p>'}
+ $('#liq').innerHTML=wk.length?`<div class="tw"><table class="tbl"><tr><th>Fecha</th><th class="r">Importe</th><th>Estado</th></tr>${wk.map(w=>`<tr><td>${fmtD(w.d,{day:'numeric',month:'long'})}</td><td class="r"><b>${eur(w.v)}</b></td><td>${w.st=='Pagado'?'<span class="tag a">Pagado</span>':'<span class="tag c">En camino</span>'}</td></tr>`).join('')}</table></div>`:vacio('Aún no hay liquidaciones. Después de cada plan, NYXA te ingresa lo cobrado con la comisión ya descontada, y aquí queda el detalle.',accPlan())}
 
 function vCuenta(){const pl=planOf(S.plan);const Y='<span class="y">✓</span>',N='<span class="n">—</span>';const rows=[['Planes publicados a la vez','3','Sin límite','Sin límite'],['Perfil de empresa y panel',Y,Y,Y],['Check-in, calendario y reservas',Y,Y,Y],['Códigos de descuento','1','Hasta 10','Sin límite'],['Destacar planes',N,Y,Y],['Público y datos en vivo',N,Y,Y],['Informes mensuales',N,Y,Y],['Personas del equipo','1','3','Sin límite'],['Impulso de visibilidad','+5 puntos','+5 puntos','+3 puntos'],['Exclusiva de tu categoría o zona',N,N,Y],['Gestor de NYXA para ti',N,N,Y],['Acceso antes que nadie a lo nuevo',N,N,Y]];const cmp=`<div class="box" style="margin-top:14px"><div class="bh"><h2>Compara los planes</h2></div><div class="tw"><table class="cmp"><tr><th></th>${PLANS.map(p=>`<th class="${p[0]==S.plan?'hi':''}">${p[1]}<small>${eur(p[2])}/mes${p[3]?' · '+p[3].toLowerCase():''}</small></th>`).join('')}</tr>${rows.map(r=>`<tr><td>${r[0]}</td>${[1,2,3].map(i=>`<td class="${PLANS[i-1][0]==S.plan?'hi':''}">${r[i]}</td>`).join('')}</tr>`).join('')}<tr><td></td>${PLANS.map(p=>`<td class="${p[0]==S.plan?'hi':''}">${p[0]==S.plan?'<span class="tag a">Tu plan</span>':`<button class="btn sm" data-setplan="${p[0]}">${p[0]=='premium'?'Probar gratis':'Elegir'}</button>`}</td>`).join('')}</tr></table></div></div>`;const avg=S.plans.length?Math.round(S.plans.reduce((a,p)=>a+p.pr,0)/S.plans.length):30;const roi=`<div class="box" style="margin-top:14px"><div class="bh"><div><h2>¿Te sale a cuenta subir de plan?</h2><p>Calcúlalo con tus números</p></div></div><div class="roi"><div><div class="f"><label for="roiP">Precio medio de tus planes: <b id="roiPv">${eur(avg)}</b></label><input type="range" id="roiP" min="5" max="800" step="5" value="${avg}"></div><div class="f" style="margin-top:16px"><label for="roiT">Pasar a</label><select id="roiT"><option value="premium">Premium</option><option value="ultra" selected>Ultra</option></select></div></div><div class="out" id="roiO"></div></div></div>`;const inv=[];for(let k=0;k<4;k++){const d=new Date(today.getFullYear(),today.getMonth()-k,1);inv.push({d:iso(d),v:k==0&&S.plan=='premium'&&!S.demo?0:pl[2]})}
  return `<div class="mh"><div><h1>Plan y facturación</h1><p>Cambia de plan cuando quieras. Sin permanencia.</p></div></div>
@@ -683,7 +780,7 @@ function vCalendario(){const base=new Date(today.getFullYear(),today.getMonth()+
 function afterCalendario(){$('#cPrev').onclick=()=>{S.calM--;save();renderDash()};$('#cNext').onclick=()=>{S.calM++;save();renderDash()}}
 
 let ciP=null;
-function vCheckin(){const cand=S.plans.filter(p=>p.status!='borrador').sort((a,b)=>Math.abs(new Date(a.d)-today)-Math.abs(new Date(b.d)-today));if(!cand.length)return `<div class="mh"><div><h1>Check-in</h1></div></div>`+emptyBox('Cuando tengas planes, aquí marcarás quién llega.');
+function vCheckin(){const cand=S.plans.filter(p=>p.status!='borrador').sort((a,b)=>Math.abs(new Date(a.d)-today)-Math.abs(new Date(b.d)-today));if(!cand.length)return `<div class="mh"><div><h1>Check-in</h1></div></div>`+emptyBox('Aquí marcarás quién llega el día del plan, uno a uno o por código.',accPlan());
  if(!ciP||!S.plans.find(p=>p.id==ciP))ciP=cand[0].id;const p=S.plans.find(x=>x.id==ciP);const bl=S.book.filter(b=>b.pid==p.id&&conf(b));const tot=bl.reduce((a,b)=>a+b.seats,0),inn=bl.filter(b=>b.in).reduce((a,b)=>a+b.seats,0);
  return `<div class="mh"><div><h1>Check-in</h1><p>El día del plan, marca quién llega con su código o su QR.</p></div><div class="ctl"><select class="srch" id="ciSel" aria-label="Elegir plan">${cand.map(x=>`<option value="${x.id}" ${x.id==ciP?'selected':''}>${esc(x.t)} · ${fmtD(x.d,{day:'numeric',month:'short'})}</option>`).join('')}</select></div></div>
  <div class="grid g3"><div class="box kpi bl"><small>Han llegado</small><b>${inn} / ${tot}</b><p class="dl">plazas</p></div><div class="box kpi"><small>Asistencia</small><b>${tot?pct(inn/tot):'—'}</b><p class="dl">de las plazas confirmadas</p></div><div class="box kpi"><small>Faltan</small><b>${tot-inn}</b><p class="dl">por llegar</p></div></div>
@@ -698,16 +795,16 @@ function afterCheckin(){const s=$('#ciSel');if(!s)return;s.onchange=e=>{ciP=e.ta
 function vPromos(){const prem=L().feat;const act=S.plans.filter(p=>p.status=='activo');const usedRes=S.promos.reduce((a,x)=>a+x.used,0);
  return `<div class="mh"><div><h1>Promociones</h1><p>Herramientas para llenar más y antes. ${demoPill()}</p></div><button class="btn sm" data-newpromo>Nuevo código</button></div>
  <div class="grid g3"><div class="box kpi bl"><small>Códigos activos</small><b>${S.promos.filter(x=>x.on).length}</b><p class="dl">en tus planes</p></div><div class="box kpi"><small>Reservas con código</small><b>${usedRes}</b><p class="dl">desde que los creaste</p></div><div class="box kpi"><small>Planes destacados</small><b>${act.filter(p=>S.feat[p.id]).length} / ${act.length}</b><p class="dl">de tus planes publicados</p></div></div>
- <div class="box" style="margin-top:14px"><div class="bh"><div><h2>Códigos de descuento</h2><p>Compártelos en tus redes, con tus clientes o en tu local.</p></div></div>${S.promos.length?`<div class="tw"><table class="tbl"><tr><th>Código</th><th>Descuento</th><th>Plan</th><th>Usos</th><th>Hasta</th><th>Activo</th></tr>${S.promos.map((x,i)=>`<tr><td><b>${esc(x.code)}</b></td><td>${x.type=='%'?x.v+' %':eur(x.v)}</td><td>${x.pid?esc((S.plans.find(p=>p.id==x.pid)||{t:'—'}).t):'Todos'}</td><td>${x.used} / ${x.max}</td><td>${fmtD(x.until,{day:'numeric',month:'short'})}</td><td><button class="sw ${x.on?'on':''}" data-pr="${i}" role="switch" aria-checked="${x.on}" aria-label="Activar ${esc(x.code)}"></button></td></tr>`).join('')}</table></div>`:'<p class="empty">Todavía no tienes códigos.</p>'}</div>
- <div class="box" style="margin-top:14px"><div class="bh"><div><h2>Destacar en NYXA</h2><p>Tu plan aparece primero ante la gente que encaja con él.</p></div></div>${prem?act.map(p=>`<div class="rowf"><div class="nm"><div class="th" style="background-image:url(${p.img})"></div><div><h3>${esc(p.t)}</h3><p>${seatsOf(p)} de ${p.p} plazas · ${fmtD(p.d)}</p></div></div><button class="sw ${S.feat[p.id]?'on':''}" data-ft="${p.id}" role="switch" aria-checked="${!!S.feat[p.id]}" aria-label="Destacar ${esc(p.t)}"></button></div>`).join('')||'<p class="empty">Publica un plan para destacarlo.</p>':`<div class="lock"><div><b>Disponible en Premium y Ultra</b><p>Destaca tus planes ante quien ya quiere lo que haces. Primer mes gratis.</p></div><button class="btn" data-up="feat">Probar Premium</button></div>`}</div>
- <div class="box" style="margin-top:14px"><div class="bh"><div><h2>Oferta de última hora</h2><p>Si a 48 h del plan quedan plazas libres, NYXA las ofrece con descuento a quien encaja.</p></div></div>${act.map(p=>`<div class="rowf"><div class="nm"><div class="th" style="background-image:url(${p.img})"></div><div><h3>${esc(p.t)}</h3><p>${S.last[p.id]?S.last[p.id]+' % de descuento en las plazas libres':'Desactivada'}</p></div></div><select class="srch" style="width:auto" data-lm="${p.id}" aria-label="Descuento de última hora">${[0,10,15,20,30].map(v=>`<option value="${v}" ${(S.last[p.id]||0)==v?'selected':''}>${v?v+' %':'No'}</option>`).join('')}</select></div>`).join('')||'<p class="empty">Publica un plan para activarla.</p>'}</div>`}
+ <div class="box" style="margin-top:14px"><div class="bh"><div><h2>Códigos de descuento</h2><p>Compártelos en tus redes, con tus clientes o en tu local.</p></div></div>${S.promos.length?`<div class="tw"><table class="tbl"><tr><th>Código</th><th>Descuento</th><th>Plan</th><th>Usos</th><th>Hasta</th><th>Activo</th></tr>${S.promos.map((x,i)=>`<tr><td><b>${esc(x.code)}</b></td><td>${x.type=='%'?x.v+' %':eur(x.v)}</td><td>${x.pid?esc((S.plans.find(p=>p.id==x.pid)||{t:'—'}).t):'Todos'}</td><td>${x.used} / ${x.max}</td><td>${fmtD(x.until,{day:'numeric',month:'short'})}</td><td><button class="sw ${x.on?'on':''}" data-pr="${i}" role="switch" aria-checked="${x.on}" aria-label="Activar ${esc(x.code)}"></button></td></tr>`).join('')}</table></div>`:vacio('Todavía no tienes códigos. Un descuento sirve para llenar las plazas que se quedan sueltas.','<button class="btn sm" data-newpromo>Crear un código</button>')}</div>
+ <div class="box" style="margin-top:14px"><div class="bh"><div><h2>Destacar en NYXA</h2><p>Tu plan aparece primero ante la gente que encaja con él.</p></div></div>${prem?act.map(p=>`<div class="rowf"><div class="nm"><div class="th" style="background-image:url(${p.img})"></div><div><h3>${esc(p.t)}</h3><p>${seatsOf(p)} de ${p.p} plazas · ${fmtD(p.d)}</p></div></div><button class="sw ${S.feat[p.id]?'on':''}" data-ft="${p.id}" role="switch" aria-checked="${!!S.feat[p.id]}" aria-label="Destacar ${esc(p.t)}"></button></div>`).join('')||vacio('Destacar pone un plan tuyo delante de quien encaja con él.',accPlan()):`<div class="lock"><div><b>Disponible en Premium y Ultra</b><p>Destaca tus planes ante quien ya quiere lo que haces. Primer mes gratis.</p></div><button class="btn" data-up="feat">Probar Premium</button></div>`}</div>
+ <div class="box" style="margin-top:14px"><div class="bh"><div><h2>Oferta de última hora</h2><p>Si a 48 h del plan quedan plazas libres, NYXA las ofrece con descuento a quien encaja.</p></div></div>${act.map(p=>`<div class="rowf"><div class="nm"><div class="th" style="background-image:url(${p.img})"></div><div><h3>${esc(p.t)}</h3><p>${S.last[p.id]?S.last[p.id]+' % de descuento en las plazas libres':'Desactivada'}</p></div></div><select class="srch" style="width:auto" data-lm="${p.id}" aria-label="Descuento de última hora">${[0,10,15,20,30].map(v=>`<option value="${v}" ${(S.last[p.id]||0)==v?'selected':''}>${v?v+' %':'No'}</option>`).join('')}</select></div>`).join('')||vacio('La oferta de última hora rebaja las plazas que queden libres cuando se acerca la fecha.',accPlan())}</div>`}
 function afterPromos(){$$('[data-pr]').forEach(x=>x.onclick=()=>{const pr=S.promos[+x.dataset.pr];pr.on=!pr.on;save();renderDash()});
  $$('[data-ft]').forEach(x=>x.onclick=()=>{S.feat[x.dataset.ft]=!S.feat[x.dataset.ft];save();renderDash();toast(S.feat[x.dataset.ft]?'Plan destacado':'Ya no está destacado')});
  $$('[data-lm]').forEach(x=>x.onchange=()=>{S.last[x.dataset.lm]=+x.value;save();renderDash();toast(+x.value?'Oferta de última hora activada':'Oferta desactivada')})}
 function openPromo(){if(S.promos.length>=L().codes){openUp('codes');return}const act=S.plans.filter(p=>p.status=='activo');openDrw(`<h2>Nuevo código</h2><div class="form"><div class="f full"><label for="pcC">Código</label><input id="pcC" maxlength="16" placeholder="VERANO15" style="text-transform:uppercase"></div><div class="f"><label for="pcT">Tipo</label><select id="pcT"><option value="%">Porcentaje</option><option value="€">Euros</option></select></div><div class="f"><label for="pcV">Descuento</label><input id="pcV" type="number" min="1" value="10"></div><div class="f"><label for="pcP">Plan</label><select id="pcP"><option value="">Todos mis planes</option>${act.map(p=>`<option value="${p.id}">${esc(p.t)}</option>`).join('')}</select></div><div class="f"><label for="pcM">Usos máximos</label><input id="pcM" type="number" min="1" value="50"></div><div class="f full"><label for="pcU">Válido hasta</label><input id="pcU" type="date" value="${iso(+today+30*DAY)}"></div></div><p class="note" style="margin-top:14px">El descuento sale de tu precio. La comisión de NYXA se calcula sobre lo que paga la persona.</p><p class="err" id="pcE" role="alert"></p><div class="act"><button class="btn" id="pcS">Crear código</button></div>`);
  $('#pcS').onclick=()=>{const c=$('#pcC').value.trim().toUpperCase().replace(/[^A-Z0-9]/g,'');if(c.length<3){$('#pcE').textContent='El código necesita al menos 3 letras o números.';return}if(S.promos.some(x=>x.code==c)){$('#pcE').textContent='Ya tienes un código con ese nombre.';return}S.promos.push({code:c,type:$('#pcT').value,v:Math.max(1,+$('#pcV').value||1),pid:$('#pcP').value,max:Math.max(1,+$('#pcM').value||1),used:0,until:$('#pcU').value,on:true});save();closeDrw();S.view='promos';renderDash();toast('Código '+c+' creado')}}
 
-function vResenas(){const R=S.reviews;if(!R.length)return `<div class="mh"><div><h1>Valoraciones</h1><p>Lo que dice la gente que ha ido.</p></div></div>`+emptyBox('Después de cada plan, NYXA pide una valoración a quien fue. Aparecerán aquí.');
+function vResenas(){const R=S.reviews;if(!R.length)return `<div class="mh"><div><h1>Valoraciones</h1><p>Lo que dice la gente que ha ido.</p></div></div>`+emptyBox('Después de cada plan, NYXA le pide una valoración a quien fue. Las que te dejen aparecen aquí.',accPlan());
  const av=R.reduce((a,r)=>a+r.s,0)/R.length;const st=n=>'★'.repeat(n)+'☆'.repeat(5-n);
  return `<div class="mh"><div><h1>Valoraciones</h1><p>Lo que dice la gente que ha ido. ${demoPill()}</p></div></div>
  <div class="grid g21"><div class="box"><div class="bh"><h2>Opiniones</h2></div>${R.slice().sort((a,b)=>b.at-a.at).map(r=>{const p=S.plans.find(x=>x.id==r.pid)||{t:''};return `<div class="rv2"><div class="tp2"><span class="stars" aria-label="${r.s} de 5">${st(r.s)}</span><span style="font-size:12.5px;color:var(--muted)">Asistente verificado · ${esc(p.t)} · ${fmtD(iso(r.at),{day:'numeric',month:'short'})}</span></div><p>${esc(r.c)}</p>${r.rep?`<div class="rep"><b>Tu respuesta:</b> ${esc(r.rep)}</div>`:`<textarea data-rt="${r.id}" placeholder="Responde en público…" aria-label="Responder valoración"></textarea><div class="act" style="margin-top:8px"><button class="btn sm" data-rr="${r.id}">Responder</button></div>`}</div>`}).join('')}</div>
@@ -717,7 +814,7 @@ function afterResenas(){const R=S.reviews;if(!R.length)return;hbars($('#chRv'),[
 
 function vPreguntas(){const Q=S.qs.slice().sort((a,b)=>(!!a.a)-(!!b.a)||b.at-a.at);
  return `<div class="mh"><div><h1>Preguntas</h1><p>Lo que pregunta la gente en tus planes. Tu respuesta se ve en el plan. ${demoPill()}</p></div></div>
- <div class="box">${Q.length?Q.map(q=>{const p=S.plans.find(x=>x.id==q.pid)||{t:''};return `<div class="rv2"><div class="tp2"><b>${esc(q.q)}</b>${q.a?'<span class="tag a">Respondida</span>':'<span class="tag p">Sin responder</span>'}</div><p style="font-size:12.5px;color:var(--muted)">${esc(p.t)} · ${new Date(q.at).toLocaleString('es-ES',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'})}</p>${q.a?`<div class="rep">${esc(q.a)}</div>`:`<div class="qr">${['¡Sí! Puedes venir solo, la mayoría viene así.','Todo está incluido en el precio.','Te mandamos los detalles 48 h antes.'].map(x=>`<button data-qrt="${q.id}" data-txt="${esc(x)}">${esc(x)}</button>`).join('')}</div><textarea data-qt="${q.id}" placeholder="Escribe tu respuesta…" aria-label="Responder pregunta"></textarea><div class="act" style="margin-top:8px"><button class="btn sm" data-qa="${q.id}">Responder</button></div>`}</div>`}).join(''):'<p class="empty">Todavía no te han preguntado nada.</p>'}</div>`}
+ <div class="box">${Q.length?Q.map(q=>{const p=S.plans.find(x=>x.id==q.pid)||{t:''};return `<div class="rv2"><div class="tp2"><b>${esc(q.q)}</b>${q.a?'<span class="tag a">Respondida</span>':'<span class="tag p">Sin responder</span>'}</div><p style="font-size:12.5px;color:var(--muted)">${esc(p.t)} · ${new Date(q.at).toLocaleString('es-ES',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'})}</p>${q.a?`<div class="rep">${esc(q.a)}</div>`:`<div class="qr">${['¡Sí! Puedes venir solo, la mayoría viene así.','Todo está incluido en el precio.','Te mandamos los detalles 48 h antes.'].map(x=>`<button data-qrt="${q.id}" data-txt="${esc(x)}">${esc(x)}</button>`).join('')}</div><textarea data-qt="${q.id}" placeholder="Escribe tu respuesta…" aria-label="Responder pregunta"></textarea><div class="act" style="margin-top:8px"><button class="btn sm" data-qa="${q.id}">Responder</button></div>`}</div>`}).join(''):vacio('Todavía no te han preguntado nada. Aquí llegan las dudas de quien se está pensando venir, y lo que respondas lo ve todo el mundo.')}</div>`}
 function afterPreguntas(){$$('[data-qrt]').forEach(b=>b.onclick=()=>{$(`[data-qt="${b.dataset.qrt}"]`).value=b.dataset.txt});$$('[data-qa]').forEach(b=>b.onclick=()=>{const q=S.qs.find(x=>x.id==b.dataset.qa);const v=$(`[data-qt="${q.id}"]`).value.trim();if(!v){toast('Escribe tu respuesta');return}q.a=v;save();renderDash();toast('Respuesta publicada en el plan')})}
 
 function vPerfil(){const b=S.biz,des=DESEOS[b.s],hl=S.prof.hl||[];const gal=S.prof.gal||[];
@@ -781,7 +878,7 @@ function vProgramas(){const C=topCrit(),top=C.every(c=>c[4]);const av=S.reviews.
  <div class="box pgm"><div class="ph2"><img src="/o/estrella.png" alt=""><div><h3>Empresa Top NYXA</h3><p class="sub2">Se revisa cada mes con tus últimos 12 meses</p></div></div>${top?'<span class="badge2">✓ Eres Empresa Top</span>':'<span class="badge2 no">Todavía no · sigue así</span>'}<ul class="ben"><li>Insignia Top en tu perfil y tus planes</li><li>Mejor posición en Explorar</li><li>Acceso antes que nadie a lo nuevo</li></ul><div class="crit">${C.map(c=>`<div class="c ${c[4]?'ok2':''}"><b>${c[0]}</b><span>${c[1]} · ${c[2]}</span><div class="bar"><i style="width:${c[3]*100}%"></i></div></div>`).join('')}</div></div>
  <div class="box pgm"><div class="ph2"><img src="/o/corazon.png" alt=""><div><h3>Club NYXA</h3><p class="sub2">Un descuento para quien más planes vive en NYXA</p></div></div><ul class="ben"><li>Etiqueta Club en tus planes</li><li>Te enseñamos a la gente más activa de la app</li><li>Puedes pausarlo hasta 30 días al año</li></ul><div class="rowf"><div><b>Descuento Club</b><p class="note">Solo para personas con 3 o más planes vividos</p></div><select class="srch" style="width:auto" id="clubD">${[10,15,20].map(v=>`<option value="${v}" ${S.club.d==v?'selected':''}>${v} %</option>`).join('')}</select></div><div class="rowf"><b>${S.club.on?'Estás en el Club':'Unirme al Club'}</b><button class="sw ${S.club.on?'on':''}" id="clubOn" role="switch" aria-checked="${S.club.on}" aria-label="Club NYXA"></button></div></div>
  <div class="box pgm"><div class="ph2"><img src="/o/trato.png" alt=""><div><h3>Socio preferente</h3><p class="sub2">Más visibilidad a cambio de 3 puntos más de comisión</p></div></div><ul class="ben"><li>Etiqueta Preferente en tus planes</li><li>Más arriba en los resultados</li><li>Solo pagas la diferencia en lo que se reserva</li></ul>${av>=4.5||!S.reviews.length?`<div class="rowf"><b>${S.pref?'Eres socio preferente':'Hacerme socio preferente'}</b><button class="sw ${S.pref?'on':''}" id="prefOn" role="switch" aria-checked="${S.pref}" aria-label="Socio preferente"></button></div>`:'<p class="note">Necesitas una valoración de 4,5 o más para entrar.</p>'}</div>
- <div class="box pgm"><div class="ph2"><img src="/o/sol.png" alt=""><div><h3>Impulso de visibilidad</h3><p class="sub2">Para semanas flojas: tu plan sube durante 7 días</p></div></div><ul class="ben"><li>Pagas ${S.plan=='ultra'?'3':'5'} puntos más de comisión, solo en lo que se reserve gracias al impulso</li><li>Lo activas y lo paras cuando quieras</li>${S.plan=='ultra'?'<li>Con Ultra pagas menos por cada impulso</li>':''}</ul>${S.plans.filter(p=>p.status=='activo').map(p=>`<div class="rowf"><div class="nm"><div class="th" style="background-image:url(${p.img})"></div><div><h3>${esc(p.t)}</h3><p>${S.boost[p.id]?'Impulsado hasta el '+fmtD(S.boost[p.id],{day:'numeric',month:'short'}):'Sin impulso'}</p></div></div><button class="btn sm ${S.boost[p.id]?'g':''}" data-boost="${p.id}">${S.boost[p.id]?'Parar':'Impulsar 7 días'}</button></div>`).join('')||'<p class="empty">Publica un plan para impulsarlo.</p>'}</div>
+ <div class="box pgm"><div class="ph2"><img src="/o/sol.png" alt=""><div><h3>Impulso de visibilidad</h3><p class="sub2">Para semanas flojas: tu plan sube durante 7 días</p></div></div><ul class="ben"><li>Pagas ${S.plan=='ultra'?'3':'5'} puntos más de comisión, solo en lo que se reserve gracias al impulso</li><li>Lo activas y lo paras cuando quieras</li>${S.plan=='ultra'?'<li>Con Ultra pagas menos por cada impulso</li>':''}</ul>${S.plans.filter(p=>p.status=='activo').map(p=>`<div class="rowf"><div class="nm"><div class="th" style="background-image:url(${p.img})"></div><div><h3>${esc(p.t)}</h3><p>${S.boost[p.id]?'Impulsado hasta el '+fmtD(S.boost[p.id],{day:'numeric',month:'short'}):'Sin impulso'}</p></div></div><button class="btn sm ${S.boost[p.id]?'g':''}" data-boost="${p.id}">${S.boost[p.id]?'Parar':'Impulsar 7 días'}</button></div>`).join('')||vacio('Impulsar enseña un plan tuyo a más gente de tu ciudad durante siete días.',accPlan())}</div>
  </div>`}
 function afterProgramas(){const c=$('#clubOn');c&&(c.onclick=()=>{S.club.on=!S.club.on;save();renderDash();toast(S.club.on?'Ya estás en el Club NYXA':'Has salido del Club')});const d=$('#clubD');d&&(d.onchange=()=>{S.club.d=+d.value;save()});
  const pf=$('#prefOn');pf&&(pf.onclick=()=>{S.pref=!S.pref;save();renderDash();toast(S.pref?'Ahora eres socio preferente':'Ya no eres socio preferente')});
