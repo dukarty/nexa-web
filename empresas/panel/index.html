@@ -377,7 +377,10 @@ em[style*="12A150"],.up,.pos,.tag.a,.ok{color:#0B7A3B!important}
 /* El azul de marca como texto pequeño no llega: 4,22 sobre crema y 4,47
    sobre blanco. --blue-txt es el mismo azul un punto más oscuro, y ya
    estaba definido para esto. */
-.pill2,.tag.c,#nav button.on,.qr button{color:var(--blue-txt)}  /* → 5,3-5,9 */
+.pill2,.tag.c,#nav button.on,.qr button,.btn.ln{color:var(--blue-txt)}  /* → 5,3-5,9 */
+/* `.btn.ln` («Ver todas», «Hacerlo») daba 4,70 sobre blanco, que pasa justo.
+   Al poner en crema la tarjeta de los estados vacíos, el mismo botón cayó a
+   4,47 y dejó de pasar. Con --blue-txt pasa en los dos fondos. */
 
 /* ── Ritmo · una escala de títulos, no ocho tamaños (24-nov) ─────────────────
    El panel tenía 15, 16, 17, 18, 24, 26, 28 y 46 px de título. Cuatro de
