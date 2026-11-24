@@ -411,9 +411,19 @@ em[style*="12A150"],.up,.pos,.tag.a,.ok{color:#0B7A3B!important}
   margin-inline:auto;
   text-wrap:pretty;             /* y que no se quede una palabra sola */
 }
-/* Si la caja no contiene más que el vacío, se queda sin fondo: así no hay una
-   tarjeta blanca enorme pidiendo un contenido que todavía no existe. */
-.box:has(> .empty:only-child){background:transparent;box-shadow:none}
+/* Probé a quitarle el fondo a la caja cuando sólo contiene el vacío, y quedó
+   PEOR: el mensaje flotaba suelto en la página y parecía aún más que algo
+   había fallado. La tarjeta se queda: es lo que ancla el mensaje. Lo que
+   cambia es el aire de dentro y el tono del texto. */
+.box:has(> .empty:only-child){
+  display:grid;
+  place-items:center;
+  min-height:220px;             /* ocupa como ocuparía el contenido que falta */
+  background:var(--paper);      /* crema, no blanco: se distingue de una lista
+                                   llena sin dejar de ser una superficie */
+  box-shadow:inset 0 0 0 1px var(--line);
+}
+.box:has(> .empty:only-child) .empty{padding:0 24px}
 </style>
 </head>
 <body>
