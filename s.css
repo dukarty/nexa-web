@@ -685,3 +685,17 @@ h1,h2,h3,h4,h5{text-wrap:balance}p{text-wrap:pretty}
 .emp-h,.bz-hd{max-width:1000px}
 .bz-hd h2{max-width:22ch;margin-left:auto;margin-right:auto}
 @media(max-width:700px){.emp-h,.bz-hd,.bz-hd h2{max-width:none}}
+
+/* ── Comisión por tipo de negocio (24-nov) ─────────────────────────────────
+   Sustituye al bloque de tres cifras. Misma familia visual: filete grueso
+   arriba, cifra en azul de marca, texto de apoyo en gris. */
+.bz-cm2{margin-top:28px;border-top:2px solid var(--ink)}
+.bz-cm2 .cmh{padding:20px 0 2px}
+.bz-cm2 .cmh .lbl{display:block;color:var(--muted);margin-bottom:6px}
+.bz-cm2 .cmh p{margin:0;color:var(--body);font-size:15px;max-width:62ch}
+.bz-cm2 ul{list-style:none;margin:10px 0 0;padding:0}
+.bz-cm2 li{display:flex;align-items:center;justify-content:space-between;gap:24px;padding:17px 0;border-top:1px solid var(--line)}
+.bz-cm2 li b{display:block;font:800 17px/1.25 var(--s);color:var(--ink)}
+.bz-cm2 li span{display:block;margin-top:3px;color:var(--muted);font-size:14.5px;line-height:1.45;max-width:54ch}
+.bz-cm2 li em{flex:none;font:900 clamp(28px,2.6vw,38px)/1 var(--s);font-style:normal;letter-spacing:-.03em;color:var(--blue)}
+@media(max-width:560px){.bz-cm2 li{gap:14px;padding:15px 0}.bz-cm2 li em{font-size:26px}.bz-cm2 li span{font-size:13.5px}}
