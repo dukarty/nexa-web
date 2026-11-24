@@ -409,7 +409,9 @@ em[style*="12A150"],.up,.pos,.tag.a,.ok{color:#0B7A3B!important}
   padding:52px 24px;            /* era 26px 4px */
   max-width:46ch;               /* una línea de lectura, no todo el ancho */
   margin-inline:auto;
-  text-wrap:pretty;             /* y que no se quede una palabra sola */
+  text-wrap:balance;            /* `pretty` sólo salva UNA palabra suelta, y
+                                   aquí quedaban colas de tres. `balance`
+                                   reparte las líneas: son textos cortos. */
 }
 /* Probé a quitarle el fondo a la caja cuando sólo contiene el vacío, y quedó
    PEOR: el mensaje flotaba suelto en la página y parecía aún más que algo
@@ -424,6 +426,9 @@ em[style*="12A150"],.up,.pos,.tag.a,.ok{color:#0B7A3B!important}
   box-shadow:inset 0 0 0 1px var(--line);
 }
 .box:has(> .empty:only-child) .empty{padding:0 24px}
+
+/* Las notas al pie de las secciones dejaban la última frase colgando. */
+.note{text-wrap:balance}
 </style>
 </head>
 <body>
