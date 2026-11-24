@@ -365,8 +365,11 @@ em[style*="12A150"],.up,.pos,.tag.a,.ok{color:#0B7A3B!important}
    jerarquía la llevan el tamaño y el peso, que es donde debe estar. */
 .kpi.bl small,.kpi.bl .dl{color:#fff}      /* 3,48 → 4,70 */
 
-/* El contador de avisos: tinta sobre azul. En blanco se lee. */
-.bell b{color:#fff}                        /* 4,16 → 4,70 */
+/* El contador de avisos: tinta sobre azul, 4,16. Lleva !important porque la
+   barra lateral fuerza su propio color con `.sb,.sb *` y `.sb b` cuando se
+   aclaró el fondo; sin él, esta regla no gana nunca. Es la única burbuja de
+   la barra con relleno de color, así que la excepción es esa y sólo esa. */
+.sb .bell b{color:#fff!important}          /* 4,16 → 4,70 */
 
 /* El azul de marca como texto pequeño no llega: 4,22 sobre crema y 4,47
    sobre blanco. --blue-txt es el mismo azul un punto más oscuro, y ya
