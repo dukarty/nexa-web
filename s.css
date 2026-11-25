@@ -930,3 +930,14 @@ h1,h2,h3,h4,h5{text-wrap:balance}p{text-wrap:pretty}
 .pl.pr-ox            { opacity: .78; }
 .pl.pr-ox .pr b      { color: var(--muted); }   /* el precio no grita */
 .pl.pr-ox:hover      { opacity: 1; }
+
+/* La etiqueta no se estira: dentro de una tarjeta flex en columna, un
+   inline-block ocupa todo el ancho si no se le dice que no. */
+.pl-tg { align-self: flex-start; }
+
+/* La promesa va justo bajo el h1 y con peso: es la frase que decide, no una
+   nota al pie. «Entra gratis» arriba, «solo pagas comisión» aquí: juntas se
+   leen de un golpe, y el h1 no se come medio hero. Con la frase entera como
+   h1 salían CUATRO líneas en un móvil de 390 px y 359 px de alto a 1440. */
+.bz-claim { font-size: clamp(17px, 1.5vw, 21px); font-weight: 600;
+            color: var(--ink); max-width: 30ch; }
