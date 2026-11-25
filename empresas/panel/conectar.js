@@ -233,9 +233,14 @@
     let a = null;
     try { a = JSON.parse(localStorage.getItem('nyxa_alta_v1') || 'null'); } catch (e) {}
     if (!a) return;
-    // Sólo rellena los huecos: nunca pisa algo que ya haya tocado.
-    ['n','s','c','e','t','d'].forEach(k => { if (!S.biz[k] && a[k]) S.biz[k] = a[k]; });
+    /* Sector y ciudad vienen con un valor por defecto del panel ('viajes',
+       'Valencia') que nadie ha elegido: ésos sí se pisan con lo que escribió
+       en el alta. El resto sólo rellena huecos. */
+    ['n','e','t','d'].forEach(k => { if (!S.biz[k] && a[k]) S.biz[k] = a[k]; });
+    ['s','c'].forEach(k => { if (a[k]) S.biz[k] = a[k]; });
     guardar();
+    // El panel ya dibujó el formulario vacío antes de que esto corriera.
+    if (S.stage === 'ob') pintar();
   }
 
   /* ── Arranque ────────────────────────────────────────────────────────── */
