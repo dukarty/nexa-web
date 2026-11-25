@@ -531,8 +531,16 @@ let S;try{S=JSON.parse(localStorage.getItem(KEY))}catch(e){}
 const blank=()=>({step:0,biz:{n:'',s:'viajes',c:'Valencia',e:'',t:'',d:'',web:'',ig:''},plan:'premium',draft:{t:'',d:'',h:'10:00',l:'',p:15,pr:290,c:'f',img:PICS[0],desc:''},stripe:false,stage:'ob',plans:[],book:[],notif:{res:true,wait:true,week:true,can:true},view:'resumen',range:30,demo:false,promos:[],reviews:[],qs:[],team:[],prof:{hl:[0,1,2,3],gal:[]},feat:{},last:{},calM:0,seen:0,club:{on:false,d:10},pref:false,boost:{}});
 if(!S||!S.biz)S=blank();{const d=blank();for(const k in d)if(S[k]===undefined)S[k]=d[k]}
 const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(S))}catch(e){}};
-const comFor=(pr,n)=>{const c=COM[S.biz.s];return c.f?c.f*n:Math.round(pr*n*c.p*100)/100};
-const comLabel=()=>{const c=COM[S.biz.s];return c.f?c.f+' €':Math.round(c.p*100)+' %'};
+/* `businesses.category` es texto libre: un negocio real puede traer
+   "Discoteca / Ocio nocturno" y no uno de estos ocho códigos. Antes eso
+   dejaba `c` en undefined, `c.f` reventaba y, como show() se llama dentro
+   de un try/catch que se lo tragaba, el panel se quedaba MUDO con los datos
+   de ejemplo para siempre. Ante lo desconocido: 15 %, el tramo de en medio,
+   nunca el más caro. */
+const COM_POR_DEFECTO={p:.15,t:'15 % solo sobre lo reservado.'};
+const comDe=()=>COM[S.biz.s]||COM_POR_DEFECTO;
+const comFor=(pr,n)=>{const c=comDe();return c.f?c.f*n:Math.round(pr*n*c.p*100)/100};
+const comLabel=()=>{const c=comDe();return c.f?c.f+' €':Math.round(c.p*100)+' %'};
 
 /* ---------- ONBOARDING ---------- */
 $('#fs').innerHTML=SECT.map(s=>`<option value="${s[0]}">${s[1]}</option>`).join('');

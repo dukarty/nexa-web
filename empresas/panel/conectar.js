@@ -44,7 +44,30 @@
      no viven en window: se leen por nombre, que si es alcanzable desde aqui. */
   const elEstado = () => { try { return S; } catch (e) { return null; } };
   const guardar  = () => { try { save(); } catch (e) {} };
-  const pintar   = () => { try { show(); } catch (e) {} };
+  /* Esto se tragaba los errores en silencio: `show()` reventaba por una
+     categoría desconocida y el panel se quedaba con la demo sin que nadie
+     se enterara. Ahora al menos queda dicho en la consola. */
+  const pintar   = () => { try { show(); } catch (e) { console.error('[NYXA] no se pudo repintar el panel:', e); } };
+
+  /* El servidor guarda la categoría como texto libre ("Discoteca / Ocio
+     nocturno"), y el panel la usa como clave de su tabla de comisiones. Si no
+     se traduce, no encuentra nada. Mismo criterio que en la base: lo que no se
+     reconoce se queda sin tocar y la comisión cae al 15 %. */
+  const SLUGS = ['viajes','turismo','catas','talleres','clases','cenas','ocio','deporte'];
+  const PISTAS = [
+    [/viaj|escapad|finde/, 'viajes'], [/turismo|aventura|ruta|senderis/, 'turismo'],
+    [/cata|bodega|vino|cervez/, 'catas'], [/taller|curso|manualidad/, 'talleres'],
+    [/clase|escuela|baile|academ/, 'clases'], [/cena|restaurant|gastro|comida/, 'cenas'],
+    [/discotec|ocio|noct|fiesta|concierto|event/, 'ocio'], [/deporte|padel|pádel|running|gimnas|yoga/, 'deporte']
+  ];
+  function aCodigo(txt) {
+    const v = String(txt || '').trim();
+    if (!v) return '';
+    if (SLUGS.includes(v)) return v;
+    const n = v.toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+    for (const [re, slug] of PISTAS) if (re.test(n)) return slug;
+    return '';
+  }
 
   function volcar(d) {
     const S = elEstado();
@@ -52,13 +75,23 @@
     const n = d.negocio || {}, p = d.plan || {}, m = d.mes || {};
     if (n.nombre)   S.biz.n = n.nombre;
     if (n.ciudad)   S.biz.c = n.ciudad;
-    if (n.categoria) S.biz.s = n.categoria;
+    if (n.categoria) { const cod = aCodigo(n.categoria); if (cod) S.biz.s = cod; }
     if (p.tier && p.tier !== 'alta') S.biz.tier = p.tier;
     // 'dentro' | 'premium' | 'ultra' son los mismos slugs que usa el panel.
     if (['dentro','premium','ultra'].includes(p.tier)) S.plan = p.tier;
     S.real = { nivel: p.nivel ?? null, incluido: p.incluido ?? null,
                precio: p.precio ?? null, mes: m, cuando: Date.now() };
     API.negocio = n;
+
+    /* Un negocio de verdad no puede estar viendo los planes y las reservas
+       de la demo. Si venía del panel de ejemplo, eso se va: lo suyo todavía
+       no existe, y un panel vacío es la verdad. */
+    if (S.demo) {
+      S.demo = false;
+      S.plans = []; S.book = []; S.reviews = []; S.promos = []; S.qs = [];
+      S.notif = []; S.feat = {}; S.last = {};
+      S.stage = 'db';
+    }
     guardar();
   }
 
