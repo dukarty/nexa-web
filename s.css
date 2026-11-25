@@ -720,7 +720,13 @@ h1,h2,h3,h4,h5{text-wrap:balance}p{text-wrap:pretty}
   /* 1 · Aire alrededor del titular ────────────────────────────────────────
      El suelo de 54px venía del diseño de escritorio y en un móvil se come
      la pantalla. Baja a ~46px a 375 px, que deja ~50 px a cada lado. */
-  .hero h1 { font-size: clamp(34px, 12.2vw, 54px); }
+  .hero h1 {
+    font-size: clamp(34px, 12.2vw, 54px);
+    /* Encoger la letra sola no daba aire: al caber más por línea, el bloque
+       volvía a ocupar lo mismo. Con un ancho máximo el titular rompe donde
+       debe («Todo / empieza / con un plan.») y el aire aparece de verdad. */
+    max-width: 300px;
+  }
 
   /* 2 · Las polaroids, dentro ────────────────────────────────────────────
      Antes: left 80% y 86% con 92-108 px de ancho = se salían por la derecha.
@@ -728,10 +734,14 @@ h1,h2,h3,h4,h5{text-wrap:balance}p{text-wrap:pretty}
      pasa del cristal. Cuatro bastan: seis en un móvil era ruido. */
   .hfl .po { width: 84px; padding: 7px 7px 24px; }
   .hfl .po span { bottom: 8px; font-size: 9.5px; letter-spacing: .08em; }
-  .hfl .po:nth-child(1) { left: 2%;  top: 16%; }
-  .hfl .po:nth-child(2) { left: 6%;  top: 63%; }
-  .hfl .po:nth-child(3) { left: auto; right: 2%; top: 13%; }
-  .hfl .po:nth-child(4) { left: auto; right: 5%; top: 60%; }
+  /* Las posiciones vienen como estilo EN LÍNEA desde el HTML (left:80% …),
+     y eso gana a cualquier regla de aquí. Por eso llevan !important: no es
+     pereza, es que no hay otra forma de recolocarlas sin tocar el HTML de
+     escritorio, donde están bien. */
+  .hfl .po:nth-child(1) { left: 2% !important;  right: auto !important; top: 16% !important; }
+  .hfl .po:nth-child(2) { left: 5% !important;  right: auto !important; top: 64% !important; }
+  .hfl .po:nth-child(3) { left: auto !important; right: 2% !important;  top: 13% !important; }
+  .hfl .po:nth-child(4) { left: auto !important; right: 5% !important;  top: 61% !important; }
   .hfl .po:nth-child(n+5) { display: none; }
 
   /* 3 · Nada por debajo de 11 px ─────────────────────────────────────────
