@@ -259,6 +259,64 @@
     return { ok:true, creado:true };
   };
 
+
+  /* ── Las categorías de verdad ────────────────────────────────────────────
+     El servidor exige que el plan traiga una categoría que exista en
+     `public.categories`; no vale el sector del negocio. Se piden una vez y se
+     guardan en memoria. */
+  let _cats = null;
+  API.categorias = async function () {
+    if (_cats) return _cats;
+    const { data, error } = await sb.from('categories')
+      .select('id,label').eq('activa', true).order('label', { ascending: true });
+    _cats = error ? [] : (data || []);
+    return _cats;
+  };
+
+  /* ── Publicar un plan DE VERDAD ──────────────────────────────────────────
+     Hasta ahora el panel guardaba los planes en el navegador y decía «Plan
+     publicado». No llegaban a NYXA, no salían en la app y desaparecían al
+     cambiar de dispositivo. Esto llama a `crear_plan_negocio()`, que existe
+     en producción desde el 15-oct.
+
+     El servidor tiene la última palabra y puede decir que no por motivos
+     legítimos (negocio sin verificar, tope del tramo, fecha pasada). Cuando
+     dice que no, aquí NO se finge que se publicó: se devuelve el motivo tal
+     cual para enseñarlo.
+
+     La portada no se manda: `plans.cover_url` sólo acepta URLs de nuestro
+     Storage (constraint `plans_cover_url_solo_storage`), y las imágenes del
+     panel son ficheros del sitio. Subirlas es trabajo aparte.
+
+     Devuelve {ok:true, id} o {ok:false, motivo} — nunca lanza. */
+  API.publicarPlan = async function (plan, ciudad) {
+    if (!API.conectado) return { ok: false, motivo: 'no-conectado' };
+    if (!plan || !plan.t) return { ok: false, motivo: 'Falta el título del plan.' };
+    if (!plan.cat)        return { ok: false, motivo: 'Elige la actividad del plan.' };
+    if (!plan.d)          return { ok: false, motivo: 'Elige una fecha.' };
+
+    const cuando = new Date(plan.d + 'T' + (plan.h || '10:00'));
+    if (isNaN(cuando) || cuando <= new Date())
+      return { ok: false, motivo: 'La fecha y la hora tienen que estar en el futuro.' };
+
+    const precio = Number(plan.pr) > 0 ? Math.round(Number(plan.pr) * 100) : null;
+
+    const { data, error } = await sb.rpc('crear_plan_negocio', {
+      p_title:       String(plan.t).slice(0, 80),
+      p_starts_at:   cuando.toISOString(),
+      p_capacity:    Math.max(1, Math.min(200, parseInt(plan.p) || 1)),
+      p_category_id: plan.cat,
+      p_place:       plan.l || null,
+      p_city:        ciudad || null,
+      p_cover_url:   null,
+      p_description: plan.desc || null,
+      p_price_cents: precio,
+      p_currency:    'EUR'
+    });
+    if (error) return { ok: false, motivo: error.message };
+    return { ok: true, id: (data && (data.id || data.plan_id)) || null };
+  };
+
   /* ── Pagar la cuota ───────────────────────────────────────────────────
      Llama a la Edge Function crear-checkout, que devuelve la URL de Stripe
      Checkout, y lleva allí. La clave secreta de Stripe vive solo en esa
