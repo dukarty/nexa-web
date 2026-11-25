@@ -60,3 +60,26 @@ h1, h2, h3,
 h1 { font-weight: 900 !important; letter-spacing: -.028em; }
 h2 { font-weight: 900 !important; letter-spacing: -.022em; }
 h3 { font-weight: 800 !important; letter-spacing: -.015em; }
+
+/* ══════════════════════════════════════════════════════════════════════════
+   UNA SOLA JERARQUÍA · las 12 de ciudad, en la escala del resto del sitio
+
+   Estas páginas traían su propio sistema: tres papeles con cinco topes, más
+   una escalera de tamaños fijos para 1500 / 1920 / 2500 px que el resto del
+   sitio no tiene. El efecto en un escritorio era doble y malo: el mismo
+   título medía 48 px aquí y 60 en la portada, y al ensanchar la ventana de
+   1480 a 1510 el título de sección ENCOGÍA de 56 a 52.
+
+   Ahora comparten los niveles de s.css:
+
+       sección  clamp(32px, 4vw, 60px)   .live h2 · .faq h2 · .xs__t · .cta-sec h2
+       cierre   clamp(40px, 5vw, 76px)   .dclose h2 · .dl__t   (en el HTML)
+
+   Las escaleras de >=1500 px de esos títulos se han quitado. Las de los h1
+   (.phero h1, .match h1) se quedan: ese es otro nivel y crece bien.
+   ══════════════════════════════════════════════════════════════════════════ */
+
+.live h2, .faq h2, .xs__t, .cta-sec h2,
+.vplans h2, .calm h2, .grow h2 { font-size: clamp(32px,4vw,60px); }
+/* .dl__t no esta aqui a proposito: su regla vive en un <style> del body, que
+   siempre gana a esta hoja. El titulo de cierre se fija en el propio HTML. */
