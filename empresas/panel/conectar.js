@@ -423,6 +423,28 @@
      servidor y haría fallar la creación entera, así que en ese caso va null.
 
      Devuelve {ok:true, id} o {ok:false, motivo} — nunca lanza. */
+  /* DESTACAR UN PLAN (migracion 20261215140000). Devuelve {ok} o
+     {ok:false, motivo}; nunca lanza, como el resto de esta capa. El tope lo
+     pone el servidor (business_destacados_max): el gratis, 1 a la vez. */
+  API.destacarPlan = async function (planId, dias) {
+    if (!API.conectado) return { ok: false, motivo: 'no-conectado' };
+    if (!planId) return { ok: false, motivo: 'Falta el plan.' };
+    const { data, error } = await sb.rpc('destacar_plan_negocio', {
+      p_plan_id: planId,
+      p_dias: Number(dias) > 0 ? Math.min(30, Math.round(Number(dias))) : 7,
+    });
+    if (error) return { ok: false, motivo: API.error(error) };
+    return { ok: true, hasta: data && data.hasta };
+  };
+
+  API.quitarDestacado = async function (planId) {
+    if (!API.conectado) return { ok: false, motivo: 'no-conectado' };
+    if (!planId) return { ok: false, motivo: 'Falta el plan.' };
+    const { error } = await sb.rpc('quitar_destacado_plan_negocio', { p_plan_id: planId });
+    if (error) return { ok: false, motivo: API.error(error) };
+    return { ok: true };
+  };
+
   API.publicarPlan = async function (plan, ciudad) {
     if (!API.conectado) return { ok: false, motivo: 'no-conectado' };
     if (!plan || !plan.t) return { ok: false, motivo: 'Falta el título del plan.' };
