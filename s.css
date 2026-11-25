@@ -905,3 +905,65 @@ h1,h2,h3,h4,h5{text-wrap:balance}p{text-wrap:pretty}
 .dk2 .more { margin-top: auto; padding-top: 20px; }  /* el enlace al pie en las dos */
 
 @media (max-width: 860px) { .tc { min-height: 300px; } .tc h3 { min-height: 0; } }
+
+/* ══════════════════════════════════════════════════════════════════════════
+   EN EL ARRANQUE NO SE COBRA CUOTA  (25-nov, decisión de David)
+
+   La página de empresas estaba construida sobre «una cuota al mes para estar
+   dentro». Ya no: se entra gratis y solo se paga comisión por reserva. Las
+   tres cuotas dejan de ser el requisito para aparecer y pasan a ser
+   opcionales, para destacar, y todavía no están.
+
+   Por eso la tarjeta destacada ahora es la gratuita, y Premium y Ultra se
+   ven como lo que son: algo que llegará. Atenuadas, no tachadas — siguen
+   contando lo que traerán.
+   ══════════════════════════════════════════════════════════════════════════ */
+
+/* La etiqueta pasa de flotar en la esquina a ir en el flujo, encima del
+   título: «Para destacar · próximamente» no cabe en una esquina de una
+   tarjeta a un tercio de ancho, y partía. */
+.pl-tg { position: static; display: inline-block; margin-bottom: 14px; }
+
+.pl-tg.soon { background: transparent; color: var(--muted);
+              box-shadow: inset 0 0 0 1px var(--line); font-size: 11.5px; }
+
+.pl.pr-ox            { opacity: .78; }
+.pl.pr-ox .pr b      { color: var(--muted); }   /* el precio no grita */
+.pl.pr-ox:hover      { opacity: 1; }
+
+/* La etiqueta no se estira: dentro de una tarjeta flex en columna, un
+   inline-block ocupa todo el ancho si no se le dice que no. */
+.pl-tg { align-self: flex-start; }
+
+/* La promesa va justo bajo el h1 y con peso: es la frase que decide, no una
+   nota al pie. «Entra gratis» arriba, «solo pagas comisión» aquí: juntas se
+   leen de un golpe, y el h1 no se come medio hero. Con la frase entera como
+   h1 salían CUATRO líneas en un móvil de 390 px y 359 px de alto a 1440. */
+.bz-claim { font-size: clamp(17px, 1.5vw, 21px); font-weight: 600;
+            color: var(--ink); max-width: 30ch; }
+
+/* ══════════════════════════════════════════════════════════════════════════
+   DOS TEXTOS QUE NO SE VEÍAN  (25-nov)
+
+   1 · «NYXA para empresas», el rótulo del hero de /empresas, salía en blanco
+       al 70 % sobre el azul clarísimo del fondo: contraste 1,11 cuando el
+       mínimo es 4,5. Prácticamente invisible.
+
+       La causa es un patrón que conviene conocer porque puede repetirse: más
+       abajo hay un bloque que convierte en claras las secciones que nacieron
+       oscuras (.fin .h24 .feat.k .tc.c2 .c3.k .ph.dk .dk2.e) y reparte el
+       color nuevo con `.ph.dk * { color: inherit }`. Pero las reglas de
+       antes, como `.ph.dk .lbl { color: rgba(255,255,255,.7) }`, tienen
+       especificidad (0,2,0) contra (0,1,1) del selector con `*`. Ganan
+       ellas, y el texto se queda del color del tema viejo.
+
+   2 · El azul de marca #2F66FF como color de TEXTO PEQUEÑO da 4,47 sobre el
+       crema y 4,22 sobre el gris azulado: no llega a 4,5. Para eso ya existe
+       --blue-txt (#2558E0), que da 5,62 y 5,31 y es casi indistinguible.
+       Faltaba usarlo en los sitios donde seguía el azul de marca.
+   ══════════════════════════════════════════════════════════════════════════ */
+
+.ph.dk .lbl, .fin .lbl, .h24 .lbl, .feat.k .lbl,
+.tc.c2 .lbl, .c3.k .lbl, .dk2.e .lbl { color: var(--muted); }
+
+.more, .st i, .dk2.u .more { color: var(--blue-txt); }
