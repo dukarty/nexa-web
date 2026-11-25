@@ -55,7 +55,7 @@ button,input,select,textarea{font:inherit;color:inherit}
 .pl li{padding-left:20px;position:relative}.pl li:before{content:"✓";position:absolute;left:0;color:var(--blue);font-weight:800}
 .com{margin-top:16px;max-width:880px;background:#fff;border-radius:16px;padding:16px 18px;display:flex;gap:16px;align-items:center;box-shadow:inset 0 0 0 1px var(--line)}
 .com b{font:900 26px/1 var(--s);color:var(--blue);white-space:nowrap}.com p{color:var(--body);font-size:14px}
-.pics{display:flex;gap:8px;flex-wrap:wrap}.f .sub2{margin:14px 0 8px;color:var(--muted);font-size:13px}.f input[type=file]{font:inherit;font-size:13.5px;color:var(--body)}.pics button.subida{box-shadow:0 0 0 3px var(--blue)}
+.pics{display:flex;gap:8px;flex-wrap:wrap}.avisoR{margin:0 0 18px;padding:13px 15px;border-radius:12px;background:var(--soft);color:var(--body);font-size:13.5px;line-height:1.5;box-shadow:inset 0 0 0 1px var(--line)}.f .sub2{margin:14px 0 8px;color:var(--muted);font-size:13px}.f input[type=file]{font:inherit;font-size:13.5px;color:var(--body)}.pics button.subida{box-shadow:0 0 0 3px var(--blue)}
 .pics button{all:unset;cursor:pointer;width:62px;height:62px;border-radius:12px;background:#ccc center/cover}
 .pics button.on{box-shadow:0 0 0 3px var(--blue)}
 .stripe{margin-top:28px;max-width:560px;background:#fff;border-radius:20px;padding:24px;box-shadow:inset 0 0 0 1px var(--line)}
@@ -950,7 +950,7 @@ function openDrw(h){$('#drwB').innerHTML=h;$('#drw').classList.add('on');$('#drw
 function closeDrw(){$('#drw').classList.remove('on');$('#drw').setAttribute('aria-hidden','true');untip()}
 $('#drwX').onclick=closeDrw;$('#drw').onclick=e=>{if(e.target.id=='drw')closeDrw()};addEventListener('keydown',e=>{if(e.key=='Escape')closeDrw()});
 function openEdit(id){const p=id?S.plans.find(x=>x.id==id):{t:'',d:'',h:'10:00',l:S.biz.c,p:15,pr:30,c:'f',img:PICS[0],desc:''};
- openDrw(`<h2>${id?'Editar plan':'Nuevo plan'}</h2><div class="form">${planFormHTML('e')}</div><p class="err" id="ee" role="alert"></p><div class="act"><button class="btn" id="esv">${id?'Guardar cambios':'Publicar plan'}</button>${id?'':'<button class="btn g" id="edr">Guardar borrador</button>'}</div>`);
+ openDrw(`<h2>${id?'Editar plan':'Nuevo plan'}</h2>${id&&p.remoto?`<p class="avisoR">Este plan ya está publicado en NYXA. Lo que cambies aquí <b>todavía no llega a la app</b>: el servidor sabe crear planes, pero aún no editarlos.</p>`:''}<div class="form">${planFormHTML('e')}</div><p class="err" id="ee" role="alert"></p><div class="act"><button class="btn" id="esv">${id?'Guardar cambios':'Publicar plan'}</button>${id?'':'<button class="btn g" id="edr">Guardar borrador</button>'}</div>`);
  const tmp={...p};setPF('e',tmp);$$('#epics button').forEach(x=>x.onclick=()=>{tmp.img=x.dataset.p;setPF('e',{...tmp,...(getPF('e',tmp),tmp)})});
  const sv=async st=>{getPF('e',tmp);if(st=='activo'&&(!id||p.status!='activo')&&activeN()>=L().plans){closeDrw();openUp('plans');return}if(!tmp.t){$('#ee').textContent='Escribe qué organizas.';return}if(st!='borrador'&&!tmp.d){$('#ee').textContent='Elige una fecha.';return}if(st=='activo'&&new Date(tmp.d+'T23:59')<today){$('#ee').textContent='La fecha ya ha pasado. Elige una a partir de hoy.';return}if(id&&tmp.p<seatsOf(p)){$('#ee').textContent='Ya tienes '+seatsOf(p)+' plazas reservadas. No puedes poner menos plazas.';return}
   
