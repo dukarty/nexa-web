@@ -142,48 +142,79 @@
   const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 
   /* ── Entrar: enlace por correo, sin contraseñas ──────────────────────── */
-  /* El correo de Supabase puede traer un ENLACE, un CÓDIGO de 6 cifras, o los
-     dos: depende de la plantilla que haya puesta en el panel de Supabase, y
-     eso se cambia sin tocar este código. Antes aquí sólo se contaba con el
-     enlace, así que quien recibía un código no tenía dónde meterlo y se
-     quedaba fuera sin saber por qué. Ahora valen los dos caminos. */
-  async function entrar() {
-    const email = (prompt('Tu correo de empresa en NYXA:') || '').trim();
-    if (!email) return;
-    const banda = document.querySelector('.demo');
-    const { error } = await sb.auth.signInWithOtp({
-      email,
-      options: { emailRedirectTo: location.origin + '/empresas/panel/' }
-    });
-    if (error) {
-      if (banda) banda.innerHTML = '<b>No se ha podido enviar.</b> ' + esc(error.message);
-      return;
-    }
-    if (banda) {
-      banda.innerHTML = '<b>Te hemos escrito a ' + esc(email) + '.</b>'
-        + ' Abre el enlace del correo, o pega aquí el código:'
-        + '<input id="codEmp" inputmode="numeric" autocomplete="one-time-code"'
-        + ' maxlength="8" placeholder="123456" style="width:94px;text-align:center">'
-        + '<button id="okCod" class="cta">Entrar</button>';
-      const i = document.getElementById('codEmp');
-      const b = document.getElementById('okCod');
-      const ir = async () => {
-        const token = (i.value || '').replace(/\D/g, '');
-        if (token.length < 6) { i.focus(); return; }
-        b.disabled = true; b.textContent = 'Comprobando…';
-        const { error: e2 } = await sb.auth.verifyOtp({ email, token, type: 'email' });
-        if (e2) {
-          b.disabled = false; b.textContent = 'Entrar';
-          banda.insertAdjacentHTML('beforeend',
-            '<span class="sec"> · ' + esc(e2.message) + '</span>');
-          return;
-        }
-        location.reload();   // con sesión ya puesta, el panel arranca de cero
-      };
-      if (b) b.onclick = ir;
-      if (i) { i.onkeydown = ev => { if (ev.key === 'Enter') ir(); }; i.focus(); }
-    }
+  /* ── Entrar · una ventana de verdad, con el mismo molde que el panel ───
+     Antes esto era un prompt() del navegador y, después, un recuadro metido
+     a presión en la banda de arriba. Ni una cosa ni la otra se parecen al
+     resto del panel.
+
+     El correo de Supabase puede traer un ENLACE, un CÓDIGO de 6 cifras o los
+     dos, según la plantilla que haya puesta en Supabase — y eso se cambia sin
+     tocar este repo. Así que la ventana acepta las dos vías y lo dice. */
+  const abrirDrw  = h => { try { openDrw(h); return true; } catch (e) { return false; } };
+  const cerrarDrw = () => { try { closeDrw(); } catch (e) {} };
+
+  function pasoCorreo(valor, aviso) {
+    const ok = abrirDrw(
+      '<h2>Entrar en tu panel</h2>'
+      + '<p class="sub">Te mandamos un acceso por correo. Sin contraseñas.</p>'
+      + '<div class="form"><div class="f full">'
+      +   '<label for="emEnt">Tu correo de empresa</label>'
+      +   '<input id="emEnt" type="email" autocomplete="email" placeholder="hola@tunegocio.com" value="' + esc(valor || '') + '">'
+      + '</div></div>'
+      + (aviso ? '<p class="err" role="alert">' + esc(aviso) + '</p>' : '')
+      + '<div class="act"><button class="btn" id="pedirAcc">Enviarme el acceso</button></div>'
+    );
+    if (!ok) return;
+    const campo = document.getElementById('emEnt');
+    const boton = document.getElementById('pedirAcc');
+    const pedir = async () => {
+      const email = (campo.value || '').trim();
+      if (!/.+@.+\..+/.test(email)) { campo.focus(); return pasoCorreo(email, 'Escribe un correo válido.'); }
+      boton.disabled = true; boton.textContent = 'Enviando…';
+      const { error } = await sb.auth.signInWithOtp({
+        email, options: { emailRedirectTo: location.origin + '/empresas/panel/' }
+      });
+      if (error) return pasoCorreo(email, error.message);
+      pasoCodigo(email);
+    };
+    boton.onclick = pedir;
+    campo.onkeydown = ev => { if (ev.key === 'Enter') pedir(); };
   }
+
+  function pasoCodigo(email, aviso) {
+    const ok = abrirDrw(
+      '<h2>Mira tu correo</h2>'
+      + '<p class="sub">Te hemos escrito a <b>' + esc(email) + '</b>.</p>'
+      + '<div class="form"><div class="f full">'
+      +   '<label for="codEnt">Pega aquí el código</label>'
+      +   '<input id="codEnt" inputmode="numeric" autocomplete="one-time-code" maxlength="8" placeholder="123456">'
+      +   '<small>Si el correo trae un botón en vez de un código, púlsalo y entras directo.</small>'
+      + '</div></div>'
+      + (aviso ? '<p class="err" role="alert">' + esc(aviso) + '</p>' : '')
+      + '<div class="act">'
+      +   '<button class="btn g" id="otroCorreo">Es otro correo</button>'
+      +   '<button class="btn" id="okCod">Entrar</button>'
+      + '</div>'
+    );
+    if (!ok) return;
+    const campo = document.getElementById('codEnt');
+    const boton = document.getElementById('okCod');
+    const otro  = document.getElementById('otroCorreo');
+    const ir = async () => {
+      const token = (campo.value || '').replace(/\D/g, '');
+      if (token.length < 6) { campo.focus(); return; }
+      boton.disabled = true; boton.textContent = 'Comprobando…';
+      const { error } = await sb.auth.verifyOtp({ email, token, type: 'email' });
+      if (error) return pasoCodigo(email, error.message);
+      cerrarDrw();
+      location.reload();   // con la sesión puesta, el panel arranca de cero
+    };
+    boton.onclick = ir;
+    otro.onclick  = () => pasoCorreo('');
+    campo.onkeydown = ev => { if (ev.key === 'Enter') ir(); };
+  }
+
+  function entrar() { pasoCorreo(''); }
 
   /* ── Dar de alta el negocio de verdad ────────────────────────────────
      El servidor ya lo permite desde el 23-jul: una cuenta autenticada puede
@@ -314,6 +345,13 @@
       if (d) volcar(d);
     }
     avisar();
+    /* «Iniciar sesión» de las páginas de empresas llega aquí con ?entrar=1:
+       la ventana se abre sola, sin que haya que buscar un botón pequeño
+       dentro de la banda. */
+    if (!session && /[?&]entrar=1/.test(location.search)) {
+      history.replaceState({}, '', location.pathname);
+      setTimeout(entrar, 120);
+    }
     await volverDeStripe();
     if (API.conectado) pintar();
   }
