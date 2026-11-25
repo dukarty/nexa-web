@@ -142,18 +142,46 @@
   const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 
   /* ── Entrar: enlace por correo, sin contraseñas ──────────────────────── */
+  /* El correo de Supabase puede traer un ENLACE, un CÓDIGO de 6 cifras, o los
+     dos: depende de la plantilla que haya puesta en el panel de Supabase, y
+     eso se cambia sin tocar este código. Antes aquí sólo se contaba con el
+     enlace, así que quien recibía un código no tenía dónde meterlo y se
+     quedaba fuera sin saber por qué. Ahora valen los dos caminos. */
   async function entrar() {
-    const email = prompt('Tu correo de empresa en NYXA:');
+    const email = (prompt('Tu correo de empresa en NYXA:') || '').trim();
     if (!email) return;
+    const banda = document.querySelector('.demo');
     const { error } = await sb.auth.signInWithOtp({
-      email: email.trim(),
+      email,
       options: { emailRedirectTo: location.origin + '/empresas/panel/' }
     });
-    const banda = document.querySelector('.demo');
+    if (error) {
+      if (banda) banda.innerHTML = '<b>No se ha podido enviar.</b> ' + esc(error.message);
+      return;
+    }
     if (banda) {
-      banda.innerHTML = error
-        ? '<b>No se ha podido enviar el enlace.</b> ' + esc(error.message)
-        : '<b>Te hemos enviado un enlace a ' + esc(email.trim()) + '.</b> Ábrelo en este mismo navegador.';
+      banda.innerHTML = '<b>Te hemos escrito a ' + esc(email) + '.</b>'
+        + ' Abre el enlace del correo, o pega aquí el código:'
+        + '<input id="codEmp" inputmode="numeric" autocomplete="one-time-code"'
+        + ' maxlength="8" placeholder="123456" style="width:94px;text-align:center">'
+        + '<button id="okCod" class="cta">Entrar</button>';
+      const i = document.getElementById('codEmp');
+      const b = document.getElementById('okCod');
+      const ir = async () => {
+        const token = (i.value || '').replace(/\D/g, '');
+        if (token.length < 6) { i.focus(); return; }
+        b.disabled = true; b.textContent = 'Comprobando…';
+        const { error: e2 } = await sb.auth.verifyOtp({ email, token, type: 'email' });
+        if (e2) {
+          b.disabled = false; b.textContent = 'Entrar';
+          banda.insertAdjacentHTML('beforeend',
+            '<span class="sec"> · ' + esc(e2.message) + '</span>');
+          return;
+        }
+        location.reload();   // con sesión ya puesta, el panel arranca de cero
+      };
+      if (b) b.onclick = ir;
+      if (i) { i.onkeydown = ev => { if (ev.key === 'Enter') ir(); }; i.focus(); }
     }
   }
 
