@@ -941,3 +941,29 @@ h1,h2,h3,h4,h5{text-wrap:balance}p{text-wrap:pretty}
    h1 salían CUATRO líneas en un móvil de 390 px y 359 px de alto a 1440. */
 .bz-claim { font-size: clamp(17px, 1.5vw, 21px); font-weight: 600;
             color: var(--ink); max-width: 30ch; }
+
+/* ══════════════════════════════════════════════════════════════════════════
+   DOS TEXTOS QUE NO SE VEÍAN  (25-nov)
+
+   1 · «NYXA para empresas», el rótulo del hero de /empresas, salía en blanco
+       al 70 % sobre el azul clarísimo del fondo: contraste 1,11 cuando el
+       mínimo es 4,5. Prácticamente invisible.
+
+       La causa es un patrón que conviene conocer porque puede repetirse: más
+       abajo hay un bloque que convierte en claras las secciones que nacieron
+       oscuras (.fin .h24 .feat.k .tc.c2 .c3.k .ph.dk .dk2.e) y reparte el
+       color nuevo con `.ph.dk * { color: inherit }`. Pero las reglas de
+       antes, como `.ph.dk .lbl { color: rgba(255,255,255,.7) }`, tienen
+       especificidad (0,2,0) contra (0,1,1) del selector con `*`. Ganan
+       ellas, y el texto se queda del color del tema viejo.
+
+   2 · El azul de marca #2F66FF como color de TEXTO PEQUEÑO da 4,47 sobre el
+       crema y 4,22 sobre el gris azulado: no llega a 4,5. Para eso ya existe
+       --blue-txt (#2558E0), que da 5,62 y 5,31 y es casi indistinguible.
+       Faltaba usarlo en los sitios donde seguía el azul de marca.
+   ══════════════════════════════════════════════════════════════════════════ */
+
+.ph.dk .lbl, .fin .lbl, .h24 .lbl, .feat.k .lbl,
+.tc.c2 .lbl, .c3.k .lbl, .dk2.e .lbl { color: var(--muted); }
+
+.more, .st i, .dk2.u .more { color: var(--blue-txt); }
