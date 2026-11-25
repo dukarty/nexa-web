@@ -699,3 +699,79 @@ h1,h2,h3,h4,h5{text-wrap:balance}p{text-wrap:pretty}
 .bz-cm2 li span{display:block;margin-top:3px;color:var(--muted);font-size:14.5px;line-height:1.45;max-width:54ch;text-wrap:balance}
 .bz-cm2 li em{flex:none;font:900 clamp(28px,2.6vw,38px)/1 var(--s);font-style:normal;letter-spacing:-.03em;color:var(--blue)}
 @media(max-width:560px){.bz-cm2 li{gap:14px;padding:15px 0}.bz-cm2 li em{font-size:26px}.bz-cm2 li span{font-size:13.5px}}
+
+/* ══════════════════════════════════════════════════════════════════════════
+   MÓVIL · lo que hacía que no pareciera una web cuidada (25-nov)
+
+   Medido a 375 px sobre la web publicada, no a ojo. Cinco cosas concretas:
+
+     1 · El titular dejaba 25 px de aire a cada lado. No se salía, pero se
+         sentía apretado contra el cristal.
+     2 · Dos polaroids decorativas acababan en 399 px y 420 px sobre una
+         pantalla de 375: no se salían de la página (el hero las recorta),
+         pero se veían amputadas, como un fallo.
+     3 · Había texto a 8 px y 9 px. En un móvil eso no se lee.
+     4 · Botones y enlaces de 22-31 px de alto. El mínimo cómodo es 44.
+     5 · El azul de marca como texto pequeño: 4,22, por debajo del mínimo.
+   ══════════════════════════════════════════════════════════════════════════ */
+
+@media (max-width: 700px) {
+
+  /* 1 · Aire alrededor del titular ────────────────────────────────────────
+     El suelo de 54px venía del diseño de escritorio y en un móvil se come
+     la pantalla. Baja a ~46px a 375 px, que deja ~50 px a cada lado. */
+  .hero h1 {
+    font-size: clamp(34px, 12.2vw, 54px);
+    /* Encoger la letra sola no daba aire: al caber más por línea, el bloque
+       volvía a ocupar lo mismo. Con un ancho máximo el titular rompe donde
+       debe («Todo / empieza / con un plan.») y el aire aparece de verdad. */
+    max-width: 300px;
+  }
+
+  /* 2 · Las polaroids, dentro ────────────────────────────────────────────
+     Antes: left 80% y 86% con 92-108 px de ancho = se salían por la derecha.
+     Ahora se colocan con `right` para que el borde derecho mande, y ninguna
+     pasa del cristal. Cuatro bastan: seis en un móvil era ruido. */
+  .hfl .po { width: 84px; padding: 7px 7px 24px; }
+  .hfl .po span { bottom: 8px; font-size: 9.5px; letter-spacing: .08em; }
+  /* Las posiciones vienen como estilo EN LÍNEA desde el HTML (left:80% …),
+     y eso gana a cualquier regla de aquí. Por eso llevan !important: no es
+     pereza, es que no hay otra forma de recolocarlas sin tocar el HTML de
+     escritorio, donde están bien. */
+  .hfl .po:nth-child(1) { left: 2% !important;  right: auto !important; top: 16% !important; }
+  .hfl .po:nth-child(2) { left: 5% !important;  right: auto !important; top: 64% !important; }
+  .hfl .po:nth-child(3) { left: auto !important; right: 2% !important;  top: 13% !important; }
+  .hfl .po:nth-child(4) { left: auto !important; right: 5% !important;  top: 61% !important; }
+  .hfl .po:nth-child(n+5) { display: none; }
+
+  /* 3 · Nada por debajo de 11 px ─────────────────────────────────────────
+     Un rótulo decorativo puede ser pequeño; ilegible no. */
+  .tg, .lbl, .tmr2, small, .who { font-size: 11px !important; }
+  .hfl .po span { font-size: 9.5px !important; }   /* esta sí es decorativa
+                                                      y va dentro de una foto
+                                                      de 84 px: 9,5 es su sitio */
+
+  /* 4 · Que se pueda pulsar con el dedo ──────────────────────────────────
+     44 px es el mínimo que recomienda Apple. No se cambia el aspecto: se
+     añade zona de toque con padding y un alto mínimo. */
+  .nav .logo { display: inline-flex; align-items: center; min-height: 44px; }
+  .fin a, .fin .cols a { display: inline-block; padding: 7px 0; min-height: 44px; line-height: 30px; }
+  .hero .low a { display: inline-block; padding: 10px 14px; margin-top: 2px; }
+
+  /* La frase de debajo del hero iba con `left:0; right:0` y padding 0: el
+     texto tocaba los dos bordes del cristal, sin un solo píxel de aire. Es
+     lo que más grita «sin terminar» de toda la portada. */
+  .hero .low { padding-left: 26px; padding-right: 26px; }
+
+  /* Y la polaroid de la izquierda empezaba en 0 con la rotación: cortada
+     justo por el marco. Un par de puntos más adentro y se ve entera. */
+  .hfl .po:nth-child(1) { left: 5% !important; }
+  .x2, button.x2 { min-height: 44px; min-width: 44px; }
+}
+
+/* 5 · El azul de marca como texto pequeño ────────────────────────────────
+   Mismo arreglo que en el panel: #2F66FF da 4,22 sobre crema y 4,47 sobre
+   blanco, los dos por debajo de 4,5. --blue-txt es el mismo azul un punto
+   más hondo. Se aplica en todas las anchuras, no sólo en móvil: el problema
+   no es del tamaño de pantalla. */
+.pasa .n i, .pasos i, ol.bz-f li b, .sec .n, .step .no { color: var(--blue-txt); }
