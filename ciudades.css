@@ -60,3 +60,28 @@ h1, h2, h3,
 h1 { font-weight: 900 !important; letter-spacing: -.028em; }
 h2 { font-weight: 900 !important; letter-spacing: -.022em; }
 h3 { font-weight: 800 !important; letter-spacing: -.015em; }
+
+/* ══════════════════════════════════════════════════════════════════════════
+   UNA SOLA JERARQUÍA · el título de sección mide lo mismo en todo el sitio
+
+   Medidos los nueve títulos de sección que hay repartidos por la web, salían
+   SEIS ritmos distintos para el mismo papel:
+
+       3,6vw   .faq h2   (conocer-gente)
+       3,8vw   .faq h2   (portada)
+       4vw     .cambia · .vplans · .calm · .grow · .cta-sec      ← el común
+       4,4vw   .live · .bz-hd
+       4,6vw   .xs__t
+       4,8vw   .dl__t
+
+   Ninguna de esas diferencias quiere decir nada: son tres o cuatro píxeles
+   que nadie decidió. El lector no los lee como jerarquía, los lee como
+   descuido. Todos pasan al mismo: clamp(30px, 4vw, 56px).
+
+   NO se tocan los que sí dicen algo:
+     · 5vw   el cierre de página (.fin, .bz-cta, .dclose) — el crescendo final
+     · 8vw   «Pruébalo.»           (portada)  — cartel editorial
+     · 10vw  «Menos pantalla…»     (portada)  — el cartel más grande, a posta
+   ══════════════════════════════════════════════════════════════════════════ */
+
+.live h2, .faq h2, .xs__t, .dl__t { font-size: clamp(30px, 4vw, 56px); }
