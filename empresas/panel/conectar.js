@@ -97,6 +97,15 @@
     /* Y ahora la verdad: los planes que existen de verdad en NYXA mandan
        sobre la copia local. Los borradores que todavía no ha publicado SÍ se
        respetan — sólo viven aquí y perderlos sería tirarle el trabajo. */
+    /* El estado de la verificación lo sabe el servidor, no el navegador:
+       `verified` en el propio negocio, y si no, el estado de su solicitud. */
+    S.verif = n.verified ? 'verificado' : '';
+    API.estadoVerificacion().then(e => {
+      const S3 = elEstado(); if (!S3) return;
+      if (!n.verified && e) S3.verif = e;
+      guardar(); pintar();
+    });
+
     if (n.id) {
       API.misPlanes(n.id).then(reales => {
         const S2 = elEstado(); if (!S2) return;
@@ -325,6 +334,35 @@
     return typeof url === 'string' && url.indexOf('/storage/v1/object/public/nexa/') > -1 ? url : null;
   };
 
+
+
+  /* ── Verificación del negocio ────────────────────────────────────────────
+     Sin `verified` NADIE publica: `crear_plan_negocio()` lo comprueba antes
+     que nada. Y hasta hoy el panel no tenía ningún sitio donde pedirla, así
+     que un negocio se daba de alta y se quedaba parado para siempre sin
+     saber por qué. NEXA STUDIOS estuvo cinco semanas así.
+
+     Las dos funciones ya existen en producción desde el 2-oct y están
+     concedidas a `authenticated`: sólo había que llamarlas.
+
+     APROBAR no se hace desde aquí, y es a propósito: está concedido sólo a
+     `service_role`. Es la única puerta que impide que cualquiera publique
+     como negocio falso ante toda la app. Eso lo mira una persona. */
+  API.estadoVerificacion = async function () {
+    const { data, error } = await sb.rpc('estado_verificacion_negocio');
+    if (error) return null;
+    return data;   // 'sin_solicitud' | 'pendiente' | 'aprobada' | 'rechazada' | 'verificado'
+  };
+
+  API.pedirVerificacion = async function (nombreFiscal, cif, enlace) {
+    const { data, error } = await sb.rpc('solicitar_verificacion_negocio', {
+      p_nombre_fiscal: nombreFiscal,
+      p_cif:           cif,
+      p_enlace:        enlace
+    });
+    if (error) return { ok: false, motivo: error.message };
+    return { ok: true, resultado: data };
+  };
 
   /* ── Traer los planes que de verdad existen ──────────────────────────────
      Hasta ahora la lista de planes del panel vivía sólo en el navegador. Un
