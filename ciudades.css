@@ -53,6 +53,10 @@ h1, h2, h3,
 .nf__col h4, .xs--faq h3, .vtit, .hero h1, .brand {
   font-family: "Archivo", system-ui, sans-serif;
 }
-h1 { font-weight: 900; letter-spacing: -.028em; }
-h2 { font-weight: 900; letter-spacing: -.022em; }
-h3 { font-weight: 800; letter-spacing: -.015em; }
+/* El peso lleva !important porque cada página define el suyo con un selector
+   de clase (`.phero h1 { font-weight: 800 }`), que gana a cualquier `h1` a
+   secas. Es justo lo que se quiere sobreescribir: el titular de NYXA pesa
+   900, en todo el sitio. Sólo el peso: tamaños y márgenes no se tocan. */
+h1 { font-weight: 900 !important; letter-spacing: -.028em; }
+h2 { font-weight: 900 !important; letter-spacing: -.022em; }
+h3 { font-weight: 800 !important; letter-spacing: -.015em; }
