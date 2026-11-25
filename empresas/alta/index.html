@@ -69,6 +69,7 @@
 .hecho{text-align:center}
 .hecho .tic{width:62px;height:62px;border-radius:50%;background:var(--blue);color:#fff;
   display:grid;place-items:center;margin:0 auto 20px;font-size:28px}
+.hecho .sec{display:inline-block;margin-top:10px;color:var(--muted);font-size:13.5px;line-height:1.5}
 .hecho h2{font:900 clamp(24px,2.6vw,32px)/1.12 var(--s);letter-spacing:-.025em;margin-bottom:12px}
 .hecho p{color:var(--body);line-height:1.55;max-width:40ch;margin-inline:auto}
 .pasos{margin-top:28px;display:grid;gap:15px;text-align:left}
@@ -224,6 +225,8 @@
     return ok;
   }
 
+  const esc = s => String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
   const enviar = cuerpo => fetch(C.SUPABASE_URL + '/rest/v1/leads_organizadores', {
     method: 'POST',
     headers: {
@@ -306,9 +309,15 @@
       }));
     } catch (e) {}
 
-    $('#hecho-txt').textContent = entra
-      ? 'Te hemos enviado un enlace a ' + d.email + '. Ábrelo en este mismo navegador y tu panel está listo.'
-      : 'Te escribimos a ' + d.email + ' en 24-48 horas para abrirte NYXA.';
+    /* El enlace se manda, pero el correo de Supabase es poco fiable mientras
+       no haya SMTP propio (docs/COSTES-Y-ABUSO.md: ~2-4 al día con el suyo).
+       Prometer sólo el enlace deja tirado a quien no lo recibe, así que se
+       dicen las dos cosas y ninguna es mentira en ninguno de los dos casos. */
+    $('#hecho-txt').innerHTML = entra
+      ? 'Te escribimos a <b>' + esc(d.email) + '</b> para montarlo contigo.'
+        + '<br><span class="sec">Y te hemos mandado un enlace por si quieres ir entrando tú. '
+        + 'Si no te llega, da igual: no tienes que hacer nada.</span>'
+      : 'Te escribimos a <b>' + esc(d.email) + '</b> en 24-48 horas para abrirte NYXA.';
     $('#form-lado').hidden = true;
     $('#hecho-lado').hidden = false;
     $('#hecho-lado').scrollIntoView({ block: 'center', behavior: 'smooth' });
