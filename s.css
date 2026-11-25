@@ -775,3 +775,21 @@ h1,h2,h3,h4,h5{text-wrap:balance}p{text-wrap:pretty}
    más hondo. Se aplica en todas las anchuras, no sólo en móvil: el problema
    no es del tamaño de pantalla. */
 .pasa .n i, .pasos i, ol.bz-f li b, .sec .n, .step .no { color: var(--blue-txt); }
+
+/* ── Repaso del sitio entero, página por página (25-nov) ────────────────────
+   Auditadas a 375 px: /, /empresas, /universidades, /descarga, /ayuda.
+   Quedaban dos cosas, las dos en todas las páginas. */
+
+/* El botón de cerrar el menú medía 31 px de alto. Llevaba ya una regla con
+   min-height, pero no servía de nada: `.mnav .x2` hace `all: unset`, que borra
+   TODAS las propiedades, la mía incluida, y gana por especificidad. Hay que
+   escribirlo con el mismo peso y volver a dar display, que `all:unset`
+   también se lleva por delante. */
+.mnav .x2 {
+  min-width: 44px; min-height: 44px;
+  display: inline-grid; place-items: center;
+}
+
+/* Y el rótulo de la tarjeta de ejemplo iba a 9 px. En un móvil eso no se lee:
+   es información (la ciudad y el cuándo), no decoración. */
+.dsc .dtop span { font-size: 11px; letter-spacing: .1em; }
