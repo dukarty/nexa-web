@@ -812,8 +812,33 @@ function afterAjustes(){$$('[data-sw]').forEach(s=>s.onclick=()=>{const k=s.data
  $('#asv').onclick=()=>{const b=S.biz,e=$('#ae').value.trim(),ph=$('#at').value.trim();if(!/^\S+@\S+\.\S+$/.test(e)){$('#aerr').textContent='Revisa el email.';return}if(ph.replace(/\D/g,'').length<9){$('#aerr').textContent='Revisa el teléfono: faltan números.';return}b.n=$('#an').value.trim()||b.n;b.e=e;b.t=ph;save();renderNav();toast('Cambios guardados')}}
 
 
-function steps(){const b=S.biz;return [['Completa tu perfil en NYXA',!!(b.d&&(S.prof.gal||[]).length),'perfil'],['Publica tu primer plan',S.plans.some(p=>p.status!='borrador'),'planes'],['Conecta tus cobros',!!S.stripe,'cuenta'],['Crea un código de descuento',S.promos.length>0,'promos'],['Invita a alguien de tu equipo',S.team.length>1,'equipo']]}
-function stepsBox(){const st=steps(),n=st.filter(s=>s[1]).length;if(n==st.length)return '';return `<div class="box" style="margin-bottom:14px"><div class="bh"><div><h2>Pon tu negocio a punto</h2><p>${n} de ${st.length} hechos. Cuanto más completo, más reservas.</p></div></div><div class="prog"><i style="width:${n/st.length*100}%"></i></div><div class="chk">${st.map(s=>`<div class="${s[1]?'dn':''}"><i>✓</i><span>${s[0]}</span>${s[1]?'':`<button class="btn ln" data-go="${s[2]}" style="margin-left:auto">Hacerlo</button>`}</div>`).join('')}</div></div>`}
+/* El primer paso es verificarse, porque sin eso NO se puede publicar nada:
+   crear_plan_negocio() lo comprueba antes que nada. Antes no estaba en la
+   lista y un negocio se quedaba parado sin saber que le faltaba esto. */
+function steps(){const b=S.biz;const vr=S.verif||'';
+ return [['Verifica tu negocio',vr=='verificado'||vr=='aprobada','__verif'],
+  ['Completa tu perfil en NYXA',!!(b.d&&(S.prof.gal||[]).length),'perfil'],['Publica tu primer plan',S.plans.some(p=>p.status!='borrador'),'planes'],['Conecta tus cobros',!!S.stripe,'cuenta'],['Crea un código de descuento',S.promos.length>0,'promos'],['Invita a alguien de tu equipo',S.team.length>1,'equipo']]}
+/* Pedir la verificación. Los tres datos son los que exige el servidor
+   (solicitar_verificacion_negocio): nombre fiscal, CIF y un enlace que
+   permita comprobar que el negocio existe de verdad. */
+function openVerif(){const v=S.verif||'';
+ if(v=='verificado'||v=='aprobada'){openDrw('<h2>Negocio verificado</h2><p class="sub">Ya puedes publicar planes en NYXA.</p>');return}
+ if(v=='pendiente'){openDrw('<h2>Verificación pedida</h2><p class="sub">La estamos revisando. Te avisamos en cuanto esté: normalmente el mismo día. Mientras tanto puedes dejar tu ficha y tus planes preparados como borrador.</p>');return}
+ openDrw(`<h2>Verifica tu negocio</h2><p class="sub">Es lo que nos deja publicar tus planes ante la gente. Una vez y ya.</p>`
+  +`<div class="form"><div class="f full"><label for="vnf">Nombre fiscal</label><input id="vnf" maxlength="120" placeholder="Nombre que aparece en el CIF"></div>`
+  +`<div class="f"><label for="vcif">CIF o NIF</label><input id="vcif" maxlength="20" placeholder="B12345678"></div>`
+  +`<div class="f"><label for="vurl">Enlace que os acredite</label><input id="vurl" placeholder="https://instagram.com/tunegocio"></div></div>`
+  +`<p class="err" id="verr" role="alert"></p><div class="act"><button class="btn" id="vsend">Pedir verificación</button></div>`);
+ const b=$('#vsend');
+ b.onclick=async()=>{const API=window.NYXA_API;
+  if(!API||!API.pedirVerificacion||!API.conectado){$('#verr').textContent='Entra con tu cuenta de empresa.';return}
+  const nf=$('#vnf').value.trim(),cif=$('#vcif').value.trim(),url=$('#vurl').value.trim();
+  b.disabled=true;b.textContent='Enviando…';
+  const r=await API.pedirVerificacion(nf,cif,url);
+  b.disabled=false;b.textContent='Pedir verificación';
+  if(!r.ok){$('#verr').textContent=r.motivo;return}
+  S.verif='pendiente';save();closeDrw();renderDash();toast('Verificación pedida. Te avisamos en cuanto esté.')}}
+function stepsBox(){const st=steps(),n=st.filter(s=>s[1]).length;if(n==st.length)return '';return `<div class="box" style="margin-bottom:14px"><div class="bh"><div><h2>Pon tu negocio a punto</h2><p>${n} de ${st.length} hechos. Cuanto más completo, más reservas.</p></div></div><div class="prog"><i style="width:${n/st.length*100}%"></i></div><div class="chk">${st.map(s=>`<div class="${s[1]?'dn':''}"><i>✓</i><span>${s[0]}</span>${s[1]?'':(s[2]=='__verif'?`<button class="btn ln" data-verif style="margin-left:auto">${S.verif=='pendiente'?'Ver estado':'Hacerlo'}</button>`:`<button class="btn ln" data-go="${s[2]}" style="margin-left:auto">Hacerlo</button>`)}</div>`).join('')}</div></div>`}
 function tips(){const T=[];const act=S.plans.filter(p=>p.status=='activo');
  act.forEach(p=>{const d=(new Date(p.d+'T12:00')-today)/DAY,o=seatsOf(p)/p.p;if(d>=0&&d<=21&&o<.6&&!(S.last[p.id]))T.push(['reloj',`"${p.t}" va al ${pct(o)} y es en ${Math.max(0,Math.round(d))} días.`,'Activa una oferta de última hora para las plazas libres.','Activar oferta',`data-lastm="${p.id}"`])});
  const q=S.qs.filter(x=>!x.a).length;if(q)T.push(['carta',`Tienes ${q} pregunta${q>1?'s':''} sin responder.`,'Quien pregunta suele estar a punto de reservar. Contesta pronto.','Responder','data-go="preguntas"']);
@@ -938,7 +963,7 @@ function afterProgramas(){const c=$('#clubOn');c&&(c.onclick=()=>{S.club.on=!S.c
 
 const VIEWS={oportunidades:[vOportunidades,afterOportunidades],programas:[vProgramas,afterProgramas],calendario:[vCalendario,afterCalendario],checkin:[vCheckin,afterCheckin],promos:[vPromos,afterPromos],resenas:[vResenas,afterResenas],preguntas:[vPreguntas,afterPreguntas],perfil:[vPerfil,afterPerfil],equipo:[vEquipo,afterEquipo],ayuda:[vAyuda,afterAyuda],resumen:[vResumen,afterResumen],planes:[vPlanes,afterPlanes],reservas:[vReservas,afterReservas],publico:[vPublico,afterPublico],ingresos:[vIngresos,afterIngresos],cuenta:[vCuenta,afterCuenta],ajustes:[vAjustes,afterAjustes]};
 function renderDash(){renderNav();const v=VIEWS[S.view]||VIEWS.resumen;$('#main').innerHTML=v[0]();v[1]();bindCommon()}
-function bindCommon(){$$('[data-up]').forEach(b=>{if(!b.closest('#meter'))b.onclick=()=>openUp(b.dataset.up)});$$('[data-feat]').forEach(b=>b.onclick=()=>{S.feat[b.dataset.feat]=true;save();renderDash();toast('Plan destacado')});$$('[data-newpromo]').forEach(b=>b.onclick=()=>openPromo());$$('[data-lastm]').forEach(b=>b.onclick=()=>{S.last[b.dataset.lastm]=15;save();renderDash();toast('Oferta de última hora activada: 15 % en plazas libres')});$$('[data-new]').forEach(b=>b.onclick=()=>openEdit());$$('[data-edit]').forEach(b=>b.onclick=()=>openEdit(b.dataset.edit));$$('[data-open]').forEach(b=>b.onclick=()=>openDetail(b.dataset.open));
+function bindCommon(){$$('[data-up]').forEach(b=>{if(!b.closest('#meter'))b.onclick=()=>openUp(b.dataset.up)});$$('[data-feat]').forEach(b=>b.onclick=()=>{S.feat[b.dataset.feat]=true;save();renderDash();toast('Plan destacado')});$$('[data-verif]').forEach(b=>b.onclick=()=>openVerif());$$('[data-newpromo]').forEach(b=>b.onclick=()=>openPromo());$$('[data-lastm]').forEach(b=>b.onclick=()=>{S.last[b.dataset.lastm]=15;save();renderDash();toast('Oferta de última hora activada: 15 % en plazas libres')});$$('[data-new]').forEach(b=>b.onclick=()=>openEdit());$$('[data-edit]').forEach(b=>b.onclick=()=>openEdit(b.dataset.edit));$$('[data-open]').forEach(b=>b.onclick=()=>openDetail(b.dataset.open));
  $$('[data-go]').forEach(b=>b.onclick=()=>{S.view=b.dataset.go;save();renderDash();window.scrollTo(0,0)});
  $$('[data-pause]').forEach(b=>b.onclick=()=>{const p=S.plans.find(x=>x.id==b.dataset.pause);p.status='pausado';save();renderDash();toast('Plan pausado. Ya no aparece en la app.')});
  $$('[data-pub]').forEach(b=>b.onclick=()=>{if(activeN()>=L().plans){openUp('plans');return}const p=S.plans.find(x=>x.id==b.dataset.pub);p.status='activo';save();renderDash();toast('Plan publicado')});
