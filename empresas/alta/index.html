@@ -116,15 +116,15 @@
        <label for="sector">Qué ofrecéis</label>
        <select id="sector" name="sector" required>
         <option value="">Elige…</option>
-        <option>Viajes y escapadas</option>
-        <option>Turismo activo</option>
-        <option>Catas y bodegas</option>
-        <option>Talleres</option>
-        <option>Clases y escuelas</option>
-        <option>Restaurantes y cenas</option>
-        <option>Ocio nocturno</option>
-        <option>Deporte social</option>
-        <option>Otra cosa</option>
+        <option value="viajes">Viajes y escapadas</option>
+        <option value="turismo">Turismo activo</option>
+        <option value="catas">Catas y bodegas</option>
+        <option value="talleres">Talleres</option>
+        <option value="clases">Clases y escuelas</option>
+        <option value="cenas">Restaurantes y cenas</option>
+        <option value="ocio">Ocio nocturno</option>
+        <option value="deporte">Deporte social</option>
+        <option value="">Otra cosa</option>
        </select>
        <div class="pie"><small></small><div class="mal" id="e-sector"></div></div>
       </div>
@@ -238,7 +238,9 @@
   f.addEventListener('submit', async ev => {
     ev.preventDefault();
     const d = {
-      negocio: $('#negocio').value.trim(), sector: $('#sector').value,
+      negocio: $('#negocio').value.trim(),
+      sector: $('#sector').selectedOptions[0] ? $('#sector').selectedOptions[0].text : '',
+      sectorCod: $('#sector').value,
       ciudad: $('#ciudad').value.trim(),   email: $('#email').value.trim(),
       tel: $('#tel').value.trim(),         que: $('#que').value.trim()
     };
@@ -281,7 +283,32 @@
       }
     }
 
-    $('#hecho-txt').textContent = 'Te escribimos a ' + d.email + ' en 24-48 horas para abrirte NYXA.';
+    /* El negocio no espera a que le escribamos: le mandamos su enlace de
+       acceso al mismo correo y entra solo. Si el envío falla, NO se pierde
+       nada: el contacto ya está guardado y volvemos al mensaje de antes. */
+    let entra = false;
+    try {
+      const re = await fetch(
+        C.SUPABASE_URL + '/auth/v1/otp?redirect_to=' +
+        encodeURIComponent(location.origin + '/empresas/panel/'), {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json', 'apikey': C.SUPABASE_ANON_KEY },
+          body: JSON.stringify({ email: d.email, create_user: true })
+        });
+      entra = re.ok;
+    } catch (e) {}
+
+    /* Lo que acaba de escribir se guarda para que el panel no se lo vuelva a
+       pedir. Mismo origen, así que el panel lo lee sin más. */
+    try {
+      localStorage.setItem('nyxa_alta_v1', JSON.stringify({
+        n: d.negocio, s: d.sectorCod, c: d.ciudad, e: d.email, t: d.tel, d: d.que
+      }));
+    } catch (e) {}
+
+    $('#hecho-txt').textContent = entra
+      ? 'Te hemos enviado un enlace a ' + d.email + '. Ábrelo en este mismo navegador y tu panel está listo.'
+      : 'Te escribimos a ' + d.email + ' en 24-48 horas para abrirte NYXA.';
     $('#form-lado').hidden = true;
     $('#hecho-lado').hidden = false;
     $('#hecho-lado').scrollIntoView({ block: 'center', behavior: 'smooth' });

@@ -75,9 +75,27 @@
       if (b) b.onclick = async () => { await sb.auth.signOut(); location.reload(); };
       return;
     }
-    const motivo = API.error === 'sin-negocio'
-      ? ' Esta cuenta no tiene ningún negocio dado de alta.'
-      : API.error === 'sin-config' ? '' : '';
+    /* Has entrado, pero esta cuenta todavía no tiene negocio. Antes se
+       calculaba este mensaje y NO se usaba: la banda decía «datos de
+       ejemplo» y el panel enseñaba un negocio inventado. Para quien acaba
+       de pedir su panel, eso no se entiende. */
+    if (API.sesion && API.error === 'sin-negocio') {
+      const correo = (API.sesion.user && API.sesion.user.email) || 'tu cuenta';
+      banda.innerHTML = '<b>Has entrado como ' + esc(correo) + '.</b>'
+        + ' Todavía no tienes tu negocio en NYXA.'
+        + '<button id="altaEmp" class="cta">Dar de alta mi negocio</button>'
+        + '<button id="salirEmp">Salir</button>';
+      banda.style.background = '#1b46c2';
+      const a = document.getElementById('altaEmp');
+      if (a) a.onclick = () => {
+        const S = elEstado();
+        if (S) { S.stage = 'ob'; S.step = 0; guardar(); pintar(); }
+      };
+      const s = document.getElementById('salirEmp');
+      if (s) s.onclick = async () => { await sb.auth.signOut(); location.reload(); };
+      return;
+    }
+
     banda.innerHTML = '<b>Vista previa</b> · datos de ejemplo'
       + '<a class="cta" href="/empresas/alta/">Quiero mi panel</a>'
       + (API.error === 'sin-config' ? '' : '<button id="entrarEmp">Ya tengo cuenta</button>')
@@ -208,10 +226,28 @@
     history.replaceState({}, '', location.pathname);
   }
 
+  /* ── Lo que escribió en el alta, para no pedírselo dos veces ─────────── */
+  function traerDelAlta() {
+    const S = elEstado();
+    if (!S || !S.biz) return;
+    let a = null;
+    try { a = JSON.parse(localStorage.getItem('nyxa_alta_v1') || 'null'); } catch (e) {}
+    if (!a) return;
+    /* Sector y ciudad vienen con un valor por defecto del panel ('viajes',
+       'Valencia') que nadie ha elegido: ésos sí se pisan con lo que escribió
+       en el alta. El resto sólo rellena huecos. */
+    ['n','e','t','d'].forEach(k => { if (!S.biz[k] && a[k]) S.biz[k] = a[k]; });
+    ['s','c'].forEach(k => { if (a[k]) S.biz[k] = a[k]; });
+    guardar();
+    // El panel ya dibujó el formulario vacío antes de que esto corriera.
+    if (S.stage === 'ob') pintar();
+  }
+
   /* ── Arranque ────────────────────────────────────────────────────────── */
   async function arrancar() {
     const { data: { session } } = await sb.auth.getSession();
     API.sesion = session;
+    traerDelAlta();
     if (session) {
       const d = await traer();
       if (d) volcar(d);

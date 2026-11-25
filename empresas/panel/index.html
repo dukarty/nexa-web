@@ -920,6 +920,10 @@ show();
      Si falta cualquiera de los tres, el panel sigue en modo ejemplo. -->
 <script src="/config.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
-<script src="conectar.js?v=2"></script>
+<!-- Ruta ABSOLUTA a propósito. Con `cleanUrls` esta página se sirve en
+     /empresas/panel SIN barra final, así que una ruta relativa se
+     resolvía contra /empresas/ y daba 404: conectar.js no se ejecutó
+     nunca en producción, y el panel se quedó siempre en modo ejemplo. -->
+<script src="/empresas/panel/conectar.js?v=3"></script>
 </body>
 </html>
