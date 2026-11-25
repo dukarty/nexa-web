@@ -28,3 +28,35 @@
   .cr a, .credit a, .vcred a { display: inline-block; padding: 10px 0; min-height: 40px; }
   .nf__soc a { display: inline-flex; align-items: center; min-height: 44px; }
 }
+
+/* ══════════════════════════════════════════════════════════════════════════
+   LA MISMA MARCA · titulares en Archivo (25-nov)
+
+   Medidos los dos sistemas lado a lado, resultó que comparten casi todo:
+
+     fondo #FBF9F4 · texto #0A0C11 · cuerpo en Plus Jakarta Sans   → iguales
+     TITULARES                                                     → distintos
+
+   El sistema nuevo escribe los titulares en **Archivo 900**; estas páginas
+   los escribían en Plus Jakarta Sans 800. La tipografía de los titulares es
+   la señal de marca más fuerte que tiene una web, y por eso estas 12 páginas
+   parecían de otro sitio: no estaban mal maquetadas, hablaban con otra voz.
+
+   Archivo se pide en la MISMA petición de fuentes que ya hacían, así que esto
+   no añade ni un viaje de red.
+
+   Sólo se cambia la familia, el peso y el apretado de las letras. Ni un
+   tamaño, ni un margen: así ninguna composición se mueve de sitio.
+   ══════════════════════════════════════════════════════════════════════════ */
+
+h1, h2, h3,
+.nf__col h4, .xs--faq h3, .vtit, .hero h1, .brand {
+  font-family: "Archivo", system-ui, sans-serif;
+}
+/* El peso lleva !important porque cada página define el suyo con un selector
+   de clase (`.phero h1 { font-weight: 800 }`), que gana a cualquier `h1` a
+   secas. Es justo lo que se quiere sobreescribir: el titular de NYXA pesa
+   900, en todo el sitio. Sólo el peso: tamaños y márgenes no se tocan. */
+h1 { font-weight: 900 !important; letter-spacing: -.028em; }
+h2 { font-weight: 900 !important; letter-spacing: -.022em; }
+h3 { font-weight: 800 !important; letter-spacing: -.015em; }
