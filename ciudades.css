@@ -79,6 +79,7 @@ h3 { font-weight: 800 !important; letter-spacing: -.015em; }
    (.phero h1, .match h1) se quedan: ese es otro nivel y crece bien.
    ══════════════════════════════════════════════════════════════════════════ */
 
-.live h2, .faq h2, .xs__t, .cta-sec h2 { font-size: clamp(32px,4vw,60px); }
+.live h2, .faq h2, .xs__t, .cta-sec h2,
+.vplans h2, .calm h2, .grow h2 { font-size: clamp(32px,4vw,60px); }
 /* .dl__t no esta aqui a proposito: su regla vive en un <style> del body, que
    siempre gana a esta hoja. El titulo de cierre se fija en el propio HTML. */
