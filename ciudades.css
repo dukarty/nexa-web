@@ -23,5 +23,8 @@
 
   /* El logotipo de la cabecera y los enlaces sueltos de atribución. */
   .brand, a.brand { display: inline-flex; align-items: center; min-height: 44px; }
-  .cr a, .credit a { display: inline-block; padding: 8px 0; min-height: 36px; }
+  /* Atribuciones y enlaces del pie que quedaban sueltos: el crédito de
+     Wikimedia (.vcred) y los dos contactos del pie (.nf__soc). */
+  .cr a, .credit a, .vcred a { display: inline-block; padding: 10px 0; min-height: 40px; }
+  .nf__soc a { display: inline-flex; align-items: center; min-height: 44px; }
 }
