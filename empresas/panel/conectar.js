@@ -93,6 +93,18 @@
       S.stage = 'db';
     }
     guardar();
+
+    /* Y ahora la verdad: los planes que existen de verdad en NYXA mandan
+       sobre la copia local. Los borradores que todavía no ha publicado SÍ se
+       respetan — sólo viven aquí y perderlos sería tirarle el trabajo. */
+    if (n.id) {
+      API.misPlanes(n.id).then(reales => {
+        const S2 = elEstado(); if (!S2) return;
+        const borradores = (S2.plans || []).filter(x => x.status === 'borrador' && !x.remoto);
+        S2.plans = reales.concat(borradores);
+        guardar(); pintar();
+      });
+    }
   }
 
   /* ── La banda de arriba dice la verdad ───────────────────────────────── */
@@ -311,6 +323,50 @@
      es mejor que hacer fallar la creación entera del plan. */
   API.portadaValida = function (url) {
     return typeof url === 'string' && url.indexOf('/storage/v1/object/public/nexa/') > -1 ? url : null;
+  };
+
+
+  /* ── Traer los planes que de verdad existen ──────────────────────────────
+     Hasta ahora la lista de planes del panel vivía sólo en el navegador. Un
+     negocio que publicaba desde el portátil y luego entraba desde el móvil no
+     veía nada: su plan estaba en NYXA, pero el panel no lo sabía.
+
+     El estado del plan se DERIVA de lo que hay en la base, que es poco:
+     `plans` no tiene columna `status`, sólo `cancelled_at`. Así que un plan
+     que viene del servidor sólo puede ser «activo» o «pasado» — borrador y
+     pausado son conceptos que ahora mismo existen únicamente en esta maqueta.
+     Mientras eso no se decida en el modelo de datos, aquí no se inventa. */
+  API.misPlanes = async function (businessId) {
+    if (!businessId) return [];
+    const { data, error } = await sb.from('plans')
+      .select('id,title,starts_at,capacity,price_cents,place,cover_url,description,category_id,cancelled_at')
+      .eq('business_id', businessId)
+      .order('starts_at', { ascending: false });
+    if (error || !data) return [];
+
+    const ahora = Date.now();
+    return data.map(r => {
+      const cuando = r.starts_at ? new Date(r.starts_at) : null;
+      const pasado = !!r.cancelled_at || (cuando && cuando.getTime() < ahora);
+      return {
+        id:      r.id,
+        remoto:  r.id,
+        t:       r.title || '',
+        d:       cuando ? cuando.toISOString().slice(0, 10) : '',
+        h:       cuando ? cuando.toTimeString().slice(0, 5) : '10:00',
+        l:       r.place || '',
+        p:       r.capacity || 1,
+        pr:      r.price_cents ? r.price_cents / 100 : 0,
+        img:     r.cover_url || '/i/nat.webp',
+        desc:    r.description || '',
+        cat:     r.category_id || '',
+        c:       'f',
+        status:  pasado ? 'pasado' : 'activo',
+        cancelado: !!r.cancelled_at,
+        views:   0,
+        created: (r.starts_at || '').slice(0, 10)
+      };
+    });
   };
 
   /* ── Publicar un plan DE VERDAD ──────────────────────────────────────────
