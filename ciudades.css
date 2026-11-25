@@ -80,6 +80,14 @@ h3 { font-weight: 800 !important; letter-spacing: -.015em; }
    ══════════════════════════════════════════════════════════════════════════ */
 
 .live h2, .faq h2, .xs__t, .cta-sec h2,
-.vplans h2, .calm h2, .grow h2 { font-size: clamp(32px,4vw,60px); }
+.vplans h2, .calm h2, .grow h2 { font-size: clamp(30px,4vw,60px); }
 /* .dl__t no esta aqui a proposito: su regla vive en un <style> del body, que
    siempre gana a esta hoja. El titulo de cierre se fija en el propio HTML. */
+
+
+/* CORREGIDO el 25-nov, unas horas después: el mínimo de estos clamp lo subí
+   yo esta mañana (30→32 la sección, 34→40 el cierre, este último en el HTML)
+   buscando coherencia con la portada. El tope sí había que unificarlo; el
+   mínimo era el que partía los titulares en móvil. Medido en 390 px: a 40 px
+   «En Valencia hay alguien con tu mismo plan» caía en cuatro líneas con la
+   tercera a media anchura; a 36 px son tres y bien repartidas. */
