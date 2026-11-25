@@ -757,6 +757,15 @@ h1,h2,h3,h4,h5{text-wrap:balance}p{text-wrap:pretty}
   .nav .logo { display: inline-flex; align-items: center; min-height: 44px; }
   .fin a, .fin .cols a { display: inline-block; padding: 7px 0; min-height: 44px; line-height: 30px; }
   .hero .low a { display: inline-block; padding: 10px 14px; margin-top: 2px; }
+
+  /* La frase de debajo del hero iba con `left:0; right:0` y padding 0: el
+     texto tocaba los dos bordes del cristal, sin un solo píxel de aire. Es
+     lo que más grita «sin terminar» de toda la portada. */
+  .hero .low { padding-left: 26px; padding-right: 26px; }
+
+  /* Y la polaroid de la izquierda empezaba en 0 con la rotación: cortada
+     justo por el marco. Un par de puntos más adentro y se ve entera. */
+  .hfl .po:nth-child(1) { left: 5% !important; }
   .x2, button.x2 { min-height: 44px; min-width: 44px; }
 }
 
