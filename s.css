@@ -723,9 +723,12 @@ h1,h2,h3,h4,h5{text-wrap:balance}p{text-wrap:pretty}
   .hero h1 {
     font-size: clamp(34px, 12.2vw, 54px);
     /* Encoger la letra sola no daba aire: al caber más por línea, el bloque
-       volvía a ocupar lo mismo. Con un ancho máximo el titular rompe donde
-       debe («Todo / empieza / con un plan.») y el aire aparece de verdad. */
-    max-width: 300px;
+       volvía a ocupar lo mismo. Hace falta un ancho máximo.
+       CORREGIDO el 25-nov: estaba en 300px y eso partía el titular en TRES
+       líneas en escalera — 120 · 206 · 286 px, un desnivel del 58 %. Medido
+       en 390 px: con 340 son dos líneas al 14 % de desnivel, con la misma
+       letra y con 34 px de aire a cada lado. */
+    max-width: 340px;
   }
 
   /* 2 · Las polaroids, dentro ────────────────────────────────────────────
@@ -818,10 +821,10 @@ h1,h2,h3,h4,h5{text-wrap:balance}p{text-wrap:pretty}
       Ya lo comparten .h24 .pasa .emp-h .sob .perf .uni: no hace falta tocarlo. */
 
 /* 2 · cierre de página — el crescendo final */
-.fin h2, .bz-cta h2, .st-ch h2 { font-size: clamp(40px, 5vw, 76px); }
+.fin h2, .bz-cta h2, .st-ch h2 { font-size: clamp(36px, 5vw, 76px); }
 
 /* 3 · título de sección — el caballo de batalla */
-.cambia h2, .why h2, .faq h2, .sec2 h2, .bz-hd h2 { font-size: clamp(32px, 4vw, 60px); }
+.cambia h2, .why h2, .faq h2, .sec2 h2, .bz-hd h2 { font-size: clamp(30px, 4vw, 60px); }
 
 /* 4 · cartel editorial — .demo (8vw) y .vid (10vw) se quedan como están.
       Son dos carteles a toda página, no títulos de sección. A posta. */
@@ -829,3 +832,76 @@ h1,h2,h3,h4,h5{text-wrap:balance}p{text-wrap:pretty}
 /* .feat h2 se queda en 2,9vw/42px: no es un título de sección, es el rótulo de
    una subsección, y a 1024 mide 30px frente a los 41 de una sección. Nivel
    propio, deliberado. */
+
+/* ══════════════════════════════════════════════════════════════════════════
+   QUE NADA QUEDE MAL · composición y legibilidad  (25-nov)
+
+   Mirando la web en pantalla, no midiendo números, salían tres cosas feas.
+   ══════════════════════════════════════════════════════════════════════════ */
+
+/* ── 1 · había 26 textos por debajo de 12 px, y seis a 8 ──────────────────
+   El rótulo de una polaroid del hero medía 8 px con un tracking de .16em.
+   A ese tamaño el espaciado separa tanto las letras que la palabra se
+   deshace: «Atardecer» se leía «AYASEFOR». No era la fuente, era el tamaño.
+
+   Regla que se aplica a partir de ahora:
+     · texto de la WEB            →  11 px mínimo, 12 px si lleva tracking
+     · texto DENTRO del móvil de  →  puede bajar: representa una pantalla de
+       la demo                       app a escala, y a tamaño real cantaría   */
+
+.lbl          { font-size: 12px; letter-spacing: .14em; }  /* era 10,5 / .16em */
+.po span      { font-size: 11px; letter-spacing: .10em; }  /* era 9,5          */
+.hfl .po span { font-size: 11px; bottom: 11px; }           /* era 8            */
+.store small  { font-size: 11px; }                         /* era 10           */
+.stamp        { width: 68px; height: 68px; font-size: 9px; }
+
+/* dentro de la maqueta del móvil: suben un punto, no más */
+.dc .tg    { font-size: 10px; }   /* era 8,5 */
+.dtop span { font-size: 10px; }   /* era 9   */
+
+/* ── 2 · los cuatro pasos se partían en dos líneas ────────────────────────
+   En móvil la rejilla era de dos columnas y «Elige un plan» y «Cerráis
+   hora» no cabían: partían, y las cuatro píldoras quedaban de alturas
+   distintas. Son los cuatro pasos de un proceso, así que van en una
+   columna: así se leen como la secuencia que son y no parte ninguno. */
+@media (max-width: 860px) {
+  .steps { grid-template-columns: 1fr; max-width: 420px; }
+  .st    { justify-content: flex-start; }
+  .demo .wrap { text-align: left; }
+  .demo h2, .demo .hint { text-align: left; }
+}
+
+
+/* ── 3 · los titulares que se partían mal ─────────────────────────────────
+   Medido en 390 px, titular a titular, contando las líneas de verdad y el
+   ancho de cada una. La causa era mía: esta mañana subí el MÍNIMO de los
+   clamp buscando coherencia (34→40 el cierre, 30→32 la sección). El TOPE sí
+   había que unificarlo; el mínimo no tenía por qué moverse.
+
+   A 40 px, «En Valencia hay alguien con tu mismo plan» pasaba a CUATRO
+   líneas con la tercera a la mitad de ancho (desnivel del 44 %). A 36 px
+   son tres líneas y el desnivel baja al 22 %, que es el reparto natural de
+   esa frase: por debajo ya no mejora, solo encoge la letra.
+
+   Regla a partir de ahora: en móvil ningún titular pasa de tres líneas, y
+   ninguna línea baja del 65 % de la más larga. Ojo — `text-wrap: balance`
+   YA estaba puesto en todos y no arregla nada de esto: no puede partir lo
+   que no cabe. Lo que no cabe se arregla con el cuerpo, no con el wrap.    */
+
+/* ── 4 · tarjetas: mandaba la caja, no el contenido ───────────────────────
+   .tc medía 460 px de alto para tres líneas de texto, así que quedaba un
+   hueco muerto de unos 130 px entre el enlace y el dibujo. Y en la pareja
+   de abajo las dos tarjetas pegaban su contenido al suelo: como una lleva
+   lista y la otra no, los dos títulos no caían a la misma altura.          */
+
+.tc        { min-height: 400px; }      /* era 460 */
+.tc h3     { min-height: 2.08em; }     /* así los tres «Descubre más» se alinean */
+.tc .ob    { width: auto; max-width: 74%; height: clamp(130px, 13vw, 180px);
+             object-fit: contain; object-position: bottom center; margin: auto auto 0; }
+
+.dk2       { justify-content: flex-start;            /* era flex-end */
+             padding-top: clamp(118px, 13vw, 178px); /* aquí vive el dibujo */
+             min-height: clamp(300px, 27vw, 400px); }
+.dk2 .more { margin-top: auto; padding-top: 20px; }  /* el enlace al pie en las dos */
+
+@media (max-width: 860px) { .tc { min-height: 300px; } .tc h3 { min-height: 0; } }
