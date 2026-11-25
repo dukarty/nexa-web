@@ -55,7 +55,7 @@ button,input,select,textarea{font:inherit;color:inherit}
 .pl li{padding-left:20px;position:relative}.pl li:before{content:"✓";position:absolute;left:0;color:var(--blue);font-weight:800}
 .com{margin-top:16px;max-width:880px;background:#fff;border-radius:16px;padding:16px 18px;display:flex;gap:16px;align-items:center;box-shadow:inset 0 0 0 1px var(--line)}
 .com b{font:900 26px/1 var(--s);color:var(--blue);white-space:nowrap}.com p{color:var(--body);font-size:14px}
-.pics{display:flex;gap:8px;flex-wrap:wrap}
+.pics{display:flex;gap:8px;flex-wrap:wrap}.f .sub2{margin:14px 0 8px;color:var(--muted);font-size:13px}.f input[type=file]{font:inherit;font-size:13.5px;color:var(--body)}.pics button.subida{box-shadow:0 0 0 3px var(--blue)}
 .pics button{all:unset;cursor:pointer;width:62px;height:62px;border-radius:12px;background:#ccc center/cover}
 .pics button.on{box-shadow:0 0 0 3px var(--blue)}
 .stripe{margin-top:28px;max-width:560px;background:#fff;border-radius:20px;padding:24px;box-shadow:inset 0 0 0 1px var(--line)}
@@ -552,11 +552,46 @@ function planFormHTML(pre){return `
  <div class="f"><label for="${pre}p">Plazas</label><input id="${pre}p" type="number" min="1" max="500"></div>
  <div class="f"><label for="${pre}pr">Precio por persona (€)</label><input id="${pre}pr" type="number" min="0" step="0.5"></div>
  <div class="f"><label for="${pre}c">Cancelación</label><select id="${pre}c"><option value="f">Gratis hasta 48 h antes</option><option value="e">Sin reembolso a menos de 48 h</option></select></div>
+<div class="f"><label for="${pre}cat">Actividad</label><select id="${pre}cat"><option value="">Elige…</option></select><small>Es la que usa NYXA para enseñárselo a quien le encaja.</small></div>
  <div class="f full"><label for="${pre}desc">Qué incluye</label><textarea id="${pre}desc" maxlength="240" placeholder="Transporte, alojamiento y actividades. Grupo reducido."></textarea></div>
- <div class="f full"><label>Foto</label><div class="pics" id="${pre}pics">${PICS.map(p=>`<button type="button" style="background-image:url(${p})" data-p="${p}" aria-label="Elegir foto"></button>`).join('')}</div></div>`}
+ <div class="f full"><label for="${pre}file">Foto del plan</label><input type="file" id="${pre}file" accept="image/*"><small id="${pre}fmsg">La tuya es la que mejor funciona. Hasta 8 MB.</small><p class="sub2">O elige una de las nuestras:</p><div class="pics" id="${pre}pics">${PICS.map(p=>`<button type="button" style="background-image:url(${p})" data-p="${p}" aria-label="Elegir foto"></button>`).join('')}</div></div>`}
 $('#pform').innerHTML=planFormHTML('o');
-const FIELDS=['t','d','h','l','p','pr','c','desc'];
-function setPF(pre,o){FIELDS.forEach(k=>{const el=$('#'+pre+k);if(el)el.value=o[k]??''});$$('#'+pre+'pics button').forEach(b=>b.classList.toggle('on',b.dataset.p==o.img))}
+/* 'cat' es la categoría del catálogo real de NYXA: el servidor la exige
+   para publicar (crear_plan_negocio → public.categories). */
+const FIELDS=['t','d','h','l','p','pr','c','cat','desc'];
+/* El selector de actividad se rellena con el catálogo REAL de NYXA. Sin
+   sesión no hay catálogo: se deja deshabilitado y se dice por qué, en vez
+   de ofrecer una lista inventada que luego el servidor rechazaría. */
+async function llenarCats(pre,valor){const el=$('#'+pre+'cat');if(!el)return;
+ const API=window.NYXA_API;
+ if(!API||!API.categorias||!API.conectado){el.innerHTML='<option value="">Entra con tu cuenta para elegir actividad</option>';el.disabled=true;return}
+ const cs=await API.categorias();
+ if(!cs.length){el.innerHTML='<option value="">No se ha podido cargar el catálogo</option>';el.disabled=true;return}
+ el.disabled=false;
+ el.innerHTML='<option value="">Elige…</option>'+cs.map(c=>`<option value="${esc(c.id)}">${esc(c.label||c.id)}</option>`).join('');
+ if(valor)el.value=valor}
+/* Cablea el campo de subir foto de un formulario de plan (pre='e' en el
+   cajon, pre='o' en el alta). La foto del negocio manda sobre las nuestras:
+   en cuanto sube una, se queda seleccionada y se deselecciona el catalogo. */
+function cableaFoto(pre,obj){const inp=$('#'+pre+'file');if(!inp)return;
+ const msg=$('#'+pre+'fmsg');const API=window.NYXA_API;
+ if(!API||!API.subirFoto||!API.conectado){if(msg)msg.textContent='Entra con tu cuenta para subir tu propia foto.';inp.disabled=true;return}
+ inp.disabled=false;
+ inp.onchange=async()=>{const f=inp.files&&inp.files[0];if(!f)return;
+  if(msg)msg.textContent='Subiendo…';inp.disabled=true;
+  const r=await API.subirFoto(f);
+  inp.disabled=false;
+  if(!r.ok){if(msg)msg.textContent=r.motivo;return}
+  obj.img=r.url;
+  if(msg)msg.textContent='Lista. Es la que se verá.';
+  $$('#'+pre+'pics button').forEach(b=>b.classList.remove('on'));
+  const prev=$('#'+pre+'pics .subida');if(prev)prev.remove();
+  const b=document.createElement('button');b.type='button';b.className='subida on';
+  b.style.backgroundImage='url('+r.url+')';b.dataset.p=r.url;b.setAttribute('aria-label','Tu foto');
+  b.onclick=()=>{obj.img=r.url;$$('#'+pre+'pics button').forEach(x=>x.classList.remove('on'));b.classList.add('on')};
+  $('#'+pre+'pics').prepend(b)};
+}
+function setPF(pre,o){FIELDS.forEach(k=>{const el=$('#'+pre+k);if(el)el.value=o[k]??''});$$('#'+pre+'pics button').forEach(b=>b.classList.toggle('on',b.dataset.p==o.img));llenarCats(pre,o.cat);cableaFoto(pre,o)}
 function getPF(pre,o){FIELDS.forEach(k=>{const el=$('#'+pre+k);if(!el)return;let v=el.value;if(k=='p')v=Math.max(1,parseInt(v)||1);if(k=='pr')v=Math.max(0,parseFloat(v)||0);if(typeof v=='string')v=v.trim();o[k]=v})}
 function plansHTML(){return PLANS.map(p=>`<button type="button" class="pl${S.plan==p[0]?' on':''}" data-pl="${p[0]}" aria-pressed="${S.plan==p[0]}">${p[0]=='premium'?'<span class="tg">Recomendado</span>':''}<h3>${p[1]}</h3><div class="pr">${eur(p[2])} <span>al mes</span></div>${p[3]?`<p class="fr">${p[3]}</p>`:''}<ul>${p[4].map(x=>`<li>${x}</li>`).join('')}</ul></button>`).join('')}
 function comText(){return 'Tu comisión como '+sectName(S.biz.s).toLowerCase()+': '+COM[S.biz.s].t+' Si no se reserva, no hay comisión.'}
@@ -917,8 +952,24 @@ $('#drwX').onclick=closeDrw;$('#drw').onclick=e=>{if(e.target.id=='drw')closeDrw
 function openEdit(id){const p=id?S.plans.find(x=>x.id==id):{t:'',d:'',h:'10:00',l:S.biz.c,p:15,pr:30,c:'f',img:PICS[0],desc:''};
  openDrw(`<h2>${id?'Editar plan':'Nuevo plan'}</h2><div class="form">${planFormHTML('e')}</div><p class="err" id="ee" role="alert"></p><div class="act"><button class="btn" id="esv">${id?'Guardar cambios':'Publicar plan'}</button>${id?'':'<button class="btn g" id="edr">Guardar borrador</button>'}</div>`);
  const tmp={...p};setPF('e',tmp);$$('#epics button').forEach(x=>x.onclick=()=>{tmp.img=x.dataset.p;setPF('e',{...tmp,...(getPF('e',tmp),tmp)})});
- const sv=st=>{getPF('e',tmp);if(st=='activo'&&(!id||p.status!='activo')&&activeN()>=L().plans){closeDrw();openUp('plans');return}if(!tmp.t){$('#ee').textContent='Escribe qué organizas.';return}if(st!='borrador'&&!tmp.d){$('#ee').textContent='Elige una fecha.';return}if(st=='activo'&&new Date(tmp.d+'T23:59')<today){$('#ee').textContent='La fecha ya ha pasado. Elige una a partir de hoy.';return}if(id&&tmp.p<seatsOf(p)){$('#ee').textContent='Ya tienes '+seatsOf(p)+' plazas reservadas. No puedes poner menos plazas.';return}
-  if(id){Object.assign(p,tmp);toast('Cambios guardados')}else{S.plans.push({...tmp,id:newId(),status:st,views:0,created:iso(today)});toast(st=='borrador'?'Borrador guardado':'Plan publicado')}save();closeDrw();renderDash()};
+ const sv=async st=>{getPF('e',tmp);if(st=='activo'&&(!id||p.status!='activo')&&activeN()>=L().plans){closeDrw();openUp('plans');return}if(!tmp.t){$('#ee').textContent='Escribe qué organizas.';return}if(st!='borrador'&&!tmp.d){$('#ee').textContent='Elige una fecha.';return}if(st=='activo'&&new Date(tmp.d+'T23:59')<today){$('#ee').textContent='La fecha ya ha pasado. Elige una a partir de hoy.';return}if(id&&tmp.p<seatsOf(p)){$('#ee').textContent='Ya tienes '+seatsOf(p)+' plazas reservadas. No puedes poner menos plazas.';return}
+  
+ /* PUBLICAR DE VERDAD. Hasta ahora esto guardaba el plan en el navegador y
+    decía «Plan publicado»: no llegaba a NYXA, no salía en la app y se perdía
+    al cambiar de dispositivo. Con sesión de empresa se llama al servidor, y
+    si el servidor dice que no (negocio sin verificar, tope del tramo, fecha
+    pasada) NO se finge que se publicó: se enseña su motivo y no se guarda
+    como publicado. Sin sesión, el panel sigue siendo la maqueta de antes. */
+ const API=window.NYXA_API;
+ if(st=='activo'&&API&&API.conectado&&API.publicarPlan){
+   const b=$('#esv');const antes=b?b.textContent:'';
+   if(b){b.disabled=true;b.textContent='Publicando…'}
+   const r=await API.publicarPlan(tmp,S.biz.c);
+   if(b){b.disabled=false;b.textContent=antes}
+   if(!r.ok){$('#ee').textContent=r.motivo;return}
+   tmp.remoto=r.id||null;
+ }
+ if(id){Object.assign(p,tmp);toast('Cambios guardados')}else{S.plans.push({...tmp,id:newId(),status:st,views:0,created:iso(today)});toast(st=='borrador'?'Borrador guardado':(tmp.remoto?'Plan publicado en NYXA':'Plan publicado'))}save();closeDrw();renderDash()};
  $('#esv').onclick=()=>sv(id?p.status:'activo');const d=$('#edr');if(d)d.onclick=()=>sv('borrador')}
 function openDetail(id){const p=S.plans.find(x=>x.id==id);if(!p)return;const bl=S.book.filter(b=>b.pid==id);const s=seatsOf(p),g=grossOf(bl),c=comOfList(bl),res=bl.filter(conf).length;
  openDrw(`<span>${statusTag(pStatus(p))}</span><h2 style="margin-top:10px">${esc(p.t)}</h2><p style="color:var(--muted);margin-top:4px">${fmtD(p.d,{weekday:'long',day:'numeric',month:'long'})} · ${esc(p.h)} · ${esc(p.l||'')}</p>
