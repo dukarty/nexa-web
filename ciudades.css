@@ -1,0 +1,27 @@
+/* ══════════════════════════════════════════════════════════════════════════
+   PÁGINAS DE CIUDAD · arreglos de móvil (25-nov)
+
+   Las 12 páginas de ciudad son de otra generación del sitio: NO cargan s.css,
+   llevan sus estilos dentro. Por eso los arreglos de móvil del sistema nuevo
+   nunca les llegaron, y por eso esto va en una hoja aparte en vez de tocar
+   doce ficheros por dentro. Se quita el <link> y vuelve todo como estaba.
+
+   Medido a 375 px sobre lo publicado:
+     · conocer-gente-*  → 13 créditos de foto a 8,5 px y 15 zonas de toque cortas
+     · hacer-amigos-* y planes-*  → 16 enlaces de pie de 23 px de alto
+   ══════════════════════════════════════════════════════════════════════════ */
+
+@media (max-width: 700px) {
+
+  /* Los créditos de las fotos son una obligación de la licencia (CC BY-SA):
+     si no se leen, no estamos atribuyendo. 8,5 px no se lee en un móvil. */
+  .cr, span.cr { font-size: 11px !important; line-height: 1.45; }
+
+  /* Enlaces del pie: 23 px de alto. El mínimo cómodo con el dedo es 44.
+     No cambia el aspecto, sólo la zona que responde al toque. */
+  .nf__col a, footer .nf__col a { display: block; min-height: 44px; line-height: 44px; }
+
+  /* El logotipo de la cabecera y los enlaces sueltos de atribución. */
+  .brand, a.brand { display: inline-flex; align-items: center; min-height: 44px; }
+  .cr a, .credit a { display: inline-block; padding: 8px 0; min-height: 36px; }
+}
