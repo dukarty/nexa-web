@@ -905,3 +905,28 @@ h1,h2,h3,h4,h5{text-wrap:balance}p{text-wrap:pretty}
 .dk2 .more { margin-top: auto; padding-top: 20px; }  /* el enlace al pie en las dos */
 
 @media (max-width: 860px) { .tc { min-height: 300px; } .tc h3 { min-height: 0; } }
+
+/* ══════════════════════════════════════════════════════════════════════════
+   EN EL ARRANQUE NO SE COBRA CUOTA  (25-nov, decisión de David)
+
+   La página de empresas estaba construida sobre «una cuota al mes para estar
+   dentro». Ya no: se entra gratis y solo se paga comisión por reserva. Las
+   tres cuotas dejan de ser el requisito para aparecer y pasan a ser
+   opcionales, para destacar, y todavía no están.
+
+   Por eso la tarjeta destacada ahora es la gratuita, y Premium y Ultra se
+   ven como lo que son: algo que llegará. Atenuadas, no tachadas — siguen
+   contando lo que traerán.
+   ══════════════════════════════════════════════════════════════════════════ */
+
+/* La etiqueta pasa de flotar en la esquina a ir en el flujo, encima del
+   título: «Para destacar · próximamente» no cabe en una esquina de una
+   tarjeta a un tercio de ancho, y partía. */
+.pl-tg { position: static; display: inline-block; margin-bottom: 14px; }
+
+.pl-tg.soon { background: transparent; color: var(--muted);
+              box-shadow: inset 0 0 0 1px var(--line); font-size: 11.5px; }
+
+.pl.pr-ox            { opacity: .78; }
+.pl.pr-ox .pr b      { color: var(--muted); }   /* el precio no grita */
+.pl.pr-ox:hover      { opacity: 1; }
